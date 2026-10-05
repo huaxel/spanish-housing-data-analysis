@@ -21,6 +21,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)
 - [Madrid vs Valencia: scarcity vs composition](docs/explorations/madrid_vs_valencia.md)
+- [Synthesis: the answer in one place](docs/synthesis.md)
 
 ## Setup and verification
 
