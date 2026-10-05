@@ -30,7 +30,10 @@ def load() -> dict:
 
 def record(relative_path: str, source: dict) -> None:
     """Pin one file: hash its current bytes and store its source metadata."""
+    import datetime
+
     man = load()
+    man["snapshot_date"] = datetime.date.today().isoformat()
     full = Path(__file__).resolve().parents[2] / relative_path
     man.setdefault("sha256", {})[relative_path] = sha256(full)
     man.setdefault("sources", {})[relative_path] = source

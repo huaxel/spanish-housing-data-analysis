@@ -22,6 +22,14 @@ Record a reproduction with: checkout revision, `uv --version`, input-manifest
 snapshot date, `coverage.json`, and test summary. `data/` is git-ignored by
 design; the manifest (committed) is what makes a run auditable.
 
+## Clean-rebuild record (2026-10-06)
+
+`data/` wiped (backup in /tmp, since removed) and `make gates` rerun from
+empty: fetch → build → verify → audit (26/26) → test (11) all green.
+Regenerated manifest byte-identical to committed (37 pinned files — no
+upstream revisions in between), marts identical (342 + 1,071 rows).
+This is the evidence the pipeline reproduces, not just runs.
+
 ## Evidence explorer
 
 ```bash
