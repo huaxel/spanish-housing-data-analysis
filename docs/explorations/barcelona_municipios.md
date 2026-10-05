@@ -42,6 +42,17 @@ years. The city built infill at ~1,500 starts/year against +90k population
 54.6%. Supply geography mirrors the burden map — construction didn't go
 where the workers are.
 
+## Update: the 2011 vacant overhang (`censo2011_bcn`)
+
+Vacant share of dwellings, 2011: Barcelona **10.9%** · Sant Adrià 10.6% ·
+Badalona 9.6% · Cornellà 7.3% · Santa Coloma 4.9%. Barcelona city alone held
+~88k vacant flats (scale: more than all of Santa Coloma's stock). The metro
+entered the recovery sitting on a larger vacant overhang than Madrid's south
+— then absorbed it through a decade of migration *and* converted part of it:
+the city's tourist flats grew 2022–24 while Balears' shrank. Vacancy →
+absorption + tourist conversion, not new construction (19k starts in 13
+years), is the arithmetic of Barcelona's tightening.
+
 ## Limits
 
 - Sale prices = Secretaria d'Habitatge (registrars), 2013–; rents = Incasòl

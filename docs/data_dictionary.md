@@ -31,6 +31,12 @@ Same stock/population columns as above plus `cpro` (2-digit code,
 No price columns — INE publishes no provincial IPV. Plus `pop_source`,
 `hogares` (2021 only overlaps padrón window), `viv_por_hogar`.
 
+## censo2011_bcn
+
+Same 2011 split for Barcelona demarcation (188 municipios with DIBA
+presence; 122 small ones under the census threshold). Barcelona city 2011:
+88,259 vacant (10.9%) + 38,769 secundaria.
+
 ## valor_municipal_madrid
 
 `codigo` (INE 4-digit), `municipio`, `anyo`, `eur_m2` — Libre, Madrid

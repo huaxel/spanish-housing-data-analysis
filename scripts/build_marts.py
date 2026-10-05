@@ -693,6 +693,27 @@ def main() -> None:
         raise SystemExit(f"censo2011 missing valor municipios: {sorted(missing)}")
     con.register("cen11_df", pa.Table.from_pylist(cen11))
     con.execute("CREATE OR REPLACE TABLE censo2011_mad AS SELECT * FROM cen11_df")
+    # Same 2011 split for Barcelona demarcation municipios (muni_key join).
+    from spanish_housing.muni_names import muni_key as _mk
+
+    bcn_names = set()
+    for code in ("m19", "m23"):
+        for r in load_parquet(f"diba_{code}.parquet"):
+            if r["municipio"] == "Barcelona (provincia)":
+                continue  # aggregate; homonym city kept (same key!)
+            bcn_names.add(_mk(r["municipio"]))
+    cen_bcn = [
+        {"municipio": r["municipio"], "tipo": r["tipo"], "viviendas_2011": r["viviendas"]}
+        for r in load_parquet("censo2011_municipios.parquet")
+        if _mk(r["municipio"]) in bcn_names
+    ]
+    have_bcn = {_mk(c["municipio"]) for c in cen_bcn}
+    missing_bcn = {v for v in bcn_names if v not in have_bcn}
+    print(f"censo2011_bcn: {len(have_bcn)} municipios, missing {len(missing_bcn)}")
+    if missing_bcn:
+        print(f"  (e.g. {sorted(missing_bcn)[:8]} — small municipios under census threshold)")
+    con.register("cenbcn_df", pa.Table.from_pylist(cen_bcn))
+    con.execute("CREATE OR REPLACE TABLE censo2011_bcn AS SELECT * FROM cenbcn_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -703,6 +724,7 @@ def main() -> None:
         "muni_madrid",
         "censo2011_mad",
         "muni_bcn",
+        "censo2011_bcn",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

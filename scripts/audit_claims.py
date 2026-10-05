@@ -169,6 +169,14 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Barcelona vacant dwellings 2011",
+        "SELECT viviendas_2011 FROM censo2011_bcn "
+        "WHERE municipio='Barcelona' AND tipo='Vivienda vacía'",
+        88259.0,
+        1.0,
+    ),
+    (
+        "municipios",
         "Madrid capital 2025",
         "SELECT eur_m2 FROM valor_municipal_madrid WHERE codigo='0796' AND anyo=2025",
         4993.3,
