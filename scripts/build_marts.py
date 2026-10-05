@@ -352,6 +352,28 @@ def main() -> None:
     if need_renta - renta_terrs:
         raise SystemExit(f"renta missing CCAA: {need_renta - renta_terrs}")
 
+    # Transactions (registrars, 2007-). Additive guard: nueva + usada == total.
+    trx: dict[tuple[str, int], dict] = {}
+    for r in load_parquet("transmisiones.parquet"):
+        trx.setdefault((N(r["territorio"]), r["grain"], r["anyo"]), {})[r[
+            "categoria"
+        ]] = r["transacciones"]
+    trx_bad = {
+        k: v
+        for k, v in trx.items()
+        if set(v) != {"total", "nueva", "usada", "libre", "protegida"}
+        or v["nueva"] + v["usada"] != v["total"]
+    }
+    if trx_bad:
+        raise SystemExit(f"transmisiones additive check failed: {dict(list(trx_bad.items())[:3])}")
+
+    def trx_triple(grain: str, terr: str, anyo: int) -> tuple[float | None, float | None]:
+        cell = trx.get((N(terr), grain, anyo), {})
+        tot, nue = cell.get("total"), cell.get("nueva")
+        if not tot or nue is None:
+            return None, None
+        return tot, round(nue / tot, 4)
+
     def ccaa_renta(ccaa: str, anyo: int) -> float | None:
         key = N("Total Nacional") if ccaa == "Nacional" else N(ccaa)
         return renta.get((key, anyo))
@@ -447,6 +469,16 @@ def main() -> None:
                 hogar = hog_prov.get((N(d["provincia"]), anyo))
             eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
             if d["cpro"] == "51+52":
+                _t1 = trx.get((N("Ceuta"), "provincia", anyo), {})
+                _t2 = trx.get((N("Melilla"), "provincia", anyo), {})
+                if _t1.get("total") and _t2.get("total"):
+                    _tt = _t1["total"] + _t2["total"]
+                    trx_p = (_tt, round((_t1["nueva"] + _t2["nueva"]) / _tt, 4))
+                else:
+                    trx_p = (None, None)
+            else:
+                trx_p = trx_triple("provincia", d["provincia"], anyo)
+            if d["cpro"] == "51+52":
                 t1 = tur.get((N("Ceuta"), anyo), 0) or 0
                 t2 = tur.get((N("Melilla"), anyo), 0) or 0
                 tur_v = t1 + t2 or None
@@ -483,6 +515,8 @@ def main() -> None:
                     "vt_source": vt_src,
                     "hip_viv_num": hip_num,
                     "hip_ticket_miles": hip_ticket,
+                    "trx_total": trx_p[0],
+                    "share_nueva": trx_p[1],
                     "viv_turisticas": tur_v,
                     "share_turistica_no_princ": tur_s,
                 }
@@ -519,6 +553,11 @@ def main() -> None:
                 continue
             tot = sum(c["total"] for c in cells)
             hogar = ccaa_hog(ccaa, anyo)
+            trx_t, trx_n = trx_triple(
+                "nacional" if ccaa == "Nacional" else "ccaa",
+                "Total Nacional" if ccaa == "Nacional" else ccaa,
+                anyo,
+            )
             no_princ = sum(c["no_principal"] for c in cells)
             terr_t = "Total Nacional" if ccaa == "Nacional" else ccaa
             tur_v, tur_s = tur_share(no_princ, terr_t, anyo)
@@ -544,6 +583,8 @@ def main() -> None:
                     "vt_source": eur_src,
                     "hip_viv_num": hip_nc,
                     "hip_ticket_miles": hip_tc,
+                    "trx_total": trx_t,
+                    "share_nueva": trx_n,
                     "viv_turisticas": tur_v,
                     "share_turistica_no_princ": tur_s,
                     "renta_hogar_neta": (renta_v := ccaa_renta(ccaa, anyo)),
@@ -790,6 +831,8 @@ def main() -> None:
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
         "hogares_window": "2021+ (ECP, 1-January); viv_por_hogar NULL before",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,
+        "transmisiones_window": "2007+ registrars; nueva+usada==total asserted; "
+        "share_nueva in both marts",
         "hipotecas_window": "2003+ monthly Viviendas; complete years in marts "
         "(prov NULL before 2003); importe in thousands of EUR; national rates table",
         "valor_window": "1995+ quarterly Libre/Protegida; marts carry Libre annual means + n_trim",

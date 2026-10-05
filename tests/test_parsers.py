@@ -364,3 +364,12 @@ def test_ecp_hog_keeps_all_sizes():
     rows, skipped = parse_ecp_hog(payload)
     assert len(rows) == 3 and skipped == []
     assert {r["tamano"] for r in rows} == {"Total", "1", "4 y más"}
+
+
+def test_transmisiones_strip_code():
+    from fetch_transmisiones import strip_code
+
+    assert strip_code("01 Andalucía") == "Andalucía"
+    assert strip_code("18 Ceuta") == "Ceuta"
+    assert strip_code("") == ""
+    assert strip_code("Total Nacional") == "Total Nacional"

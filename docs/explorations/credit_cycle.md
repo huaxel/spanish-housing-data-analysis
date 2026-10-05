@@ -5,6 +5,15 @@ national rates (76315) put the demand side next to the stock story.
 Computed inline from the marts; no separate script (queries below are the
 evidence — rerun against `marts.duckdb`).
 
+## Update: liquidity and the nueva collapse (Transmisiones layer)
+
+Transactions (registrars) complete the cycle: 775k (2007) → 313k (2013) →
+640k (2024), with the nueva share falling 42% → 21% (spiking to 46% in
+2013 as developers dumped new stock into a frozen used market). Mortgages
+overshoot transactions throughout (refinancing/subrogations included) —
+compare shapes, never levels. The post-2021 recovery transacts *used* homes (79% of 2024 deals) on a stock
+that barely grows: churn, not construction, clearing the market.
+
 ## Nacional: credit explains the bust, not the tightening
 
 | año | hipotecas | ticket medio | tipo medio | IPV |

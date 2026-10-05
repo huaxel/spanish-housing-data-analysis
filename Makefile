@@ -24,6 +24,7 @@ fetch:
 	uv run python scripts/fetch_municipios_mad.py
 	uv run python scripts/fetch_padron_municipios_mad.py
 	uv run python scripts/fetch_censo2011_municipios.py
+	uv run python scripts/fetch_transmisiones.py
 	uv run python scripts/fetch_diba.py
 	uv run python scripts/fetch_padron_municipios_bcn.py
 

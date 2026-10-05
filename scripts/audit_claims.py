@@ -186,6 +186,20 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.1,
     ),
     (
+        "credit",
+        "transactions Nacional 2007 (liquidity peak)",
+        "SELECT trx_total FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2007",
+        775300.0,
+        1.0,
+    ),
+    (
+        "credit",
+        "nueva share Nacional 2024 (used market recovery)",
+        "SELECT share_nueva FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2024",
+        0.2098,
+        0.0001,
+    ),
+    (
         "young",
         "solo-household share Nacional 2025",
         "SELECT share_1persona FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2025",

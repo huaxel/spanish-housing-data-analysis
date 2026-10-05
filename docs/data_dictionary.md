@@ -17,6 +17,7 @@
 | pob_20_34 / share_20_34 | residents aged 20–34 / share of población (1-Jan) | ECP single-year detail, parsed bands |
 | hog_1persona / share_1persona | 1-person households / share of hogares (2021–; sizes additive-checked) | ECP tamaño detail |
 | hip_viv_num / hip_ticket_miles | mortgages on dwellings / mean capital (thousands EUR; NULL before 2003) | INE HPT (complete years only) |
+| trx_total / share_nueva | registered transactions / new-build share (NULL before 2007) | Transmisiones (nueva+usada==total asserted) |
 | viv_turisticas / share_turistica_no_princ | registered tourist dwellings / share of non-primary stock (December snapshot; NULL before 2020) | INE VTE |
 | renta_hogar_neta | mean net household income, income year (NULL for 2025: ECV lags) | INE ECV |
 | afford_90m2_years | years of net income for 90 m² at Libre €/m² | derived (AFFORD_M2=90) |
