@@ -60,7 +60,9 @@ bust = rows(
 
 out = {"nacional_snapshots": nacional, "absorption_2021_2025": absorption,
        "bust_2007_2013": bust}
-(inews := PROCESSED.parent / "artifacts").mkdir(exist_ok=True)
+from spanish_housing.data_paths import ROOT  # noqa: E402
+
+(inews := ROOT / "artifacts").mkdir(exist_ok=True)
 (inews / "exploration_01.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
 
