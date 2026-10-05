@@ -115,6 +115,22 @@ def main() -> int:
     # Mortgages start 2003; the CCAA mart starts 2007, so it must be complete.
     assert hip == 0, "ccaa mortgages must be complete 2007-2025"
     assert hip_prov_pre == 0 and hip_prov_post == 0, "prov mortgages must cover 2003-2021"
+    tur_cc = con.execute(
+        "SELECT COUNT(*) FROM mart_ccaa_anual WHERE anyo >= 2020 AND viv_turisticas IS NULL"
+    ).fetchone()[0]
+    tur_cc_pre = con.execute(
+        "SELECT COUNT(*) FROM mart_ccaa_anual WHERE anyo < 2020 AND viv_turisticas IS NOT NULL"
+    ).fetchone()[0]
+    tur_pr = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo IN (2020, 2021) "
+        "AND viv_turisticas IS NULL"
+    ).fetchone()[0]
+    print(
+        f"tourist dwellings: ccaa null-post2020={tur_cc}, ccaa pre2020-leak={tur_cc_pre}, "
+        f"prov null-2020/21={tur_pr}"
+    )
+    assert tur_cc == 0 and tur_cc_pre == 0, "ccaa tourist must cover 2020-2025 only"
+    assert tur_pr == 0, "prov tourist must cover 2020-2021"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

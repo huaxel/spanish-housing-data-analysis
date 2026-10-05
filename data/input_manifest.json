@@ -27,7 +27,11 @@
     "data/raw/hipotecas_prov.json": "32a7ef413a69195faf85613ec8bd4c3f19831433facb26398f2ba824c263c62a",
     "data/raw/parquet/hipotecas_prov.parquet": "446840aafade0a6f1549b0cfa8c85542f3901e6edd3a16b27d174a4727b748ff",
     "data/raw/hipotecas_rates.json": "ae017d5156dafdd6aae66a2763bd4165fa9f8aed07d0b5098e04666748f79435",
-    "data/raw/parquet/hipotecas_rates.parquet": "6be4f31be89a283af59a4ae8d53d15db880625cb6b583f127d23aefdb194552b"
+    "data/raw/parquet/hipotecas_rates.parquet": "6be4f31be89a283af59a4ae8d53d15db880625cb6b583f127d23aefdb194552b",
+    "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
+    "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
+    "data/raw/turisticas_con_pct.json": "77446313d60a7dcd41bcfa24ea24578b19a8b4cc7761f7a1fc1812c12ac24fa6",
+    "data/raw/parquet/turisticas_con_pct.parquet": "f328a67953abf652c713937bc78c40665ce900e33dea8f0626da83570900da7c"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -185,6 +189,28 @@
       "operation": "HPT",
       "accessed": "2026-10-06",
       "note": "Viviendas only; annual sums/means + n_months"
+    },
+    "data/raw/turisticas_counts.json": {
+      "api": "wstempus/DATOS_TABLA/39364",
+      "operation": "VTE",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/turisticas_counts.parquet": {
+      "api": "wstempus/DATOS_TABLA/39364",
+      "operation": "VTE",
+      "accessed": "2026-10-06",
+      "note": "December snapshot per year"
+    },
+    "data/raw/turisticas_con_pct.json": {
+      "api": "wstempus/DATOS_TABLA/46141",
+      "operation": "VTE",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/turisticas_con_pct.parquet": {
+      "api": "wstempus/DATOS_TABLA/46141",
+      "operation": "VTE",
+      "accessed": "2026-10-06",
+      "note": "December snapshot per year"
     }
   }
 }

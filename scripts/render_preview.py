@@ -77,8 +77,8 @@ yshare = [round(r[7] * 100, 2) if r[7] else None for r in rows]
 
 ccaa25 = con.execute(
     "SELECT ccaa, eur_m2_libre, afford_90m2_years, viv_por_hogar, viv_por_1000_hab,"
-    " hip_viv_num FROM mart_ccaa_anual WHERE anyo=2025 AND ccaa!='Nacional'"
-    " ORDER BY eur_m2_libre DESC"
+    " hip_viv_num, share_turistica_no_princ FROM mart_ccaa_anual"
+    " WHERE anyo=2025 AND ccaa!='Nacional' ORDER BY eur_m2_libre DESC"
 ).fetchall()
 ccaa24 = {
     r[0]: r[1]
@@ -87,10 +87,15 @@ ccaa24 = {
     ).fetchall()
 }
 
+
+def pct(t: float | None) -> str:
+    return f"{t * 100:.1f}%" if t else "—"
+
+
 table = "".join(
     f"<tr><td>{c}</td><td>{e:,.0f}</td><td>{ccaa24.get(c) or '—'}</td>"
-    f"<td>{h or '—'}</td><td>{v:,.0f}</td><td>{n:,.0f}</td></tr>"
-    for c, e, _a, h, v, n in ccaa25
+    f"<td>{h or '—'}</td><td>{v:,.0f}</td><td>{n:,.0f}</td><td>{pct(t)}</td></tr>"
+    for c, e, _a, h, v, n, t in ccaa25
 )
 
 html = f"""<!doctype html><html lang="es"><head><meta charset="utf-8">
@@ -105,7 +110,7 @@ El visor Evidence está bloqueado por un bug upstream — estas son sus mismas c
 {svg_dual("Asequibilidad (años de renta, 90 m²) vs hipotecas — Nacional", years, afford, hip, "años renta", "hipotecas")}
 {svg_dual("Cuota 20–34 años (%) vs IPV — Nacional", years, yshare, ipv, "% 20–34", "IPV")}
 <h3>CCAA 2025 (asequibilidad 2024)</h3>
-<table><tr><th>CCAA</th><th>€/m²</th><th>años renta</th><th>viv/hogar</th><th>viv/1000</th><th>hipotecas</th></tr>{table}</table>
+<table><tr><th>CCAA</th><th>€/m²</th><th>años renta</th><th>viv/hogar</th><th>viv/1000</th><th>hipotecas</th><th>% tur/no-princ</th></tr>{table}</table>
 <p class="note">Métodos y límites en <code>docs/methods.md</code>. Nulps pre-2021 en viv/hogar y renta (ventanas ECP/ECH).</p>
 </body></html>"""
 

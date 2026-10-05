@@ -19,10 +19,21 @@ demographic inflow. Building more is the necessary (not sufficient) answer.
 The CCAA built 0.23 dwellings per new household 2021–25 (tightest in Spain)
 — yet Alicante holds 720 dwellings per 1,000 people and Castellón 762
 (vs Madrid's 429), because **44–46% of those dwellings aren't primary
-residences**. Second homes, tourist stock, vacant inheritance: the shortage
-is in *primary* housing next to a sea of non-primary stock. Prices (€1,070
+residences**. And the tourist-flat suspect is acquitted: registered tourist
+dwellings are only **4.3% of Valencia's non-primary stock** (48k of 1.12M,
+2025), 5–6% in Cataluña, 4% in Madrid — *falling* 2021→25 in most markets
+(Balears 29k→19k) while prices rose. The sea beside primary housing is
+second homes and vacant inheritance, not tourist flats. Prices (€1,070
 Castellón → €1,708 CCAA mean, 2021–25) and mortgages (20k→61k) recovered
 without the magnet's demographics (young share only 15.9→16.7%).
+
+## Update 2026-10-06: tourist flats acquitted (VTE layer)
+
+`viv_turisticas` / `share_turistica_no_princ` (2020–) now in both marts.
+Only Canarias (19%) and Balears (9–14%) have double-digit tourist shares of
+non-primary stock; everywhere else it's 4–6% and shrinking under licensing
+freezes. The queued distinction is now sharper: *second homes vs vacant*
+— neither is observable yet in Tempus at this grain.
 
 ## The policy moral the data supports
 

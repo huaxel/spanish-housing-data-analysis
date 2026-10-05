@@ -35,6 +35,13 @@
   49146 verified byte-identical content, not fetched). Enables
   `afford_90m2_years = eur_m2_libre × 90 / renta` (CCAA mart only — no
   provincial incomes in Tempus). Means-on-means: blind to inequality.
+- **Turísticas (INE VTE, 39364/46141 CCAA+provincia):** registered tourist
+  dwellings, monthly registry snapshots from 2020 — December (or latest
+  month) kept, never averaged. Uniprovincial CCAA appear as duplicate
+  CCAA+provincia series (verified value-identical, first kept with a guard).
+  Marts carry `viv_turisticas` + `share_turistica_no_princ` (2020–). Finding:
+  4–6% of non-primary stock in most CCAA (Balears/Canarias higher), falling
+  2021→25 — tourist flats are not the composition crisis.
 - **Hipotecas (INE HPT, 76316/76317 CCAA+provincia, 76315 rates):** monthly
   mortgages constituted on dwellings (número + importe, thousands of EUR)
   and national average rates (total/fijo/variable). Marts carry annual

@@ -104,6 +104,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/hipotecas_ccaa.parquet",
     "data/raw/parquet/hipotecas_prov.parquet",
     "data/raw/parquet/hipotecas_rates.parquet",
+    "data/raw/parquet/turisticas_counts.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -316,6 +317,21 @@ def main() -> None:
         key = N("Total Nacional") if ccaa == "Nacional" else N(ccaa)
         return renta.get((key, anyo))
 
+    # Tourist dwellings (VTE, December snapshot). Uniprovincial names already
+    # deduped at fetch (identical values asserted).
+    tur = {
+        (N(r["territorio"]), r["anyo"]): r["viv_turisticas"]
+        for r in load_parquet("turisticas_counts.parquet")
+    }
+
+    def tur_share(
+        no_princ: int | None, terr_key: str, anyo: int
+    ) -> tuple[int | None, float | None]:
+        v = tur.get((N(terr_key), anyo))
+        if v is None or not no_princ:
+            return None, None
+        return v, round(v / no_princ, 4)
+
     # Mortgages on dwellings (HPT). Complete (12-month) years only; importe
     # unit is thousands of euros (ticket 2006 ~= EUR 140k — sanity-checked).
     hip_ccaa: dict[tuple[str, int], dict] = {}
@@ -392,6 +408,13 @@ def main() -> None:
                 hogar = hog_prov.get((N(d["provincia"]), anyo))
             eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
             if d["cpro"] == "51+52":
+                t1 = tur.get((N("Ceuta"), anyo), 0) or 0
+                t2 = tur.get((N("Melilla"), anyo), 0) or 0
+                tur_v = t1 + t2 or None
+                tur_s = round((t1 + t2) / cell["no_principal"], 4) if tur_v else None
+            else:
+                tur_v, tur_s = tur_share(cell["no_principal"], d["provincia"], anyo)
+            if d["cpro"] == "51+52":
                 n1, t1 = hip_pair(hip_prov, "Ceuta", anyo)
                 n2, t2 = hip_pair(hip_prov, "Melilla", anyo)
                 if n1 and n2:
@@ -421,6 +444,8 @@ def main() -> None:
                     "vt_source": vt_src,
                     "hip_viv_num": hip_num,
                     "hip_ticket_miles": hip_ticket,
+                    "viv_turisticas": tur_v,
+                    "share_turistica_no_princ": tur_s,
                 }
             )
     prov_rows.sort(key=lambda r: (r["cpro"], r["anyo"]))
@@ -455,6 +480,9 @@ def main() -> None:
                 continue
             tot = sum(c["total"] for c in cells)
             hogar = ccaa_hog(ccaa, anyo)
+            no_princ = sum(c["no_principal"] for c in cells)
+            terr_t = "Total Nacional" if ccaa == "Nacional" else ccaa
+            tur_v, tur_s = tur_share(no_princ, terr_t, anyo)
             ipv_key = ccaa if ccaa != "Nacional" else "Nacional"
             eur_m2, eur_trim, eur_src = ccaa_valor(ccaa, anyo, provs)
             hip_nc, hip_tc = ccaa_hip(ccaa, anyo)
@@ -475,6 +503,8 @@ def main() -> None:
                     "vt_source": eur_src,
                     "hip_viv_num": hip_nc,
                     "hip_ticket_miles": hip_tc,
+                    "viv_turisticas": tur_v,
+                    "share_turistica_no_princ": tur_s,
                     "renta_hogar_neta": (renta_v := ccaa_renta(ccaa, anyo)),
                     "afford_90m2_years": (
                         round(eur_m2 * AFFORD_M2 / renta_v, 2) if eur_m2 and renta_v else None

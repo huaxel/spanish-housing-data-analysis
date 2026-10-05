@@ -138,6 +138,22 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         6.41,
         0.01,
     ),
+    (
+        "deepcut",
+        "Valencia tourist share of non-primary 2025",
+        "SELECT share_turistica_no_princ FROM mart_ccaa_anual "
+        "WHERE ccaa='Comunitat Valenciana' AND anyo=2025",
+        0.0432,
+        0.0001,
+    ),
+    (
+        "deepcut",
+        "Balears tourist dwellings 2025 (falling)",
+        "SELECT viv_turisticas FROM mart_ccaa_anual "
+        "WHERE ccaa='Balears, Illes' AND anyo=2025",
+        19398.0,
+        1.0,
+    ),
 ]
 
 

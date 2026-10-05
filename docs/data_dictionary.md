@@ -16,6 +16,7 @@
 | eur_m2_libre | mean appraised €/m², vivienda libre (annual mean of published quarters) | MIVAU valor tasado |
 | pob_20_34 / share_20_34 | residents aged 20–34 / share of población (1-Jan) | ECP single-year detail, parsed bands |
 | hip_viv_num / hip_ticket_miles | mortgages on dwellings / mean capital (thousands EUR; NULL before 2003) | INE HPT (complete years only) |
+| viv_turisticas / share_turistica_no_princ | registered tourist dwellings / share of non-primary stock (December snapshot; NULL before 2020) | INE VTE |
 | renta_hogar_neta | mean net household income, income year (NULL for 2025: ECV lags) | INE ECV |
 | afford_90m2_years | years of net income for 90 m² at Libre €/m² | derived (AFFORD_M2=90) |
 | eur_m2_n_trim | quarters averaged (completeness flag — partial years visible) | derived |
