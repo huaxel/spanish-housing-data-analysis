@@ -1,0 +1,50 @@
+"""SHA-256 input manifest: record what was fetched, verify before building.
+
+Mirrors the four-prices discipline on a smaller scale: every raw input is
+pinned by bytes; build_marts refuses to run on unpinned or changed inputs
+unless --refresh-manifest is passed explicitly after review.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+from .data_paths import MANIFEST
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def load() -> dict:
+    if not MANIFEST.exists():
+        return {"snapshot_date": None, "sha256": {}, "sources": {}}
+    return json.loads(MANIFEST.read_text(encoding="utf-8"))
+
+
+def record(relative_path: str, source: dict) -> None:
+    """Pin one file: hash its current bytes and store its source metadata."""
+    man = load()
+    full = Path(__file__).resolve().parents[2] / relative_path
+    man.setdefault("sha256", {})[relative_path] = sha256(full)
+    man.setdefault("sources", {})[relative_path] = source
+    MANIFEST.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def check(expected: dict[str, str]) -> tuple[list[str], list[str]]:
+    """Return (missing, mismatched) relative paths vs current bytes."""
+    missing, mismatched = [], []
+    root = Path(__file__).resolve().parents[2]
+    for rel, digest in expected.items():
+        p = root / rel
+        if not p.exists():
+            missing.append(rel)
+        elif sha256(p) != digest:
+            mismatched.append(rel)
+    return missing, mismatched

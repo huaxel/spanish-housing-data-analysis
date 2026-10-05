@@ -1,0 +1,115 @@
+{
+  "snapshot_date": null,
+  "sha256": {
+    "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+    "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
+    "data/raw/ipv_ccaa_anual.json": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
+    "data/raw/parquet/ipv_ccaa_anual.parquet": "6dc32de53a18850f11773834b7455a1ecda921b88d8916687f5e9324167e9c34",
+    "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
+    "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
+    "data/raw/padron_ccaa.json": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
+    "data/raw/parquet/padron_ccaa.parquet": "495e970541579aa086c3f0ddf760b600734f4b73d672a1fec2aa8e844e07cf4d",
+    "data/raw/censo_viviendas_2001_2011.csv": "8a4f18414c1d2953003c26d1b22455269f21fc34a6ce9883f710b82b94330dab",
+    "data/raw/parquet/censo_viviendas_2001_2011.parquet": "42040a0a9a5593538fe7a21c05c707a8c44c5524efba2176a943b2e08d514c14",
+    "data/raw/ecp_pob_ccaa.json": "2117dfcfb189dfc287a5825d0d68706d0c3f28d58de3c1e3e5799d4b682efde1",
+    "data/raw/parquet/ecp_pob_ccaa.parquet": "f97e785ab58ba23c16f52475871d3d6086bd68aea0dc55ed5da49154b2700495",
+    "data/raw/ecp_hog_ccaa.json": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
+    "data/raw/parquet/ecp_hog_ccaa.parquet": "cb5462ff652790e7b98669a53c6ca8e49040376618f0d78bbc979ae79a1044f4",
+    "data/raw/ecp_hog_prov.json": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
+    "data/raw/parquet/ecp_hog_prov.parquet": "f4d3e7f2003a5f0dbce85fe18ee992f50b08f4ab5303571a18c63e60a3bc41d1"
+  },
+  "sources": {
+    "data/raw/parque_viviendas.csv": {
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv",
+      "publisher": "MIVAU",
+      "dataset": "VDP002_01",
+      "accessed": "2026-10-05",
+      "note": "(parsed copy in data/raw/parquet/)"
+    },
+    "data/raw/parquet/parque_viviendas.parquet": {
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv",
+      "publisher": "MIVAU",
+      "dataset": "VDP002_01",
+      "accessed": "2026-10-05",
+      "note": "parquet mirror of the pinned CSV"
+    },
+    "data/raw/ipv_ccaa_anual.json": {
+      "api": "wstempus/DATOS_TABLA/80271",
+      "operation": "IPV",
+      "accessed": "2026-10-05"
+    },
+    "data/raw/parquet/ipv_ccaa_anual.parquet": {
+      "api": "wstempus/DATOS_TABLA/80271",
+      "operation": "IPV",
+      "accessed": "2026-10-05",
+      "note": "parsed index levels only"
+    },
+    "data/raw/padron_provincia.json": {
+      "api": "wstempus/DATOS_TABLA/2852",
+      "operation": "DPOP",
+      "accessed": "2026-10-05"
+    },
+    "data/raw/parquet/padron_provincia.parquet": {
+      "api": "wstempus/DATOS_TABLA/2852",
+      "operation": "DPOP",
+      "accessed": "2026-10-05",
+      "note": "sexo=Total only"
+    },
+    "data/raw/padron_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/2853",
+      "operation": "DPOP",
+      "accessed": "2026-10-05"
+    },
+    "data/raw/parquet/padron_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/2853",
+      "operation": "DPOP",
+      "accessed": "2026-10-05",
+      "note": "sexo=Total only"
+    },
+    "data/raw/censo_viviendas_2001_2011.csv": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv",
+      "publisher": "INE",
+      "operation": "CENSOPV",
+      "accessed": "2026-10-05"
+    },
+    "data/raw/parquet/censo_viviendas_2001_2011.parquet": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv",
+      "publisher": "INE",
+      "operation": "CENSOPV",
+      "accessed": "2026-10-05"
+    },
+    "data/raw/ecp_pob_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/56940",
+      "operation": "ECP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/ecp_pob_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/56940",
+      "operation": "ECP",
+      "accessed": "2026-10-06",
+      "note": "1-Jan (FK_Periodo 19) rows only"
+    },
+    "data/raw/ecp_hog_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/60131",
+      "operation": "ECP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/ecp_hog_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/60131",
+      "operation": "ECP",
+      "accessed": "2026-10-06",
+      "note": "1-Jan (FK_Periodo 19) rows only"
+    },
+    "data/raw/ecp_hog_prov.json": {
+      "api": "wstempus/DATOS_TABLA/60133",
+      "operation": "ECP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/ecp_hog_prov.parquet": {
+      "api": "wstempus/DATOS_TABLA/60133",
+      "operation": "ECP",
+      "accessed": "2026-10-06",
+      "note": "1-Jan (FK_Periodo 19) rows only"
+    }
+  }
+}

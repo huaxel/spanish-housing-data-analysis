@@ -1,0 +1,8 @@
+# Raw publisher inputs (pinned by data/input_manifest.json). Never edit by hand.
+# Processed DuckDB marts + coverage report. Regenerate with make build.
+# Evidence dev node_modules.
+data/raw/
+data/processed/
+!data/input_manifest.json
+evidence/node_modules/
+evidence/.evidence/

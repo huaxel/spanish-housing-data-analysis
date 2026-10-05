@@ -1,0 +1,188 @@
+"""Offline parser/join-rule tests. No network, no data/ dependency."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+
+from build_marts import CPRO_CCAA, N  # noqa: E402
+from fetch_ecp import parse_hog as parse_ecp_hog  # noqa: E402
+from fetch_ecp import parse_pob as parse_ecp_pob  # noqa: E402
+from fetch_ipv import parse as parse_ipv  # noqa: E402
+from fetch_padron import parse as parse_padron  # noqa: E402
+from spanish_housing import ine_api  # noqa: E402
+
+
+def test_norm_matches_all_parque_province_names():
+    parque_names = [
+        "Araba/Álava",
+        "Albacete",
+        "Alicante/Alacant",
+        "Almería",
+        "Ávila",
+        "Badajoz",
+        "Balears, Illes",
+        "Barcelona",
+        "Burgos",
+        "Cáceres",
+        "Cádiz",
+        "Castellón/Castelló",
+        "Ciudad Real",
+        "Córdoba",
+        "Coruña, A",
+        "Cuenca",
+        "Girona",
+        "Granada",
+        "Guadalajara",
+        "Gipuzkoa",
+        "Huelva",
+        "Huesca",
+        "Jaén",
+        "León",
+        "Lleida",
+        "Rioja, La",
+        "Lugo",
+        "Madrid",
+        "Málaga",
+        "Murcia",
+        "Navarra",
+        "Ourense",
+        "Asturias",
+        "Palencia",
+        "Palmas, Las",
+        "Pontevedra",
+        "Salamanca",
+        "Santa Cruz de Tenerife",
+        "Cantabria",
+        "Segovia",
+        "Sevilla",
+        "Soria",
+        "Tarragona",
+        "Teruel",
+        "Toledo",
+        "Valencia/València",
+        "Valladolid",
+        "Bizkaia",
+        "Zamora",
+        "Zaragoza",
+    ]
+    assert len(parque_names) == 50
+    # every MIVAU province name must hit the CPRO map via build lookup order
+    assert len({N(n) for n in parque_names}) == 50
+
+
+def test_cpro_ccaa_covers_all_50_provinces():
+    assert len(CPRO_CCAA) == 50
+    assert set(CPRO_CCAA) == {f"{i:02d}" for i in range(1, 51)}
+
+
+def test_ipv_parse_keeps_index_levels_only():
+    payload = [
+        {
+            "COD": "X1",
+            "Nombre": "Nacional. Media anual. General. ",
+            "Data": [{"Anyo": 2020, "Valor": 70.0}],
+        },
+        {
+            "COD": "X2",
+            "Nombre": "Nacional. Variación anual. General. ",
+            "Data": [{"Anyo": 2020, "Valor": 1.5}],
+        },
+        {
+            "COD": "X3",
+            "Nombre": "Madrid, Comunidad de. Media anual. Vivienda nueva. ",
+            "Data": [{"Anyo": 2020, "Valor": 80.0}],
+        },
+    ]
+    rows, skipped = parse_ipv(payload)
+    assert len(rows) == 2
+    assert len(skipped) == 1 and "Variación" in skipped[0]
+    assert rows[1]["territorio"] == "Madrid, Comunidad de"
+
+
+def test_padron_parse_keeps_total_habitantes_only():
+    payload = [
+        {
+            "COD": "D1",
+            "Nombre": "Albacete. Total. Total habitantes. Personas. ",
+            "Data": [{"Anyo": 2021, "Valor": 386464.0}],
+        },
+        {
+            "COD": "D2",
+            "Nombre": "Albacete. Total. Nacidos en el municipio. Personas. ",
+            "Data": [{"Anyo": 2021, "Valor": 1.0}],
+        },
+    ]
+    rows, skipped = parse_padron(payload)
+    assert len(rows) == 1 and rows[0]["poblacion"] == 386464
+    assert len(skipped) == 1
+
+
+def test_ine_split_nombre():
+    assert ine_api.split_nombre("Albacete. Total. Total habitantes. Personas. ") == [
+        "Albacete",
+        "Total",
+        "Total habitantes",
+        "Personas",
+    ]
+
+
+def test_ecp_pob_keeps_january_totals_only():
+    payload = [
+        {
+            "COD": "E1",
+            "Nombre": "Total. Todas las edades. Andalucía. Población. Número. ",
+            "Data": [
+                {"Anyo": 2022, "FK_Periodo": 19, "Valor": 8000000.0},
+                {"Anyo": 2022, "FK_Periodo": 20, "Valor": 8010000.0},
+            ],
+        },
+        {
+            "COD": "E2",
+            "Nombre": "Hombres. Todas las edades. Andalucía. Población. Número. ",
+            "Data": [{"Anyo": 2022, "FK_Periodo": 19, "Valor": 3900000.0}],
+        },
+        {
+            "COD": "E3",
+            "Nombre": "Total Nacional. Todas las edades. Total. Población. Número. ",
+            "Data": [{"Anyo": 2022, "FK_Periodo": 19, "Valor": 47000000.0}],
+        },
+        {
+            "COD": "E4",
+            "Nombre": "Total. 40 años. Andalucía. Población. Número. ",
+            "Data": [{"Anyo": 2022, "FK_Periodo": 19, "Valor": 1.0}],
+        },
+    ]
+    rows, skipped = parse_ecp_pob(payload)
+    assert len(rows) == 2  # quarterly point + sex/age detail excluded
+    assert rows[0] == {
+        "territorio": "Andalucía",
+        "anyo": 2022,
+        "poblacion": 8000000,
+        "serie_cod": "E1",
+    }
+    assert len(skipped) == 2
+
+
+def test_ecp_hog_keeps_household_totals_only():
+    payload = [
+        {
+            "COD": "H1",
+            "Nombre": "Madrid. Total. Hogares en viviendas familiares. Número. ",
+            "Data": [
+                {"Anyo": 2023, "FK_Periodo": 19, "Valor": 2600000.0},
+                {"Anyo": 2023, "FK_Periodo": 21, "Valor": 2610000.0},
+            ],
+        },
+        {
+            "COD": "H2",
+            "Nombre": "Madrid. 1. Hogares en viviendas familiares. Número. ",
+            "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 700000.0}],
+        },
+    ]
+    rows, skipped = parse_ecp_hog(payload)
+    assert len(rows) == 1 and rows[0]["hogares"] == 2600000
+    assert skipped == []
