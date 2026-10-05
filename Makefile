@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build verify evidence-install evidence-dev evidence-build clean
+.PHONY: sync test lint fetch build verify audit evidence-install evidence-dev evidence-build clean
 
 sync:
 	uv sync --group dev
@@ -27,8 +27,11 @@ build:
 verify:
 	uv run python scripts/verify_data.py
 
-# Full local gate: fetch -> build -> verify -> test
-gates: fetch build verify test
+audit:
+	uv run python scripts/audit_claims.py
+
+# Full local gate: fetch -> build -> verify -> audit -> test
+gates: fetch build verify audit test
 
 evidence-install:
 	cd evidence && npm install

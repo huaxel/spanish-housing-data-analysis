@@ -14,6 +14,8 @@ make gates   # fetch -> build -> verify -> test
   `coverage.json`.
 - `make verify` — manifest hashes + mart integrity (51 territories, no null
   keys, IPV base identity via build).
+- `make audit` — 17 headline doc numbers re-queried against the marts; fails
+  on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 
 Record a reproduction with: checkout revision, `uv --version`, input-manifest
