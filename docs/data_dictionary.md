@@ -31,6 +31,12 @@ Same stock/population columns as above plus `cpro` (2-digit code,
 No price columns — INE publishes no provincial IPV. Plus `pop_source`,
 `hogares` (2021 only overlaps padrón window), `viv_por_hogar`.
 
+## valor_municipal_madrid
+
+`codigo` (INE 4-digit), `municipio`, `anyo`, `eur_m2` — Libre, Madrid
+municipios with published appraisals (28, capital complete 2005–2025).
+Price-only: no municipal stock/population yet.
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /

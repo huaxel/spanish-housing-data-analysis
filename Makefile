@@ -21,6 +21,7 @@ fetch:
 	uv run python scripts/parse_edad.py
 	uv run python scripts/fetch_hipotecas.py
 	uv run python scripts/fetch_turisticas.py
+	uv run python scripts/fetch_municipios_mad.py
 
 build:
 	uv run python scripts/build_marts.py

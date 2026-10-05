@@ -147,6 +147,30 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.0001,
     ),
     (
+        "municipios",
+        "Madrid capital 2025",
+        "SELECT eur_m2 FROM valor_municipal_madrid WHERE codigo='0796' AND anyo=2025",
+        4993.3,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Parla trough 2013",
+        "SELECT eur_m2 FROM valor_municipal_madrid "
+        "WHERE municipio='Parla' AND anyo=2013",
+        1083.1,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Fuenlabrada 2025 vs 2007 (flat)",
+        "SELECT MAX(CASE WHEN anyo=2025 THEN eur_m2 END) "
+        "- MAX(CASE WHEN anyo=2007 THEN eur_m2 END) FROM valor_municipal_madrid "
+        "WHERE municipio='Fuenlabrada'",
+        14.0,
+        5.0,
+    ),
+    (
         "deepcut",
         "Balears tourist dwellings 2025 (falling)",
         "SELECT viv_turisticas FROM mart_ccaa_anual WHERE ccaa='Balears, Illes' AND anyo=2025",

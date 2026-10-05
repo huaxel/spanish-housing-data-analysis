@@ -105,6 +105,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/hipotecas_prov.parquet",
     "data/raw/parquet/hipotecas_rates.parquet",
     "data/raw/parquet/turisticas_counts.parquet",
+    "data/raw/parquet/valor_municipal_madrid.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -569,12 +570,20 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE valor_tasado_anual AS SELECT * FROM vt_df")
     con.register("rates_df", pa.Table.from_pylist(rates_rows))
     con.execute("CREATE OR REPLACE TABLE tipos_hipoteca_nacional AS SELECT * FROM rates_df")
+    mun = [
+        {"codigo": r["Código territorio"], "municipio": r["Territorio"],
+         "anyo": int(r["Año"]), "eur_m2": float(r["Valor"])}
+        for r in load_parquet("valor_municipal_madrid.parquet")
+    ]
+    con.register("mun_df", pa.Table.from_pylist(mun))
+    con.execute("CREATE OR REPLACE TABLE valor_municipal_madrid AS SELECT * FROM mun_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
         "dim_territorio",
         "valor_tasado_anual",
         "tipos_hipoteca_nacional",
+        "valor_municipal_madrid",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
