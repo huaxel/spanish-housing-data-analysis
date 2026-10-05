@@ -12,6 +12,7 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | INE Censo viviendas 2001/2011 (CENSOPV) | `ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv` | CCAA/provincia × censo | tab-separated, BOM; anchor use |
 | INE ECP población (operation ECP Id 450), table 56940 | `.../DATOS_TABLA/56940` | CCAA × 1-ene, 1971–2025 | FK_Periodo 19 = 1 Jan (date-checked at fetch) |
 | INE ECP hogares (ECP), tables 60131/60133 | `.../DATOS_TABLA/60131`, `.../60133` | CCAA/provincia × 1-ene, 2021– | household totals (tamaño detail skipped) |
+| INE Censo 2011 tipos de vivienda por municipio (CENSOPV 3456) | `.../DATOS_TABLA/3456` | 2,308 municipios >2.000 hab., 2011 only | principal/secundaria/vacía; 2021 census dropped the split; joined to the 28 valor municipios |
 | Madrid municipios valor tasado (datos.comunidad.madrid, MIVAU mirror) | direct CSV URL in `fetch_municipios_mad.py` | 28 municipios × año, 2005– | cp1252 → UTF-8; '-' unpublished dropped; third-party mirror, provincial mean cross-checked |
 | INE Turísticas (Tempus3 39364/46141) | `.../DATOS_TABLA/39364`, `.../46141` | CCAA/provincia × mes, 2020– | December snapshot; duplicate uniprovincial series asserted identical |
 | INE Hipotecas CCAA/prov/rates (Tempus3 76316/76317/76315) | `.../DATOS_TABLA/76316` etc. | CCAA/provincia × mes (2003–), rates nacional | Viviendas only; territory↔measure positions swap between tables; importe in thousands of EUR |

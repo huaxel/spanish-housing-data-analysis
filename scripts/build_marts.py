@@ -107,6 +107,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
+    "data/raw/parquet/censo2011_municipios.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -610,6 +611,18 @@ def main() -> None:
         raise SystemExit(f"municipal pop unmapped: {sorted(set(muni_unmapped))}")
     con.register("muni_df", pa.Table.from_pylist(muni_rows))
     con.execute("CREATE OR REPLACE TABLE muni_madrid AS SELECT * FROM muni_df")
+    # flat() already unifies 'Rozas de Madrid (Las)' vs ', Las' variants.
+    valor_names = {flat(r["Territorio"]) for r in load_parquet("valor_municipal_madrid.parquet")}
+    cen11 = [
+        {"municipio": r["municipio"], "tipo": r["tipo"], "viviendas_2011": r["viviendas"]}
+        for r in load_parquet("censo2011_municipios.parquet")
+        if flat(r["municipio"]) in valor_names
+    ]
+    missing = valor_names - {flat(c["municipio"]) for c in cen11}
+    if missing:
+        raise SystemExit(f"censo2011 missing valor municipios: {sorted(missing)}")
+    con.register("cen11_df", pa.Table.from_pylist(cen11))
+    con.execute("CREATE OR REPLACE TABLE censo2011_mad AS SELECT * FROM cen11_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -618,6 +631,7 @@ def main() -> None:
         "tipos_hipoteca_nacional",
         "valor_municipal_madrid",
         "muni_madrid",
+        "censo2011_mad",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

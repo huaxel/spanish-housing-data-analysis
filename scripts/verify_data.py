@@ -147,6 +147,14 @@ def main() -> int:
     ).fetchone()
     print(f"muni_madrid join: municipios={muni[0]} years={muni[1]}-{muni[2]}")
     assert muni[0] >= 20, f"too few joined municipios: {muni[0]}"
+    cen = con.execute(
+        "SELECT COUNT(DISTINCT municipio) FROM censo2011_mad"
+    ).fetchone()[0]
+    cen_bad = con.execute(
+        "SELECT COUNT(*) FROM censo2011_mad WHERE viviendas_2011 < 0"
+    ).fetchone()[0]
+    print(f"censo2011_mad: municipios={cen} negatives={cen_bad}")
+    assert cen >= 20 and cen_bad == 0, "censo2011 join broken"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

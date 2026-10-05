@@ -35,7 +35,9 @@
     "data/raw/valor_municipal_madrid.csv": "5b61a14a42e42210adb471784dac86648844c004367f1bca234379ecf5a13714",
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
-    "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86"
+    "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86",
+    "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
+    "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -236,6 +238,16 @@
     "data/raw/parquet/padron_municipios_mad.parquet": {
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/censo2011_municipios.json": {
+      "api": "wstempus/DATOS_TABLA/3456",
+      "operation": "CENSOPV",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/censo2011_municipios.parquet": {
+      "api": "wstempus/DATOS_TABLA/3456",
+      "operation": "CENSOPV",
       "accessed": "2026-10-06"
     }
   }

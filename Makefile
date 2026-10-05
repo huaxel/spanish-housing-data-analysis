@@ -23,6 +23,7 @@ fetch:
 	uv run python scripts/fetch_turisticas.py
 	uv run python scripts/fetch_municipios_mad.py
 	uv run python scripts/fetch_padron_municipios_mad.py
+	uv run python scripts/fetch_censo2011_municipios.py
 
 build:
 	uv run python scripts/build_marts.py

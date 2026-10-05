@@ -36,6 +36,11 @@ No price columns — INE publishes no provincial IPV. Plus `pop_source`,
 `codigo` (INE 4-digit), `municipio`, `anyo`, `eur_m2` — Libre, Madrid
 municipios with published appraisals (28, capital complete 2005–2025).
 
+## censo2011_mad
+
+`municipio`, `tipo` (Total/familiar/principal/no principal/secundaria/
+vacía/colectiva), `viviendas_2011` — 2011 split for the 28 valor municipios.
+
 ## muni_madrid
 
 `municipio`, `anyo`, `eur_m2`, `poblacion` — valor joined to Padrón

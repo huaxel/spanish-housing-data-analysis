@@ -50,6 +50,23 @@ without purchasing power — filtering down, not gentrification); the capital
 grew least (+12%) and appreciated most (+30%). Municipal absorption *does*
 discriminate, unlike the CCAA ratio — grain matters.
 
+## Update: the 2011 split — vacancy, not second homes (`censo2011_mad`)
+
+The 2011 census classified municipal dwellings (principal/secundaria/vacía;
+the 2021 register-census dropped the split, which is why it stays open).
+Vacant share of all dwellings, 2011:
+
+Madrid city 10.0% · Valdemoro 8.3% · Torrejón 8.1% · Alcalá 7.3% ·
+Getafe 7.0% · Parla 6.0% · Leganés 5.2% · Fuenlabrada 4.9% ·
+Pozuelo 4.7% (but secundaria 5.5% — rich second homes) ·
+Alcobendas 3.7% · Rivas 1.9%.
+
+The south's overhang was vacant crash-leftover from the start, not second
+homes; Rivas (the growth absorber) had almost no vacancy. Madrid city's
+153k vacant + 57k secundaria dwellings in 2011 are the scale reminder:
+the capital's 2025 tightness was built on a decade of absorbing exactly
+this slack — plus migrants.
+
 ## Limits
 
 - Mirror source (Base 2005): third-party copy of MIVAU; provincial VDP006

@@ -162,6 +162,23 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Madrid city vacant dwellings 2011",
+        "SELECT viviendas_2011 FROM censo2011_mad "
+        "WHERE municipio='Madrid' AND tipo='Vivienda vacía'",
+        153101.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Parla vacant share 2011 (south = vacancy)",
+        "SELECT ROUND(SUM(CASE WHEN tipo='Vivienda vacía' THEN viviendas_2011 END) "
+        "* 100.0 / SUM(CASE WHEN tipo='Total viviendas' THEN viviendas_2011 END), 1) "
+        "FROM censo2011_mad WHERE municipio='Parla'",
+        6.0,
+        0.1,
+    ),
+    (
+        "municipios",
         "Rivas population growth 2007-2025",
         "SELECT ROUND((MAX(CASE WHEN anyo=2025 THEN poblacion END) "
         "- MAX(CASE WHEN anyo=2007 THEN poblacion END)) * 100.0 "
