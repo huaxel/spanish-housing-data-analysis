@@ -14,14 +14,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
+
 from spanish_housing.data_paths import PROCESSED  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 
 
 def rows(sql: str) -> list[dict]:
-    return [dict(zip([d[0] for d in con.description], r, strict=True))
-            for r in con.execute(sql).fetchall()]
+    return [
+        dict(zip([d[0] for d in con.description], r, strict=True))
+        for r in con.execute(sql).fetchall()
+    ]
 
 
 nacional = rows(
@@ -58,23 +61,29 @@ bust = rows(
      WHERE b.ccaa != 'Nacional' ORDER BY ipv_pct"""
 )
 
-out = {"nacional_snapshots": nacional, "absorption_2021_2025": absorption,
-       "bust_2007_2013": bust}
+out = {"nacional_snapshots": nacional, "absorption_2021_2025": absorption, "bust_2007_2013": bust}
 from spanish_housing.data_paths import ROOT  # noqa: E402
 
 (inews := ROOT / "artifacts").mkdir(exist_ok=True)
 (inews / "exploration_01.json").write_text(
-    json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"
+)
 
 print("== NACIONAL ==")
 for r in nacional:
-    print(f"{r['anyo']}: ipv={r['ipv_general']} eur/m2={r['eur_m2_libre']} "
-          f"viv/1000={r['viv_por_1000_hab']} viv/hogar={r['viv_por_hogar']}")
+    print(
+        f"{r['anyo']}: ipv={r['ipv_general']} eur/m2={r['eur_m2_libre']} "
+        f"viv/1000={r['viv_por_1000_hab']} viv/hogar={r['viv_por_hogar']}"
+    )
 print("\n== ABSORPTION 2021-2025 (dwellings built per new household) ==")
 for r in sorted(absorption, key=lambda x: (x["viv_per_new_hogar"] is None, x["viv_per_new_hogar"])):
-    print(f"{r['ccaa']}: d_viv={r['d_viv']} d_hog={r['d_hog']} "
-          f"viv/new_hogar={r['viv_per_new_hogar']} d_eur/m2={r['d_eur_m2']:+.0f}")
+    print(
+        f"{r['ccaa']}: d_viv={r['d_viv']} d_hog={r['d_hog']} "
+        f"viv/new_hogar={r['viv_per_new_hogar']} d_eur/m2={r['d_eur_m2']:+.0f}"
+    )
 print("\n== BUST 2007-2013 (IPV % vs stock-per-capita change) ==")
 for r in bust:
-    print(f"{r['ccaa']}: ipv {r['ipv_pct']:+.1f}% eur {r['eur_pct']:+.1f}% "
-          f"d_viv/1000={r['d_viv1000']:+.1f} (+{r['d_viv']} dwellings)")
+    print(
+        f"{r['ccaa']}: ipv {r['ipv_pct']:+.1f}% eur {r['eur_pct']:+.1f}% "
+        f"d_viv/1000={r['d_viv1000']:+.1f} (+{r['d_viv']} dwellings)"
+    )

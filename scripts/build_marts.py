@@ -99,7 +99,11 @@ REQUIRED_RAW = [
     "data/raw/parquet/ecp_hog_ccaa.parquet",
     "data/raw/parquet/ecp_hog_prov.parquet",
     "data/raw/parquet/valor_tasado.parquet",
+    "data/raw/parquet/renta_hogar_ccaa.parquet",
 ]
+# Affordability reference dwelling. A single explicit assumption (documented
+# in methods §2), not an empirical claim about what households buy.
+AFFORD_M2 = 90
 # Population splice: Padrón (Revisión) through 2021, ECP from 2022.
 # Same reference point (1 January), different methodology — never blended.
 POP_SPLICE_YEAR = 2022
@@ -283,6 +287,20 @@ def main() -> None:
         return hog_ccaa.get((N(ccaa), anyo))
 
     vt = annualize_valor(load_parquet("valor_tasado.parquet"))
+    renta = {
+        (N(r["territorio"]), r["renta_anyo"]): r["renta_eur"]
+        for r in load_parquet("renta_hogar_ccaa.parquet")
+        if r["indicador"] == "neta"
+    }
+    # ECV names 'Total Nacional' where marts say 'Nacional'.
+    renta_terrs = {t for (t, _a) in renta}
+    need_renta = {N(d["ccaa"]) for d in dim} - {N("Ceuta y Melilla")} | {N("Total Nacional")}
+    if need_renta - renta_terrs:
+        raise SystemExit(f"renta missing CCAA: {need_renta - renta_terrs}")
+
+    def ccaa_renta(ccaa: str, anyo: int) -> float | None:
+        key = N("Total Nacional") if ccaa == "Nacional" else N(ccaa)
+        return renta.get((key, anyo))
 
     def prov_valor(cpro: str, anyo: int) -> tuple[float | None, int | None, str | None]:
         cell = vt.get(("P" + cpro, anyo, "Libre"))
@@ -399,6 +417,10 @@ def main() -> None:
                     "eur_m2_libre": eur_m2,
                     "eur_m2_n_trim": eur_trim,
                     "vt_source": eur_src,
+                    "renta_hogar_neta": (renta_v := ccaa_renta(ccaa, anyo)),
+                    "afford_90m2_years": (
+                        round(eur_m2 * AFFORD_M2 / renta_v, 2) if eur_m2 and renta_v else None
+                    ),
                     "ipv_general": ipv_cell.get((ipv_key, anyo, "General")),
                     "ipv_nueva": ipv_cell.get((ipv_key, anyo, "Vivienda nueva")),
                     "ipv_segunda_mano": ipv_cell.get((ipv_key, anyo, "Vivienda segunda mano")),

@@ -11,7 +11,8 @@ order by 1
 
 ```sql ficha
 select anyo, viviendas_total, poblacion, pop_source, viv_por_1000_hab,
-       hogares, viv_por_hogar, ipv_general, ipv_nueva, ipv_segunda_mano
+       hogares, viv_por_hogar, eur_m2_libre, renta_hogar_neta,
+       afford_90m2_years, ipv_general, ipv_nueva, ipv_segunda_mano
 from mart_ccaa_anual
 where ccaa = '${inputs.ccaa.value}'
 order by anyo
@@ -50,6 +51,13 @@ order by anyo, provincia
   x=anyo
   y=eur_m2_libre
   title="Valor tasado vivienda libre, €/m² (${inputs.ccaa.value})"
+/>
+
+<LineChart
+  data={ficha}
+  x=anyo
+  y=afford_90m2_years
+  title="Años de renta neta para 90 m² (${inputs.ccaa.value})"
 />
 
 <LineChart

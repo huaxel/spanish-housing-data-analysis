@@ -17,6 +17,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Data dictionary](docs/data_dictionary.md)
 - [Exploration 01: boom-bust vs tightening](docs/explorations/boom_bust_vs_tightening.md)
 - [Hypothesis 01: absorption ratio vs prices](docs/explorations/absorption_hypothesis.md) — verdict: descriptor, not a huge predictor
+- [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 
 ## Setup and verification
 

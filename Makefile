@@ -17,6 +17,7 @@ fetch:
 	uv run python scripts/fetch_censo_viviendas.py
 	uv run python scripts/fetch_ecp.py
 	uv run python scripts/fetch_valor_tasado.py
+	uv run python scripts/fetch_renta.py
 
 build:
 	uv run python scripts/build_marts.py

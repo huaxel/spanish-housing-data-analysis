@@ -83,6 +83,17 @@ def main() -> int:
     # CCAA mart excludes Ceuta y Melilla (aggregated stock); every other
     # cell must have valor tasado (single-province CCAA fall back to prov_fill).
     assert null_cells == [], f"unexpected valor gaps: {null_cells}"
+    aff = con.execute(
+        "SELECT COUNT(*), SUM(CASE WHEN renta_hogar_neta IS NULL THEN 1 ELSE 0 END), "
+        "SUM(CASE WHEN afford_90m2_years IS NULL THEN 1 ELSE 0 END) "
+        "FROM mart_ccaa_anual"
+    ).fetchone()
+    aff_2025 = con.execute(
+        "SELECT COUNT(*) FROM mart_ccaa_anual WHERE anyo = 2025 AND renta_hogar_neta IS NOT NULL"
+    ).fetchone()[0]
+    print(f"affordability: rows={aff[0]} null_renta={aff[1]} null_afford={aff[2]}")
+    # Renta runs to 2024 (ECV lag) while the mart runs to 2025: only 2025 may lack it.
+    assert aff[1] == 18 and aff_2025 == 0, f"renta gaps outside 2025: null={aff[1]}"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

@@ -29,6 +29,12 @@
   household, the closest observable to shortage (a region can have ample
   dwellings per capita yet few per household when second/vacant homes dominate).
   NULL before 2021; household-size breakdown queued.
+- **Renta (INE ECV, Tempus3 9949, CCAA):** mean net household income.
+  TIMING: ECV survey year Y reports calendar-year Y−1 incomes — the build
+  stores `renta_anyo = encuesta_anyo − 1` and joins on income year (table
+  49146 verified byte-identical content, not fetched). Enables
+  `afford_90m2_years = eur_m2_libre × 90 / renta` (CCAA mart only — no
+  provincial incomes in Tempus). Means-on-means: blind to inequality.
 - **Valor tasado (MIVAU, 1995–):** appraisal-based mean €/m² (Libre/Protegida),
   stratified by urban area/age/type and weighted by cadastral stock. This is
   the price *level* complement to IPV's *trend* — and it exists at provincial

@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
+
 from spanish_housing.data_paths import PROCESSED  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
@@ -72,8 +73,14 @@ def ccaa_pairs(y0: int, y1: int) -> list[dict]:
     for ccaa, d_viv, d_pob, d_ipv, d_eur in con.execute(q, [y0, y1]).fetchall():
         if d_viv is None or d_pob is None or d_ipv is None:
             continue
-        out.append({"terr": ccaa, "ratio": (d_viv / d_pob) if d_pob > 0 else None,
-                    "d_price": d_ipv, "d_price_eur": d_eur})
+        out.append(
+            {
+                "terr": ccaa,
+                "ratio": (d_viv / d_pob) if d_pob > 0 else None,
+                "d_price": d_ipv,
+                "d_price_eur": d_eur,
+            }
+        )
     return out
 
 
@@ -88,8 +95,14 @@ def prov_pairs(y0: int, y1: int) -> list[dict]:
     for prov, d_viv, d_pob, d_eur in con.execute(q, [y0, y1]).fetchall():
         if d_viv is None or d_pob is None or d_eur is None:
             continue
-        out.append({"terr": prov, "ratio": (d_viv / d_pob) if d_pob > 0 else None,
-                    "d_price": d_eur, "d_price_eur": d_eur})
+        out.append(
+            {
+                "terr": prov,
+                "ratio": (d_viv / d_pob) if d_pob > 0 else None,
+                "d_price": d_eur,
+                "d_price_eur": d_eur,
+            }
+        )
     return out
 
 
@@ -97,11 +110,16 @@ def summarize(pairs: list[dict]) -> dict:
     valid = [p for p in pairs if p["ratio"] is not None]
     xs = [p["ratio"] for p in valid]
     ys = [p["d_price"] for p in valid]
-    return {"n": len(pairs), "n_valid": len(valid),
-            "n_nonpositive_pop": len(pairs) - len(valid),
-            "pearson": pearson(xs, ys), "spearman": spearman(xs, ys),
-            "detail": sorted(pairs, key=lambda p: (p["ratio"] is None,
-                             p["ratio"] if p["ratio"] is not None else 0))}
+    return {
+        "n": len(pairs),
+        "n_valid": len(valid),
+        "n_nonpositive_pop": len(pairs) - len(valid),
+        "pearson": pearson(xs, ys),
+        "spearman": spearman(xs, ys),
+        "detail": sorted(
+            pairs, key=lambda p: (p["ratio"] is None, p["ratio"] if p["ratio"] is not None else 0)
+        ),
+    }
 
 
 results: dict = {"ccaa_windows": {}, "prov_windows": {}}
@@ -111,27 +129,42 @@ for y0, y1 in PROV_WINDOWS:
     results["prov_windows"][f"{y0}-{y1}"] = summarize(prov_pairs(y0, y1))
 
 # Pooled (all windows, rank-based; windows differ in credit regime — read with care).
-pool_c = [p for w in results["ccaa_windows"].values() for p in w["detail"] if p["ratio"] is not None]
-pool_p = [p for w in results["prov_windows"].values() for p in w["detail"] if p["ratio"] is not None]
+pool_c = [
+    p for w in results["ccaa_windows"].values() for p in w["detail"] if p["ratio"] is not None
+]
+pool_p = [
+    p for w in results["prov_windows"].values() for p in w["detail"] if p["ratio"] is not None
+]
 results["pooled"] = {
-    "ccaa": {"n": len(pool_c),
-             "spearman": spearman([p["ratio"] for p in pool_c], [p["d_price"] for p in pool_c])},
-    "prov": {"n": len(pool_p),
-             "spearman": spearman([p["ratio"] for p in pool_p], [p["d_price"] for p in pool_p])},
+    "ccaa": {
+        "n": len(pool_c),
+        "spearman": spearman([p["ratio"] for p in pool_c], [p["d_price"] for p in pool_c]),
+    },
+    "prov": {
+        "n": len(pool_p),
+        "spearman": spearman([p["ratio"] for p in pool_p], [p["d_price"] for p in pool_p]),
+    },
 }
 
 from spanish_housing.data_paths import ROOT  # noqa: E402
 
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "hypothesis_01.json").write_text(
-    json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
+    json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
+)
 
 print("== CCAA (IPV %) ==")
 for w, s in results["ccaa_windows"].items():
-    print(f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} "
-          f"spearman={s['spearman']:+.2f}" if s["pearson"] is not None else f"{w}: n too small")
+    print(
+        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f}"
+        if s["pearson"] is not None
+        else f"{w}: n too small"
+    )
 print("== PROVINCIA (EUR/m2 %) ==")
 for w, s in results["prov_windows"].items():
-    print(f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} "
-          f"spearman={s['spearman']:+.2f}" if s["pearson"] is not None else f"{w}: n too small")
+    print(
+        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f}"
+        if s["pearson"] is not None
+        else f"{w}: n too small"
+    )
 print("== POOLED spearman ==", results["pooled"])

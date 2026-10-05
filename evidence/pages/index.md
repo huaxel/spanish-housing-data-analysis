@@ -51,6 +51,13 @@ ver [métodos](../docs/methods.md) (en el repo).
   title="Valor tasado vivienda libre (€/m²)"
 />
 
+<LineChart
+  data={nacional}
+  x=anyo
+  y=afford_90m2_years
+  title="Años de renta neta para 90 m²"
+/>
+
 ```sql nueva_segunda
 select anyo, ipv_nueva, ipv_segunda_mano
 from mart_ccaa_anual

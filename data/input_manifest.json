@@ -18,7 +18,9 @@
     "data/raw/ecp_hog_prov.json": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
     "data/raw/parquet/ecp_hog_prov.parquet": "f4d3e7f2003a5f0dbce85fe18ee992f50b08f4ab5303571a18c63e60a3bc41d1",
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
-    "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4"
+    "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
+    "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
+    "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -126,6 +128,17 @@
       "dataset": "VDP006_01",
       "accessed": "2026-10-06",
       "note": "raw quarterly rows; empty Valor = unpublished"
+    },
+    "data/raw/renta_hogar_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/9949",
+      "operation": "ECV",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/renta_hogar_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/9949",
+      "operation": "ECV",
+      "accessed": "2026-10-06",
+      "note": "renta_anyo = encuesta_anyo - 1"
     }
   }
 }

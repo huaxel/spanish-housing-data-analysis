@@ -247,3 +247,26 @@ def test_annualize_valor_mean_andprovenance():
     assert out[("P08", 2020, "Libre")] == {"eur_m2": 1050.0, "n_trim": 2}
     assert out[("CCATALUNA", 2020, "Libre")] == {"eur_m2": 2000.0, "n_trim": 1}
     assert len(out) == 2  # unpublished quarters never zero-filled
+
+
+def test_renta_parse_lags_survey_year():
+    from fetch_renta import parse as parse_renta
+
+    payload = [
+        {
+            "COD": "R1",
+            "Nombre": "Madrid, Comunidad de. Renta neta media por hogar. Base 2013. ",
+            "Data": [{"Anyo": 2025, "Valor": 47375.0}],
+        },
+        {
+            "COD": "R2",
+            "Nombre": (
+                "Madrid, Comunidad de. Renta media por hogar (con alquiler imputado). Base 2013. "
+            ),
+            "Data": [{"Anyo": 2025, "Valor": 54000.0}],
+        },
+    ]
+    rows, skipped = parse_renta(payload)
+    assert len(rows) == 2 and skipped == []
+    neta = [r for r in rows if r["indicador"] == "neta"][0]
+    assert neta["renta_anyo"] == 2024 and neta["encuesta_anyo"] == 2025
