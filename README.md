@@ -20,6 +20,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)
+- [Madrid vs Valencia: scarcity vs composition](docs/explorations/madrid_vs_valencia.md)
 
 ## Setup and verification
 
