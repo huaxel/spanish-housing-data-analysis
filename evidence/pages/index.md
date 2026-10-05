@@ -6,7 +6,8 @@ viviendas por cada 1.000 habitantes. Ámbito nacional; por CCAA en la
 
 ```sql nacional
 select anyo, viviendas_total, poblacion, pop_source, viv_por_1000_hab,
-       hogares, viv_por_hogar, ipv_general, ipv_nueva, ipv_segunda_mano
+       hogares, viv_por_hogar, eur_m2_libre, afford_90m2_years,
+       pob_20_34, share_20_34, ipv_general, ipv_nueva, ipv_segunda_mano
 from mart_ccaa_anual
 where ccaa = 'Nacional'
 order by anyo
@@ -56,6 +57,13 @@ ver [métodos](../docs/methods.md) (en el repo).
   x=anyo
   y=afford_90m2_years
   title="Años de renta neta para 90 m²"
+/>
+
+<LineChart
+  data={nacional}
+  x=anyo
+  y=share_20_34
+  title="Cuota de 20–34 años en la población"
 />
 
 ```sql nueva_segunda

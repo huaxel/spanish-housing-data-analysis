@@ -94,6 +94,11 @@ def main() -> int:
     print(f"affordability: rows={aff[0]} null_renta={aff[1]} null_afford={aff[2]}")
     # Renta runs to 2024 (ECV lag) while the mart runs to 2025: only 2025 may lack it.
     assert aff[1] == 18 and aff_2025 == 0, f"renta gaps outside 2025: null={aff[1]}"
+    young = con.execute(
+        "SELECT COUNT(*), SUM(CASE WHEN pob_20_34 IS NULL THEN 1 ELSE 0 END) FROM mart_ccaa_anual"
+    ).fetchone()
+    print(f"young cohort 20-34: rows={young[0]} null={young[1]}")
+    assert young[1] == 0, "pob_20_34 must be complete 2007-2025"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

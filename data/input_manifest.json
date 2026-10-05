@@ -20,7 +20,8 @@
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
-    "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4"
+    "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
+    "data/raw/parquet/ecp_edad_ccaa.parquet": "aefa8e90ba6c535aee40e6ed36e71a838d36ccce347423b38bd56e7085d12146"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -139,6 +140,12 @@
       "operation": "ECV",
       "accessed": "2026-10-06",
       "note": "renta_anyo = encuesta_anyo - 1"
+    },
+    "data/raw/parquet/ecp_edad_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/56940",
+      "operation": "ECP",
+      "accessed": "2026-10-06",
+      "note": "1-Jan age bands parsed from pinned ecp_pob_ccaa.json"
     }
   }
 }

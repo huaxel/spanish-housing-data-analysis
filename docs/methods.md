@@ -35,6 +35,12 @@
   49146 verified byte-identical content, not fetched). Enables
   `afford_90m2_years = eur_m2_libre × 90 / renta` (CCAA mart only — no
   provincial incomes in Tempus). Means-on-means: blind to inequality.
+- **Edades (ECP 56940 single-year detail, CCAA):** `scripts/parse_edad.py`
+  aggregates to 0–19/20–34/35–49/50–64/65+ at 1-January. Overlap guards
+  verified arithmetically: single years 85–99 and both centenarian series
+  live inside the grouped `85 y más años` (bands must sum to the published
+  total within 2e-4; early back-series years carry integer-rounding noise).
+  The mart carries `pob_20_34`/`share_20_34` — the household-formation ages.
 - **Valor tasado (MIVAU, 1995–):** appraisal-based mean €/m² (Libre/Protegida),
   stratified by urban area/age/type and weighted by cadastral stock. This is
   the price *level* complement to IPV's *trend* — and it exists at provincial

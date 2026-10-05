@@ -270,3 +270,18 @@ def test_renta_parse_lags_survey_year():
     assert len(rows) == 2 and skipped == []
     neta = [r for r in rows if r["indicador"] == "neta"][0]
     assert neta["renta_anyo"] == 2024 and neta["encuesta_anyo"] == 2025
+
+
+def test_edad_band_edges_and_grouped_elderly():
+    from parse_edad import band
+
+    assert band("Todas las edades") == "total"
+    assert band("0 años") == "0-19" and band("1 año") == "0-19"
+    assert band("19 años") == "0-19" and band("20 años") == "20-34"
+    assert band("34 años") == "20-34" and band("35 años") == "35-49"
+    assert band("49 años") == "35-49" and band("50 años") == "50-64"
+    assert band("64 años") == "50-64" and band("65 años") == "65+"
+    assert band("84 años") == "65+"
+    assert band("85 y más años") == "65+"
+    assert band("100 y más años") == "65+"
+    assert band("De 0 a 15 años") is None

@@ -100,6 +100,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ecp_hog_prov.parquet",
     "data/raw/parquet/valor_tasado.parquet",
     "data/raw/parquet/renta_hogar_ccaa.parquet",
+    "data/raw/parquet/ecp_edad_ccaa.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -246,6 +247,16 @@ def main() -> None:
     hog_prov = {
         (N(r["territorio"]), r["anyo"]): r["hogares"] for r in load_parquet("ecp_hog_prov.parquet")
     }
+    edad_2034 = {
+        (N(r["territorio"]), r["anyo"]): r["poblacion"]
+        for r in load_parquet("ecp_edad_ccaa.parquet")
+        if r["banda"] == "20-34"
+    }
+    for ccaa in {d["ccaa"] for d in dim} - {"Ceuta y Melilla"}:
+        if (N(ccaa), 2025) not in edad_2034:
+            raise SystemExit(f"edad 20-34 missing for {ccaa}")
+    if (N("Total Nacional"), 2025) not in edad_2034:
+        raise SystemExit("edad 20-34 missing for Total Nacional")
     # ECP names must cover every CCAA (+ Ceuta/Melilla separately) and province.
     ecp_ccaa_names = {t for (t, _a) in ecp_pob} - {N("Total Nacional")}
     need_ccaa = {N(c) for c in {d["ccaa"] for d in dim} - {"Ceuta y Melilla"}}
@@ -421,6 +432,12 @@ def main() -> None:
                     "afford_90m2_years": (
                         round(eur_m2 * AFFORD_M2 / renta_v, 2) if eur_m2 and renta_v else None
                     ),
+                    "pob_20_34": (
+                        y2034 := edad_2034.get(
+                            (N("Total Nacional") if ccaa == "Nacional" else N(ccaa), anyo)
+                        )
+                    ),
+                    "share_20_34": round(y2034 / pop, 4) if y2034 else None,
                     "ipv_general": ipv_cell.get((ipv_key, anyo, "General")),
                     "ipv_nueva": ipv_cell.get((ipv_key, anyo, "Vivienda nueva")),
                     "ipv_segunda_mano": ipv_cell.get((ipv_key, anyo, "Vivienda segunda mano")),

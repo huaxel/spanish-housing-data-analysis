@@ -18,6 +18,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Exploration 01: boom-bust vs tightening](docs/explorations/boom_bust_vs_tightening.md)
 - [Hypothesis 01: absorption ratio vs prices](docs/explorations/absorption_hypothesis.md) — verdict: descriptor, not a huge predictor
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
+- [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 
 ## Setup and verification
 
