@@ -161,6 +161,9 @@ def main() -> int:
                         [focus]).fetchone()[0]
         assert n == 7, f"censo2011_bcn missing {focus}: {n} rows"
     print(f"censo2011_bcn: municipios={cen_b} (focus cities complete)")
+    cen_v = con.execute("SELECT COUNT(DISTINCT municipio) FROM censo2011_val").fetchone()[0]
+    print(f"censo2011_val: municipios={cen_v}")
+    assert cen_v == 9, f"valencia focus incomplete: {cen_v}"
     bcn = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_bcn"
     ).fetchone()

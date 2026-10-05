@@ -169,6 +169,24 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Torrevieja second homes 2011",
+        "SELECT ROUND(SUM(CASE WHEN tipo='Vivienda secundaria' THEN viviendas_2011 END) "
+        "* 100.0 / SUM(CASE WHEN tipo='Total viviendas' THEN viviendas_2011 END), 1) "
+        "FROM censo2011_val WHERE municipio='Torrevieja'",
+        51.2,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Denia vacant share 2011 (highest)",
+        "SELECT ROUND(SUM(CASE WHEN tipo='Vivienda vacía' THEN viviendas_2011 END) "
+        "* 100.0 / SUM(CASE WHEN tipo='Total viviendas' THEN viviendas_2011 END), 1) "
+        "FROM censo2011_val WHERE municipio='Dénia'",
+        31.3,
+        0.1,
+    ),
+    (
+        "municipios",
         "Barcelona vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_bcn "
         "WHERE municipio='Barcelona' AND tipo='Vivienda vacía'",

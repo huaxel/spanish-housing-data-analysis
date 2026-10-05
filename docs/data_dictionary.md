@@ -42,6 +42,11 @@ presence; 122 small ones under the census threshold). Barcelona city 2011:
 `codigo` (INE 4-digit), `municipio`, `anyo`, `eur_m2` — Libre, Madrid
 municipios with published appraisals (28, capital complete 2005–2025).
 
+## censo2011_val
+
+Same split for 9 Valencia focus municipios (coast + capitals) — the
+second-home coast (Torrevieja 51%) vs vacant towns (Dénia 31%).
+
 ## censo2011_mad
 
 `municipio`, `tipo` (Total/familiar/principal/no principal/secundaria/

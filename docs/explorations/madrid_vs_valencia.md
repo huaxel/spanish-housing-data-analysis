@@ -27,6 +27,16 @@ second homes and vacant inheritance, not tourist flats. Prices (€1,070
 Castellón → €1,708 CCAA mean, 2021–25) and mortgages (20k→61k) recovered
 without the magnet's demographics (young share only 15.9→16.7%).
 
+## Update 2026-10-06: the 2011 split decomposes the sea (`censo2011_val`)
+
+Second vs vacant, 2011: Torrevieja **51% second + 16% vacant** (two-thirds
+non-primary) · Benidorm 43% + 9% · Orihuela 40% + 16% · Gandía 37% + 9% ·
+Dénia 29% + **31% vacant** (highest vacancy in the set) · Alicante 15% + 14% ·
+Castellón 9% + 15% · Valencia city 8% + 14%. The composition crisis is *both*:
+a second-home coast (Torrevieja/Benidorm/Orihuela) *and* a vacant stock
+(Dénia, Castellón, Valencia city at 14–31%). Tourist flats (4.3%) are a
+footnote to both.
+
 ## Update 2026-10-06: tourist flats acquitted (VTE layer)
 
 `viv_turisticas` / `share_turistica_no_princ` (2020–) now in both marts.

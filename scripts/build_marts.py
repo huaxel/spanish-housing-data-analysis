@@ -714,6 +714,20 @@ def main() -> None:
         print(f"  (e.g. {sorted(missing_bcn)[:8]} — small municipios under census threshold)")
     con.register("cenbcn_df", pa.Table.from_pylist(cen_bcn))
     con.execute("CREATE OR REPLACE TABLE censo2011_bcn AS SELECT * FROM cenbcn_df")
+    # Valencia 2011 split: second-home coast vs vacant interior for the
+    # composition-crisis baseline (display names as published).
+    VAL_FOCUS = {"València", "Alacant/Alicante", "Elx/Elche", "Torrevieja",
+                 "Benidorm", "Orihuela", "Gandia", "Dénia",
+                 "Castelló de la Plana/Castellón de la Plana"}
+    cen_val = [{"municipio": r["municipio"], "tipo": r["tipo"],
+                "viviendas_2011": r["viviendas"]}
+               for r in load_parquet("censo2011_municipios.parquet")
+               if r["municipio"] in VAL_FOCUS]
+    have_val = {c["municipio"] for c in cen_val}
+    if have_val != VAL_FOCUS:
+        raise SystemExit(f"censo2011 missing valencia focus: {VAL_FOCUS - have_val}")
+    con.register("cenval_df", pa.Table.from_pylist(cen_val))
+    con.execute("CREATE OR REPLACE TABLE censo2011_val AS SELECT * FROM cenval_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -725,6 +739,7 @@ def main() -> None:
         "censo2011_mad",
         "muni_bcn",
         "censo2011_bcn",
+        "censo2011_val",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
