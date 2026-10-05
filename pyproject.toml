@@ -31,3 +31,8 @@ src = ["src", "tests", "scripts"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM"]
 ignore = ["SIM117"]
+
+[tool.ruff.lint.per-file-ignores]
+# render_preview.py embeds an HTML/SVG template; wrapping template lines
+# would damage the readability of the web source, not Python.
+"scripts/render_preview.py" = ["E501"]
