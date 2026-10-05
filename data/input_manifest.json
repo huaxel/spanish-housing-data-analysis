@@ -16,7 +16,9 @@
     "data/raw/ecp_hog_ccaa.json": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
     "data/raw/parquet/ecp_hog_ccaa.parquet": "cb5462ff652790e7b98669a53c6ca8e49040376618f0d78bbc979ae79a1044f4",
     "data/raw/ecp_hog_prov.json": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
-    "data/raw/parquet/ecp_hog_prov.parquet": "f4d3e7f2003a5f0dbce85fe18ee992f50b08f4ab5303571a18c63e60a3bc41d1"
+    "data/raw/parquet/ecp_hog_prov.parquet": "f4d3e7f2003a5f0dbce85fe18ee992f50b08f4ab5303571a18c63e60a3bc41d1",
+    "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
+    "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -110,6 +112,20 @@
       "operation": "ECP",
       "accessed": "2026-10-06",
       "note": "1-Jan (FK_Periodo 19) rows only"
+    },
+    "data/raw/valor_tasado.csv": {
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv",
+      "publisher": "MIVAU",
+      "dataset": "VDP006_01",
+      "accessed": "2026-10-06",
+      "note": "(parsed copy in data/raw/parquet/)"
+    },
+    "data/raw/parquet/valor_tasado.parquet": {
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv",
+      "publisher": "MIVAU",
+      "dataset": "VDP006_01",
+      "accessed": "2026-10-06",
+      "note": "raw quarterly rows; empty Valor = unpublished"
     }
   }
 }

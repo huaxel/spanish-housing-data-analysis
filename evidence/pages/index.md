@@ -44,6 +44,13 @@ ver [métodos](../docs/methods.md) (en el repo).
   title="Viviendas por hogar (desde 2021)"
 />
 
+<LineChart
+  data={nacional}
+  x=anyo
+  y=eur_m2_libre
+  title="Valor tasado vivienda libre (€/m²)"
+/>
+
 ```sql nueva_segunda
 select anyo, ipv_nueva, ipv_segunda_mano
 from mart_ccaa_anual

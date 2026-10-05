@@ -28,7 +28,7 @@ explicit extensions, not v1.
 | 3 | INE Padrón Revisión (Tempus3 2852/2853, 1996–2021) | Pinned, in marts |
 | 4 | INE Censo viviendas 2001/2011 (jaxi CSV) | Pinned, anchor checks pending |
 | 5 | INE ECP población (2022+) | DONE 2026-10-06 — CCAA/nacional (56940); provincial (56945) API-blocked, see sources |
-| 6 | MIVAU valor tasado (€/m² levels) | TODO — price levels, complements IPV trends |
+| 6 | MIVAU valor tasado (€/m² levels) | DONE 2026-10-06 — Libre annual means in marts (prov + CCAA), 0.95 YoY corr vs IPV |
 | 7 | Households | PARTIAL 2026-10-06 — ECP hogares 2021+ in marts (`viv_por_hogar`); ECH annual + tamaño detail + census anchors queued |
 | 8 | INE Censo viviendas 2021 | TODO — third anchor; stock already embeds its rebase |
 
@@ -43,10 +43,10 @@ explicit extensions, not v1.
 
 ## Status 2026-10-06
 
-Pipeline v1 + ECP extension live: CCAA mart 2007–2025 (pop splice quantified),
-provincia mart 2001–2021, hogares 2021+. Next: valor tasado (€/m² levels, #6)
-or Evidence toolchain fix — the 2022–25 tightening (viv/1000 ↓, viv/hogar ↓,
-IPV ↑) is the story to lead the explorer with.
+Pipeline v1 + ECP + valor tasado live: CCAA mart 2007–2025 (pop splice quantified,
+Libre €/m² complete), provincia mart 2001–2021, hogares 2021+. Next: Evidence
+toolchain fix — the 2022–25 tightening (viv/1000 ↓, viv/hogar ↓, IPV ↑,
+€/m² at record levels) is the story to lead the explorer with.
 
 ## Exclusions (v1)
 

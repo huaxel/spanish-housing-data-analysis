@@ -186,3 +186,64 @@ def test_ecp_hog_keeps_household_totals_only():
     rows, skipped = parse_ecp_hog(payload)
     assert len(rows) == 1 and rows[0]["hogares"] == 2600000
     assert skipped == []
+
+
+def test_annualize_valor_mean_andprovenance():
+    from build_marts import annualize_valor
+
+    rows = [
+        {
+            "Año": "2020",
+            "Trimestre": "1",
+            "Valor": "1000.0",
+            "Régimen": "Libre",
+            "CPRO": "8",
+            "Provincia": "Barcelona",
+            "Comunidad_Autónoma": "Cataluña",
+            "CODAUTO": "9",
+        },
+        {
+            "Año": "2020",
+            "Trimestre": "2",
+            "Valor": "1100.0",
+            "Régimen": "Libre",
+            "CPRO": "8",
+            "Provincia": "Barcelona",
+            "Comunidad_Autónoma": "Cataluña",
+            "CODAUTO": "9",
+        },
+        {
+            "Año": "2020",
+            "Trimestre": "3",
+            "Valor": "",
+            "Régimen": "Libre",
+            "CPRO": "8",
+            "Provincia": "Barcelona",
+            "Comunidad_Autónoma": "Cataluña",
+            "CODAUTO": "9",
+        },
+        {
+            "Año": "2020",
+            "Trimestre": "1",
+            "Valor": "2000.0",
+            "Régimen": "Libre",
+            "CPRO": "null",
+            "Provincia": "Total CCAA",
+            "Comunidad_Autónoma": "Cataluña",
+            "CODAUTO": "9",
+        },
+        {
+            "Año": "2020",
+            "Trimestre": "1",
+            "Valor": "",
+            "Régimen": "Protegida",
+            "CPRO": "",
+            "Provincia": "",
+            "Comunidad_Autónoma": "Total CCAA",
+            "CODAUTO": "",
+        },
+    ]
+    out = annualize_valor(rows)
+    assert out[("P08", 2020, "Libre")] == {"eur_m2": 1050.0, "n_trim": 2}
+    assert out[("CCATALUNA", 2020, "Libre")] == {"eur_m2": 2000.0, "n_trim": 1}
+    assert len(out) == 2  # unpublished quarters never zero-filled

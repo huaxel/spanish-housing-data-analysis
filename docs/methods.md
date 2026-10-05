@@ -29,6 +29,15 @@
   household, the closest observable to shortage (a region can have ample
   dwellings per capita yet few per household when second/vacant homes dominate).
   NULL before 2021; household-size breakdown queued.
+- **Valor tasado (MIVAU, 1995–):** appraisal-based mean €/m² (Libre/Protegida),
+  stratified by urban area/age/type and weighted by cadastral stock. This is
+  the price *level* complement to IPV's *trend* — and it exists at provincial
+  grain (48 provinces direct; Madrid/Murcia/Navarra/Asturias filled from
+  their identical CCAA aggregate and flagged). Caveats: appraisals, not
+  transactions (mortgage-selection bias); NOT quality-adjusted, so composition
+  shifts leak into the series; 844 unpublished quarter-cells kept missing.
+  Validation: Nacional Libre YoY changes correlate **0.95** with IPV YoY
+  (18 years) — two independent methodologies telling the same trend story.
 - **Census dwellings (2001/2011):** independent anchors for the stock series.
   The 2021 anchor is embedded in the parque rebase; pinning the 2021 census
   table is queued as a cross-check, not a blocker.

@@ -62,6 +62,27 @@ def main() -> int:
     assert {s[0] for s in srcs} == {"padron", "ecp"}, f"pop splice broken: {srcs}"
     assert ccaa[2] == 2007 and ccaa[3] == 2025, f"ccaa years drifted: {ccaa[2:4]}"
     assert pre_hog == 0, "hogares must be NULL before 2021"
+    vt = con.execute(
+        "SELECT COUNT(*), SUM(CASE WHEN eur_m2_libre IS NULL THEN 1 ELSE 0 END), "
+        "MIN(anyo), MAX(anyo) FROM mart_ccaa_anual"
+    ).fetchone()
+    vt_srcs = con.execute("SELECT DISTINCT vt_source FROM mart_provincia_anual").fetchall()
+    print(f"valor tasado: ccaa rows={vt[0]} null_eur={vt[1]} years={vt[2]}–{vt[3]} ")
+    print(f"prov vt sources: {sorted(s[0] for s in vt_srcs if s[0])}")
+    prov_null = con.execute(
+        "SELECT cpro, MIN(anyo), MAX(anyo), COUNT(*) FROM mart_provincia_anual "
+        "WHERE eur_m2_libre IS NULL GROUP BY 1"
+    ).fetchall()
+    print(f"prov cells without valor (upstream unpublished): {prov_null}")
+    null_cells = con.execute(
+        "SELECT ccaa, MIN(anyo), MAX(anyo) FROM mart_ccaa_anual "
+        "WHERE eur_m2_libre IS NULL GROUP BY 1"
+    ).fetchall()
+    print(f"ccaa cells without valor: {null_cells}")
+    assert {s[0] for s in vt_srcs if s[0]} <= {"prov_direct", "ccaa_direct", "ccaa_fill"}
+    # CCAA mart excludes Ceuta y Melilla (aggregated stock); every other
+    # cell must have valor tasado (single-province CCAA fall back to prov_fill).
+    assert null_cells == [], f"unexpected valor gaps: {null_cells}"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

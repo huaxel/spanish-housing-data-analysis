@@ -46,6 +46,13 @@ order by anyo, provincia
 />
 
 <LineChart
+  data={ficha}
+  x=anyo
+  y=eur_m2_libre
+  title="Valor tasado vivienda libre, €/m² (${inputs.ccaa.value})"
+/>
+
+<LineChart
   data={provincias}
   x=anyo
   y=viv_por_1000_hab

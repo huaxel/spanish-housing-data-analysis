@@ -98,10 +98,19 @@ REQUIRED_RAW = [
     "data/raw/parquet/ecp_pob_ccaa.parquet",
     "data/raw/parquet/ecp_hog_ccaa.parquet",
     "data/raw/parquet/ecp_hog_prov.parquet",
+    "data/raw/parquet/valor_tasado.parquet",
 ]
 # Population splice: Padrón (Revisión) through 2021, ECP from 2022.
 # Same reference point (1 January), different methodology — never blended.
 POP_SPLICE_YEAR = 2022
+# Provinces with no direct valor-tasado rows; filled from their (identical)
+# CCAA aggregate and flagged via vt_source.
+VT_CCAA_FILL = {
+    "28": "Madrid, Comunidad de",
+    "30": "Murcia, Región de",
+    "31": "Navarra, Comunidad Foral de",
+    "33": "Asturias, Principado de",
+}
 
 
 def load_parquet(name: str) -> list[dict]:
@@ -156,6 +165,37 @@ def pivot_parque(parque: list[dict]) -> dict[tuple[str, int], dict]:
 
 def padron_by_name(rows: list[dict]) -> dict[tuple[str, int], int]:
     return {(N(r["territorio"]), r["anyo"]): r["poblacion"] for r in rows}
+
+
+def flat(s: str) -> str:
+    """Accent/case/punctuation-insensitive compare for MIVAU name quirks."""
+    return "".join(c for c in N(s) if c.isalnum())
+
+
+def annualize_valor(rows: list[dict]) -> dict[tuple[str, int, str], dict]:
+    """Mean of published quarters per (territory-key, year, regimen).
+
+    Returns {(key, anyo, regimen): {eur_m2, n_trim}}. Empty Valor =
+    unpublished quarter (skipped, counted via n_trim — never zero-filled).
+    """
+    buckets: dict[tuple[str, int, str], list[float]] = {}
+    for r in rows:
+        if not (r["Valor"] or "").strip():
+            continue
+        cpro = (r["CPRO"] or "").strip()
+        prov_f, ccaa_f = flat(r["Provincia"]), flat(r["Comunidad_Autónoma"])
+        if cpro and cpro != "null":
+            key = "P" + cpro.zfill(2)
+        elif (prov_f, ccaa_f) == ("TOTALCCAA", "TOTALNACIONAL"):
+            key = "NACIONAL"
+        elif prov_f == "CEUTAYMELILLA":
+            key = "C51+52"
+        elif prov_f == "TOTALCCAA":
+            key = "C" + ccaa_f
+        else:
+            raise SystemExit(f"valor tasado: unclassifiable row {r}")
+        buckets.setdefault((key, int(r["Año"]), r["Régimen"]), []).append(float(r["Valor"]))
+    return {k: {"eur_m2": round(sum(v) / len(v), 1), "n_trim": len(v)} for k, v in buckets.items()}
 
 
 def main() -> None:
@@ -242,6 +282,40 @@ def main() -> None:
             return hog_ccaa.get((N("Total Nacional"), anyo))
         return hog_ccaa.get((N(ccaa), anyo))
 
+    vt = annualize_valor(load_parquet("valor_tasado.parquet"))
+
+    def prov_valor(cpro: str, anyo: int) -> tuple[float | None, int | None, str | None]:
+        cell = vt.get(("P" + cpro, anyo, "Libre"))
+        if cell:
+            return cell["eur_m2"], cell["n_trim"], "prov_direct"
+        if cpro == "51+52":
+            cell = vt.get(("C51+52", anyo, "Libre"))
+            if cell:
+                return cell["eur_m2"], cell["n_trim"], "ccaa_direct"
+            return None, None, None
+        fill_ccaa = VT_CCAA_FILL.get(cpro)
+        if fill_ccaa:
+            cell = vt.get(("C" + flat(fill_ccaa), anyo, "Libre"))
+            if cell:
+                return cell["eur_m2"], cell["n_trim"], "ccaa_fill"
+        return None, None, None
+
+    def ccaa_valor(
+        ccaa: str, anyo: int, provs: list[dict]
+    ) -> tuple[float | None, int | None, str | None]:
+        if ccaa == "Nacional":
+            cell = vt.get(("NACIONAL", anyo, "Libre"))
+            return (cell["eur_m2"], cell["n_trim"], "ccaa_direct") if cell else (None, None, None)
+        cell = vt.get(("C" + flat(ccaa), anyo, "Libre"))
+        if cell:
+            return cell["eur_m2"], cell["n_trim"], "ccaa_direct"
+        # Single-province CCAA without an aggregate row: identical geography.
+        if len(provs) == 1:
+            cell = vt.get(("P" + provs[0]["cpro"], anyo, "Libre"))
+            if cell:
+                return cell["eur_m2"], cell["n_trim"], "prov_fill"
+        return None, None, None
+
     prov_rows = []
     for d in dim:
         for anyo in range(2001, 2022):  # parque ∩ padrón (provincial ECP blocked)
@@ -255,6 +329,7 @@ def main() -> None:
                 ) or None
             else:
                 hogar = hog_prov.get((N(d["provincia"]), anyo))
+            eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
             prov_rows.append(
                 {
                     "cpro": d["cpro"],
@@ -270,6 +345,9 @@ def main() -> None:
                     "viv_por_1000_hab": round(cell["total"] / pop * 1000, 2),
                     "share_no_principal": round(cell["no_principal"] / cell["total"], 4),
                     "viv_por_hogar": round(cell["total"] / hogar, 3) if hogar else None,
+                    "eur_m2_libre": eur_m2,
+                    "eur_m2_n_trim": eur_trim,
+                    "vt_source": vt_src,
                 }
             )
     prov_rows.sort(key=lambda r: (r["cpro"], r["anyo"]))
@@ -305,6 +383,7 @@ def main() -> None:
             tot = sum(c["total"] for c in cells)
             hogar = ccaa_hog(ccaa, anyo)
             ipv_key = ccaa if ccaa != "Nacional" else "Nacional"
+            eur_m2, eur_trim, eur_src = ccaa_valor(ccaa, anyo, provs)
             ccaa_rows.append(
                 {
                     "ccaa": ccaa,
@@ -317,6 +396,9 @@ def main() -> None:
                     "hogares": hogar,
                     "viv_por_1000_hab": round(tot / pop * 1000, 2),
                     "viv_por_hogar": round(tot / hogar, 3) if hogar else None,
+                    "eur_m2_libre": eur_m2,
+                    "eur_m2_n_trim": eur_trim,
+                    "vt_source": eur_src,
                     "ipv_general": ipv_cell.get((ipv_key, anyo, "General")),
                     "ipv_nueva": ipv_cell.get((ipv_key, anyo, "Vivienda nueva")),
                     "ipv_segunda_mano": ipv_cell.get((ipv_key, anyo, "Vivienda segunda mano")),
@@ -331,14 +413,37 @@ def main() -> None:
             "kept with NULL ipv, see coverage report"
         )
 
+    # Cross-check: valor-tasado Libre trend vs IPV trend (Nacional, YoY %).
+    nat = sorted(
+        (r for r in ccaa_rows if r["ccaa"] == "Nacional" and r["eur_m2_libre"]),
+        key=lambda r: r["anyo"],
+    )
+    vt_yoy, ipv_yoy = [], []
+    for a, b in zip(nat, nat[1:], strict=False):  # consecutive pairs: lengths differ by design
+        if b["anyo"] == a["anyo"] + 1 and a["ipv_general"] and b["ipv_general"]:
+            vt_yoy.append((b["eur_m2_libre"] - a["eur_m2_libre"]) / a["eur_m2_libre"] * 100)
+            ipv_yoy.append((b["ipv_general"] - a["ipv_general"]) / a["ipv_general"] * 100)
+    vt_ipv_corr = None
+    if len(vt_yoy) > 3:
+        n = len(vt_yoy)
+        mx, my = sum(vt_yoy) / n, sum(ipv_yoy) / n
+        cov = sum((x - mx) * (y - my) for x, y in zip(vt_yoy, ipv_yoy, strict=True))
+        vx = sum((x - mx) ** 2 for x in vt_yoy) ** 0.5
+        vy = sum((y - my) ** 2 for y in ipv_yoy) ** 0.5
+        vt_ipv_corr = round(cov / (vx * vy), 3) if vx and vy else None
+    print(f"valor-vs-IPV Nacional YoY correlation ({len(vt_yoy)} years): {vt_ipv_corr}")
+
+    vt_annual = [{"terr_key": k[0], "anyo": k[1], "regimen": k[2], **v} for k, v in vt.items()]
     con = duckdb.connect(str(MARTS_DB))
     con.register("prov_df", pa.Table.from_pylist(prov_rows))
     con.register("ccaa_df", pa.Table.from_pylist(ccaa_rows))
     con.register("dim_df", pa.Table.from_pylist(dim))
+    con.register("vt_df", pa.Table.from_pylist(vt_annual))
     con.execute("CREATE OR REPLACE TABLE mart_provincia_anual AS SELECT * FROM prov_df")
     con.execute("CREATE OR REPLACE TABLE mart_ccaa_anual AS SELECT * FROM ccaa_df")
     con.execute("CREATE OR REPLACE TABLE dim_territorio AS SELECT * FROM dim_df")
-    for name in ("mart_provincia_anual", "mart_ccaa_anual", "dim_territorio"):
+    con.execute("CREATE OR REPLACE TABLE valor_tasado_anual AS SELECT * FROM vt_df")
+    for name in ("mart_provincia_anual", "mart_ccaa_anual", "dim_territorio", "valor_tasado_anual"):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
         "mart_provincia_anual_rows": len(prov_rows),
@@ -350,6 +455,8 @@ def main() -> None:
         "pop_seam_2021_ecp_vs_padron_pct": overlap,
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
         "hogares_window": "2021+ (ECP, 1-January); viv_por_hogar NULL before",
+        "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,
+        "valor_window": "1995+ quarterly Libre/Protegida; marts carry Libre annual means + n_trim",
         "known_gaps": [
             "provincial ECP population (Tempus3 56945) unreachable "
             "(volume-blocked; probed 2026-10-06) — provincia mart ends 2021",

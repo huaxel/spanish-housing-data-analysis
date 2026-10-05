@@ -13,6 +13,9 @@
 | viv_por_hogar | dwellings per household (NULL before 2021) | derived |
 | viv_por_1000_hab | dwellings per 1,000 inhabitants | derived |
 | ipv_general / ipv_nueva / ipv_segunda_mano | quality-adjusted price index, base 2025 | INE IPV rows (never averaged) |
+| eur_m2_libre | mean appraised €/m², vivienda libre (annual mean of published quarters) | MIVAU valor tasado |
+| eur_m2_n_trim | quarters averaged (completeness flag — partial years visible) | derived |
+| vt_source | `ccaa_direct` / `prov_direct` / `ccaa_fill` (28/30/31/33) / `prov_fill` (Balears/Cantabria/Rioja CCAA) | derived |
 
 Ceuta/Melilla have IPV rows but aggregated stock, so no CCAA-mart row.
 
@@ -22,6 +25,11 @@ Same stock/population columns as above plus `cpro` (2-digit code,
 `51+52` for the Ceuta y Melilla aggregate) and `share_no_principal`.
 No price columns — INE publishes no provincial IPV. Plus `pop_source`,
 `hogares` (2021 only overlaps padrón window), `viv_por_hogar`.
+
+## valor_tasado_anual
+
+Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
+`C51+52`, both regímenes): `terr_key`, `anyo`, `regimen`, `eur_m2`, `n_trim`.
 
 ## dim_territorio
 
