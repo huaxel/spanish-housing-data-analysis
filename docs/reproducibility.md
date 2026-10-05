@@ -32,17 +32,24 @@ Evidence version is pinned in `evidence/package.json` (40.1.8, 2026-10-05).
 Pages query the committed-path Parquet marts via the `housing`
 DuckDB source (`evidence/sources/housing/connection.yaml`).
 
-## Known blocker (2026-10-05): vite build fails in this environment
+## Known blocker (2026-10-06): Evidence 40.1.8 cannot build — upstream bug
 
-`npm run build` and `npm run dev` both fail loading
-`.evidence/template/vite.config.js`: esbuild's `externalize-deps` plugin
-tries to `require()` ESM-only packages (`@evidence-dev/sdk/*`,
-`@sveltejs/kit/vite`) on Node 24, 22 and 20 alike. Install needs
-`legacy-peer-deps=true` (see `evidence/.npmrc`). All page SQL is validated
-directly against `marts.duckdb` (see project log), so the data contract holds
-— only the JS toolchain needs a supported environment or a version bump.
-Try: a clean `npm create evidence` scaffold for comparison, or newer
-`@evidence-dev/evidence` once the pin is revisited.
+`npm run build` and `npm run dev` both die loading
+`.evidence/template/vite.config.js`. Root cause, verified 2026-10-06:
+the template imports `@sveltejs/kit/vite`, whose `exports` entry has only
+an `import` condition (kit 2.8.4, no `require`/`default`), while vite 5.4's
+config bundler (esbuild `externalize-deps`) loads it via `require()`.
+Result: `ERR_PACKAGE_PATH_NOT_EXPORTED` on Node 20, 22 and 24 alike —
+no Node version can satisfy it, and 40.1.8 is the newest release, so no
+bump fixes it. Ruled out: dependency skew (fails identically on a clean
+strict tree), Node version, peer resolution (`overrides.typescript` gives
+a clean strict install; that part is kept).
+
+Workarounds when revisiting: patch the generated template config loading,
+try `npm create evidence` output of a newer release once published, or
+render the (already SQL-validated) pages elsewhere. All page SQL is
+validated directly against `marts.duckdb`, so the data contract holds —
+only the JS build is broken.
 
 ## Adding a source (queued 5–8)
 

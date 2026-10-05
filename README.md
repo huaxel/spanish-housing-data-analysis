@@ -15,6 +15,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Sources](docs/sources.md)
 - [Reproducible setup](docs/reproducibility.md)
 - [Data dictionary](docs/data_dictionary.md)
+- [Exploration 01: boom-bust vs tightening](docs/explorations/boom_bust_vs_tightening.md)
 
 ## Setup and verification
 
