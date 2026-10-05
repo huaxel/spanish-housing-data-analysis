@@ -31,6 +31,25 @@ the municipal face of the CCAA story: Madrid's aggregate recovery was
 capital-plus-northwest; the provinces' analogue needs the same municipal cut
 elsewhere (queued: Barcelona via IDESCAT/AMB mirrors, Valencia via GVA).
 
+## Update: people vs prices 2007–2025 (`muni_madrid` join)
+
+Padrón municipal (DPOP 2881; the 'Madrid' province/city name collision
+resolved against the pinned provincial total) joined to valor tasado:
+
+| municipio | pob 2007→25 | €/m² 2007→25 |
+| --- | --- | --- |
+| Rivas-Vaciamadrid | +74% | +21% |
+| Boadilla del Monte | +67% | +20% |
+| Valdemoro | +62% | −4% |
+| Parla | +39% | −13% |
+| Madrid capital | +12% | +30% |
+
+Growth doesn't lift all prices: Rivas absorbed +74% people at +21% prices
+(building kept up, family suburb); Parla absorbed +39% at −13% (demand
+without purchasing power — filtering down, not gentrification); the capital
+grew least (+12%) and appreciated most (+30%). Municipal absorption *does*
+discriminate, unlike the CCAA ratio — grain matters.
+
 ## Limits
 
 - Mirror source (Base 2005): third-party copy of MIVAU; provincial VDP006

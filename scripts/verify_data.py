@@ -142,6 +142,11 @@ def main() -> int:
     print(f"municipal madrid: municipios={mun[0]} years={mun[1]}-{mun[2]}; "
           f"capital years={mun_cap[1]}-{mun_cap[2]} ({mun_cap[0]} rows)")
     assert mun_cap[0] == mun_cap[2] - mun_cap[1] + 1, "capital must be complete"
+    muni = con.execute(
+        "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_madrid"
+    ).fetchone()
+    print(f"muni_madrid join: municipios={muni[0]} years={muni[1]}-{muni[2]}")
+    assert muni[0] >= 20, f"too few joined municipios: {muni[0]}"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

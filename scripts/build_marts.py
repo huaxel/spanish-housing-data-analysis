@@ -106,6 +106,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/hipotecas_rates.parquet",
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
+    "data/raw/parquet/padron_municipios_mad.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -577,6 +578,24 @@ def main() -> None:
     ]
     con.register("mun_df", pa.Table.from_pylist(mun))
     con.execute("CREATE OR REPLACE TABLE valor_municipal_madrid AS SELECT * FROM mun_df")
+    pad_mun = {(N(r["territorio"]), r["anyo"]): r["poblacion"]
+               for r in load_parquet("padron_municipios_mad.parquet")}
+    # Valor ↔ padrón name aliases (verified 2026-10-06, fail loudly on more).
+    MUNI_ALIAS = {N("Madrid"): N("Madrid (ciudad)"),
+                  N("Rozas de Madrid (Las)"): N("Rozas de Madrid, Las")}
+    muni_rows, muni_unmapped = [], []
+    for r in load_parquet("valor_municipal_madrid.parquet"):
+        key = MUNI_ALIAS.get(N(r["Territorio"]), N(r["Territorio"]))
+        pop = pad_mun.get((key, int(r["Año"])))
+        if pop is None:
+            muni_unmapped.append(r["Territorio"])
+            continue
+        muni_rows.append({"municipio": r["Territorio"], "anyo": int(r["Año"]),
+                          "eur_m2": float(r["Valor"]), "poblacion": pop})
+    if muni_unmapped:
+        raise SystemExit(f"municipal pop unmapped: {sorted(set(muni_unmapped))}")
+    con.register("muni_df", pa.Table.from_pylist(muni_rows))
+    con.execute("CREATE OR REPLACE TABLE muni_madrid AS SELECT * FROM muni_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -584,6 +603,7 @@ def main() -> None:
         "valor_tasado_anual",
         "tipos_hipoteca_nacional",
         "valor_municipal_madrid",
+        "muni_madrid",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

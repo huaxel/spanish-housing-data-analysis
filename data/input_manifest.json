@@ -33,7 +33,9 @@
     "data/raw/turisticas_con_pct.json": "77446313d60a7dcd41bcfa24ea24578b19a8b4cc7761f7a1fc1812c12ac24fa6",
     "data/raw/parquet/turisticas_con_pct.parquet": "f328a67953abf652c713937bc78c40665ce900e33dea8f0626da83570900da7c",
     "data/raw/valor_municipal_madrid.csv": "5b61a14a42e42210adb471784dac86648844c004367f1bca234379ecf5a13714",
-    "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0"
+    "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
+    "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
+    "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -225,6 +227,16 @@
       "publisher": "datos.comunidad.madrid (MIVAU mirror)",
       "accessed": "2026-10-06",
       "note": "published values only; '-' dropped, counted in print"
+    },
+    "data/raw/padron_municipios_mad.json": {
+      "api": "wstempus/DATOS_TABLA/2881",
+      "operation": "DPOP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/padron_municipios_mad.parquet": {
+      "api": "wstempus/DATOS_TABLA/2881",
+      "operation": "DPOP",
+      "accessed": "2026-10-06"
     }
   }
 }
