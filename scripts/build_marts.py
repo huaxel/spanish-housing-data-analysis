@@ -258,6 +258,7 @@ def main() -> None:
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("ecp_pob_ccaa.parquet")
     }
+
     # Household sizes 1/2/3/4+ must sum to Total (additive guard, like parque).
     def pivot_hog(fname: str) -> tuple[dict, dict]:
         cells: dict[tuple[str, int], dict] = {}
@@ -273,8 +274,7 @@ def main() -> None:
             raise SystemExit(f"hogares size additive check failed: {dict(list(bad.items())[:3])}")
         totals = {k: v["Total"] for k, v in cells.items()}
         sizes = {
-            k: {"1": v["1"], "2": v["2"], "3": v["3"], "4p": v["4 y más"]}
-            for k, v in cells.items()
+            k: {"1": v["1"], "2": v["2"], "3": v["3"], "4p": v["4 y más"]} for k, v in cells.items()
         }
         return totals, sizes
 

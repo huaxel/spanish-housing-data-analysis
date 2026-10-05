@@ -345,12 +345,21 @@ def test_ecp_hog_keeps_all_sizes():
     from fetch_ecp import parse_hog as parse_ecp_hog
 
     payload = [
-        {"COD": "H1", "Nombre": "Madrid. Total. Hogares en viviendas familiares. Número. ",
-         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 2600000.0}]},
-        {"COD": "H2", "Nombre": "Madrid. 1. Hogares en viviendas familiares. Número. ",
-         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 700000.0}]},
-        {"COD": "H3", "Nombre": "Madrid. 4 y más. Hogares en viviendas familiares. Número. ",
-         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 500000.0}]},
+        {
+            "COD": "H1",
+            "Nombre": "Madrid. Total. Hogares en viviendas familiares. Número. ",
+            "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 2600000.0}],
+        },
+        {
+            "COD": "H2",
+            "Nombre": "Madrid. 1. Hogares en viviendas familiares. Número. ",
+            "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 700000.0}],
+        },
+        {
+            "COD": "H3",
+            "Nombre": "Madrid. 4 y más. Hogares en viviendas familiares. Número. ",
+            "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 500000.0}],
+        },
     ]
     rows, skipped = parse_ecp_hog(payload)
     assert len(rows) == 3 and skipped == []
