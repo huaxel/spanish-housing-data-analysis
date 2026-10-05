@@ -45,8 +45,9 @@ vacía/colectiva), `viviendas_2011` — 2011 split for the 28 valor municipios.
 
 `municipio`, `anyo`, `poblacion`, `sale_eur_m2` (M19, 2013–),
 `rent_month` (M23, 2005–), `vacant_reg` (H9a, 2018–), `tourist` (H18a,
-2015–), `rent_burden`/`mortgage_burden` % (M11d/M11e, 2015–2022) — 310
-municipios incl. Barcelona city, joined to Padrón via `muni_key()`.
+2015–), `rent_burden`/`mortgage_burden` % (M11d/M11e, 2015–2022), `starts`/
+`completions` dwellings (M12/M13, 2012–2024) — 310 municipios incl.
+Barcelona city, joined to Padrón via `muni_key()`.
 
 ## muni_madrid
 

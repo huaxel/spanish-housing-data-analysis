@@ -160,9 +160,17 @@ def main() -> int:
         "SELECT MIN(anyo), MAX(anyo) FROM muni_bcn "
         "WHERE municipio = 'Barcelona' AND sale_eur_m2 IS NOT NULL"
     ).fetchone()
-    print(f"muni_bcn: municipios={bcn[0]} years={bcn[1]}-{bcn[2]}; "
-          f"city sale window={bcn_city[0]}-{bcn_city[1]}")
+    print(
+        f"muni_bcn: municipios={bcn[0]} years={bcn[1]}-{bcn[2]}; "
+        f"city sale window={bcn_city[0]}-{bcn_city[1]}"
+    )
     assert bcn_city == (2013, 2024), "barcelona city sale window broken"
+    sc = con.execute(
+        "SELECT SUM(starts) FROM muni_bcn WHERE municipio='Santa Coloma de Gramenet'"
+        " AND anyo BETWEEN 2012 AND 2024"
+    ).fetchone()[0]
+    print(f"santa coloma starts 2012-24: {sc}")
+    assert sc == 514, f"santa coloma starts drifted: {sc}"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

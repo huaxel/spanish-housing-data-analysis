@@ -46,7 +46,9 @@
     "data/raw/parquet/diba_m11d.parquet": "971faaaf2883abbc9780936bfa092281ff3f8eb4c0135b438e8cfc187103a3aa",
     "data/raw/parquet/diba_m11e.parquet": "1d69e700499b402093e84c16a01d93fb2510e9029ea1f6fc874d3ea7e650e6a3",
     "data/raw/padron_municipios_bcn.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
-    "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6"
+    "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6",
+    "data/raw/parquet/diba_m12.parquet": "aec1b6353a1fe7d8250c294ba0a2b03214cd5ea74de86241378e740bbd657464",
+    "data/raw/parquet/diba_m13.parquet": "adc3788902963bafa78592c2a41a3eae7168e6accc9fb024fb47fcff63fcb30e"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -309,6 +311,18 @@
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP",
       "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/diba_m12.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m12 (starts)"
+    },
+    "data/raw/parquet/diba_m13.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m13 (completions)"
     }
   }
 }

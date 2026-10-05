@@ -324,8 +324,9 @@ def test_muni_key_unifies_publishers():
     assert muni_key("El Bruc") == muni_key("Bruc, El") == "BRUC"
     assert muni_key("L'Ametlla del Vallès") == "AMETLLA DEL VALLES"
     assert muni_key("Rozas de Madrid (Las)") == muni_key("Rozas de Madrid, Las")
-    assert muni_key("Barcelona (provincia)") == muni_key("Barcelona") == muni_key(
-        "Barcelona (ciudad)")
+    assert (
+        muni_key("Barcelona (provincia)") == muni_key("Barcelona") == muni_key("Barcelona (ciudad)")
+    )
     assert muni_key("Hospitalet de Llobregat") == muni_key("Hospitalet de Llobregat")
     assert muni_key("Santa Coloma de Gramenet") != muni_key("Santa Coloma de Cervelló")
 

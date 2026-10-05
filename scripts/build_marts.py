@@ -115,6 +115,8 @@ REQUIRED_RAW = [
     "data/raw/parquet/diba_h18a.parquet",
     "data/raw/parquet/diba_m11d.parquet",
     "data/raw/parquet/diba_m11e.parquet",
+    "data/raw/parquet/diba_m12.parquet",
+    "data/raw/parquet/diba_m13.parquet",
     "data/raw/parquet/padron_municipios_bcn.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
@@ -625,14 +627,16 @@ def main() -> None:
     from spanish_housing.muni_names import muni_key
 
     # Cross-publisher renames (verified 2026-10-06): DIBA keeps the old name.
-    BCN_ALIAS = {muni_key("Bigues i Riells"): muni_key("Bigues i Riells del Fai"),
-                 muni_key("Santa Maria de Corcó"): muni_key("L'Esquirol")}
+    BCN_ALIAS = {
+        muni_key("Bigues i Riells"): muni_key("Bigues i Riells del Fai"),
+        muni_key("Santa Maria de Corcó"): muni_key("L'Esquirol"),
+    }
     # NOTE: 'Barcelona (provincia)' (aggregate) and 'Barcelona' (city) share
     # the canonical key — the aggregate is skipped here on display name so
     # the city survives. Never filter on the bare key.
     diba: dict[tuple[str, int], dict] = {}
     diba_display: dict[str, str] = {}
-    for code in ("m19", "m23", "h9a", "h18a", "m11d", "m11e"):
+    for code in ("m19", "m23", "h9a", "h18a", "m11d", "m11e", "m12", "m13"):
         for r in load_parquet(f"diba_{code}.parquet"):
             if r["valor"] is None:
                 continue
@@ -640,8 +644,10 @@ def main() -> None:
                 continue  # province aggregate; the homonym municipio is kept
             diba.setdefault((muni_key(r["municipio"]), r["anyo"]), {})[code] = r["valor"]
             diba_display.setdefault(muni_key(r["municipio"]), r["municipio"])
-    pad_bcn = {(muni_key(r["territorio"]), r["anyo"]): r["poblacion"]
-               for r in load_parquet("padron_municipios_bcn.parquet")}
+    pad_bcn = {
+        (muni_key(r["territorio"]), r["anyo"]): r["poblacion"]
+        for r in load_parquet("padron_municipios_bcn.parquet")
+    }
     # No silent merges: one padrón name per key (qualifiers already stripped).
     pad_key_names: dict[str, set] = {}
     for r in load_parquet("padron_municipios_bcn.parquet"):
@@ -655,11 +661,23 @@ def main() -> None:
         if pop is None:
             bcn_missing_pop += 1
             continue
-        bcn_rows.append({"municipio": diba_display[nname], "anyo": anyo, "poblacion": pop,
-                         "sale_eur_m2": m.get("m19"), "rent_month": m.get("m23"),
-                         "vacant_reg": m.get("h9a"), "tourist": m.get("h18a"),
-                         "rent_burden": m.get("m11d"),
-                         "mortgage_burden": m.get("m11e")})
+        starts = m.get("m12")
+        complet = m.get("m13")
+        bcn_rows.append(
+            {
+                "municipio": diba_display[nname],
+                "anyo": anyo,
+                "poblacion": pop,
+                "starts": int(starts) if starts is not None else None,
+                "completions": int(complet) if complet is not None else None,
+                "sale_eur_m2": m.get("m19"),
+                "rent_month": m.get("m23"),
+                "vacant_reg": m.get("h9a"),
+                "tourist": m.get("h18a"),
+                "rent_burden": m.get("m11d"),
+                "mortgage_burden": m.get("m11e"),
+            }
+        )
     print(f"muni_bcn: {len(bcn_rows)} rows, missing pop for {bcn_missing_pop}")
     con.register("bcn_df", pa.Table.from_pylist(bcn_rows))
     con.execute("CREATE OR REPLACE TABLE muni_bcn AS SELECT * FROM bcn_df")

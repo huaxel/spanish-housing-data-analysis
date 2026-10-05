@@ -31,6 +31,17 @@ unlike Balears' decline); Santa Coloma holds 28. The VTE provincial share
 district story wearing provincial clothes — the municipal cut is the first
 grain that shows it.
 
+## Update: where building happened 2012–24 (M12/M13)
+
+Starts → completions, 2012–24 cumulative: Barcelona city 19,086 → 16,721;
+Badalona 6,570 → 5,271; Viladecans 2,358 → 1,050; Sant Joan Despí
+1,730 → 1,241; **Santa Coloma 514 → 419 — forty homes a year for 120,000
+people**. Demarcation total: 105,696 starts, 84,164 completions in thirteen
+years. The city built infill at ~1,500 starts/year against +90k population
+2013–24; Santa Coloma built essentially nothing while its rent burden hit
+54.6%. Supply geography mirrors the burden map — construction didn't go
+where the workers are.
+
 ## Limits
 
 - Sale prices = Secretaria d'Habitatge (registrars), 2013–; rents = Incasòl

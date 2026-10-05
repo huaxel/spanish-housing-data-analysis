@@ -12,8 +12,7 @@ from __future__ import annotations
 import re
 import unicodedata
 
-_ARTICLES = {"EL", "LA", "LOS", "LAS", "ELS", "LES", "ES", "SA", "SES", "NA", "EN",
-             "L"}
+_ARTICLES = {"EL", "LA", "LOS", "LAS", "ELS", "LES", "ES", "SA", "SES", "NA", "EN", "L"}
 _QUALIFIERS = {"(CIUDAD)", "(PROVINCIA)"}
 
 
