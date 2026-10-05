@@ -1,0 +1,43 @@
+# The credit cycle: the bust's other half
+
+Mortgages on dwellings (HPT 76316/76317, CCAA + provincia, 2003–) and
+national rates (76315) put the demand side next to the stock story.
+Computed inline from the marts; no separate script (queries below are the
+evidence — rerun against `marts.duckdb`).
+
+## Nacional: credit explains the bust, not the tightening
+
+| año | hipotecas | ticket medio | tipo medio | IPV |
+| --- | --- | --- | --- | --- |
+| 2007 | 1,239k | €149k | — | 83.2 |
+| 2013 | 200k | €100k | 4.2% | 53.5 |
+| 2019 | 361k | €126k | ~2.5% | 69.3 |
+| 2024 | 426k | €145k | 3.3% | 88.7 |
+
+Mortgage counts fell **84%** 2007–13 while the stock kept growing — the bust
+was a credit stop, not a supply flood. Prices fell 36% on vanishing
+transactions, not on vacant abundance. Conversely 2021–24: mortgages grew
+modestly (+18% from a low base) while prices rose ~20% and rates *rose*
+2.2→3.3% — the tightening happened *against* the credit wind, pointing at
+real demographic demand (young-migrant refill, fragmentation) rather than
+cheap money. The fixed-rate share shift (fijo ≈ variable by 2024 vs
+variable-dominated pre-2015) is in `tipos_hipoteca_nacional` for the
+follow-up on payment sensitivity.
+
+## What this does to Hypothesis 01
+
+The per-window instability (±0.5 CCAA, ≈0 provincial) now has a name:
+2007–11 prices moved with credit volumes (1.2M→0.4M mortgages), 2011–15
+with depopulation, 2021–25 with household formation against tight supply.
+The absorption ratio is never the whole model — credit belongs in any
+multivariate attempt, and this dataset now carries it (counts + tickets at
+both grains, rates nationally).
+
+## Limits
+
+- Mortgage *counts* ≠ credit *conditions*: LTV, effort rates (cuota/renta)
+  and approvals aren't in HPT Tempus tables — BdE distributional data is the
+  queued upgrade.
+- Ticket medio mixes composition (cheaper areas, smaller flats) with leverage;
+  deflate by €/m² before leverage claims.
+- Rates are national-only: no CCAA mortgage-price sensitivity is testable.

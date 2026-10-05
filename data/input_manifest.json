@@ -21,7 +21,13 @@
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
-    "data/raw/parquet/ecp_edad_ccaa.parquet": "aefa8e90ba6c535aee40e6ed36e71a838d36ccce347423b38bd56e7085d12146"
+    "data/raw/parquet/ecp_edad_ccaa.parquet": "aefa8e90ba6c535aee40e6ed36e71a838d36ccce347423b38bd56e7085d12146",
+    "data/raw/hipotecas_ccaa.json": "7afd223280c3cf27a1343bd2f2b834844d86af9c4b798df327c338e9dadfd057",
+    "data/raw/parquet/hipotecas_ccaa.parquet": "a298bd29aa42e59ebde0d7d1b3aa8082ec1151ec4f9c56a2b3d5dc49575e3905",
+    "data/raw/hipotecas_prov.json": "32a7ef413a69195faf85613ec8bd4c3f19831433facb26398f2ba824c263c62a",
+    "data/raw/parquet/hipotecas_prov.parquet": "446840aafade0a6f1549b0cfa8c85542f3901e6edd3a16b27d174a4727b748ff",
+    "data/raw/hipotecas_rates.json": "ae017d5156dafdd6aae66a2763bd4165fa9f8aed07d0b5098e04666748f79435",
+    "data/raw/parquet/hipotecas_rates.parquet": "6be4f31be89a283af59a4ae8d53d15db880625cb6b583f127d23aefdb194552b"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -146,6 +152,39 @@
       "operation": "ECP",
       "accessed": "2026-10-06",
       "note": "1-Jan age bands parsed from pinned ecp_pob_ccaa.json"
+    },
+    "data/raw/hipotecas_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/76316",
+      "operation": "HPT",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/hipotecas_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/76316",
+      "operation": "HPT",
+      "accessed": "2026-10-06",
+      "note": "Viviendas only; annual sums/means + n_months"
+    },
+    "data/raw/hipotecas_prov.json": {
+      "api": "wstempus/DATOS_TABLA/76317",
+      "operation": "HPT",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/hipotecas_prov.parquet": {
+      "api": "wstempus/DATOS_TABLA/76317",
+      "operation": "HPT",
+      "accessed": "2026-10-06",
+      "note": "Viviendas only; annual sums/means + n_months"
+    },
+    "data/raw/hipotecas_rates.json": {
+      "api": "wstempus/DATOS_TABLA/76315",
+      "operation": "HPT",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/hipotecas_rates.parquet": {
+      "api": "wstempus/DATOS_TABLA/76315",
+      "operation": "HPT",
+      "accessed": "2026-10-06",
+      "note": "Viviendas only; annual sums/means + n_months"
     }
   }
 }

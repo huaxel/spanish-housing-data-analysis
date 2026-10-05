@@ -285,3 +285,34 @@ def test_edad_band_edges_and_grouped_elderly():
     assert band("85 y más años") == "65+"
     assert band("100 y más años") == "65+"
     assert band("De 0 a 15 años") is None
+
+
+def test_hipotecas_classify_both_layouts():
+    from fetch_hipotecas import classify
+
+    # CCAA layout: nature. terr. medida
+    assert classify("Viviendas. Andalucía. Número de hipotecas. Base nueva. Mensual.") == (
+        "count",
+        "Andalucía",
+        "Número de hipotecas",
+    )
+    # Provincia layout: nature. medida. terr (swapped)
+    assert classify("Viviendas. Número de hipotecas. Albacete. Base nueva. Mensual.") == (
+        "count",
+        "Albacete",
+        "Número de hipotecas",
+    )
+    assert classify("Viviendas. Importe de hipotecas. Madrid. Base nueva. Mensual.") == (
+        "count",
+        "Madrid",
+        "Importe de hipotecas",
+    )
+    # Rates: national only
+    assert classify(
+        "Viviendas. Tipo de interés medio. Total Nacional. Base nueva. Mensual. Fijo."
+    ) == ("rates", "Total Nacional", "Fijo")
+    # Skips: other natures, non-national rates, short names
+    assert classify("Solares. Andalucía. Número de hipotecas. Base nueva. Mensual.") is None
+    assert (
+        classify("Viviendas. Tipo de interés medio. Andalucía. Base nueva. Mensual. Fijo.") is None
+    )

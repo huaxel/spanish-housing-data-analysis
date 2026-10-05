@@ -99,6 +99,22 @@ def main() -> int:
     ).fetchone()
     print(f"young cohort 20-34: rows={young[0]} null={young[1]}")
     assert young[1] == 0, "pob_20_34 must be complete 2007-2025"
+    hip = con.execute(
+        "SELECT SUM(CASE WHEN hip_viv_num IS NULL THEN 1 ELSE 0 END) FROM mart_ccaa_anual"
+    ).fetchone()[0]
+    hip_prov_pre = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo < 2003 AND hip_viv_num IS NOT NULL"
+    ).fetchone()[0]
+    hip_prov_post = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo >= 2003 AND hip_viv_num IS NULL"
+    ).fetchone()[0]
+    print(
+        f"mortgages: ccaa null={hip}, prov null-pre2003={hip_prov_pre}, "
+        f"prov null-post2003={hip_prov_post}"
+    )
+    # Mortgages start 2003; the CCAA mart starts 2007, so it must be complete.
+    assert hip == 0, "ccaa mortgages must be complete 2007-2025"
+    assert hip_prov_pre == 0 and hip_prov_post == 0, "prov mortgages must cover 2003-2021"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

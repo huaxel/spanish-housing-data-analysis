@@ -19,6 +19,7 @@ fetch:
 	uv run python scripts/fetch_valor_tasado.py
 	uv run python scripts/fetch_renta.py
 	uv run python scripts/parse_edad.py
+	uv run python scripts/fetch_hipotecas.py
 
 build:
 	uv run python scripts/build_marts.py

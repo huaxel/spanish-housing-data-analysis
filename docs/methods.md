@@ -35,6 +35,13 @@
   49146 verified byte-identical content, not fetched). Enables
   `afford_90m2_years = eur_m2_libre × 90 / renta` (CCAA mart only — no
   provincial incomes in Tempus). Means-on-means: blind to inequality.
+- **Hipotecas (INE HPT, 76316/76317 CCAA+provincia, 76315 rates):** monthly
+  mortgages constituted on dwellings (número + importe, thousands of EUR)
+  and national average rates (total/fijo/variable). Marts carry annual
+  `hip_viv_num` + `hip_ticket_miles` (complete 12-month years only; NULL
+  before 2003) and a `tipos_hipoteca_nacional` table. CCAA/provincia grain
+  for volumes; rates national-only. Layout swap between tables handled
+  structurally (territory↔measure positions differ).
 - **Edades (ECP 56940 single-year detail, CCAA):** `scripts/parse_edad.py`
   aggregates to 0–19/20–34/35–49/50–64/65+ at 1-January. Overlap guards
   verified arithmetically: single years 85–99 and both centenarian series

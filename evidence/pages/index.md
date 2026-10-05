@@ -66,6 +66,13 @@ ver [métodos](../docs/methods.md) (en el repo).
   title="Cuota de 20–34 años en la población"
 />
 
+<LineChart
+  data={nacional}
+  x=anyo
+  y=hip_viv_num
+  title="Hipotecas sobre viviendas constituidas"
+/>
+
 ```sql nueva_segunda
 select anyo, ipv_nueva, ipv_segunda_mano
 from mart_ccaa_anual

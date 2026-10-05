@@ -101,6 +101,9 @@ REQUIRED_RAW = [
     "data/raw/parquet/valor_tasado.parquet",
     "data/raw/parquet/renta_hogar_ccaa.parquet",
     "data/raw/parquet/ecp_edad_ccaa.parquet",
+    "data/raw/parquet/hipotecas_ccaa.parquet",
+    "data/raw/parquet/hipotecas_prov.parquet",
+    "data/raw/parquet/hipotecas_rates.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -313,6 +316,35 @@ def main() -> None:
         key = N("Total Nacional") if ccaa == "Nacional" else N(ccaa)
         return renta.get((key, anyo))
 
+    # Mortgages on dwellings (HPT). Complete (12-month) years only; importe
+    # unit is thousands of euros (ticket 2006 ~= EUR 140k — sanity-checked).
+    hip_ccaa: dict[tuple[str, int], dict] = {}
+    for r in load_parquet("hipotecas_ccaa.parquet"):
+        if r["n_months"] != 12:
+            continue
+        cell = hip_ccaa.setdefault((N(r["territorio"]), r["anyo"]), {})
+        cell[r["medida"]] = r["valor"]
+    hip_prov: dict[tuple[str, int], dict] = {}
+    for r in load_parquet("hipotecas_prov.parquet"):
+        if r["n_months"] != 12:
+            continue
+        cell = hip_prov.setdefault((N(r["territorio"]), r["anyo"]), {})
+        cell[r["medida"]] = r["valor"]
+
+    def hip_pair(
+        store: dict[tuple[str, int], dict], terr: str, anyo: int
+    ) -> tuple[float | None, float | None]:
+        cell = store.get((N(terr), anyo), {})
+        num = cell.get("Número de hipotecas")
+        imp = cell.get("Importe de hipotecas")
+        if not num or not imp:
+            return None, None
+        return num, round(imp / num, 1)
+
+    def ccaa_hip(ccaa: str, anyo: int) -> tuple[float | None, float | None]:
+        terr = "Total Nacional" if ccaa == "Nacional" else ccaa
+        return hip_pair(hip_ccaa, terr, anyo)
+
     def prov_valor(cpro: str, anyo: int) -> tuple[float | None, int | None, str | None]:
         cell = vt.get(("P" + cpro, anyo, "Libre"))
         if cell:
@@ -359,6 +391,16 @@ def main() -> None:
             else:
                 hogar = hog_prov.get((N(d["provincia"]), anyo))
             eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
+            if d["cpro"] == "51+52":
+                n1, t1 = hip_pair(hip_prov, "Ceuta", anyo)
+                n2, t2 = hip_pair(hip_prov, "Melilla", anyo)
+                if n1 and n2:
+                    hip_num = n1 + n2
+                    hip_ticket = round((t1 * n1 + t2 * n2) / hip_num, 1)
+                else:
+                    hip_num, hip_ticket = None, None
+            else:
+                hip_num, hip_ticket = hip_pair(hip_prov, d["provincia"], anyo)
             prov_rows.append(
                 {
                     "cpro": d["cpro"],
@@ -377,6 +419,8 @@ def main() -> None:
                     "eur_m2_libre": eur_m2,
                     "eur_m2_n_trim": eur_trim,
                     "vt_source": vt_src,
+                    "hip_viv_num": hip_num,
+                    "hip_ticket_miles": hip_ticket,
                 }
             )
     prov_rows.sort(key=lambda r: (r["cpro"], r["anyo"]))
@@ -413,6 +457,7 @@ def main() -> None:
             hogar = ccaa_hog(ccaa, anyo)
             ipv_key = ccaa if ccaa != "Nacional" else "Nacional"
             eur_m2, eur_trim, eur_src = ccaa_valor(ccaa, anyo, provs)
+            hip_nc, hip_tc = ccaa_hip(ccaa, anyo)
             ccaa_rows.append(
                 {
                     "ccaa": ccaa,
@@ -428,6 +473,8 @@ def main() -> None:
                     "eur_m2_libre": eur_m2,
                     "eur_m2_n_trim": eur_trim,
                     "vt_source": eur_src,
+                    "hip_viv_num": hip_nc,
+                    "hip_ticket_miles": hip_tc,
                     "renta_hogar_neta": (renta_v := ccaa_renta(ccaa, anyo)),
                     "afford_90m2_years": (
                         round(eur_m2 * AFFORD_M2 / renta_v, 2) if eur_m2 and renta_v else None
@@ -473,6 +520,14 @@ def main() -> None:
     print(f"valor-vs-IPV Nacional YoY correlation ({len(vt_yoy)} years): {vt_ipv_corr}")
 
     vt_annual = [{"terr_key": k[0], "anyo": k[1], "regimen": k[2], **v} for k, v in vt.items()]
+    rates: dict[int, dict] = {}
+    for r in load_parquet("hipotecas_rates.parquet"):
+        if r["n_months"] != 12:
+            continue
+        rates.setdefault(r["anyo"], {})[r["medida"]] = r["valor"]
+    rates_rows = [
+        {"anyo": a, **{k.lower(): v for k, v in m.items()}} for a, m in sorted(rates.items())
+    ]
     con = duckdb.connect(str(MARTS_DB))
     con.register("prov_df", pa.Table.from_pylist(prov_rows))
     con.register("ccaa_df", pa.Table.from_pylist(ccaa_rows))
@@ -482,7 +537,15 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE mart_ccaa_anual AS SELECT * FROM ccaa_df")
     con.execute("CREATE OR REPLACE TABLE dim_territorio AS SELECT * FROM dim_df")
     con.execute("CREATE OR REPLACE TABLE valor_tasado_anual AS SELECT * FROM vt_df")
-    for name in ("mart_provincia_anual", "mart_ccaa_anual", "dim_territorio", "valor_tasado_anual"):
+    con.register("rates_df", pa.Table.from_pylist(rates_rows))
+    con.execute("CREATE OR REPLACE TABLE tipos_hipoteca_nacional AS SELECT * FROM rates_df")
+    for name in (
+        "mart_provincia_anual",
+        "mart_ccaa_anual",
+        "dim_territorio",
+        "valor_tasado_anual",
+        "tipos_hipoteca_nacional",
+    ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
         "mart_provincia_anual_rows": len(prov_rows),
@@ -495,6 +558,8 @@ def main() -> None:
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
         "hogares_window": "2021+ (ECP, 1-January); viv_por_hogar NULL before",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,
+        "hipotecas_window": "2003+ monthly Viviendas; complete years in marts "
+        "(prov NULL before 2003); importe in thousands of EUR; national rates table",
         "valor_window": "1995+ quarterly Libre/Protegida; marts carry Libre annual means + n_trim",
         "known_gaps": [
             "provincial ECP population (Tempus3 56945) unreachable "
