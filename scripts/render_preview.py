@@ -12,17 +12,18 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
+
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 W, H, PAD = 640, 260, 44
 
 
-def svg_dual(title: str, xs: list, left: list, right: list,
-             llabel: str, rlabel: str) -> str:
+def svg_dual(title: str, xs: list, left: list, right: list, llabel: str, rlabel: str) -> str:
     def scale(vs: list, lo: float, hi: float) -> list:
-        return [H - PAD - (v - lo) / (hi - lo) * (H - 2 * PAD) if v is not None else None
-                for v in vs]
+        return [
+            H - PAD - (v - lo) / (hi - lo) * (H - 2 * PAD) if v is not None else None for v in vs
+        ]
 
     lx, rx = [v for v in left if v is not None], [v for v in right if v is not None]
     llo, lhi, rlo, rhi = min(lx), max(lx), min(rx), max(rx)
@@ -79,8 +80,12 @@ ccaa25 = con.execute(
     " hip_viv_num FROM mart_ccaa_anual WHERE anyo=2025 AND ccaa!='Nacional'"
     " ORDER BY eur_m2_libre DESC"
 ).fetchall()
-ccaa24 = {r[0]: r[1] for r in con.execute(
-    "SELECT ccaa, afford_90m2_years FROM mart_ccaa_anual WHERE anyo=2024").fetchall()}
+ccaa24 = {
+    r[0]: r[1]
+    for r in con.execute(
+        "SELECT ccaa, afford_90m2_years FROM mart_ccaa_anual WHERE anyo=2024"
+    ).fetchall()
+}
 
 table = "".join(
     f"<tr><td>{c}</td><td>{e:,.0f}</td><td>{ccaa24.get(c) or '—'}</td>"
