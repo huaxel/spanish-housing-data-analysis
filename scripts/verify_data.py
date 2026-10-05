@@ -99,6 +99,13 @@ def main() -> int:
     ).fetchone()
     print(f"young cohort 20-34: rows={young[0]} null={young[1]}")
     assert young[1] == 0, "pob_20_34 must be complete 2007-2025"
+    solo = con.execute(
+        "SELECT SUM(CASE WHEN hog_1persona IS NULL THEN 1 ELSE 0 END), "
+        "SUM(CASE WHEN hog_1persona > hogares THEN 1 ELSE 0 END) "
+        "FROM mart_ccaa_anual WHERE anyo >= 2021"
+    ).fetchone()
+    print(f"solo households 2021+: null={solo[0]} over-total={solo[1]}")
+    assert solo == (0, 0), "solo-household cells broken"
     hip = con.execute(
         "SELECT SUM(CASE WHEN hip_viv_num IS NULL THEN 1 ELSE 0 END) FROM mart_ccaa_anual"
     ).fetchone()[0]

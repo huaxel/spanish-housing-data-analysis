@@ -19,6 +19,15 @@ and the ranking mirrors affordability pain: the four highest young shares
 affordability readings. The young flock to expensive magnets for jobs; they
 don't arbitrage housing costs away.
 
+## Update: fragmentation quantified (tamaño detail, 2021–2025)
+
+Nationally 1-person households grew **+10.1%** and 2-person +8.4% while
+3-person managed +1.4% and 4+ *shrank* −0.3%. Solo living hit 28.2% of
+all households (2025) — highest in emptying regions (Castilla y León 35.3%,
+Asturias 34.1%), where it reads as elderly alone + youth exodus. The
+Andalucía puzzle (+165k households on +22k young) is now arithmetic:
+shrinking household size, not hidden youth.
+
 ## 2021–2025: two different household surges
 
 In Madrid (+160k young / +162k households) and Cataluña (+160k / +171k) the

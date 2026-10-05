@@ -29,7 +29,7 @@ explicit extensions, not v1.
 | 4 | INE Censo viviendas 2001/2011 (jaxi CSV) | Pinned, anchor checks pending |
 | 5 | INE ECP población (2022+) | DONE 2026-10-06 — CCAA/nacional (56940); provincial (56945) API-blocked, see sources |
 | 6 | MIVAU valor tasado (€/m² levels) | DONE 2026-10-06 — Libre annual means in marts (prov + CCAA), 0.95 YoY corr vs IPV |
-| 7 | Households | PARTIAL 2026-10-06 — ECP hogares 2021+ in marts (`viv_por_hogar`); ECH annual + tamaño detail + census anchors queued |
+| 7 | Households | DONE 2026-10-06 — ECP hogares 2021+ with tamaño detail (`viv_por_hogar`, `share_1persona`); ECH annual pre-2021 + census anchors queued |
 | 8 | INE Censo viviendas 2021 | TODO — third anchor; stock already embeds its rebase |
 
 ## Milestones

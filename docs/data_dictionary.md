@@ -15,6 +15,7 @@
 | ipv_general / ipv_nueva / ipv_segunda_mano | quality-adjusted price index, base 2025 | INE IPV rows (never averaged) |
 | eur_m2_libre | mean appraised €/m², vivienda libre (annual mean of published quarters) | MIVAU valor tasado |
 | pob_20_34 / share_20_34 | residents aged 20–34 / share of población (1-Jan) | ECP single-year detail, parsed bands |
+| hog_1persona / share_1persona | 1-person households / share of hogares (2021–; sizes additive-checked) | ECP tamaño detail |
 | hip_viv_num / hip_ticket_miles | mortgages on dwellings / mean capital (thousands EUR; NULL before 2003) | INE HPT (complete years only) |
 | viv_turisticas / share_turistica_no_princ | registered tourist dwellings / share of non-primary stock (December snapshot; NULL before 2020) | INE VTE |
 | renta_hogar_neta | mean net household income, income year (NULL for 2025: ECV lags) | INE ECV |

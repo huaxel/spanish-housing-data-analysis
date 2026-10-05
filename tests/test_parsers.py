@@ -184,7 +184,8 @@ def test_ecp_hog_keeps_household_totals_only():
         },
     ]
     rows, skipped = parse_ecp_hog(payload)
-    assert len(rows) == 1 and rows[0]["hogares"] == 2600000
+    assert len(rows) == 2  # Total + tamaño detail both kept
+    assert [r for r in rows if r["tamano"] == "Total"][0]["hogares"] == 2600000
     assert skipped == []
 
 
@@ -338,3 +339,19 @@ def test_muni_key_trailing_articles():
     assert muni_key("Hospitalet de Llobregat, L'") == muni_key("Hospitalet de Llobregat")
     assert muni_key("Ametlla del Vallès, L'") == muni_key("L'Ametlla del Vallès")
     assert muni_key("Bruc, El") == muni_key("El Bruc")
+
+
+def test_ecp_hog_keeps_all_sizes():
+    from fetch_ecp import parse_hog as parse_ecp_hog
+
+    payload = [
+        {"COD": "H1", "Nombre": "Madrid. Total. Hogares en viviendas familiares. Número. ",
+         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 2600000.0}]},
+        {"COD": "H2", "Nombre": "Madrid. 1. Hogares en viviendas familiares. Número. ",
+         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 700000.0}]},
+        {"COD": "H3", "Nombre": "Madrid. 4 y más. Hogares en viviendas familiares. Número. ",
+         "Data": [{"Anyo": 2023, "FK_Periodo": 19, "Valor": 500000.0}]},
+    ]
+    rows, skipped = parse_ecp_hog(payload)
+    assert len(rows) == 3 and skipped == []
+    assert {r["tamano"] for r in rows} == {"Total", "1", "4 y más"}

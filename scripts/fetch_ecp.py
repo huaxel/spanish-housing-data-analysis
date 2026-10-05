@@ -103,8 +103,9 @@ def parse_hog(payload: list[dict]) -> tuple[list[dict], list[str]]:
         if len(parts) != 4 or parts[2] != "Hogares en viviendas familiares":
             skipped.append(s["Nombre"])
             continue
-        if parts[1] != "Total":
-            continue  # tamaño detail queued; v1 keeps household totals
+        if parts[1] not in ("Total", "1", "2", "3", "4 y más"):
+            skipped.append(s["Nombre"])
+            continue
         for x in s["Data"]:
             if x["FK_Periodo"] != JAN:
                 continue
@@ -112,6 +113,7 @@ def parse_hog(payload: list[dict]) -> tuple[list[dict], list[str]]:
                 {
                     "territorio": parts[0],
                     "anyo": x["Anyo"],
+                    "tamano": parts[1],
                     "hogares": int(x["Valor"]),
                     "serie_cod": s["COD"],
                 }

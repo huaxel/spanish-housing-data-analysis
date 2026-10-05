@@ -186,6 +186,13 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.1,
     ),
     (
+        "young",
+        "solo-household share Nacional 2025",
+        "SELECT share_1persona FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2025",
+        0.2822,
+        0.0001,
+    ),
+    (
         "municipios",
         "Barcelona vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_bcn "

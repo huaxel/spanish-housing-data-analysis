@@ -258,12 +258,28 @@ def main() -> None:
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("ecp_pob_ccaa.parquet")
     }
-    hog_ccaa = {
-        (N(r["territorio"]), r["anyo"]): r["hogares"] for r in load_parquet("ecp_hog_ccaa.parquet")
-    }
-    hog_prov = {
-        (N(r["territorio"]), r["anyo"]): r["hogares"] for r in load_parquet("ecp_hog_prov.parquet")
-    }
+    # Household sizes 1/2/3/4+ must sum to Total (additive guard, like parque).
+    def pivot_hog(fname: str) -> tuple[dict, dict]:
+        cells: dict[tuple[str, int], dict] = {}
+        for r in load_parquet(fname):
+            cells.setdefault((N(r["territorio"]), r["anyo"]), {})[r["tamano"]] = r["hogares"]
+        bad = {
+            k: v
+            for k, v in cells.items()
+            if set(v) != {"Total", "1", "2", "3", "4 y más"}
+            or v["1"] + v["2"] + v["3"] + v["4 y más"] != v["Total"]
+        }
+        if bad:
+            raise SystemExit(f"hogares size additive check failed: {dict(list(bad.items())[:3])}")
+        totals = {k: v["Total"] for k, v in cells.items()}
+        sizes = {
+            k: {"1": v["1"], "2": v["2"], "3": v["3"], "4p": v["4 y más"]}
+            for k, v in cells.items()
+        }
+        return totals, sizes
+
+    hog_ccaa, hog_ccaa_sz = pivot_hog("ecp_hog_ccaa.parquet")
+    hog_prov, hog_prov_sz = pivot_hog("ecp_hog_prov.parquet")
     edad_2034 = {
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("ecp_edad_ccaa.parquet")
@@ -313,6 +329,16 @@ def main() -> None:
         if ccaa == "Nacional":
             return hog_ccaa.get((N("Total Nacional"), anyo))
         return hog_ccaa.get((N(ccaa), anyo))
+
+    def ccaa_hog1(ccaa: str, anyo: int) -> int | None:
+        if ccaa == "Ceuta y Melilla":
+            v = hog_ccaa_sz.get((N("Ceuta"), anyo), {}).get("1", 0) + hog_ccaa_sz.get(
+                (N("Melilla"), anyo), {}
+            ).get("1", 0)
+            return v or None
+        if ccaa == "Nacional":
+            return hog_ccaa_sz.get((N("Total Nacional"), anyo), {}).get("1")
+        return hog_ccaa_sz.get((N(ccaa), anyo), {}).get("1")
 
     vt = annualize_valor(load_parquet("valor_tasado.parquet"))
     renta = {
@@ -509,6 +535,8 @@ def main() -> None:
                     "poblacion": pop,
                     "pop_source": source,
                     "hogares": hogar,
+                    "hog_1persona": (h1 := ccaa_hog1(ccaa, anyo)),
+                    "share_1persona": round(h1 / hogar, 4) if hogar and h1 else None,
                     "viv_por_1000_hab": round(tot / pop * 1000, 2),
                     "viv_por_hogar": round(tot / hogar, 3) if hogar else None,
                     "eur_m2_libre": eur_m2,
