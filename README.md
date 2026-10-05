@@ -23,6 +23,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Madrid vs Valencia: scarcity vs composition](docs/explorations/madrid_vs_valencia.md)
 - [Synthesis: the answer in one place](docs/synthesis.md)
 - [Madrid capital vs corona: the south never recovered](docs/explorations/madrid_municipios.md)
+- [Barcelona: burdened metropolis, stretched corona](docs/explorations/barcelona_municipios.md)
 
 ## Setup and verification
 

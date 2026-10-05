@@ -108,6 +108,14 @@ REQUIRED_RAW = [
     "data/raw/parquet/valor_municipal_madrid.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
+    "data/raw/diba_opendata.zip",
+    "data/raw/parquet/diba_m19.parquet",
+    "data/raw/parquet/diba_m23.parquet",
+    "data/raw/parquet/diba_h9a.parquet",
+    "data/raw/parquet/diba_h18a.parquet",
+    "data/raw/parquet/diba_m11d.parquet",
+    "data/raw/parquet/diba_m11e.parquet",
+    "data/raw/parquet/padron_municipios_bcn.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -611,6 +619,50 @@ def main() -> None:
         raise SystemExit(f"municipal pop unmapped: {sorted(set(muni_unmapped))}")
     con.register("muni_df", pa.Table.from_pylist(muni_rows))
     con.execute("CREATE OR REPLACE TABLE muni_madrid AS SELECT * FROM muni_df")
+    # Barcelona metro join: DIBA indicators (all keyed by municipio+year) +
+    # Padrón municipal. Name match is flat()-exact; 'Barcelona' is the city
+    # in DIBA (province aggregate is 'Barcelona (provincia)').
+    from spanish_housing.muni_names import muni_key
+
+    # Cross-publisher renames (verified 2026-10-06): DIBA keeps the old name.
+    BCN_ALIAS = {muni_key("Bigues i Riells"): muni_key("Bigues i Riells del Fai"),
+                 muni_key("Santa Maria de Corcó"): muni_key("L'Esquirol")}
+    # NOTE: 'Barcelona (provincia)' (aggregate) and 'Barcelona' (city) share
+    # the canonical key — the aggregate is skipped here on display name so
+    # the city survives. Never filter on the bare key.
+    diba: dict[tuple[str, int], dict] = {}
+    diba_display: dict[str, str] = {}
+    for code in ("m19", "m23", "h9a", "h18a", "m11d", "m11e"):
+        for r in load_parquet(f"diba_{code}.parquet"):
+            if r["valor"] is None:
+                continue
+            if r["municipio"] == "Barcelona (provincia)":
+                continue  # province aggregate; the homonym municipio is kept
+            diba.setdefault((muni_key(r["municipio"]), r["anyo"]), {})[code] = r["valor"]
+            diba_display.setdefault(muni_key(r["municipio"]), r["municipio"])
+    pad_bcn = {(muni_key(r["territorio"]), r["anyo"]): r["poblacion"]
+               for r in load_parquet("padron_municipios_bcn.parquet")}
+    # No silent merges: one padrón name per key (qualifiers already stripped).
+    pad_key_names: dict[str, set] = {}
+    for r in load_parquet("padron_municipios_bcn.parquet"):
+        pad_key_names.setdefault(muni_key(r["territorio"]), set()).add(r["territorio"])
+    dup = {k: v for k, v in pad_key_names.items() if len(v) > 1}
+    if dup:
+        raise SystemExit(f"muni_key collisions: {dict(list(dup.items())[:5])}")
+    bcn_rows, bcn_missing_pop = [], 0
+    for (nname, anyo), m in sorted(diba.items()):
+        pop = pad_bcn.get((BCN_ALIAS.get(nname, nname), anyo))
+        if pop is None:
+            bcn_missing_pop += 1
+            continue
+        bcn_rows.append({"municipio": diba_display[nname], "anyo": anyo, "poblacion": pop,
+                         "sale_eur_m2": m.get("m19"), "rent_month": m.get("m23"),
+                         "vacant_reg": m.get("h9a"), "tourist": m.get("h18a"),
+                         "rent_burden": m.get("m11d"),
+                         "mortgage_burden": m.get("m11e")})
+    print(f"muni_bcn: {len(bcn_rows)} rows, missing pop for {bcn_missing_pop}")
+    con.register("bcn_df", pa.Table.from_pylist(bcn_rows))
+    con.execute("CREATE OR REPLACE TABLE muni_bcn AS SELECT * FROM bcn_df")
     # flat() already unifies 'Rozas de Madrid (Las)' vs ', Las' variants.
     valor_names = {flat(r["Territorio"]) for r in load_parquet("valor_municipal_madrid.parquet")}
     cen11 = [
@@ -632,6 +684,7 @@ def main() -> None:
         "valor_municipal_madrid",
         "muni_madrid",
         "censo2011_mad",
+        "muni_bcn",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

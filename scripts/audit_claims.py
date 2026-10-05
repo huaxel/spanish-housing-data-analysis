@@ -148,6 +148,27 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Barcelona sale 2024",
+        "SELECT sale_eur_m2 FROM muni_bcn WHERE municipio='Barcelona' AND anyo=2024",
+        4481.77,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Barcelona rent burden 2022",
+        "SELECT rent_burden FROM muni_bcn WHERE municipio='Barcelona' AND anyo=2022",
+        51.22986737621087,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Santa Coloma tourist 2022 (none)",
+        "SELECT tourist FROM muni_bcn WHERE municipio='Santa Coloma de Gramenet' AND anyo=2022",
+        5.0,
+        1.0,
+    ),
+    (
+        "municipios",
         "Madrid capital 2025",
         "SELECT eur_m2 FROM valor_municipal_madrid WHERE codigo='0796' AND anyo=2025",
         4993.3,

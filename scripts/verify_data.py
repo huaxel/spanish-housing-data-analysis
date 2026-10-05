@@ -153,6 +153,16 @@ def main() -> int:
     ]
     print(f"censo2011_mad: municipios={cen} negatives={cen_bad}")
     assert cen >= 20 and cen_bad == 0, "censo2011 join broken"
+    bcn = con.execute(
+        "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_bcn"
+    ).fetchone()
+    bcn_city = con.execute(
+        "SELECT MIN(anyo), MAX(anyo) FROM muni_bcn "
+        "WHERE municipio = 'Barcelona' AND sale_eur_m2 IS NOT NULL"
+    ).fetchone()
+    print(f"muni_bcn: municipios={bcn[0]} years={bcn[1]}-{bcn[2]}; "
+          f"city sale window={bcn_city[0]}-{bcn_city[1]}")
+    assert bcn_city == (2013, 2024), "barcelona city sale window broken"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0

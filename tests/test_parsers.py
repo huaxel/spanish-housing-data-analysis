@@ -316,3 +316,24 @@ def test_hipotecas_classify_both_layouts():
     assert (
         classify("Viviendas. Tipo de interés medio. Andalucía. Base nueva. Mensual. Fijo.") is None
     )
+
+
+def test_muni_key_unifies_publishers():
+    from spanish_housing.muni_names import muni_key
+
+    assert muni_key("El Bruc") == muni_key("Bruc, El") == "BRUC"
+    assert muni_key("L'Ametlla del Vallès") == "AMETLLA DEL VALLES"
+    assert muni_key("Rozas de Madrid (Las)") == muni_key("Rozas de Madrid, Las")
+    assert muni_key("Barcelona (provincia)") == muni_key("Barcelona") == muni_key(
+        "Barcelona (ciudad)")
+    assert muni_key("Hospitalet de Llobregat") == muni_key("Hospitalet de Llobregat")
+    assert muni_key("Santa Coloma de Gramenet") != muni_key("Santa Coloma de Cervelló")
+
+
+def test_muni_key_trailing_articles():
+    from spanish_housing.muni_names import muni_key
+
+    assert muni_key("Masnou, El") == muni_key("El Masnou") == "MASNOU"
+    assert muni_key("Hospitalet de Llobregat, L'") == muni_key("Hospitalet de Llobregat")
+    assert muni_key("Ametlla del Vallès, L'") == muni_key("L'Ametlla del Vallès")
+    assert muni_key("Bruc, El") == muni_key("El Bruc")

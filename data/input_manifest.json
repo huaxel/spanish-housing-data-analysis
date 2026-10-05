@@ -1,5 +1,5 @@
 {
-  "snapshot_date": null,
+  "snapshot_date": "2026-10-06",
   "sha256": {
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
     "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
@@ -37,7 +37,16 @@
     "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
     "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
-    "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4"
+    "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
+    "data/raw/diba_opendata.zip": "01bb0bd88e67b9add2f015b2294a7e4c0cd632deb7ecba605c82df1c41db3b9a",
+    "data/raw/parquet/diba_m19.parquet": "bc783fc3feb27af74af36120c7258203ccebff35dd2c919c683fc03a50e56ce6",
+    "data/raw/parquet/diba_m23.parquet": "63900a34ea1766c388ac1a75f4257ea240eedc6b473824d88a6a4a34101ad41e",
+    "data/raw/parquet/diba_h9a.parquet": "a648c6dcedff125a190531f0ebbb42126fe91906fd8180d6535829a291a7e2c5",
+    "data/raw/parquet/diba_h18a.parquet": "951b7b80c4925c83bc230e3ed52285fbf0b7c7314c3a20bafad0d2525337e68c",
+    "data/raw/parquet/diba_m11d.parquet": "971faaaf2883abbc9780936bfa092281ff3f8eb4c0135b438e8cfc187103a3aa",
+    "data/raw/parquet/diba_m11e.parquet": "1d69e700499b402093e84c16a01d93fb2510e9029ea1f6fc874d3ea7e650e6a3",
+    "data/raw/padron_municipios_bcn.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
+    "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -248,6 +257,57 @@
     "data/raw/parquet/censo2011_municipios.parquet": {
       "api": "wstempus/DATOS_TABLA/3456",
       "operation": "CENSOPV",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/diba_opendata.zip": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/diba_m19.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m19 (sale_eur_m2)"
+    },
+    "data/raw/parquet/diba_m23.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m23 (rent_month)"
+    },
+    "data/raw/parquet/diba_h9a.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_h9a (vacant_reg)"
+    },
+    "data/raw/parquet/diba_h18a.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_h18a (tourist)"
+    },
+    "data/raw/parquet/diba_m11d.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m11d (rent_burden)"
+    },
+    "data/raw/parquet/diba_m11e.parquet": {
+      "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip",
+      "publisher": "Diputació de Barcelona",
+      "accessed": "2026-10-06",
+      "note": "tb_m11e (mortgage_burden)"
+    },
+    "data/raw/padron_municipios_bcn.json": {
+      "api": "wstempus/DATOS_TABLA/2861",
+      "operation": "DPOP",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/padron_municipios_bcn.parquet": {
+      "api": "wstempus/DATOS_TABLA/2861",
+      "operation": "DPOP",
       "accessed": "2026-10-06"
     }
   }
