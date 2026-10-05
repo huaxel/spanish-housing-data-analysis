@@ -149,8 +149,7 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     (
         "deepcut",
         "Balears tourist dwellings 2025 (falling)",
-        "SELECT viv_turisticas FROM mart_ccaa_anual "
-        "WHERE ccaa='Balears, Illes' AND anyo=2025",
+        "SELECT viv_turisticas FROM mart_ccaa_anual WHERE ccaa='Balears, Illes' AND anyo=2025",
         19398.0,
         1.0,
     ),
