@@ -156,8 +156,7 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     (
         "municipios",
         "Parla trough 2013",
-        "SELECT eur_m2 FROM valor_municipal_madrid "
-        "WHERE municipio='Parla' AND anyo=2013",
+        "SELECT eur_m2 FROM valor_municipal_madrid WHERE municipio='Parla' AND anyo=2013",
         1083.1,
         0.1,
     ),
@@ -165,8 +164,8 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "municipios",
         "Rivas population growth 2007-2025",
         "SELECT ROUND((MAX(CASE WHEN anyo=2025 THEN poblacion END) "
-        "- MAX(CASE WHEN anyo=2007 THEN poblacion END)) "
-        "/ MAX(CASE WHEN anyo=2007 THEN poblacion END) * 100, 1 FROM muni_madrid "
+        "- MAX(CASE WHEN anyo=2007 THEN poblacion END)) * 100.0 "
+        "/ MAX(CASE WHEN anyo=2007 THEN poblacion END), 1) FROM muni_madrid "
         "WHERE municipio='Rivas-Vaciamadrid'",
         73.6,
         0.1,
@@ -175,8 +174,8 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "municipios",
         "Parla price change 2007-2025 (negative)",
         "SELECT ROUND((MAX(CASE WHEN anyo=2025 THEN eur_m2 END) "
-        "- MAX(CASE WHEN anyo=2007 THEN eur_m2 END)) "
-        "/ MAX(CASE WHEN anyo=2007 THEN eur_m2 END) * 100, 1 FROM muni_madrid "
+        "- MAX(CASE WHEN anyo=2007 THEN eur_m2 END)) * 100.0 "
+        "/ MAX(CASE WHEN anyo=2007 THEN eur_m2 END), 1) FROM muni_madrid "
         "WHERE municipio='Parla'",
         -13.1,
         0.1,

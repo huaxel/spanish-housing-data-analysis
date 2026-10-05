@@ -132,15 +132,15 @@ def main() -> int:
     assert tur_cc == 0 and tur_cc_pre == 0, "ccaa tourist must cover 2020-2025 only"
     assert tur_pr == 0, "prov tourist must cover 2020-2021"
     mun = con.execute(
-        "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) "
-        "FROM valor_municipal_madrid"
+        "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM valor_municipal_madrid"
     ).fetchone()
     mun_cap = con.execute(
-        "SELECT COUNT(*), MIN(anyo), MAX(anyo) FROM valor_municipal_madrid "
-        "WHERE codigo = '0796'"
+        "SELECT COUNT(*), MIN(anyo), MAX(anyo) FROM valor_municipal_madrid WHERE codigo = '0796'"
     ).fetchone()
-    print(f"municipal madrid: municipios={mun[0]} years={mun[1]}-{mun[2]}; "
-          f"capital years={mun_cap[1]}-{mun_cap[2]} ({mun_cap[0]} rows)")
+    print(
+        f"municipal madrid: municipios={mun[0]} years={mun[1]}-{mun[2]}; "
+        f"capital years={mun_cap[1]}-{mun_cap[2]} ({mun_cap[0]} rows)"
+    )
     assert mun_cap[0] == mun_cap[2] - mun_cap[1] + 1, "capital must be complete"
     muni = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_madrid"

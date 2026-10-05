@@ -41,14 +41,24 @@ def main() -> None:
     _, rows = csvx.read_csv_records(RAW_CSV, delimiter=";")
     keep = [r for r in rows if (r["Valor"] or "").strip() not in ("", "-")]
     n = csvx.write_parquet(keep, RAW_PARQUET)
-    manifest.record("data/raw/valor_municipal_madrid.csv",
-                    {"url": URL, "publisher": "datos.comunidad.madrid (MIVAU mirror)",
-                     "accessed": "2026-10-06",
-                     "note": "cp1252 original; stored as UTF-8"})
-    manifest.record("data/raw/parquet/valor_municipal_madrid.parquet",
-                    {"url": URL, "publisher": "datos.comunidad.madrid (MIVAU mirror)",
-                     "accessed": "2026-10-06",
-                     "note": "published values only; '-' dropped, counted in print"})
+    manifest.record(
+        "data/raw/valor_municipal_madrid.csv",
+        {
+            "url": URL,
+            "publisher": "datos.comunidad.madrid (MIVAU mirror)",
+            "accessed": "2026-10-06",
+            "note": "cp1252 original; stored as UTF-8",
+        },
+    )
+    manifest.record(
+        "data/raw/parquet/valor_municipal_madrid.parquet",
+        {
+            "url": URL,
+            "publisher": "datos.comunidad.madrid (MIVAU mirror)",
+            "accessed": "2026-10-06",
+            "note": "published values only; '-' dropped, counted in print",
+        },
+    )
     print(f"municipios madrid: {n} valued rows ({len(rows) - n} unpublished '-')")
 
 

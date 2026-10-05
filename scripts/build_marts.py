@@ -572,17 +572,25 @@ def main() -> None:
     con.register("rates_df", pa.Table.from_pylist(rates_rows))
     con.execute("CREATE OR REPLACE TABLE tipos_hipoteca_nacional AS SELECT * FROM rates_df")
     mun = [
-        {"codigo": r["Código territorio"], "municipio": r["Territorio"],
-         "anyo": int(r["Año"]), "eur_m2": float(r["Valor"])}
+        {
+            "codigo": r["Código territorio"],
+            "municipio": r["Territorio"],
+            "anyo": int(r["Año"]),
+            "eur_m2": float(r["Valor"]),
+        }
         for r in load_parquet("valor_municipal_madrid.parquet")
     ]
     con.register("mun_df", pa.Table.from_pylist(mun))
     con.execute("CREATE OR REPLACE TABLE valor_municipal_madrid AS SELECT * FROM mun_df")
-    pad_mun = {(N(r["territorio"]), r["anyo"]): r["poblacion"]
-               for r in load_parquet("padron_municipios_mad.parquet")}
+    pad_mun = {
+        (N(r["territorio"]), r["anyo"]): r["poblacion"]
+        for r in load_parquet("padron_municipios_mad.parquet")
+    }
     # Valor ↔ padrón name aliases (verified 2026-10-06, fail loudly on more).
-    MUNI_ALIAS = {N("Madrid"): N("Madrid (ciudad)"),
-                  N("Rozas de Madrid (Las)"): N("Rozas de Madrid, Las")}
+    MUNI_ALIAS = {
+        N("Madrid"): N("Madrid (ciudad)"),
+        N("Rozas de Madrid (Las)"): N("Rozas de Madrid, Las"),
+    }
     muni_rows, muni_unmapped = [], []
     for r in load_parquet("valor_municipal_madrid.parquet"):
         key = MUNI_ALIAS.get(N(r["Territorio"]), N(r["Territorio"]))
@@ -590,8 +598,14 @@ def main() -> None:
         if pop is None:
             muni_unmapped.append(r["Territorio"])
             continue
-        muni_rows.append({"municipio": r["Territorio"], "anyo": int(r["Año"]),
-                          "eur_m2": float(r["Valor"]), "poblacion": pop})
+        muni_rows.append(
+            {
+                "municipio": r["Territorio"],
+                "anyo": int(r["Año"]),
+                "eur_m2": float(r["Valor"]),
+                "poblacion": pop,
+            }
+        )
     if muni_unmapped:
         raise SystemExit(f"municipal pop unmapped: {sorted(set(muni_unmapped))}")
     con.register("muni_df", pa.Table.from_pylist(muni_rows))
