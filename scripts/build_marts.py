@@ -716,13 +716,22 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE censo2011_bcn AS SELECT * FROM cenbcn_df")
     # Valencia 2011 split: second-home coast vs vacant interior for the
     # composition-crisis baseline (display names as published).
-    VAL_FOCUS = {"València", "Alacant/Alicante", "Elx/Elche", "Torrevieja",
-                 "Benidorm", "Orihuela", "Gandia", "Dénia",
-                 "Castelló de la Plana/Castellón de la Plana"}
-    cen_val = [{"municipio": r["municipio"], "tipo": r["tipo"],
-                "viviendas_2011": r["viviendas"]}
-               for r in load_parquet("censo2011_municipios.parquet")
-               if r["municipio"] in VAL_FOCUS]
+    VAL_FOCUS = {
+        "València",
+        "Alacant/Alicante",
+        "Elx/Elche",
+        "Torrevieja",
+        "Benidorm",
+        "Orihuela",
+        "Gandia",
+        "Dénia",
+        "Castelló de la Plana/Castellón de la Plana",
+    }
+    cen_val = [
+        {"municipio": r["municipio"], "tipo": r["tipo"], "viviendas_2011": r["viviendas"]}
+        for r in load_parquet("censo2011_municipios.parquet")
+        if r["municipio"] in VAL_FOCUS
+    ]
     have_val = {c["municipio"] for c in cen_val}
     if have_val != VAL_FOCUS:
         raise SystemExit(f"censo2011 missing valencia focus: {VAL_FOCUS - have_val}")

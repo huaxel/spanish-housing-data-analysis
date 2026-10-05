@@ -155,10 +155,15 @@ def main() -> int:
     assert cen >= 20 and cen_bad == 0, "censo2011 join broken"
     cen_b = con.execute("SELECT COUNT(DISTINCT municipio) FROM censo2011_bcn").fetchone()[0]
     # Census display names (INE article order) — keys already asserted in build.
-    for focus in ("Barcelona", "Hospitalet de Llobregat, L'", "Badalona",
-                  "Santa Coloma de Gramenet"):
-        n = con.execute("SELECT COUNT(*) FROM censo2011_bcn WHERE municipio = ?",
-                        [focus]).fetchone()[0]
+    for focus in (
+        "Barcelona",
+        "Hospitalet de Llobregat, L'",
+        "Badalona",
+        "Santa Coloma de Gramenet",
+    ):
+        n = con.execute(
+            "SELECT COUNT(*) FROM censo2011_bcn WHERE municipio = ?", [focus]
+        ).fetchone()[0]
         assert n == 7, f"censo2011_bcn missing {focus}: {n} rows"
     print(f"censo2011_bcn: municipios={cen_b} (focus cities complete)")
     cen_v = con.execute("SELECT COUNT(DISTINCT municipio) FROM censo2011_val").fetchone()[0]

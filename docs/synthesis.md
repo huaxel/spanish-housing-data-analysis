@@ -35,10 +35,18 @@ Three regimes, three different price drivers:
 ## The split (why national ratios mislead)
 
 - **Madrid** (absolute scarcity): 429 dwellings/1000, 14% non-primary,
-  young-migrant refill, worst affordability (6.2y). Needs net new stock.
-- **Coastal Valencia** (composition crisis): 720+ dwellings/1000 in
-  Alicante/Castellón at 44–46% non-primary, tightest absorption (0.23).
-  Needs mobilization of existing stock, not just construction.
+  young-migrant refill, worst affordability (6.2y). Municipally: capital
+  +30% vs south never recovered nominally (Parla −13%, Fuenlabrada +0.5%
+  in 18y); 2011 south was already vacancy (Parla 6%, Torrejón 8%).
+  Needs net new stock.
+- **Coastal Valencia** (composition crisis, decomposed): 720+ dwellings/1000
+  at 44–46% non-primary = a second-home coast (Torrevieja 51%, Benidorm 43%)
+  *plus* vacant towns (Dénia 31%), tourist flats a 4.3% footnote. Needs
+  mobilization, not just construction.
+- **Barcelona** (burdened metropolis): city +65% sale / +68% rents 2013–24,
+  51% rent burden, 64% new-mortgage burden; corona more stretched (Sant
+  Adrià 72%); 10k tourist flats in the city vs 28 in Santa Coloma; 514
+  starts in 13 years there. Built on absorbing a 10.9% 2011 vacancy.
 - **Interior** (Galicia, Castilla y León, Asturias): 650–770/1000, shrinking
   young cohorts, mild prices — abundance without demand.
 
