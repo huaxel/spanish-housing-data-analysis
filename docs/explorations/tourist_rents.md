@@ -14,43 +14,53 @@ the two tests the old panel could not:
    per 1,000 pop) vs SERPAVI median municipal rent level (2024) and
    growth (2020→2024) — includes Balears, Canarias, Girona, Málaga.
 
-## Results
+## Results (corrected 2026-10-06)
 
 | Test | Pearson | Spearman | n |
 | --- | --- | --- | --- |
-| BCN municipal: tour vs rent level | 0.087 | 0.037 | 199 |
-| BCN municipal: tour vs rent growth | 0.020 | −0.024 | 199 |
-| Provincial: tour vs rent level | **0.619** | **0.016** | 45 |
-| Provincial: tour vs rent growth | 0.225 | 0.041 | 45 |
+| BCN municipal: tour vs rent level | 0.087 | 0.005 | 199 |
+| BCN municipal: tour vs rent growth | 0.020 | 0.145 | 199 |
+| Provincial: tour vs rent level | **0.619** | **0.525** | 45 |
+| Provincial: tour vs rent growth | 0.225 | 0.304 | 45 |
+
+**Correction 2026-10-06 (independent review):** the first version
+published Spearman figures from the same buggy rank function as
+`serpavi_analysis.py` (x-ranks vs y-values-sorted-by-x). All Spearman
+values above are the true two-sided figures. The provincial level
+Spearman moves 0.016 → **0.525**: the association survives ranking and
+is no longer dismissable as pure scale.
 
 ## Reading
 
-- **The Pearson 0.619 is a scale artifact, not a tourism effect.**
-  Provinces with more tourist dwellings are also larger/coastal/richer;
-  on ranks the level correlation vanishes (Spearman 0.016). The same
-  pattern as the rent-vacancy cross (`serpavi.md`): a level correlation
-  dominated by city size, not by the tourist margin.
-- **The municipal replication is a clean null** (levels 0.087, growth
-  0.020): within Barcelona, tourist intensity does not predict SERPAVI
-  rents either — confirming the old panel's DIBA-based null with an
-  independent rent source.
-- **Growth is weakly positive at provincial rank (0.041)** and the
-  top-tourist provinces do show the fastest rent growth 2020→2024
-  (Tenerife +27.9%, Balears +23.0%, Girona +18.7%). But n=45, rank
-  correlation 0.041, and the 2020→24 window is the post-COVID rental
-  boom — tourist provinces may just be coastal-demand provinces. Not
-  distinguishable from zero by this design.
+- **The provincial tourist→rent-level association is substantial on
+  ranks too (0.53).** Tourist-intensive provinces have higher rents —
+  Balears, Canarias, Girona, Málaga sit top on both. This does NOT
+  identify a tourism effect: the cross-section cannot separate tourism
+  from coastal demand, size, or income (n=45, no controls). The
+  identification problem the original panel documented stands; but the
+  association itself is real, not a scale artifact.
+- **The municipal replication is a clean null** (levels 0.087/0.005,
+  growth 0.020/0.145): within Barcelona, tourist intensity does not
+  predict SERPAVI rents — confirming the old panel's DIBA-based null
+  with an independent rent source.
+- **Growth is moderately positive at provincial rank (0.30)** and the
+  top-tourist provinces show the fastest rent growth 2020→2024
+  (Tenerife +27.9%, Balears +23.0%, Girona +18.7%). But n=45 and the
+  2020→24 window is the post-COVID rental boom — tourist provinces may
+  just be coastal-demand provinces. Suggestive, not conclusive.
 
-## Verdict
+## Verdict (corrected)
 
-The tourist-rents channel joins the tourist-sale channel as a **null at
-the margin**: within-municipio variation does not track rents, and the
-provincial level association is a composition effect. Where tourism
-might matter (levels across provinces), the design cannot separate
-tourism from coastal demand — the same identification problem the
-original panel documented. SERPAVI did not overturn the panel; it
-extended its external-validity claim to Balears/Canarias and found the
-same non-result.
+The tourist-rents channel is **mixed, not null**: within-municipio
+variation does not track rents (clean null, replicated with an
+independent source), but across provinces tourist intensity and rent
+levels move together substantially (Pearson 0.62, Spearman 0.53) with
+moderately positive growth (0.23/0.30). The cross-section cannot
+separate tourism from coastal demand — the same identification problem
+the original panel documented — so this is an association with a known
+confound, not evidence for or against a tourism effect. SERPAVI extended
+the panel's external-validity claim to Balears/Canarias and found a
+real level association the within-design cannot explain.
 
 ## Limits
 

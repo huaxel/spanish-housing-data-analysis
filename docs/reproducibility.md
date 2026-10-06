@@ -19,7 +19,7 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 198 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 8 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried; fails
+- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried; fails
   on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 
@@ -30,7 +30,7 @@ design; the manifest (committed) is what makes a run auditable.
 ## Clean-rebuild record (2026-10-06, rerun 20:15 UTC)
 
 `data/` wiped (backup in `~/backups/spanish-housing/`) and `make gates`
-rerun from empty: fetch → build → verify → audit (198/198) → test (52)
+rerun from empty: fetch → build → verify → audit (199/199) → test (52)
 all green. marts byte-identical to the pre-wipe build (sha256 of
 `mart_*.parquet` + `dim_territorio.parquet` match; 342 + 1,275 rows
 unchanged), so the pipeline reproduced — not just ran. This run also

@@ -51,18 +51,22 @@ def pearson(xs: list[float], ys: list[float]) -> float | None:
 def spearman(xs: list[float], ys: list[float]) -> float | None:
     if len(xs) < 3:
         return None
-    order = sorted(range(len(xs)), key=lambda i: xs[i])
-    rk = [0.0] * len(xs)
+    return pearson(ranks(xs), ranks(ys))
+
+
+def ranks(vs: list[float]) -> list[float]:
+    order = sorted(range(len(vs)), key=lambda i: vs[i])
+    rk = [0.0] * len(vs)
     i = 0
     while i < len(order):
         j = i
-        while j + 1 < len(order) and xs[order[j + 1]] == xs[order[i]]:
+        while j + 1 < len(order) and vs[order[j + 1]] == vs[order[i]]:
             j += 1
         avg = (i + j) / 2 + 1
         for k in range(i, j + 1):
             rk[order[k]] = avg
         i = j + 1
-    return pearson(rk, [ys[x] for x in order])
+    return rk
 
 
 # --- 1. Barcelona municipios: tourist intensity vs SERPAVI rent level/growth

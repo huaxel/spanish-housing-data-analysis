@@ -18,7 +18,7 @@ rent (€/month):
 | --- | --- |
 | n | 202 municipios |
 | Pearson | **0.825** |
-| Spearman | 0.82 |
+| Spearman | 0.87 |
 
 Same ordering, different administrative sources. This is the strongest
 cross-source validation available to the repo (the DIBA series is already
@@ -37,23 +37,25 @@ rent), same year, same municipios. Caveat: SERPAVI is tax-deposit based
 (new/rolling contracts), DIBA sale is appraisal — a wedge between the two
 statistics, not a market arbitrage claim.
 
-## Rent vs vacancy: no robust cross-section signal
+## Rent vs vacancy: substantial negative rank association (corrected)
 
 | | value |
 | --- | --- |
 | n | 2,237 municipios (2023 rent × 2021 vacancy) |
 | Pearson | −0.429 |
-| Spearman | **−0.024** |
+| Spearman | **−0.507** |
 
-The Pearson −0.43 is a **scale artifact**: big municipios have both high
-rents and low vacancy shares, so the level correlation is negative. On
-ranks it vanishes (−0.02): across municipios, high vacancy does NOT
-detectably compress rents. This is a useful negative — the overstock
-narrative (interior vacancy ⇒ weak prices) does not extend to rents in a
-cross-section that holds size constant. It complements the viv/1000 and
-electricity-vacancy work (`ratio_ccaa.md`): vacancy is high where
-population/price pressures are low, but within-vacancy rent compression
-is not visible at this grain.
+Municipios with higher vacancy shares have lower rents, on ranks as well
+as levels. **Correction 2026-10-06 (independent review):** the first
+version published Spearman −0.024 from a buggy rank function that
+correlated x-ranks with y-values-sorted-by-x instead of ranking both
+variables; the true two-sided Spearman is −0.507. The "no robust signal
+/ scale artifact" conclusion is withdrawn. The cross-section is
+consistent with the overhang direction — high-vacancy (interior)
+municipios carry lower rents — and it is the strongest rank association
+in this file. Still **not causal**: 2023 rents vs 2021 vacancy (temporal
+mismatch), no municipality-size control, geography confounds both. It
+corroborates `ratio_ccaa.md` as a spatial contrast, not a mechanism.
 
 ## What this unlocks
 

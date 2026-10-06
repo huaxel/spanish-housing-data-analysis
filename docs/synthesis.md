@@ -111,9 +111,12 @@ descriptive. Full threats + read record in
   the **electricity-based vacancy** (2021 census, 59531) confirms the
   overstock is objectively empty: Galicia 28.8% vacant vs Madrid 6.3%.
 - Rents (SERPAVI, municipal 2011–2024): DIBA cross-validated (Pearson
-  0.825); gross yield 3.6% in Barcelona vs 4.6% corona median; tourist
-  intensity does not predict rents at any grain (municipal null,
-  provincial level = scale artifact, Spearman 0.016).
+  0.825, Spearman 0.87); gross yield 3.6% in Barcelona vs 4.6% corona
+  median; tourist intensity does not predict rents within municipios
+  (clean null) but tracks rent levels across provinces (Pearson 0.62,
+  Spearman 0.53 — confounded with coastal demand, not identified). Rent–
+  vacancy is substantially negative on ranks (−0.51), consistent with
+  overhang, not causal.
 - Credit volumes track the bust; household formation tracks the tightening;
   incomes outran prices over the full period (affordability 6.2→4.4 years
   despite record prices) while concentrating pain in magnets.
