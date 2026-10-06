@@ -28,9 +28,14 @@ shift-share argument.
 Data: Tempus DPOP has NO nationality tables (65 tables checked) and EM
 flows (24322) start 2008 — but the jaxi padrón-continuo file e245/p08
 (1998–2022, 137 nacionalidades × provincia) supplies origin-level
-*stocks*, now pinned (`padron_extranjeros_origen`, 544,575 cells). So
-the shares half is DONE at full origin detail; what remains is the
-national *surge by origin* 2000–2008 (pre-EM) — the one missing piece. Feasible
+*stocks*, now pinned (`padron_extranjeros_origen`, 544,575 cells). The
+*surge* half is built as national net change by origin
+(`explorations/bartik_surge.py`: Ecuador +131k in 2003, Colombia +104k
+in 2002, Morocco +91k in 2005, Romania +205k in 2008 on EU accession,
+Venezuela +51k in 2020). Caveat: net change conflates inflows,
+outflows, deaths and naturalizations — a proxy for the surge, built
+descriptively. Design A is now data-complete; only the estimation +
+read remain. Feasible
 variants with pinned-style data: 2008+ flow-based design (bust/recovery
 window) or 2021+ ECP-nationality refill design (different shock, own
 shares). Panel: provincias × window, CCAA + year FE, cluster by

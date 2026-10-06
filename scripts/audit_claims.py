@@ -510,6 +510,26 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        "migration",
+        "Ecuador net change 2003 (surge peak)",
+        "SELECT (SELECT SUM(personas) FROM padron_extranjeros_origen "
+        "WHERE nacionalidad='Ecuador' AND sexo='Ambos sexos' AND cpro != '00' AND anyo=2003)"
+        " - (SELECT SUM(personas) FROM padron_extranjeros_origen "
+        "WHERE nacionalidad='Ecuador' AND sexo='Ambos sexos' AND cpro != '00' AND anyo=2002)",
+        130775.0,
+        1.0,
+    ),
+    (
+        "migration",
+        "Romania net change 2008 (EU accession wave)",
+        "SELECT (SELECT SUM(personas) FROM padron_extranjeros_origen "
+        "WHERE nacionalidad='Rumanía' AND sexo='Ambos sexos' AND cpro != '00' AND anyo=2008)"
+        " - (SELECT SUM(personas) FROM padron_extranjeros_origen "
+        "WHERE nacionalidad='Rumanía' AND sexo='Ambos sexos' AND cpro != '00' AND anyo=2007)",
+        204787.0,
+        1.0,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "
