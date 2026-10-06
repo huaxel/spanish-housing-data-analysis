@@ -36,7 +36,7 @@ analysis, not to improve the code.
 | `docs/reproducibility.md` | Gate definitions and clean-rebuild record |
 | `docs/sources.md`, `docs/data_dictionary.md` | Provenance and column semantics |
 | `src/spanish_housing/`, `scripts/` | Estimation + build code |
-| `explorations/*.py`, `*.md` | 23 explorations: boom-bust vs tightening, credit cycle, absorption, panel (adjusted/quarterly), affordability, young-squeeze, Madrid/Barcelona municipios, tourist panel + SERPAVI extension, terrain (Saiz probe, provincial/municipal nulls, Madrid leg), ratio decomposition + vacancy, IV migration, data probes (censo anual, SERPAVI, valor referencia, construction) |
+| `explorations/*.py`, `*.md` | 24 explorations: boom-bust vs tightening, credit cycle, absorption, panel (adjusted/quarterly), affordability, young-squeeze, Madrid/Barcelona municipios, tourist panel + SERPAVI extension, terrain (Saiz probe, provincial/municipal nulls, Madrid leg), ratio decomposition + vacancy, IV migration, data probes (censo anual, SERPAVI, valor referencia, construction) |
 
 **New-data additions since the brief was written (2026-10-06), all in scope:**
 
@@ -51,7 +51,7 @@ analysis, not to improve the code.
 ```bash
 uv sync --group dev
 make gates      # verify + audit + test + lint
-make audit      # 184 headline doc numbers re-queried against marts/models/probe
+make audit      # 192 headline doc numbers re-queried against marts/models/probe
 ```
 
 `make audit` is the anti-drift device: every quotable number in the docs is a

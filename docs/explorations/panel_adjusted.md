@@ -2,11 +2,13 @@
 
 Computed by `explorations/panel_adjusted.py` from the CCAA mart
 (raw output: `artifacts/panel_adjusted.json`, git-ignored). Annual panel,
-17 CCAA × 2008–2024; outcome is IPV-general YoY % change; CCAA + year fixed
+17 CCAA × 2008–2025 (S0; S1/S2 stop 2024 where demand controls lack
+2025); outcome is IPV-general YoY % change; CCAA + year fixed
 effects (the year dummies absorb the national rate cycle); SEs clustered by
 CCAA (CR1V). **Adjusted description only** — income, credit, and population
 are jointly determined with prices, so no coefficient below is a structural
-or causal estimate.
+or causal estimate. Re-run 2026-10-06 with the mart at 184 claims:
+S0 gains 2025 without moving its coefficients (n 193→194).
 
 ## Results
 

@@ -971,6 +971,24 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] tourist_rents: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 10
+    pp = json.loads(
+        (Path(__file__).resolve().parents[1] / "artifacts" / "panel_provincial.json").read_text()
+    )
+    for desc, path, expected, tol in (
+        ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.025, 0.005),
+        ("prov panel S0 absor se", "s0_absorption_only.coefs.absor.se", 0.007, 0.005),
+        ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.423, 0.01),
+        ("prov panel S0 n", "s0_absorption_only.n", 777, 0),
+        ("prov panel S1 absor b", "s1_with_controls.coefs.absor.b", -0.21, 0.01),
+        ("prov panel S1 n", "s1_with_controls.n", 178, 0),
+        ("prov panel window max", "window.max", 2025, 0),
+        ("prov panel n provinces", "window.n_provinces", 50, 0),
+    ):
+        got = _json_path(pp, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_provincial: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 8
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 
