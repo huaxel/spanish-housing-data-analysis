@@ -70,6 +70,13 @@
   levels — join on territory/year, never average across territories, and
   note the base (2021 = 100: Madrid 71.2 in 2007, i.e. +40% cumulative
   inflation to 2025, which is why nominal recoveries mislead).
+- **Migración (INE EM, 24322, 2008–2021):** foreign immigration flows by
+  provincia × year (Ambos sexos, Total edad; española vs extranjera kept
+  separate, Nacional + Ceuta-y-Melilla aggregated locally like ECP).
+  Annual only (FK_Periodo 28). Finding: foreign inflow ran 567k (2008) →
+  248k (2013 trough, −56%) → 666k (2019 record) → COVID dip → recovery;
+  Madrid + Barcelona took ~37% of 2015–21 inflows. The demand half of any
+  future shift-share design (see identification memo).
 - **Edades (ECP 56940 single-year detail, CCAA):** `scripts/parse_edad.py`
   aggregates to 0–19/20–34/35–49/50–64/65+ at 1-January. Overlap guards
   verified arithmetically: single years 85–99 and both centenarian series

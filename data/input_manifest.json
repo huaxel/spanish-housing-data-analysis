@@ -60,7 +60,9 @@
     "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
     "data/raw/parquet/ech_hogares.parquet": "7567f05ca1aba9d8e3f62d03fdbb560ab7843a61aed62d57bdcdb8d7053d3317",
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
-    "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045"
+    "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
+    "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
+    "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -411,6 +413,17 @@
       "operation": "Censo 2021 tpx=59521",
       "accessed": "2026-10-06",
       "note": "all tipo x banda cells; anchor uses Total x Total"
+    },
+    "data/raw/migracion_flujos.json": {
+      "api": "wstempus/DATOS_TABLA/24322",
+      "operation": "EM flujos",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/migracion_flujos.parquet": {
+      "api": "wstempus/DATOS_TABLA/24322",
+      "operation": "EM flujos",
+      "accessed": "2026-10-06",
+      "note": "Ambos sexos, Total edad; annual (FK_Periodo 28) only"
     }
   }
 }

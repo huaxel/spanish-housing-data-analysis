@@ -455,6 +455,30 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.15,
     ),
     (
+        "migration",
+        "foreign inflow Nacional 2008 (boom tail)",
+        "SELECT flujo FROM migra_anual WHERE provincia='Nacional' "
+        "AND nacionalidad='Extranjero' AND anyo=2008",
+        567373.0,
+        1.0,
+    ),
+    (
+        "migration",
+        "foreign inflow Nacional 2013 (trough)",
+        "SELECT flujo FROM migra_anual WHERE provincia='Nacional' "
+        "AND nacionalidad='Extranjero' AND anyo=2013",
+        248347.0,
+        1.0,
+    ),
+    (
+        "migration",
+        "foreign inflow Nacional 2019 (record)",
+        "SELECT flujo FROM migra_anual WHERE provincia='Nacional' "
+        "AND nacionalidad='Extranjero' AND anyo=2019",
+        666022.0,
+        1.0,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "

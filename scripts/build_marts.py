@@ -109,6 +109,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
+    "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -966,6 +967,39 @@ def main() -> None:
         pa.Table.from_pylist(load_parquet("censo2021_viviendas.parquet")),
     )
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
+    # Foreign immigration flows 2008-2021 (EM 24322, annual). Counts sum:
+    # Nacional + Ceuta-y-Melilla aggregates built locally, like ECP.
+    mig_rows = []
+    for r in load_parquet("migracion_flujos.parquet"):
+        key = mart_prov_by_norm.get(N(r["provincia"]))
+        if key is None:
+            if N(r["provincia"]) not in (N("Ceuta"), N("Melilla")):
+                raise SystemExit(f"migracion unknown provincia: {r['provincia']!r}")
+            key = r["provincia"]
+        mig_rows.append(
+            {
+                "provincia": key,
+                "anyo": r["anyo"],
+                "nacionalidad": r["nacionalidad"],
+                "flujo": r["flujo"],
+            }
+        )
+    for agg_name, members in [
+        ("Nacional", None),
+        ("Ceuta y Melilla", ("Ceuta", "Melilla")),
+    ]:
+        pool = [r for r in mig_rows if members is None or r["provincia"] in members]
+        acc: dict[tuple[int, str], float] = {}
+        for r in pool:
+            acc[(r["anyo"], r["nacionalidad"])] = (
+                acc.get((r["anyo"], r["nacionalidad"]), 0) + r["flujo"]
+            )
+        mig_rows += [
+            {"provincia": agg_name, "anyo": a, "nacionalidad": n, "flujo": v}
+            for (a, n), v in sorted(acc.items())
+        ]
+    con.register("mig_df", pa.Table.from_pylist(mig_rows))
+    con.execute("CREATE OR REPLACE TABLE migra_anual AS SELECT * FROM mig_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -982,6 +1016,7 @@ def main() -> None:
         "censo2011_vintage",
         "censo2011_tenencia",
         "censo2021_viviendas",
+        "migra_anual",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
@@ -997,6 +1032,8 @@ def main() -> None:
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
         "censo2021_anchor": "provincial totals vs parque 2021, worst gap <1.0% (tipo split"
         " diverges definitionally, unchecked)",
+        "migracion_window": "2008-2021 annual foreign/Spanish inflows by provincia"
+        " (EM 24322, Ambos sexos, Total edad); Nacional + 51+52 aggregated locally",
         "hogares_2001_proxy": "principales-as-households; worst 2011 disagreement"
         f" {proxy_tol}% — documented tolerance, not exact",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,

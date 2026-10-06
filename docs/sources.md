@@ -21,6 +21,7 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | INE Transmisiones (jaxiT3 6155, registradores) | MIVAU-style direct CSV URL in `fetch_transmisiones.py` | CCAA/provincia × año, 2007– | Total/nueva/usada/libre/protegida; dots are thousands; nueva+usada==total asserted |
 | INE Turísticas (Tempus3 39364/46141) | `.../DATOS_TABLA/39364`, `.../46141` | CCAA/provincia × mes, 2020– | December snapshot; duplicate uniprovincial series asserted identical |
 | INE Hipotecas CCAA/prov/rates (Tempus3 76316/76317/76315) | `.../DATOS_TABLA/76316` etc. | CCAA/provincia × mes (2003–), rates nacional | Viviendas only; territory↔measure positions swap between tables; importe in thousands of EUR |
+| INE EM flujos inmigración (Tempus3 24322) | `.../DATOS_TABLA/24322` | provincia × año × nacionalidad, 2008–2021 | Ambos sexos, Total edad; annual (FK_Periodo 28); Nacional + 51+52 aggregated |
 | INE ECH hogares por provincia (jaxi p274/serie/def/p03/l0/03003) | static CSV URL in `fetch_ech.py` | provincia × año, 2014–2020 | Total × Total margin; thousands → units; mixed `.`/`,` decimals |
 | INE ECV renta por hogar (Tempus3 9949) | `servicios.ine.es/wstempus/js/es/DATOS_TABLA/9949` | CCAA × encuesta, 2008– | renta_anyo = encuesta − 1; neta + con-alquiler-imputado (marts use neta); Base 2013 |
 | INE IPC general (Tempus3 76136) | `.../DATOS_TABLA/76136` | CCAA/Nacional × mes, 2002– | general index levels only (variations recomputed); base 2021; `ipc_anual` annual means |

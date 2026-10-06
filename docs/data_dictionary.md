@@ -92,6 +92,12 @@ Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
 `provincia`, `tipo` (Total/principal/no principal), `banda`, `viviendas`.
 Anchor uses Total × Total only (26,623,708); tipo split unchecked (definitional).
 
+## migra_anual
+
+Foreign/Spanish immigration flows by provincia × year (`provincia`,
+`anyo`, `nacionalidad` Total/Española/Extranjero, `flujo`), plus Nacional
+and Ceuta-y-Melilla aggregates. Annual (FK_Periodo 28), 2008–2021.
+
 ## dim_territorio
 
 `cpro`, `provincia`, `ccaa` — canonical mapping (MIVAU codes, INE names).
