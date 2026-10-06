@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build verify audit dashboard evidence-install evidence-dev evidence-build clean
+.PHONY: sync test lint fetch build verify audit dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
 
 sync:
 	uv sync --group dev
@@ -47,13 +47,24 @@ dashboard:
 	python3 -m http.server -d artifacts/preview 8091 --bind 0.0.0.0
 
 evidence-install:
-	cd evidence && npm install
+	cd evidence && npm ci
 
+# The housing-evidence user service owns port 3000 and .evidence/template/.
+# Manual dev would fail on the busy port; a concurrent build corrupts the
+# template both commands regenerate. Stop the service first, or set ALLOW=1.
 evidence-dev:
+	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Local dev server running? Stop it first: systemctl --user stop housing-evidence (or make evidence-dev ALLOW=1)."; exit 1; fi
 	cd evidence && npm run dev
 
 evidence-build:
+	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Refusing: dev server/service owns .evidence/template/. Stop it first: systemctl --user stop housing-evidence (or make evidence-build ALLOW=1)."; exit 1; fi
 	cd evidence && npm run build
+
+evidence-smoke:
+	bash scripts/smoke_dashboard.sh
+
+evidence-smoke-browser:
+	bash scripts/smoke_browser.sh
 
 clean:
 	rm -rf .pytest_cache src/spanish_housing/__pycache__ tests/__pycache__

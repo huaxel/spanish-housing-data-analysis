@@ -1,3 +1,4 @@
+name: housing
 type: duckdb
 options:
-  filename: '../data/processed/marts.duckdb'
+  filename: '../../../data/processed/marts.duckdb'

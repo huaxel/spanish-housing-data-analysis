@@ -6,4 +6,6 @@ data/processed/
 !data/input_manifest.json
 evidence/node_modules/
 evidence/.evidence/
+evidence/build/
+.playwright-cli/
 artifacts/

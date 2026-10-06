@@ -1,1 +1,6 @@
 title: "Vivienda en España: precios, stock y población"
+plugins:
+  components:
+    "@evidence-dev/core-components": {}
+  datasources:
+    "@evidence-dev/duckdb": {}
