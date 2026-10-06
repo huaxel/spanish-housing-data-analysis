@@ -39,8 +39,8 @@ verify:
 audit:
 	uv run python scripts/audit_claims.py
 
-# Full local gate: fetch -> build -> verify -> audit -> test
-gates: fetch build verify audit test
+# Full local gate: lint -> fetch -> build -> verify -> audit -> test
+gates: lint fetch build verify audit test
 
 dashboard:
 	uv run python scripts/render_preview.py

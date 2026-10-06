@@ -1,0 +1,19 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  offline-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+      - run: uv sync --group dev
+      - run: make lint
+      - run: make test
+      # Full gates (fetch -> build -> verify -> audit) need publisher data
+      # in data/ (git-ignored) and stay local: run `make gates` before release.
