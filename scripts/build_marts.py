@@ -108,6 +108,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/valor_municipal_madrid.parquet",
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
+    "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -938,6 +939,33 @@ def main() -> None:
     con.register("ten_df", pa.Table.from_pylist(ten_rows))
     con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
     con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
+    # Third anchor: 2021 census totals vs parque 2021 (rebase cross-check).
+    # Totals only — the 2021 tipo split is occupancy-based and diverges
+    # definitionally from MIVAU modelled principal/no-principal (up to ~20%).
+    cen21 = [
+        r
+        for r in load_parquet("censo2021_viviendas.parquet")
+        if r["tipo"] == "Total" and r["banda"] == "Total"
+    ]
+    cen_tot = {r["cpro"]: r["viviendas"] for r in cen21}
+    cen_tot["51+52"] = cen_tot.pop("51", 0) + cen_tot.pop("52", 0)
+    gaps21 = {}
+    for r in prov_rows:
+        if r["anyo"] != 2021:
+            continue
+        c = cen_tot.get(r["cpro"])
+        if c is None:
+            raise SystemExit(f"censo2021 anchor missing cpro {r['cpro']}")
+        gaps21[r["cpro"]] = abs(c - r["viviendas_total"]) / r["viviendas_total"] * 100
+    worst21 = max(gaps21.items(), key=lambda kv: kv[1])
+    print(f"censo2021 anchor: {len(gaps21)} provincias, worst gap {worst21[1]:.2f}% ({worst21[0]})")
+    if worst21[1] >= 1.0:
+        raise SystemExit(f"censo2021 anchor drifted: {worst21}")
+    con.register(
+        "cen21_df",
+        pa.Table.from_pylist(load_parquet("censo2021_viviendas.parquet")),
+    )
+    con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -953,6 +981,7 @@ def main() -> None:
         "censo2011_val",
         "censo2011_vintage",
         "censo2011_tenencia",
+        "censo2021_viviendas",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
@@ -966,6 +995,8 @@ def main() -> None:
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
         "hogares_window": "2021+ (ECP, 1-January); 2014-2020 ECH annual survey;"
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
+        "censo2021_anchor": "provincial totals vs parque 2021, worst gap <1.0% (tipo split"
+        " diverges definitionally, unchecked)",
         "hogares_2001_proxy": "principales-as-households; worst 2011 disagreement"
         f" {proxy_tol}% — documented tolerance, not exact",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,

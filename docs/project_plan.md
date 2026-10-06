@@ -30,7 +30,7 @@ explicit extensions, not v1.
 | 5 | INE ECP población (2022+) | DONE 2026-10-06 — CCAA/nacional (56940); provincial (56945) API-blocked, see sources |
 | 6 | MIVAU valor tasado (€/m² levels) | DONE 2026-10-06 — Libre annual means in marts (prov + CCAA), 0.95 YoY corr vs IPV |
 | 7 | Households | DONE 2026-10-06 — ECP hogares 2021+ with tamaño detail (`viv_por_hogar`, `share_1persona`); ECH annual pre-2021 + census anchors queued |
-| 8 | INE Censo viviendas 2021 | TODO — third anchor; stock already embeds its rebase |
+| 8 | INE Censo viviendas 2021 | DONE 2026-10-06 — viewer export (tpx=59521) via playwright-cli; totals within 0.77% (build asserts <1%); tipo split diverges, unchecked |
 | 9 | INE ECV renta hogares (Tempus3 9949) | DONE 2026-10-06 — CCAA mean net income, `afford_90m2_years` in CCAA mart |
 | 10 | INE Hipotecas (HPT) + Transmisiones | DONE 2026-10-06 — mortgage volumes/tickets + transaction liquidity in marts |
 | 11 | INE Turísticas (VTE) | DONE 2026-10-06 — registered tourist dwellings (Dec snapshot) in marts |

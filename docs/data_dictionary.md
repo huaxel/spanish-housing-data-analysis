@@ -86,6 +86,12 @@ No municipal stock: per-capita housing still unavailable at this grain.
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
 `C51+52`, both regímenes): `terr_key`, `anyo`, `regimen`, `eur_m2`, `n_trim`.
 
+## censo2021_viviendas
+
+2021 census dwellings by provincia × tipo × construction band: `cpro`,
+`provincia`, `tipo` (Total/principal/no principal), `banda`, `viviendas`.
+Anchor uses Total × Total only (26,623,708); tipo split unchecked (definitional).
+
 ## dim_territorio
 
 `cpro`, `provincia`, `ccaa` — canonical mapping (MIVAU codes, INE names).

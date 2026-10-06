@@ -22,6 +22,7 @@ fetch:
 	uv run python scripts/fetch_hipotecas.py
 	uv run python scripts/fetch_ipc.py
 	uv run python scripts/fetch_ech.py
+	uv run python scripts/fetch_censo2021.py
 	uv run python scripts/fetch_turisticas.py
 	uv run python scripts/fetch_municipios_mad.py
 	uv run python scripts/fetch_padron_municipios_mad.py

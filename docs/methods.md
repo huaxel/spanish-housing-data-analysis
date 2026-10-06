@@ -85,9 +85,13 @@
   shifts leak into the series; 844 unpublished quarter-cells kept missing.
   Validation: Nacional Libre YoY changes correlate **0.95** with IPV YoY
   (18 years) — two independent methodologies telling the same trend story.
-- **Census dwellings (2001/2011):** independent anchors for the stock series.
-  The 2021 anchor is embedded in the parque rebase; pinning the 2021 census
-  table is queued as a cross-check, not a blocker.
+- **Census dwellings (2001/2011/2021):** independent anchors for the stock
+  series. The 2021 table (viewer tpx=59521, browser-exported via
+  playwright-cli — no static CSV exists) cross-checks the embedded rebase:
+  provincial totals agree within 0.77% everywhere (build fails past 1.0%).
+  The 2021 *tipo* split is NOT checked: census occupancy-based
+  principal/no-principal diverges definitionally from MIVAU modelled
+  stock (up to ~20% on no-principal) — totals anchor, splits don't.
 
 ## 2. Derived ratios (the actual subject)
 

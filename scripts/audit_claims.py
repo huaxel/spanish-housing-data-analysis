@@ -389,6 +389,24 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.005,
     ),
     (
+        "anchor",
+        "censo2021 total dwellings (Total x Total)",
+        "SELECT SUM(viviendas) FROM censo2021_viviendas WHERE tipo='Total' AND banda='Total'",
+        26623708.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "censo2021 worst provincial gap vs parque 2021 (%)",
+        "WITH c AS (SELECT CASE WHEN cpro IN ('51', '52') THEN '51+52' ELSE cpro END AS cpro, "
+        "SUM(viviendas) AS v FROM censo2021_viviendas "
+        "WHERE tipo='Total' AND banda='Total' GROUP BY 1) "
+        "SELECT MAX(ABS(c.v - m.viviendas_total) * 100.0 / m.viviendas_total) "
+        "FROM c JOIN mart_provincia_anual m ON c.cpro = m.cpro WHERE m.anyo = 2021",
+        0.77,
+        0.03,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "
