@@ -68,8 +68,12 @@ for cpro, rows in by_unit.items():
         )
 
 
-def build(spec_extra: list[str] | None = None):
-    rows = [o for o in obs if o["exposure"] is not None and o["pred"] is not None]
+def build(spec_extra: list[str] | None = None, y0: int = 1999, y1: int = 2021):
+    rows = [
+        o
+        for o in obs
+        if o["exposure"] is not None and o["pred"] is not None and y0 <= o["anyo"] <= y1
+    ]
     cpros = sorted({o["cpro"] for o in rows})
     years = sorted({o["anyo"] for o in rows})[1:]
     feats = ["exposure", *(spec_extra or [])]
@@ -147,6 +151,8 @@ specs = {
     "base": build(),
     "province_trends": build_trends(),
     "drop_madrid_barcelona": build_drop_top2(),
+    "bust_2002_2013": build(None, 2002, 2013),
+    "recovery_2014_2021": build(None, 2014, 2021),
 }
 results = {}
 for name, (yy, dd, ww, zz, cc, rr) in specs.items():

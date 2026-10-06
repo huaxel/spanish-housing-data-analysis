@@ -50,6 +50,22 @@ AR sets are bounded, informative, and exclude both zero and OLS.
 - 2002–2021 window only (flows + tasado overlap); 2022+ refill wave
   untested, COVID year inside the sample.
 
+## Split-sample: the instrument is a bust-era instrument (branch)
+
+| | bust 2002–13 | recovery 2014–21 |
+| --- | --- | --- |
+| 2SLS | +0.84 (0.15) | +2.29 (4.84) — uninformative |
+| first-stage F | 88.4 | **0.13** |
+| AR set | [0.45, 1.40] | full grid (no information) |
+
+The pooled +0.67 is bust-driven: 1998 settlement geography predicts
+2002–13 inflows (F = 88) but nothing about 2014–21 flows (F = 0.13).
+Post-crisis migration decoupled from historical networks — new origins
+(Venezuela, Honduras), dispersal, ECP-era patterns. Consequence: the
+recovery half of the story (S3's inflow surge) remains descriptive;
+only the bust-half effect is identified. If merged, the synthesis
+paragraph needs this qualifier, not just the pooled number.
+
 ## Read plan (proposed — merge needs this settled)
 
 1. Independent reader gets: this note + identification.md + ols.py/bartik.py
