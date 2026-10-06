@@ -19,6 +19,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Hypothesis 01: absorption ratio vs prices](docs/explorations/absorption_hypothesis.md) — verdict: descriptor, not a huge predictor
 - [Panel: absorption with demand controls](docs/explorations/panel_adjusted.md) — adjusted description (CCAA + year FE, clustered SEs); attenuation is the finding
 - [Quarterly credit timing](docs/explorations/panel_quarterly.md) — mortgages lead appraisal prices by 3 quarters; supply unobservable at this frequency
+- [Identification memo](docs/explorations/identification.md) — what a causal extension would take (scoping only: migration shift-share first, Saiz GIS second)
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)
