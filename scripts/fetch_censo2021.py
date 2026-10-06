@@ -64,7 +64,10 @@ def main() -> None:
         check=True,
         capture_output=True,
     )
-    try:
+    # The public viewer is slow/flaky: retry the whole flow a few times.
+    raw_bytes = None
+    last_err = ""
+    for _attempt in range(3):
         with tempfile.TemporaryDirectory() as tmp:
             out = str(Path(tmp) / "censo2021.csv")
             js = JS.replace("%URL%", URL).replace("%OUT%", out)
@@ -74,11 +77,13 @@ def main() -> None:
                 text=True,
                 timeout=300,
             )
-            if r.returncode != 0 or "saved" not in (r.stdout + r.stderr):
-                raise SystemExit(f"viewer export failed:\n{r.stdout[-2000:]}\n{r.stderr[-2000:]}")
-            raw_bytes = Path(out).read_bytes()
-    finally:
-        subprocess.run(["playwright-cli", f"-s={SESSION}", "close"], capture_output=True)
+            if r.returncode == 0 and "saved" in (r.stdout + r.stderr):
+                raw_bytes = Path(out).read_bytes()
+                break
+            last_err = f"{r.stdout[-2000:]}\n{r.stderr[-2000:]}"
+    subprocess.run(["playwright-cli", f"-s={SESSION}", "close"], capture_output=True)
+    if raw_bytes is None:
+        raise SystemExit(f"viewer export failed after 3 attempts:\n{last_err}")
     # Viewer exports cp1252; normalize to UTF-8 at pin time.
     text = raw_bytes.decode("cp1252")
     if "Almer" not in text or "Total" not in text.splitlines()[0]:
