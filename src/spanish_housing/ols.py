@@ -32,7 +32,9 @@ def solve(a: list[list[float]], b: list[float]) -> list[float]:
 
 def invert(a: list[list[float]]) -> list[list[float]]:
     n = len(a)
-    return [solve(_copy(a), [1.0 if i == j else 0.0 for i in range(n)]) for j in range(n)]
+    cols = [solve(_copy(a), [1.0 if i == j else 0.0 for i in range(n)]) for j in range(n)]
+    # solve() returns columns of the inverse; transpose into rows.
+    return [list(row) for row in zip(*cols, strict=True)]
 
 
 def xtx(x: list[list[float]]) -> list[list[float]]:
@@ -152,3 +154,171 @@ def ols_cluster(x: list[list[float]], y: list[float], clusters: list[str | int])
         "clusters": g,
         "r2": r2,
     }
+
+
+def _mat_vec(m: list[list[float]], v: list[float]) -> list[float]:
+    return [sum(row[j] * v[j] for j in range(len(v))) for row in m]
+
+
+def _project(x: list[list[float]], y: list[float]) -> list[float]:
+    """OLS fitted values of y on X (no SEs)."""
+    return predict(x, solve(xtx(x), xty(x, y)))
+
+
+def tsls(
+    y: list[float],
+    d: list[float],
+    w: list[list[float]],
+    z: list[list[float]],
+    clusters: list[str | int],
+) -> dict:
+    """2SLS for y = D*tau + W*gamma with excluded instruments Z.
+
+    Single endogenous regressor; W holds exogenous controls (include a
+    constant / FE dummies explicitly). Cluster-robust (CR1V) SEs from 2SLS
+    residuals with bread = inv(X'Pz X). With Z == [D] this reduces to OLS.
+    """
+    n = len(y)
+    zw = [zi + wi for zi, wi in zip(z, w, strict=True)]
+    x = [[di] + wi for di, wi in zip(d, w, strict=True)]
+    zt_x = [
+        [sum(a * b for a, b in zip(zr, xc, strict=True)) for xc in zip(*x, strict=True)]
+        for zr in zip(*zw, strict=True)
+    ]
+    zt_y = [sum(a * b for a, b in zip(zr, y, strict=True)) for zr in zip(*zw, strict=True)]
+    bread = invert(zt_x)
+    beta = _mat_vec(bread, zt_y)
+    resid = [yi - yh for yi, yh in zip(y, predict(x, beta), strict=True)]
+    k = len(x[0])
+    groups: dict[str | int, list[int]] = {}
+    for i, g in enumerate(clusters):
+        groups.setdefault(g, []).append(i)
+    g = len(groups)
+    meat = [[0.0] * k for _ in range(k)]
+    for idx in groups.values():
+        s = [0.0] * k
+        for i in idx:
+            for j in range(k):
+                s[j] += zw[i][j] * resid[i]
+        for i in range(k):
+            for j in range(k):
+                meat[i][j] += s[i] * s[j]
+    tmp = [[sum(bread[i][m] * meat[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+    cov = [[sum(tmp[i][m] * bread[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+    c = (g / (g - 1)) * ((n - 1) / (n - k)) if g > 1 and n > k else 1.0
+    cov = [[v * c for v in row] for row in cov]
+    return {
+        "tau": beta[0],
+        "se": (cov[0][0] if cov[0][0] > 0 else 0.0) ** 0.5,
+        "beta": beta,
+        "n": n,
+        "k": k,
+        "clusters": g,
+    }
+
+
+def first_stage_f(
+    d: list[float],
+    w: list[list[float]],
+    z: list[list[float]],
+    clusters: list[str | int],
+) -> dict:
+    """Cluster-robust Wald F on the excluded instruments in D ~ Z + W."""
+    zw = [zi + wi for zi, wi in zip(z, w, strict=True)]
+    fit = ols_cluster(zw, d, clusters)
+    kz = len(z[0])
+    bread = invert(xtx(zw))
+    n, k = fit["n"], fit["k"]
+    resid = [di - yh for di, yh in zip(d, predict(zw, fit["beta"]), strict=True)]
+    groups: dict[str | int, list[int]] = {}
+    for i, g in enumerate(clusters):
+        groups.setdefault(g, []).append(i)
+    meat = [[0.0] * k for _ in range(k)]
+    for idx in groups.values():
+        s = [0.0] * k
+        for i in idx:
+            for j in range(k):
+                s[j] += zw[i][j] * resid[i]
+        for i in range(k):
+            for j in range(k):
+                meat[i][j] += s[i] * s[j]
+    g = len(groups)
+    c = (g / (g - 1)) * ((n - 1) / (n - k)) if g > 1 and n > k else 1.0
+    # Full sandwich first, then the top-left kz block (block-wise products
+    # would drop the cross terms).
+    tmp = [[sum(bread[i][m] * meat[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+    vfull = [
+        [sum(tmp[i][m] * bread[m][j] for m in range(k)) * c for j in range(k)] for i in range(k)
+    ]
+    vz = [[vfull[i][j] for j in range(kz)] for i in range(kz)]
+    delta = fit["beta"][:kz]
+    try:
+        wald = _mat_vec(invert(vz), delta)
+        f = sum(di * wi for di, wi in zip(delta, wald, strict=True)) / kz
+    except ValueError:
+        f = 0.0
+    return {"F": round(f, 2), "kz": kz, "clusters": g, "n": n}
+
+
+def _wald_sub(y: list[float], x: list[list[float]], clusters: list[str | int], k_sel: int) -> float:
+    """Cluster-robust (CR1V) Wald F for H0: first k_sel coefficients are 0."""
+    n, k = len(x), len(x[0])
+    bread = invert(xtx(x))
+    beta = solve(xtx(x), xty(x, y))
+    resid = [yi - yh for yi, yh in zip(y, predict(x, beta), strict=True)]
+    groups: dict[str | int, list[int]] = {}
+    for i, g in enumerate(clusters):
+        groups.setdefault(g, []).append(i)
+    g = len(groups)
+    meat = [[0.0] * k for _ in range(k)]
+    for idx in groups.values():
+        s = [0.0] * k
+        for i in idx:
+            for j in range(k):
+                s[j] += x[i][j] * resid[i]
+        for i in range(k):
+            for j in range(k):
+                meat[i][j] += s[i] * s[j]
+    c = (g / (g - 1)) * ((n - 1) / (n - k)) if g > 1 and n > k else 1.0
+    tmp = [[sum(bread[i][m] * meat[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+    vfull = [
+        [sum(tmp[i][m] * bread[m][j] for m in range(k)) * c for j in range(k)] for i in range(k)
+    ]
+    vz = [[vfull[i][j] for j in range(k_sel)] for i in range(k_sel)]
+    delta = beta[:k_sel]
+    try:
+        wald = _mat_vec(invert(vz), delta)
+        return sum(di * wi for di, wi in zip(delta, wald, strict=True)) / k_sel
+    except ValueError:
+        return 0.0
+
+
+def ar_ci(
+    y: list[float],
+    d: list[float],
+    w: list[list[float]],
+    z: list[list[float]],
+    clusters: list[str | int],
+    lo: float,
+    hi: float,
+    steps: int = 101,
+    f_crit: float = 10.0,
+) -> dict:
+    """Anderson-Rubin confidence set for tau (single endogenous regressor).
+
+    Inverts the cluster-robust Wald test of excluded instruments in
+    e(b0) = y - D*b0 on [Z, W]: keeps b0 with F < f_crit. Default critical
+    value is a placeholder — calibrate by wild bootstrap for the real
+    application (F( kz, G-1 ) quantiles are optimistic with few clusters).
+    Returns the grid and the acceptance mask (possibly disjoint/empty).
+    """
+    kz = len(z[0])
+    grid, keep = [], []
+    for s in range(steps):
+        b0 = lo + (hi - lo) * s / (steps - 1) if steps > 1 else lo
+        e = [yi - di * b0 for yi, di in zip(y, d, strict=True)]
+        x = [zi + wi for zi, wi in zip(z, w, strict=True)]
+        f = _wald_sub(e, x, clusters, kz)
+        grid.append(round(b0, 4))
+        keep.append(f < f_crit)
+    return {"grid": grid, "keep": keep, "kz": kz, "f_crit": f_crit}
