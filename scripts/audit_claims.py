@@ -883,6 +883,24 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 21
+    serp = json.loads(
+        (Path(__file__).resolve().parents[1] / "artifacts" / "serpavi_analysis.json").read_text()
+    )
+    for desc, path, expected, tol in (
+        ("diba-serpavi pearson", "rent_cross_diba_2023.pearson", 0.825, 0.005),
+        ("diba-serpavi n", "rent_cross_diba_2023.n", 202, 0),
+        ("bcn yield pct", "gross_yield_bcn_2023.barcelona.yield_pct", 3.61, 0.02),
+        ("yield median", "gross_yield_bcn_2023.stats.median", 4.58, 0.02),
+        ("rent-vac pearson", "rent_vs_vacancy_2023.pearson", -0.429, 0.005),
+        ("rent-vac spearman", "rent_vs_vacancy_2023.spearman", -0.024, 0.005),
+        ("rent-vac n", "rent_vs_vacancy_2023.n", 2237, 0),
+        ("serpavi munis 2024 rent", "coverage.serpavi_munis_2024_rent", 2555, 0),
+    ):
+        got = _json_path(serp, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] serpavi: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 8
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

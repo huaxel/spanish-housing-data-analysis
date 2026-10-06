@@ -111,6 +111,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/censo2021_intensidad.parquet",
+    "data/raw/parquet/serpavi_municipal.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
     "data/raw/parquet/padron_extranjeros_origen.parquet",
@@ -1012,6 +1013,11 @@ def main() -> None:
         "inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet"))
     )
     con.execute("CREATE OR REPLACE TABLE censo2021_intensidad AS SELECT * FROM inten_df")
+    # SERPAVI municipal rents (MIVAU, tax-deposit based), long melt 2011-2024.
+    con.register(
+        "serp_df", pa.Table.from_pylist(load_parquet("serpavi_municipal.parquet"))
+    )
+    con.execute("CREATE OR REPLACE TABLE serpavi_municipal AS SELECT * FROM serp_df")
     con.register("pade_df", pa.Table.from_pylist(load_parquet("padron_extranjeros.parquet")))
     con.execute("CREATE OR REPLACE TABLE padron_extranjeros AS SELECT * FROM pade_df")
     con.register(

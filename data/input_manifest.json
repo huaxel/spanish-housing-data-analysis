@@ -58,12 +58,14 @@
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
     "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
+    "data/raw/parquet/serpavi_municipal.parquet": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
     "data/raw/parquet/transmisiones.parquet": "a1fd79b11cb59bc26142022cc5fcf45083dee93577ecb807e4d521aa6ba8d0c5",
     "data/raw/parquet/turisticas_con_pct.parquet": "f328a67953abf652c713937bc78c40665ce900e33dea8f0626da83570900da7c",
     "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
+    "data/raw/serpavi_bd.xlsx": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
     "data/raw/transmisiones.csv": "b6d9cc60eca2c82f40d057b209e1f9707389d01f3e13506ef6663f10e6697ecd",
     "data/raw/turisticas_con_pct.json": "77446313d60a7dcd41bcfa24ea24578b19a8b4cc7761f7a1fc1812c12ac24fa6",
     "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
@@ -411,6 +413,12 @@
       "note": "renta_anyo = encuesta_anyo - 1",
       "operation": "ECV"
     },
+    "data/raw/parquet/serpavi_municipal.parquet": {
+      "accessed": "2026-10-06",
+      "note": "long melt: municipio x anyo x medida; populated cells only",
+      "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    },
     "data/raw/parquet/transmisiones.parquet": {
       "accessed": "2026-10-06",
       "operation": "Transmisiones",
@@ -446,6 +454,12 @@
       "accessed": "2026-10-06",
       "api": "wstempus/DATOS_TABLA/9949",
       "operation": "ECV"
+    },
+    "data/raw/serpavi_bd.xlsx": {
+      "accessed": "2026-10-06",
+      "note": "71 MB Excel; Municipios sheet 8,894 rows x 280 cols",
+      "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/transmisiones.csv": {
       "accessed": "2026-10-06",

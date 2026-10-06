@@ -94,6 +94,15 @@ Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
 `provincia`, `tipo` (Total/principal/no principal), `banda`, `viviendas`.
 Anchor uses Total × Total only (26,623,708); tipo split unchecked (definitional).
 
+## serpavi_municipal
+
+SERPAVI (MIVAU) municipal rents from rental-deposit tax data, long melt:
+`cpro`, `provincia`, `codigo` (5-digit INE), `municipio`, `anyo`
+(2011–2024), `medida` (20: ALQM2_LV_M/25/75_VC/VU €/m²/month,
+ALQTBID12_* €/month, SLVM2_* surface m², BI_ALVHEPCO_* contract counts),
+`valor`. Populated cells only (716,889; 7,331 municipios; 2,555 with 2024
+median rent). Validated vs DIBA: Pearson 0.825 (202 Barcelona municipios).
+
 ## censo2021_intensidad
 
 2021 census dwellings by electricity-consumption intensity, municipal
