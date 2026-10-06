@@ -36,7 +36,7 @@ for r in ROWS:
 
 obs = []
 for ccaa, rows in by_ccaa.items():
-    for prev, cur in zip(rows, rows[1:]):
+    for prev, cur in zip(rows, rows[1:], strict=False):
         d_pop = cur[3] - prev[3]
         obs.append(
             {
@@ -115,4 +115,6 @@ for name, r in results.items():
     print(f"== {name}: n={r['n']} G={r['clusters']} R2={r['r2_within']} ==")
     for v, c in r["coefs"].items():
         print(f"  {v}: b={c['b']} se={c['se']} t={c['t']} ci95={c['ci95']}")
-print(f"dropped undefined-absorption rows: {results['undefined_absorption_dropped']}/{results['total_yoy_rows']}")
+n_drop = results["undefined_absorption_dropped"]
+n_tot = results["total_yoy_rows"]
+print(f"dropped undefined-absorption rows: {n_drop}/{n_tot}")
