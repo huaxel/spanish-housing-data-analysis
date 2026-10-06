@@ -1,0 +1,1792 @@
+[
+  {
+    "lau_id": "28036",
+    "municipio": "Casarrubuelos",
+    "lau_km2": 5.34,
+    "land_km2": 5.343,
+    "area_err_pct": 0.06,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28050",
+    "municipio": "Cubas de la Sagra",
+    "lau_km2": 12.929,
+    "land_km2": 13.171,
+    "area_err_pct": 1.87,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28066",
+    "municipio": "Gri\u00f1\u00f3n",
+    "lau_km2": 17.105,
+    "land_km2": 16.638,
+    "area_err_pct": 2.73,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28073",
+    "municipio": "Humanes de Madrid",
+    "lau_km2": 19.705,
+    "land_km2": 19.696,
+    "area_err_pct": 0.05,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28149",
+    "municipio": "Torrej\u00f3n de la Calzada",
+    "lau_km2": 8.98,
+    "land_km2": 8.683,
+    "area_err_pct": 3.3,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28007",
+    "municipio": "Alcorc\u00f3n",
+    "lau_km2": 33.614,
+    "land_km2": 33.259,
+    "area_err_pct": 1.06,
+    "undevelopable_share": 0.0012,
+    "steep_share": 0.0012,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28089",
+    "municipio": "Moraleja de Enmedio",
+    "lau_km2": 31.205,
+    "land_km2": 30.777,
+    "area_err_pct": 1.37,
+    "undevelopable_share": 0.0013,
+    "steep_share": 0.0013,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28115",
+    "municipio": "Pozuelo de Alarc\u00f3n",
+    "lau_km2": 43.103,
+    "land_km2": 42.522,
+    "area_err_pct": 1.35,
+    "undevelopable_share": 0.0015,
+    "steep_share": 0.0015,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28148",
+    "municipio": "Torrej\u00f3n de Ardoz",
+    "lau_km2": 32.369,
+    "land_km2": 32.137,
+    "area_err_pct": 0.72,
+    "undevelopable_share": 0.0022,
+    "steep_share": 0.0022,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28059",
+    "municipio": "Fuente el Saz de Jarama",
+    "lau_km2": 33.152,
+    "land_km2": 32.814,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.0026,
+    "steep_share": 0.0026,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28004",
+    "municipio": "\u00c1lamo, El",
+    "lau_km2": 21.956,
+    "land_km2": 21.901,
+    "area_err_pct": 0.25,
+    "undevelopable_share": 0.0036,
+    "steep_share": 0.0036,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28164",
+    "municipio": "Valdetorres de Jarama",
+    "lau_km2": 35.133,
+    "land_km2": 35.24,
+    "area_err_pct": 0.31,
+    "undevelopable_share": 0.0037,
+    "steep_share": 0.0037,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28116",
+    "municipio": "Pozuelo del Rey",
+    "lau_km2": 30.916,
+    "land_km2": 31.017,
+    "area_err_pct": 0.33,
+    "undevelopable_share": 0.0038,
+    "steep_share": 0.0038,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28106",
+    "municipio": "Parla",
+    "lau_km2": 24.961,
+    "land_km2": 25.118,
+    "area_err_pct": 0.63,
+    "undevelopable_share": 0.006,
+    "steep_share": 0.006,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28022",
+    "municipio": "Boadilla del Monte",
+    "lau_km2": 47.465,
+    "land_km2": 47.233,
+    "area_err_pct": 0.49,
+    "undevelopable_share": 0.0069,
+    "steep_share": 0.0069,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28058",
+    "municipio": "Fuenlabrada",
+    "lau_km2": 39.187,
+    "land_km2": 39.236,
+    "area_err_pct": 0.13,
+    "undevelopable_share": 0.007,
+    "steep_share": 0.007,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28096",
+    "municipio": "Navalcarnero",
+    "lau_km2": 100.904,
+    "land_km2": 100.752,
+    "area_err_pct": 0.15,
+    "undevelopable_share": 0.007,
+    "steep_share": 0.007,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28141",
+    "municipio": "Sevilla la Nueva",
+    "lau_km2": 24.743,
+    "land_km2": 24.245,
+    "area_err_pct": 2.01,
+    "undevelopable_share": 0.0086,
+    "steep_share": 0.0086,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28074",
+    "municipio": "Legan\u00e9s",
+    "lau_km2": 43.232,
+    "land_km2": 42.428,
+    "area_err_pct": 1.86,
+    "undevelopable_share": 0.0103,
+    "steep_share": 0.0103,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28083",
+    "municipio": "Meco",
+    "lau_km2": 34.865,
+    "land_km2": 34.706,
+    "area_err_pct": 0.46,
+    "undevelopable_share": 0.0105,
+    "steep_share": 0.0105,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28178",
+    "municipio": "Villanueva de Perales",
+    "lau_km2": 31.435,
+    "land_km2": 31.116,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.0132,
+    "steep_share": 0.0132,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28006",
+    "municipio": "Alcobendas",
+    "lau_km2": 45.23,
+    "land_km2": 45.411,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.0143,
+    "steep_share": 0.0143,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28113",
+    "municipio": "Pinto",
+    "lau_km2": 62.003,
+    "land_km2": 61.297,
+    "area_err_pct": 1.14,
+    "undevelopable_share": 0.0165,
+    "steep_share": 0.0165,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28026",
+    "municipio": "Brunete",
+    "lau_km2": 49.187,
+    "land_km2": 49.026,
+    "area_err_pct": 0.33,
+    "undevelopable_share": 0.0187,
+    "steep_share": 0.0187,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28092",
+    "municipio": "M\u00f3stoles",
+    "lau_km2": 44.961,
+    "land_km2": 44.515,
+    "area_err_pct": 0.99,
+    "undevelopable_share": 0.0198,
+    "steep_share": 0.0198,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28080",
+    "municipio": "Majadahonda",
+    "lau_km2": 38.518,
+    "land_km2": 38.608,
+    "area_err_pct": 0.23,
+    "undevelopable_share": 0.0216,
+    "steep_share": 0.0216,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28065",
+    "municipio": "Getafe",
+    "lau_km2": 78.697,
+    "land_km2": 78.545,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.0224,
+    "steep_share": 0.0224,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28140",
+    "municipio": "Serranillos del Valle",
+    "lau_km2": 13.31,
+    "land_km2": 13.043,
+    "area_err_pct": 2.01,
+    "undevelopable_share": 0.0225,
+    "steep_share": 0.0225,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28134",
+    "municipio": "San Sebasti\u00e1n de los Reyes",
+    "lau_km2": 59.274,
+    "land_km2": 58.492,
+    "area_err_pct": 1.32,
+    "undevelopable_share": 0.0241,
+    "steep_share": 0.0241,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28015",
+    "municipio": "Arroyomolinos",
+    "lau_km2": 20.799,
+    "land_km2": 20.646,
+    "area_err_pct": 0.74,
+    "undevelopable_share": 0.0256,
+    "steep_share": 0.0256,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28049",
+    "municipio": "Coslada",
+    "lau_km2": 12.029,
+    "land_km2": 12.448,
+    "area_err_pct": 3.49,
+    "undevelopable_share": 0.0329,
+    "steep_share": 0.0329,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28150",
+    "municipio": "Torrej\u00f3n de Velasco",
+    "lau_km2": 52.211,
+    "land_km2": 51.905,
+    "area_err_pct": 0.59,
+    "undevelopable_share": 0.0334,
+    "steep_share": 0.0334,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28176",
+    "municipio": "Villanueva de la Ca\u00f1ada",
+    "lau_km2": 34.805,
+    "land_km2": 33.806,
+    "area_err_pct": 2.87,
+    "undevelopable_share": 0.0343,
+    "steep_share": 0.0343,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28162",
+    "municipio": "Valdeolmos-Alalpardo",
+    "lau_km2": 25.882,
+    "land_km2": 25.83,
+    "area_err_pct": 0.2,
+    "undevelopable_share": 0.0349,
+    "steep_share": 0.0349,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28084",
+    "municipio": "Mejorada del Campo",
+    "lau_km2": 17.926,
+    "land_km2": 17.387,
+    "area_err_pct": 3.01,
+    "undevelopable_share": 0.0363,
+    "steep_share": 0.0363,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28181",
+    "municipio": "Villaviciosa de Od\u00f3n",
+    "lau_km2": 68.247,
+    "land_km2": 68.176,
+    "area_err_pct": 0.1,
+    "undevelopable_share": 0.0365,
+    "steep_share": 0.0365,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28054",
+    "municipio": "Escorial, El",
+    "lau_km2": 68.804,
+    "land_km2": 68.513,
+    "area_err_pct": 0.42,
+    "undevelopable_share": 0.0382,
+    "steep_share": 0.0285,
+    "water_share": 0.0097
+  },
+  {
+    "lau_id": "28002",
+    "municipio": "Ajalvir",
+    "lau_km2": 19.82,
+    "land_km2": 19.707,
+    "area_err_pct": 0.57,
+    "undevelopable_share": 0.0406,
+    "steep_share": 0.0406,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28119",
+    "municipio": "Quijorna",
+    "lau_km2": 25.662,
+    "land_km2": 25.706,
+    "area_err_pct": 0.17,
+    "undevelopable_share": 0.0433,
+    "steep_share": 0.0433,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28130",
+    "municipio": "San Fernando de Henares",
+    "lau_km2": 38.855,
+    "land_km2": 38.302,
+    "area_err_pct": 1.42,
+    "undevelopable_share": 0.0471,
+    "steep_share": 0.0471,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28079",
+    "municipio": "Madrid",
+    "lau_km2": 604.992,
+    "land_km2": 601.608,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.0508,
+    "steep_share": 0.0472,
+    "water_share": 0.0038
+  },
+  {
+    "lau_id": "28177",
+    "municipio": "Villanueva del Pardillo",
+    "lau_km2": 25.474,
+    "land_km2": 25.978,
+    "area_err_pct": 1.98,
+    "undevelopable_share": 0.0523,
+    "steep_share": 0.0523,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28145",
+    "municipio": "Talamanca de Jarama",
+    "lau_km2": 38.474,
+    "land_km2": 38.894,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.0538,
+    "steep_share": 0.0538,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28017",
+    "municipio": "Batres",
+    "lau_km2": 21.377,
+    "land_km2": 21.31,
+    "area_err_pct": 0.32,
+    "undevelopable_share": 0.0582,
+    "steep_share": 0.0582,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28009",
+    "municipio": "Algete",
+    "lau_km2": 37.948,
+    "land_km2": 37.743,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.0591,
+    "steep_share": 0.0591,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28055",
+    "municipio": "Estremera",
+    "lau_km2": 79.21,
+    "land_km2": 78.716,
+    "area_err_pct": 0.62,
+    "undevelopable_share": 0.0616,
+    "steep_share": 0.0563,
+    "water_share": 0.0064
+  },
+  {
+    "lau_id": "28174",
+    "municipio": "Villamanta",
+    "lau_km2": 63.246,
+    "land_km2": 62.704,
+    "area_err_pct": 0.86,
+    "undevelopable_share": 0.0632,
+    "steep_share": 0.0628,
+    "water_share": 0.0004
+  },
+  {
+    "lau_id": "28170",
+    "municipio": "Villaconejos",
+    "lau_km2": 33.31,
+    "land_km2": 32.693,
+    "area_err_pct": 1.85,
+    "undevelopable_share": 0.0664,
+    "steep_share": 0.0662,
+    "water_share": 0.0006
+  },
+  {
+    "lau_id": "28167",
+    "municipio": "Velilla de San Antonio",
+    "lau_km2": 14.406,
+    "land_km2": 14.589,
+    "area_err_pct": 1.27,
+    "undevelopable_share": 0.0687,
+    "steep_share": 0.0138,
+    "water_share": 0.0549
+  },
+  {
+    "lau_id": "28173",
+    "municipio": "Villamanrique de Tajo",
+    "lau_km2": 29.611,
+    "land_km2": 29.192,
+    "area_err_pct": 1.42,
+    "undevelopable_share": 0.0733,
+    "steep_share": 0.0513,
+    "water_share": 0.022
+  },
+  {
+    "lau_id": "28053",
+    "municipio": "Daganzo de Arriba",
+    "lau_km2": 43.459,
+    "land_km2": 43.283,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.0768,
+    "steep_share": 0.0768,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28040",
+    "municipio": "Ciempozuelos",
+    "lau_km2": 49.384,
+    "land_km2": 49.133,
+    "area_err_pct": 0.51,
+    "undevelopable_share": 0.0798,
+    "steep_share": 0.069,
+    "water_share": 0.0126
+  },
+  {
+    "lau_id": "28041",
+    "municipio": "Cobe\u00f1a",
+    "lau_km2": 20.794,
+    "land_km2": 20.59,
+    "area_err_pct": 0.98,
+    "undevelopable_share": 0.088,
+    "steep_share": 0.088,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28127",
+    "municipio": "Rozas de Madrid, Las",
+    "lau_km2": 58.322,
+    "land_km2": 58.357,
+    "area_err_pct": 0.06,
+    "undevelopable_share": 0.0899,
+    "steep_share": 0.0899,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28032",
+    "municipio": "Camarma de Esteruelas",
+    "lau_km2": 35.211,
+    "land_km2": 35.047,
+    "area_err_pct": 0.46,
+    "undevelopable_share": 0.0902,
+    "steep_share": 0.0902,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28161",
+    "municipio": "Valdemoro",
+    "lau_km2": 64.232,
+    "land_km2": 63.849,
+    "area_err_pct": 0.6,
+    "undevelopable_share": 0.0915,
+    "steep_share": 0.0915,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28057",
+    "municipio": "Fresno de Torote",
+    "lau_km2": 31.79,
+    "land_km2": 31.467,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.0943,
+    "steep_share": 0.0943,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28013",
+    "municipio": "Aranjuez",
+    "lau_km2": 189.431,
+    "land_km2": 187.141,
+    "area_err_pct": 1.21,
+    "undevelopable_share": 0.0961,
+    "steep_share": 0.0782,
+    "water_share": 0.0182
+  },
+  {
+    "lau_id": "28056",
+    "municipio": "Fresnedillas de la Oliva",
+    "lau_km2": 28.39,
+    "land_km2": 27.919,
+    "area_err_pct": 1.66,
+    "undevelopable_share": 0.1018,
+    "steep_share": 0.1018,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28122",
+    "municipio": "Ribatejada",
+    "lau_km2": 32.201,
+    "land_km2": 31.74,
+    "area_err_pct": 1.43,
+    "undevelopable_share": 0.1058,
+    "steep_share": 0.1058,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28060",
+    "municipio": "Fuentidue\u00f1a de Tajo",
+    "lau_km2": 60.2,
+    "land_km2": 59.537,
+    "area_err_pct": 1.1,
+    "undevelopable_share": 0.1084,
+    "steep_share": 0.0973,
+    "water_share": 0.0121
+  },
+  {
+    "lau_id": "28903",
+    "municipio": "Tres Cantos",
+    "lau_km2": 37.949,
+    "land_km2": 37.52,
+    "area_err_pct": 1.13,
+    "undevelopable_share": 0.1129,
+    "steep_share": 0.1129,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28156",
+    "municipio": "Valdeavero",
+    "lau_km2": 18.696,
+    "land_km2": 18.303,
+    "area_err_pct": 2.11,
+    "undevelopable_share": 0.1141,
+    "steep_share": 0.1141,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28144",
+    "municipio": "Soto del Real",
+    "lau_km2": 42.888,
+    "land_km2": 42.534,
+    "area_err_pct": 0.83,
+    "undevelopable_share": 0.1215,
+    "steep_share": 0.1099,
+    "water_share": 0.0116
+  },
+  {
+    "lau_id": "28010",
+    "municipio": "Alpedrete",
+    "lau_km2": 12.661,
+    "land_km2": 12.216,
+    "area_err_pct": 3.51,
+    "undevelopable_share": 0.1284,
+    "steep_share": 0.1284,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28136",
+    "municipio": "Santorcaz",
+    "lau_km2": 28.226,
+    "land_km2": 27.942,
+    "area_err_pct": 1.0,
+    "undevelopable_share": 0.1291,
+    "steep_share": 0.1291,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28100",
+    "municipio": "Nuevo Bazt\u00e1n",
+    "lau_km2": 20.11,
+    "land_km2": 19.582,
+    "area_err_pct": 2.63,
+    "undevelopable_share": 0.134,
+    "steep_share": 0.134,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28019",
+    "municipio": "Belmonte de Tajo",
+    "lau_km2": 24.06,
+    "land_km2": 23.957,
+    "area_err_pct": 0.43,
+    "undevelopable_share": 0.1353,
+    "steep_share": 0.1353,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28005",
+    "municipio": "Alcal\u00e1 de Henares",
+    "lau_km2": 88.018,
+    "land_km2": 87.847,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.1504,
+    "steep_share": 0.1504,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28042",
+    "municipio": "Colmenar del Arroyo",
+    "lau_km2": 49.258,
+    "land_km2": 49.007,
+    "area_err_pct": 0.51,
+    "undevelopable_share": 0.1537,
+    "steep_share": 0.1536,
+    "water_share": 0.0001
+  },
+  {
+    "lau_id": "28094",
+    "municipio": "Navalafuente",
+    "lau_km2": 12.207,
+    "land_km2": 11.612,
+    "area_err_pct": 4.87,
+    "undevelopable_share": 0.1554,
+    "steep_share": 0.1554,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28047",
+    "municipio": "Collado Villalba",
+    "lau_km2": 25.202,
+    "land_km2": 25.296,
+    "area_err_pct": 0.37,
+    "undevelopable_share": 0.1595,
+    "steep_share": 0.1595,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28033",
+    "municipio": "Campo Real",
+    "lau_km2": 61.837,
+    "land_km2": 61.541,
+    "area_err_pct": 0.48,
+    "undevelopable_share": 0.1617,
+    "steep_share": 0.1617,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28163",
+    "municipio": "Valdepi\u00e9lagos",
+    "lau_km2": 17.71,
+    "land_km2": 17.196,
+    "area_err_pct": 2.9,
+    "undevelopable_share": 0.1619,
+    "steep_share": 0.1619,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28180",
+    "municipio": "Villarejo de Salvan\u00e9s",
+    "lau_km2": 119.123,
+    "land_km2": 118.446,
+    "area_err_pct": 0.57,
+    "undevelopable_share": 0.1629,
+    "steep_share": 0.1623,
+    "water_share": 0.0007
+  },
+  {
+    "lau_id": "28025",
+    "municipio": "Brea de Tajo",
+    "lau_km2": 44.722,
+    "land_km2": 44.285,
+    "area_err_pct": 0.98,
+    "undevelopable_share": 0.172,
+    "steep_share": 0.172,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28101",
+    "municipio": "Olmeda de las Fuentes",
+    "lau_km2": 16.547,
+    "land_km2": 16.275,
+    "area_err_pct": 1.64,
+    "undevelopable_share": 0.1813,
+    "steep_share": 0.1813,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28029",
+    "municipio": "Cabanillas de la Sierra",
+    "lau_km2": 13.814,
+    "land_km2": 13.875,
+    "area_err_pct": 0.44,
+    "undevelopable_share": 0.1814,
+    "steep_share": 0.1814,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28147",
+    "municipio": "Titulcia",
+    "lau_km2": 10.135,
+    "land_km2": 10.219,
+    "area_err_pct": 0.84,
+    "undevelopable_share": 0.1828,
+    "steep_share": 0.1649,
+    "water_share": 0.03
+  },
+  {
+    "lau_id": "28061",
+    "municipio": "Galapagar",
+    "lau_km2": 65.186,
+    "land_km2": 64.725,
+    "area_err_pct": 0.71,
+    "undevelopable_share": 0.1883,
+    "steep_share": 0.1883,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28104",
+    "municipio": "Paracuellos de Jarama",
+    "lau_km2": 43.828,
+    "land_km2": 43.573,
+    "area_err_pct": 0.58,
+    "undevelopable_share": 0.1899,
+    "steep_share": 0.1899,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28153",
+    "municipio": "Torremocha de Jarama",
+    "lau_km2": 18.901,
+    "land_km2": 18.238,
+    "area_err_pct": 3.51,
+    "undevelopable_share": 0.1939,
+    "steep_share": 0.1939,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28027",
+    "municipio": "Buitrago del Lozoya",
+    "lau_km2": 25.98,
+    "land_km2": 25.513,
+    "area_err_pct": 1.8,
+    "undevelopable_share": 0.1973,
+    "steep_share": 0.1538,
+    "water_share": 0.0706
+  },
+  {
+    "lau_id": "28154",
+    "municipio": "Torres de la Alameda",
+    "lau_km2": 43.348,
+    "land_km2": 43.022,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.2018,
+    "steep_share": 0.2018,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28129",
+    "municipio": "San Agust\u00edn del Guadalix",
+    "lau_km2": 38.255,
+    "land_km2": 38.379,
+    "area_err_pct": 0.33,
+    "undevelopable_share": 0.2021,
+    "steep_share": 0.2021,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28044",
+    "municipio": "Colmenarejo",
+    "lau_km2": 31.504,
+    "land_km2": 31.208,
+    "area_err_pct": 0.94,
+    "undevelopable_share": 0.2032,
+    "steep_share": 0.1668,
+    "water_share": 0.0373
+  },
+  {
+    "lau_id": "28075",
+    "municipio": "Loeches",
+    "lau_km2": 44.363,
+    "land_km2": 44.583,
+    "area_err_pct": 0.5,
+    "undevelopable_share": 0.2045,
+    "steep_share": 0.2045,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28043",
+    "municipio": "Colmenar de Oreja",
+    "lau_km2": 126.392,
+    "land_km2": 125.738,
+    "area_err_pct": 0.52,
+    "undevelopable_share": 0.21,
+    "steep_share": 0.2054,
+    "water_share": 0.0046
+  },
+  {
+    "lau_id": "28160",
+    "municipio": "Valdemorillo",
+    "lau_km2": 93.905,
+    "land_km2": 93.379,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.2126,
+    "steep_share": 0.1677,
+    "water_share": 0.0461
+  },
+  {
+    "lau_id": "28095",
+    "municipio": "Navalagamella",
+    "lau_km2": 75.813,
+    "land_km2": 75.844,
+    "area_err_pct": 0.04,
+    "undevelopable_share": 0.2127,
+    "steep_share": 0.2107,
+    "water_share": 0.0024
+  },
+  {
+    "lau_id": "28086",
+    "municipio": "Molar, El",
+    "lau_km2": 50.187,
+    "land_km2": 49.601,
+    "area_err_pct": 1.17,
+    "undevelopable_share": 0.2137,
+    "steep_share": 0.2137,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28175",
+    "municipio": "Villamantilla",
+    "lau_km2": 23.932,
+    "land_km2": 23.761,
+    "area_err_pct": 0.71,
+    "undevelopable_share": 0.2191,
+    "steep_share": 0.2191,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28048",
+    "municipio": "Corpa",
+    "lau_km2": 25.982,
+    "land_km2": 25.947,
+    "area_err_pct": 0.14,
+    "undevelopable_share": 0.2195,
+    "steep_share": 0.2195,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28045",
+    "municipio": "Colmenar Viejo",
+    "lau_km2": 182.986,
+    "land_km2": 182.079,
+    "area_err_pct": 0.5,
+    "undevelopable_share": 0.2214,
+    "steep_share": 0.2214,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28155",
+    "municipio": "Valdaracete",
+    "lau_km2": 63.879,
+    "land_km2": 63.776,
+    "area_err_pct": 0.16,
+    "undevelopable_share": 0.2224,
+    "steep_share": 0.2224,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28138",
+    "municipio": "Serna del Monte, La",
+    "lau_km2": 5.497,
+    "land_km2": 5.867,
+    "area_err_pct": 6.74,
+    "undevelopable_share": 0.223,
+    "steep_share": 0.223,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28165",
+    "municipio": "Valdilecha",
+    "lau_km2": 42.577,
+    "land_km2": 41.981,
+    "area_err_pct": 1.4,
+    "undevelopable_share": 0.2275,
+    "steep_share": 0.2275,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28014",
+    "municipio": "Arganda del Rey",
+    "lau_km2": 80.331,
+    "land_km2": 79.909,
+    "area_err_pct": 0.52,
+    "undevelopable_share": 0.2325,
+    "steep_share": 0.2287,
+    "water_share": 0.004
+  },
+  {
+    "lau_id": "28008",
+    "municipio": "Aldea del Fresno",
+    "lau_km2": 51.65,
+    "land_km2": 51.424,
+    "area_err_pct": 0.44,
+    "undevelopable_share": 0.2341,
+    "steep_share": 0.2327,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "28132",
+    "municipio": "San Mart\u00edn de la Vega",
+    "lau_km2": 105.172,
+    "land_km2": 104.285,
+    "area_err_pct": 0.84,
+    "undevelopable_share": 0.2432,
+    "steep_share": 0.2284,
+    "water_share": 0.0157
+  },
+  {
+    "lau_id": "28123",
+    "municipio": "Rivas-Vaciamadrid",
+    "lau_km2": 67.33,
+    "land_km2": 66.744,
+    "area_err_pct": 0.87,
+    "undevelopable_share": 0.2454,
+    "steep_share": 0.1894,
+    "water_share": 0.0602
+  },
+  {
+    "lau_id": "28091",
+    "municipio": "Morata de Taju\u00f1a",
+    "lau_km2": 45.346,
+    "land_km2": 44.911,
+    "area_err_pct": 0.96,
+    "undevelopable_share": 0.2466,
+    "steep_share": 0.2466,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28063",
+    "municipio": "Gargantilla del Lozoya y Pinilla de Buitrago",
+    "lau_km2": 24.181,
+    "land_km2": 24.166,
+    "area_err_pct": 0.07,
+    "undevelopable_share": 0.2508,
+    "steep_share": 0.1843,
+    "water_share": 0.071
+  },
+  {
+    "lau_id": "28901",
+    "municipio": "Lozoyuela-Navas-Sieteiglesias",
+    "lau_km2": 51.436,
+    "land_km2": 51.152,
+    "area_err_pct": 0.55,
+    "undevelopable_share": 0.2541,
+    "steep_share": 0.2541,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28172",
+    "municipio": "Villalbilla",
+    "lau_km2": 34.682,
+    "land_km2": 33.718,
+    "area_err_pct": 2.78,
+    "undevelopable_share": 0.2647,
+    "steep_share": 0.2647,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28111",
+    "municipio": "Pezuela de las Torres",
+    "lau_km2": 41.671,
+    "land_km2": 41.683,
+    "area_err_pct": 0.03,
+    "undevelopable_share": 0.2703,
+    "steep_share": 0.2703,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28179",
+    "municipio": "Villar del Olmo",
+    "lau_km2": 27.782,
+    "land_km2": 27.935,
+    "area_err_pct": 0.55,
+    "undevelopable_share": 0.2708,
+    "steep_share": 0.2708,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28052",
+    "municipio": "Chinch\u00f3n",
+    "lau_km2": 115.859,
+    "land_km2": 115.972,
+    "area_err_pct": 0.1,
+    "undevelopable_share": 0.2715,
+    "steep_share": 0.2713,
+    "water_share": 0.0002
+  },
+  {
+    "lau_id": "28171",
+    "municipio": "Villa del Prado",
+    "lau_km2": 77.282,
+    "land_km2": 76.754,
+    "area_err_pct": 0.68,
+    "undevelopable_share": 0.2722,
+    "steep_share": 0.2722,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28023",
+    "municipio": "Boalo, El",
+    "lau_km2": 39.463,
+    "land_km2": 39.131,
+    "area_err_pct": 0.84,
+    "undevelopable_share": 0.2769,
+    "steep_share": 0.2769,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28109",
+    "municipio": "Pelayos de la Presa",
+    "lau_km2": 7.563,
+    "land_km2": 7.497,
+    "area_err_pct": 0.88,
+    "undevelopable_share": 0.2815,
+    "steep_share": 0.2763,
+    "water_share": 0.0069
+  },
+  {
+    "lau_id": "28051",
+    "municipio": "Chapiner\u00eda",
+    "lau_km2": 25.591,
+    "land_km2": 25.359,
+    "area_err_pct": 0.9,
+    "undevelopable_share": 0.2818,
+    "steep_share": 0.2813,
+    "water_share": 0.0005
+  },
+  {
+    "lau_id": "28169",
+    "municipio": "Venturada",
+    "lau_km2": 10.238,
+    "land_km2": 10.321,
+    "area_err_pct": 0.82,
+    "undevelopable_share": 0.2859,
+    "steep_share": 0.2859,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28114",
+    "municipio": "Pi\u00f1u\u00e9car-Gandullas",
+    "lau_km2": 18.259,
+    "land_km2": 18.629,
+    "area_err_pct": 2.03,
+    "undevelopable_share": 0.2891,
+    "steep_share": 0.2572,
+    "water_share": 0.0623
+  },
+  {
+    "lau_id": "28168",
+    "municipio": "Vell\u00f3n, El",
+    "lau_km2": 33.536,
+    "land_km2": 33.541,
+    "area_err_pct": 0.01,
+    "undevelopable_share": 0.2922,
+    "steep_share": 0.2922,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28012",
+    "municipio": "Anchuelo",
+    "lau_km2": 21.616,
+    "land_km2": 21.753,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.3207,
+    "steep_share": 0.3207,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28072",
+    "municipio": "Hoyo de Manzanares",
+    "lau_km2": 45.267,
+    "land_km2": 45.032,
+    "area_err_pct": 0.52,
+    "undevelopable_share": 0.3245,
+    "steep_share": 0.3245,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28152",
+    "municipio": "Torrelodones",
+    "lau_km2": 21.718,
+    "land_km2": 21.477,
+    "area_err_pct": 1.11,
+    "undevelopable_share": 0.3259,
+    "steep_share": 0.3259,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28030",
+    "municipio": "Cabrera, La",
+    "lau_km2": 22.157,
+    "land_km2": 21.812,
+    "area_err_pct": 1.56,
+    "undevelopable_share": 0.326,
+    "steep_share": 0.326,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28121",
+    "municipio": "Redue\u00f1a",
+    "lau_km2": 13.028,
+    "land_km2": 13.068,
+    "area_err_pct": 0.31,
+    "undevelopable_share": 0.3337,
+    "steep_share": 0.3337,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28108",
+    "municipio": "Pedrezuela",
+    "lau_km2": 28.528,
+    "land_km2": 28.561,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.3476,
+    "steep_share": 0.3184,
+    "water_share": 0.0408
+  },
+  {
+    "lau_id": "28137",
+    "municipio": "Santos de la Humosa, Los",
+    "lau_km2": 35.032,
+    "land_km2": 35.158,
+    "area_err_pct": 0.36,
+    "undevelopable_share": 0.3499,
+    "steep_share": 0.3499,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28067",
+    "municipio": "Guadalix de la Sierra",
+    "lau_km2": 60.282,
+    "land_km2": 59.689,
+    "area_err_pct": 0.98,
+    "undevelopable_share": 0.3519,
+    "steep_share": 0.3077,
+    "water_share": 0.0486
+  },
+  {
+    "lau_id": "28018",
+    "municipio": "Becerril de la Sierra",
+    "lau_km2": 29.676,
+    "land_km2": 29.373,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.3652,
+    "steep_share": 0.3643,
+    "water_share": 0.0011
+  },
+  {
+    "lau_id": "28037",
+    "municipio": "Cenicientos",
+    "lau_km2": 68.363,
+    "land_km2": 67.968,
+    "area_err_pct": 0.58,
+    "undevelopable_share": 0.3699,
+    "steep_share": 0.3699,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28151",
+    "municipio": "Torrelaguna",
+    "lau_km2": 43.076,
+    "land_km2": 42.906,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.3699,
+    "steep_share": 0.3699,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28087",
+    "municipio": "Molinos, Los",
+    "lau_km2": 19.181,
+    "land_km2": 19.222,
+    "area_err_pct": 0.21,
+    "undevelopable_share": 0.3747,
+    "steep_share": 0.3747,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28902",
+    "municipio": "Puentes Viejas",
+    "lau_km2": 58.615,
+    "land_km2": 59.087,
+    "area_err_pct": 0.81,
+    "undevelopable_share": 0.4008,
+    "steep_share": 0.375,
+    "water_share": 0.0503
+  },
+  {
+    "lau_id": "28166",
+    "municipio": "Valverde de Alcal\u00e1",
+    "lau_km2": 13.747,
+    "land_km2": 13.858,
+    "area_err_pct": 0.8,
+    "undevelopable_share": 0.4011,
+    "steep_share": 0.4011,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28090",
+    "municipio": "Moralzarzal",
+    "lau_km2": 43.539,
+    "land_km2": 43.138,
+    "area_err_pct": 0.92,
+    "undevelopable_share": 0.4018,
+    "steep_share": 0.4018,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28062",
+    "municipio": "Garganta de los Montes",
+    "lau_km2": 40.383,
+    "land_km2": 39.782,
+    "area_err_pct": 1.49,
+    "undevelopable_share": 0.4218,
+    "steep_share": 0.409,
+    "water_share": 0.0157
+  },
+  {
+    "lau_id": "28035",
+    "municipio": "Caraba\u00f1a",
+    "lau_km2": 47.659,
+    "land_km2": 47.31,
+    "area_err_pct": 0.73,
+    "undevelopable_share": 0.4219,
+    "steep_share": 0.4219,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28046",
+    "municipio": "Collado Mediano",
+    "lau_km2": 22.203,
+    "land_km2": 22.496,
+    "area_err_pct": 1.32,
+    "undevelopable_share": 0.4315,
+    "steep_share": 0.4315,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28157",
+    "municipio": "Valdelaguna",
+    "lau_km2": 42.112,
+    "land_km2": 41.97,
+    "area_err_pct": 0.34,
+    "undevelopable_share": 0.4449,
+    "steep_share": 0.4449,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28021",
+    "municipio": "Berrueco, El",
+    "lau_km2": 28.457,
+    "land_km2": 28.462,
+    "area_err_pct": 0.02,
+    "undevelopable_share": 0.4559,
+    "steep_share": 0.4101,
+    "water_share": 0.0615
+  },
+  {
+    "lau_id": "28068",
+    "municipio": "Guadarrama",
+    "lau_km2": 57.23,
+    "land_km2": 56.769,
+    "area_err_pct": 0.81,
+    "undevelopable_share": 0.4613,
+    "steep_share": 0.4545,
+    "water_share": 0.0091
+  },
+  {
+    "lau_id": "28102",
+    "municipio": "Orusco de Taju\u00f1a",
+    "lau_km2": 21.403,
+    "land_km2": 21.295,
+    "area_err_pct": 0.5,
+    "undevelopable_share": 0.4795,
+    "steep_share": 0.4795,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28078",
+    "municipio": "Madarcos",
+    "lau_km2": 8.567,
+    "land_km2": 8.162,
+    "area_err_pct": 4.72,
+    "undevelopable_share": 0.4826,
+    "steep_share": 0.4826,
+    "water_share": 0.0032
+  },
+  {
+    "lau_id": "28031",
+    "municipio": "Cadalso de los Vidrios",
+    "lau_km2": 47.857,
+    "land_km2": 48.126,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.4901,
+    "steep_share": 0.4897,
+    "water_share": 0.0008
+  },
+  {
+    "lau_id": "28110",
+    "municipio": "Perales de Taju\u00f1a",
+    "lau_km2": 49.277,
+    "land_km2": 49.372,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.4972,
+    "steep_share": 0.4972,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28133",
+    "municipio": "San Mart\u00edn de Valdeiglesias",
+    "lau_km2": 116.516,
+    "land_km2": 115.579,
+    "area_err_pct": 0.8,
+    "undevelopable_share": 0.5051,
+    "steep_share": 0.4761,
+    "water_share": 0.0487
+  },
+  {
+    "lau_id": "28085",
+    "municipio": "Miraflores de la Sierra",
+    "lau_km2": 56.427,
+    "land_km2": 56.37,
+    "area_err_pct": 0.1,
+    "undevelopable_share": 0.5156,
+    "steep_share": 0.5151,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "28064",
+    "municipio": "Gascones",
+    "lau_km2": 20.051,
+    "land_km2": 19.575,
+    "area_err_pct": 2.37,
+    "undevelopable_share": 0.518,
+    "steep_share": 0.518,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28158",
+    "municipio": "Valdemanco",
+    "lau_km2": 17.796,
+    "land_km2": 17.467,
+    "area_err_pct": 1.85,
+    "undevelopable_share": 0.5266,
+    "steep_share": 0.5266,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28099",
+    "municipio": "Navas del Rey",
+    "lau_km2": 50.671,
+    "land_km2": 50.208,
+    "area_err_pct": 0.91,
+    "undevelopable_share": 0.5511,
+    "steep_share": 0.5504,
+    "water_share": 0.0092
+  },
+  {
+    "lau_id": "28011",
+    "municipio": "Ambite",
+    "lau_km2": 25.801,
+    "land_km2": 26.022,
+    "area_err_pct": 0.86,
+    "undevelopable_share": 0.5524,
+    "steep_share": 0.5524,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28117",
+    "municipio": "Pr\u00e1dena del Rinc\u00f3n",
+    "lau_km2": 22.546,
+    "land_km2": 22.398,
+    "area_err_pct": 0.65,
+    "undevelopable_share": 0.5533,
+    "steep_share": 0.5527,
+    "water_share": 0.0006
+  },
+  {
+    "lau_id": "28131",
+    "municipio": "San Lorenzo de El Escorial",
+    "lau_km2": 56.393,
+    "land_km2": 56.449,
+    "area_err_pct": 0.1,
+    "undevelopable_share": 0.5702,
+    "steep_share": 0.5691,
+    "water_share": 0.0011
+  },
+  {
+    "lau_id": "28146",
+    "municipio": "Tielmes",
+    "lau_km2": 26.618,
+    "land_km2": 26.162,
+    "area_err_pct": 1.71,
+    "undevelopable_share": 0.583,
+    "steep_share": 0.583,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28125",
+    "municipio": "Robledo de Chavela",
+    "lau_km2": 94.176,
+    "land_km2": 94.231,
+    "area_err_pct": 0.06,
+    "undevelopable_share": 0.5901,
+    "steep_share": 0.59,
+    "water_share": 0.0001
+  },
+  {
+    "lau_id": "28183",
+    "municipio": "Zarzalejo",
+    "lau_km2": 20.178,
+    "land_km2": 19.714,
+    "area_err_pct": 2.3,
+    "undevelopable_share": 0.599,
+    "steep_share": 0.599,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28070",
+    "municipio": "Horcajo de la Sierra-Aoslos",
+    "lau_km2": 21.192,
+    "land_km2": 21.057,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.6058,
+    "steep_share": 0.6058,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28182",
+    "municipio": "Villavieja del Lozoya",
+    "lau_km2": 23.221,
+    "land_km2": 22.666,
+    "area_err_pct": 2.39,
+    "undevelopable_share": 0.6138,
+    "steep_share": 0.6138,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28097",
+    "municipio": "Navarredonda y San Mam\u00e9s",
+    "lau_km2": 28.584,
+    "land_km2": 29.067,
+    "area_err_pct": 1.69,
+    "undevelopable_share": 0.614,
+    "steep_share": 0.614,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28028",
+    "municipio": "Bustarviejo",
+    "lau_km2": 56.234,
+    "land_km2": 56.61,
+    "area_err_pct": 0.67,
+    "undevelopable_share": 0.626,
+    "steep_share": 0.626,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28128",
+    "municipio": "Rozas de Puerto Real",
+    "lau_km2": 29.639,
+    "land_km2": 29.733,
+    "area_err_pct": 0.32,
+    "undevelopable_share": 0.6564,
+    "steep_share": 0.6472,
+    "water_share": 0.0092
+  },
+  {
+    "lau_id": "28003",
+    "municipio": "Alameda del Valle",
+    "lau_km2": 25.761,
+    "land_km2": 25.294,
+    "area_err_pct": 1.81,
+    "undevelopable_share": 0.6731,
+    "steep_share": 0.6731,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28034",
+    "municipio": "Canencia",
+    "lau_km2": 54.203,
+    "land_km2": 54.608,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.703,
+    "steep_share": 0.703,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28135",
+    "municipio": "Santa Mar\u00eda de la Alameda",
+    "lau_km2": 75.717,
+    "land_km2": 75.721,
+    "area_err_pct": 0.01,
+    "undevelopable_share": 0.7061,
+    "steep_share": 0.7061,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "28082",
+    "municipio": "Manzanares el Real",
+    "lau_km2": 127.837,
+    "land_km2": 127.118,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.7104,
+    "steep_share": 0.6415,
+    "water_share": 0.069
+  },
+  {
+    "lau_id": "28112",
+    "municipio": "Pinilla del Valle",
+    "lau_km2": 25.429,
+    "land_km2": 25.745,
+    "area_err_pct": 1.24,
+    "undevelopable_share": 0.7113,
+    "steep_share": 0.6904,
+    "water_share": 0.0208
+  },
+  {
+    "lau_id": "28039",
+    "municipio": "Cervera de Buitrago",
+    "lau_km2": 11.547,
+    "land_km2": 11.265,
+    "area_err_pct": 2.44,
+    "undevelopable_share": 0.7133,
+    "steep_share": 0.5057,
+    "water_share": 0.2707
+  },
+  {
+    "lau_id": "28124",
+    "municipio": "Robledillo de la Jara",
+    "lau_km2": 21.016,
+    "land_km2": 20.899,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.7192,
+    "steep_share": 0.7152,
+    "water_share": 0.0179
+  },
+  {
+    "lau_id": "28159",
+    "municipio": "Valdemaqueda",
+    "lau_km2": 51.735,
+    "land_km2": 50.948,
+    "area_err_pct": 1.52,
+    "undevelopable_share": 0.7244,
+    "steep_share": 0.7244,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28024",
+    "municipio": "Braojos",
+    "lau_km2": 24.927,
+    "land_km2": 24.66,
+    "area_err_pct": 1.07,
+    "undevelopable_share": 0.7279,
+    "steep_share": 0.7279,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28126",
+    "municipio": "Robregordo",
+    "lau_km2": 18.354,
+    "land_km2": 18.088,
+    "area_err_pct": 1.45,
+    "undevelopable_share": 0.7387,
+    "steep_share": 0.7387,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28120",
+    "municipio": "Rascafr\u00eda",
+    "lau_km2": 149.279,
+    "land_km2": 148.284,
+    "area_err_pct": 0.67,
+    "undevelopable_share": 0.7426,
+    "steep_share": 0.7426,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28020",
+    "municipio": "Berzosa del Lozoya",
+    "lau_km2": 14.624,
+    "land_km2": 14.185,
+    "area_err_pct": 3.0,
+    "undevelopable_share": 0.7429,
+    "steep_share": 0.7388,
+    "water_share": 0.0159
+  },
+  {
+    "lau_id": "28093",
+    "municipio": "Navacerrada",
+    "lau_km2": 27.519,
+    "land_km2": 27.315,
+    "area_err_pct": 0.74,
+    "undevelopable_share": 0.7659,
+    "steep_share": 0.7408,
+    "water_share": 0.0266
+  },
+  {
+    "lau_id": "28088",
+    "municipio": "Montejo de la Sierra",
+    "lau_km2": 32.193,
+    "land_km2": 32.23,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.7701,
+    "steep_share": 0.7701,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28076",
+    "municipio": "Lozoya",
+    "lau_km2": 57.774,
+    "land_km2": 56.771,
+    "area_err_pct": 1.74,
+    "undevelopable_share": 0.8127,
+    "steep_share": 0.7558,
+    "water_share": 0.0582
+  },
+  {
+    "lau_id": "28038",
+    "municipio": "Cercedilla",
+    "lau_km2": 35.74,
+    "land_km2": 35.47,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.8263,
+    "steep_share": 0.8256,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "28071",
+    "municipio": "Horcajuelo de la Sierra",
+    "lau_km2": 23.866,
+    "land_km2": 23.424,
+    "area_err_pct": 1.85,
+    "undevelopable_share": 0.8523,
+    "steep_share": 0.8523,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28143",
+    "municipio": "Somosierra",
+    "lau_km2": 20.425,
+    "land_km2": 20.271,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.8885,
+    "steep_share": 0.8885,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28001",
+    "municipio": "Acebeda, La",
+    "lau_km2": 21.87,
+    "land_km2": 21.575,
+    "area_err_pct": 1.35,
+    "undevelopable_share": 0.8922,
+    "steep_share": 0.8922,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28107",
+    "municipio": "Patones",
+    "lau_km2": 35.082,
+    "land_km2": 34.847,
+    "area_err_pct": 0.67,
+    "undevelopable_share": 0.8982,
+    "steep_share": 0.8778,
+    "water_share": 0.0326
+  },
+  {
+    "lau_id": "28016",
+    "municipio": "Atazar, El",
+    "lau_km2": 28.45,
+    "land_km2": 28.424,
+    "area_err_pct": 0.09,
+    "undevelopable_share": 0.96,
+    "steep_share": 0.9143,
+    "water_share": 0.0734
+  },
+  {
+    "lau_id": "28118",
+    "municipio": "Puebla de la Sierra",
+    "lau_km2": 56.771,
+    "land_km2": 56.4,
+    "area_err_pct": 0.65,
+    "undevelopable_share": 0.9823,
+    "steep_share": 0.9823,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "28069",
+    "municipio": "Hiruela, La",
+    "lau_km2": 17.137,
+    "land_km2": 17.413,
+    "area_err_pct": 1.61,
+    "undevelopable_share": 0.9841,
+    "steep_share": 0.9841,
+    "water_share": 0.0
+  }
+]

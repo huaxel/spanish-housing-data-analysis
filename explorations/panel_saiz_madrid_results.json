@@ -1,0 +1,36 @@
+{
+  "n_municipios": 28,
+  "constraint_min": 0.0012,
+  "constraint_max": 0.2454,
+  "province_constraint_max": 0.9841,
+  "note": "28/28 join, but priced municipios span only 0.00-0.25 constraint against the province's 0.00-0.98: the steep municipios are villages without price series. Weak leverage by construction.",
+  "price_growth": {
+    "dep": "d_price",
+    "controls": [],
+    "coef_per_0p1": -0.134,
+    "se_per_0p1": 0.134,
+    "t": -1.0,
+    "n": 539,
+    "clusters": 28
+  },
+  "log_price_levels": {
+    "dep": "log_price",
+    "controls": [],
+    "coef_per_0p1": -0.0809,
+    "se_per_0p1": 0.0397,
+    "t": -2.04,
+    "n": 539,
+    "clusters": 28
+  },
+  "log_price_levels_density": {
+    "dep": "log_price",
+    "controls": [
+      "density"
+    ],
+    "coef_per_0p1": -0.1008,
+    "se_per_0p1": 0.0448,
+    "t": -2.25,
+    "n": 539,
+    "clusters": 28
+  }
+}

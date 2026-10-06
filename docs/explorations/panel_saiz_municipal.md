@@ -99,3 +99,46 @@ the data are unreachable — they are not — but because the preponderance of
 evidence here says the terrain channel is not doing measurable work in
 this outcome. If it is revisited, the honest next step is a second
 province and price *levels* rather than growth, not more instruments.
+
+## Madrid leg: the replication that could not be delivered
+
+That next step was attempted (`explorations/panel_saiz_madrid.py`,
+`explorations/saiz_municipal_mad.json`, 179 LAU municipios, land total
+7,979 km² against LAU's 8,025, worst area error 6.7%). The join works —
+28/28 priced municipios match. The replication does not, and it fails
+for a reason worth recording:
+
+**Madrid's priced municipios span constraint 0.00–0.25 against the
+province's 0.00–0.98.** The steep municipios (Atazar 0.96, Puebla de la
+Sierra 0.98, La Hiruela 0.98) are villages with no price series; the 28
+with series are the big central-basin ones. So the test has no leverage
+where the question lives — exactly the selection problem the Barcelona
+price caveat (130 of 310) has, one step worse.
+
+What the test *does* find is instructive as a warning rather than as
+evidence. Price **levels** are *negatively* associated with constraint
+(−0.081 log points per 0.1, t = −2.04; −0.101 with a density control,
+t = −2.25), while growth is null (−0.134, t = −1.00). Taken at face value
+that contradicts both the supply-scarcity story (constraint ⇒ dearer) and
+the amenity story (mountains ⇒ dearer). Look at the municipios carrying
+the slope and neither story is needed: the "constrained" ones are the
+periphery (Arganda 1,707 €/m², Aranjuez 1,611, Valdemoro 1,784) while the
+dear flat ones are the NW suburbs (Pozuelo 3,214, Madrid city 3,280). The
+slope is a **centrality/wealth gradient wearing a terrain proxy** —
+within a 0.00–0.25 range, "hillier" mostly means "farther from the
+centre".
+
+That is the sharpest lesson of the Madrid leg: at cross-sections,
+terrain correlates with everything, and an association can be
+significant, wrong-signed, and fully explained by something else — at
+28 clusters, with a quarter of the constraint range, and no construction
+data. It is not evidence against or for design B; it is evidence for why
+design B needs an exclusion argument the data here cannot buy, and it
+confirms the recommendation above with a stronger one:
+
+**Final recommendation: leave design B unbuilt. The reopen condition
+("second province, price levels") cannot be met — no Spanish province
+publishes municipal price series for its steep municipios. If terrain is
+ever revisited, it needs a design in which terrain is compared to
+*terrain*, not to centrality: matched pairs or within-mountain-range
+variation, not cross-sectional slopes.**

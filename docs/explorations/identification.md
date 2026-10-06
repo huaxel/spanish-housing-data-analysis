@@ -116,8 +116,14 @@ not t-stats) are non-negotiable reporting.
    municipal grain (`panel_saiz.md`, `panel_saiz_municipal.md`).
    Recommendation: **leave B unbuilt as an instrument** — not for lack of
    data, but because three independent nulls say the terrain channel does
-   little measurable work here. Revisit only with a second province and
-   price levels rather than growth.
+   little measurable work here. The stated reopen condition ("a second
+   province, price levels") was attempted and **cannot be met**: Madrid's
+   priced municipios span constraint 0.00–0.25 against the province's
+   0.00–0.98, and its one significant association is a centrality gradient
+   wearing a terrain proxy. No Spanish province publishes municipal price
+   series for its steep municipios. If terrain is ever revisited it needs a
+   design comparing terrain to terrain (matched pairs / within-range
+   variation), not cross-sectional slopes.
 4. Nothing causal merges into synthesis until an independent read of the
    design — same bar as v1's methods review (plan milestone 5). The read
    questions for design A are written out in `docs/review_brief.md`;

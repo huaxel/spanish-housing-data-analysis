@@ -825,6 +825,29 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] saiz_muni_probe: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 4
+    madrid = json.loads((expl / "panel_saiz_madrid_results.json").read_text())
+    for desc, got, expected, tol in (
+        ("Madrid municipios joined", madrid["n_municipios"], 28, 0),
+        ("Madrid priced-constraint max", madrid["constraint_max"], 0.245, 0.005),
+        ("Madrid province constraint max", madrid["province_constraint_max"], 0.984, 0.005),
+        ("Madrid price-growth coef /0.1", madrid["price_growth"]["coef_per_0p1"], -0.134, 0.005),
+        (
+            "Madrid log-levels coef /0.1",
+            madrid["log_price_levels"]["coef_per_0p1"],
+            -0.0809,
+            0.005,
+        ),
+        (
+            "Madrid log-levels+density coef /0.1",
+            madrid["log_price_levels_density"]["coef_per_0p1"],
+            -0.1008,
+            0.005,
+        ),
+    ):
+        ok = abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_saiz_madrid: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 6
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

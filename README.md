@@ -25,7 +25,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [**Independent review brief**](docs/review_brief.md) — milestone-5 package (scope, reproduction, adversarial questions, disclosed limitations); **review not yet run**
 - [Saiz GIS probe](docs/explorations/saiz_gis_probe.md) — design B feasibility: full 52-provincia developable-land series, 2.6 GB / ~2 min from public Copernicus DEM; the memo's "data not in reach" was wrong
 - [Land constraint vs the migration→price gradient](docs/explorations/panel_saiz.md) — null with precision: premise and direct-price checks null, mechanism right-signed but indistinguishable (high τ 0.74 vs low 0.64)
-- [Terrain null survives the grain change](docs/explorations/panel_saiz_municipal.md) — municipal rerun (310 municipios, real starts/completions, 0.00–1.00 constraint spread): still null; design B left unbuilt
+- [Terrain null survives the grain change](docs/explorations/panel_saiz_municipal.md) — municipal rerun (310 municipios, real starts/completions, 0.00–1.00 constraint spread): still null; Madrid leg can't deliver the replication (priced municipios span 0.00–0.25) and its one association is a centrality gradient in terrain clothing; design B left unbuilt
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)
