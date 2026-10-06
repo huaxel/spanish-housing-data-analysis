@@ -71,7 +71,9 @@ def fisher_ci(r: float | None, n: int) -> list[float] | None:
 
 
 CCAA_WINDOWS = [(2007, 2011), (2011, 2015), (2015, 2019), (2019, 2021), (2021, 2025)]
-PROV_WINDOWS = [(2007, 2011), (2011, 2015), (2015, 2019), (2019, 2021)]
+# (2021, 2025) added 2026-10-06: provincia mart now runs to 2025 on the
+# Censo Anual de Población (previously population ended 2021).
+PROV_WINDOWS = [(2007, 2011), (2011, 2015), (2015, 2019), (2019, 2021), (2021, 2025)]
 
 
 def ccaa_pairs(y0: int, y1: int) -> list[dict]:
