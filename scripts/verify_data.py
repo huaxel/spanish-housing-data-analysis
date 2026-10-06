@@ -189,6 +189,13 @@ def main() -> int:
           f"(pre2007-leak={trx_p_ok}, post2007-gap={trx_p_bad})")
     assert trx_c == 0, "ccaa transactions must be complete 2007-2025"
     assert trx_p_ok == 0 and trx_p_bad == 0, "prov transactions must cover 2007-2021 only"
+    vin = con.execute(
+        "SELECT SUM(CASE WHEN tipo='vacia' AND vintage='De 2002 a 2011' "
+        "THEN viviendas END), SUM(CASE WHEN tipo='vacia' AND vintage='Total' "
+        "THEN viviendas END) FROM censo2011_vintage WHERE ccaa = '' AND provincia = ''"
+    ).fetchone()
+    print(f"vintage: new-vacant share nacional={vin[0] / vin[1]:.3f}")
+    assert vin[0] is not None and vin[1] is not None, "vintage nacional missing"
     cen_v = con.execute("SELECT COUNT(DISTINCT municipio) FROM censo2011_val").fetchone()[0]
     print(f"censo2011_val: municipios={cen_v}")
     assert cen_v == 9, f"valencia focus incomplete: {cen_v}"

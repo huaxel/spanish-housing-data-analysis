@@ -49,6 +49,11 @@ municipios with published appraisals (28, capital complete 2005–2025).
 Same split for 9 Valencia focus municipios (coast + capitals) — the
 second-home coast (Torrevieja 51%) vs vacant towns (Dénia 31%).
 
+## censo2011_vintage
+
+`ccaa`, `provincia`, `tipo` (principal/secundaria/vacia), `vintage`
+construction band, `viviendas` — 2011 only; boom fringe directly observable.
+
 ## censo2011_mad
 
 `municipio`, `tipo` (Total/familiar/principal/no principal/secundaria/

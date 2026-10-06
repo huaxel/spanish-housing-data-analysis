@@ -41,6 +41,15 @@ live where and with what credit*, not just unit counts — the next layer is
 household size/age structure (ECP age detail is already fetched in raw JSON)
 and, for levels-vs-incomes, an income source still to be pinned.
 
+## Update: the overhang was one-fifth brand-new (`censo2011_vintage`)
+
+2011 vacant stock by construction vintage: **22.3% built 2002–11** (768k
+unsold boom flats), 29.4% from the 1960s–70s, the rest older. The bust
+overhang was mostly *old* vacancy plus a new fringe — except in the boom
+belt: Almería 45%, Toledo 42%, Guadalajara 39%, Alicante 33%, Castellón
+29% of vacant stock brand-new. Where the cranes were, the overhang was
+unsold product; elsewhere, structural vacancy.
+
 ## Limits of this cut
 
 - 2021–2025 absorption uses ECP households (resident, family dwellings) vs

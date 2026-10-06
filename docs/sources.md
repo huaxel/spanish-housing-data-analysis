@@ -12,6 +12,7 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | INE Censo viviendas 2001/2011 (CENSOPV) | `ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv` | CCAA/provincia × censo | tab-separated, BOM; anchor use |
 | INE ECP población (operation ECP Id 450), table 56940 | `.../DATOS_TABLA/56940` | CCAA × 1-ene, 1971–2025 | FK_Periodo 19 = 1 Jan (date-checked at fetch) |
 | INE ECP hogares (ECP), tables 60131/60133 | `.../DATOS_TABLA/60131`, `.../60133` | CCAA/provincia × 1-ene, 2021– | household totals (tamaño detail skipped) |
+| INE Censo 2011 vintage por provincia (jaxi p01/01011a) | direct CSV URL in `fetch_censo2011_vintage.py` | provincia × tipo × construction band | dot thousands; '..' suppressed; ±10 additive tolerance |
 | INE Censo 2011 tipos de vivienda por municipio (CENSOPV 3456) | `.../DATOS_TABLA/3456` | 2,308 municipios >2.000 hab., 2011 only | principal/secundaria/vacía; 2021 census dropped the split; joined to the 28 valor municipios |
 | Diputació de Barcelona municipal housing (DIBA opendata.zip) | media.diba.cat ZIP | 311 municipios: sale €/m² M19 (2013–), rents M23 (2005–), vacant H9a (2018–), tourist H18a (2015–), burdens M11d/M11e (2015–2022) | cp1252, Catalan decimals; province row '08' mapped; muni_key() canonicalizes article order |
 | Madrid municipios valor tasado (datos.comunidad.madrid, MIVAU mirror) | direct CSV URL in `fetch_municipios_mad.py` | 28 municipios × año, 2005– | cp1252 → UTF-8; '-' unpublished dropped; third-party mirror, provincial mean cross-checked |

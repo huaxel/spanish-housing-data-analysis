@@ -24,6 +24,10 @@
   Provincial ECP (table 56945) is unreachable via the public API (volume
   block + empty series/filter endpoints, probed 2026-10-06), so the
   **provincia mart ends 2021** while CCAA/national run to 2025.
+- **Vintage (INE Censo 2011, jaxi p01/01011a):** dwellings by construction
+  band × provincia for principales/secundarias/vacías. Bands (+ No consta)
+  sum to Total within ±10 dwellings (published rounding). 2011 only — the
+  boom fringe is directly observable (22.3% of vacant built 2002–11).
 - **Hogares (INE ECP, 2021–):** households in family dwellings, CCAA (60131)
   and provincia (60133), 1-January. Enables `viv_por_hogar` — dwellings per
   household, the closest observable to shortage (a region can have ample

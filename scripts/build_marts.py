@@ -806,6 +806,29 @@ def main() -> None:
         raise SystemExit(f"censo2011 missing valencia focus: {VAL_FOCUS - have_val}")
     con.register("cenval_df", pa.Table.from_pylist(cen_val))
     con.execute("CREATE OR REPLACE TABLE censo2011_val AS SELECT * FROM cenval_df")
+    # Vintage additive guard: bands (+ No consta) sum to Total per cell.
+    vint: dict[tuple[str, str], dict] = {}
+    for r in load_parquet("censo2011_vintage.parquet"):
+        vint.setdefault((r["provincia"], r["tipo"]), {})[r["vintage"]] = r["viviendas"]
+    # Tolerance 10 dwellings absolute: published cells carry ±1 rounding
+    # noise (observed); structural breaks would be thousands.
+    vint_bad = {}
+    for k, v in vint.items():
+        if v.get("Total") is None:
+            vint_bad[k] = v
+            continue
+        s = sum(x for b, x in v.items() if b != "Total" and x is not None)
+        if abs(s - (v["Total"] or 0)) > 10:
+            vint_bad[k] = (s, v["Total"])
+    if vint_bad:
+        raise SystemExit(f"vintage additive check failed: {dict(list(vint_bad.items())[:3])}")
+    vint_rows = [
+        {"ccaa": r["ccaa"], "provincia": r["provincia"], "tipo": r["tipo"],
+         "vintage": r["vintage"], "viviendas": r["viviendas"]}
+        for r in load_parquet("censo2011_vintage.parquet")
+    ]
+    con.register("vint_df", pa.Table.from_pylist(vint_rows))
+    con.execute("CREATE OR REPLACE TABLE censo2011_vintage AS SELECT * FROM vint_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -818,6 +841,7 @@ def main() -> None:
         "muni_bcn",
         "censo2011_bcn",
         "censo2011_val",
+        "censo2011_vintage",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

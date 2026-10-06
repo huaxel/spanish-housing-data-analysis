@@ -168,6 +168,25 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        "bust",
+        "new-vacant share Nacional 2011 (boom fringe)",
+        "SELECT ROUND(SUM(CASE WHEN tipo='vacia' AND vintage='De 2002 a 2011' "
+        "THEN viviendas END) * 100.0 / SUM(CASE WHEN tipo='vacia' "
+        "AND vintage='Total' THEN viviendas END), 1) "
+        "FROM censo2011_vintage WHERE ccaa = '' AND provincia = ''",
+        22.3,
+        0.1,
+    ),
+    (
+        "bust",
+        "new-vacant share Almeria 2011 (boom belt)",
+        "SELECT ROUND(SUM(CASE WHEN vintage='De 2002 a 2011' THEN viviendas END) "
+        "* 100.0 / SUM(CASE WHEN vintage='Total' THEN viviendas END), 1) "
+        "FROM censo2011_vintage WHERE provincia='Almería' AND tipo='vacia'",
+        45.3,
+        0.1,
+    ),
+    (
         "municipios",
         "Torrevieja second homes 2011",
         "SELECT ROUND(SUM(CASE WHEN tipo='Vivienda secundaria' THEN viviendas_2011 END) "
