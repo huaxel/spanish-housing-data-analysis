@@ -19,7 +19,7 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 145 headline doc numbers (66 mart + 79 model/probe/terrain + 5 external anchors) re-queried; fails
+- `make audit` — 145 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg) re-queried; fails
   on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 
