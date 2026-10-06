@@ -34,6 +34,13 @@ Unreachable (probed 2026-10-06, do not retry blindly): provincial ECP population
 `DATOS_METADATAOPERACION/ECP` filters (115:provincia + 18:Total + 356:Todas,
 with and without `p=1`, raw and URL-encoded) all match nothing. Filter-variable
 IDs resolved for the record: Provincias=115 (Araba/Álava=2 … Ourense=53),
+
+**Workaround found 2026-10-06:** the Censo Anual de Población (the
+register-based replacement for the decennial census) publishes provincial
+population 2021–2025 as a **static CSV** (`jaxiT3/files/t/es/csv_bd/68521.csv`, 208 MB) —
+no API call needed. Verified: 2025 national 49,128,297 = mart exact;
+2021 province-vs-padrón mean Δ 0.17%. See
+`docs/explorations/censo_anual_probe.md`; fetch not yet built.
 Sexo=18 (Total=451), Totales de edad=356 (Todas=15668). If INE lifts the block,
 re-add 56945 to `scripts/fetch_ecp.py` and extend the provincia mart past 2021. |
 

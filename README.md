@@ -32,6 +32,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Madrid vs Valencia: scarcity vs composition](docs/explorations/madrid_vs_valencia.md)
 - [Synthesis: the answer in one place](docs/synthesis.md)
 - [Madrid capital vs corona: the south never recovered](docs/explorations/madrid_municipios.md)
+- [Censo Anual probe](docs/explorations/censo_anual_probe.md) — provincial population 2021–2025 reachable as static CSV; closes the 56945 block (2025 national = mart exact)
 - [Barcelona: burdened metropolis, stretched corona](docs/explorations/barcelona_municipios.md)
 
 ## Setup and verification
