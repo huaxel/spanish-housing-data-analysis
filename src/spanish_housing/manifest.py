@@ -30,7 +30,12 @@ def load() -> dict:
 
 
 def record(relative_path: str, source: dict) -> None:
-    """Pin one file: hash its current bytes and store its source metadata."""
+    """Pin one file: hash its current bytes and store its source metadata.
+
+    sort_keys makes regeneration byte-identical regardless of the order
+    fetch scripts run in; without it the committed manifest's byte order
+    silently depends on fetch sequence.
+    """
     import datetime
 
     man = load()
@@ -38,7 +43,10 @@ def record(relative_path: str, source: dict) -> None:
     full = Path(__file__).resolve().parents[2] / relative_path
     man.setdefault("sha256", {})[relative_path] = sha256(full)
     man.setdefault("sources", {})[relative_path] = source
-    MANIFEST.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    MANIFEST.write_text(
+        json.dumps(man, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def snapshot_age_days(man: dict, today: date | None = None) -> int | None:

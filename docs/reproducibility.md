@@ -27,13 +27,21 @@ Record a reproduction with: checkout revision, `uv --version`, input-manifest
 snapshot date, `coverage.json`, and test summary. `data/` is git-ignored by
 design; the manifest (committed) is what makes a run auditable.
 
-## Clean-rebuild record (2026-10-06)
+## Clean-rebuild record (2026-10-06, rerun 16:15 UTC)
 
-`data/` wiped (backup in /tmp, since removed) and `make gates` rerun from
-empty: fetch → build → verify → audit (145/145) → test (49) all green.
-Regenerated manifest byte-identical to committed (65 pinned paths — no
-upstream revisions in between), marts identical (342 + 1,071 rows).
-This is the evidence the pipeline reproduces, not just runs.
+`data/` wiped (backup in `~/backups/spanish-housing/`) and `make gates`
+rerun from empty: fetch → build → verify → audit (145/145) → test (49)
+all green. marts byte-identical to the pre-wipe build (sha256 of
+`mart_*.parquet` + `dim_territorio.parquet` match; 342 + 1,071 rows
+unchanged), so the pipeline reproduced — not just ran.
+
+The rerun caught one real (minor) flaw: the regenerated manifest was not
+byte-identical to committed, only set-identical. `manifest.record`
+appended one entry per fetch, so JSON byte order silently followed fetch
+sequence. Fixed with `sort_keys=True` on write (now deterministic and
+idempotent); the committed manifest is the sorted form, so a same-day
+regeneration is byte-identical. This is the evidence the pipeline
+reproduces, not just runs.
 
 ## Evidence explorer
 
