@@ -30,7 +30,7 @@ design; the manifest (committed) is what makes a run auditable.
 ## Clean-rebuild record (2026-10-06)
 
 `data/` wiped (backup in /tmp, since removed) and `make gates` rerun from
-empty: fetch → build → verify → audit (60/60) → test (42) all green.
+empty: fetch → build → verify → audit (60/60) → test (47) all green.
 Regenerated manifest byte-identical to committed (62 pinned paths — no
 upstream revisions in between), marts identical (342 + 1,071 rows).
 This is the evidence the pipeline reproduces, not just runs.

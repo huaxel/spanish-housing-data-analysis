@@ -9,7 +9,9 @@ Ages from ECP single-year detail, bands parsed with overlap guards
 
 The 20–34 cohort fell everywhere 2007–19 (−15% Balears to −41% Asturias;
 nationally 10.5M→7.7M) — Spain's baby-bust generations aging out, barely
-offset by immigration. The 2019–25 refill split the country: Madrid (+17%),
+offset by immigration: foreign inflows collapsed 567k→248k (2008–13) and
+only recovered past the boom peak in 2019 (666k; `migra_anual`).
+The 2019–25 refill split the country: Madrid (+17%),
 Cataluña (+16%), Valencia (+14%) rebounded on migration; the interior kept
 shrinking (Extremadura −8.7%, Asturias −2.5%, Galicia −1.9%).
 
