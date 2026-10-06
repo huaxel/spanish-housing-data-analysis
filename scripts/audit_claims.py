@@ -971,6 +971,24 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] tourist_rents: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 10
+    mv = json.loads(
+        (
+            Path(__file__).resolve().parents[1] / "artifacts" / "madrid_vacancy_terrain.json"
+        ).read_text()
+    )
+    for desc, path, expected, tol in (
+        ("named both n", "n_named_both", 135, 0),
+        ("constraint max", "constraint_max", 0.8263, 0.005),
+        ("vacancy max", "vacancy_max", 38.52, 0.05),
+        ("corr pearson", "pearson", 0.375, 0.005),
+        ("corr spearman", "spearman", 0.557, 0.005),
+        ("steep in table", "steep_villages_in_table", 0, 0),
+    ):
+        got = _json_path(mv, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] madrid_vacancy: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 6
     pp = json.loads(
         (Path(__file__).resolve().parents[1] / "artifacts" / "panel_provincial.json").read_text()
     )

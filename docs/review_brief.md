@@ -51,7 +51,7 @@ analysis, not to improve the code.
 ```bash
 uv sync --group dev
 make gates      # verify + audit + test + lint
-make audit      # 192 headline doc numbers re-queried against marts/models/probe
+make audit      # 198 headline doc numbers re-queried against marts/models/probe
 ```
 
 `make audit` is the anti-drift device: every quotable number in the docs is a

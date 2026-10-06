@@ -142,3 +142,28 @@ publishes municipal price series for its steep municipios. If terrain is
 ever revisited, it needs a design in which terrain is compared to
 *terrain*, not to centrality: matched pairs or within-mountain-range
 variation, not cross-sectional slopes.**
+
+## Madrid epilogue: the vacancy table does not reopen the question
+
+The one remaining variant — vacancy by electricity consumption (INE
+table 59531, `censo2021_intensidad`), which names 3,139 municipios and
+might reach the villages prices miss — was tested
+(`explorations/panel_saiz_madrid_vacancy.py`,
+`artifacts/madrid_vacancy_terrain.json`) and **closes the door twice**:
+
+1. **0 of the 7 steepest Madrid villages appear in the vacancy table**
+   (Hiruela 0.984, Puebla de la Sierra 0.982, Atazar 0.960, Patones
+   0.898, Acebeda 0.892, Somosierra 0.888, Horcajuelo 0.852 — all
+   rolled into "Resto de Madrid"; only Cercedilla 0.826, ~7k pop, is
+   named). The selection problem is structural: the terrain-relevant
+   tail aggregates away in *every* administrative series, not just
+   prices.
+2. On the 135 named Madrid municipios with both terrain (0.00–0.826)
+   and vacancy (2.7–38.5%): constraint→vacancy is **positive** (Pearson
+   0.375, Spearman 0.557). But the highest-vacancy named ones are rural
+   south-east periphery (Carabaña 39%, Valdelaguna 33%, Orusco 33%),
+   not mountains. It is the same centrality gradient as the price
+   finding, wearing a third proxy: constraint predicts vacancy
+   positively *and* prices negatively in the same sample, both fully
+   explained by center-versus-periphery. Terrain correlates with
+   everything, again — no identification added, verdict unchanged.
