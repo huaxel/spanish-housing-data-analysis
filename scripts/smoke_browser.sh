@@ -52,6 +52,8 @@ playwright-cli -s="$SESSION" open "$BASE/" >/dev/null 2>&1
 fail=0
 check_page "/"           8 "Precios, stock" "Datos y cobertura" || fail=1
 check_page "/ccaa/"      7 "Comunidades autónomas" "Madrid, Comunidad de" || fail=1
-check_page "/comparar/"  7 "Resumen del periodo" "38 records" || fail=1
+# NOTE: dev renders query-inspector chrome ('N records ...') that static
+# builds omit — assert shipped content only, valid against both.
+check_page "/comparar/"  7 "Resumen del periodo" "comunitat valenciana" || fail=1
 check_page "/municipios/" 5 "la capital se despega" "Santa Coloma de Gramenet" || fail=1
 exit $fail
