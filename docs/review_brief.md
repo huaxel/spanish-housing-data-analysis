@@ -34,7 +34,7 @@ analysis, not to improve the code.
 | `docs/explorations/identification.md` | Design menu and its own ranking |
 | `docs/explorations/iv_migration.md` | The one causal estimate, its limits |
 | `docs/reproducibility.md` | Gate definitions and clean-rebuild record |
-| `docs/sources.md`, `data_dictionary.md` | Provenance and column semantics |
+| `docs/sources.md`, `docs/data_dictionary.md` | Provenance and column semantics |
 | `src/spanish_housing/`, `scripts/` | Estimation + build code |
 | `explorations/*.py`, `*.md` | The four explorations and their writeups |
 
