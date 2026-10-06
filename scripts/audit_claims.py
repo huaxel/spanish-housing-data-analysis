@@ -871,12 +871,18 @@ def main() -> int:
             0.1,
         ),
         ("median real price overstock", "groups.median_real_price.overstock", -23.6, 0.1),
+        ("vacancy pearson", "vacancy_2021.corr_ratio_vs_vacancy.pearson", 0.523, 0.005),
+        ("vacancy spearman", "vacancy_2021.corr_ratio_vs_vacancy.spearman", 0.475, 0.005),
+        ("vacancy n", "vacancy_2021.corr_ratio_vs_vacancy.n", 17, 0),
+        ("vacancy galicia pct", "vacancy_2021.by_ccaa_pct.Galicia", 28.81, 0.05),
+        ("vacancy madrid pct", "vacancy_2021.by_ccaa_pct.Madrid, Comunidad de", 6.34, 0.05),
+        ("vacancy CyL pct", "vacancy_2021.by_ccaa_pct.Castilla y León", 19.38, 0.05),
     ):
         got = _json_path(ratio, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 14
+    total += 21
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

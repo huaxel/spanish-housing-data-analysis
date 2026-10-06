@@ -60,3 +60,35 @@ consistent — this is a descriptor, not an estimate.
   `coverage.json`); 2001 stock is MIVAU-modeled, census-anchored at 2011
   (see `docs/methods.md`). Cross-section of 17, no clustering — treat the
   correlations as a floor on uncertainty, not a standard error.
+
+## Vacancy (electricity-based, censo2021_intensidad 59531) confirms it
+
+The 2021 census replaced the classic principal/secundaria/vacía split with
+an **objective vacancy measure from electricity consumption** (below-threshold
+use over the year to 1-Jan-2021), published at municipal grain (3,139 named
+municipios + per-province Resto aggregates; see
+`docs/explorations/censo_anual_probe.md`). This gives the other side of the
+overhang that the viv/1000 ratio only suggests:
+
+| CCAA | Vacancy share 2021 | Δ ratio 2007→25 |
+| --- | --- | --- |
+| Galicia | **28.81%** | +107.4 |
+| Castilla - La Mancha | 22.51% | +65.5 |
+| Castilla y León | 19.38% | +122.0 |
+| Extremadura | 17.61% | +100.0 |
+| Madrid | **6.34%** | −29.7 |
+| País Vasco | 6.48% | +36.2 |
+| Cataluña | 10.67% | −27.6 |
+
+Cross-section across 17 CCAA: Δ ratio vs vacancy share, Pearson **+0.523**,
+Spearman **+0.475** — stronger than the price cross (−0.385). The regions
+where the boom built most per person are the ones with the highest share of
+dwellings whose consumption is below the occupancy threshold: **Galicia has
+4.5× Madrid's vacancy rate (28.8% vs 6.3%)**. The overstock group of the
+ratio decomposition is not a modeling artifact of the viv/1000 metric — it
+shows up as objectively empty stock in the electricity data.
+
+Caveat: electricity-based vacancy is a 2021 snapshot only (the 2011 census
+used the field-agent classification; the two are not comparable). It
+complements, does not replace, the vintage/vacancy data the repo already
+has for 2011 (`censo2011_vintage`).

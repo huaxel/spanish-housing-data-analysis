@@ -9,6 +9,7 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | MIVAU Estimación del Parque de Viviendas (VDP002_01 CSV) | `cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv` | provincia × año × tipo, 2001–2025 | `;`-separated, BOM; Ceuta+Melilla one aggregate |
 | INE IPV, operation IPV (Id 15), table 80271 | `servicios.ine.es/wstempus/js/es/DATOS_TABLA/80271` | CCAA × año × tipo, 2007–2025 | medias anuales; base 2025 (identity-checked) |
 | INE Padrón Revisión, operation DPOP (Id 22), tables 2852/2853 | `.../DATOS_TABLA/2852`, `.../2853` | provincia/CCAA × año, 1996–2021 | ends 2021; provincial 2022+ via Censo Anual (see row below) |
+| INE Censo 2021 viviendas por intensidad de uso (tpx=59531) | `jaxi/files/tpx/csv_bd/59531.csv` | municipio × 18 medidas, 2021 only | static CSV; objective vacancy from electricity consumption (3,139 named + Resto); total 26,623,708, vacías 3,828,307 |
 | INE Censo viviendas 2021 (viewer tpx=59521) | browser-exported CSV via playwright-cli (no static file) | provincia × tipo × banda, 2021 only | cp1252 → UTF-8 at pin; anchor = Total × Total |
 | INE Censo viviendas 2001/2011 (CENSOPV) | `ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv` | CCAA/provincia × censo | tab-separated, BOM; anchor use |
 | INE ECP población (operation ECP Id 450), table 56940 | `.../DATOS_TABLA/56940` | CCAA × 1-ene, 1971–2025 | FK_Periodo 19 = 1 Jan (date-checked at fetch) |

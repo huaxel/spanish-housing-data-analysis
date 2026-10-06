@@ -110,6 +110,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
+    "data/raw/parquet/censo2021_intensidad.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
     "data/raw/parquet/padron_extranjeros_origen.parquet",
@@ -1005,6 +1006,12 @@ def main() -> None:
         pa.Table.from_pylist(load_parquet("censo2021_viviendas.parquet")),
     )
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
+    # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
+    # electricity consumption. Municipal grain (named + Resto aggregates).
+    con.register(
+        "inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet"))
+    )
+    con.execute("CREATE OR REPLACE TABLE censo2021_intensidad AS SELECT * FROM inten_df")
     con.register("pade_df", pa.Table.from_pylist(load_parquet("padron_extranjeros.parquet")))
     con.execute("CREATE OR REPLACE TABLE padron_extranjeros AS SELECT * FROM pade_df")
     con.register(

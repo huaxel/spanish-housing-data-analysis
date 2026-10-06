@@ -3,6 +3,7 @@
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
+    "data/raw/censo2021_intensidad.csv": "9dfcc0ea546da82bd021c0cf6ff7b34f49270873885053e5f76839a135dd5558",
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
     "data/raw/censo_anual_68521.csv": "cdd0b707a40ce4af62d0f967fb02d88f2e70098c2ac4dbd846e3bcb7abcf0b52",
     "data/raw/censo_viviendas_2001_2011.csv": "8a4f18414c1d2953003c26d1b22455269f21fc34a6ce9883f710b82b94330dab",
@@ -26,6 +27,7 @@
     "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
     "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
+    "data/raw/parquet/censo2021_intensidad.parquet": "fb0e757b0151c42be8d4bcd760032a5472a538dca381e4698a2d425f9e2ee475",
     "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
     "data/raw/parquet/censo_anual_pob_prov.parquet": "8ea764f83d9e78f94783b9acd304866e89aa94f8f0c6c988a9cf3a1ca031ab46",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": "42040a0a9a5593538fe7a21c05c707a8c44c5524efba2176a943b2e08d514c14",
@@ -86,6 +88,12 @@
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
+    },
+    "data/raw/censo2021_intensidad.csv": {
+      "accessed": "2026-10-06",
+      "note": "static jaxi CSV; tab-separated, dot-thousands, BOM; 18 measures",
+      "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
+      "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/censo2021_viviendas.csv": {
       "accessed": "2026-10-06",
@@ -213,6 +221,12 @@
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
+    },
+    "data/raw/parquet/censo2021_intensidad.parquet": {
+      "accessed": "2026-10-06",
+      "note": "municipio grain; named + Resto aggregates; 18 measures",
+      "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
+      "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/parquet/censo2021_viviendas.parquet": {
       "accessed": "2026-10-06",

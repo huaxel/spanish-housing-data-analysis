@@ -94,6 +94,16 @@ Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
 `provincia`, `tipo` (Total/principal/no principal), `banda`, `viviendas`.
 Anchor uses Total × Total only (26,623,708); tipo split unchecked (definitional).
 
+## censo2021_intensidad
+
+2021 census dwellings by electricity-consumption intensity, municipal
+grain: `codigo` (5-digit INE, 999-suffix = Resto aggregate), `municipio`,
+`provincia_cod`, `medida` (18 measures: Viviendas totales, Viviendas
+vacías, Mediana consumo anual, 15 consumption bands), `valor`. Objective
+vacancy (below-threshold consumption) — replaces the classic
+principal/secundaria/vacía split. 3,139 named municipios + 46 Resto.
+Anchors: total 26,623,708, vacías 3,828,307.
+
 ## migra_anual
 
 Foreign/Spanish immigration flows by provincia × year (`provincia`,

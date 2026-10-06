@@ -141,6 +141,43 @@ print(f"n={n} pearson={pearson} t={t} spearman={spearman}")
 print("scarcity median real:", out["groups"]["median_real_price"]["scarcity"])
 print("overstock median real:", out["groups"]["median_real_price"]["overstock"])
 
+# --- vacancy share by electricity consumption (censo2021_intensidad, 59531)
+# Objective vacancy (below consumption threshold) at municipal grain, 2021.
+# The overstock group should carry the highest vacancy rates.
+vac_rows = con.execute(
+    """
+    WITH t AS (
+      SELECT d.ccaa ccaa,
+        SUM(CASE WHEN i.medida='Viviendas totales' THEN i.valor END) tot,
+        SUM(CASE WHEN i.medida='Viviendas vacías' THEN i.valor END) vac
+      FROM censo2021_intensidad i
+      LEFT JOIN (SELECT cpro, ccaa FROM dim_territorio WHERE cpro != '51+52') d
+        ON i.provincia_cod=d.cpro
+      GROUP BY d.ccaa
+    )
+    SELECT ccaa, ROUND(100.0*vac/tot,2) FROM t
+    WHERE tot IS NOT NULL AND vac IS NOT NULL
+    """
+).fetchall()
+vacancy = {c: v for c, v in vac_rows if c}
+
+# Cross: ratio change (2007-25) vs vacancy share (2021), across CCAA.
+xs2 = [ratios[k]["d_07_25"] for k in vacancy if k in ratios and ratios[k]["d_07_25"] is not None]
+ys2 = [v for k, v in vacancy.items() if k in ratios and ratios[k]["d_07_25"] is not None]
+n2 = len(xs2)
+pearson2 = round(statistics.correlation(xs2, ys2), 3) if n2 > 2 else None
+spearman2 = round(statistics.correlation(_rank(xs2), _rank(ys2)), 3) if n2 > 2 else None
+out["vacancy_2021"] = {
+    "by_ccaa_pct": vacancy,
+    "corr_ratio_vs_vacancy": {"n": n2, "pearson": pearson2, "spearman": spearman2},
+    "galicia_vs_madrid": {
+        "galicia": vacancy.get("Galicia"),
+        "madrid": vacancy.get("Madrid, Comunidad de"),
+    },
+}
+print(f"vacancy: n={n2} pearson={pearson2} spearman={spearman2}")
+print("galicia vac%:", vacancy.get("Galicia"), "madrid:", vacancy.get("Madrid, Comunidad de"))
+
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "ratio_ccaa.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

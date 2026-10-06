@@ -24,6 +24,7 @@ fetch:
 	uv run python scripts/fetch_ipc.py
 	uv run python scripts/fetch_ech.py
 	uv run python scripts/fetch_censo2021.py
+	uv run python scripts/fetch_intensidad.py
 	uv run python scripts/fetch_migracion.py
 	uv run python scripts/fetch_padron_extranjeros.py
 	uv run python scripts/fetch_turisticas.py
