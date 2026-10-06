@@ -1,0 +1,366 @@
+[
+  {
+    "provincia": "Valladolid",
+    "tiles": 5,
+    "undevelopable_share": 0.0737,
+    "steep_share": 0.071,
+    "water_share": 0.0031
+  },
+  {
+    "provincia": "Salamanca",
+    "tiles": 4,
+    "undevelopable_share": 0.1376,
+    "steep_share": 0.131,
+    "water_share": 0.0081
+  },
+  {
+    "provincia": "Segovia",
+    "tiles": 4,
+    "undevelopable_share": 0.1645,
+    "steep_share": 0.1638,
+    "water_share": 0.0011
+  },
+  {
+    "provincia": "Toledo",
+    "tiles": 7,
+    "undevelopable_share": 0.1648,
+    "steep_share": 0.159,
+    "water_share": 0.0063
+  },
+  {
+    "provincia": "Zamora",
+    "tiles": 5,
+    "undevelopable_share": 0.1823,
+    "steep_share": 0.1715,
+    "water_share": 0.0142
+  },
+  {
+    "provincia": "Badajoz",
+    "tiles": 10,
+    "undevelopable_share": 0.1992,
+    "steep_share": 0.1796,
+    "water_share": 0.0218
+  },
+  {
+    "provincia": "Palencia",
+    "tiles": 7,
+    "undevelopable_share": 0.2153,
+    "steep_share": 0.2114,
+    "water_share": 0.0047
+  },
+  {
+    "provincia": "Sevilla",
+    "tiles": 6,
+    "undevelopable_share": 0.221,
+    "steep_share": 0.2071,
+    "water_share": 0.0151
+  },
+  {
+    "provincia": "Albacete",
+    "tiles": 5,
+    "undevelopable_share": 0.2504,
+    "steep_share": 0.2479,
+    "water_share": 0.0032
+  },
+  {
+    "provincia": "Melilla",
+    "tiles": 2,
+    "undevelopable_share": 0.2612,
+    "steep_share": 0.2175,
+    "water_share": 0.0541
+  },
+  {
+    "provincia": "Madrid",
+    "tiles": 4,
+    "undevelopable_share": 0.2681,
+    "steep_share": 0.2613,
+    "water_share": 0.0081
+  },
+  {
+    "provincia": "Ciudad Real",
+    "tiles": 7,
+    "undevelopable_share": 0.2703,
+    "steep_share": 0.266,
+    "water_share": 0.0048
+  },
+  {
+    "provincia": "Cuenca",
+    "tiles": 6,
+    "undevelopable_share": 0.2847,
+    "steep_share": 0.279,
+    "water_share": 0.0063
+  },
+  {
+    "provincia": "C\u00e1ceres",
+    "tiles": 7,
+    "undevelopable_share": 0.301,
+    "steep_share": 0.2872,
+    "water_share": 0.0176
+  },
+  {
+    "provincia": "Soria",
+    "tiles": 4,
+    "undevelopable_share": 0.3019,
+    "steep_share": 0.2994,
+    "water_share": 0.0029
+  },
+  {
+    "provincia": "Illes Balears",
+    "tiles": 7,
+    "undevelopable_share": 0.3201,
+    "steep_share": 0.3115,
+    "water_share": 0.0113
+  },
+  {
+    "provincia": "Huelva",
+    "tiles": 5,
+    "undevelopable_share": 0.3321,
+    "steep_share": 0.3129,
+    "water_share": 0.0212
+  },
+  {
+    "provincia": "Murcia",
+    "tiles": 6,
+    "undevelopable_share": 0.3341,
+    "steep_share": 0.3305,
+    "water_share": 0.0041
+  },
+  {
+    "provincia": "Zaragoza",
+    "tiles": 7,
+    "undevelopable_share": 0.3393,
+    "steep_share": 0.3298,
+    "water_share": 0.0108
+  },
+  {
+    "provincia": "Burgos",
+    "tiles": 7,
+    "undevelopable_share": 0.3495,
+    "steep_share": 0.3465,
+    "water_share": 0.0035
+  },
+  {
+    "provincia": "C\u00f3rdoba",
+    "tiles": 4,
+    "undevelopable_share": 0.3497,
+    "steep_share": 0.34,
+    "water_share": 0.0125
+  },
+  {
+    "provincia": "\u00c1vila",
+    "tiles": 4,
+    "undevelopable_share": 0.3696,
+    "steep_share": 0.3674,
+    "water_share": 0.0029
+  },
+  {
+    "provincia": "C\u00e1diz",
+    "tiles": 3,
+    "undevelopable_share": 0.4009,
+    "steep_share": 0.3742,
+    "water_share": 0.0283
+  },
+  {
+    "provincia": "Guadalajara",
+    "tiles": 6,
+    "undevelopable_share": 0.4154,
+    "steep_share": 0.4108,
+    "water_share": 0.0057
+  },
+  {
+    "provincia": "Alicante/Alacant",
+    "tiles": 4,
+    "undevelopable_share": 0.4306,
+    "steep_share": 0.417,
+    "water_share": 0.0144
+  },
+  {
+    "provincia": "A Coru\u00f1a",
+    "tiles": 6,
+    "undevelopable_share": 0.4307,
+    "steep_share": 0.4205,
+    "water_share": 0.0137
+  },
+  {
+    "provincia": "Valencia/Val\u00e8ncia",
+    "tiles": 5,
+    "undevelopable_share": 0.445,
+    "steep_share": 0.4395,
+    "water_share": 0.0068
+  },
+  {
+    "provincia": "Teruel",
+    "tiles": 8,
+    "undevelopable_share": 0.4664,
+    "steep_share": 0.4654,
+    "water_share": 0.0014
+  },
+  {
+    "provincia": "Las Palmas",
+    "tiles": 5,
+    "undevelopable_share": 0.5256,
+    "steep_share": 0.5206,
+    "water_share": 0.0069
+  },
+  {
+    "provincia": "Tarragona",
+    "tiles": 3,
+    "undevelopable_share": 0.5274,
+    "steep_share": 0.5145,
+    "water_share": 0.0141
+  },
+  {
+    "provincia": "Le\u00f3n",
+    "tiles": 7,
+    "undevelopable_share": 0.5275,
+    "steep_share": 0.5234,
+    "water_share": 0.0055
+  },
+  {
+    "provincia": "Navarra",
+    "tiles": 6,
+    "undevelopable_share": 0.5529,
+    "steep_share": 0.5475,
+    "water_share": 0.0072
+  },
+  {
+    "provincia": "Lugo",
+    "tiles": 4,
+    "undevelopable_share": 0.5549,
+    "steep_share": 0.5521,
+    "water_share": 0.0059
+  },
+  {
+    "provincia": "Araba/\u00c1lava",
+    "tiles": 4,
+    "undevelopable_share": 0.5608,
+    "steep_share": 0.5514,
+    "water_share": 0.0113
+  },
+  {
+    "provincia": "Pontevedra",
+    "tiles": 3,
+    "undevelopable_share": 0.5639,
+    "steep_share": 0.5563,
+    "water_share": 0.0107
+  },
+  {
+    "provincia": "Ja\u00e9n",
+    "tiles": 6,
+    "undevelopable_share": 0.5659,
+    "steep_share": 0.5575,
+    "water_share": 0.011
+  },
+  {
+    "provincia": "Huesca",
+    "tiles": 4,
+    "undevelopable_share": 0.5693,
+    "steep_share": 0.5633,
+    "water_share": 0.0073
+  },
+  {
+    "provincia": "Granada",
+    "tiles": 7,
+    "undevelopable_share": 0.574,
+    "steep_share": 0.5708,
+    "water_share": 0.0041
+  },
+  {
+    "provincia": "Almer\u00eda",
+    "tiles": 7,
+    "undevelopable_share": 0.5957,
+    "steep_share": 0.593,
+    "water_share": 0.0031
+  },
+  {
+    "provincia": "Ourense",
+    "tiles": 6,
+    "undevelopable_share": 0.6087,
+    "steep_share": 0.6006,
+    "water_share": 0.0126
+  },
+  {
+    "provincia": "La Rioja",
+    "tiles": 5,
+    "undevelopable_share": 0.6106,
+    "steep_share": 0.6068,
+    "water_share": 0.0049
+  },
+  {
+    "provincia": "Castell\u00f3n/Castell\u00f3",
+    "tiles": 4,
+    "undevelopable_share": 0.6153,
+    "steep_share": 0.6132,
+    "water_share": 0.0026
+  },
+  {
+    "provincia": "Girona",
+    "tiles": 5,
+    "undevelopable_share": 0.6371,
+    "steep_share": 0.6327,
+    "water_share": 0.0059
+  },
+  {
+    "provincia": "Barcelona",
+    "tiles": 4,
+    "undevelopable_share": 0.6431,
+    "steep_share": 0.6407,
+    "water_share": 0.0036
+  },
+  {
+    "provincia": "Lleida",
+    "tiles": 4,
+    "undevelopable_share": 0.646,
+    "steep_share": 0.6409,
+    "water_share": 0.0071
+  },
+  {
+    "provincia": "M\u00e1laga",
+    "tiles": 5,
+    "undevelopable_share": 0.66,
+    "steep_share": 0.653,
+    "water_share": 0.0079
+  },
+  {
+    "provincia": "Santa Cruz de Tenerife",
+    "tiles": 6,
+    "undevelopable_share": 0.7841,
+    "steep_share": 0.7813,
+    "water_share": 0.0061
+  },
+  {
+    "provincia": "Ceuta",
+    "tiles": 1,
+    "undevelopable_share": 0.7887,
+    "steep_share": 0.75,
+    "water_share": 0.0596
+  },
+  {
+    "provincia": "Cantabria",
+    "tiles": 4,
+    "undevelopable_share": 0.7982,
+    "steep_share": 0.7831,
+    "water_share": 0.0173
+  },
+  {
+    "provincia": "Bizkaia",
+    "tiles": 4,
+    "undevelopable_share": 0.8385,
+    "steep_share": 0.833,
+    "water_share": 0.0087
+  },
+  {
+    "provincia": "Asturias",
+    "tiles": 6,
+    "undevelopable_share": 0.8827,
+    "steep_share": 0.8792,
+    "water_share": 0.0068
+  },
+  {
+    "provincia": "Gipuzkoa",
+    "tiles": 3,
+    "undevelopable_share": 0.9249,
+    "steep_share": 0.9205,
+    "water_share": 0.0077
+  }
+]

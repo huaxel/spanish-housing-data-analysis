@@ -46,15 +46,26 @@ window) or 2021+ ECP-nationality refill design (different shock, own
 shares). Panel: provincias × window, CCAA + year FE, cluster by
 provincia, AR CIs.
 
-### B. Saiz elasticity for supply → prices (credible, heavy)
+### B. Saiz elasticity for supply → prices (feasible — probe done 2026-10-06)
 
-Developable-land share (slope + water/wetland masks) × national demand
-as supply-elasticity instrument, à la Saiz (2010). Exclusion is the
-usual geography-only-via-supply argument.
-Data: NOT in reach — needs a GIS build (IGN MDT elevation, SIOSE/Corine
-land cover) reduced to province elasticities. Weeks, not days, plus a
-new pipeline discipline (rasters don't fit the manifest-pin pattern
-without thought). The single biggest data investment on this list.
+Developable-land share (slope + water masks) × national demand as
+supply-elasticity instrument, à la Saiz (2010). Exclusion is the usual
+geography-only-via-supply argument.
+
+**Data WAS thought to be NOT in reach — that was wrong.**
+`docs/explorations/saiz_gis_probe.md` builds the full 52-provincia
+series from Copernicus DEM GLO-30 (AWS Open Data, public) + GISCO NUTS-3
+during one session: 2.6 GB, ~2 minutes, no new committed dependencies,
+spread 0.07 (Valladolid) → 0.92 (Gipuzkoa) and face-valid. Spanish IGN
+is unreachable from here, but it was never needed. What remains is the
+exclusion argument and pipeline discipline, not data acquisition.
+
+Threshold is **15% grade (8.53°), not 15°** — and GLO-30 is a DSM, so the
+raster must be averaged to 90 m to match Saiz. Both traps are documented
+in the probe.
+
+The plausible amenity/tourism-terrain confound is unresolved and is the
+real cost of this design.
 
 ### C. Tourist-demand shift-share (feasible, wrong estimand for supply)
 
@@ -84,9 +95,14 @@ not t-stats) are non-negotiable reporting.
 ## Recommended sequence
 
 1. A (migration shift-share, provincias 2001–2011): data-light, answers
-   the demand half, reuses pinned Padrón/ECP patterns.
+   the demand half, reuses pinned Padrón/ECP patterns. **DONE** — merged
+   with the split-sample qualifier; independent read still owed.
 2. C (tourist exposure, Barcelona pilot): municipal, already-pinned data.
-3. B (Saiz GIS build): only after A or C shows the machinery works.
+   **DONE** — municipal null.
+3. B (Saiz GIS build): prerequisite (A or C shows the machinery works)
+   is met, and the data/tooling blocker was overstated — see the probe.
+   Now the *cheapest* remaining data step, but its exclusion argument is
+   the most serious open question on this list.
 4. Nothing causal merges into synthesis until an independent read of the
    design — same bar as v1's methods review (plan milestone 5). The read
    questions for design A are written out in `docs/review_brief.md`;
@@ -95,7 +111,12 @@ not t-stats) are non-negotiable reporting.
 
 ## What would need building (when, not now)
 
-- `fetch_migracion.py` (nationality shares by provincia) + shift-share
-  constructor in explorations + weak-IV diagnostics in `ols.py`
-  (AR confidence sets, first-stage F with clustered SEs).
-- GIS pipeline + manifest treatment for rasters (design decision open).
+- ~~`fetch_migracion.py` + shift-share constructor + weak-IV diagnostics~~
+  DONE — see `explorations/iv_migration.py`, `bartik_*.py`, `ols.py`.
+- GIS pipeline: the raster reduction exists (`scripts/probe_saiz_gis.py`),
+  but its **manifest treatment is still an open design decision** — pin
+  103 tiles (2.6 GB) by hash as a second manifest class, or pin the tile
+  list + source version and treat rasters like `data/` (git-ignored but
+  reproducible). The latter matches existing repo practice.
+- Saiz-series sensitivity table (resolution 30/90/180 m, threshold
+  10/15/20% grade) and audit claims for the committed series.

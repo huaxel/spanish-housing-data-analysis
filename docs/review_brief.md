@@ -43,7 +43,7 @@ analysis, not to improve the code.
 ```bash
 uv sync --group dev
 make gates      # verify + audit + test + lint
-make audit      # 83 headline doc numbers re-queried against marts/models
+make audit      # 104 headline doc numbers re-queried against marts/models/probe
 ```
 
 `make audit` is the anti-drift device: every quotable number in the docs is a
@@ -128,9 +128,12 @@ Disclosed here so the reviewer judges them rather than finding them later:
   stated bar was not met at merge time.
 - Milestone 5 has been open since the plan was written while the explorer was
   already deployed to workers.dev.
-- Design B (Saiz GIS, `identification.md` §B) has not been started; its
-  precondition ("only after A or C shows the machinery works") is now met by
-  A. Its exclusion argument has not been independently checked either.
+- Design B (Saiz GIS) was probed this session
+  (`docs/explorations/saiz_gis_probe.md`): the memo's "data NOT in reach,
+  weeks not days" claim was **wrong** — the full 52-provincia series takes
+  ~2 minutes and 2.6 GB from public Copernicus DEM. That probe needs
+  reviewing too, and its own exclusion argument (terrain correlates with
+  coastal amenity/tourism) is the sharpest open question on the list.
 
 ## Output
 

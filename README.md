@@ -23,6 +23,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [IV: migration exposure → prices](docs/explorations/iv_migration.md) — commissioned design-A estimate (+0.67, AR [0.35, 1.00]); threats + read record included
 - [Tourist intensity panel](docs/explorations/panel_tourist.md) — municipal null: tourist changes don't track price/rent accelerations (wild-p 0.45–0.94)
 - [**Independent review brief**](docs/review_brief.md) — milestone-5 package (scope, reproduction, adversarial questions, disclosed limitations); **review not yet run**
+- [Saiz GIS probe](docs/explorations/saiz_gis_probe.md) — design B feasibility: full 52-provincia developable-land series, 2.6 GB / ~2 min from public Copernicus DEM; the memo's "data not in reach" was wrong
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)

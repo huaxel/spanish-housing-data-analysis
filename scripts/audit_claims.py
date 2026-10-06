@@ -608,6 +608,52 @@ IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
 ]
 
 
+# (doc, description, provincia, field, expected, tolerance)
+# Probe series: terrain-derived, so re-running the probe is the only way to
+# reproduce it. Pinned here so a doc quote cannot drift from the JSON.
+PROBE_CLAIMS = [
+    (
+        "saiz_gis_probe",
+        "Valladolid undevelopable",
+        "Valladolid",
+        "undevelopable_share",
+        0.07,
+        0.005,
+    ),
+    ("saiz_gis_probe", "Salamanca undevelopable", "Salamanca", "undevelopable_share", 0.14, 0.005),
+    ("saiz_gis_probe", "Segovia undevelopable", "Segovia", "undevelopable_share", 0.165, 0.005),
+    ("saiz_gis_probe", "Toledo undevelopable", "Toledo", "undevelopable_share", 0.165, 0.005),
+    ("saiz_gis_probe", "Zamora undevelopable", "Zamora", "undevelopable_share", 0.182, 0.005),
+    ("saiz_gis_probe", "Gipuzkoa undevelopable", "Gipuzkoa", "undevelopable_share", 0.925, 0.005),
+    ("saiz_gis_probe", "Asturias undevelopable", "Asturias", "undevelopable_share", 0.883, 0.005),
+    ("saiz_gis_probe", "Bizkaia undevelopable", "Bizkaia", "undevelopable_share", 0.839, 0.005),
+    ("saiz_gis_probe", "Cantabria undevelopable", "Cantabria", "undevelopable_share", 0.798, 0.005),
+    ("saiz_gis_probe", "Ceuta undevelopable", "Ceuta", "undevelopable_share", 0.789, 0.005),
+    ("saiz_gis_probe", "Malaga undevelopable", "Málaga", "undevelopable_share", 0.66, 0.005),
+    ("saiz_gis_probe", "Barcelona undevelopable", "Barcelona", "undevelopable_share", 0.643, 0.005),
+    ("saiz_gis_probe", "Madrid inland water share", "Madrid", "water_share", 0.008, 0.005),
+    (
+        "saiz_gis_probe",
+        "Alicante inland water share",
+        "Alicante/Alacant",
+        "water_share",
+        0.014,
+        0.005,
+    ),
+    ("saiz_gis_probe", "Ceuta inland water share", "Ceuta", "water_share", 0.06, 0.005),
+]
+
+# (doc, description, tile key, resolution, expected, tolerance)
+SENSITIVITY_CLAIMS = [
+    ("saiz_gis_probe", "Extremadura steep 30m", "extremadura_rolling", "30m", 0.29, 0.005),
+    ("saiz_gis_probe", "Extremadura steep 90m", "extremadura_rolling", "90m", 0.248, 0.005),
+    ("saiz_gis_probe", "Extremadura steep 180m", "extremadura_rolling", "180m", 0.192, 0.005),
+    ("saiz_gis_probe", "Pyrenees steep 30m", "pyrenees_steep", "30m", 0.88, 0.005),
+    ("saiz_gis_probe", "Pyrenees steep 90m", "pyrenees_steep", "90m", 0.876, 0.005),
+    ("saiz_gis_probe", "Pyrenees steep 180m", "pyrenees_steep", "180m", 0.853, 0.005),
+]
+
+
 def _json_path(data: dict, path: str):
     for part in path.split("."):
         data = data[int(part) if part.isdigit() else part]
@@ -631,7 +677,24 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total = len(CLAIMS) + len(IV_CLAIMS)
+
+    expl = Path(__file__).resolve().parents[1] / "explorations"
+    probe = json.loads((expl / "saiz_probe_results.json").read_text())
+    by_prov = {r["provincia"]: r for r in probe}
+    for doc, desc, prov, field, expected, tol in PROBE_CLAIMS:
+        got = by_prov.get(prov, {}).get(field)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+
+    sens = json.loads((expl / "saiz_resolution_sensitivity.json").read_text())
+    for doc, desc, tile, res, expected, tol in SENSITIVITY_CLAIMS:
+        got = sens.get(tile, {}).get(res)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+
+    total = len(CLAIMS) + len(IV_CLAIMS) + len(PROBE_CLAIMS) + len(SENSITIVITY_CLAIMS)
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 
