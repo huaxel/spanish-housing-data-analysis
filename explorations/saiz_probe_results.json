@@ -2,125 +2,143 @@
   {
     "provincia": "Valladolid",
     "tiles": 5,
-    "undevelopable_share": 0.0737,
+    "land_km2": 8062.34,
+    "undevelopable_share": 0.0738,
     "steep_share": 0.071,
     "water_share": 0.0031
   },
   {
     "provincia": "Salamanca",
     "tiles": 4,
-    "undevelopable_share": 0.1376,
-    "steep_share": 0.131,
-    "water_share": 0.0081
+    "land_km2": 12280.57,
+    "undevelopable_share": 0.138,
+    "steep_share": 0.1314,
+    "water_share": 0.008
   },
   {
     "provincia": "Segovia",
     "tiles": 4,
-    "undevelopable_share": 0.1645,
-    "steep_share": 0.1638,
+    "land_km2": 6884.37,
+    "undevelopable_share": 0.1647,
+    "steep_share": 0.164,
     "water_share": 0.0011
   },
   {
     "provincia": "Toledo",
     "tiles": 7,
-    "undevelopable_share": 0.1648,
-    "steep_share": 0.159,
+    "land_km2": 15283.26,
+    "undevelopable_share": 0.165,
+    "steep_share": 0.1592,
     "water_share": 0.0063
   },
   {
     "provincia": "Zamora",
     "tiles": 5,
-    "undevelopable_share": 0.1823,
-    "steep_share": 0.1715,
+    "land_km2": 10496.24,
+    "undevelopable_share": 0.1818,
+    "steep_share": 0.171,
     "water_share": 0.0142
   },
   {
     "provincia": "Badajoz",
     "tiles": 10,
+    "land_km2": 21648.63,
     "undevelopable_share": 0.1992,
-    "steep_share": 0.1796,
-    "water_share": 0.0218
+    "steep_share": 0.1797,
+    "water_share": 0.0217
   },
   {
     "provincia": "Palencia",
     "tiles": 7,
-    "undevelopable_share": 0.2153,
-    "steep_share": 0.2114,
+    "land_km2": 8002.16,
+    "undevelopable_share": 0.2143,
+    "steep_share": 0.2104,
     "water_share": 0.0047
   },
   {
     "provincia": "Sevilla",
     "tiles": 6,
-    "undevelopable_share": 0.221,
-    "steep_share": 0.2071,
+    "land_km2": 13965.8,
+    "undevelopable_share": 0.2205,
+    "steep_share": 0.2065,
     "water_share": 0.0151
   },
   {
     "provincia": "Albacete",
     "tiles": 5,
-    "undevelopable_share": 0.2504,
-    "steep_share": 0.2479,
+    "land_km2": 14844.78,
+    "undevelopable_share": 0.2513,
+    "steep_share": 0.2488,
     "water_share": 0.0032
   },
   {
     "provincia": "Melilla",
     "tiles": 2,
+    "land_km2": 13.92,
     "undevelopable_share": 0.2612,
     "steep_share": 0.2175,
-    "water_share": 0.0541
+    "water_share": 0.0542
   },
   {
     "provincia": "Madrid",
     "tiles": 4,
-    "undevelopable_share": 0.2681,
-    "steep_share": 0.2613,
+    "land_km2": 7984.33,
+    "undevelopable_share": 0.2675,
+    "steep_share": 0.2608,
     "water_share": 0.0081
   },
   {
     "provincia": "Ciudad Real",
     "tiles": 7,
-    "undevelopable_share": 0.2703,
-    "steep_share": 0.266,
+    "land_km2": 19710.25,
+    "undevelopable_share": 0.2706,
+    "steep_share": 0.2662,
     "water_share": 0.0048
   },
   {
     "provincia": "Cuenca",
     "tiles": 6,
-    "undevelopable_share": 0.2847,
-    "steep_share": 0.279,
+    "land_km2": 17047.0,
+    "undevelopable_share": 0.2839,
+    "steep_share": 0.2783,
     "water_share": 0.0063
   },
   {
     "provincia": "C\u00e1ceres",
     "tiles": 7,
-    "undevelopable_share": 0.301,
-    "steep_share": 0.2872,
+    "land_km2": 19759.48,
+    "undevelopable_share": 0.3005,
+    "steep_share": 0.2867,
     "water_share": 0.0176
   },
   {
     "provincia": "Soria",
     "tiles": 4,
-    "undevelopable_share": 0.3019,
-    "steep_share": 0.2994,
-    "water_share": 0.0029
+    "land_km2": 10245.71,
+    "undevelopable_share": 0.3015,
+    "steep_share": 0.299,
+    "water_share": 0.0028
   },
   {
     "provincia": "Illes Balears",
     "tiles": 7,
-    "undevelopable_share": 0.3201,
-    "steep_share": 0.3115,
+    "land_km2": 4966.4,
+    "undevelopable_share": 0.32,
+    "steep_share": 0.3114,
     "water_share": 0.0113
   },
   {
     "provincia": "Huelva",
     "tiles": 5,
-    "undevelopable_share": 0.3321,
-    "steep_share": 0.3129,
+    "land_km2": 10078.9,
+    "undevelopable_share": 0.3313,
+    "steep_share": 0.312,
     "water_share": 0.0212
   },
   {
     "provincia": "Murcia",
     "tiles": 6,
+    "land_km2": 11257.44,
     "undevelopable_share": 0.3341,
     "steep_share": 0.3305,
     "water_share": 0.0041
@@ -128,62 +146,71 @@
   {
     "provincia": "Zaragoza",
     "tiles": 7,
-    "undevelopable_share": 0.3393,
-    "steep_share": 0.3298,
+    "land_km2": 17170.11,
+    "undevelopable_share": 0.339,
+    "steep_share": 0.3296,
     "water_share": 0.0108
   },
   {
     "provincia": "Burgos",
     "tiles": 7,
-    "undevelopable_share": 0.3495,
-    "steep_share": 0.3465,
+    "land_km2": 14205.13,
+    "undevelopable_share": 0.3487,
+    "steep_share": 0.3457,
     "water_share": 0.0035
   },
   {
     "provincia": "C\u00f3rdoba",
     "tiles": 4,
-    "undevelopable_share": 0.3497,
-    "steep_share": 0.34,
+    "land_km2": 13703.03,
+    "undevelopable_share": 0.35,
+    "steep_share": 0.3402,
     "water_share": 0.0125
   },
   {
     "provincia": "\u00c1vila",
     "tiles": 4,
-    "undevelopable_share": 0.3696,
-    "steep_share": 0.3674,
+    "land_km2": 8005.22,
+    "undevelopable_share": 0.3706,
+    "steep_share": 0.3683,
     "water_share": 0.0029
   },
   {
     "provincia": "C\u00e1diz",
     "tiles": 3,
-    "undevelopable_share": 0.4009,
-    "steep_share": 0.3742,
+    "land_km2": 7402.53,
+    "undevelopable_share": 0.401,
+    "steep_share": 0.3743,
     "water_share": 0.0283
   },
   {
     "provincia": "Guadalajara",
     "tiles": 6,
-    "undevelopable_share": 0.4154,
-    "steep_share": 0.4108,
+    "land_km2": 12140.78,
+    "undevelopable_share": 0.4152,
+    "steep_share": 0.4107,
     "water_share": 0.0057
   },
   {
     "provincia": "Alicante/Alacant",
     "tiles": 4,
-    "undevelopable_share": 0.4306,
-    "steep_share": 0.417,
-    "water_share": 0.0144
+    "land_km2": 5788.0,
+    "undevelopable_share": 0.43,
+    "steep_share": 0.4163,
+    "water_share": 0.0145
   },
   {
     "provincia": "A Coru\u00f1a",
     "tiles": 6,
-    "undevelopable_share": 0.4307,
-    "steep_share": 0.4205,
+    "land_km2": 7899.19,
+    "undevelopable_share": 0.4304,
+    "steep_share": 0.4203,
     "water_share": 0.0137
   },
   {
     "provincia": "Valencia/Val\u00e8ncia",
     "tiles": 5,
+    "land_km2": 10750.67,
     "undevelopable_share": 0.445,
     "steep_share": 0.4395,
     "water_share": 0.0068
@@ -191,146 +218,167 @@
   {
     "provincia": "Teruel",
     "tiles": 8,
-    "undevelopable_share": 0.4664,
-    "steep_share": 0.4654,
+    "land_km2": 14725.95,
+    "undevelopable_share": 0.4668,
+    "steep_share": 0.4658,
     "water_share": 0.0014
+  },
+  {
+    "provincia": "Le\u00f3n",
+    "tiles": 7,
+    "land_km2": 15485.79,
+    "undevelopable_share": 0.5264,
+    "steep_share": 0.5223,
+    "water_share": 0.0055
   },
   {
     "provincia": "Las Palmas",
     "tiles": 5,
-    "undevelopable_share": 0.5256,
-    "steep_share": 0.5206,
+    "land_km2": 4055.82,
+    "undevelopable_share": 0.5265,
+    "steep_share": 0.5215,
     "water_share": 0.0069
   },
   {
     "provincia": "Tarragona",
     "tiles": 3,
-    "undevelopable_share": 0.5274,
-    "steep_share": 0.5145,
-    "water_share": 0.0141
-  },
-  {
-    "provincia": "Le\u00f3n",
-    "tiles": 7,
-    "undevelopable_share": 0.5275,
-    "steep_share": 0.5234,
-    "water_share": 0.0055
+    "land_km2": 6265.7,
+    "undevelopable_share": 0.5272,
+    "steep_share": 0.5142,
+    "water_share": 0.0142
   },
   {
     "provincia": "Navarra",
     "tiles": 6,
-    "undevelopable_share": 0.5529,
-    "steep_share": 0.5475,
+    "land_km2": 10328.01,
+    "undevelopable_share": 0.5515,
+    "steep_share": 0.5461,
     "water_share": 0.0072
   },
   {
     "provincia": "Lugo",
     "tiles": 4,
-    "undevelopable_share": 0.5549,
-    "steep_share": 0.5521,
+    "land_km2": 9795.24,
+    "undevelopable_share": 0.555,
+    "steep_share": 0.5522,
     "water_share": 0.0059
   },
   {
     "provincia": "Araba/\u00c1lava",
     "tiles": 4,
-    "undevelopable_share": 0.5608,
-    "steep_share": 0.5514,
+    "land_km2": 3018.75,
+    "undevelopable_share": 0.5606,
+    "steep_share": 0.5513,
     "water_share": 0.0113
   },
   {
     "provincia": "Pontevedra",
     "tiles": 3,
-    "undevelopable_share": 0.5639,
-    "steep_share": 0.5563,
+    "land_km2": 4466.76,
+    "undevelopable_share": 0.5641,
+    "steep_share": 0.5565,
     "water_share": 0.0107
   },
   {
     "provincia": "Ja\u00e9n",
     "tiles": 6,
+    "land_km2": 13427.87,
     "undevelopable_share": 0.5659,
     "steep_share": 0.5575,
-    "water_share": 0.011
+    "water_share": 0.0109
   },
   {
     "provincia": "Huesca",
     "tiles": 4,
-    "undevelopable_share": 0.5693,
-    "steep_share": 0.5633,
+    "land_km2": 15542.04,
+    "undevelopable_share": 0.5677,
+    "steep_share": 0.5616,
     "water_share": 0.0073
   },
   {
     "provincia": "Granada",
     "tiles": 7,
-    "undevelopable_share": 0.574,
-    "steep_share": 0.5708,
+    "land_km2": 12585.84,
+    "undevelopable_share": 0.5745,
+    "steep_share": 0.5713,
     "water_share": 0.0041
   },
   {
     "provincia": "Almer\u00eda",
     "tiles": 7,
-    "undevelopable_share": 0.5957,
-    "steep_share": 0.593,
+    "land_km2": 8735.03,
+    "undevelopable_share": 0.5959,
+    "steep_share": 0.5931,
     "water_share": 0.0031
   },
   {
     "provincia": "Ourense",
     "tiles": 6,
-    "undevelopable_share": 0.6087,
-    "steep_share": 0.6006,
+    "land_km2": 7228.46,
+    "undevelopable_share": 0.6086,
+    "steep_share": 0.6005,
     "water_share": 0.0126
   },
   {
     "provincia": "La Rioja",
     "tiles": 5,
-    "undevelopable_share": 0.6106,
-    "steep_share": 0.6068,
+    "land_km2": 5016.1,
+    "undevelopable_share": 0.6111,
+    "steep_share": 0.6073,
     "water_share": 0.0049
   },
   {
     "provincia": "Castell\u00f3n/Castell\u00f3",
     "tiles": 4,
-    "undevelopable_share": 0.6153,
-    "steep_share": 0.6132,
+    "land_km2": 6596.54,
+    "undevelopable_share": 0.6151,
+    "steep_share": 0.6131,
     "water_share": 0.0026
   },
   {
     "provincia": "Girona",
     "tiles": 5,
-    "undevelopable_share": 0.6371,
-    "steep_share": 0.6327,
+    "land_km2": 5874.08,
+    "undevelopable_share": 0.6368,
+    "steep_share": 0.6325,
     "water_share": 0.0059
   },
   {
     "provincia": "Barcelona",
     "tiles": 4,
-    "undevelopable_share": 0.6431,
-    "steep_share": 0.6407,
+    "land_km2": 7684.34,
+    "undevelopable_share": 0.6427,
+    "steep_share": 0.6403,
     "water_share": 0.0036
   },
   {
     "provincia": "Lleida",
     "tiles": 4,
-    "undevelopable_share": 0.646,
-    "steep_share": 0.6409,
+    "land_km2": 12098.81,
+    "undevelopable_share": 0.6442,
+    "steep_share": 0.6392,
     "water_share": 0.0071
   },
   {
     "provincia": "M\u00e1laga",
     "tiles": 5,
-    "undevelopable_share": 0.66,
-    "steep_share": 0.653,
+    "land_km2": 7277.96,
+    "undevelopable_share": 0.6604,
+    "steep_share": 0.6535,
     "water_share": 0.0079
   },
   {
     "provincia": "Santa Cruz de Tenerife",
     "tiles": 6,
-    "undevelopable_share": 0.7841,
-    "steep_share": 0.7813,
+    "land_km2": 3369.53,
+    "undevelopable_share": 0.7839,
+    "steep_share": 0.7811,
     "water_share": 0.0061
   },
   {
     "provincia": "Ceuta",
     "tiles": 1,
+    "land_km2": 19.86,
     "undevelopable_share": 0.7887,
     "steep_share": 0.75,
     "water_share": 0.0596
@@ -338,29 +386,33 @@
   {
     "provincia": "Cantabria",
     "tiles": 4,
-    "undevelopable_share": 0.7982,
+    "land_km2": 5293.1,
+    "undevelopable_share": 0.7983,
     "steep_share": 0.7831,
     "water_share": 0.0173
   },
   {
     "provincia": "Bizkaia",
     "tiles": 4,
-    "undevelopable_share": 0.8385,
+    "land_km2": 2198.91,
+    "undevelopable_share": 0.8386,
     "steep_share": 0.833,
     "water_share": 0.0087
   },
   {
     "provincia": "Asturias",
     "tiles": 6,
-    "undevelopable_share": 0.8827,
-    "steep_share": 0.8792,
+    "land_km2": 10535.44,
+    "undevelopable_share": 0.883,
+    "steep_share": 0.8795,
     "water_share": 0.0068
   },
   {
     "provincia": "Gipuzkoa",
     "tiles": 3,
-    "undevelopable_share": 0.9249,
-    "steep_share": 0.9205,
+    "land_km2": 1967.57,
+    "undevelopable_share": 0.925,
+    "steep_share": 0.9206,
     "water_share": 0.0077
   }
 ]

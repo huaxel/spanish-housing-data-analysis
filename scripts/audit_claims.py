@@ -641,6 +641,10 @@ PROBE_CLAIMS = [
         0.005,
     ),
     ("saiz_gis_probe", "Ceuta inland water share", "Ceuta", "water_share", 0.06, 0.005),
+    ("saiz_gis_probe", "Madrid land area km2", "Madrid", "land_km2", 7984.33, 1.0),
+    ("saiz_gis_probe", "Asturias land area km2", "Asturias", "land_km2", 10535.44, 1.0),
+    ("saiz_gis_probe", "Gipuzkoa land area km2", "Gipuzkoa", "land_km2", 1967.57, 1.0),
+    ("saiz_gis_probe", "Valladolid land area km2", "Valladolid", "land_km2", 8062.34, 1.0),
 ]
 
 # (doc, description, tile key, resolution, expected, tolerance)
@@ -694,7 +698,15 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
 
-    total = len(CLAIMS) + len(IV_CLAIMS) + len(PROBE_CLAIMS) + len(SENSITIVITY_CLAIMS)
+    # Spain's land area (505,990 km2) is an EXTERNAL anchor the probe did not
+    # choose. Summing to ~503k is what catches a cos(lat) area regression;
+    # the shares alone would stay valid while the areas silently broke.
+    got_area = round(sum(r["land_km2"] for r in probe), 1)
+    ok = abs(got_area - 503189.7) <= 2.0
+    print(f"[{'OK' if ok else 'FAIL'}] saiz_gis_probe: total land km2 = {got_area} (doc: 503189.7)")
+    failures += not ok
+
+    total = len(CLAIMS) + len(IV_CLAIMS) + len(PROBE_CLAIMS) + len(SENSITIVITY_CLAIMS) + 1
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

@@ -218,10 +218,21 @@ def province_stats(name: str, polys: list) -> dict | None:
         slope = max_neighbour_slope_grade(a90, coarse_transform)
         steep = (slope > SLOPE_GRADE_THRESHOLD) & mask
         und = steep | water
-        dev_px += int((mask & ~und).sum())
-        und_px += int(und.sum())
-        steep_px += int(steep.sum())
-        water_px += int(water.sum())
+
+        # Cell AREA needs the same cos(lat) correction as the gradient: on an
+        # EPSG:4326 grid cells are ~92 m N-S but only ~71 m E-W at 40N. A
+        # scalar 90x90 m^2 overstates Spanish land area by ~24%.
+        dlat = abs(coarse_transform.e)
+        dlon = abs(coarse_transform.a)
+        nrows = coarse_shape[0]
+        lat_rows = coarse_transform.f - dlat * (np.arange(nrows) + 0.5)
+        row_area = (dlat * M_PER_DEG_LAT) * (dlon * M_PER_DEG_LON_EQ * np.cos(np.radians(lat_rows)))
+        wgt = np.broadcast_to(row_area[:, None], mask.shape)
+
+        dev_px += float(((mask & ~und) * wgt).sum())
+        und_px += float((und * wgt).sum())
+        steep_px += float((steep * wgt).sum())
+        water_px += float((water * wgt).sum())
         used += 1
 
     total = dev_px + und_px
@@ -230,6 +241,7 @@ def province_stats(name: str, polys: list) -> dict | None:
     return {
         "provincia": name,
         "tiles": used,
+        "land_km2": round(total / 1e6, 2),
         "undevelopable_share": round(und_px / total, 4),
         "steep_share": round(steep_px / total, 4),
         "water_share": round(water_px / total, 4),

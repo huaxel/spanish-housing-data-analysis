@@ -16,7 +16,7 @@ Measured, this session, on this machine:
 | Reproducibility | full re-run reproduced the committed JSON **byte-identical** (determinism verified) |
 | New dependencies | none committed — `rasterio` + `numpy` via `uv run --with` |
 | Code | `scripts/probe_saiz_gis.py` (one file, ~280 lines) |
-| Output | `explorations/saiz_probe_results.json` |
+| Output | `explorations/saiz_probe_results.json` (per-province shares + land area) |
 
 The memo's "weeks" estimate was about *building a pipeline*. The probe
 shows the pipeline is one script. The remaining work is not data
@@ -41,12 +41,14 @@ plausible. All four are now handled in the probe and recorded here so the
 production version cannot regress them.
 
 1. **15% grade, not 15 degrees.** Factor 1.76 on the threshold.
-2. **EPSG:4326 longitude spacing.** The DEM is in geographic degrees. A
-   constant 30 m spacing for the gradient is wrong: at 40°N a cell is
-   30.7 m north-south but only 23.5 m east-west. Ignoring `cos(lat)`
-   understated the >15% share by ~24% in *relative* terms (Madrid-inland
-   tile: 0.0871 → 0.1085). The probe corrects analytically per row, which
-   avoids resampling the raster at all.
+2. **EPSG:4326 spacing needs `cos(lat)` — for slope *and* for area.**
+   At 40°N a grid cell is ~92 m north-south but only ~71 m east-west. Ignoring
+   it understated the >15% share by ~24% in *relative* terms (Madrid-inland
+   tile: 0.0871 → 0.1085). It also silently inflated land area: a scalar
+   90×90 m² per cell put Spain at 625,064 km² against an actual 505,990.
+   Correcting both (see the validation below) is what makes the measure
+   quotable. The probe corrects analytically per row, which avoids
+   resampling the raster at all.
 3. **GLO-30 is a DSM, not a DTM.** It includes buildings and canopy, so
    at native 30 m a single building edge can clear 15%. Saiz worked at
    90 m on a bare-earth USGS DEM. Resolution sensitivity, measured:
@@ -74,6 +76,14 @@ probably what the memo generalised from. But IGN was never required —
 Copernicus serves the same job, publicly and 30× faster.
 
 ## Results — the geography checks out
+
+Before the rankings, a check the probe can fail on its own arithmetic:
+summed land area over the 52 provincias is **503,190 km², or 99.4% of
+Spain's 505,990 km²**. Individual provinces land within ~1% of their
+published areas (Valladolid 8,062 vs 8,110 km²; Asturias 10,535 vs 10,604;
+Gipuzkoa 1,968 vs 1,980). The residual is coastal clipping of the NUTS-3
+polygons. This is what caught the missing `cos(lat)` on area — the shares
+were immune to it, the areas were not.
 
 Full 52-provincia series in `explorations/saiz_probe_results.json`.
 Ranked share of undevelopable land:
