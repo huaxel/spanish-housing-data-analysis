@@ -58,7 +58,11 @@ One point faster inflow growth raises appraised prices ~0.7pp that year
 dominance. Candidate reasons: measurement attenuation in OLS
 (inflows mixed with outflows/deaths/naturalizations), LATE compliers in
 tight markets — or residual exclusion failure, which the trends spec
-argues against but cannot kill. Full threats + read record in
+argues against but cannot kill. The pooled number is bust-driven:
+2002–13 gives +0.84 (first-stage F = 88) while 2014–21 has no first
+stage at all (F = 0.13 — post-crisis flows decoupled from 1998
+settlement geography), so the recovery half of the story stays
+descriptive. Full threats + read record in
 [the IV note](docs/explorations/iv_migration.md); estimator machinery in
 `src/spanish_housing/` (tested); numbers pinned in
 `explorations/iv_results.json` (re-run reproduces it deterministically).

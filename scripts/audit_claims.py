@@ -550,6 +550,8 @@ IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("synthesis", "IV AR lower bound (base)", "base.ar_set.0", 0.35, 0.005),
     ("synthesis", "IV AR upper bound (base)", "base.ar_set.1", 1.0, 0.005),
     ("synthesis", "IV first-stage F (base)", "base.first_stage_F", 47.67, 0.05),
+    ("synthesis", "IV first-stage F (bust)", "bust_2002_2013.first_stage_F", 88.4, 0.05),
+    ("synthesis", "IV first-stage F (recovery)", "recovery_2014_2021.first_stage_F", 0.13, 0.05),
 ]
 
 

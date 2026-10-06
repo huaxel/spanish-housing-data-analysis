@@ -19,7 +19,7 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 70 headline doc numbers (66 mart + 4 committed-model) re-queried; fails
+- `make audit` — 72 headline doc numbers (66 mart + 6 committed-model) re-queried; fails
   on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 
@@ -30,7 +30,7 @@ design; the manifest (committed) is what makes a run auditable.
 ## Clean-rebuild record (2026-10-06)
 
 `data/` wiped (backup in /tmp, since removed) and `make gates` rerun from
-empty: fetch → build → verify → audit (70/70) → test (49) all green.
+empty: fetch → build → verify → audit (72/72) → test (49) all green.
 Regenerated manifest byte-identical to committed (65 pinned paths — no
 upstream revisions in between), marts identical (342 + 1,071 rows).
 This is the evidence the pipeline reproduces, not just runs.
