@@ -55,6 +55,22 @@ for ccaa, rows in by_ccaa.items():
         )
 
 
+LAG_VARS = ["absor", "d_hip", "d_renta"]
+
+
+def attach_lags() -> None:
+    """Attach prior-year values as L_<var> (None at each CCAA's first year)."""
+    last: dict[str, dict] = {}
+    for o in obs:
+        p = last.get(o["ccaa"])
+        for v in LAG_VARS:
+            o["L_" + v] = p[v] if p is not None and p[v] is not None else None
+        last[o["ccaa"]] = o
+
+
+attach_lags()
+
+
 def build_design(spec: list[str]) -> tuple[list, list, list, list]:
     rows = [o for o in obs if all(o[v] is not None for v in ["d_ipv", *spec])]
     ccaas = sorted({o["ccaa"] for o in rows})
@@ -112,11 +128,16 @@ def add_bootstrap(result: dict, spec: list[str]) -> None:
 results = {
     "s0_absorption_only": run(["absor"]),
     "s1_with_demand_controls": run(["absor", "d_hip", "d_renta", "d_coh"]),
+    "s2_with_lags": run(["absor", "d_hip", "d_renta", "d_coh", "L_absor", "L_d_hip", "L_d_renta"]),
     "undefined_absorption_dropped": sum(1 for o in obs if o["absor"] is None),
     "total_yoy_rows": len(obs),
 }
 add_bootstrap(results["s0_absorption_only"], ["absor"])
 add_bootstrap(results["s1_with_demand_controls"], ["absor", "d_hip", "d_renta", "d_coh"])
+add_bootstrap(
+    results["s2_with_lags"],
+    ["absor", "d_hip", "d_renta", "d_coh", "L_absor", "L_d_hip", "L_d_renta"],
+)
 
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_adjusted.json").write_text(

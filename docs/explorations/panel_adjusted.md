@@ -21,6 +21,27 @@ or causal estimate.
 (Coefficient (CR1V clustered SE) [95% CI]; wild-p from 2,999-rep
 Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
 
+## S2: adding one-year lags (n=133, G=17, R² 0.91)
+
+| regressor | b (SE) | wild-p |
+| --- | --- | --- |
+| absorption | +0.011 (0.064) | 0.844 |
+| mortgage growth | +0.114 (0.033) | **0.003** |
+| income growth | +0.138 (0.050) | **0.029** |
+| 20–34 share Δ | +6.33 (1.79) | **0.003** |
+| L.absorption | −0.033 (0.073) | 0.665 |
+| L.mortgage growth | +0.060 (0.022) | **0.030** |
+| L.income growth | −0.154 (0.084) | 0.205 |
+
+Timing does not rescue supply: contemporaneous absorption is fully dead
+(+0.01, p = 0.84) and last year's is too (−0.03, p = 0.66). What persists
+across both years is credit — current (+0.11, p = 0.003) *and* lagged
+(+0.06, p = 0.030), a signature of approvals preceding prices while
+current volumes co-move. Income flips sign (current +0.14 significant,
+lag −0.15 not): transitory-blip behavior, net near zero over two years —
+consistent with S1's null, now with the dynamics visible. The cohort
+association strengthens (+6.3, p = 0.003), same reverse-causality warning.
+
 ## Reading
 
 - The absorption sign survives the panel arithmetically (−0.11, analytic CI
@@ -49,7 +70,9 @@ Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
   (Rademacher, null-imposed, 2,999 reps, fixed seed) is the reported
   significance, not the analytic t. Only the cohort association clears it
   (p = 0.032) — and it is the most reverse-caused regressor.
-- Annual absorption is noisy (small denominators); no lags modelled, so
-  construction-completion timing vs price timing is blurred.
-- Next: lags and — only with an instrument or design, not more controls —
-  anything causal.
+- One annual lag only; completion-to-price timing below yearly frequency is
+  blurred, and S2's complete-case n=133 compounds the selection above.
+  Credit itself is reverse-caused in part (expectations drive applications
+  and prices together) — timing fit is not identification.
+- Next: deeper/quarterly lags and — only with an instrument or design, not
+  more controls — anything causal.
