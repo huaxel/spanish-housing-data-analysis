@@ -110,6 +110,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
+    "data/raw/parquet/padron_extranjeros.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -967,6 +968,8 @@ def main() -> None:
         pa.Table.from_pylist(load_parquet("censo2021_viviendas.parquet")),
     )
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
+    con.register("pade_df", pa.Table.from_pylist(load_parquet("padron_extranjeros.parquet")))
+    con.execute("CREATE OR REPLACE TABLE padron_extranjeros AS SELECT * FROM pade_df")
     # Foreign immigration flows 2008-2021 (EM 24322, annual). Counts sum:
     # Nacional + Ceuta-y-Melilla aggregates built locally, like ECP.
     mig_rows = []
@@ -1017,6 +1020,7 @@ def main() -> None:
         "censo2011_tenencia",
         "censo2021_viviendas",
         "migra_anual",
+        "padron_extranjeros",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {
@@ -1032,6 +1036,8 @@ def main() -> None:
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
         "censo2021_anchor": "provincial totals vs parque 2021, worst gap <1.0% (tipo split"
         " diverges definitionally, unchecked)",
+        "padron_extranjeros_window": "1998-2022 annual foreign stocks by provincia"
+        " (TOTAL EXTRANJEROS x Ambos sexos; Bartik shares base)",
         "migracion_window": "2008-2021 annual foreign/Spanish inflows by provincia"
         " (EM 24322, Ambos sexos, Total edad); Nacional + 51+52 aggregated locally",
         "hogares_2001_proxy": "principales-as-households; worst 2011 disagreement"

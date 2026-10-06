@@ -479,6 +479,13 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        "migration",
+        "Madrid foreign stock 1998 (shares base)",
+        "SELECT extranjeros FROM padron_extranjeros WHERE cpro='28' AND anyo=1998",
+        115202.0,
+        1.0,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "

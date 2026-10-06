@@ -98,6 +98,11 @@ Foreign/Spanish immigration flows by provincia × year (`provincia`,
 `anyo`, `nacionalidad` Total/Española/Extranjero, `flujo`), plus Nacional
 and Ceuta-y-Melilla aggregates. Annual (FK_Periodo 28), 2008–2021.
 
+## padron_extranjeros
+
+Annual foreign resident stocks (`cpro`, `provincia`, `anyo`,
+`extranjeros`), 1998–2022. Bartik shares base; surge half queued.
+
 ## dim_territorio
 
 `cpro`, `provincia`, `ccaa` — canonical mapping (MIVAU codes, INE names).

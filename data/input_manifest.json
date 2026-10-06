@@ -62,7 +62,9 @@
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
     "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
-    "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a"
+    "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
+    "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
+    "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -424,6 +426,19 @@
       "operation": "EM flujos",
       "accessed": "2026-10-06",
       "note": "Ambos sexos, Total edad; annual (FK_Periodo 28) only"
+    },
+    "data/raw/padron_extranjeros.csv": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv",
+      "publisher": "INE",
+      "operation": "Padrón e245",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/padron_extranjeros.parquet": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv",
+      "publisher": "INE",
+      "operation": "Padrón e245",
+      "accessed": "2026-10-06",
+      "note": "TOTAL EXTRANJEROS x Ambos sexos only; full detail in raw CSV"
     }
   }
 }

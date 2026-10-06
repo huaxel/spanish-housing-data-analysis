@@ -75,6 +75,7 @@ at port 8091 (binds to all interfaces).
 | INE Turísticas (VTE) | Registered tourist dwellings, Dec snapshots from 2020 |
 | ECP edad/tamaño + Censo 2011 | 20–34 cohort, 1-person households; 2011 vacancy/vintage splits |
 | Municipios (Madrid + Barcelona) | Valor tasado + padrón (Mad); sale/rent/burdens via DIBA (BCN) |
+| Padrón extranjeros (1998–2022) | Foreign stocks by provincia → `padron_extranjeros`; Bartik shares base |
 | INE EM inmigración (2008–2021) | Foreign/Spanish inflows by provincia → `migra_anual`; demand-side data layer |
 | INE IPC general (base 2021) | Monthly CPI, CCAA + Nacional → `ipc_anual`; deflator for real-terms levels |
 | Evidence marts | `mart_ccaa_anual`, `mart_provincia_anual` + `dim_territorio` + `muni_*` |
