@@ -78,7 +78,14 @@ def main() -> int:
         for r in con.execute(
             "SELECT DISTINCT anyo FROM mart_ccaa_anual WHERE anyo < 2021 AND hogares IS NOT NULL"
         ).fetchall()
-    ) == {2011}, "pre-2021 hogares allowed only for exact-census 2011"
+    ) <= {2011, 2014, 2015, 2016, 2017, 2018, 2019, 2020}, (
+        "pre-2021 hogares allowed only for census-2011 + ECH 2014-2020"
+    )
+    ech_null = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual "
+        "WHERE anyo BETWEEN 2014 AND 2020 AND hogares IS NULL"
+    ).fetchone()[0]
+    assert ech_null == 0, "ECH households must be complete (51 x 7)"
     vt = con.execute(
         "SELECT COUNT(*), SUM(CASE WHEN eur_m2_libre IS NULL THEN 1 ELSE 0 END), "
         "MIN(anyo), MAX(anyo) FROM mart_ccaa_anual"

@@ -56,7 +56,9 @@
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
     "data/raw/ipc_ccaa.json": "3fc94f9c62597754edbbd4c41a30b7431967570484cadaec4947a049b2eb466d",
-    "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b"
+    "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b",
+    "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
+    "data/raw/parquet/ech_hogares.parquet": "7567f05ca1aba9d8e3f62d03fdbb560ab7843a61aed62d57bdcdb8d7053d3317"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -380,6 +382,19 @@
       "operation": "IPC general",
       "accessed": "2026-10-06",
       "note": "general index levels only; base 2021"
+    },
+    "data/raw/ech_hogares.csv": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv",
+      "publisher": "INE",
+      "operation": "ECH",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/ech_hogares.parquet": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv",
+      "publisher": "INE",
+      "operation": "ECH",
+      "accessed": "2026-10-06",
+      "note": "Total x Total margin only; thousands -> units"
     }
   }
 }

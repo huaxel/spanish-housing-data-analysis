@@ -33,10 +33,11 @@ Three regimes, three different price drivers:
    the naive supply story fits, and it fits everywhere at once.
 
 The long arc in dwellings per household: 1.48 (2001, proxy) → 1.40 (2011)
-→ 1.44 (2021) → 1.39 (2025). Fragmentation loosened the 2000s, the bust
-left the loosest stock on record, and the post-2021 surge in household
-formation has now pushed past even the 2011 tightness — in the opposite
-direction from prices in every regime but the last.
+→ 1.41 (2014) → 1.42 (2020) → 1.44 (2021) → 1.39 (2025). Fragmentation
+loosened the 2000s, the bust left the loosest stock on record, the 2010s
+reconsumed the slack one hundredth at a time, and the post-2021 surge in
+household formation has now pushed past even the 2011 tightness — in the
+opposite direction from prices in every regime but the last.
 
 ## The split (why national ratios mislead)
 

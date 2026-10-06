@@ -36,7 +36,7 @@ explicit extensions, not v1.
 | 11 | INE Turísticas (VTE) | DONE 2026-10-06 — registered tourist dwellings (Dec snapshot) in marts |
 | 12 | ECP edad/tamaño detail + Censo 2011 vintage/tenencia | DONE 2026-10-06 — 20–34 cohort, 1-person share; 2011 vacancy/vintage splits |
 | 13 | Municipios (Madrid valor tasado + padrón; DIBA Barcelona) | DONE 2026-10-06 — `muni_madrid` / `muni_bcn` tables, municipal explorer pages |
-| 14 | Households pre-2021 | HALF-DONE 2026-10-06 — census years in marts (2011 exact, 2001 proxy ±2.1%); ECH *annual* 2013–20 still TODO (retired from Tempus, needs static-file hunt) |
+| 14 | Households pre-2021 | DONE 2026-10-06 — ECH annual 2014–20 (jaxi p274 static files) + 2011 exact + 2001 proxy; no 2013 (serie starts 2014) |
 | 15 | INE IPC deflator (real-terms levels) | DONE 2026-10-06 — general index (base 2021) CCAA+Nacional in `ipc_anual`; Madrid real: capital −7.5%, south −28 to −38% |
 
 ## Milestones

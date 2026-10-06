@@ -9,7 +9,7 @@
 | viviendas_total / _principales / _no_principales | dwelling counts | MIVAU parque, summed over provinces |
 | poblacion | inhabitants (1-Jan) | Padrón ≤2021, ECP ≥2022 (CCAA rows); Nacional: padrón sum / ECP direct |
 | pop_source | `padron` or `ecp` — never compare across the seam without the overlap note | methods §1 |
-| hogares | households in family dwellings (2021+ ECP; 2011 exact census; NULL otherwise pre-2021) | ECP / Censo 2011 tenencia |
+| hogares | households in family dwellings (2021+ ECP; 2014–20 ECH; 2011 exact census; NULL otherwise) | ECP / ECH / Censo 2011 tenencia |
 | viv_por_hogar | dwellings per household (2021+, 2011) | derived |
 | hogares_2001_proxy / viv_por_hogar_2001_proxy | 2001 principales-as-households (provincia mart only; ±2.1% tolerance) | derived, flagged |
 | viv_por_1000_hab | dwellings per 1,000 inhabitants | derived |
@@ -32,7 +32,7 @@ Ceuta/Melilla have IPV rows but aggregated stock, so no CCAA-mart row.
 Same stock/population columns as above plus `cpro` (2-digit code,
 `51+52` for the Ceuta y Melilla aggregate) and `share_no_principal`.
 No price columns — INE publishes no provincial IPV. Plus `pop_source`,
-`hogares` (2021 ECP + 2011 exact census), `viv_por_hogar`, plus `hogares_2001_proxy` /
+`hogares` (2021+ ECP, 2014–20 ECH, 2011 exact census), `viv_por_hogar`, plus `hogares_2001_proxy` /
 `viv_por_hogar_2001_proxy` (principales proxy, ±2.1% validated tolerance).
 
 ## censo2011_bcn

@@ -392,3 +392,13 @@ def test_manifest_snapshot_age():
     assert manifest.snapshot_age_days({"snapshot_date": None}) is None
     assert manifest.snapshot_age_days({}) is None
     assert manifest.snapshot_age_days({"snapshot_date": "not-a-date"}) is None
+
+
+def test_ech_num_mixed_decimals():
+    from fetch_ech import num
+
+    assert num("18.689,8") == 18689.8
+    assert num("18,689.8") == 18689.8
+    assert num("152,0") == 152.0
+    assert num("2552.4") == 2552.4
+    assert num("") is None and num("..") is None and num(".") is None

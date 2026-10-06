@@ -368,6 +368,20 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "synthesis",
+        "viv/hogar Nacional 2014 (ECH)",
+        "SELECT viv_por_hogar FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2014",
+        1.412,
+        0.005,
+    ),
+    (
+        "synthesis",
+        "viv/hogar Nacional 2020 (ECH)",
+        "SELECT viv_por_hogar FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2020",
+        1.424,
+        0.005,
+    ),
+    (
+        "synthesis",
         "viv/hogar Nacional 2001 (principales proxy)",
         "SELECT SUM(viviendas_total) * 1.0 / SUM(hogares_2001_proxy) "
         "FROM mart_provincia_anual WHERE anyo=2001",

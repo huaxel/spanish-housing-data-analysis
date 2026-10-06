@@ -107,6 +107,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
     "data/raw/parquet/ipc_ccaa.parquet",
+    "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -259,6 +260,17 @@ def main() -> None:
         and r["tenencia"] == "Total (régimen de tenencia)"
     ]
     mart_prov_by_norm = {N(d["provincia"]): d["provincia"] for d in dim}
+    # ECH annual households 2014-2020 (survey, thousands->units at fetch).
+    ech: dict[tuple[str, int], int] = {}
+    for r in load_parquet("ech_hogares.parquet"):
+        key = mart_prov_by_norm.get(N(r["provincia"]))
+        if key is None:
+            if N(r["provincia"]) not in (N("Ceuta"), N("Melilla")):
+                raise SystemExit(f"ECH unknown provincia: {r['provincia']!r}")
+            key = r["provincia"]  # aggregated to 51+52 at use, like ECP
+        ech[(key, r["anyo"])] = r["hogares"]
+    ech_years = sorted({a for (_p, a) in ech})
+    print(f"ECH hogares: {len(ech)} cells, {ech_years[0]}-{ech_years[-1]}")
     sole_prov = {}
     for d in dim:
         sole_prov.setdefault(d["ccaa"], []).append(d["provincia"])
@@ -510,6 +522,14 @@ def main() -> None:
             if anyo == 2011:
                 # Exact census households (tenencia totals); ECP starts 2021.
                 hogar = hog2011[d["provincia"]]
+            elif 2014 <= anyo <= 2020:
+                # ECH annual survey; Ceuta y Melilla aggregated like ECP.
+                if d["cpro"] == "51+52":
+                    hogar = (ech.get(("Ceuta", anyo), 0) or 0) + (
+                        ech.get(("Melilla", anyo), 0) or 0
+                    ) or None
+                else:
+                    hogar = ech.get((d["provincia"], anyo))
             eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
             if d["cpro"] == "51+52":
                 _t1 = trx.get((N("Ceuta"), "provincia", anyo), {})
@@ -603,6 +623,15 @@ def main() -> None:
             if anyo == 2011:
                 # Exact census households summed over member provinces.
                 hogar = sum(hog2011[p["provincia"]] for p in provs)
+            elif 2014 <= anyo <= 2020:
+                # ECH summed over member provinces (counts sum legitimately).
+                vals = [
+                    ech.get(("Ceuta", anyo), 0) + ech.get(("Melilla", anyo), 0)
+                    if p["cpro"] == "51+52"
+                    else ech.get((p["provincia"], anyo))
+                    for p in provs
+                ]
+                hogar = sum(vals) if all(vals) else None
             trx_t, trx_n = trx_triple(
                 "nacional" if ccaa == "Nacional" else "ccaa",
                 "Total Nacional" if ccaa == "Nacional" else ccaa,
@@ -935,8 +964,8 @@ def main() -> None:
         "ipv_base_check": "Nacional/General/2025 == 100.0 OK",
         "pop_seam_2021_ecp_vs_padron_pct": overlap,
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
-        "hogares_window": "2021+ (ECP, 1-January); 2011 exact (censo tenencia totals,"
-        " 51 provincias); viv_por_hogar NULL otherwise before 2021",
+        "hogares_window": "2021+ (ECP, 1-January); 2014-2020 ECH annual survey;"
+        " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
         "hogares_2001_proxy": "principales-as-households; worst 2011 disagreement"
         f" {proxy_tol}% — documented tolerance, not exact",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,

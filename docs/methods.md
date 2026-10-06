@@ -34,8 +34,10 @@
 - **Hogares (INE ECP, 2021–; Censo 2011; proxy 2001):** households in family
   dwellings, CCAA (60131) and provincia (60133), 1-January. Enables
   `viv_por_hogar` — dwellings per household, the closest observable to
-  shortage (a region can have ample dwellings per capita yet few per
-  household when second/vacant homes dominate). 2011 is exact census
+  shortage. 2014–2020 is ECH annual survey (Total×Total margin, thousands→units;
+  this serie starts 2014, no 2013). The ECH→ECP step (18.69M in 2020 →
+  18.54M in 2021) mixes definition change with real change — read across
+  2020/21 as a seam, not a fall. 2011 is exact census
   (tenencia totals, 51 provincias, sums to the 18,083,692 anchor); 2001 is
   a validated proxy (`hogares_2001_proxy` = principales, worst 2011
   disagreement 2.11% — documented tolerance, separate columns, never
