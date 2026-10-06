@@ -47,7 +47,14 @@ PY
 
 trap 'playwright-cli -s="$SESSION" close >/dev/null 2>&1 || true' EXIT
 
-playwright-cli -s="$SESSION" open "$BASE/" >/dev/null 2>&1
+# Open with retry: playwright-cli can race the session bootstrap; a cold
+# open occasionally fails and poisons every later $result with empty JSON.
+for _ in 1 2 3; do
+	if playwright-cli -s="$SESSION" open "$BASE/" >/dev/null 2>&1; then
+		break
+	fi
+	sleep 2
+done
 
 fail=0
 check_page "/"           8 "Precios, stock" "Datos y cobertura" || fail=1
@@ -56,4 +63,6 @@ check_page "/ccaa/"      7 "Comunidades autónomas" "Madrid, Comunidad de" || fa
 # builds omit — assert shipped content only, valid against both.
 check_page "/comparar/"  7 "Resumen del periodo" "comunitat valenciana" || fail=1
 check_page "/municipios/" 5 "la capital se despega" "Santa Coloma de Gramenet" || fail=1
+check_page "/renta/"      2 "Renta municipal" "SERPAVI" || fail=1
+check_page "/vacancia/"   2 "Vivienda vacía" "consumo eléctrico" || fail=1
 exit $fail
