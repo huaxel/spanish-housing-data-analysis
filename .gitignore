@@ -10,3 +10,4 @@ evidence/build/
 evidence/build-cf/
 .playwright-cli/
 artifacts/
+evidence/.wrangler/
