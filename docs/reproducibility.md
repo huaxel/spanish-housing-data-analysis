@@ -41,14 +41,32 @@ This is the evidence the pipeline reproduces, not just runs.
 make evidence-install   # npm ci in evidence/ (locked dependencies)
 make evidence-dev       # dev server; open the printed URL
 make evidence-build     # static build
+make evidence-deploy    # publish to Cloudflare (see below)
 ```
 
+### Public deploy (Cloudflare Workers Static Assets)
+
+`make evidence-deploy` publishes `evidence/build/` to the
+`vivienda-explorer` worker (`evidence/wrangler.toml` + `worker.js`).
+Two subtleties, both load-bearing:
+
+- DuckDB WASM blobs exceed the 25 MiB asset limit, so `worker.js`
+  proxies `*.wasm` from pinned jsDelivr npm bytes (verified
+  md5-identical to the build blobs). Bump `WASM_VERSION` when
+  `@duckdb/duckdb-wasm` updates. An R2-bucket variant was tried and
+  abandoned (jurisdictional shadowing); the bucket has been deleted.
+- Smoke scripts assert shipped content only: dev renders
+  query-inspector chrome (`'N records ...'`) that static builds omit.
+- Custom domain `vivienda.juanbenjumea.me` still needs a one-time
+  dashboard attach (deploy token lacks zone scope) — live on
+  `vivienda-explorer.juakke.workers.dev` meanwhile.
+
 Open `http://localhost:3000/` (or the URL printed if the port is occupied).
-Dev and build automatically run strict source extraction first. The four SQL
+Dev and build automatically run strict source extraction first. The five SQL
 files in `evidence/sources/housing/` export the existing tables from
 `data/processed/marts.duckdb` to Parquet; page SQL queries them as
 `housing.mart_ccaa_anual`, `housing.mart_provincia_anual`,
-`housing.muni_madrid`, and `housing.muni_bcn`.
+`housing.muni_madrid`, `housing.muni_bcn`, and `housing.ipc_anual`.
 The connection filename is relative to `evidence/sources/housing/`, not the
 project root. If the database is missing, run `make gates` first.
 
