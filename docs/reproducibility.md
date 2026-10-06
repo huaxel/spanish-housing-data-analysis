@@ -27,21 +27,26 @@ Record a reproduction with: checkout revision, `uv --version`, input-manifest
 snapshot date, `coverage.json`, and test summary. `data/` is git-ignored by
 design; the manifest (committed) is what makes a run auditable.
 
-## Clean-rebuild record (2026-10-06, rerun 16:15 UTC)
+## Clean-rebuild record (2026-10-06, rerun 18:50 UTC)
 
 `data/` wiped (backup in `~/backups/spanish-housing/`) and `make gates`
 rerun from empty: fetch → build → verify → audit (192/192) → test (49)
 all green. marts byte-identical to the pre-wipe build (sha256 of
-`mart_*.parquet` + `dim_territorio.parquet` match; 342 + 1,071 rows
-unchanged), so the pipeline reproduced — not just ran.
+`mart_*.parquet` + `dim_territorio.parquet` match; 342 + 1,275 rows
+unchanged), so the pipeline reproduced — not just ran. This run also
+re-fetched and re-pinned the three sources added after the morning run
+(Censo Anual 68521 static CSV, SERPAVI 71 MB Excel, intensidad 59531
+CSV): all reproduce byte-identical and the new mart tables
+(`serpavi_municipal` 716,889 rows, `censo2021_intensidad` 57,330 rows)
+are present.
 
-The rerun caught one real (minor) flaw: the regenerated manifest was not
-byte-identical to committed, only set-identical. `manifest.record`
-appended one entry per fetch, so JSON byte order silently followed fetch
-sequence. Fixed with `sort_keys=True` on write (now deterministic and
-idempotent); the committed manifest is the sorted form, so a same-day
-regeneration is byte-identical. This is the evidence the pipeline
-reproduces, not just runs.
+The rerun caught one real (minor) flaw in the morning: the regenerated
+manifest was not byte-identical to committed, only set-identical.
+`manifest.record` appended one entry per fetch, so JSON byte order
+silently followed fetch sequence. Fixed with `sort_keys=True` on write
+(now deterministic and idempotent); the committed manifest is the sorted
+form, so a same-day regeneration is byte-identical. This is the evidence
+the pipeline reproduces, not just runs.
 
 ## Evidence explorer
 
