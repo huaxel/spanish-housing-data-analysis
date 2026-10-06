@@ -34,7 +34,7 @@ def test_singleton_clusters_equal_hc1():
     n, k = 6, 2
     bread = ols.invert(ols.xtx(x))
     beta = ols.solve(ols.xtx(x), ols.xty(x, y))
-    resid = [yi - sum(b * xij for b, xij in zip(beta, row, strict=True)) for yi, row in zip(y, x, strict=True)]
+    resid = [yi - yh for yi, yh in zip(y, ols.predict(x, beta), strict=True)]
     meat = [[0.0] * k for _ in range(k)]
     for row, e in zip(x, resid, strict=True):
         for i in range(k):

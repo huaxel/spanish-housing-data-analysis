@@ -48,6 +48,10 @@ def xtx(x: list[list[float]]) -> list[list[float]]:
     return out
 
 
+def predict(x: list[list[float]], beta: list[float]) -> list[float]:
+    return [sum(b * xij for b, xij in zip(beta, row, strict=True)) for row in x]
+
+
 def xty(x: list[list[float]], y: list[float]) -> list[float]:
     k = len(x[0])
     out = [0.0] * k
@@ -69,7 +73,7 @@ def ols_cluster(
     n, k = len(x), len(x[0])
     bread = invert(xtx(x))
     beta = solve(xtx(x), xty(x, y))
-    resid = [yi - sum(b * xij for b, xij in zip(beta, row, strict=True)) for yi, row in zip(y, x, strict=True)]
+    resid = [yi - yh for yi, yh in zip(y, predict(x, beta), strict=True)]
     groups: dict[str | int, list[int]] = {}
     for i, g in enumerate(clusters):
         groups.setdefault(g, []).append(i)
