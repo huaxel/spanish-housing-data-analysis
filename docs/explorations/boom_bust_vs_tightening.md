@@ -39,7 +39,8 @@ Madrid (+€1,009) combined mid-range absorption (0.5/0.47) with high demand;
 Extremadura (+€76) barely moved despite 0.59. Prices reflect *who wants to
 live where and with what credit*, not just unit counts — the next layer is
 household size/age structure (ECP age detail is already fetched in raw JSON)
-and, for levels-vs-incomes, an income source still to be pinned.
+and, for levels-vs-incomes, household incomes (ECV, now in the CCAA mart —
+see the affordability note).
 
 ## Update: the overhang was one-fifth brand-new (`censo2011_vintage`)
 
@@ -49,6 +50,22 @@ overhang was mostly *old* vacancy plus a new fringe — except in the boom
 belt: Almería 45%, Toledo 42%, Guadalajara 39%, Alicante 33%, Castellón
 29% of vacant stock brand-new. Where the cranes were, the overhang was
 unsold product; elsewhere, structural vacancy.
+
+## Update: splitting the per-capita ratio (numerator vs denominator)
+
+`viv/1000` moves from both sides. Exact split, Nacional (construction
+effect holds population at the base year; the two terms sum to Δ exactly):
+
+| Window | Δ viv/1000 | construction | population |
+| --- | --- | --- | --- |
+| 2007–2013 | +11.9 | +35.1 (+1.59M dwellings) | −23.2 (+1.93M people) |
+| 2021–2025 | −12.3 | +8.0 (+0.38M dwellings) | −20.3 (+1.74M people) |
+
+The bust's per-capita "overhang" rose *despite* 1.9M more people, because
+completions outran them. The tightening is the mirror: construction never
+went negative (+380k), but 1.74M more people diluted it more than four to
+one — the 2021–25 shortfall is arithmetically a denominator story, which is
+why it fits every CCAA at once.
 
 ## Limits of this cut
 

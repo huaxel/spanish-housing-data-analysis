@@ -14,7 +14,7 @@ overshoot transactions throughout (refinancing/subrogations included) —
 compare shapes, never levels. The post-2021 recovery transacts *used* homes (79% of 2024 deals) on a stock
 that barely grows: churn, not construction, clearing the market.
 
-## Nacional: credit explains the bust, not the tightening
+## Nacional: credit timing fits the bust, not the tightening
 
 | año | hipotecas | ticket medio | tipo medio | IPV |
 | --- | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ that barely grows: churn, not construction, clearing the market.
 | 2024 | 426k | €145k | 3.3% | 88.7 |
 
 Mortgage counts fell **84%** 2007–13 while the stock kept growing — the bust
-was a credit stop, not a supply flood. Prices fell 36% on vanishing
+looks like a credit stop, not a supply flood. Prices fell 36% on vanishing
 transactions, not on vacant abundance. Conversely 2021–24: mortgages grew
 modestly (+18% from a low base) while prices rose ~20% and rates *rose*
 2.2→3.3% — the tightening happened *against* the credit wind, pointing at

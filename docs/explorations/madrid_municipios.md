@@ -25,7 +25,10 @@ Madrid-municipios table) for per-capita context.
 
 North-west premium markets fell ~30% and recovered past boom prices; the
 southern corona fell ~50–55% (Parla €1,083!) and *never nominally recovered*
-— Fuenlabrada took eighteen years to reach +0.5%. The capital (+30%) detached from
+— Fuenlabrada took eighteen years to reach +0.5%. All municipal €/m² here
+are nominal: in real terms the south's shortfall is larger (IPC deflation
+is queued — no price level in this doc is inflation-adjusted). The capital
+(+30%) detached from
 its own south, which now prices like 2007 Castilla-La Mancha towns. This is
 the municipal face of the CCAA story: Madrid's aggregate recovery was
 capital-plus-northwest; the provinces' analogue needs the same municipal cut

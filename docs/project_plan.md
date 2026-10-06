@@ -37,6 +37,7 @@ explicit extensions, not v1.
 | 12 | ECP edad/tamaño detail + Censo 2011 vintage/tenencia | DONE 2026-10-06 — 20–34 cohort, 1-person share; 2011 vacancy/vintage splits |
 | 13 | Municipios (Madrid valor tasado + padrón; DIBA Barcelona) | DONE 2026-10-06 — `muni_madrid` / `muni_bcn` tables, municipal explorer pages |
 | 14 | ECH annual households (pre-2021) | TODO — yearly dwellings-per-household before 2021 |
+| 15 | INE IPC deflator (real-terms levels) | TODO — municipal/national €/m² are nominal; no inflation adjustment yet |
 
 ## Milestones
 

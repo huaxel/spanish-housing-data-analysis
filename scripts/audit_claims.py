@@ -309,6 +309,42 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         19398.0,
         1.0,
     ),
+    (
+        "boom_bust",
+        "viv/1000 2007-13 construction effect",
+        "SELECT (b.viviendas_total - a.viviendas_total) * 1000.0 / a.poblacion "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa = b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2007 AND b.anyo=2013",
+        35.1,
+        0.1,
+    ),
+    (
+        "boom_bust",
+        "viv/1000 2007-13 population effect",
+        "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa = b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2007 AND b.anyo=2013",
+        -23.2,
+        0.1,
+    ),
+    (
+        "boom_bust",
+        "viv/1000 2021-25 construction effect",
+        "SELECT (b.viviendas_total - a.viviendas_total) * 1000.0 / a.poblacion "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa = b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
+        8.0,
+        0.1,
+    ),
+    (
+        "boom_bust",
+        "viv/1000 2021-25 population effect",
+        "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa = b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
+        -20.3,
+        0.1,
+    ),
 ]
 
 

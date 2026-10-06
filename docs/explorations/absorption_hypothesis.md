@@ -11,15 +11,19 @@ and counted. Pearson + Spearman per window and pooled.
 
 | Window | CCAA (IPV) | Provincia (€/m²) |
 | --- | --- | --- |
-| 2007–2011 | +0.51 (17/17) | +0.36 (47/51) |
-| 2011–2015 | — (<3 growing) | −0.26 (6/51) |
-| 2015–2019 | −0.54 (10/17) | −0.46 (22/51) |
-| 2019–2021 | −0.13 (13/17) | −0.22 (34/51) |
-| 2021–2025 | −0.12 (16/17) | — (pop ends 2021) |
-| **Pooled rank** | **−0.41 (n=57)** | **−0.06 (n=109)** |
+| 2007–2011 | +0.51 (17/17) [0.04, 0.80] | +0.36 (47/51) [0.08, 0.58] |
+| 2011–2015 | — (<3 growing) | −0.26 (6/51) [−0.88, 0.70] |
+| 2015–2019 | −0.54 (10/17) [−0.87, 0.14] | −0.46 (22/51) [−0.74, −0.05] |
+| 2019–2021 | −0.13 (13/17) [−0.63, 0.46] | −0.22 (34/51) [−0.52, 0.13] |
+| 2021–2025 | −0.12 (16/17) [−0.58, 0.40] | — (pop ends 2021) |
+| **Pooled rank** | **−0.41 (n=57) [−0.60, −0.16]** | **−0.06 (n=109) [−0.25, 0.13]** |
 
-(Spearman; Pearson similar. Positive = more building per person went with
-*bigger price rises* in that window.)
+(Spearman with naive Fisher-z 95% CIs; Pearson similar. Positive = more
+building per person went with *bigger price rises* in that window.
+With n=17 CCAA the window CIs are wide by construction — only the pooled
+CCAA band clears zero, and it pools repeat observations of the same 17
+territories across windows with no clustering, so treat it as a floor on
+uncertainty, not a standard error.)
 
 ## Reading
 
@@ -35,7 +39,10 @@ and counted. Pearson + Spearman per window and pooled.
   most (−22 to −27%). The denominator is demand itself.
 - 2011–2015 is the dog that didn't bark: only 1–2 CCAA grew at all, so the
   ratio test is undefined for the whole depopulation window — a reminder the
-  metric only exists when people arrive.
+  metric only exists when people arrive. Stronger: this test *cannot observe
+  the bust*, the one regime where overhang-lowers-prices is most testable.
+  Excluding shrinking-population windows conditions the sample on demand
+  itself, so the design selects away its best shot at the theory.
 
 ## Verdict
 

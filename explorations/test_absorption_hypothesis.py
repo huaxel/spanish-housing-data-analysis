@@ -17,6 +17,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+import math  # noqa: E402
+
 import duckdb  # noqa: E402
 
 from spanish_housing.data_paths import PROCESSED  # noqa: E402
@@ -55,6 +57,17 @@ def spearman(xs: list[float], ys: list[float]) -> float | None:
     if len(xs) < 3:
         return None
     return pearson(ranks(xs), ranks(ys))
+
+
+def fisher_ci(r: float | None, n: int) -> list[float] | None:
+    """Naive 95% CI for a correlation via Fisher z. For pooled windows this
+    ignores within-territory dependence across windows — a floor on
+    uncertainty, not a standard error."""
+    if r is None or n < 4 or abs(r) >= 1:
+        return None
+    z = math.atanh(r)
+    se = 1 / math.sqrt(n - 3)
+    return [round(math.tanh(z - 1.96 * se), 2), round(math.tanh(z + 1.96 * se), 2)]
 
 
 CCAA_WINDOWS = [(2007, 2011), (2011, 2015), (2015, 2019), (2019, 2021), (2021, 2025)]
@@ -110,12 +123,14 @@ def summarize(pairs: list[dict]) -> dict:
     valid = [p for p in pairs if p["ratio"] is not None]
     xs = [p["ratio"] for p in valid]
     ys = [p["d_price"] for p in valid]
+    sp = spearman(xs, ys)
     return {
         "n": len(pairs),
         "n_valid": len(valid),
         "n_nonpositive_pop": len(pairs) - len(valid),
         "pearson": pearson(xs, ys),
-        "spearman": spearman(xs, ys),
+        "spearman": sp,
+        "spearman_ci95": fisher_ci(sp, len(valid)),
         "detail": sorted(
             pairs, key=lambda p: (p["ratio"] is None, p["ratio"] if p["ratio"] is not None else 0)
         ),
@@ -135,14 +150,18 @@ pool_c = [
 pool_p = [
     p for w in results["prov_windows"].values() for p in w["detail"] if p["ratio"] is not None
 ]
+pool_c_sp = spearman([p["ratio"] for p in pool_c], [p["d_price"] for p in pool_c])
+pool_p_sp = spearman([p["ratio"] for p in pool_p], [p["d_price"] for p in pool_p])
 results["pooled"] = {
     "ccaa": {
         "n": len(pool_c),
-        "spearman": spearman([p["ratio"] for p in pool_c], [p["d_price"] for p in pool_c]),
+        "spearman": pool_c_sp,
+        "spearman_ci95": fisher_ci(pool_c_sp, len(pool_c)),
     },
     "prov": {
         "n": len(pool_p),
-        "spearman": spearman([p["ratio"] for p in pool_p], [p["d_price"] for p in pool_p]),
+        "spearman": pool_p_sp,
+        "spearman_ci95": fisher_ci(pool_p_sp, len(pool_p)),
     },
 }
 
@@ -156,14 +175,16 @@ from spanish_housing.data_paths import ROOT  # noqa: E402
 print("== CCAA (IPV %) ==")
 for w, s in results["ccaa_windows"].items():
     print(
-        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f}"
+        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f} "
+        f"ci95={s['spearman_ci95']}"
         if s["pearson"] is not None
         else f"{w}: n too small"
     )
 print("== PROVINCIA (EUR/m2 %) ==")
 for w, s in results["prov_windows"].items():
     print(
-        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f}"
+        f"{w}: n={s['n_valid']}/{s['n']} pearson={s['pearson']:+.2f} spearman={s['spearman']:+.2f} "
+        f"ci95={s['spearman_ci95']}"
         if s["pearson"] is not None
         else f"{w}: n too small"
     )

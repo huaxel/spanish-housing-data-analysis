@@ -20,7 +20,7 @@ Three regimes, three different price drivers:
 
 1. **Boom–bust (2007–13): credit, not bricks.** Prices −36% while stock
    *grew* everywhere and per-capita stock *rose* (532→544). Mortgage counts
-   fell 84%. The overhang narrative is backwards: the bust was a credit stop
+   fell 84%. The overhang narrative is backwards: the bust looks like a credit stop
    on top of mostly still-needed stock.
 2. **Stagnation–recovery (2013–19): demography diverges.** Prices recover
    while the 20–34 cohort collapses 9.0M→7.7M and population stagnates.
