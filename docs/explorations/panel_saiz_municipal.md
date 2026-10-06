@@ -91,8 +91,11 @@ The identification memo was right that design B's data problem was
 overstated, and this session showed that — but the mechanism it exists to
 exploit does not show up in Spanish price growth at either provincia or
 municipal grain, in two different provinces, with real construction data
-and a demand control. That is now three independent nulls
+and a demand control. That is now three convergent but non-independent null diagnostics
 (`panel_saiz.md`, this note, and the tourist panel) pointing the same way.
+They share terrain constructs, outcome families, and selected urban
+samples — convergent evidence against a measurable terrain channel, not
+independent replications (corrected 2026-10-06 after independent review).
 
 Recommendation: **leave design B unbuilt as an instrument.** Not because
 the data are unreachable — they are not — but because the preponderance of

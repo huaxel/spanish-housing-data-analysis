@@ -41,30 +41,33 @@ reconsumed the slack one hundredth at a time, and the post-2021 surge in
 household formation has now pushed past even the 2011 tightness — in the
 opposite direction from prices in every regime but the last.
 
-## Causal extension: migration exposure raises prices (commissioned IV)
+## Causal extension: migration exposure and appraised prices (commissioned IV, bust-era compliers)
 
 First causal estimate in this project (design A from the identification
 memo): shift-share instrument (1998 origin levels × leave-one-out
 national waves) for foreign net inflow per 1,000 inhabitants →
-valor-tasado YoY %, provincia panel 2002–2021, province + year FE,
-SEs clustered by provincia (G=50).
+valor-tasado YoY % (appraisal outcome, not transactions), provincia panel
+2002–2021, province + year FE, SEs clustered by provincia (G=50).
 
 | | base | + province trends | drop Madrid/Barcelona |
 | --- | --- | --- | --- |
 | 2SLS | +0.67 (0.11) | +0.76 (0.12) | +0.65 (0.12) |
 | first-stage F | 47.7 | 56.3 | 35.5 |
-| AR 95% set | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
+| AR region (grid, uncalibrated) | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
 
-One point faster inflow growth raises appraised prices ~0.7pp that year
-— 4–5× the OLS association (+0.14), stable to trends and top-2
-dominance. Candidate reasons: measurement attenuation in OLS
-(inflows mixed with outflows/deaths/naturalizations), LATE compliers in
-tight markets — or residual exclusion failure, which the trends spec
-argues against but cannot kill. The pooled number is bust-driven:
-2002–13 gives +0.84 (first-stage F = 88) while 2014–21 has no first
-stage at all (F = 0.13 — post-crisis flows decoupled from 1998
-settlement geography), so the recovery half of the story stays
-descriptive. Full threats + read record in
+The bust-only estimate (+0.84, first-stage F = 88) is the headline:
+one point faster inflow growth raises appraised prices ~0.8pp that year
+among instrument compliers. The pooled +0.67 aggregates an identified
+bust period with an unidentified recovery (2014–21: F = 0.13, tau +2.29
+SE 4.84, AR grid fully accepted) and is reported as a descriptive
+aggregation, not the estimand. The 4–5× IV/OLS multiplier (+0.67 vs
++0.14) is a plausible attenuation/LATE-complier pattern, not an
+established 4–5× causal ratio — the repo does not estimate exposure
+reliability, complier characteristics, or rule out residual exclusion
+failure. Province trends partly address differential *linear* trends
+(the estimate moves 0.67 → 0.76); exclusion remains untested, and
+mortgage-selection bias may correlate with instrumented inflows (the
+outcome is appraisals, not transactions). Full threats + read record in
 [the IV note](docs/explorations/iv_migration.md); estimator machinery in
 `src/spanish_housing/` (tested); numbers pinned in
 `explorations/iv_results.json` (re-run reproduces it deterministically).

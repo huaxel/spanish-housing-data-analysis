@@ -24,17 +24,21 @@ YoY % (no provincial IPV exists). Province + year FE; CR1V SEs.
 | AR set | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
 | n / clusters | 1000 / 50 | 1000 / 50 | 960 / 48 |
 
-(Coefficient (clustered SE). AR = Anderson-Rubin 95% set over a grid.)
+(Coefficient (clustered SE, sandwich with transposed right bread — corrected 2026-10-06 after independent review caught the missing .T). AR = Anderson-Rubin acceptance region over a grid (F<10 cutoff, uncalibrated — NOT a calibrated 95% set; see review finding).)
 
-Reading: 1pp faster foreign-inflow growth raises appraised prices ~0.7pp
-that year — 4–5× the OLS association, stable across province trends
-(differential-trends exclusion threat: rejected) and top-2 dominance
-(LOO working as designed). First stage is strong everywhere (F ≥ 35);
-AR sets are bounded, informative, and exclude both zero and OLS.
+Reading (corrected 2026-10-06 after independent review): 1pp faster
+foreign-inflow growth raises appraised prices ~0.7–0.8pp that year among
+bust-era instrument compliers — 4–5× the OLS association, stable across
+province trends (which partly address differential *linear* trends;
+exclusion remains untested) and top-2 dominance (LOO working as
+designed). First stage is strong in the bust era (F ≥ 35); AR acceptance
+regions are bounded and informative there, and exclude both zero and OLS.
+The recovery half (2014–21) has no first stage (F = 0.13) and its AR
+region is the full search grid — unidentified, reported for completeness.
 
 ## Why 2SLS >> OLS (three readings, not one)
 
-1. **Measurement attenuation (most likely):** exposure = Δstock/pop mixes
+1. **Measurement attenuation (plausible hypothesis, not established):** exposure = Δstock/pop mixes
    inflows with outflows, deaths, and naturalizations (naturalized
    citizens vanish from the Extranjero count). Classical noise in the
    endogenous regressor attenuates OLS; the instrument, built from 1998

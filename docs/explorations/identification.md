@@ -75,7 +75,7 @@ grain, and the migration→price effect is right-signed but indistinguishable
 across constraint groups (high τ 0.74 vs low 0.64). Moving to municipal
 grain — 0.00–1.00 constraint spread within Barcelona province, real
 starts/completions, density control — does **not** restore it. Combined
-with the tourist-panel null, that is three independent nulls. See §Recommended
+with the tourist-panel null, that is three convergent but non-independent null diagnostics. See §Recommended
 sequence item 3.
 
 ### C. Tourist-demand shift-share (feasible, wrong estimand for supply)
@@ -115,7 +115,8 @@ not t-stats) are non-negotiable reporting.
    the *mechanism* does not appear in this outcome at either provincia or
    municipal grain (`panel_saiz.md`, `panel_saiz_municipal.md`).
    Recommendation: **leave B unbuilt as an instrument** — not for lack of
-   data, but because three independent nulls say the terrain channel does
+   data, but because three convergent (non-independent) null diagnostics say
+   the terrain channel does
    little measurable work here. The stated reopen condition ("a second
    province, price levels") was attempted and **cannot be met**: Madrid's
    priced municipios span constraint 0.00–0.25 against the province's

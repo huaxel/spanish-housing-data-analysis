@@ -204,7 +204,10 @@ def tsls(
             for j in range(k):
                 meat[i][j] += s[i] * s[j]
     tmp = [[sum(bread[i][m] * meat[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
-    cov = [[sum(tmp[i][m] * bread[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+    # Exactly-identified IV sandwich: bread @ meat @ bread.T. The right
+    # bread must be transposed because Z'X is nonsymmetric with controls
+    # (fixed 2026-10-06 after independent review caught the missing .T).
+    cov = [[sum(tmp[i][m] * bread[j][m] for m in range(k)) for j in range(k)] for i in range(k)]
     c = (g / (g - 1)) * ((n - 1) / (n - k)) if g > 1 and n > k else 1.0
     cov = [[v * c for v in row] for row in cov]
     return {

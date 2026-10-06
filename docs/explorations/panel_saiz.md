@@ -54,7 +54,7 @@ Splitting the design-A IV at the median constraint (0.445):
 | --- | --- | --- |
 | 2SLS τ | +0.64 (0.18) | +0.74 (0.15) |
 | first-stage F | 40.3 | 22.8 |
-| AR 95% set | [0.25, 1.30] | [0.10, 1.30] |
+| AR region (grid, uncalibrated) | [0.25, 1.30] | [0.10, 1.30] |
 | clusters | 26 | 24 |
 | OLS τ | +0.07 (0.10) | +0.25 (0.04) |
 

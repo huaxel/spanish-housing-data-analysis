@@ -134,6 +134,59 @@ def test_tsls_recovers_truth_strong_iv():
     assert abs(t["tau"] - 2.0) < 0.25
 
 
+def test_tsls_se_uses_transposed_bread_with_controls():
+    """Independent recomputation of the exactly-identified IV sandwich.
+
+    With controls, Z'X is nonsymmetric, so bread @ meat @ bread differs
+    from bread @ meat @ bread.T. This test builds the sandwich by an
+    independent route and pins the transpose (regression test for the
+    2026-10-06 review finding that tsls omitted .T)."""
+    from spanish_housing import ols as ols_mod
+
+    y, d, w, z, cl = _iv_dgp(n=200, ncl=20, strength=1.0, seed=11)
+    t = ols_mod.tsls(y, d, w, z, cl)
+    # Independent route: rebuild bread/meat from primitives.
+    x = [[di] + wi for di, wi in zip(d, w, strict=True)]
+    zw = [zi + wi for zi, wi in zip(z, w, strict=True)]
+    k = len(x[0])
+    zt_x = [
+        [sum(a * b for a, b in zip(zr, xc, strict=True)) for xc in zip(*x, strict=True)]
+        for zr in zip(*zw, strict=True)
+    ]
+    bread = ols_mod.invert(zt_x)
+    beta = [t["beta"][i] for i in range(k)]
+    resid = [y[i] - sum(x[i][j] * beta[j] for j in range(k)) for i in range(len(y))]
+    groups: dict = {}
+    for i, g in enumerate(cl):
+        groups.setdefault(g, []).append(i)
+    meat = [[0.0] * k for _ in range(k)]
+    for idx in groups.values():
+        s = [0.0] * k
+        for i in idx:
+            for j in range(k):
+                s[j] += zw[i][j] * resid[i]
+        for i in range(k):
+            for j in range(k):
+                meat[i][j] += s[i] * s[j]
+
+    # Correct: bread @ meat @ bread.T. Wrong (old): bread @ meat @ bread.
+    def mmul(a, b):
+        return [[sum(a[i][m] * b[m][j] for m in range(k)) for j in range(k)] for i in range(k)]
+
+    def transpose(m):
+        return [[m[j][i] for j in range(k)] for i in range(k)]
+
+    g, n = len(groups), len(y)
+    c = (g / (g - 1)) * ((n - 1) / (n - k))
+    good = mmul(mmul(bread, meat), transpose(bread))
+    bad = mmul(mmul(bread, meat), bread)
+    good_se = (c * good[0][0]) ** 0.5
+    bad_se = (c * bad[0][0]) ** 0.5
+    assert abs(good_se - bad_se) > 1e-6, "DGP must separate the two formulas"
+    assert abs(t["se"] - good_se) < 1e-9
+    assert abs(t["se"] - bad_se) > 1e-6
+
+
 def test_first_stage_f_scales_with_strength():
     from spanish_housing import ols as ols_mod
 
