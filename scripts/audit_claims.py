@@ -486,6 +486,14 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        "synthesis",
+        "Madrid non-primary share 2025",
+        "SELECT 1.0 - viviendas_principales * 1.0 / viviendas_total "
+        "FROM mart_ccaa_anual WHERE ccaa='Madrid, Comunidad de' AND anyo=2025",
+        0.116,
+        0.003,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "
