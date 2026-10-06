@@ -34,7 +34,11 @@ real declines. The capital (+30% nominal) detached from
 its own south, which now prices like 2007 Castilla-La Mancha towns. This is
 the municipal face of the CCAA story: Madrid's aggregate recovery was
 capital-plus-northwest; the provinces' analogue needs the same municipal cut
-elsewhere (queued: Barcelona via IDESCAT/AMB mirrors, Valencia via GVA).
+elsewhere (Barcelona done via DIBA; Valencia closed 2026-10-06: no GVA
+series at usable quality — Idealista barrio snapshots and UPV report
+aggregates, neither transaction/appraisal-based nor multi-municipio, so
+mixing them in would break source discipline. Revisit only if GVA
+publishes registry-based municipal prices).
 
 ## Update: people vs prices 2007–2025 (`muni_madrid` join)
 
