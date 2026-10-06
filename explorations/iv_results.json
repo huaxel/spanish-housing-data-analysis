@@ -1,0 +1,68 @@
+{
+  "base": {
+    "spec": "base",
+    "n": 1000,
+    "clusters": 50,
+    "years": [
+      2002,
+      2021
+    ],
+    "ols": {
+      "tau": 0.145,
+      "se": 0.057
+    },
+    "tsls": {
+      "tau": 0.67,
+      "se": 0.107
+    },
+    "first_stage_F": 47.67,
+    "ar_set": [
+      0.35,
+      1.0
+    ]
+  },
+  "province_trends": {
+    "spec": "province_trends",
+    "n": 1000,
+    "clusters": 50,
+    "years": [
+      2002,
+      2021
+    ],
+    "ols": {
+      "tau": 0.152,
+      "se": 0.061
+    },
+    "tsls": {
+      "tau": 0.762,
+      "se": 0.115
+    },
+    "first_stage_F": 56.28,
+    "ar_set": [
+      0.4,
+      1.15
+    ]
+  },
+  "drop_madrid_barcelona": {
+    "spec": "drop_madrid_barcelona",
+    "n": 960,
+    "clusters": 48,
+    "years": [
+      2002,
+      2021
+    ],
+    "ols": {
+      "tau": 0.129,
+      "se": 0.059
+    },
+    "tsls": {
+      "tau": 0.653,
+      "se": 0.122
+    },
+    "first_stage_F": 35.45,
+    "ar_set": [
+      0.25,
+      1.05
+    ]
+  }
+}

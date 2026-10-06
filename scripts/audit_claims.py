@@ -541,6 +541,24 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
 ]
 
 
+# Model-output claims (doc <-> committed explorations/iv_results.json).
+# Mart SQL cannot recompute 2SLS; instead the doc numbers must match the
+# committed estimator output, and re-running explorations/iv_migration.py
+# (deterministic) must reproduce that file. Guards transcription drift.
+IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("synthesis", "IV 2SLS tau (base)", "base.tsls.tau", 0.67, 0.005),
+    ("synthesis", "IV AR lower bound (base)", "base.ar_set.0", 0.35, 0.005),
+    ("synthesis", "IV AR upper bound (base)", "base.ar_set.1", 1.0, 0.005),
+    ("synthesis", "IV first-stage F (base)", "base.first_stage_F", 47.67, 0.05),
+]
+
+
+def _json_path(data: dict, path: str):
+    for part in path.split("."):
+        data = data[int(part) if part.isdigit() else part]
+    return data
+
+
 def main() -> int:
     failures = 0
     for doc, desc, sql, expected, tol in CLAIMS:
@@ -548,7 +566,18 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
-    print(f"{len(CLAIMS) - failures}/{len(CLAIMS)} claims hold")
+    import json
+
+    iv = json.loads(
+        (Path(__file__).resolve().parents[1] / "explorations" / "iv_results.json").read_text()
+    )
+    for doc, desc, path, expected, tol in IV_CLAIMS:
+        got = _json_path(iv, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total = len(CLAIMS) + len(IV_CLAIMS)
+    print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 
 

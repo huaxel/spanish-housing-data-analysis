@@ -65,8 +65,11 @@ archaeology; nothing causal merges before milestone 5's independent read.
 
 ## Exclusions (v1)
 
-No causal attribution of price moves to construction volumes; no
-municipal-level claims from provincial aggregates; no splicing of index bases.
+No causal attribution of price moves to construction volumes (the one
+causal estimate — migration exposure → prices, commissioned 2026-10-06 —
+lives in synthesis + the IV note with its threats, not as a general
+license); no municipal-level claims from provincial aggregates; no
+splicing of index bases.
 Population from 2022 comes from ECP (methodology differs from Padrón — the
 2021 overlap is quantified in `coverage.json`, never silently spliced).
 Provincial ECP is API-blocked, so the provincia mart ends 2021 while

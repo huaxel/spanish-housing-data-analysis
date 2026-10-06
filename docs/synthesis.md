@@ -39,6 +39,30 @@ reconsumed the slack one hundredth at a time, and the post-2021 surge in
 household formation has now pushed past even the 2011 tightness — in the
 opposite direction from prices in every regime but the last.
 
+## Causal extension: migration exposure raises prices (commissioned IV)
+
+First causal estimate in this project (design A from the identification
+memo): shift-share instrument (1998 origin levels × leave-one-out
+national waves) for foreign net inflow per 1,000 inhabitants →
+valor-tasado YoY %, provincia panel 2002–2021, province + year FE,
+SEs clustered by provincia (G=50).
+
+| | base | + province trends | drop Madrid/Barcelona |
+| --- | --- | --- | --- |
+| 2SLS | +0.67 (0.11) | +0.76 (0.12) | +0.65 (0.12) |
+| first-stage F | 47.7 | 56.3 | 35.5 |
+| AR 95% set | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
+
+One point faster inflow growth raises appraised prices ~0.7pp that year
+— 4–5× the OLS association (+0.14), stable to trends and top-2
+dominance. Candidate reasons: measurement attenuation in OLS
+(inflows mixed with outflows/deaths/naturalizations), LATE compliers in
+tight markets — or residual exclusion failure, which the trends spec
+argues against but cannot kill. Full threats + read record in
+[the IV note](docs/explorations/iv_migration.md); estimator machinery in
+`src/spanish_housing/` (tested); numbers pinned in
+`explorations/iv_results.json` (re-run reproduces it deterministically).
+
 ## The split (why national ratios mislead)
 
 - **Madrid** (absolute scarcity): 429 dwellings/1000, 12% non-primary (2025; was 19% in 2007),
