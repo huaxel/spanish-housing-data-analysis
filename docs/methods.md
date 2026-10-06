@@ -73,7 +73,10 @@
 - **Extranjeros en padrón (jaxi e245/p08, 1998–2022):** foreign resident
   stocks by provincia × year (TOTAL EXTRANJEROS × Ambos sexos; `padron_extranjeros`).
   The Bartik *shares* base: Madrid ran 115,202 of 5,091,336 (2.3%) foreign
-  in 1998 → 1,005,381 in 2008. Surge-by-origin half still queued (EM has
+  in 1998 → 1,005,381 in 2008. Origin detail lives in
+  `padron_extranjeros_origen` (all 137 nacionalidades × sexo, 1998–2022;
+  rollups duplicate leaves — e.g. 35,431 Moroccans in Almería and 138,667
+  Ecuadorians in Madrid, 2008). Surge-by-origin half still queued (EM has
   no origin detail) — see identification memo.
 - **Migración (INE EM, 24322, 2008–2021):** foreign immigration flows by
   provincia × year (Ambos sexos, Total edad; española vs extranjera kept

@@ -22,6 +22,7 @@ from spanish_housing.data_paths import RAW  # noqa: E402
 URL = "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
 RAW_CSV = RAW / "padron_extranjeros.csv"
 RAW_PARQUET = RAW / "parquet" / "padron_extranjeros.parquet"
+RAW_DETAIL = RAW / "parquet" / "padron_extranjeros_origen.parquet"
 
 
 def num(v: str) -> int | None:
@@ -39,18 +40,34 @@ def main() -> None:
         tmp_path = tmp.name
     Path(tmp_path).replace(RAW_CSV)
     _, rows = csvx.read_csv_records(RAW_CSV, delimiter="\t")
-    out = []
+    out, detail = [], []
     for r in rows:
+        v = num(r["Total"])
+        if v is None:
+            continue
+        if r["Provincias"] == "TOTAL ESPAÑA":
+            cpro, name = "00", "Total España"
+        else:
+            cpro, _, name = r["Provincias"].partition(" ")
+        detail.append(
+            {
+                "nacionalidad": r["Nacionalidad"],
+                "cpro": cpro,
+                "provincia": name,
+                "sexo": r["Sexo"],
+                "anyo": int(r["Periodo"]),
+                "personas": v,
+            }
+        )
         if r["Nacionalidad"] != "TOTAL EXTRANJEROS" or r["Sexo"] != "Ambos sexos":
             continue
-        v = num(r["Total"])
-        if v is None or r["Provincias"] == "TOTAL ESPAÑA":
+        if r["Provincias"] == "TOTAL ESPAÑA":
             continue
-        cpro, _, name = r["Provincias"].partition(" ")
         out.append({"cpro": cpro, "provincia": name, "anyo": int(r["Periodo"]), "extranjeros": v})
     if not out:
         raise SystemExit("padron_extranjeros: zero rows — format changed?")
     n = csvx.write_parquet(out, RAW_PARQUET)
+    nd = csvx.write_parquet(detail, RAW_DETAIL)
     manifest.record(
         "data/raw/padron_extranjeros.csv",
         {"url": URL, "publisher": "INE", "operation": "Padrón e245", "accessed": "2026-10-06"},
@@ -65,8 +82,18 @@ def main() -> None:
             "note": "TOTAL EXTRANJEROS x Ambos sexos only; full detail in raw CSV",
         },
     )
+    manifest.record(
+        "data/raw/parquet/padron_extranjeros_origen.parquet",
+        {
+            "url": URL,
+            "publisher": "INE",
+            "operation": "Padrón e245",
+            "accessed": "2026-10-06",
+            "note": "all 137 nacionalidades x sexo (rollups duplicate leaves)",
+        },
+    )
     yrs = sorted({r["anyo"] for r in out})
-    print(f"padron_extranjeros: {n} cells, {yrs[0]}-{yrs[-1]}")
+    print(f"padron_extranjeros: {n} margin + {nd} detail rows, {yrs[0]}-{yrs[-1]}")
 
 
 if __name__ == "__main__":

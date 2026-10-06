@@ -103,6 +103,12 @@ and Ceuta-y-Melilla aggregates. Annual (FK_Periodo 28), 2008–2021.
 Annual foreign resident stocks (`cpro`, `provincia`, `anyo`,
 `extranjeros`), 1998–2022. Bartik shares base; surge half queued.
 
+## padron_extranjeros_origen
+
+Full origin × sex detail (`nacionalidad`, `cpro`, `provincia`, `sexo`,
+`anyo`, `personas`): 137 nacionalidades (18 rollups duplicate leaves),
+1998–2022. Origin-level shares base for the shift-share design.
+
 ## dim_territorio
 
 `cpro`, `provincia`, `ccaa` — canonical mapping (MIVAU codes, INE names).

@@ -25,11 +25,12 @@ inflow surge. First stage is strong by construction in the boom years;
 exclusion rests on historical shares being unrelated to 2000s local
 supply shocks conditional on FE — the standard (contested, acceptable)
 shift-share argument.
-Data (probed 2026-10-06, costlier than first thought): Tempus DPOP has
-NO nationality tables (65 tables checked); EM flows (24322, provincia ×
-nationality) start 2008 — after the boom peak — so the classic
-2001–2011 design needs share archaeology (1991/2001 census jaxi, same
-viewer-export trick as #8) plus a pre-2008 surge source. Feasible
+Data: Tempus DPOP has NO nationality tables (65 tables checked) and EM
+flows (24322) start 2008 — but the jaxi padrón-continuo file e245/p08
+(1998–2022, 137 nacionalidades × provincia) supplies origin-level
+*stocks*, now pinned (`padron_extranjeros_origen`, 544,575 cells). So
+the shares half is DONE at full origin detail; what remains is the
+national *surge by origin* 2000–2008 (pre-EM) — the one missing piece. Feasible
 variants with pinned-style data: 2008+ flow-based design (bust/recovery
 window) or 2021+ ECP-nationality refill design (different shock, own
 shares). Panel: provincias × window, CCAA + year FE, cluster by

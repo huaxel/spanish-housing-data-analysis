@@ -111,6 +111,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
+    "data/raw/parquet/padron_extranjeros_origen.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -970,6 +971,10 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
     con.register("pade_df", pa.Table.from_pylist(load_parquet("padron_extranjeros.parquet")))
     con.execute("CREATE OR REPLACE TABLE padron_extranjeros AS SELECT * FROM pade_df")
+    con.register(
+        "padeo_df", pa.Table.from_pylist(load_parquet("padron_extranjeros_origen.parquet"))
+    )
+    con.execute("CREATE OR REPLACE TABLE padron_extranjeros_origen AS SELECT * FROM padeo_df")
     # Foreign immigration flows 2008-2021 (EM 24322, annual). Counts sum:
     # Nacional + Ceuta-y-Melilla aggregates built locally, like ECP.
     mig_rows = []
@@ -1021,6 +1026,7 @@ def main() -> None:
         "censo2021_viviendas",
         "migra_anual",
         "padron_extranjeros",
+        "padron_extranjeros_origen",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

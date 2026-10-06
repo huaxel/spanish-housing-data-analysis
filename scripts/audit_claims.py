@@ -494,6 +494,22 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.003,
     ),
     (
+        "migration",
+        "Moroccans in Almeria 2008",
+        "SELECT personas FROM padron_extranjeros_origen WHERE nacionalidad='Marruecos' "
+        "AND cpro='04' AND sexo='Ambos sexos' AND anyo=2008",
+        35431.0,
+        1.0,
+    ),
+    (
+        "migration",
+        "Ecuadorians in Madrid 2008",
+        "SELECT personas FROM padron_extranjeros_origen WHERE nacionalidad='Ecuador' "
+        "AND cpro='28' AND sexo='Ambos sexos' AND anyo=2008",
+        138667.0,
+        1.0,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "

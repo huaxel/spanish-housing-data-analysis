@@ -64,7 +64,8 @@
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
     "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
     "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
-    "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed"
+    "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed",
+    "data/raw/parquet/padron_extranjeros_origen.parquet": "e3157a1c4fffc5ca5ed4002ecc8e5a6051b13f68e0470f8b2b3590f86b5fc417"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -439,6 +440,13 @@
       "operation": "Padrón e245",
       "accessed": "2026-10-06",
       "note": "TOTAL EXTRANJEROS x Ambos sexos only; full detail in raw CSV"
+    },
+    "data/raw/parquet/padron_extranjeros_origen.parquet": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv",
+      "publisher": "INE",
+      "operation": "Padrón e245",
+      "accessed": "2026-10-06",
+      "note": "all 137 nacionalidades x sexo (rollups duplicate leaves)"
     }
   }
 }
