@@ -17,7 +17,7 @@ mix them: instruments for one do not identify the other.
 
 ## Candidate designs, ranked by feasibility
 
-### A. Migration shift-share for demand → prices (most feasible)
+### A. Migration shift-share for demand → prices (feasible, not light)
 
 2000s Latin-American immigration × historical settlement networks:
 Bartik-style instrument = 1990s province nationality shares × national
@@ -25,11 +25,15 @@ inflow surge. First stage is strong by construction in the boom years;
 exclusion rests on historical shares being unrelated to 2000s local
 supply shocks conditional on FE — the standard (contested, acceptable)
 shift-share argument.
-Data: mostly in reach — Padrón/ECP nationality detail exists in Tempus
-(ECP tables carry nationality breakdowns); needs pinning + validation.
-Panel: provincias × 2001–2011, CCAA + year FE, cluster by provincia.
-Risk: weak first stage outside the boom window; 2021+ refill is a
-different shock (needs its own shares).
+Data (probed 2026-10-06, costlier than first thought): Tempus DPOP has
+NO nationality tables (65 tables checked); EM flows (24322, provincia ×
+nationality) start 2008 — after the boom peak — so the classic
+2001–2011 design needs share archaeology (1991/2001 census jaxi, same
+viewer-export trick as #8) plus a pre-2008 surge source. Feasible
+variants with pinned-style data: 2008+ flow-based design (bust/recovery
+window) or 2021+ ECP-nationality refill design (different shock, own
+shares). Panel: provincias × window, CCAA + year FE, cluster by
+provincia, AR CIs.
 
 ### B. Saiz elasticity for supply → prices (credible, heavy)
 
