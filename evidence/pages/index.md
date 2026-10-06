@@ -7,8 +7,9 @@ title: Nacional
 Evolución del precio de la vivienda (IPV, índice base 2025) frente a las
 viviendas por cada 1.000 habitantes. Ámbito nacional; detalle regional en
 [comunidades autónomas](/ccaa/). También puedes [comparar dos territorios](/comparar/),
-y bajar al [grano municipal](/municipios/) en Madrid y Barcelona, o ver la
-[renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024).
+y bajar al [grano municipal](/municipios/) en Madrid y Barcelona, ver la
+[renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024), o la
+[vivienda vacía por consumo eléctrico](/vacancia/) (Censo 2021).
 
 ```sql nacional
 select anyo, viviendas_total, poblacion, pop_source, viv_por_1000_hab,
