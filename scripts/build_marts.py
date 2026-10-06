@@ -392,7 +392,8 @@ def main() -> None:
     worst_prov = (
         max(prov_overlap.items(), key=lambda kv: abs(kv[1])) if prov_overlap else (None, None)
     )
-    print(f"pop seam 2021, censo-anual-vs-padrón % (prov): n={len(prov_overlap)} worst={worst_prov}")
+    print(f"pop seam 2021, censo-anual-vs-padrón % (prov): n={len(prov_overlap)}")
+    print(f"  worst={worst_prov}")
 
     def ccaa_pop(ccaa: str, anyo: int) -> tuple[int | None, str]:
         if anyo < POP_SPLICE_YEAR:
