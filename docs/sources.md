@@ -8,10 +8,11 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | --- | --- | --- | --- |
 | MIVAU Estimación del Parque de Viviendas (VDP002_01 CSV) | `cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv` | provincia × año × tipo, 2001–2025 | `;`-separated, BOM; Ceuta+Melilla one aggregate |
 | INE IPV, operation IPV (Id 15), table 80271 | `servicios.ine.es/wstempus/js/es/DATOS_TABLA/80271` | CCAA × año × tipo, 2007–2025 | medias anuales; base 2025 (identity-checked) |
-| INE Padrón Revisión, operation DPOP (Id 22), tables 2852/2853 | `.../DATOS_TABLA/2852`, `.../2853` | provincia/CCAA × año, 1996–2021 | ends 2021; successor pending |
+| INE Padrón Revisión, operation DPOP (Id 22), tables 2852/2853 | `.../DATOS_TABLA/2852`, `.../2853` | provincia/CCAA × año, 1996–2021 | ends 2021; provincial 2022+ via Censo Anual (see row below) |
 | INE Censo viviendas 2021 (viewer tpx=59521) | browser-exported CSV via playwright-cli (no static file) | provincia × tipo × banda, 2021 only | cp1252 → UTF-8 at pin; anchor = Total × Total |
 | INE Censo viviendas 2001/2011 (CENSOPV) | `ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv` | CCAA/provincia × censo | tab-separated, BOM; anchor use |
 | INE ECP población (operation ECP Id 450), table 56940 | `.../DATOS_TABLA/56940` | CCAA × 1-ene, 1971–2025 | FK_Periodo 19 = 1 Jan (date-checked at fetch) |
+| INE Censo Anual de Población, table 68521 | `jaxiT3/files/t/es/csv_bd/68521.csv` | provincia × 1-ene, 2021–2025 | static CSV (no API); margin Total×Todas las edades×Total; 2025 national = ECP exact; 2021 prov-vs-padrón mean 0.17% |
 | INE ECP hogares (ECP), tables 60131/60133 | `.../DATOS_TABLA/60131`, `.../60133` | CCAA/provincia × 1-ene, 2021– | household totals (tamaño detail skipped) |
 | INE Censo 2011 tenure × size por CCAA/provincia (jaxi p01/02015) | direct CSV URL in `fetch_censo2011_tenencia.py` | 2011 only | '.', '..' missing; dot thousands; mortgaged anchor 5,940,928 |
 | INE Censo 2011 vintage por provincia (jaxi p01/01011a) | direct CSV URL in `fetch_censo2011_vintage.py` | provincia × tipo × construction band | dot thousands; '..' suppressed; ±10 additive tolerance |

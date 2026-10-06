@@ -27,11 +27,13 @@
 
 Ceuta/Melilla have IPV rows but aggregated stock, so no CCAA-mart row.
 
-## mart_provincia_anual (2001–2021; 51 = 50 provincias + Ceuta y Melilla)
+## mart_provincia_anual (2001–2025; 51 = 50 provincias + Ceuta y Melilla)
 
 Same stock/population columns as above plus `cpro` (2-digit code,
 `51+52` for the Ceuta y Melilla aggregate) and `share_no_principal`.
-No price columns — INE publishes no provincial IPV. Plus `pop_source`,
+No price columns — INE publishes no provincial IPV. Plus `pop_source`
+(padron ≤2021 / censo_anual ≥2022 — Censo Anual de Población static CSV
+68521, verified 2025 national = ECP exact),
 `hogares` (2021+ ECP, 2014–20 ECH, 2011 exact census), `viv_por_hogar`, plus `hogares_2001_proxy` /
 `viv_por_hogar_2001_proxy` (principales proxy, ±2.1% validated tolerance).
 

@@ -12,7 +12,7 @@ explicit extensions, not v1.
 
 ## Scope
 
-- Time: 2001–2025 (census-anchored stock series; IPV from 2007; Padrón to 2021, ECP from 2022 at CCAA/national grain — provincia mart ends 2021).
+- Time: 2001–2025 (census-anchored stock series; IPV from 2007; Padrón to 2021, ECP at CCAA grain / Censo Anual at province grain from 2022 — provincia mart runs 2001–2025).
 - Geography: national + CCAA + provincia. Prices join at CCAA/national only —
   INE publishes no provincial IPV (see methods §1).
 - Units: counts, ratios (dwellings per 1,000 inhabitants, dwellings per
@@ -76,5 +76,6 @@ license); no municipal-level claims from provincial aggregates; no
 splicing of index bases.
 Population from 2022 comes from ECP (methodology differs from Padrón — the
 2021 overlap is quantified in `coverage.json`, never silently spliced).
-Provincial ECP is API-blocked, so the provincia mart ends 2021 while
-CCAA/national run to 2025.
+Provincial ECP is API-blocked, so the provincia mart's 2022–2025 population
+comes from the Censo Anual de Población static CSV (verified 2025 national = ECP
+exact; probe in docs/explorations/censo_anual_probe.md); CCAA/national run to 2025.

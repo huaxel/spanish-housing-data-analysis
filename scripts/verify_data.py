@@ -145,7 +145,7 @@ def main() -> int:
     )
     # Mortgages start 2003; the CCAA mart starts 2007, so it must be complete.
     assert hip == 0, "ccaa mortgages must be complete 2007-2025"
-    assert hip_prov_pre == 0 and hip_prov_post == 0, "prov mortgages must cover 2003-2021"
+    assert hip_prov_pre == 0 and hip_prov_post == 0, "prov mortgages must cover 2003-2025"
     tur_cc = con.execute(
         "SELECT COUNT(*) FROM mart_ccaa_anual WHERE anyo >= 2020 AND viv_turisticas IS NULL"
     ).fetchone()[0]
@@ -153,15 +153,14 @@ def main() -> int:
         "SELECT COUNT(*) FROM mart_ccaa_anual WHERE anyo < 2020 AND viv_turisticas IS NOT NULL"
     ).fetchone()[0]
     tur_pr = con.execute(
-        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo IN (2020, 2021) "
-        "AND viv_turisticas IS NULL"
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo >= 2020 AND viv_turisticas IS NULL"
     ).fetchone()[0]
     print(
         f"tourist dwellings: ccaa null-post2020={tur_cc}, ccaa pre2020-leak={tur_cc_pre}, "
-        f"prov null-2020/21={tur_pr}"
+        f"prov null-post2020={tur_pr}"
     )
     assert tur_cc == 0 and tur_cc_pre == 0, "ccaa tourist must cover 2020-2025 only"
-    assert tur_pr == 0, "prov tourist must cover 2020-2021"
+    assert tur_pr == 0, "prov tourist must cover 2020-2025"
     mun = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM valor_municipal_madrid"
     ).fetchone()
@@ -214,7 +213,7 @@ def main() -> int:
         f"(pre2007-leak={trx_p_ok}, post2007-gap={trx_p_bad})"
     )
     assert trx_c == 0, "ccaa transactions must be complete 2007-2025"
-    assert trx_p_ok == 0 and trx_p_bad == 0, "prov transactions must cover 2007-2021 only"
+    assert trx_p_ok == 0 and trx_p_bad == 0, "prov transactions must cover 2007-2025"
     vin = con.execute(
         "SELECT SUM(CASE WHEN tipo='vacia' AND vintage='De 2002 a 2011' "
         "THEN viviendas END), SUM(CASE WHEN tipo='vacia' AND vintage='Total' "

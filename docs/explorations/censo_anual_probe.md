@@ -1,6 +1,6 @@
 # Probe: Censo Anual de Población — provincial population 2021–2025
 
-**Date:** 2026-10-06 · **Status:** reachable, verified against marts
+**Date:** 2026-10-06 · **Status:** reachable, verified, **fetch built** (scripts/fetch_censo_anual.py)
 
 ## What the repo lacks
 
@@ -59,9 +59,12 @@ the top.
 
 ## Verdict
 
-**Reachable and valuable.** This would extend the provincia mart to
-2022–2025 with a documented, auditable source — closing the one temporal
-gap the sources doc lists as unreachable. The fetch is a static CSV
-download (~208 MB) + margin filter, mirroring the ECP pattern but without
-the API block. Recommend a `fetch_censo_anual.py` (population only, 2021
-overlap for the seam check, `pop_source='censo_anual'`).
+**Reachable, valuable, and now built.** `scripts/fetch_censo_anual.py`
+downloads the static CSV (~208 MB), keeps the Total×Todas las edades×Total
+margin, guards the 2025 provincial sum against 49,128,297, and pins both
+the raw CSV and the parquet in the manifest. `build_marts.py` extends the
+provincia mart to 2025 (`pop_source='censo_anual'` for 2022+, padrón
+before), and `verify_data.py` windows now assert 2022–2025 coverage. The
+provincia mart grew from 1,071 to 1,275 rows; 2025 provincial sum
+49,128,297 matches the CCAA mart Nacional exactly. This closes the one
+temporal gap the sources doc listed as unreachable.

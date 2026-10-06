@@ -4,6 +4,7 @@
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
+    "data/raw/censo_anual_68521.csv": "cdd0b707a40ce4af62d0f967fb02d88f2e70098c2ac4dbd846e3bcb7abcf0b52",
     "data/raw/censo_viviendas_2001_2011.csv": "8a4f18414c1d2953003c26d1b22455269f21fc34a6ce9883f710b82b94330dab",
     "data/raw/diba_opendata.zip": "01bb0bd88e67b9add2f015b2294a7e4c0cd632deb7ecba605c82df1c41db3b9a",
     "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
@@ -26,6 +27,7 @@
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
     "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
     "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
+    "data/raw/parquet/censo_anual_pob_prov.parquet": "8ea764f83d9e78f94783b9acd304866e89aa94f8f0c6c988a9cf3a1ca031ab46",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": "42040a0a9a5593538fe7a21c05c707a8c44c5524efba2176a943b2e08d514c14",
     "data/raw/parquet/diba_h18a.parquet": "951b7b80c4925c83bc230e3ed52285fbf0b7c7314c3a20bafad0d2525337e68c",
     "data/raw/parquet/diba_h9a.parquet": "a648c6dcedff125a190531f0ebbb42126fe91906fd8180d6535829a291a7e2c5",
@@ -91,6 +93,12 @@
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
+    },
+    "data/raw/censo_anual_68521.csv": {
+      "accessed": "2026-10-06",
+      "note": "static jaxiT3 CSV export; 208 MB; tab-separated, dot-thousands, BOM",
+      "operation": "Censo Anual de Población (68521)",
+      "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/censo_viviendas_2001_2011.csv": {
       "accessed": "2026-10-05",
@@ -212,6 +220,12 @@
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
+    },
+    "data/raw/parquet/censo_anual_pob_prov.parquet": {
+      "accessed": "2026-10-06",
+      "note": "Total × Todas las edades × Total margin only; 2021-2025",
+      "operation": "Censo Anual de Población (68521)",
+      "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": {
       "accessed": "2026-10-05",

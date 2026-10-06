@@ -96,6 +96,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/padron_provincia.parquet",
     "data/raw/parquet/padron_ccaa.parquet",
     "data/raw/parquet/ecp_pob_ccaa.parquet",
+    "data/raw/parquet/censo_anual_pob_prov.parquet",
     "data/raw/parquet/ecp_hog_ccaa.parquet",
     "data/raw/parquet/ecp_hog_prov.parquet",
     "data/raw/parquet/valor_tasado.parquet",
@@ -243,6 +244,15 @@ def main() -> None:
     parque = load_parquet("parque_viviendas.parquet")
     ipv = load_parquet("ipv_ccaa_anual.parquet")
     pad_prov = load_parquet("padron_provincia.parquet")
+    censo_anual = {
+        (N(r["territorio"]), r["anyo"]): r["poblacion"]
+        for r in load_parquet("censo_anual_pob_prov.parquet")
+        if r["granularity"] == "provincia"
+    }
+    censo_anual_ceuta = {
+        a: censo_anual.get((N("Ceuta"), a), 0) + censo_anual.get((N("Melilla"), a), 0)
+        for a in range(2021, 2026)
+    }
 
     # Base identity: Nacional/General/2025 == 100 (base 2025, full-history rebase).
     base = [
@@ -512,8 +522,17 @@ def main() -> None:
 
     prov_rows = []
     for d in dim:
-        for anyo in range(2001, 2022):  # parque ∩ padrón (provincial ECP blocked)
-            pop = ceuta[anyo] if d["cpro"] == "51+52" else pob.get((N(d["provincia"]), anyo))
+        for anyo in range(2001, 2026):  # parque ∩ (padrón → censo anual provincial)
+            if anyo < POP_SPLICE_YEAR:
+                pop = ceuta[anyo] if d["cpro"] == "51+52" else pob.get((N(d["provincia"]), anyo))
+                pop_src = "padron"
+            else:
+                pop = (
+                    censo_anual_ceuta[anyo]
+                    if d["cpro"] == "51+52"
+                    else censo_anual.get((N(d["provincia"]), anyo))
+                )
+                pop_src = "censo_anual"
             cell = stock.get((d["cpro"], anyo))
             if pop is None or cell is None:
                 continue  # recorded in coverage report, not silently zero
@@ -572,7 +591,7 @@ def main() -> None:
                     "viviendas_principales": cell["principal"],
                     "viviendas_no_principales": cell["no_principal"],
                     "poblacion": pop,
-                    "pop_source": "padron",
+                    "pop_source": pop_src,
                     "hogares": hogar,
                     "hogares_2001_proxy": (cell["principal"] if anyo == 2001 else None),
                     "viv_por_1000_hab": round(cell["total"] / pop * 1000, 2),
@@ -593,6 +612,23 @@ def main() -> None:
                 }
             )
     prov_rows.sort(key=lambda r: (r["cpro"], r["anyo"]))
+
+    # Cross-mart coherence: provincial Censo Anual sums must equal the ECP
+    # national total used in the CCAA mart (same register-based series).
+    ecp_national = {
+        r["anyo"]: r["poblacion"]
+        for r in load_parquet("ecp_pob_ccaa.parquet")
+        if r["territorio"] == "Total Nacional"
+    }
+    for anyo in range(POP_SPLICE_YEAR, 2026):
+        prov_sum = sum(
+            r["poblacion"]
+            for r in prov_rows
+            if r["anyo"] == anyo and r["pop_source"] == "censo_anual"
+        )
+        ecp_n = ecp_national.get(anyo)
+        if ecp_n and prov_sum != ecp_n:
+            raise SystemExit(f"censo-anual sum {prov_sum:,} != ECP national {ecp_n:,} for {anyo}")
 
     # CCAA mart: aggregate counts, take IPV from INE rows (never averaged).
     ipv_cell = {(r["territorio"], r["anyo"], r["tipo_vivienda"]): r["indice"] for r in ipv}
@@ -1037,7 +1073,7 @@ def main() -> None:
         "ccaa_year_cells_without_ipv": len(missing_ipv),
         "ipv_base_check": "Nacional/General/2025 == 100.0 OK",
         "pop_seam_2021_ecp_vs_padron_pct": overlap,
-        "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
+        "pop_source_rule": "padron <=2021, ecp (CCAA) / censo anual (prov) >=2022 (1-January both)",
         "hogares_window": "2021+ (ECP, 1-January); 2014-2020 ECH annual survey;"
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
         "censo2021_anchor": "provincial totals vs parque 2021, worst gap <1.0% (tipo split"
@@ -1057,8 +1093,10 @@ def main() -> None:
         "ipc_window": "2002+ monthly general index (base 2021), CCAA + Nacional (+Ceuta/Melilla"
         " separately); ipc_anual carries annual means + n_months",
         "known_gaps": [
-            "provincial ECP population (Tempus3 56945) unreachable "
-            "(volume-blocked; probed 2026-10-06) — provincia mart ends 2021",
+            "provincial ECP population (Tempus3 56945) unreachable (volume-blocked;"
+            " probed 2026-10-06) — provincia mart continues 2022-2025 on the Censo"
+            " Anual de Población static CSV (verified: 2025 national = ECP exact,"
+            " 2021 prov-vs-padrón mean |Δ| 0.17%)",
             "IPV starts 2007 — no quality-adjusted price index before",
             "IPV has no provincial grain — price joins are CCAA/national only",
             "Ceuta/Melilla have separate IPV rows but aggregated stock — excluded from CCAA mart",

@@ -18,15 +18,19 @@
   years are estimates, rebased at each census — treat census seams (2001,
   2011, 2021) as revision points, not organic jumps. Counts sum across
   provinces legitimately (unlike indices or medians).
-- **Padrón (INE DPOP, 1996–2021) → ECP (INE, 2022–):** registered population
-  to 2021, resident population (Estadística Continua de Población, Tempus3
-  56940, CCAA grain) from 2022. Same reference point (1 January), different
-  methodology. The 2021 overlap is quantified at build (ECP-vs-Padrón: max
-  +0.89% Balears, most CCAA <0.2%) and stored in `coverage.json` — a benign
-  seam, not a silent splice. Column `pop_source` tags every row.
-  Provincial ECP (table 56945) is unreachable via the public API (volume
-  block + empty series/filter endpoints, probed 2026-10-06), so the
-  **provincia mart ends 2021** while CCAA/national run to 2025.
+- **Padrón (INE DPOP, 1996–2021) → ECP / Censo Anual (2022–):** registered
+  population to 2021, resident population from 2022 — ECP (Estadística
+  Continua de Población, Tempus3 56940) at CCAA grain, Censo Anual de
+  Población (static jaxiT3 CSV 68521) at province grain. Same reference
+  point (1 January), same register-based methodology (2025 national total
+  identical between the two: 49,128,297). The 2021 overlap is quantified at
+  build (ECP-vs-Padrón: max +0.89% Balears, most CCAA <0.2%) and stored in
+  `coverage.json` — a benign seam, not a silent splice. Column
+  `pop_source` tags every row (padron / ecp / censo_anual). Provincial ECP
+  (table 56945) is unreachable via the public API (volume block + empty
+  series/filter endpoints, probed 2026-10-06), so the **provincia mart
+  continues 2022–2025 on the Censo Anual** (probe + verification in
+  `docs/explorations/censo_anual_probe.md`); CCAA/national run to 2025.
 - **Vintage (INE Censo 2011, jaxi p01/01011a):** dwellings by construction
   band × provincia for principales/secundarias/vacías. Bands (+ No consta)
   sum to Total within ±10 dwellings (published rounding). 2011 only — the

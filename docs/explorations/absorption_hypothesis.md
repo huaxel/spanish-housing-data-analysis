@@ -15,7 +15,7 @@ and counted. Pearson + Spearman per window and pooled.
 | 2011–2015 | — (<3 growing) | −0.26 (6/51) [−0.88, 0.70] |
 | 2015–2019 | −0.54 (10/17) [−0.87, 0.14] | −0.46 (22/51) [−0.74, −0.05] |
 | 2019–2021 | −0.13 (13/17) [−0.63, 0.46] | −0.22 (34/51) [−0.52, 0.13] |
-| 2021–2025 | −0.12 (16/17) [−0.58, 0.40] | — (pop ends 2021) |
+| 2021–2025 | −0.12 (16/17) [−0.58, 0.40] | — (Censo Anual pop added 2026-10-06; rerun queued) |
 | **Pooled rank** | **−0.41 (n=57) [−0.60, −0.16]** | **−0.06 (n=109) [−0.25, 0.13]** |
 
 (Spearman with naive Fisher-z 95% CIs; Pearson similar. Positive = more
