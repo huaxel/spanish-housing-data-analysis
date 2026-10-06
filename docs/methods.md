@@ -9,6 +9,9 @@
   published. Grain: national + CCAA (+ Ceuta/Melilla separately). **There is
   no provincial IPV** — any "provincial price" would be a fabrication.
   Base identity guard: Nacional/General/2025 == 100.0, checked at build.
+  Base arithmetic: 2025 reads 100 by construction, so window % changes
+  (e.g. "IPV +36% 2021–25") partly measure distance from the chosen base —
+  compare window lengths and bases before comparing magnitudes across cuts.
 - **Parque (MIVAU):** estimated dwelling *counts* by provincia and year,
   split principal / no-principal. Method: Census 2001/2011/2021 anchors plus
   yearly modelled flows (finished homes in, withdrawals out). Inter-census

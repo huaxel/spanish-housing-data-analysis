@@ -30,7 +30,9 @@ markets (Cataluña, Aragón, Madrid, −42 to −46%); thinnest falls the interi
 
 **Every CCAA built fewer dwellings than the households it added**
 (0.23–0.90 dwellings per new household). Tightest: Comunitat Valenciana
-(0.23), Canarias (0.25), Murcia (0.27), Cataluña (0.31). Loosest: Asturias
+(0.23), Canarias (0.25), Murcia (0.27), Cataluña (0.31) — gaps this small are
+ties, not rankings (ECP household noise plus modelled stock flows swamp
+second decimals). Loosest: Asturias
 (0.90, still shrinking its household base slowly). Nationally viv/hogar fell
 1.44→1.39 and viv/1000 fell 564→552 while IPV rose ~36%.
 
