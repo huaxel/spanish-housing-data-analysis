@@ -33,6 +33,9 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Synthesis: the answer in one place](docs/synthesis.md)
 - [Madrid capital vs corona: the south never recovered](docs/explorations/madrid_municipios.md)
 - [Censo Anual probe](docs/explorations/censo_anual_probe.md)
+- [SERPAVI probe](docs/explorations/serpavi_probe.md) — municipal rents 2011–2024 nationwide (2,555 municipios at 2024), validated vs DIBA; highest-value data candidate
+- [Valor de Referencia probe](docs/explorations/valor_referencia_probe.md) — all-municipio MBR/MBC modules, PDF-only, parked (reopens with design B)
+- [Construction probe](docs/explorations/construction_probe.md) — licencias/ECB flows, app/PDF access with coverage gaps, parked
 - [viv/1000 flatness is a two-group accident](docs/explorations/ratio_ccaa.md) — national ratio +7.8% hides a split: scarcity CCAA falling (−30 Madrid/Cataluña) vs overstock rising (+100–130 interior); price cross −0.39 (n=17, directional) — provincial population 2021–2025 reachable as static CSV; closes the 56945 block (2025 national = mart exact)
 - [Barcelona: burdened metropolis, stretched corona](docs/explorations/barcelona_municipios.md)
 

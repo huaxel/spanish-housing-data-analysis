@@ -46,6 +46,9 @@ no API call needed. Verified: 2025 national 49,128,297 = mart exact;
 Sexo=18 (Total=451), Totales de edad=356 (Todas=15668). If INE lifts the block,
 re-add 56945 to `scripts/fetch_ecp.py` and extend the provincia mart past 2021. |
 
+| SERPAVI alquiler municipal (MIVAU, fianzas tax exploitation) | `cdn.mivau.gob.es/.../bd_SERPAVI_2011-2024.xlsx` | municipio × 20 medidas, 2011–2024 | 71 MB Excel wide matrix; €/m² mediana/P25/P75 (VC/VU), superficie, contratos; 2,555 municipios at 2024 (29%), all named; validated vs DIBA Barcelona (13.68 €/m² ≈ 1,147 €/mo); probe in docs/explorations/serpavi_probe.md |
+| INE Índice de Precios de Vivienda en Alquiler (Tempus3) | live in API | CCAA/prov | redundant with SERPAVI (see construction probe) |
+
 Methodology references: INE IPV metodología Base 2025
 (`ine.es/daco/daco42/ipv/metodologia2025.pdf`); MIVAU parque metodología
 (`mivau.gob.es/.../2025-02_metodologia_estimacion_del_parque_de_viviendas.pdf`;
