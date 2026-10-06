@@ -61,6 +61,16 @@ evidence-build:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Refusing: dev server/service owns .evidence/template/. Stop it first: systemctl --user stop housing-evidence (or make evidence-build ALLOW=1)."; exit 1; fi
 	cd evidence && npm run build
 
+# Cloudflare deploy: DuckDB WASM blobs exceed the 25 MiB Workers asset
+# limit, so worker.js proxies them from the pinned npm CDN (byte-identical
+# to the build blobs — see worker.js); build-cf is build/ minus *.wasm.
+# Re-run after every evidence-build (hashed filenames change). Custom domain
+# vivienda.juanbenjumea.me attaches via workers.dev dashboard/API once.
+evidence-deploy:
+	rm -rf evidence/build-cf && cp -r evidence/build evidence/build-cf
+	rm -f evidence/build-cf/_app/immutable/assets/*.wasm
+	cd evidence && npx wrangler deploy
+
 evidence-smoke:
 	bash scripts/smoke_dashboard.sh
 

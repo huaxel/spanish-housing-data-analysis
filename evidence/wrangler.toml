@@ -1,0 +1,19 @@
+# Cloudflare deploy for the static Evidence build (see Makefile evidence-build).
+# Deploy with: npx wrangler deploy  (from evidence/)
+# Custom domain vivienda.juanbenjumea.me is attached out-of-band via the
+# Cloudflare API (POST /accounts/:id/workers/domains), not here.
+name = "vivienda-explorer"
+main = "./worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+# Custom domain needs a one-time attach (token lacks zone scope):
+# dash.cloudflare.com → Workers & Pages → vivienda-explorer → Settings →
+# Domains & Routes → Add Custom Domain → vivienda.juanbenjumea.me.
+# (A `route` here fails the same way until then; keep dashboard as source.)
+
+[assets]
+directory = "./build-cf"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = true
