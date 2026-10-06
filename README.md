@@ -56,3 +56,9 @@ make evidence-dev   # open the printed localhost URL
 Price *levels* (€/m², MIVAU valor tasado), post-2021 population (Cifras de
 Población), and annual households (ECH) are queued sources — see
 [project plan](docs/project_plan.md). Missing cells stay missing.
+
+## License
+
+Code license TBD — ask before reusing. Data © their publishers (INE,
+MIVAU, Diputació de Barcelona, datos.comunidad.madrid); see
+[Sources](docs/sources.md) for terms and attribution.
