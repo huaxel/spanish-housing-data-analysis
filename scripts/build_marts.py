@@ -1009,14 +1009,10 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
     # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
     # electricity consumption. Municipal grain (named + Resto aggregates).
-    con.register(
-        "inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet"))
-    )
+    con.register("inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet")))
     con.execute("CREATE OR REPLACE TABLE censo2021_intensidad AS SELECT * FROM inten_df")
     # SERPAVI municipal rents (MIVAU, tax-deposit based), long melt 2011-2024.
-    con.register(
-        "serp_df", pa.Table.from_pylist(load_parquet("serpavi_municipal.parquet"))
-    )
+    con.register("serp_df", pa.Table.from_pylist(load_parquet("serpavi_municipal.parquet")))
     con.execute("CREATE OR REPLACE TABLE serpavi_municipal AS SELECT * FROM serp_df")
     con.register("pade_df", pa.Table.from_pylist(load_parquet("padron_extranjeros.parquet")))
     con.execute("CREATE OR REPLACE TABLE padron_extranjeros AS SELECT * FROM pade_df")
