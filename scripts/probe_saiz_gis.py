@@ -276,9 +276,156 @@ def sensitivity_report() -> None:
     (CACHE.parent / "sensitivity.json").write_text(json.dumps(out, indent=2))
 
 
+def municipal_report(prefix: str, out_name: str) -> None:
+    """Terrain terrain series per LAU (municipio) for one provincia code.
+
+    Processes whole 1x1 degree tiles and labels every municipio in the tile
+    at once (rasterize + bincount), rather than one pass per municipio. Much
+    faster and it keeps the cos(lat) area weighting identical to the
+    provincial run.
+
+    Validates computed land area against GISCO's own AREA_KM2 per municipio,
+    which is a per-row external check the provincial run could not offer.
+    """
+    lau = CACHE.parent / "lau.geojson"
+    if not lau.exists():
+        fetch(
+            "https://gisco-services.ec.europa.eu/distribution/v2/lau/geojson/"
+            "LAU_RG_01M_2021_4326.geojson",
+            lau,
+        )
+    data = json.loads(lau.read_text())
+    units = []
+    for f in data["features"]:
+        p = f["properties"]
+        if p.get("CNTR_CODE") != "ES" or not p.get("LAU_ID", "").startswith(prefix):
+            continue
+        g = f["geometry"]
+        polys = [g["coordinates"]] if g["type"] == "Polygon" else g["coordinates"]
+        units.append(
+            {"id": p["LAU_ID"], "name": p["LAU_NAME"], "lau_km2": p["AREA_KM2"], "polys": polys}
+        )
+    if not units:
+        raise SystemExit(f"no LAU units for prefix {prefix!r}")
+    print(f"LAU units: {len(units)}")
+
+    needed: set[tuple[int, int]] = set()
+    for u in units:
+        needed.update(tiles_for(u["polys"]))
+
+    def dl(t):
+        lat, lon = t
+        dem, wbm = tile_paths(lat, lon)
+        if not dem.exists():
+            fetch(dem_url(lat, lon, "DEM"), dem)
+        if not wbm.exists():
+            fetch(dem_url(lat, lon, "WBM"), wbm)
+
+    with ThreadPoolExecutor(max_workers=16) as ex:
+        list(ex.map(dl, sorted(needed)))
+
+    n = len(units)
+    tot = np.zeros(n + 1)
+    und = np.zeros(n + 1)
+    steep_t = np.zeros(n + 1)
+    water_t = np.zeros(n + 1)
+    for lat, lon in sorted(needed):
+        dem, wbm = tile_paths(lat, lon)
+        if not dem.exists():
+            continue
+        with rasterio.open(dem) as ds:
+            a = ds.read(1).astype("float32")
+            nd = ds.nodata
+            transform = ds.transform
+        if nd is not None:
+            a = np.where(a == nd, np.nan, a)
+        h, w = a.shape
+        coarse_shape = (h // FACTOR, w // FACTOR)
+        coarse_transform = rasterio.Affine(
+            transform.a * FACTOR,
+            transform.b,
+            transform.c,
+            transform.d,
+            transform.e * FACTOR,
+            transform.f,
+        )
+        shapes = []
+        for i, u in enumerate(units, start=1):
+            for p in u["polys"]:
+                shapes.append(({"type": "Polygon", "coordinates": p}, i))
+        labels = rasterize(
+            shapes,
+            out_shape=coarse_shape,
+            transform=coarse_transform,
+            fill=0,
+            dtype="int32",
+        )
+        if not labels.any():
+            continue
+        a90 = block_mean(np.where(np.isnan(a), np.nanmean(a), a), FACTOR)
+        if wbm.exists():
+            with rasterio.open(wbm) as ws:
+                wt = block_mean(ws.read(1).astype("float32"), FACTOR)
+            water = wt > 0.5
+        else:
+            water = np.zeros_like(labels, dtype=bool)
+        slope = max_neighbour_slope_grade(a90, coarse_transform)
+        steep = slope > SLOPE_GRADE_THRESHOLD
+        un = steep | water
+
+        dlat = abs(coarse_transform.e)
+        dlon = abs(coarse_transform.a)
+        lat_rows = coarse_transform.f - dlat * (np.arange(coarse_shape[0]) + 0.5)
+        row_area = (dlat * M_PER_DEG_LAT) * (dlon * M_PER_DEG_LON_EQ * np.cos(np.radians(lat_rows)))
+        wgt = np.broadcast_to(row_area[:, None], labels.shape)
+        lab = labels.ravel()
+        wt_flat = wgt.ravel()
+
+        tot += np.bincount(lab, weights=wt_flat, minlength=n + 1)
+        und += np.bincount(lab, weights=(wt_flat * un.ravel()), minlength=n + 1)
+        steep_t += np.bincount(lab, weights=(wt_flat * steep.ravel()), minlength=n + 1)
+        water_t += np.bincount(lab, weights=(wt_flat * water.ravel()), minlength=n + 1)
+
+    rows = []
+    worst = 0.0
+    for i, u in enumerate(units, start=1):
+        if tot[i] <= 0:
+            continue
+        km2 = tot[i] / 1e6
+        err = abs(km2 - u["lau_km2"]) / u["lau_km2"] if u["lau_km2"] else 0.0
+        worst = max(worst, err)
+        rows.append(
+            {
+                "lau_id": u["id"],
+                "municipio": u["name"],
+                "lau_km2": round(u["lau_km2"], 3),
+                "land_km2": round(km2, 3),
+                "area_err_pct": round(err * 100, 2),
+                "undevelopable_share": round(und[i] / tot[i], 4),
+                "steep_share": round(steep_t[i] / tot[i], 4),
+                "water_share": round(water_t[i] / tot[i], 4),
+            }
+        )
+    rows.sort(key=lambda r: r["undevelopable_share"])
+    (CACHE.parent / "municipal.json").write_text(json.dumps(rows, indent=2))
+    tot_km2 = sum(r["land_km2"] for r in rows)
+    print(f"municipios: {len(rows)}  total {tot_km2:.0f} km2  worst area err {worst * 100:.1f}%")
+
+    def _fmt(rs):
+        return ", ".join(f"{r['municipio']} {r['undevelopable_share']:.2f}" for r in rs)
+
+    print("least:", _fmt(rows[:4]))
+    print(
+        "most: ", ", ".join(f"{r['municipio']} {r['undevelopable_share']:.2f}" for r in rows[-4:])
+    )
+
+
 def main() -> None:
     if sys.argv[1:2] == ["--sensitivity"]:
         sensitivity_report()
+        return
+    if sys.argv[1:2] == ["--municipal"]:
+        municipal_report(sys.argv[2] if len(sys.argv) > 2 else "08", "municipal.json")
         return
     provinces = load_provinces()
     wanted = sys.argv[1:] or sorted(provinces)

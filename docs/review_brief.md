@@ -43,7 +43,7 @@ analysis, not to improve the code.
 ```bash
 uv sync --group dev
 make gates      # verify + audit + test + lint
-make audit      # 124 headline doc numbers re-queried against marts/models/probe
+make audit      # 139 headline doc numbers re-queried against marts/models/probe
 ```
 
 `make audit` is the anti-drift device: every quotable number in the docs is a
@@ -137,8 +137,12 @@ Disclosed here so the reviewer judges them rather than finding them later:
   **now partly answered against it**: `docs/explorations/panel_saiz.md`
   finds a *null* direct terrain→price association, a *null* build-suppression
   premise, and a right-signed but indistinguishable mechanism
-  (high-constraint τ 0.74 vs low 0.64). Review should weigh whether that
-  null is evidence about the mechanism or about provincia averaging.
+  (high-constraint τ 0.74 vs low 0.64). `docs/explorations/panel_saiz_municipal.md`
+  reruns the same diagnostics at municipal grain (310 municipios, real
+  starts/completions, 0.00-1.00 constraint spread, density control) and
+  **still** gets nulls, which closes the "provincial averaging hid it"
+  hypothesis. Review should weigh whether these nulls are evidence about the
+  mechanism, about the outcome (price *growth*, not levels), or about power.
 
 ## Output
 

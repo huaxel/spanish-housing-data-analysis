@@ -658,6 +658,40 @@ SENSITIVITY_CLAIMS = [
 ]
 
 # (doc, description, json path, expected, tolerance) against
+# explorations/panel_saiz_municipal_results.json.
+PANEL_SAIZ_MUNI_CLAIMS = [
+    ("panel_saiz_muni", "muni count", "n_municipios", 310, 0),
+    ("panel_saiz_muni", "premise starts coef /0.1", "premise_starts.coef_per_0p1", -0.023, 0.005),
+    ("panel_saiz_muni", "premise starts se /0.1", "premise_starts.se_per_0p1", 0.026, 0.005),
+    (
+        "panel_saiz_muni",
+        "premise completions coef /0.1",
+        "premise_completions.coef_per_0p1",
+        -0.008,
+        0.005,
+    ),
+    (
+        "panel_saiz_muni",
+        "premise starts+density coef /0.1",
+        "premise_starts_density.coef_per_0p1",
+        -0.028,
+        0.005,
+    ),
+    ("panel_saiz_muni", "exclusion price coef /0.1", "exclusion_price.coef_per_0p1", -0.009, 0.005),
+    (
+        "panel_saiz_muni",
+        "exclusion price+density coef /0.1",
+        "exclusion_price_density.coef_per_0p1",
+        0.05,
+        0.005,
+    ),
+    ("panel_saiz_muni", "exclusion price n", "exclusion_price.n", 1414, 0),
+    ("panel_saiz_muni", "exclusion price clusters", "exclusion_price.clusters", 130, 0),
+    ("panel_saiz_muni", "mean starts per 1000", "mean_starts_pc", 1.5219, 0.005),
+    ("panel_saiz_muni", "mean price growth", "mean_d_price", 4.2094, 0.005),
+]
+
+# (doc, description, json path, expected, tolerance) against
 # explorations/panel_saiz_results.json -- terrain x migration diagnostics.
 PANEL_SAIZ_CLAIMS = [
     (
@@ -770,6 +804,27 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(PANEL_SAIZ_CLAIMS)
+    muni = json.loads((expl / "panel_saiz_municipal_results.json").read_text())
+    for doc, desc, path, expected, tol in PANEL_SAIZ_MUNI_CLAIMS:
+        got = _json_path(muni, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(PANEL_SAIZ_MUNI_CLAIMS)
+    muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
+    muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
+    muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)
+    muni_med = sorted(x["area_err_pct"] for x in muniterr)[len(muniterr) // 2]
+    for desc, got, expected, tol in (
+        ("municipal LAU units", len(muniterr), 311, 0),
+        ("municipal total computed km2", muni_tot_land, 7685.2, 0.5),
+        ("municipal total LAU km2", muni_tot_lau, 7729.5, 0.5),
+        ("municipal median area err pct", muni_med, 0.99, 0.02),
+    ):
+        ok = abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] saiz_muni_probe: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 4
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

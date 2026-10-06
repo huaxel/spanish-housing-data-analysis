@@ -67,6 +67,17 @@ in the probe.
 The plausible amenity/tourism-terrain confound is unresolved and is the
 real cost of this design.
 
+**Mechanism looks absent (2026-10-06).** Two follow-ups
+(`docs/explorations/panel_saiz.md`, `panel_saiz_municipal.md`) test whether
+terrain moderates anything that matters here, and it does not: the build
+premise is null, the direct terrain→price association is null at provincia
+grain, and the migration→price effect is right-signed but indistinguishable
+across constraint groups (high τ 0.74 vs low 0.64). Moving to municipal
+grain — 0.00–1.00 constraint spread within Barcelona province, real
+starts/completions, density control — does **not** restore it. Combined
+with the tourist-panel null, that is three independent nulls. See §Recommended
+sequence item 3.
+
 ### C. Tourist-demand shift-share (feasible, wrong estimand for supply)
 
 International arrivals × coastal/urban exposure → local demand shocks.
@@ -100,9 +111,13 @@ not t-stats) are non-negotiable reporting.
 2. C (tourist exposure, Barcelona pilot): municipal, already-pinned data.
    **DONE** — municipal null.
 3. B (Saiz GIS build): prerequisite (A or C shows the machinery works)
-   is met, and the data/tooling blocker was overstated — see the probe.
-   Now the *cheapest* remaining data step, but its exclusion argument is
-   the most serious open question on this list.
+   is met and the data/tooling blocker was overstated — see the probe. But
+   the *mechanism* does not appear in this outcome at either provincia or
+   municipal grain (`panel_saiz.md`, `panel_saiz_municipal.md`).
+   Recommendation: **leave B unbuilt as an instrument** — not for lack of
+   data, but because three independent nulls say the terrain channel does
+   little measurable work here. Revisit only with a second province and
+   price levels rather than growth.
 4. Nothing causal merges into synthesis until an independent read of the
    design — same bar as v1's methods review (plan milestone 5). The read
    questions for design A are written out in `docs/review_brief.md`;

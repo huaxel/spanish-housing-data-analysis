@@ -1,0 +1,3112 @@
+[
+  {
+    "lau_id": "08105",
+    "municipio": "Llagosta, La",
+    "lau_km2": 3.014,
+    "land_km2": 2.899,
+    "area_err_pct": 3.79,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08904",
+    "municipio": "Badia del Vall\u00e8s",
+    "lau_km2": 0.928,
+    "land_km2": 0.986,
+    "area_err_pct": 6.24,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08174",
+    "municipio": "Puigd\u00e0lber",
+    "lau_km2": 0.492,
+    "land_km2": 0.423,
+    "area_err_pct": 13.96,
+    "undevelopable_share": 0.0,
+    "steep_share": 0.0,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08219",
+    "municipio": "Vilassar de Mar",
+    "lau_km2": 3.988,
+    "land_km2": 3.815,
+    "area_err_pct": 4.32,
+    "undevelopable_share": 0.0034,
+    "steep_share": 0.0,
+    "water_share": 0.0034
+  },
+  {
+    "lau_id": "08172",
+    "municipio": "Premi\u00e0 de Mar",
+    "lau_km2": 1.984,
+    "land_km2": 1.78,
+    "area_err_pct": 10.27,
+    "undevelopable_share": 0.0036,
+    "steep_share": 0.0,
+    "water_share": 0.0036
+  },
+  {
+    "lau_id": "08094",
+    "municipio": "Granada, La",
+    "lau_km2": 6.446,
+    "land_km2": 6.203,
+    "area_err_pct": 3.78,
+    "undevelopable_share": 0.0052,
+    "steep_share": 0.0052,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08073",
+    "municipio": "Cornell\u00e0 de Llobregat",
+    "lau_km2": 6.802,
+    "land_km2": 6.808,
+    "area_err_pct": 0.08,
+    "undevelopable_share": 0.0217,
+    "steep_share": 0.017,
+    "water_share": 0.0047
+  },
+  {
+    "lau_id": "08305",
+    "municipio": "Vilafranca del Pened\u00e8s",
+    "lau_km2": 19.914,
+    "land_km2": 19.88,
+    "area_err_pct": 0.17,
+    "undevelopable_share": 0.0223,
+    "steep_share": 0.0223,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08124",
+    "municipio": "Mollet del Vall\u00e8s",
+    "lau_km2": 10.799,
+    "land_km2": 10.651,
+    "area_err_pct": 1.37,
+    "undevelopable_share": 0.0228,
+    "steep_share": 0.0228,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08159",
+    "municipio": "Parets del Vall\u00e8s",
+    "lau_km2": 9.117,
+    "land_km2": 9.561,
+    "area_err_pct": 4.88,
+    "undevelopable_share": 0.0328,
+    "steep_share": 0.0328,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08260",
+    "municipio": "Santa Perp\u00e8tua de Mogoda",
+    "lau_km2": 15.664,
+    "land_km2": 15.594,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.0373,
+    "steep_share": 0.0373,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08101",
+    "municipio": "Hospitalet de Llobregat, L'",
+    "lau_km2": 13.51,
+    "land_km2": 13.204,
+    "area_err_pct": 2.27,
+    "undevelopable_share": 0.0423,
+    "steep_share": 0.0389,
+    "water_share": 0.0034
+  },
+  {
+    "lau_id": "08217",
+    "municipio": "Sant Joan Desp\u00ed",
+    "lau_km2": 5.603,
+    "land_km2": 5.735,
+    "area_err_pct": 2.35,
+    "undevelopable_share": 0.0447,
+    "steep_share": 0.0089,
+    "water_share": 0.0358
+  },
+  {
+    "lau_id": "08249",
+    "municipio": "Santa Fe del Pened\u00e8s",
+    "lau_km2": 3.323,
+    "land_km2": 3.271,
+    "area_err_pct": 1.56,
+    "undevelopable_share": 0.049,
+    "steep_share": 0.049,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08135",
+    "municipio": "Montmel\u00f3",
+    "lau_km2": 3.941,
+    "land_km2": 3.889,
+    "area_err_pct": 1.3,
+    "undevelopable_share": 0.0526,
+    "steep_share": 0.0526,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08169",
+    "municipio": "Prat de Llobregat, El",
+    "lau_km2": 31.591,
+    "land_km2": 31.706,
+    "area_err_pct": 0.36,
+    "undevelopable_share": 0.0557,
+    "steep_share": 0.0036,
+    "water_share": 0.052
+  },
+  {
+    "lau_id": "08037",
+    "municipio": "Calldetenes",
+    "lau_km2": 5.733,
+    "land_km2": 5.546,
+    "area_err_pct": 3.27,
+    "undevelopable_share": 0.0608,
+    "steep_share": 0.0608,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08180",
+    "municipio": "Ripollet",
+    "lau_km2": 4.389,
+    "land_km2": 4.097,
+    "area_err_pct": 6.64,
+    "undevelopable_share": 0.0609,
+    "steep_share": 0.0609,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08027",
+    "municipio": "Cabanyes, Les",
+    "lau_km2": 1.198,
+    "land_km2": 1.238,
+    "area_err_pct": 3.37,
+    "undevelopable_share": 0.0622,
+    "steep_share": 0.0622,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08164",
+    "municipio": "Pla del Pened\u00e8s, El",
+    "lau_km2": 9.651,
+    "land_km2": 9.808,
+    "area_err_pct": 1.63,
+    "undevelopable_share": 0.0667,
+    "steep_share": 0.0667,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08206",
+    "municipio": "Sant Cugat Sesgarrigues",
+    "lau_km2": 6.262,
+    "land_km2": 6.025,
+    "area_err_pct": 3.79,
+    "undevelopable_share": 0.0714,
+    "steep_share": 0.0714,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08304",
+    "municipio": "Vilob\u00ed del Pened\u00e8s",
+    "lau_km2": 9.335,
+    "land_km2": 9.293,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.0801,
+    "steep_share": 0.0794,
+    "water_share": 0.0048
+  },
+  {
+    "lau_id": "08194",
+    "municipio": "Sant Adri\u00e0 de Bes\u00f2s",
+    "lau_km2": 3.807,
+    "land_km2": 3.66,
+    "area_err_pct": 3.87,
+    "undevelopable_share": 0.0893,
+    "steep_share": 0.0088,
+    "water_share": 0.0806
+  },
+  {
+    "lau_id": "08228",
+    "municipio": "Sant Mart\u00ed Sesgueioles",
+    "lau_km2": 3.868,
+    "land_km2": 3.81,
+    "area_err_pct": 1.51,
+    "undevelopable_share": 0.0938,
+    "steep_share": 0.0938,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08246",
+    "municipio": "Santa Eug\u00e8nia de Berga",
+    "lau_km2": 6.992,
+    "land_km2": 6.769,
+    "area_err_pct": 3.2,
+    "undevelopable_share": 0.1015,
+    "steep_share": 0.1015,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08112",
+    "municipio": "Manlleu",
+    "lau_km2": 17.279,
+    "land_km2": 16.724,
+    "area_err_pct": 3.21,
+    "undevelopable_share": 0.1082,
+    "steep_share": 0.0896,
+    "water_share": 0.03
+  },
+  {
+    "lau_id": "08156",
+    "municipio": "Palau-solit\u00e0 i Plegamans",
+    "lau_km2": 15.066,
+    "land_km2": 15.058,
+    "area_err_pct": 0.05,
+    "undevelopable_share": 0.1104,
+    "steep_share": 0.1087,
+    "water_share": 0.0017
+  },
+  {
+    "lau_id": "08301",
+    "municipio": "Viladecans",
+    "lau_km2": 20.075,
+    "land_km2": 20.041,
+    "area_err_pct": 0.17,
+    "undevelopable_share": 0.1259,
+    "steep_share": 0.1035,
+    "water_share": 0.0224
+  },
+  {
+    "lau_id": "08041",
+    "municipio": "Canovelles",
+    "lau_km2": 6.763,
+    "land_km2": 6.652,
+    "area_err_pct": 1.65,
+    "undevelopable_share": 0.1278,
+    "steep_share": 0.1278,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08252",
+    "municipio": "Barber\u00e0 del Vall\u00e8s",
+    "lau_km2": 8.191,
+    "land_km2": 7.892,
+    "area_err_pct": 3.66,
+    "undevelopable_share": 0.1379,
+    "steep_share": 0.1379,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08096",
+    "municipio": "Granollers",
+    "lau_km2": 14.975,
+    "land_km2": 14.889,
+    "area_err_pct": 0.57,
+    "undevelopable_share": 0.1387,
+    "steep_share": 0.1378,
+    "water_share": 0.0013
+  },
+  {
+    "lau_id": "08213",
+    "municipio": "Sant Fruit\u00f3s de Bages",
+    "lau_km2": 22.107,
+    "land_km2": 21.713,
+    "area_err_pct": 1.78,
+    "undevelopable_share": 0.1522,
+    "steep_share": 0.1495,
+    "water_share": 0.0062
+  },
+  {
+    "lau_id": "08192",
+    "municipio": "Santpedor",
+    "lau_km2": 16.771,
+    "land_km2": 16.54,
+    "area_err_pct": 1.38,
+    "undevelopable_share": 0.1584,
+    "steep_share": 0.1584,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08154",
+    "municipio": "Pacs del Pened\u00e8s",
+    "lau_km2": 6.081,
+    "land_km2": 5.659,
+    "area_err_pct": 6.94,
+    "undevelopable_share": 0.1621,
+    "steep_share": 0.1621,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08118",
+    "municipio": "Masnou, El",
+    "lau_km2": 3.239,
+    "land_km2": 3.657,
+    "area_err_pct": 12.88,
+    "undevelopable_share": 0.1681,
+    "steep_share": 0.1138,
+    "water_share": 0.056
+  },
+  {
+    "lau_id": "08111",
+    "municipio": "Malla",
+    "lau_km2": 11.022,
+    "land_km2": 10.366,
+    "area_err_pct": 5.95,
+    "undevelopable_share": 0.1701,
+    "steep_share": 0.1701,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08248",
+    "municipio": "Santa Eul\u00e0lia de Ron\u00e7ana",
+    "lau_km2": 13.967,
+    "land_km2": 14.161,
+    "area_err_pct": 1.39,
+    "undevelopable_share": 0.1718,
+    "steep_share": 0.1718,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08285",
+    "municipio": "Torell\u00f3",
+    "lau_km2": 13.517,
+    "land_km2": 13.814,
+    "area_err_pct": 2.2,
+    "undevelopable_share": 0.1746,
+    "steep_share": 0.1517,
+    "water_share": 0.0326
+  },
+  {
+    "lau_id": "08183",
+    "municipio": "Roda de Ter",
+    "lau_km2": 2.229,
+    "land_km2": 2.059,
+    "area_err_pct": 7.62,
+    "undevelopable_share": 0.1759,
+    "steep_share": 0.1605,
+    "water_share": 0.0494
+  },
+  {
+    "lau_id": "08200",
+    "municipio": "Sant Boi de Llobregat",
+    "lau_km2": 22.115,
+    "land_km2": 21.893,
+    "area_err_pct": 1.01,
+    "undevelopable_share": 0.1785,
+    "steep_share": 0.163,
+    "water_share": 0.0155
+  },
+  {
+    "lau_id": "08102",
+    "municipio": "Igualada",
+    "lau_km2": 8.211,
+    "land_km2": 8.049,
+    "area_err_pct": 1.97,
+    "undevelopable_share": 0.1795,
+    "steep_share": 0.1795,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08167",
+    "municipio": "Poliny\u00e0",
+    "lau_km2": 8.784,
+    "land_km2": 8.808,
+    "area_err_pct": 0.27,
+    "undevelopable_share": 0.1982,
+    "steep_share": 0.1982,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08298",
+    "municipio": "Vic",
+    "lau_km2": 30.869,
+    "land_km2": 30.592,
+    "area_err_pct": 0.9,
+    "undevelopable_share": 0.2063,
+    "steep_share": 0.2063,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08187",
+    "municipio": "Sabadell",
+    "lau_km2": 37.547,
+    "land_km2": 37.241,
+    "area_err_pct": 0.82,
+    "undevelopable_share": 0.2078,
+    "steep_share": 0.2078,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08110",
+    "municipio": "Malgrat de Mar",
+    "lau_km2": 8.745,
+    "land_km2": 8.789,
+    "area_err_pct": 0.51,
+    "undevelopable_share": 0.2188,
+    "steep_share": 0.1839,
+    "water_share": 0.0349
+  },
+  {
+    "lau_id": "08108",
+    "municipio": "Lli\u00e7\u00e0 de Vall",
+    "lau_km2": 10.718,
+    "land_km2": 10.408,
+    "area_err_pct": 2.88,
+    "undevelopable_share": 0.2193,
+    "steep_share": 0.2193,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08046",
+    "municipio": "Cardedeu",
+    "lau_km2": 12.239,
+    "land_km2": 12.156,
+    "area_err_pct": 0.69,
+    "undevelopable_share": 0.2354,
+    "steep_share": 0.2354,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08170",
+    "municipio": "Prats de Rei, Els",
+    "lau_km2": 26.046,
+    "land_km2": 25.897,
+    "area_err_pct": 0.57,
+    "undevelopable_share": 0.2358,
+    "steep_share": 0.2358,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08086",
+    "municipio": "Franqueses del Vall\u00e8s, Les",
+    "lau_km2": 29.692,
+    "land_km2": 29.158,
+    "area_err_pct": 1.8,
+    "undevelopable_share": 0.2493,
+    "steep_share": 0.2491,
+    "water_share": 0.0007
+  },
+  {
+    "lau_id": "08083",
+    "municipio": "Folgueroles",
+    "lau_km2": 10.889,
+    "land_km2": 10.955,
+    "area_err_pct": 0.61,
+    "undevelopable_share": 0.2519,
+    "steep_share": 0.2519,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08227",
+    "municipio": "Sant Mart\u00ed Sarroca",
+    "lau_km2": 35.361,
+    "land_km2": 35.748,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.2525,
+    "steep_share": 0.2525,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08031",
+    "municipio": "Calaf",
+    "lau_km2": 9.242,
+    "land_km2": 8.9,
+    "area_err_pct": 3.7,
+    "undevelopable_share": 0.2566,
+    "steep_share": 0.2566,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08065",
+    "municipio": "Castellv\u00ed de la Marca",
+    "lau_km2": 28.654,
+    "land_km2": 28.697,
+    "area_err_pct": 0.15,
+    "undevelopable_share": 0.2679,
+    "steep_share": 0.2679,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08077",
+    "municipio": "Esplugues de Llobregat",
+    "lau_km2": 4.548,
+    "land_km2": 4.432,
+    "area_err_pct": 2.55,
+    "undevelopable_share": 0.2691,
+    "steep_share": 0.2691,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08198",
+    "municipio": "Sant Antoni de Vilamajor",
+    "lau_km2": 13.879,
+    "land_km2": 13.909,
+    "area_err_pct": 0.22,
+    "undevelopable_share": 0.2755,
+    "steep_share": 0.2755,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08005",
+    "municipio": "Ametlla del Vall\u00e8s, L'",
+    "lau_km2": 14.229,
+    "land_km2": 14.126,
+    "area_err_pct": 0.73,
+    "undevelopable_share": 0.2784,
+    "steep_share": 0.2784,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08218",
+    "municipio": "Sant Joan de Vilatorrada",
+    "lau_km2": 16.357,
+    "land_km2": 16.112,
+    "area_err_pct": 1.5,
+    "undevelopable_share": 0.2798,
+    "steep_share": 0.2786,
+    "water_share": 0.0012
+  },
+  {
+    "lau_id": "08085",
+    "municipio": "Font-rub\u00ed",
+    "lau_km2": 37.003,
+    "land_km2": 36.972,
+    "area_err_pct": 0.08,
+    "undevelopable_share": 0.2824,
+    "steep_share": 0.2824,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08307",
+    "municipio": "Vilanova i la Geltr\u00fa",
+    "lau_km2": 33.871,
+    "land_km2": 33.419,
+    "area_err_pct": 1.34,
+    "undevelopable_share": 0.2831,
+    "steep_share": 0.2736,
+    "water_share": 0.0102
+  },
+  {
+    "lau_id": "08240",
+    "municipio": "Sant Sadurn\u00ed d'Anoia",
+    "lau_km2": 19.043,
+    "land_km2": 18.622,
+    "area_err_pct": 2.21,
+    "undevelopable_share": 0.2939,
+    "steep_share": 0.2925,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "08251",
+    "municipio": "Santa Margarida i els Monjos",
+    "lau_km2": 17.454,
+    "land_km2": 17.644,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.3054,
+    "steep_share": 0.3054,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08107",
+    "municipio": "Lli\u00e7\u00e0 d'Amunt",
+    "lau_km2": 22.369,
+    "land_km2": 22.247,
+    "area_err_pct": 0.55,
+    "undevelopable_share": 0.3062,
+    "steep_share": 0.3062,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08287",
+    "municipio": "Torrelavit",
+    "lau_km2": 23.654,
+    "land_km2": 23.447,
+    "area_err_pct": 0.88,
+    "undevelopable_share": 0.3105,
+    "steep_share": 0.3105,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08019",
+    "municipio": "Barcelona",
+    "lau_km2": 98.313,
+    "land_km2": 98.467,
+    "area_err_pct": 0.16,
+    "undevelopable_share": 0.3167,
+    "steep_share": 0.3021,
+    "water_share": 0.0146
+  },
+  {
+    "lau_id": "08113",
+    "municipio": "Manresa",
+    "lau_km2": 41.661,
+    "land_km2": 41.937,
+    "area_err_pct": 0.66,
+    "undevelopable_share": 0.3168,
+    "steep_share": 0.3144,
+    "water_share": 0.0047
+  },
+  {
+    "lau_id": "08222",
+    "municipio": "Sant Lloren\u00e7 d'Hortons",
+    "lau_km2": 19.694,
+    "land_km2": 19.484,
+    "area_err_pct": 1.06,
+    "undevelopable_share": 0.3202,
+    "steep_share": 0.3202,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08225",
+    "municipio": "Sant Mart\u00ed d'Albars",
+    "lau_km2": 14.76,
+    "land_km2": 15.066,
+    "area_err_pct": 2.07,
+    "undevelopable_share": 0.3325,
+    "steep_share": 0.3325,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08114",
+    "municipio": "Martorell",
+    "lau_km2": 12.834,
+    "land_km2": 12.751,
+    "area_err_pct": 0.65,
+    "undevelopable_share": 0.3416,
+    "steep_share": 0.331,
+    "water_share": 0.0186
+  },
+  {
+    "lau_id": "08115",
+    "municipio": "Martorelles",
+    "lau_km2": 3.66,
+    "land_km2": 3.289,
+    "area_err_pct": 10.14,
+    "undevelopable_share": 0.3444,
+    "steep_share": 0.3444,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08155",
+    "municipio": "Palafolls",
+    "lau_km2": 16.435,
+    "land_km2": 15.854,
+    "area_err_pct": 3.53,
+    "undevelopable_share": 0.35,
+    "steep_share": 0.35,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08232",
+    "municipio": "Sant Pere de Riudebitlles",
+    "lau_km2": 5.317,
+    "land_km2": 5.093,
+    "area_err_pct": 4.22,
+    "undevelopable_share": 0.3509,
+    "steep_share": 0.3471,
+    "water_share": 0.0038
+  },
+  {
+    "lau_id": "08171",
+    "municipio": "Prats de Llu\u00e7an\u00e8s",
+    "lau_km2": 13.393,
+    "land_km2": 13.143,
+    "area_err_pct": 1.87,
+    "undevelopable_share": 0.363,
+    "steep_share": 0.363,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08238",
+    "municipio": "Sant Quirze del Vall\u00e8s",
+    "lau_km2": 14.514,
+    "land_km2": 14.322,
+    "area_err_pct": 1.32,
+    "undevelopable_share": 0.3642,
+    "steep_share": 0.3637,
+    "water_share": 0.0004
+  },
+  {
+    "lau_id": "08215",
+    "municipio": "Sant Hip\u00f2lit de Voltreg\u00e0",
+    "lau_km2": 0.892,
+    "land_km2": 0.883,
+    "area_err_pct": 1.0,
+    "undevelopable_share": 0.3669,
+    "steep_share": 0.3669,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08100",
+    "municipio": "Gurb",
+    "lau_km2": 51.236,
+    "land_km2": 51.574,
+    "area_err_pct": 0.66,
+    "undevelopable_share": 0.3688,
+    "steep_share": 0.3684,
+    "water_share": 0.0022
+  },
+  {
+    "lau_id": "08278",
+    "municipio": "Taradell",
+    "lau_km2": 26.587,
+    "land_km2": 26.917,
+    "area_err_pct": 1.24,
+    "undevelopable_share": 0.3725,
+    "steep_share": 0.3713,
+    "water_share": 0.0017
+  },
+  {
+    "lau_id": "08208",
+    "municipio": "Sant Esteve Sesrovires",
+    "lau_km2": 18.475,
+    "land_km2": 18.32,
+    "area_err_pct": 0.84,
+    "undevelopable_share": 0.3726,
+    "steep_share": 0.3722,
+    "water_share": 0.0021
+  },
+  {
+    "lau_id": "08011",
+    "municipio": "Avi\u00e0",
+    "lau_km2": 27.157,
+    "land_km2": 27.122,
+    "area_err_pct": 0.13,
+    "undevelopable_share": 0.3872,
+    "steep_share": 0.3844,
+    "water_share": 0.0028
+  },
+  {
+    "lau_id": "08196",
+    "municipio": "Sant Andreu de la Barca",
+    "lau_km2": 5.64,
+    "land_km2": 5.651,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.3935,
+    "steep_share": 0.3798,
+    "water_share": 0.0136
+  },
+  {
+    "lau_id": "08121",
+    "municipio": "Matar\u00f3",
+    "lau_km2": 22.335,
+    "land_km2": 22.318,
+    "area_err_pct": 0.08,
+    "undevelopable_share": 0.3955,
+    "steep_share": 0.384,
+    "water_share": 0.0115
+  },
+  {
+    "lau_id": "08126",
+    "municipio": "Montgat",
+    "lau_km2": 2.863,
+    "land_km2": 2.946,
+    "area_err_pct": 2.91,
+    "undevelopable_share": 0.3957,
+    "steep_share": 0.3391,
+    "water_share": 0.0609
+  },
+  {
+    "lau_id": "08015",
+    "municipio": "Badalona",
+    "lau_km2": 20.968,
+    "land_km2": 21.28,
+    "area_err_pct": 1.49,
+    "undevelopable_share": 0.4009,
+    "steep_share": 0.3783,
+    "water_share": 0.0226
+  },
+  {
+    "lau_id": "08176",
+    "municipio": "Pujalt",
+    "lau_km2": 31.516,
+    "land_km2": 30.766,
+    "area_err_pct": 2.38,
+    "undevelopable_share": 0.4016,
+    "steep_share": 0.4016,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08074",
+    "municipio": "Cubelles",
+    "lau_km2": 13.325,
+    "land_km2": 12.93,
+    "area_err_pct": 2.96,
+    "undevelopable_share": 0.4027,
+    "steep_share": 0.4012,
+    "water_share": 0.0015
+  },
+  {
+    "lau_id": "08136",
+    "municipio": "Montorn\u00e8s del Vall\u00e8s",
+    "lau_km2": 10.23,
+    "land_km2": 10.128,
+    "area_err_pct": 1.0,
+    "undevelopable_share": 0.4062,
+    "steep_share": 0.4062,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08056",
+    "municipio": "Castelldefels",
+    "lau_km2": 12.794,
+    "land_km2": 12.675,
+    "area_err_pct": 0.93,
+    "undevelopable_share": 0.4156,
+    "steep_share": 0.3877,
+    "water_share": 0.0279
+  },
+  {
+    "lau_id": "08149",
+    "municipio": "Olost",
+    "lau_km2": 28.959,
+    "land_km2": 28.49,
+    "area_err_pct": 1.62,
+    "undevelopable_share": 0.4176,
+    "steep_share": 0.4158,
+    "water_share": 0.0029
+  },
+  {
+    "lau_id": "08244",
+    "municipio": "Santa Coloma de Cervell\u00f3",
+    "lau_km2": 7.513,
+    "land_km2": 7.628,
+    "area_err_pct": 1.53,
+    "undevelopable_share": 0.4205,
+    "steep_share": 0.3978,
+    "water_share": 0.0227
+  },
+  {
+    "lau_id": "08092",
+    "municipio": "Gironella",
+    "lau_km2": 6.819,
+    "land_km2": 6.693,
+    "area_err_pct": 1.85,
+    "undevelopable_share": 0.4241,
+    "steep_share": 0.4241,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08266",
+    "municipio": "Cerdanyola del Vall\u00e8s",
+    "lau_km2": 30.843,
+    "land_km2": 30.579,
+    "area_err_pct": 0.86,
+    "undevelopable_share": 0.425,
+    "steep_share": 0.425,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08119",
+    "municipio": "Masquefa",
+    "lau_km2": 17.151,
+    "land_km2": 17.484,
+    "area_err_pct": 1.94,
+    "undevelopable_share": 0.4262,
+    "steep_share": 0.4262,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08049",
+    "municipio": "Casserres",
+    "lau_km2": 29.325,
+    "land_km2": 29.194,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.432,
+    "steep_share": 0.4318,
+    "water_share": 0.0011
+  },
+  {
+    "lau_id": "08010",
+    "municipio": "Art\u00e9s",
+    "lau_km2": 17.897,
+    "land_km2": 18.079,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.4395,
+    "steep_share": 0.4388,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "08029",
+    "municipio": "Cabrera de Mar",
+    "lau_km2": 9.043,
+    "land_km2": 9.113,
+    "area_err_pct": 0.77,
+    "undevelopable_share": 0.4396,
+    "steep_share": 0.4255,
+    "water_share": 0.014
+  },
+  {
+    "lau_id": "08145",
+    "municipio": "Ol\u00e8rdola",
+    "lau_km2": 30.106,
+    "land_km2": 29.84,
+    "area_err_pct": 0.89,
+    "undevelopable_share": 0.4413,
+    "steep_share": 0.4411,
+    "water_share": 0.0006
+  },
+  {
+    "lau_id": "08283",
+    "municipio": "Tona",
+    "lau_km2": 16.46,
+    "land_km2": 16.318,
+    "area_err_pct": 0.87,
+    "undevelopable_share": 0.4428,
+    "steep_share": 0.4428,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08263",
+    "municipio": "Sant Vicen\u00e7 dels Horts",
+    "lau_km2": 9.252,
+    "land_km2": 9.183,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.4435,
+    "steep_share": 0.4211,
+    "water_share": 0.0223
+  },
+  {
+    "lau_id": "08143",
+    "municipio": "\u00d2dena",
+    "lau_km2": 52.115,
+    "land_km2": 52.107,
+    "area_err_pct": 0.02,
+    "undevelopable_share": 0.4461,
+    "steep_share": 0.4461,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08259",
+    "municipio": "Santa Maria de Palautordera",
+    "lau_km2": 16.948,
+    "land_km2": 17.185,
+    "area_err_pct": 1.4,
+    "undevelopable_share": 0.4469,
+    "steep_share": 0.4469,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08013",
+    "municipio": "Avinyonet del Pened\u00e8s",
+    "lau_km2": 29.269,
+    "land_km2": 29.093,
+    "area_err_pct": 0.6,
+    "undevelopable_share": 0.4491,
+    "steep_share": 0.4487,
+    "water_share": 0.0004
+  },
+  {
+    "lau_id": "08001",
+    "municipio": "Abrera",
+    "lau_km2": 20.008,
+    "land_km2": 19.899,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.457,
+    "steep_share": 0.4406,
+    "water_share": 0.0174
+  },
+  {
+    "lau_id": "08125",
+    "municipio": "Montcada i Reixac",
+    "lau_km2": 23.447,
+    "land_km2": 23.8,
+    "area_err_pct": 1.51,
+    "undevelopable_share": 0.4574,
+    "steep_share": 0.4518,
+    "water_share": 0.0057
+  },
+  {
+    "lau_id": "08089",
+    "municipio": "Gav\u00e0",
+    "lau_km2": 30.897,
+    "land_km2": 30.378,
+    "area_err_pct": 1.68,
+    "undevelopable_share": 0.46,
+    "steep_share": 0.457,
+    "water_share": 0.003
+  },
+  {
+    "lau_id": "08133",
+    "municipio": "Montmaneu",
+    "lau_km2": 13.442,
+    "land_km2": 13.228,
+    "area_err_pct": 1.6,
+    "undevelopable_share": 0.4604,
+    "steep_share": 0.4604,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08265",
+    "municipio": "Sant Vicen\u00e7 de Torell\u00f3",
+    "lau_km2": 6.598,
+    "land_km2": 6.555,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.4714,
+    "steep_share": 0.4675,
+    "water_share": 0.0048
+  },
+  {
+    "lau_id": "08302",
+    "municipio": "Vilanova del Cam\u00ed",
+    "lau_km2": 10.492,
+    "land_km2": 10.061,
+    "area_err_pct": 4.11,
+    "undevelopable_share": 0.4724,
+    "steep_share": 0.4724,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08181",
+    "municipio": "Roca del Vall\u00e8s, La",
+    "lau_km2": 36.752,
+    "land_km2": 36.802,
+    "area_err_pct": 0.13,
+    "undevelopable_share": 0.4742,
+    "steep_share": 0.474,
+    "water_share": 0.0003
+  },
+  {
+    "lau_id": "08184",
+    "municipio": "Rub\u00ed",
+    "lau_km2": 32.198,
+    "land_km2": 31.997,
+    "area_err_pct": 0.62,
+    "undevelopable_share": 0.4785,
+    "steep_share": 0.4785,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08279",
+    "municipio": "Terrassa",
+    "lau_km2": 70.104,
+    "land_km2": 69.868,
+    "area_err_pct": 0.34,
+    "undevelopable_share": 0.4798,
+    "steep_share": 0.4788,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "08017",
+    "municipio": "Baleny\u00e0",
+    "lau_km2": 17.247,
+    "land_km2": 17.137,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.4826,
+    "steep_share": 0.4826,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08161",
+    "municipio": "Piera",
+    "lau_km2": 57.225,
+    "land_km2": 56.527,
+    "area_err_pct": 1.22,
+    "undevelopable_share": 0.4839,
+    "steep_share": 0.4837,
+    "water_share": 0.0002
+  },
+  {
+    "lau_id": "08205",
+    "municipio": "Sant Cugat del Vall\u00e8s",
+    "lau_km2": 48.229,
+    "land_km2": 48.204,
+    "area_err_pct": 0.05,
+    "undevelopable_share": 0.4862,
+    "steep_share": 0.4862,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08140",
+    "municipio": "Navarcles",
+    "lau_km2": 5.503,
+    "land_km2": 5.459,
+    "area_err_pct": 0.81,
+    "undevelopable_share": 0.4871,
+    "steep_share": 0.4801,
+    "water_share": 0.0257
+  },
+  {
+    "lau_id": "08286",
+    "municipio": "Torre de Claramunt, La",
+    "lau_km2": 14.951,
+    "land_km2": 15.007,
+    "area_err_pct": 0.37,
+    "undevelopable_share": 0.4913,
+    "steep_share": 0.4913,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08250",
+    "municipio": "Santa Margarida de Montbui",
+    "lau_km2": 27.641,
+    "land_km2": 27.618,
+    "area_err_pct": 0.08,
+    "undevelopable_share": 0.5005,
+    "steep_share": 0.5005,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08245",
+    "municipio": "Santa Coloma de Gramenet",
+    "lau_km2": 7.143,
+    "land_km2": 6.983,
+    "area_err_pct": 2.25,
+    "undevelopable_share": 0.5009,
+    "steep_share": 0.4467,
+    "water_share": 0.0569
+  },
+  {
+    "lau_id": "08269",
+    "municipio": "Seva",
+    "lau_km2": 30.409,
+    "land_km2": 30.611,
+    "area_err_pct": 0.66,
+    "undevelopable_share": 0.5038,
+    "steep_share": 0.5036,
+    "water_share": 0.0021
+  },
+  {
+    "lau_id": "08058",
+    "municipio": "Castellet i la Gornal",
+    "lau_km2": 47.16,
+    "land_km2": 47.526,
+    "area_err_pct": 0.78,
+    "undevelopable_share": 0.5047,
+    "steep_share": 0.4969,
+    "water_share": 0.0165
+  },
+  {
+    "lau_id": "08163",
+    "municipio": "Pineda de Mar",
+    "lau_km2": 10.479,
+    "land_km2": 10.983,
+    "area_err_pct": 4.81,
+    "undevelopable_share": 0.5049,
+    "steep_share": 0.4851,
+    "water_share": 0.0198
+  },
+  {
+    "lau_id": "08189",
+    "municipio": "Sant Pere Sallavinera",
+    "lau_km2": 22.025,
+    "land_km2": 21.982,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.5079,
+    "steep_share": 0.5079,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08273",
+    "municipio": "Subirats",
+    "lau_km2": 55.877,
+    "land_km2": 56.023,
+    "area_err_pct": 0.26,
+    "undevelopable_share": 0.5106,
+    "steep_share": 0.5106,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08211",
+    "municipio": "Sant Feliu de Llobregat",
+    "lau_km2": 11.981,
+    "land_km2": 11.85,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.5275,
+    "steep_share": 0.5221,
+    "water_share": 0.006
+  },
+  {
+    "lau_id": "08231",
+    "municipio": "Sant Pere de Ribes",
+    "lau_km2": 40.884,
+    "land_km2": 41.271,
+    "area_err_pct": 0.95,
+    "undevelopable_share": 0.5372,
+    "steep_share": 0.5369,
+    "water_share": 0.0006
+  },
+  {
+    "lau_id": "08067",
+    "municipio": "Centelles",
+    "lau_km2": 15.348,
+    "land_km2": 15.475,
+    "area_err_pct": 0.83,
+    "undevelopable_share": 0.5424,
+    "steep_share": 0.5424,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08236",
+    "municipio": "Sant Quint\u00ed de Mediona",
+    "lau_km2": 13.807,
+    "land_km2": 13.87,
+    "area_err_pct": 0.46,
+    "undevelopable_share": 0.5441,
+    "steep_share": 0.5436,
+    "water_share": 0.0005
+  },
+  {
+    "lau_id": "08188",
+    "municipio": "Sag\u00e0s",
+    "lau_km2": 44.849,
+    "land_km2": 44.624,
+    "area_err_pct": 0.5,
+    "undevelopable_share": 0.5468,
+    "steep_share": 0.5468,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08220",
+    "municipio": "Sant Juli\u00e0 de Vilatorta",
+    "lau_km2": 16.173,
+    "land_km2": 16.031,
+    "area_err_pct": 0.88,
+    "undevelopable_share": 0.5492,
+    "steep_share": 0.5492,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08243",
+    "municipio": "Santa Cec\u00edlia de Voltreg\u00e0",
+    "lau_km2": 8.645,
+    "land_km2": 8.538,
+    "area_err_pct": 1.24,
+    "undevelopable_share": 0.5535,
+    "steep_share": 0.5535,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08230",
+    "municipio": "Premi\u00e0 de Dalt",
+    "lau_km2": 6.494,
+    "land_km2": 6.587,
+    "area_err_pct": 1.44,
+    "undevelopable_share": 0.5607,
+    "steep_share": 0.5588,
+    "water_share": 0.0019
+  },
+  {
+    "lau_id": "08267",
+    "municipio": "Sentmenat",
+    "lau_km2": 28.358,
+    "land_km2": 28.075,
+    "area_err_pct": 1.0,
+    "undevelopable_share": 0.5631,
+    "steep_share": 0.5631,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08084",
+    "municipio": "Fonollosa",
+    "lau_km2": 52.165,
+    "land_km2": 51.478,
+    "area_err_pct": 1.32,
+    "undevelopable_share": 0.564,
+    "steep_share": 0.564,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08254",
+    "municipio": "Esquirol, L'",
+    "lau_km2": 61.876,
+    "land_km2": 61.803,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.5645,
+    "steep_share": 0.5638,
+    "water_share": 0.0076
+  },
+  {
+    "lau_id": "08191",
+    "municipio": "Sallent",
+    "lau_km2": 65.785,
+    "land_km2": 64.029,
+    "area_err_pct": 2.67,
+    "undevelopable_share": 0.5687,
+    "steep_share": 0.5663,
+    "water_share": 0.0032
+  },
+  {
+    "lau_id": "08117",
+    "municipio": "Masies de Voltreg\u00e0, Les",
+    "lau_km2": 22.177,
+    "land_km2": 21.895,
+    "area_err_pct": 1.27,
+    "undevelopable_share": 0.5693,
+    "steep_share": 0.5536,
+    "water_share": 0.0278
+  },
+  {
+    "lau_id": "08207",
+    "municipio": "Sant Esteve de Palautordera",
+    "lau_km2": 10.703,
+    "land_km2": 10.65,
+    "area_err_pct": 0.49,
+    "undevelopable_share": 0.5734,
+    "steep_share": 0.571,
+    "water_share": 0.003
+  },
+  {
+    "lau_id": "08158",
+    "municipio": "Papiol, El",
+    "lau_km2": 8.848,
+    "land_km2": 8.99,
+    "area_err_pct": 1.61,
+    "undevelopable_share": 0.5752,
+    "steep_share": 0.5595,
+    "water_share": 0.0164
+  },
+  {
+    "lau_id": "08902",
+    "municipio": "Vilanova del Vall\u00e8s",
+    "lau_km2": 15.474,
+    "land_km2": 15.403,
+    "area_err_pct": 0.46,
+    "undevelopable_share": 0.5756,
+    "steep_share": 0.5756,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08116",
+    "municipio": "Masies de Roda, Les",
+    "lau_km2": 16.18,
+    "land_km2": 16.406,
+    "area_err_pct": 1.4,
+    "undevelopable_share": 0.5833,
+    "steep_share": 0.562,
+    "water_share": 0.1243
+  },
+  {
+    "lau_id": "08157",
+    "municipio": "Pallej\u00e0",
+    "lau_km2": 8.488,
+    "land_km2": 8.352,
+    "area_err_pct": 1.6,
+    "undevelopable_share": 0.5863,
+    "steep_share": 0.5779,
+    "water_share": 0.0084
+  },
+  {
+    "lau_id": "08048",
+    "municipio": "Carme",
+    "lau_km2": 11.332,
+    "land_km2": 11.294,
+    "area_err_pct": 0.34,
+    "undevelopable_share": 0.5887,
+    "steep_share": 0.5887,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08006",
+    "municipio": "Arenys de Mar",
+    "lau_km2": 6.453,
+    "land_km2": 6.413,
+    "area_err_pct": 0.62,
+    "undevelopable_share": 0.5912,
+    "steep_share": 0.5533,
+    "water_share": 0.0439
+  },
+  {
+    "lau_id": "08036",
+    "municipio": "Calonge de Segarra",
+    "lau_km2": 37.133,
+    "land_km2": 37.371,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.5957,
+    "steep_share": 0.5957,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08284",
+    "municipio": "Tordera",
+    "lau_km2": 84.517,
+    "land_km2": 84.057,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.5958,
+    "steep_share": 0.5958,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08130",
+    "municipio": "Montclar",
+    "lau_km2": 22.135,
+    "land_km2": 21.903,
+    "area_err_pct": 1.05,
+    "undevelopable_share": 0.5979,
+    "steep_share": 0.5979,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08122",
+    "municipio": "Mediona",
+    "lau_km2": 48.015,
+    "land_km2": 47.53,
+    "area_err_pct": 1.01,
+    "undevelopable_share": 0.6031,
+    "steep_share": 0.6031,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08038",
+    "municipio": "Call\u00fas",
+    "lau_km2": 12.402,
+    "land_km2": 12.343,
+    "area_err_pct": 0.47,
+    "undevelopable_share": 0.605,
+    "steep_share": 0.605,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08060",
+    "municipio": "Castellfollit de Riubreg\u00f3s",
+    "lau_km2": 26.28,
+    "land_km2": 26.036,
+    "area_err_pct": 0.93,
+    "undevelopable_share": 0.607,
+    "steep_share": 0.607,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08034",
+    "municipio": "Calders",
+    "lau_km2": 33.015,
+    "land_km2": 32.8,
+    "area_err_pct": 0.65,
+    "undevelopable_share": 0.6111,
+    "steep_share": 0.6111,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08054",
+    "municipio": "Castellbisbal",
+    "lau_km2": 30.983,
+    "land_km2": 31.122,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.6115,
+    "steep_share": 0.595,
+    "water_share": 0.0187
+  },
+  {
+    "lau_id": "08106",
+    "municipio": "Llinars del Vall\u00e8s",
+    "lau_km2": 27.741,
+    "land_km2": 27.228,
+    "area_err_pct": 1.85,
+    "undevelopable_share": 0.6115,
+    "steep_share": 0.6115,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08088",
+    "municipio": "Garriga, La",
+    "lau_km2": 19.015,
+    "land_km2": 19.003,
+    "area_err_pct": 0.06,
+    "undevelopable_share": 0.619,
+    "steep_share": 0.619,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08255",
+    "municipio": "Santa Maria de Merl\u00e8s",
+    "lau_km2": 51.683,
+    "land_km2": 51.121,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.6205,
+    "steep_share": 0.6196,
+    "water_share": 0.001
+  },
+  {
+    "lau_id": "08195",
+    "municipio": "Sant Agust\u00ed de Llu\u00e7an\u00e8s",
+    "lau_km2": 13.532,
+    "land_km2": 13.418,
+    "area_err_pct": 0.85,
+    "undevelopable_share": 0.6208,
+    "steep_share": 0.6208,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08033",
+    "municipio": "Caldes de Montbui",
+    "lau_km2": 37.529,
+    "land_km2": 37.107,
+    "area_err_pct": 1.13,
+    "undevelopable_share": 0.621,
+    "steep_share": 0.6203,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "08078",
+    "municipio": "Espunyola, L'",
+    "lau_km2": 35.377,
+    "land_km2": 35.142,
+    "area_err_pct": 0.66,
+    "undevelopable_share": 0.6223,
+    "steep_share": 0.6223,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08212",
+    "municipio": "Sant Feliu Sasserra",
+    "lau_km2": 23.005,
+    "land_km2": 22.77,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.623,
+    "steep_share": 0.623,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08297",
+    "municipio": "Veciana",
+    "lau_km2": 39.004,
+    "land_km2": 38.485,
+    "area_err_pct": 1.33,
+    "undevelopable_share": 0.6231,
+    "steep_share": 0.6231,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08221",
+    "municipio": "Sant Just Desvern",
+    "lau_km2": 7.758,
+    "land_km2": 7.708,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.6239,
+    "steep_share": 0.6239,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08257",
+    "municipio": "Santa Maria de Miralles",
+    "lau_km2": 25.324,
+    "land_km2": 25.946,
+    "area_err_pct": 2.45,
+    "undevelopable_share": 0.6242,
+    "steep_share": 0.6242,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08288",
+    "municipio": "Torrelles de Foix",
+    "lau_km2": 37.193,
+    "land_km2": 36.318,
+    "area_err_pct": 2.35,
+    "undevelopable_share": 0.6251,
+    "steep_share": 0.6251,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08018",
+    "municipio": "Balsareny",
+    "lau_km2": 36.731,
+    "land_km2": 36.533,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.6254,
+    "steep_share": 0.6249,
+    "water_share": 0.0021
+  },
+  {
+    "lau_id": "08226",
+    "municipio": "Sant Mart\u00ed de Tous",
+    "lau_km2": 39.008,
+    "land_km2": 38.522,
+    "area_err_pct": 1.25,
+    "undevelopable_share": 0.6287,
+    "steep_share": 0.6287,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08201",
+    "municipio": "Sant Boi de Llu\u00e7an\u00e8s",
+    "lau_km2": 20.048,
+    "land_km2": 20.025,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.6349,
+    "steep_share": 0.6349,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08151",
+    "municipio": "Orist\u00e0",
+    "lau_km2": 68.807,
+    "land_km2": 69.494,
+    "area_err_pct": 1.0,
+    "undevelopable_share": 0.635,
+    "steep_share": 0.635,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08132",
+    "municipio": "Montmajor",
+    "lau_km2": 76.507,
+    "land_km2": 75.287,
+    "area_err_pct": 1.59,
+    "undevelopable_share": 0.6381,
+    "steep_share": 0.6379,
+    "water_share": 0.0002
+  },
+  {
+    "lau_id": "08047",
+    "municipio": "Cardona",
+    "lau_km2": 66.438,
+    "land_km2": 65.837,
+    "area_err_pct": 0.9,
+    "undevelopable_share": 0.6385,
+    "steep_share": 0.6385,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08021",
+    "municipio": "Bellprat",
+    "lau_km2": 31.085,
+    "land_km2": 30.89,
+    "area_err_pct": 0.63,
+    "undevelopable_share": 0.6405,
+    "steep_share": 0.6405,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08160",
+    "municipio": "Perafita",
+    "lau_km2": 19.656,
+    "land_km2": 19.773,
+    "area_err_pct": 0.59,
+    "undevelopable_share": 0.6446,
+    "steep_share": 0.6446,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08197",
+    "municipio": "Sant Andreu de Llavaneres",
+    "lau_km2": 11.913,
+    "land_km2": 11.542,
+    "area_err_pct": 3.11,
+    "undevelopable_share": 0.6481,
+    "steep_share": 0.6481,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08264",
+    "municipio": "Sant Vicen\u00e7 de Montalt",
+    "lau_km2": 7.916,
+    "land_km2": 7.884,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.6536,
+    "steep_share": 0.652,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "08175",
+    "municipio": "Puig-reig",
+    "lau_km2": 46.217,
+    "land_km2": 45.819,
+    "area_err_pct": 0.86,
+    "undevelopable_share": 0.6548,
+    "steep_share": 0.6544,
+    "water_share": 0.0011
+  },
+  {
+    "lau_id": "08104",
+    "municipio": "Llacuna, La",
+    "lau_km2": 52.427,
+    "land_km2": 52.118,
+    "area_err_pct": 0.59,
+    "undevelopable_share": 0.656,
+    "steep_share": 0.656,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08162",
+    "municipio": "Hostalets de Pierola, Els",
+    "lau_km2": 33.488,
+    "land_km2": 33.16,
+    "area_err_pct": 0.98,
+    "undevelopable_share": 0.6566,
+    "steep_share": 0.6566,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08281",
+    "municipio": "Tei\u00e0",
+    "lau_km2": 6.722,
+    "land_km2": 6.21,
+    "area_err_pct": 7.61,
+    "undevelopable_share": 0.6587,
+    "steep_share": 0.6587,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08076",
+    "municipio": "Esparreguera",
+    "lau_km2": 27.281,
+    "land_km2": 26.874,
+    "area_err_pct": 1.49,
+    "undevelopable_share": 0.6593,
+    "steep_share": 0.6529,
+    "water_share": 0.0148
+  },
+  {
+    "lau_id": "08040",
+    "municipio": "Canet de Mar",
+    "lau_km2": 6.318,
+    "land_km2": 6.2,
+    "area_err_pct": 1.86,
+    "undevelopable_share": 0.6598,
+    "steep_share": 0.6495,
+    "water_share": 0.0103
+  },
+  {
+    "lau_id": "08144",
+    "municipio": "Olvan",
+    "lau_km2": 35.429,
+    "land_km2": 35.335,
+    "area_err_pct": 0.27,
+    "undevelopable_share": 0.6634,
+    "steep_share": 0.6634,
+    "water_share": 0.0007
+  },
+  {
+    "lau_id": "08091",
+    "municipio": "Gelida",
+    "lau_km2": 26.546,
+    "land_km2": 26.256,
+    "area_err_pct": 1.09,
+    "undevelopable_share": 0.6635,
+    "steep_share": 0.6635,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08098",
+    "municipio": "Sant Salvador de Guardiola",
+    "lau_km2": 37.091,
+    "land_km2": 36.424,
+    "area_err_pct": 1.8,
+    "undevelopable_share": 0.665,
+    "steep_share": 0.665,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08103",
+    "municipio": "Jorba",
+    "lau_km2": 31.07,
+    "land_km2": 30.904,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.6744,
+    "steep_share": 0.6744,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08214",
+    "municipio": "Vilassar de Dalt",
+    "lau_km2": 8.928,
+    "land_km2": 8.844,
+    "area_err_pct": 0.94,
+    "undevelopable_share": 0.6751,
+    "steep_share": 0.6751,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08178",
+    "municipio": "Rajadell",
+    "lau_km2": 45.646,
+    "land_km2": 45.184,
+    "area_err_pct": 1.01,
+    "undevelopable_share": 0.6765,
+    "steep_share": 0.6765,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08247",
+    "municipio": "Santa Eul\u00e0lia de Riuprimer",
+    "lau_km2": 13.888,
+    "land_km2": 13.746,
+    "area_err_pct": 1.02,
+    "undevelopable_share": 0.6779,
+    "steep_share": 0.6765,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "08012",
+    "municipio": "Aviny\u00f3",
+    "lau_km2": 62.822,
+    "land_km2": 62.823,
+    "area_err_pct": 0.0,
+    "undevelopable_share": 0.6843,
+    "steep_share": 0.6842,
+    "water_share": 0.0002
+  },
+  {
+    "lau_id": "08023",
+    "municipio": "Bigues i Riells",
+    "lau_km2": 28.819,
+    "land_km2": 28.569,
+    "area_err_pct": 0.87,
+    "undevelopable_share": 0.6849,
+    "steep_share": 0.6849,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08003",
+    "municipio": "Alella",
+    "lau_km2": 9.698,
+    "land_km2": 9.296,
+    "area_err_pct": 4.14,
+    "undevelopable_share": 0.688,
+    "steep_share": 0.688,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08069",
+    "municipio": "Collbat\u00f3",
+    "lau_km2": 18.066,
+    "land_km2": 17.867,
+    "area_err_pct": 1.1,
+    "undevelopable_share": 0.6886,
+    "steep_share": 0.6879,
+    "water_share": 0.005
+  },
+  {
+    "lau_id": "08138",
+    "municipio": "Moi\u00e0",
+    "lau_km2": 75.891,
+    "land_km2": 75.578,
+    "area_err_pct": 0.41,
+    "undevelopable_share": 0.7017,
+    "steep_share": 0.7017,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08123",
+    "municipio": "Molins de Rei",
+    "lau_km2": 15.737,
+    "land_km2": 15.313,
+    "area_err_pct": 2.69,
+    "undevelopable_share": 0.7028,
+    "steep_share": 0.6915,
+    "water_share": 0.0113
+  },
+  {
+    "lau_id": "08308",
+    "municipio": "Viver i Serrateix",
+    "lau_km2": 67.211,
+    "land_km2": 66.812,
+    "area_err_pct": 0.59,
+    "undevelopable_share": 0.7028,
+    "steep_share": 0.7028,
+    "water_share": 0.0003
+  },
+  {
+    "lau_id": "08044",
+    "municipio": "Capellades",
+    "lau_km2": 2.918,
+    "land_km2": 2.688,
+    "area_err_pct": 7.9,
+    "undevelopable_share": 0.7071,
+    "steep_share": 0.7071,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08168",
+    "municipio": "Pontons",
+    "lau_km2": 25.379,
+    "land_km2": 25.258,
+    "area_err_pct": 0.48,
+    "undevelopable_share": 0.7089,
+    "steep_share": 0.7089,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08090",
+    "municipio": "Gai\u00e0",
+    "lau_km2": 39.58,
+    "land_km2": 39.627,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.7122,
+    "steep_share": 0.7122,
+    "water_share": 0.0008
+  },
+  {
+    "lau_id": "08028",
+    "municipio": "Cabrera d'Anoia",
+    "lau_km2": 17.097,
+    "land_km2": 17.282,
+    "area_err_pct": 1.08,
+    "undevelopable_share": 0.7136,
+    "steep_share": 0.7136,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08141",
+    "municipio": "Nav\u00e0s",
+    "lau_km2": 80.703,
+    "land_km2": 80.034,
+    "area_err_pct": 0.83,
+    "undevelopable_share": 0.7181,
+    "steep_share": 0.7181,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08043",
+    "municipio": "Canyelles",
+    "lau_km2": 14.0,
+    "land_km2": 14.029,
+    "area_err_pct": 0.21,
+    "undevelopable_share": 0.7193,
+    "steep_share": 0.7193,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08082",
+    "municipio": "Fogars de la Selva",
+    "lau_km2": 32.342,
+    "land_km2": 32.297,
+    "area_err_pct": 0.14,
+    "undevelopable_share": 0.7207,
+    "steep_share": 0.7207,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08147",
+    "municipio": "Olesa de Montserrat",
+    "lau_km2": 16.713,
+    "land_km2": 16.523,
+    "area_err_pct": 1.14,
+    "undevelopable_share": 0.7224,
+    "steep_share": 0.7131,
+    "water_share": 0.0194
+  },
+  {
+    "lau_id": "08002",
+    "municipio": "Aguilar de Segarra",
+    "lau_km2": 43.274,
+    "land_km2": 43.06,
+    "area_err_pct": 0.49,
+    "undevelopable_share": 0.7247,
+    "steep_share": 0.7247,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08061",
+    "municipio": "Castellgal\u00ed",
+    "lau_km2": 17.201,
+    "land_km2": 16.951,
+    "area_err_pct": 1.46,
+    "undevelopable_share": 0.7251,
+    "steep_share": 0.7149,
+    "water_share": 0.0166
+  },
+  {
+    "lau_id": "08165",
+    "municipio": "Pobla de Claramunt, La",
+    "lau_km2": 18.552,
+    "land_km2": 18.281,
+    "area_err_pct": 1.46,
+    "undevelopable_share": 0.7264,
+    "steep_share": 0.7264,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08070",
+    "municipio": "Collsuspina",
+    "lau_km2": 15.135,
+    "land_km2": 15.063,
+    "area_err_pct": 0.47,
+    "undevelopable_share": 0.7281,
+    "steep_share": 0.7281,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08275",
+    "municipio": "Tav\u00e8rnoles",
+    "lau_km2": 18.919,
+    "land_km2": 18.702,
+    "area_err_pct": 1.15,
+    "undevelopable_share": 0.7284,
+    "steep_share": 0.7284,
+    "water_share": 0.0129
+  },
+  {
+    "lau_id": "08152",
+    "municipio": "Orp\u00ed",
+    "lau_km2": 15.288,
+    "land_km2": 15.174,
+    "area_err_pct": 0.75,
+    "undevelopable_share": 0.736,
+    "steep_share": 0.736,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08901",
+    "municipio": "Rupit i Pruit",
+    "lau_km2": 48.985,
+    "land_km2": 48.917,
+    "area_err_pct": 0.14,
+    "undevelopable_share": 0.7426,
+    "steep_share": 0.7426,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08270",
+    "municipio": "Sitges",
+    "lau_km2": 43.716,
+    "land_km2": 43.826,
+    "area_err_pct": 0.25,
+    "undevelopable_share": 0.745,
+    "steep_share": 0.7325,
+    "water_share": 0.0186
+  },
+  {
+    "lau_id": "08022",
+    "municipio": "Berga",
+    "lau_km2": 22.559,
+    "land_km2": 22.192,
+    "area_err_pct": 1.63,
+    "undevelopable_share": 0.7459,
+    "steep_share": 0.7459,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08062",
+    "municipio": "Castellnou de Bages",
+    "lau_km2": 29.135,
+    "land_km2": 29.629,
+    "area_err_pct": 1.7,
+    "undevelopable_share": 0.7472,
+    "steep_share": 0.7472,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08199",
+    "municipio": "Sant Bartomeu del Grau",
+    "lau_km2": 34.662,
+    "land_km2": 33.798,
+    "area_err_pct": 2.49,
+    "undevelopable_share": 0.7499,
+    "steep_share": 0.7499,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08009",
+    "municipio": "Argentona",
+    "lau_km2": 25.37,
+    "land_km2": 24.867,
+    "area_err_pct": 1.98,
+    "undevelopable_share": 0.7531,
+    "steep_share": 0.7531,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08063",
+    "municipio": "Castellol\u00ed",
+    "lau_km2": 25.354,
+    "land_km2": 25.212,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.7558,
+    "steep_share": 0.7558,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08209",
+    "municipio": "Sant Fost de Campsentelles",
+    "lau_km2": 13.178,
+    "land_km2": 13.257,
+    "area_err_pct": 0.6,
+    "undevelopable_share": 0.7562,
+    "steep_share": 0.7552,
+    "water_share": 0.0024
+  },
+  {
+    "lau_id": "08300",
+    "municipio": "Viladecavalls",
+    "lau_km2": 20.029,
+    "land_km2": 19.912,
+    "area_err_pct": 0.59,
+    "undevelopable_share": 0.7578,
+    "steep_share": 0.7578,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08241",
+    "municipio": "Sant Sadurn\u00ed d'Osormort",
+    "lau_km2": 30.688,
+    "land_km2": 30.55,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.7614,
+    "steep_share": 0.7614,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08059",
+    "municipio": "Castellfollit del Boix",
+    "lau_km2": 59.385,
+    "land_km2": 59.613,
+    "area_err_pct": 0.38,
+    "undevelopable_share": 0.7636,
+    "steep_share": 0.7636,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08235",
+    "municipio": "Sant Pol de Mar",
+    "lau_km2": 7.567,
+    "land_km2": 7.727,
+    "area_err_pct": 2.11,
+    "undevelopable_share": 0.7643,
+    "steep_share": 0.7328,
+    "water_share": 0.043
+  },
+  {
+    "lau_id": "08035",
+    "municipio": "Calella",
+    "lau_km2": 7.863,
+    "land_km2": 7.63,
+    "area_err_pct": 2.97,
+    "undevelopable_share": 0.7655,
+    "steep_share": 0.7412,
+    "water_share": 0.0276
+  },
+  {
+    "lau_id": "08262",
+    "municipio": "Sant Vicen\u00e7 de Castellet",
+    "lau_km2": 17.391,
+    "land_km2": 17.157,
+    "area_err_pct": 1.34,
+    "undevelopable_share": 0.7704,
+    "steep_share": 0.7633,
+    "water_share": 0.0119
+  },
+  {
+    "lau_id": "08282",
+    "municipio": "Tiana",
+    "lau_km2": 7.941,
+    "land_km2": 7.678,
+    "area_err_pct": 3.31,
+    "undevelopable_share": 0.7723,
+    "steep_share": 0.7723,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08042",
+    "municipio": "C\u00e0noves i Samal\u00fas",
+    "lau_km2": 28.723,
+    "land_km2": 28.662,
+    "area_err_pct": 0.21,
+    "undevelopable_share": 0.7735,
+    "steep_share": 0.7735,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08109",
+    "municipio": "Llu\u00e7\u00e0",
+    "lau_km2": 53.31,
+    "land_km2": 53.099,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.7779,
+    "steep_share": 0.7779,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08071",
+    "municipio": "Copons",
+    "lau_km2": 18.7,
+    "land_km2": 18.25,
+    "area_err_pct": 2.4,
+    "undevelopable_share": 0.7791,
+    "steep_share": 0.7791,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08051",
+    "municipio": "Castellar del Vall\u00e8s",
+    "lau_km2": 45.152,
+    "land_km2": 45.004,
+    "area_err_pct": 0.33,
+    "undevelopable_share": 0.7804,
+    "steep_share": 0.7804,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08030",
+    "municipio": "Cabrils",
+    "lau_km2": 7.001,
+    "land_km2": 7.237,
+    "area_err_pct": 3.38,
+    "undevelopable_share": 0.7807,
+    "steep_share": 0.7807,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08150",
+    "municipio": "Or\u00eds",
+    "lau_km2": 27.045,
+    "land_km2": 26.549,
+    "area_err_pct": 1.83,
+    "undevelopable_share": 0.7851,
+    "steep_share": 0.7796,
+    "water_share": 0.0163
+  },
+  {
+    "lau_id": "08185",
+    "municipio": "Rubi\u00f3",
+    "lau_km2": 48.0,
+    "land_km2": 47.975,
+    "area_err_pct": 0.05,
+    "undevelopable_share": 0.7874,
+    "steep_share": 0.7874,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08234",
+    "municipio": "Sant Pere de Vilamajor",
+    "lau_km2": 34.295,
+    "land_km2": 34.235,
+    "area_err_pct": 0.18,
+    "undevelopable_share": 0.7906,
+    "steep_share": 0.7906,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08291",
+    "municipio": "Vacarisses",
+    "lau_km2": 40.48,
+    "land_km2": 40.581,
+    "area_err_pct": 0.25,
+    "undevelopable_share": 0.7938,
+    "steep_share": 0.7938,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08064",
+    "municipio": "Castellter\u00e7ol",
+    "lau_km2": 31.789,
+    "land_km2": 31.694,
+    "area_err_pct": 0.3,
+    "undevelopable_share": 0.7944,
+    "steep_share": 0.7944,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08261",
+    "municipio": "Santa Susanna",
+    "lau_km2": 12.662,
+    "land_km2": 12.557,
+    "area_err_pct": 0.83,
+    "undevelopable_share": 0.8006,
+    "steep_share": 0.7955,
+    "water_share": 0.0051
+  },
+  {
+    "lau_id": "08026",
+    "municipio": "Brull, El",
+    "lau_km2": 41.15,
+    "land_km2": 40.889,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.8035,
+    "steep_share": 0.8023,
+    "water_share": 0.002
+  },
+  {
+    "lau_id": "08120",
+    "municipio": "Matadepera",
+    "lau_km2": 25.357,
+    "land_km2": 25.251,
+    "area_err_pct": 0.42,
+    "undevelopable_share": 0.8044,
+    "steep_share": 0.8044,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08905",
+    "municipio": "Palma de Cervell\u00f3, La",
+    "lau_km2": 5.398,
+    "land_km2": 5.09,
+    "area_err_pct": 5.69,
+    "undevelopable_share": 0.8048,
+    "steep_share": 0.8048,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08032",
+    "municipio": "Caldes d'Estrac",
+    "lau_km2": 0.742,
+    "land_km2": 0.723,
+    "area_err_pct": 2.64,
+    "undevelopable_share": 0.8053,
+    "steep_share": 0.7876,
+    "water_share": 0.0177
+  },
+  {
+    "lau_id": "08020",
+    "municipio": "Begues",
+    "lau_km2": 50.375,
+    "land_km2": 50.397,
+    "area_err_pct": 0.04,
+    "undevelopable_share": 0.8079,
+    "steep_share": 0.8079,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08055",
+    "municipio": "Castellcir",
+    "lau_km2": 33.942,
+    "land_km2": 33.533,
+    "area_err_pct": 1.2,
+    "undevelopable_share": 0.8127,
+    "steep_share": 0.8127,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08237",
+    "municipio": "Sant Quirze de Besora",
+    "lau_km2": 8.162,
+    "land_km2": 8.346,
+    "area_err_pct": 2.26,
+    "undevelopable_share": 0.8131,
+    "steep_share": 0.8131,
+    "water_share": 0.0053
+  },
+  {
+    "lau_id": "08025",
+    "municipio": "Bruc, El",
+    "lau_km2": 47.349,
+    "land_km2": 47.046,
+    "area_err_pct": 0.64,
+    "undevelopable_share": 0.8133,
+    "steep_share": 0.8133,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08274",
+    "municipio": "S\u00faria",
+    "lau_km2": 23.613,
+    "land_km2": 23.571,
+    "area_err_pct": 0.18,
+    "undevelopable_share": 0.8152,
+    "steep_share": 0.8152,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08306",
+    "municipio": "Vilalba Sasserra",
+    "lau_km2": 5.842,
+    "land_km2": 5.679,
+    "area_err_pct": 2.79,
+    "undevelopable_share": 0.8167,
+    "steep_share": 0.8167,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08224",
+    "municipio": "Sant Mart\u00ed de Centelles",
+    "lau_km2": 25.881,
+    "land_km2": 25.49,
+    "area_err_pct": 1.51,
+    "undevelopable_share": 0.8176,
+    "steep_share": 0.8176,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08295",
+    "municipio": "Vallirana",
+    "lau_km2": 23.812,
+    "land_km2": 23.4,
+    "area_err_pct": 1.73,
+    "undevelopable_share": 0.8204,
+    "steep_share": 0.8204,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08008",
+    "municipio": "Argen\u00e7ola",
+    "lau_km2": 47.411,
+    "land_km2": 47.81,
+    "area_err_pct": 0.84,
+    "undevelopable_share": 0.822,
+    "steep_share": 0.822,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08202",
+    "municipio": "Sant Celoni",
+    "lau_km2": 65.408,
+    "land_km2": 65.282,
+    "area_err_pct": 0.19,
+    "undevelopable_share": 0.825,
+    "steep_share": 0.8246,
+    "water_share": 0.0005
+  },
+  {
+    "lau_id": "08039",
+    "municipio": "Campins",
+    "lau_km2": 7.385,
+    "land_km2": 7.05,
+    "area_err_pct": 4.55,
+    "undevelopable_share": 0.8253,
+    "steep_share": 0.8253,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08292",
+    "municipio": "Vallbona d'Anoia",
+    "lau_km2": 6.425,
+    "land_km2": 6.534,
+    "area_err_pct": 1.7,
+    "undevelopable_share": 0.8286,
+    "steep_share": 0.8286,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08097",
+    "municipio": "Gualba",
+    "lau_km2": 23.087,
+    "land_km2": 22.816,
+    "area_err_pct": 1.17,
+    "undevelopable_share": 0.8356,
+    "steep_share": 0.8356,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08066",
+    "municipio": "Castellv\u00ed de Rosanes",
+    "lau_km2": 16.394,
+    "land_km2": 16.249,
+    "area_err_pct": 0.89,
+    "undevelopable_share": 0.8411,
+    "steep_share": 0.8411,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08296",
+    "municipio": "Vallromanes",
+    "lau_km2": 10.609,
+    "land_km2": 10.93,
+    "area_err_pct": 3.03,
+    "undevelopable_share": 0.8431,
+    "steep_share": 0.8431,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08146",
+    "municipio": "Olesa de Bonesvalls",
+    "lau_km2": 30.843,
+    "land_km2": 30.966,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.8431,
+    "steep_share": 0.8431,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08053",
+    "municipio": "Castellbell i el Vilar",
+    "lau_km2": 28.459,
+    "land_km2": 28.045,
+    "area_err_pct": 1.46,
+    "undevelopable_share": 0.8462,
+    "steep_share": 0.8421,
+    "water_share": 0.0205
+  },
+  {
+    "lau_id": "08258",
+    "municipio": "Santa Maria d'Ol\u00f3",
+    "lau_km2": 66.184,
+    "land_km2": 65.888,
+    "area_err_pct": 0.45,
+    "undevelopable_share": 0.8495,
+    "steep_share": 0.8495,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08233",
+    "municipio": "Sant Pere de Torell\u00f3",
+    "lau_km2": 55.008,
+    "land_km2": 55.07,
+    "area_err_pct": 0.11,
+    "undevelopable_share": 0.8514,
+    "steep_share": 0.8514,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08303",
+    "municipio": "Vilanova de Sau",
+    "lau_km2": 58.031,
+    "land_km2": 57.496,
+    "area_err_pct": 0.92,
+    "undevelopable_share": 0.8584,
+    "steep_share": 0.827,
+    "water_share": 0.0433
+  },
+  {
+    "lau_id": "08210",
+    "municipio": "Sant Feliu de Codines",
+    "lau_km2": 15.032,
+    "land_km2": 14.718,
+    "area_err_pct": 2.09,
+    "undevelopable_share": 0.8599,
+    "steep_share": 0.8599,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08256",
+    "municipio": "Santa Maria de Martorelles",
+    "lau_km2": 4.487,
+    "land_km2": 4.416,
+    "area_err_pct": 1.57,
+    "undevelopable_share": 0.8623,
+    "steep_share": 0.8623,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08223",
+    "municipio": "Sant Lloren\u00e7 Savall",
+    "lau_km2": 41.187,
+    "land_km2": 40.838,
+    "area_err_pct": 0.85,
+    "undevelopable_share": 0.8649,
+    "steep_share": 0.8649,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08068",
+    "municipio": "Cervell\u00f3",
+    "lau_km2": 24.146,
+    "land_km2": 24.131,
+    "area_err_pct": 0.06,
+    "undevelopable_share": 0.8682,
+    "steep_share": 0.8682,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08272",
+    "municipio": "Sora",
+    "lau_km2": 30.877,
+    "land_km2": 30.809,
+    "area_err_pct": 0.22,
+    "undevelopable_share": 0.8693,
+    "steep_share": 0.8693,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08075",
+    "municipio": "Dosrius",
+    "lau_km2": 40.74,
+    "land_km2": 40.856,
+    "area_err_pct": 0.28,
+    "undevelopable_share": 0.8697,
+    "steep_share": 0.8697,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08014",
+    "municipio": "Aiguafreda",
+    "lau_km2": 7.991,
+    "land_km2": 8.395,
+    "area_err_pct": 5.05,
+    "undevelopable_share": 0.8709,
+    "steep_share": 0.8709,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08148",
+    "municipio": "Olivella",
+    "lau_km2": 38.817,
+    "land_km2": 38.094,
+    "area_err_pct": 1.86,
+    "undevelopable_share": 0.8714,
+    "steep_share": 0.8714,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08004",
+    "municipio": "Alpens",
+    "lau_km2": 13.667,
+    "land_km2": 13.714,
+    "area_err_pct": 0.34,
+    "undevelopable_share": 0.8742,
+    "steep_share": 0.8742,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08229",
+    "municipio": "Sant Mateu de Bages",
+    "lau_km2": 102.361,
+    "land_km2": 102.308,
+    "area_err_pct": 0.05,
+    "undevelopable_share": 0.8743,
+    "steep_share": 0.8743,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08045",
+    "municipio": "Capolat",
+    "lau_km2": 34.229,
+    "land_km2": 33.666,
+    "area_err_pct": 1.65,
+    "undevelopable_share": 0.8756,
+    "steep_share": 0.8756,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08131",
+    "municipio": "Montesquiu",
+    "lau_km2": 4.848,
+    "land_km2": 4.66,
+    "area_err_pct": 3.88,
+    "undevelopable_share": 0.8843,
+    "steep_share": 0.8843,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08280",
+    "municipio": "Tavertet",
+    "lau_km2": 32.808,
+    "land_km2": 32.045,
+    "area_err_pct": 2.32,
+    "undevelopable_share": 0.8894,
+    "steep_share": 0.887,
+    "water_share": 0.0093
+  },
+  {
+    "lau_id": "08290",
+    "municipio": "Ullastrell",
+    "lau_km2": 7.459,
+    "land_km2": 7.372,
+    "area_err_pct": 1.16,
+    "undevelopable_share": 0.8906,
+    "steep_share": 0.8906,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08294",
+    "municipio": "Vallgorguina",
+    "lau_km2": 22.202,
+    "land_km2": 22.082,
+    "area_err_pct": 0.54,
+    "undevelopable_share": 0.8907,
+    "steep_share": 0.8907,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08072",
+    "municipio": "Corbera de Llobregat",
+    "lau_km2": 18.258,
+    "land_km2": 18.209,
+    "area_err_pct": 0.27,
+    "undevelopable_share": 0.8919,
+    "steep_share": 0.8912,
+    "water_share": 0.0007
+  },
+  {
+    "lau_id": "08095",
+    "municipio": "Granera",
+    "lau_km2": 23.847,
+    "land_km2": 23.592,
+    "area_err_pct": 1.07,
+    "undevelopable_share": 0.8929,
+    "steep_share": 0.8929,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08129",
+    "municipio": "Muntanyola",
+    "lau_km2": 40.484,
+    "land_km2": 40.324,
+    "area_err_pct": 0.39,
+    "undevelopable_share": 0.8965,
+    "steep_share": 0.8965,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08153",
+    "municipio": "\u00d2rrius",
+    "lau_km2": 5.561,
+    "land_km2": 5.482,
+    "area_err_pct": 1.41,
+    "undevelopable_share": 0.902,
+    "steep_share": 0.902,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08079",
+    "municipio": "Estany, L'",
+    "lau_km2": 10.265,
+    "land_km2": 9.942,
+    "area_err_pct": 3.14,
+    "undevelopable_share": 0.9027,
+    "steep_share": 0.9027,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08007",
+    "municipio": "Arenys de Munt",
+    "lau_km2": 20.749,
+    "land_km2": 20.58,
+    "area_err_pct": 0.82,
+    "undevelopable_share": 0.9053,
+    "steep_share": 0.9053,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08239",
+    "municipio": "Sant Quirze Safaja",
+    "lau_km2": 25.85,
+    "land_km2": 25.621,
+    "area_err_pct": 0.89,
+    "undevelopable_share": 0.9094,
+    "steep_share": 0.9094,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08271",
+    "municipio": "Sobremunt",
+    "lau_km2": 13.802,
+    "land_km2": 13.818,
+    "area_err_pct": 0.11,
+    "undevelopable_share": 0.915,
+    "steep_share": 0.915,
+    "water_share": 0.0009
+  },
+  {
+    "lau_id": "08293",
+    "municipio": "Vallcebre",
+    "lau_km2": 28.058,
+    "land_km2": 27.087,
+    "area_err_pct": 3.46,
+    "undevelopable_share": 0.9158,
+    "steep_share": 0.9158,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08128",
+    "municipio": "Monistrol de Calders",
+    "lau_km2": 21.942,
+    "land_km2": 22.088,
+    "area_err_pct": 0.67,
+    "undevelopable_share": 0.9174,
+    "steep_share": 0.9174,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08903",
+    "municipio": "Sant Juli\u00e0 de Cerdanyola",
+    "lau_km2": 11.654,
+    "land_km2": 11.154,
+    "area_err_pct": 4.28,
+    "undevelopable_share": 0.9211,
+    "steep_share": 0.9211,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08024",
+    "municipio": "Borred\u00e0",
+    "lau_km2": 43.548,
+    "land_km2": 42.83,
+    "area_err_pct": 1.65,
+    "undevelopable_share": 0.9244,
+    "steep_share": 0.9244,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08127",
+    "municipio": "Monistrol de Montserrat",
+    "lau_km2": 11.907,
+    "land_km2": 11.709,
+    "area_err_pct": 1.67,
+    "undevelopable_share": 0.928,
+    "steep_share": 0.9263,
+    "water_share": 0.0273
+  },
+  {
+    "lau_id": "08277",
+    "municipio": "Talamanca",
+    "lau_km2": 29.271,
+    "land_km2": 28.744,
+    "area_err_pct": 1.8,
+    "undevelopable_share": 0.9332,
+    "steep_share": 0.9328,
+    "water_share": 0.0027
+  },
+  {
+    "lau_id": "08242",
+    "municipio": "Marganell",
+    "lau_km2": 13.355,
+    "land_km2": 13.763,
+    "area_err_pct": 3.05,
+    "undevelopable_share": 0.9336,
+    "steep_share": 0.9336,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08289",
+    "municipio": "Torrelles de Llobregat",
+    "lau_km2": 13.687,
+    "land_km2": 13.513,
+    "area_err_pct": 1.27,
+    "undevelopable_share": 0.934,
+    "steep_share": 0.934,
+    "water_share": 0.0014
+  },
+  {
+    "lau_id": "08179",
+    "municipio": "Rellinars",
+    "lau_km2": 17.875,
+    "land_km2": 17.809,
+    "area_err_pct": 0.37,
+    "undevelopable_share": 0.9347,
+    "steep_share": 0.9347,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08203",
+    "municipio": "Sant Cebri\u00e0 de Vallalta",
+    "lau_km2": 15.619,
+    "land_km2": 15.615,
+    "area_err_pct": 0.02,
+    "undevelopable_share": 0.9358,
+    "steep_share": 0.9358,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08216",
+    "municipio": "Sant Jaume de Frontany\u00e0",
+    "lau_km2": 21.276,
+    "land_km2": 20.919,
+    "area_err_pct": 1.68,
+    "undevelopable_share": 0.9358,
+    "steep_share": 0.9358,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08276",
+    "municipio": "Tagamanent",
+    "lau_km2": 43.398,
+    "land_km2": 43.17,
+    "area_err_pct": 0.52,
+    "undevelopable_share": 0.9362,
+    "steep_share": 0.9362,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08081",
+    "municipio": "Fogars de Montcl\u00fas",
+    "lau_km2": 39.913,
+    "land_km2": 40.021,
+    "area_err_pct": 0.27,
+    "undevelopable_share": 0.9366,
+    "steep_share": 0.9364,
+    "water_share": 0.001
+  },
+  {
+    "lau_id": "08087",
+    "municipio": "Gallifa",
+    "lau_km2": 16.218,
+    "land_km2": 16.48,
+    "area_err_pct": 1.62,
+    "undevelopable_share": 0.9369,
+    "steep_share": 0.9369,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08193",
+    "municipio": "Sant Iscle de Vallalta",
+    "lau_km2": 17.78,
+    "land_km2": 17.51,
+    "area_err_pct": 1.52,
+    "undevelopable_share": 0.9376,
+    "steep_share": 0.9376,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08080",
+    "municipio": "F\u00edgols",
+    "lau_km2": 29.72,
+    "land_km2": 29.739,
+    "area_err_pct": 0.07,
+    "undevelopable_share": 0.9435,
+    "steep_share": 0.9435,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08182",
+    "municipio": "Pont de Vilomara i Rocafort, El",
+    "lau_km2": 27.4,
+    "land_km2": 27.11,
+    "area_err_pct": 1.06,
+    "undevelopable_share": 0.944,
+    "steep_share": 0.9437,
+    "water_share": 0.0016
+  },
+  {
+    "lau_id": "08253",
+    "municipio": "Santa Maria de Besora",
+    "lau_km2": 24.928,
+    "land_km2": 24.746,
+    "area_err_pct": 0.73,
+    "undevelopable_share": 0.9523,
+    "steep_share": 0.9523,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08299",
+    "municipio": "Vilada",
+    "lau_km2": 22.218,
+    "land_km2": 22.097,
+    "area_err_pct": 0.55,
+    "undevelopable_share": 0.957,
+    "steep_share": 0.9421,
+    "water_share": 0.0425
+  },
+  {
+    "lau_id": "08050",
+    "municipio": "Castellar del Riu",
+    "lau_km2": 32.758,
+    "land_km2": 33.228,
+    "area_err_pct": 1.44,
+    "undevelopable_share": 0.9611,
+    "steep_share": 0.9611,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08204",
+    "municipio": "Sant Climent de Llobregat",
+    "lau_km2": 10.805,
+    "land_km2": 10.751,
+    "area_err_pct": 0.5,
+    "undevelopable_share": 0.9624,
+    "steep_share": 0.9624,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08142",
+    "municipio": "Nou de Bergued\u00e0, La",
+    "lau_km2": 24.864,
+    "land_km2": 25.009,
+    "area_err_pct": 0.58,
+    "undevelopable_share": 0.9638,
+    "steep_share": 0.9638,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08177",
+    "municipio": "Quar, La",
+    "lau_km2": 37.827,
+    "land_km2": 37.606,
+    "area_err_pct": 0.58,
+    "undevelopable_share": 0.9644,
+    "steep_share": 0.9644,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08016",
+    "municipio": "Bag\u00e0",
+    "lau_km2": 43.119,
+    "land_km2": 42.69,
+    "area_err_pct": 0.99,
+    "undevelopable_share": 0.9668,
+    "steep_share": 0.9668,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08099",
+    "municipio": "Guardiola de Bergued\u00e0",
+    "lau_km2": 61.37,
+    "land_km2": 61.098,
+    "area_err_pct": 0.44,
+    "undevelopable_share": 0.9673,
+    "steep_share": 0.9673,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08166",
+    "municipio": "Pobla de Lillet, La",
+    "lau_km2": 51.799,
+    "land_km2": 51.509,
+    "area_err_pct": 0.56,
+    "undevelopable_share": 0.9711,
+    "steep_share": 0.9711,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08190",
+    "municipio": "Saldes",
+    "lau_km2": 66.831,
+    "land_km2": 66.567,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.9763,
+    "steep_share": 0.9763,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08139",
+    "municipio": "Mura",
+    "lau_km2": 47.911,
+    "land_km2": 47.828,
+    "area_err_pct": 0.17,
+    "undevelopable_share": 0.9774,
+    "steep_share": 0.9774,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08052",
+    "municipio": "Castellar de n'Hug",
+    "lau_km2": 46.977,
+    "land_km2": 46.881,
+    "area_err_pct": 0.2,
+    "undevelopable_share": 0.9782,
+    "steep_share": 0.9782,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08134",
+    "municipio": "Figar\u00f3-Montmany",
+    "lau_km2": 15.054,
+    "land_km2": 14.994,
+    "area_err_pct": 0.4,
+    "undevelopable_share": 0.9787,
+    "steep_share": 0.9787,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08268",
+    "municipio": "Cercs",
+    "lau_km2": 47.087,
+    "land_km2": 46.949,
+    "area_err_pct": 0.29,
+    "undevelopable_share": 0.9808,
+    "steep_share": 0.9502,
+    "water_share": 0.056
+  },
+  {
+    "lau_id": "08137",
+    "municipio": "Montseny",
+    "lau_km2": 26.854,
+    "land_km2": 26.294,
+    "area_err_pct": 2.08,
+    "undevelopable_share": 0.9891,
+    "steep_share": 0.9891,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08057",
+    "municipio": "Castell de l'Areny",
+    "lau_km2": 24.853,
+    "land_km2": 24.882,
+    "area_err_pct": 0.12,
+    "undevelopable_share": 0.9944,
+    "steep_share": 0.9944,
+    "water_share": 0.0
+  },
+  {
+    "lau_id": "08093",
+    "municipio": "Gisclareny",
+    "lau_km2": 36.628,
+    "land_km2": 36.576,
+    "area_err_pct": 0.14,
+    "undevelopable_share": 0.9978,
+    "steep_share": 0.9978,
+    "water_share": 0.0
+  }
+]

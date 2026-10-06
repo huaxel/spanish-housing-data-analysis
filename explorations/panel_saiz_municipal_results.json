@@ -1,0 +1,54 @@
+{
+  "n_municipios": 310,
+  "premise_starts": {
+    "dep": "starts_pc",
+    "controls": [],
+    "coef_per_0p1": -0.023,
+    "se_per_0p1": 0.0256,
+    "t": -0.9,
+    "n": 3945,
+    "clusters": 310
+  },
+  "premise_completions": {
+    "dep": "completions_pc",
+    "controls": [],
+    "coef_per_0p1": -0.0084,
+    "se_per_0p1": 0.0198,
+    "t": -0.43,
+    "n": 3945,
+    "clusters": 310
+  },
+  "exclusion_price": {
+    "dep": "d_price",
+    "controls": [],
+    "coef_per_0p1": -0.0087,
+    "se_per_0p1": 0.0594,
+    "t": -0.15,
+    "n": 1414,
+    "clusters": 130
+  },
+  "premise_starts_density": {
+    "dep": "starts_pc",
+    "controls": [
+      "density"
+    ],
+    "coef_per_0p1": -0.0283,
+    "se_per_0p1": 0.0282,
+    "t": -1.0,
+    "n": 3945,
+    "clusters": 310
+  },
+  "exclusion_price_density": {
+    "dep": "d_price",
+    "controls": [
+      "density"
+    ],
+    "coef_per_0p1": 0.0504,
+    "se_per_0p1": 0.0684,
+    "t": 0.74,
+    "n": 1414,
+    "clusters": 130
+  },
+  "mean_starts_pc": 1.5219,
+  "mean_d_price": 4.2094
+}
