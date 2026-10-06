@@ -38,22 +38,30 @@ explicit extensions, not v1.
 | 13 | Municipios (Madrid valor tasado + padrón; DIBA Barcelona) | DONE 2026-10-06 — `muni_madrid` / `muni_bcn` tables, municipal explorer pages |
 | 14 | Households pre-2021 | DONE 2026-10-06 — ECH annual 2014–20 (jaxi p274 static files) + 2011 exact + 2001 proxy; no 2013 (serie starts 2014) |
 | 15 | INE IPC deflator (real-terms levels) | DONE 2026-10-06 — general index (base 2021) CCAA+Nacional in `ipc_anual`; Madrid real: capital −7.5%, south −28 to −38% |
+| 16 | INE EM inmigración (Tempus3 24322) | DONE 2026-10-06 — foreign/Spanish inflows by provincia 2008–2021 in `migra_anual`; cycle 567k→248k→666k |
 
 ## Milestones
 
 1. Pipeline v1 (done 2026-10-05): fetch/build/verify green, marts + coverage.
 2. Evidence explorer v1 (done 2026-10-06): nacional + CCAA + comparar + municipios pages.
-3. Source completions 5–8, one at a time, each with manifest pin + methods note.
-4. Households layer: dwellings-per-household by provincia (census years first,
-   ECH annual second) — the closest observable to "shortage".
-5. Review: independent read of methods + limitations before any public release.
+3. Source completions 5–16 (done 2026-10-06): queue fully DONE — IPC,
+   ECH, censo 2021 anchor, migration flows, each with manifest pin +
+   methods note.
+4. Households layer (done 2026-10-06): dwellings-per-household by
+   provincia — 2011 exact, ECH 2014–20, ECP 2021+, 2001 proxy.
+5. Review: independent read of methods + limitations before any public
+   release — STILL OPEN (required before sharing beyond workers.dev).
 
-## Status 2026-10-06
+## Status 2026-10-06 (evening)
 
-Pipeline v1 + ECP + valor tasado live: CCAA mart 2007–2025 (pop splice quantified,
-Libre €/m² complete), provincia mart 2001–2021, hogares 2021+. Next: Evidence
-toolchain fix — the 2022–25 tightening (viv/1000 ↓, viv/hogar ↓, IPV ↑,
-€/m² at record levels) is the story to lead the explorer with.
+All 16 queued sources live; marts verified end-to-end twice from scratch
+(byte-identical re-fetch). Analysis now spans window correlations → FE
+panel (wild bootstrap, lags, migration control) → quarterly timing →
+real-terms levels, all pointing one way (demand drivers, supply
+descriptors). Explorer deployed (workers.dev + `/comparar`, `/municipios`,
+real-€ chart); custom domain waits on zone scope. Causal designs scoped
+in the identification memo — migration shift-share needs share
+archaeology; nothing causal merges before milestone 5's independent read.
 
 ## Exclusions (v1)
 
