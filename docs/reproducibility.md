@@ -4,7 +4,7 @@
 
 ```bash
 uv sync --group dev
-make gates   # lint -> fetch -> build -> verify -> audit -> test
+make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 ```
 
 - `make fetch` — downloads all pinned sources into `data/raw`
@@ -12,6 +12,12 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make build` — refuses to run on unpinned/changed inputs; writes
   `data/processed/marts.duckdb`, `mart_*.parquet`, `dim_territorio.parquet`,
   `coverage.json`.
+- `make analysis` — re-runs the deterministic estimators whose outputs
+  `make audit` requires (git-ignored `artifacts/` JSONs plus the committed
+  `explorations/iv_results.json` / `panel_saiz_results.json` copies the
+  audit freshness-checks). `bartik_predict` runs first: `iv_migration` +
+  `panel_saiz` read its instrument. Required on a clean checkout (where
+  `artifacts/` is absent) and after every `make build` (see below).
 - `make verify` — manifest hashes + mart integrity (51 territories, no null
   keys, IPV base identity via build). Warns when the manifest snapshot is
   older than 90 days (`MANIFEST_WARN_DAYS=` overrides) — upstream tables get
@@ -19,12 +25,12 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried, plus 6 model-freshness checks (each estimator output must postdate its script, `ols.py`, and `marts.duckdb` — a green audit can no longer pass on stale model numbers); fails
+- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried, plus 6 model-freshness checks (each estimator output must postdate its script, `ols.py`, and `marts.duckdb`; the IV + Saiz outputs additionally key on `artifacts/bartik_predicted.json`, the instrument they read) — a green audit can no longer pass on stale model numbers); fails
   on drift. Add a claim whenever a doc states a quotable number. Note:
   `marts.duckdb` is not byte-stable across rebuilds (container metadata
   drifts even with identical inputs), so every `make build` invalidates
-  the six model freshness keys — re-run the six estimators after a
-  rebuild (their numbers must not move; if they do, the rebuild changed
+  the six model freshness keys — run `make analysis` after a rebuild
+  (their numbers must not move; if they do, the rebuild changed
   the data, not just the container).
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 

@@ -153,7 +153,9 @@ for name, (yy, dd, ww, zz, cc, rr) in specs.items():
     results[name] = run_all(yy, dd, ww, zz, cc, rr, name)
     print(json.dumps(results[name], indent=1))
 
-results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
+results["_meta"] = ols.model_meta(
+    __file__, ["data/processed/marts.duckdb", "artifacts/bartik_predicted.json"]
+)
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "iv_migration.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

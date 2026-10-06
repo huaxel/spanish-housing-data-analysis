@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
+.PHONY: sync test lint fetch build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
 
 sync:
 	uv sync --group dev
@@ -47,8 +47,24 @@ verify:
 audit:
 	uv run python scripts/audit_claims.py
 
-# Full local gate: lint -> fetch -> build -> verify -> audit -> test
-gates: lint fetch build verify audit test
+# Deterministic estimators whose outputs audit requires (git-ignored
+# artifacts/ JSONs + committed explorations/*.json freshness copies).
+# bartik_predict first: iv_migration + panel_saiz read its instrument.
+analysis:
+	uv run python explorations/bartik_predict.py
+	uv run python explorations/iv_migration.py
+	uv run python explorations/panel_saiz.py
+	uv run python explorations/panel_provincial.py
+	uv run python explorations/panel_adjusted.py
+	uv run python explorations/panel_tourist.py
+	uv run python explorations/panel_quarterly.py
+	uv run python explorations/ratio_ccaa.py
+	uv run python explorations/serpavi_analysis.py
+	uv run python explorations/tourist_rents.py
+	uv run python explorations/panel_saiz_madrid_vacancy.py
+
+# Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
+gates: lint fetch build analysis verify audit test
 
 dashboard:
 	uv run python scripts/render_preview.py

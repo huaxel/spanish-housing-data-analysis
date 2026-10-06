@@ -110,10 +110,11 @@
     ]
   },
   "_meta": {
-    "script_sha": "9705bcfb78f4cb48317653501d378970057c42e64d0cbae2030e1b753c733706",
+    "script_sha": "385616c8ed5b508a53c4c40b1312c5938c354e02567654e6bb14fc62b94d3a3f",
     "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
     "data_sha": {
-      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0"
+      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0",
+      "artifacts/bartik_predicted.json": "ecaa677d53412585d6327a061cbc291ef233d7f9f9ffa13a9c88610aa95479ca"
     }
   }
 }

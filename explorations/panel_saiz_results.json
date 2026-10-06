@@ -62,10 +62,11 @@
     "note": "descriptive; exposure is endogenous here, so do not read as causal"
   },
   "_meta": {
-    "script_sha": "8c6186efcb62cb39592c96bda616c85dd7b46d511b86cd0fa70701cd204eeb1e",
+    "script_sha": "5cd04060924176429226f7a36696f0ff98b525e53a9e29ea8a4e7f77aab7c980",
     "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
     "data_sha": {
-      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0"
+      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0",
+      "artifacts/bartik_predicted.json": "ecaa677d53412585d6327a061cbc291ef233d7f9f9ffa13a9c88610aa95479ca"
     }
   }
 }
