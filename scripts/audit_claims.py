@@ -901,6 +901,76 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] serpavi: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 8
+    tr = json.loads(
+        (Path(__file__).resolve().parents[1] / "artifacts" / "tourist_rents.json").read_text()
+    )
+    for desc, path, expected, tol in (
+        (
+            "bcn tour-rent level pearson",
+            "bcn_municipal.corr_tour_vs_rent_level.pearson",
+            0.087,
+            0.005,
+        ),
+        (
+            "bcn tour-rent level spearman",
+            "bcn_municipal.corr_tour_vs_rent_level.spearman",
+            0.037,
+            0.005,
+        ),
+        (
+            "bcn tour-rent growth pearson",
+            "bcn_municipal.corr_tour_vs_rent_growth.pearson",
+            0.020,
+            0.005,
+        ),
+        (
+            "bcn tour-rent growth spearman",
+            "bcn_municipal.corr_tour_vs_rent_growth.spearman",
+            -0.024,
+            0.005,
+        ),
+        (
+            "prov tour-rent level pearson",
+            "provincial.corr_tour_vs_rent_level.pearson",
+            0.619,
+            0.005,
+        ),
+        (
+            "prov tour-rent level spearman",
+            "provincial.corr_tour_vs_rent_level.spearman",
+            0.016,
+            0.005,
+        ),
+        (
+            "prov tour-rent growth pearson",
+            "provincial.corr_tour_vs_rent_growth.pearson",
+            0.225,
+            0.005,
+        ),
+        (
+            "prov tour-rent growth spearman",
+            "provincial.corr_tour_vs_rent_growth.spearman",
+            0.041,
+            0.005,
+        ),
+        ("tourist-rents n prov", "provincial.n", 45, 0),
+        ("Tenerife rent growth", "provincial.top_tourist", 27.95, 0.01),
+    ):
+        if desc == "Tenerife rent growth":
+            got = next(
+                (
+                    r["rent_growth_pct"]
+                    for r in tr["provincial"]["top_tourist"]
+                    if r["provincia"] == "Santa Cruz de Tenerife"
+                ),
+                None,
+            )
+        else:
+            got = _json_path(tr, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] tourist_rents: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 10
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

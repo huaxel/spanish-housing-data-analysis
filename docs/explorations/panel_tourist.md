@@ -38,4 +38,7 @@ flat since 2015) while prices moved on other demand.
 - Sale sample (128 municipios with DIBA prices) skews larger/urban vs
   the rent sample (244); neither is the full demarcation.
 - Barcelona only — Balears/Canarias, where tourist shares are higher,
-  are the external-validity question, untested here.
+  are the external-validity question. **Now tested**: see
+  `tourist_rents.md` — SERPAVI extends rents nationally; the level
+  signal is a scale artifact (prov Spearman 0.016) and growth is
+  weakly positive (0.041), not distinguishable from zero.
