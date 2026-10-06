@@ -56,3 +56,28 @@ def test_clustering_matters_and_r2_bounded():
     assert 0.0 <= got["r2"] <= 1.0
     assert got["clusters"] == 2
     assert all(s > 0 for s in got["se"])
+
+
+def test_wild_bootstrap_deterministic_and_bounded():
+    from spanish_housing import ols as ols_mod
+
+    # 8 clusters: 2^8 sign patterns admit p < 0.05 (with 4 clusters the
+    # minimum attainable Rademacher p is 1/16, so detection is impossible).
+    x = [[1.0, float(i)] for i in range(24)]
+    y = [1.0 + 2.0 * i + (0.5 if i % 2 else -0.5) for i in range(24)]
+    cl = [i // 3 for i in range(24)]
+    r1 = ols_mod.wild_bootstrap_t(x, y, cl, j=1, reps=200, seed=7)
+    r2 = ols_mod.wild_bootstrap_t(x, y, cl, j=1, reps=200, seed=7)
+    assert r1 == r2
+    assert 0.0 <= r1["p"] <= 1.0
+    assert r1["p"] < 0.05  # strong slope on 8 clusters detected
+
+
+def test_wild_bootstrap_null_not_significant():
+    from spanish_housing import ols as ols_mod
+
+    x = [[1.0, float(i % 4)] for i in range(16)]
+    y = [(-1.0) ** i * 0.1 for i in range(16)]
+    cl = [i // 4 for i in range(16)]
+    r = ols_mod.wild_bootstrap_t(x, y, cl, j=1, reps=200, seed=7)
+    assert r["p"] > 0.05

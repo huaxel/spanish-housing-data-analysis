@@ -55,7 +55,7 @@ for ccaa, rows in by_ccaa.items():
         )
 
 
-def run(spec: list[str]) -> dict:
+def build_design(spec: list[str]) -> tuple[list, list, list, list]:
     rows = [o for o in obs if all(o[v] is not None for v in ["d_ipv", *spec])]
     ccaas = sorted({o["ccaa"] for o in rows})
     years = sorted({o["anyo"] for o in rows})[1:]
@@ -74,6 +74,11 @@ def run(spec: list[str]) -> dict:
         y.append(o["d_ipv"] - m["d_ipv"])
         x.append([o[v] - m[v] for v in spec] + [1.0 if o["anyo"] == t else 0.0 for t in years])
         cl.append(o["ccaa"])
+    return x, y, cl, rows
+
+
+def run(spec: list[str]) -> dict:
+    x, y, cl, rows = build_design(spec)
     fit = ols.ols_cluster(x, y, cl)
     out = {
         "spec": spec,
@@ -94,12 +99,24 @@ def run(spec: list[str]) -> dict:
     return out
 
 
+BOOT_REPS = 2999  # ~30s per coefficient; min attainable p ~ 1/3000
+
+
+def add_bootstrap(result: dict, spec: list[str]) -> None:
+    x, y, cl, _ = build_design(spec)
+    result["wild_bootstrap"] = {
+        v: ols.wild_bootstrap_t(x, y, cl, j=i, reps=BOOT_REPS) for i, v in enumerate(spec)
+    }
+
+
 results = {
     "s0_absorption_only": run(["absor"]),
     "s1_with_demand_controls": run(["absor", "d_hip", "d_renta", "d_coh"]),
     "undefined_absorption_dropped": sum(1 for o in obs if o["absor"] is None),
     "total_yoy_rows": len(obs),
 }
+add_bootstrap(results["s0_absorption_only"], ["absor"])
+add_bootstrap(results["s1_with_demand_controls"], ["absor", "d_hip", "d_renta", "d_coh"])
 
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_adjusted.json").write_text(
@@ -111,7 +128,9 @@ for name, r in results.items():
         continue
     print(f"== {name}: n={r['n']} G={r['clusters']} R2={r['r2_within']} ==")
     for v, c in r["coefs"].items():
+        wb = r["wild_bootstrap"][v]
         print(f"  {v}: b={c['b']} se={c['se']} t={c['t']} ci95={c['ci95']}")
+        print(f"    wild-t: t={wb['t_obs']} p={wb['p']} (reps={wb['reps']})")
 n_drop = results["undefined_absorption_dropped"]
 n_tot = results["total_yoy_rows"]
 print(f"dropped undefined-absorption rows: {n_drop}/{n_tot}")

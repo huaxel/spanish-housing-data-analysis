@@ -12,21 +12,24 @@ or causal estimate.
 
 | | S0: absorption only | S1: + demand controls |
 | --- | --- | --- |
-| absorption (dwellings per new person) | −0.111 (0.044) [−0.20, −0.03] | −0.071 (0.044) [−0.16, +0.01] |
-| mortgage-count growth (pp) | — | +0.050 (0.027) [−0.00, +0.10] |
-| income growth (pp) | — | +0.031 (0.043) [−0.05, +0.12] |
-| 20–34 share change (pp) | — | +3.81 (1.28) [+1.30, +6.32] |
+| absorption (dwellings per new person) | −0.111 (0.044) [−0.20, −0.03], wild-p **0.064** | −0.071 (0.044) [−0.16, +0.01], wild-p 0.178 |
+| mortgage-count growth (pp) | — | +0.050 (0.027) [−0.00, +0.10], wild-p 0.103 |
+| income growth (pp) | — | +0.031 (0.043) [−0.05, +0.12], wild-p 0.456 |
+| 20–34 share change (pp) | — | +3.81 (1.28) [+1.30, +6.32], wild-p **0.032** |
 | n / clusters / within-R² | 194 / 17 / 0.91 | 178 / 17 / 0.91 |
 
-(Coefficient (clustered SE) [95% CI]. regressors in YoY % or pp changes.)
+(Coefficient (CR1V clustered SE) [95% CI]; wild-p from 2,999-rep
+Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
 
 ## Reading
 
-- The absorption sign survives the panel (−0.11, CI clear of zero) but
-  **shrinks by a third and loses significance once demand covariates enter**
-  (−0.07, CI crosses zero). That attenuation *is* the finding: the raw
-  supply–price link is partly demand in disguise, exactly as the
-  hypothesis-01 note argued from the denominator side.
+- The absorption sign survives the panel arithmetically (−0.11, analytic CI
+  clear of zero) but **fails the wild bootstrap (p = 0.064)** even before
+  controls — with 17 clusters, the "significant" S0 is analytic-SE
+  optimism. With demand covariates it attenuates further (−0.07, wild-p
+  0.18). Double attenuation — by controls and by honest SEs — is the
+  finding: the supply–price link is partly demand in disguise and partly
+  small-sample noise, exactly as hypothesis-01 argued from the denominator.
 - Credit (+0.05, t ≈ 1.9) and the young-cohort share (+3.8 per pp, t ≈ 3.0)
   carry the tightening story better than unit counts do. The cohort number
   is large because a 1pp age-share shift is a big demographic event — and
@@ -42,9 +45,11 @@ or causal estimate.
 - **37% of rows dropped** (112/306): absorption is undefined when population
   shrinks, so bust years are underrepresented — the same selection the
   window analysis suffers, now quantified.
-- **G = 17 clusters** is below the ~30–50 comfort zone: CR1V CIs are
-  optimistic. A wild-cluster bootstrap is the queued hardening.
+- **G = 17 clusters** is below the ~30–50 comfort zone: the wild-t
+  (Rademacher, null-imposed, 2,999 reps, fixed seed) is the reported
+  significance, not the analytic t. Only the cohort association clears it
+  (p = 0.032) — and it is the most reverse-caused regressor.
 - Annual absorption is noisy (small denominators); no lags modelled, so
   construction-completion timing vs price timing is blurred.
-- Next: lags, the wild bootstrap, and — only with an instrument or design,
-  not more controls — anything causal.
+- Next: lags and — only with an instrument or design, not more controls —
+  anything causal.

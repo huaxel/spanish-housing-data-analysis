@@ -48,6 +48,57 @@ def xtx(x: list[list[float]]) -> list[list[float]]:
     return out
 
 
+def wild_bootstrap_t(
+    x: list[list[float]],
+    y: list[float],
+    clusters: list[str | int],
+    j: int,
+    reps: int = 4999,
+    seed: int = 20261006,
+) -> dict:
+    """Wild cluster bootstrap-t (Rademacher, null-imposed) for beta[j].
+
+    Restricted fit drops column j; bootstrap DGP is y* = X0 b0 + v_g e0 with
+    Rademacher v_g per cluster; each replicate refits the full model and
+    records t*_j = b*_j / se*_j (CR1V). Returns the observed t, the
+    bootstrap two-sided p-value, and the 2.5/97.5 percentiles of t*.
+    Deterministic for a fixed seed."""
+    import random
+
+    rng = random.Random(seed)
+    k = len(x[0])
+    keep = [c for c in range(k) if c != j]
+    x0 = [[row[c] for c in keep] for row in x]
+    fit0 = ols_cluster(x0, y, clusters)
+    b0 = fit0["beta"]
+    fitted0 = predict(x0, b0)
+    e0 = [yi - fh for yi, fh in zip(y, fitted0, strict=True)]
+    groups: dict[str | int, list[int]] = {}
+    for i, g in enumerate(clusters):
+        groups.setdefault(g, []).append(i)
+    keys = list(groups)
+    full = ols_cluster(x, y, clusters)
+    t_obs = full["beta"][j] / full["se"][j] if full["se"][j] > 0 else 0.0
+    t_stars = []
+    for _ in range(reps):
+        v = {g: 1.0 if rng.random() < 0.5 else -1.0 for g in keys}
+        y_star = [fitted0[i] + v[clusters[i]] * e0[i] for i in range(len(y))]
+        fb = ols_cluster(x, y_star, clusters)
+        t_stars.append(
+            fb["beta"][j] / fb["se"][j] if fb["se"][j] > 0 else 0.0
+        )
+    t_stars.sort()
+    p = sum(1 for t in t_stars if abs(t) >= abs(t_obs)) / reps
+    q = lambda p_: t_stars[min(reps - 1, int(p_ * reps))]
+    return {
+        "t_obs": round(t_obs, 3),
+        "p": round(p, 4),
+        "t_star_ci95": [round(q(0.025), 3), round(q(0.975), 3)],
+        "reps": reps,
+        "seed": seed,
+    }
+
+
 def predict(x: list[list[float]], beta: list[float]) -> list[float]:
     return [sum(b * xij for b, xij in zip(beta, row, strict=True)) for row in x]
 
