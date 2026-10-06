@@ -117,15 +117,22 @@ def main() -> None:
                 "h": hg / 10 if hg is not None else None,
                 "dr": (r_now - r_prev) if r_now is not None and r_prev is not None else None,
             }
-            for L in range(1, 5):
+            for L in range(1, 9):
                 jy, jq_ = quarters[i - L] if i >= L else (None, None)
                 jh = hq[c].get((jy, jq_)) if jy else None
                 jh1 = hq[c].get(quarters[i - L - 1]) if i >= L + 1 else None
                 lag = qoq(jh1, jh)
                 row[f"L{L}h"] = lag / 10 if lag is not None else None
+            # Rate lags from the national quarterly series.
+            rq_keys = [quarters[i - L] if i >= L else (None, None) for L in range(1, 3)]
+            rq_vals = [rq.get(k) if k[0] else None for k in rq_keys]
+            rq_prev = [rq.get(quarters[i - L - 1]) if i >= L + 1 else None for L in range(1, 3)]
+            for L in range(1, 3):
+                a, b = rq_vals[L - 1], rq_prev[L - 1]
+                row[f"L{L}dr"] = (a - b) if a is not None and b is not None else None
             obs.append(row)
 
-    spec = ["h", "L1h", "L2h", "L3h", "L4h", "dr"]
+    spec = ["h", "L1h", "L2h", "L3h", "L4h", "L5h", "L6h", "L7h", "L8h", "dr", "L1dr"]
     rows = [o for o in obs if all(o[v] is not None for v in ["d_vt", *spec])]
     ux = sorted({o["ccaa"] for o in rows})
     uy = sorted({o["yq"][0] for o in rows})[1:]
