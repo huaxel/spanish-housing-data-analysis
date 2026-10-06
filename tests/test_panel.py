@@ -169,3 +169,38 @@ def test_invert_asymmetric():
     prod = [[sum(a[i][m] * inv[m][j] for m in range(2)) for j in range(2)] for i in range(2)]
     assert abs(prod[0][0] - 1) < 1e-9 and abs(prod[1][1] - 1) < 1e-9
     assert abs(prod[0][1]) < 1e-9 and abs(prod[1][0]) < 1e-9
+
+
+def test_bartik_shares_sum_to_one():
+    from spanish_housing import bartik
+
+    stocks = {
+        ("A", "x", 2000): 30.0,
+        ("A", "y", 2000): 70.0,
+        ("B", "x", 2000): 50.0,
+        ("B", "y", 2000): 50.0,
+    }
+    s = bartik.shares(stocks, ["A", "B"], ["x", "y"], 2000)
+    assert abs(s[("A", "x")] - 0.3) < 1e-9 and abs(s[("A", "y")] - 0.7) < 1e-9
+    assert all(abs(sum(s[(u, o)] for o in ["x", "y"]) - 1.0) < 1e-9 for u in ["A", "B"])
+
+
+def test_bartik_leave_one_out():
+    from spanish_housing import bartik
+
+    # A dominates origin x nationally: with LOO its own boom must not
+    # move its shifter; without LOO it does.
+    stocks = {
+        ("A", "x", 2000): 100.0,
+        ("A", "x", 2010): 300.0,
+        ("B", "x", 2000): 10.0,
+        ("B", "x", 2010): 11.0,
+    }
+    units, origins = ["A", "B"], ["x"]
+    loo = bartik.shift_share(stocks, units, origins, 2000, 2010, leave_one_out=True)
+    full = bartik.shift_share(stocks, units, origins, 2000, 2010, leave_one_out=False)
+    # LOO national growth for x as seen by A: (11-10)/10 = 0.1
+    assert abs(loo["A"] - 0.1) < 1e-9
+    # Without LOO: (311-110)/110 = 1.827
+    assert abs(full["A"] - 201 / 110) < 1e-9
+    assert loo["A"] != full["A"]
