@@ -84,12 +84,13 @@ def wild_bootstrap_t(
         v = {g: 1.0 if rng.random() < 0.5 else -1.0 for g in keys}
         y_star = [fitted0[i] + v[clusters[i]] * e0[i] for i in range(len(y))]
         fb = ols_cluster(x, y_star, clusters)
-        t_stars.append(
-            fb["beta"][j] / fb["se"][j] if fb["se"][j] > 0 else 0.0
-        )
+        t_stars.append(fb["beta"][j] / fb["se"][j] if fb["se"][j] > 0 else 0.0)
     t_stars.sort()
     p = sum(1 for t in t_stars if abs(t) >= abs(t_obs)) / reps
-    q = lambda p_: t_stars[min(reps - 1, int(p_ * reps))]
+
+    def q(p_: float) -> float:
+        return t_stars[min(reps - 1, int(p_ * reps))]
+
     return {
         "t_obs": round(t_obs, 3),
         "p": round(p, 4),
