@@ -360,6 +360,21 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("madrid", "Getafe real change 2007-25 (Madrid CPI)", _real_change_sql("Getafe"), -30.3, 0.15),
     ("madrid", "Parla real change 2007-25 (Madrid CPI)", _real_change_sql("Parla"), -38.1, 0.15),
     (
+        "synthesis",
+        "viv/hogar Nacional 2011 (exact census)",
+        "SELECT viv_por_hogar FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2011",
+        1.396,
+        0.005,
+    ),
+    (
+        "synthesis",
+        "viv/hogar Nacional 2001 (principales proxy)",
+        "SELECT SUM(viviendas_total) * 1.0 / SUM(hogares_2001_proxy) "
+        "FROM mart_provincia_anual WHERE anyo=2001",
+        1.483,
+        0.005,
+    ),
+    (
         "boom_bust",
         "viv/1000 2021-25 population effect",
         "SELECT b.viviendas_total * (1.0 / b.poblacion - 1.0 / a.poblacion) * 1000.0 "

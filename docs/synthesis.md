@@ -32,6 +32,12 @@ Three regimes, three different price drivers:
    prices rise ~36% — against *rising* rates. This is the only regime where
    the naive supply story fits, and it fits everywhere at once.
 
+The long arc in dwellings per household: 1.48 (2001, proxy) → 1.40 (2011)
+→ 1.44 (2021) → 1.39 (2025). Fragmentation loosened the 2000s, the bust
+left the loosest stock on record, and the post-2021 surge in household
+formation has now pushed past even the 2011 tightness — in the opposite
+direction from prices in every regime but the last.
+
 ## The split (why national ratios mislead)
 
 - **Madrid** (absolute scarcity): 429 dwellings/1000, 14% non-primary,

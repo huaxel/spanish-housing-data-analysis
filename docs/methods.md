@@ -31,11 +31,17 @@
   band × provincia for principales/secundarias/vacías. Bands (+ No consta)
   sum to Total within ±10 dwellings (published rounding). 2011 only — the
   boom fringe is directly observable (22.3% of vacant built 2002–11).
-- **Hogares (INE ECP, 2021–):** households in family dwellings, CCAA (60131)
-  and provincia (60133), 1-January. Enables `viv_por_hogar` — dwellings per
-  household, the closest observable to shortage (a region can have ample
-  dwellings per capita yet few per household when second/vacant homes dominate).
-  NULL before 2021; household-size breakdown queued.
+- **Hogares (INE ECP, 2021–; Censo 2011; proxy 2001):** households in family
+  dwellings, CCAA (60131) and provincia (60133), 1-January. Enables
+  `viv_por_hogar` — dwellings per household, the closest observable to
+  shortage (a region can have ample dwellings per capita yet few per
+  household when second/vacant homes dominate). 2011 is exact census
+  (tenencia totals, 51 provincias, sums to the 18,083,692 anchor); 2001 is
+  a validated proxy (`hogares_2001_proxy` = principales, worst 2011
+  disagreement 2.11% — documented tolerance, separate columns, never
+  mixed with exact). Census-vs-ECP household definitions differ at the
+  margin (register-based ECP from 2021); compare 2011↔2021 levels with
+  that seam in mind.
 - **Renta (INE ECV, Tempus3 9949, CCAA):** mean net household income.
   TIMING: ECV survey year Y reports calendar-year Y−1 incomes — the build
   stores `renta_anyo = encuesta_anyo − 1` and joins on income year (table

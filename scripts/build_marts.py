@@ -250,6 +250,45 @@ def main() -> None:
 
     dim = build_dim(parque, pad_prov)
     stock = pivot_parque(parque)
+    # Census-2011 household totals by provincia (exact; tenencia Total×Total).
+    # Uniprovincial CCAA appear as CCAA rows; Ceuta/Melilla separately.
+    ten11 = [
+        r
+        for r in load_parquet("censo2011_tenencia.parquet")
+        if r["tamano"] == "Total (tamaño del hogar)"
+        and r["tenencia"] == "Total (régimen de tenencia)"
+    ]
+    mart_prov_by_norm = {N(d["provincia"]): d["provincia"] for d in dim}
+    sole_prov = {}
+    for d in dim:
+        sole_prov.setdefault(d["ccaa"], []).append(d["provincia"])
+    sole_prov = {c: ps[0] for c, ps in sole_prov.items() if len(ps) == 1}
+    hog2011: dict[str, int] = {}
+    for r in ten11:
+        if r["provincia"] not in ("", "Total Nacional"):
+            key = mart_prov_by_norm.get(N(r["provincia"]))
+            if key is None:
+                raise SystemExit(f"censo2011 hogares unknown provincia: {r['provincia']!r}")
+            hog2011[key] = r["hogares"]
+        elif r["ccaa"] in ("Ceuta", "Melilla"):
+            hog2011["Ceuta y Melilla"] = hog2011.get("Ceuta y Melilla", 0) + r["hogares"]
+        elif r["ccaa"]:
+            # CCAA aggregate row: keep only for uniprovincial CCAA
+            # (multi-province aggregates would double-count provincias).
+            match = [c for c in sole_prov if N(c) == N(r["ccaa"])]
+            if match:
+                hog2011[sole_prov[match[0]]] = r["hogares"]
+    need_hog = {d["provincia"] for d in dim}
+    if set(hog2011) != need_hog:
+        raise SystemExit(f"censo2011 hogares coverage gap: {need_hog - set(hog2011)}")
+    # Proxy validation: principales-as-households, worst 2011 disagreement.
+    gaps = [
+        abs(hog2011[d["provincia"]] - stock[(d["cpro"], 2011)]["principal"])
+        / stock[(d["cpro"], 2011)]["principal"]
+        for d in dim
+    ]
+    proxy_tol = round(max(gaps) * 100, 2)
+    print(f"censo2011 hogares: 51 provincias exact; principales-proxy worst gap {proxy_tol}%")
     pob = padron_by_name(pad_prov)
     ceuta = {
         a: pob.get((N("Ceuta"), a), 0) + pob.get((N("Melilla"), a), 0) for a in range(1996, 2022)
@@ -468,6 +507,9 @@ def main() -> None:
                 ) or None
             else:
                 hogar = hog_prov.get((N(d["provincia"]), anyo))
+            if anyo == 2011:
+                # Exact census households (tenencia totals); ECP starts 2021.
+                hogar = hog2011[d["provincia"]]
             eur_m2, eur_trim, vt_src = prov_valor(d["cpro"], anyo)
             if d["cpro"] == "51+52":
                 _t1 = trx.get((N("Ceuta"), "provincia", anyo), {})
@@ -508,9 +550,13 @@ def main() -> None:
                     "poblacion": pop,
                     "pop_source": "padron",
                     "hogares": hogar,
+                    "hogares_2001_proxy": (cell["principal"] if anyo == 2001 else None),
                     "viv_por_1000_hab": round(cell["total"] / pop * 1000, 2),
                     "share_no_principal": round(cell["no_principal"] / cell["total"], 4),
                     "viv_por_hogar": round(cell["total"] / hogar, 3) if hogar else None,
+                    "viv_por_hogar_2001_proxy": (
+                        round(cell["total"] / cell["principal"], 3) if anyo == 2001 else None
+                    ),
                     "eur_m2_libre": eur_m2,
                     "eur_m2_n_trim": eur_trim,
                     "vt_source": vt_src,
@@ -554,6 +600,9 @@ def main() -> None:
                 continue
             tot = sum(c["total"] for c in cells)
             hogar = ccaa_hog(ccaa, anyo)
+            if anyo == 2011:
+                # Exact census households summed over member provinces.
+                hogar = sum(hog2011[p["provincia"]] for p in provs)
             trx_t, trx_n = trx_triple(
                 "nacional" if ccaa == "Nacional" else "ccaa",
                 "Total Nacional" if ccaa == "Nacional" else ccaa,
@@ -575,6 +624,9 @@ def main() -> None:
                     "poblacion": pop,
                     "pop_source": source,
                     "hogares": hogar,
+                    "hogares_2001_proxy": (
+                        sum(c["principal"] for c in cells) if anyo == 2001 else None
+                    ),
                     "hog_1persona": (h1 := ccaa_hog1(ccaa, anyo)),
                     "share_1persona": round(h1 / hogar, 4) if hogar and h1 else None,
                     "viv_por_1000_hab": round(tot / pop * 1000, 2),
@@ -883,7 +935,10 @@ def main() -> None:
         "ipv_base_check": "Nacional/General/2025 == 100.0 OK",
         "pop_seam_2021_ecp_vs_padron_pct": overlap,
         "pop_source_rule": "padron <=2021, ecp >=2022 (1-January both); provincia mart ends 2021",
-        "hogares_window": "2021+ (ECP, 1-January); viv_por_hogar NULL before",
+        "hogares_window": "2021+ (ECP, 1-January); 2011 exact (censo tenencia totals,"
+        " 51 provincias); viv_por_hogar NULL otherwise before 2021",
+        "hogares_2001_proxy": "principales-as-households; worst 2011 disagreement"
+        f" {proxy_tol}% — documented tolerance, not exact",
         "valor_vs_ipv_nacional_yoy_corr": vt_ipv_corr,
         "transmisiones_window": "2007+ registrars; nueva+usada==total asserted; "
         "share_nueva in both marts",

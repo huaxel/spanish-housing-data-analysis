@@ -73,7 +73,12 @@ def main() -> int:
     assert prov[4] == 0 and neg == 0, "null/non-positive cells in provincia mart"
     assert {s[0] for s in srcs} == {"padron", "ecp"}, f"pop splice broken: {srcs}"
     assert ccaa[2] == 2007 and ccaa[3] == 2025, f"ccaa years drifted: {ccaa[2:4]}"
-    assert pre_hog == 0, "hogares must be NULL before 2021"
+    assert pre_hog == 0 or set(
+        r[0]
+        for r in con.execute(
+            "SELECT DISTINCT anyo FROM mart_ccaa_anual WHERE anyo < 2021 AND hogares IS NOT NULL"
+        ).fetchall()
+    ) == {2011}, "pre-2021 hogares allowed only for exact-census 2011"
     vt = con.execute(
         "SELECT COUNT(*), SUM(CASE WHEN eur_m2_libre IS NULL THEN 1 ELSE 0 END), "
         "MIN(anyo), MAX(anyo) FROM mart_ccaa_anual"
@@ -238,6 +243,14 @@ def main() -> int:
     ).fetchone()[0]
     print(f"santa coloma starts 2012-24: {sc}")
     assert sc == 514, f"santa coloma starts drifted: {sc}"
+    hog11 = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo=2011 AND hogares IS NULL"
+    ).fetchone()[0]
+    assert hog11 == 0, "2011 census households must be complete (51 provincias)"
+    px01 = con.execute(
+        "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo=2001 AND hogares_2001_proxy IS NULL"
+    ).fetchone()[0]
+    assert px01 == 0, "2001 proxy households must be complete (51 provincias)"
     assert (PROCESSED / "coverage.json").exists(), "coverage.json missing"
     print("verify OK")
     return 0
