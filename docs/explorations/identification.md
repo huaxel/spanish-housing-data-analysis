@@ -88,7 +88,10 @@ not t-stats) are non-negotiable reporting.
 2. C (tourist exposure, Barcelona pilot): municipal, already-pinned data.
 3. B (Saiz GIS build): only after A or C shows the machinery works.
 4. Nothing causal merges into synthesis until an independent read of the
-   design — same bar as v1's methods review (plan milestone 5).
+   design — same bar as v1's methods review (plan milestone 5). The read
+   questions for design A are written out in `docs/review_brief.md`;
+   A was merged ahead of that read under user direction, and the read is
+   still owed.
 
 ## What would need building (when, not now)
 

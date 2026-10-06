@@ -51,6 +51,10 @@ explicit extensions, not v1.
    provincia — 2011 exact, ECH 2014–20, ECP 2021+, 2001 proxy.
 5. Review: independent read of methods + limitations before any public
    release — STILL OPEN (required before sharing beyond workers.dev).
+   **Package ready: [`docs/review_brief.md`](review_brief.md)** — scope,
+   ground rules, reproduction commands, disclosed limitations, and the
+   adversarial questions (including the IV read plan step 1 that the merge
+   skipped). Blocked only on an available independent reviewer.
 
 ## Status 2026-10-06 (evening)
 

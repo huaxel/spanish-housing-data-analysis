@@ -1,4 +1,11 @@
-# IV: migration exposure → prices (BRANCH — not merged, see read plan)
+# IV: migration exposure → prices (MERGED — independent read still owed)
+
+Merged into `docs/synthesis.md` in `1616d9f`/`82aa409` (user-directed).
+Read plan step 1 — an independent reader on exclusion and LATE vs
+attenuation — has **not** run; the questions are carried in
+[`docs/review_brief.md`](../review_brief.md) §Section 2, folded into the
+milestone-5 read. Until that returns, treat this estimate as provisional
+and the split-sample caveat below as binding on any quotation.
 
 Computed by `explorations/iv_migration.py` (`artifacts/iv_migration.json`,
 git-ignored). Provincia panel 2002–2021 (n=1,000, G=50 clusters).
@@ -66,12 +73,21 @@ recovery half of the story (S3's inflow surge) remains descriptive;
 only the bust-half effect is identified. If merged, the synthesis
 paragraph needs this qualifier, not just the pooled number.
 
-## Read plan (proposed — merge needs this settled)
+## Read plan
 
 1. Independent reader gets: this note + identification.md + ols.py/bartik.py
    tests + artifacts JSON. Questions for them: exclusion plausibility,
-   trends-spec adequacy, LATE vs attenuation adjudication.
-2. On approval: fold ONE paragraph + the base-spec table into synthesis
-   (with audit claims for tau/AR bounds), link from README, merge branch.
-3. On rejection of exclusion: keep the branch unmerged as a negative
-   result and say so in the memo.
+   trends-spec adequacy, LATE vs attenuation adjudication — **now written out
+   in `docs/review_brief.md` §Section 2; not yet run.**
+2. ~~On approval: fold ONE paragraph + the base-spec table into synthesis~~
+   DONE (`1616d9f`) ahead of step 1, with audit claims for tau/AR bounds and
+   the split-sample first stages; linked from synthesis, branch merged.
+3. On rejection of exclusion: keep the estimate unmerged as a negative
+   result and say so in the memo. Remedy is removal from synthesis, not
+   softer wording.
+
+## Read record
+
+- Merged without an independent read (process gap, disclosed in the brief).
+- Milestone-5 read pending; reviewer identity + verdict to be appended to
+  `docs/review_brief.md` when it runs.
