@@ -36,7 +36,15 @@ analysis, not to improve the code.
 | `docs/reproducibility.md` | Gate definitions and clean-rebuild record |
 | `docs/sources.md`, `docs/data_dictionary.md` | Provenance and column semantics |
 | `src/spanish_housing/`, `scripts/` | Estimation + build code |
-| `explorations/*.py`, `*.md` | The four explorations and their writeups |
+| `explorations/*.py`, `*.md` | 23 explorations: boom-bust vs tightening, credit cycle, absorption, panel (adjusted/quarterly), affordability, young-squeeze, Madrid/Barcelona municipios, tourist panel + SERPAVI extension, terrain (Saiz probe, provincial/municipal nulls, Madrid leg), ratio decomposition + vacancy, IV migration, data probes (censo anual, SERPAVI, valor referencia, construction) |
+
+**New-data additions since the brief was written (2026-10-06), all in scope:**
+
+- `censo_anual_probe.md` — provincia mart extended 2001→2025 via Censo Anual de Población (static CSV 68521; closes the 56945 API block).
+- `serpavi.md` + `serpavi_probe.md` — municipal rents nationwide (MIVAU fianzas, 2011–2024), DIBA-validated (Pearson 0.825), rent-vs-sale wedge.
+- `ratio_ccaa.md` — viv/1000 decomposition: two-group split (scarcity vs overstock) + electricity-vacancy confirmation (Galicia 28.8% vs Madrid 6.3%).
+- `tourist_rents.md` — tourist→rents null extended to Balears/Canarias via SERPAVI.
+- `valor_referencia_probe.md`, `construction_probe.md` — parked decisions (PDF-only / app+gap access).
 
 ## Reproduce before judging
 
@@ -85,6 +93,27 @@ Attack these specifically:
 4. **Derived ratios**: `viv/1000` and `viv/hogar` are the analytical subject.
    Are the join rules (counts sum, indices never average, Ceuta/Melilla
    handling) sufficient to make cross-territory ratio comparison valid?
+
+5. **New: the two-group viv/1000 decomposition** (`ratio_ccaa.md`).
+   National flatness hides scarcity CCAA (Madrid −29.7, Cataluña −27.6)
+   vs overstock (+100…+130 interior). The price cross is −0.385 (n=17,
+   insignificant); the vacancy cross +0.523 (n=17, significant). Is the
+   split a fair decomposition or a cherry-picked partition? Does the
+   electricity-vacancy confirmation (Galicia 28.8% vs Madrid 6.3%,
+   2021 snapshot) carry the weight the narrative gives it?
+6. **New: provincial population via Censo Anual** (`censo_anual_probe.md`).
+   The provincia mart now runs 2001–2025, splicing padrón (≤2021) to
+   census-annual (≥2022). Is the seam handled as carefully as the
+   ECP/padrón seam (same order of magnitude, but new)? The 2021
+   province-vs-padrón mean |Δ| 0.17% is documented — is the whole
+   extended mart's exposure to this seam adequately disclosed?
+7. **New: SERPAVI rents** (`serpavi.md`). Tax-deposit based municipal
+   rents, DIBA-validated (Pearson 0.825). The rent-vs-sale wedge
+   (Barcelona yield 3.61% vs corona 4.58% median) and the rent-vs-
+   vacancy null (Pearson −0.43, Spearman −0.02 — scale artifact vs no
+   signal: which is it?) are new analytical claims. Is the tax-file
+   selection (new/rolling contracts) disclosed well enough for a
+   comparison to DIBA rents (2005–) that used the old panel?
 
 ## Section 2 — The causal IV (the part most likely to be overclaimed)
 
