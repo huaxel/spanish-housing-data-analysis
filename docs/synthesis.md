@@ -79,7 +79,9 @@ argues against but cannot kill. Full threats + read record in
   (+33% real — the recovery was real, unlike Madrid's), 51% rent burden,
   64% new-mortgage burden; corona more stretched (Sant Adrià 72%); 10k
   tourist flats in the city vs 28 in Santa Coloma; 514 starts in 13 years
-  there. Built on absorbing a 10.9% 2011 vacancy.
+  there. Built on absorbing a 10.9% 2011 vacancy. Within-municipio tourist
+  changes don't track subsequent price/rent moves at all (municipal panel
+  null, wild-p 0.45–0.94) — the footnote, confirmed.
 - **Interior** (Galicia, Castilla y León, Asturias): 650–770/1000, shrinking
   young cohorts, mild prices — abundance without demand.
 
