@@ -30,6 +30,20 @@ ROWS = con.execute("""
     FROM mart_ccaa_anual WHERE ccaa != 'Nacional' ORDER BY ccaa, anyo
 """).fetchall()
 
+_MIG_P = {}
+for _pr, _a, _f in con.execute(
+    "SELECT provincia, anyo, flujo FROM migra_anual WHERE nacionalidad='Extranjero'"
+).fetchall():
+    _MIG_P[(_pr, _a)] = _f
+_P2C = {r[0]: r[1] for r in con.execute("SELECT provincia, ccaa FROM dim_territorio").fetchall()}
+_P2C["Ceuta"] = "Ceuta y Melilla"
+_P2C["Melilla"] = "Ceuta y Melilla"
+MIG = {}
+for (_pr, _a), _f in _MIG_P.items():
+    _c = _P2C.get(_pr)
+    if _c:
+        MIG[(_c, _a)] = MIG.get((_c, _a), 0) + _f
+
 by_ccaa: dict[str, list] = {}
 for r in ROWS:
     by_ccaa.setdefault(r[0], []).append(r)
@@ -51,6 +65,13 @@ for ccaa, rows in by_ccaa.items():
                 "d_coh": (cur[7] - prev[7]) * 100
                 if cur[7] is not None and prev[7] is not None
                 else None,  # percentage points
+                "d_inmig": (
+                    (MIG[(cur[0], cur[1])] - MIG[(prev[0], prev[1])])
+                    / MIG[(prev[0], prev[1])]
+                    * 100
+                    if (cur[0], cur[1]) in MIG and (prev[0], prev[1]) in MIG
+                    else None
+                ),
             }
         )
 
@@ -129,6 +150,7 @@ results = {
     "s0_absorption_only": run(["absor"]),
     "s1_with_demand_controls": run(["absor", "d_hip", "d_renta", "d_coh"]),
     "s2_with_lags": run(["absor", "d_hip", "d_renta", "d_coh", "L_absor", "L_d_hip", "L_d_renta"]),
+    "s3_with_migration": run(["absor", "d_hip", "d_renta", "d_coh", "d_inmig"]),
     "undefined_absorption_dropped": sum(1 for o in obs if o["absor"] is None),
     "total_yoy_rows": len(obs),
 }
@@ -137,6 +159,10 @@ add_bootstrap(results["s1_with_demand_controls"], ["absor", "d_hip", "d_renta", 
 add_bootstrap(
     results["s2_with_lags"],
     ["absor", "d_hip", "d_renta", "d_coh", "L_absor", "L_d_hip", "L_d_renta"],
+)
+add_bootstrap(
+    results["s3_with_migration"],
+    ["absor", "d_hip", "d_renta", "d_coh", "d_inmig"],
 )
 
 (ROOT / "artifacts").mkdir(exist_ok=True)

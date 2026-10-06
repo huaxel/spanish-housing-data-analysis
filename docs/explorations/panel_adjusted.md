@@ -66,6 +66,25 @@ association strengthens (+6.3, p = 0.003), same reverse-causality warning.
 - **37% of rows dropped** (112/306): absorption is undefined when population
   shrinks, so bust years are underrepresented — the same selection the
   window analysis suffers, now quantified.
+## S3: adding foreign-inflow growth (n=119, G=17, R² 0.91)
+
+| regressor | b (SE) | wild-p |
+| --- | --- | --- |
+| absorption | −0.061 (0.053) | 0.281 |
+| mortgage growth | +0.050 (0.032) | 0.093 |
+| income growth | +0.090 (0.052) | 0.180 |
+| 20–34 share Δ | +5.78 (1.51) | 0.011 |
+| **foreign-inflow growth (pp)** | **+0.094 (0.024)** | **0.004** |
+
+Sample is 2009–2021 (flows start 2008, end 2021). Foreign-inflow growth
+is the strongest association in the whole panel exercise: 10pp faster
+inflow growth ↔ +0.94pp price growth, holding credit, income, cohort and
+the national cycle constant. Same reverse-causality warning as the cohort
+(migrants go where the jobs — and the building — already are), but the
+timing fits the narrative S2 couldn't see: the 2017–19 price recovery
+rode the 2016–19 inflow surge (352k → 666k) while credit was still
+subdued. Demand, measured directly for once, beats supply everywhere.
+
 - **G = 17 clusters** is below the ~30–50 comfort zone: the wild-t
   (Rademacher, null-imposed, 2,999 reps, fixed seed) is the reported
   significance, not the analytic t. Only the cohort association clears it
