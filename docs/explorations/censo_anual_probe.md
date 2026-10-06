@@ -35,7 +35,7 @@ group × nationality.
 | --- | --- |
 | National 2025 (census annual) | 49,128,297 |
 | Mart `mart_ccaa_anual` Nacional 2025 | 49,128,297 — **exact match** |
-| 2021 province-level census-vs-padrón (mart) | mean \|Δ\| = 0.17%, max 0.89% (50/52 provinces; 2 provinces not compared — código mismatch, see below) |
+| 2021 province-level census-vs-padrón (mart) | mean \|Δ\| = 0.17%, max 0.89% (50 provinces; Ceuta+Melilla aggregate excluded — expected grain difference, see below) |
 | 2021 census annual total | 47,400,798 vs mart 47,385,107 (+0.033%) |
 
 The 0.17% mean difference vs the padrón-based mart 2021 is the expected
@@ -46,10 +46,14 @@ the top.
 
 ## Caveats
 
+- **Ceuta/Melilla grain (corrected 2026-10-06 after independent
+  review):** the two CSV rows not in the 50-province comparison are
+  Ceuta (51) and Melilla (52), which the mart aggregates as one `51+52`
+  row — an expected grain difference, not a código mismatch. All 50
+other provinces compare.
 - **Province code strings**: the CSV's province column is `"01
-  Araba/Álava"` style; the mart uses 2-digit `cpro`. Two provinces failed
-  the naive key join (likely Basque/insular naming) — need a mapping check
-  at fetch time.
+  Araba/Álava"` style; strip the leading code at fetch time (done in
+  `fetch_censo_anual.py`).
 - The table has sex/age/nationality detail — the repo only needs the
   `Total × Todas las edades × Total` margin (same pattern as the ECP
   fetch), which is a small fraction of the 2.47M rows.

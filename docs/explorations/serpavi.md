@@ -29,13 +29,19 @@ used in `muni_bcn`; SERPAVI confirms it generalizes).
 | | value |
 | --- | --- |
 | Barcelona capital | **3.61%** (4,371 €/m² sale, 13.14 €/m² rent) |
-| median of ~200 municipios | **4.58%** (P25 3.9%, P75 5.7%) |
+| median of 122 municipios | **4.58%** (P25 4.11%, P75 5.23%) |
 
 Buy-to-let gross yields in the 3.5–6% band — marginal in the capital,
-better in the corona. Both rent and sale are 2023 (DIBA sale + SERPAVI
-rent), same year, same municipios. Caveat: SERPAVI is tax-deposit based
-(new/rolling contracts), DIBA sale is appraisal — a wedge between the two
-statistics, not a market arbitrage claim.
+better in the corona. **Corrections 2026-10-06 (independent review):**
+the sample is **122** municipios with both 2023 DIBA sale and SERPAVI
+rent (not "~200"); quartiles are **4.11/5.23**, not 3.9/5.7. The 80 m²
+typical-contract multiplier is an unvalidated assumption — it scales
+levels for the Pearson comparison but does not test equal rents. DIBA
+M23's contract population vs SERPAVI's tax-deposit population
+(new/rolling contracts) is undocumented here, so cross-municipality
+ordering is validated, not level equality or cohort comparability. The
+sale series is DIBA M19 transactions-based appraised values — label the
+yield an indicative statistic, not an observed investment return.
 
 ## Rent vs vacancy: substantial negative rank association (corrected)
 

@@ -379,6 +379,20 @@ def main() -> None:
         if v_pad:
             overlap[terr] = round((v_ecp - v_pad) / v_pad * 100, 3)
     print(f"pop seam 2021, ECP-vs-Padrón % (ccaa): {overlap}")
+    # Overlap diagnostic: Censo Anual 2021 vs Padrón 2021, per province.
+    # Guards the provincia-mart 2021 seam (added 2026-10-06 after
+    # independent review asked for build-time per-province seam evidence).
+    prov_overlap = {}
+    for (terr, anyo), v_ca in censo_anual.items():
+        if anyo != 2021:
+            continue
+        v_pad = pob.get((terr, anyo))
+        if v_pad:
+            prov_overlap[terr] = round((v_ca - v_pad) / v_pad * 100, 3)
+    worst_prov = (
+        max(prov_overlap.items(), key=lambda kv: abs(kv[1])) if prov_overlap else (None, None)
+    )
+    print(f"pop seam 2021, censo-anual-vs-padrón % (prov): n={len(prov_overlap)} worst={worst_prov}")
 
     def ccaa_pop(ccaa: str, anyo: int) -> tuple[int | None, str]:
         if anyo < POP_SPLICE_YEAR:
@@ -1082,6 +1096,7 @@ def main() -> None:
         "ccaa_year_cells_without_ipv": len(missing_ipv),
         "ipv_base_check": "Nacional/General/2025 == 100.0 OK",
         "pop_seam_2021_ecp_vs_padron_pct": overlap,
+        "pop_seam_2021_censo_anual_vs_padron_pct": prov_overlap,
         "pop_source_rule": "padron <=2021, ecp (CCAA) / censo anual (prov) >=2022 (1-January both)",
         "hogares_window": "2021+ (ECP, 1-January); 2014-2020 ECH annual survey;"
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",

@@ -9,9 +9,12 @@
   published. Grain: national + CCAA (+ Ceuta/Melilla separately). **There is
   no provincial IPV** — any "provincial price" would be a fabrication.
   Base identity guard: Nacional/General/2025 == 100.0, checked at build.
-  Base arithmetic: 2025 reads 100 by construction, so window % changes
-  (e.g. "IPV +36% 2021–25") partly measure distance from the chosen base —
-  compare window lengths and bases before comparing magnitudes across cuts.
+  Base arithmetic (corrected 2026-10-06 after independent review): a
+  within-series percentage change is invariant to multiplying every
+  observation by a common base factor, so window % changes do NOT partly
+  measure distance from the chosen base. What the base choice *does*
+  affect is comparability across different index definitions, vintages,
+  or rebased series — compare those before comparing magnitudes.
 - **Parque (MIVAU):** estimated dwelling *counts* by provincia and year,
   split principal / no-principal. Method: Census 2001/2011/2021 anchors plus
   yearly modelled flows (finished homes in, withdrawals out). Inter-census
@@ -118,8 +121,10 @@
   capita; the core supply-vs-people lens.
 - `share_no_principal` — second homes + vacant; high values change what
   "shortage" means (stock exists but is not primary housing).
-- Dwellings-per-*household* (queued): dwellings can exceed households while
-  households still face shortage (second homes, vacant, mismatch). Needs ECH.
+- Dwellings-per-*household* (`viv_por_hogar`, in both marts since the
+  households layer landed: ECP 2021+, ECH 2014–20, 2011 exact census):
+  dwellings can exceed households while households still face shortage
+  (second homes, vacant, mismatch).
 
 ## 3. Join rules enforced in code
 

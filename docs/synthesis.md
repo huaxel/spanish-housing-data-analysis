@@ -20,26 +20,48 @@ split.
 
 Three regimes, three different price drivers:
 
-1. **Boom–bust (2007–13): credit, not bricks.** Prices −36% while stock
-   *grew* everywhere and per-capita stock *rose* (532→544). Mortgage counts
-   fell 84%. The overhang narrative is backwards: the bust looks like a credit stop
-   on top of mostly still-needed stock.
+1. **Boom–bust (2007–13): a credit stop on top of growing stock.**
+   Prices −36% while stock *grew* everywhere and per-capita stock *rose*
+   (532→544). Mortgage counts fell 84%. **Correction 2026-10-06
+   (independent review):** this co-movement is descriptively incompatible
+   with a *simple national stock-collapse* story, but it does not
+   establish credit's relative contribution over supply, nor that units
+   were needed where built — the 2011 vintage evidence (768k vacant
+   units built 2002–11, concentrated in boom areas) is consistent with
+genuine local overhang. Credit and geographic overhang remain competing
+explanations; the "backwards / mostly still-needed" rhetoric is
+withdrawn.
 2. **Stagnation–recovery (2013–19): demography diverges.** Prices recover
    while the 20–34 cohort collapses 9.0M→7.7M and population stagnates.
    Per-capita stock peaks (564) — the only moment "too many homes" is
    arithmetically true, and only in emptying regions.
 3. **Tightening (2021–25): households outrun everything.** Stock still grows
-   (+380k), but households grow faster (+982k): 0.23–0.90 dwellings per new
-   household in *every* CCAA. Per-capita and per-household stock fall while
-   prices rise ~36% — against *rising* rates. This is the only regime where
-   the naive supply story fits, and it fits everywhere at once.
+   (+380k net modeled additions), but households grow faster (+982k net
+   ECP additions): 0.23–0.90 net dwellings per net new household in
+   *every* CCAA. **Terminology correction 2026-10-06 (independent
+   review):** both counts are *net* — MIVAU-modeled stock change (not
+gross dwellings built) over net ECP household change (not gross
+   formations) — and `viv/hogar` counts all dwellings including second
+   homes and vacant units, so a falling ratio does not by itself prove a
+   usable-home shortage. Per-capita and per-household stock fall while
+   prices rise ~36% — against *rising* rates. The supply-demand
+   co-movement is strongest here, but calling it "the naive supply
+   story fits" overstates what a net-net ratio without availability
+evidence can show.
 
-The long arc in dwellings per household: 1.48 (2001, proxy) → 1.40 (2011)
-→ 1.41 (2014) → 1.42 (2020) → 1.44 (2021) → 1.39 (2025). Fragmentation
-loosened the 2000s, the bust left the loosest stock on record, the 2010s
-reconsumed the slack one hundredth at a time, and the post-2021 surge in
-household formation has now pushed past even the 2011 tightness — in the
-opposite direction from prices in every regime but the last.
+The long arc in dwellings per household: 1.48 (2001, proxy —
+viviendas_total/viviendas_principales, not measured households) → 1.40
+(2011) → 1.41 (2014) → 1.42 (2020) → 1.44 (2021) → 1.39 (2025).
+**Correction 2026-10-06 (independent review):** the first version had
+the 2000s–2010s direction backwards. The ratio *fell* 1.48→1.40 in the
+2000s (fewer dwellings per household — household formation outran even
+boom construction), then *rose* 1.40→1.44 across 2011–2021 (the bust
+and its aftermath left more stock per household, not less), before the
+post-2021 household surge pushed it to 1.39 — past 2011 tightness. The
+2001 point is a proxy with its own tolerance (worst 2011 disagreement
+2.11%); the 2021 ECH→ECP seam makes the 2020→2021 step non-comparable.
+Read the measured 2011→2025 movement (1.40→1.44→1.39) as the
+comparable arc, not the proxy-anchored endpoints.
 
 ## Causal extension: migration exposure and appraised prices (commissioned IV, bust-era compliers)
 

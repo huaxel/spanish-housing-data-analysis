@@ -1,9 +1,18 @@
-# The viv/1000 national flatness is a two-group accident
+# The viv/1000 national flatness hides a selected-tails split
 
 Question that started this: how does the national dwellings-per-1000
 ratio stay basically flat across 2001–2025 while population grew ~+20%?
 Answer: it does **not** stay flat (+7.8% national: 511.6 → 551.6), and the
-national number hides a **two-group split** with different price outcomes.
+national number hides sharply different CCAA trajectories.
+
+**Correction 2026-10-06 (independent review):** the first version
+framed this as an exhaustive "two-group decomposition." It is not —
+the two groups below are manually selected tails (four falling, four
+largest-rising); **nine of 17 CCAA sit outside both groups**, and the
+middle (Valencia +0.1, Navarra +17, Murcia +21, Andalucía +33, País
+Vasco +36, Aragón +59, Rioja +65, CLM +65, Cantabria +70) is unassigned.
+Read the table as a tails contrast with population/stock weights, not a
+partition of the national number.
 
 Tested by `explorations/ratio_ccaa.py` (raw: `artifacts/ratio_ccaa.json`).
 Ratio = `viviendas_total / poblacion * 1000` per CCAA at 2001/2007/2021/2025
@@ -51,10 +60,14 @@ consistent — this is a descriptor, not an estimate.
   Extremadura 671.3, CLM 642.7 at 2025) sits **above** the ~650 level the
   synthesis associates with surplus stock — the demand shortage is
   geographically concentrated in the south/Mediterranean, not the north.
-- The scarcity group is where the synthesis's regime 3 (2021–25) lives:
-  Madrid and Cataluña are the two CCAA whose ratio keeps falling after 2021
-  (441 → 429 and 506 → 490) as immigration returns against a frozen
-  construction pipeline.
+- The scarcity group is where the synthesis's regime 3 (2021–25) lives —
+  but it is not only Madrid and Cataluña. **Correction 2026-10-06
+  (independent review): 13 of 17 CCAA have lower ratios in 2025 than
+  2021** (Comunitat Valenciana −37.4, Balears −24.4, Murcia −17.5,
+  CLM −16.4, Cataluña −15.9, Canarias −14.5, Madrid −11.8, …). Madrid
+  (441 → 429) and Cataluña (506 → 490) are prominent cases of a
+  broad-based post-2021 tightening as immigration returns against a
+  slow construction pipeline — not the only two.
 - Caveats: ratio uses stock (MIVAU estimate) and population that switches
   from padrón to ECP/censo-anual at 2021 (seam ≤0.9%, quantified in
   `coverage.json`); 2001 stock is MIVAU-modeled, census-anchored at 2011
