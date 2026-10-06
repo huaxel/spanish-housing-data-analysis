@@ -35,7 +35,12 @@ in 2002, Morocco +91k in 2005, Romania +205k in 2008 on EU accession,
 Venezuela +51k in 2020). Caveat: net change conflates inflows,
 outflows, deaths and naturalizations — a proxy for the surge, built
 descriptively. Design A is now data-complete; only the estimation +
-read remain. Feasible
+read remain. The instrument *values* are additionally constructed
+(`explorations/bartik_predict.py`: 1998 origin levels × leave-one-out
+national growth → predicted inflow per 1,000 1998 inhabitants,
+`artifacts/bartik_predicted.json`, mechanical asserts only) — e.g.
+Madrid +348/1000 by 2008 vs +175 actual net. No first stage, no 2SLS:
+constructing the series is plumbing, interpreting it is estimation. Feasible
 variants with pinned-style data: 2008+ flow-based design (bust/recovery
 window) or 2021+ ECP-nationality refill design (different shock, own
 shares). Panel: provincias × window, CCAA + year FE, cluster by
