@@ -113,7 +113,7 @@
     "script_sha": "9705bcfb78f4cb48317653501d378970057c42e64d0cbae2030e1b753c733706",
     "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
     "data_sha": {
-      "data/processed/marts.duckdb": "49a6032d9726a84a8fcdaf9e1209673c9942b62428f4ab6209379f71a46b5220"
+      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0"
     }
   }
 }
