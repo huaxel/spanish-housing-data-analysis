@@ -19,7 +19,6 @@ Writes artifacts/panel_provincial.json.
 from __future__ import annotations
 
 import json
-import random
 import sys
 from pathlib import Path
 
@@ -31,6 +30,7 @@ from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 
 SEED = 20261006
+BOOT_REPS = 999
 
 
 def build_rows() -> list[dict]:
@@ -78,27 +78,10 @@ def build_rows() -> list[dict]:
 
 
 def wild_p(
-    x: list[list[float]], y: list[float], cl: list[str], coef_i: int, reps: int = 999
+    x: list[list[float]], y: list[float], cl: list[str], coef_i: int, reps: int = BOOT_REPS
 ) -> float:
-    """Null-imposed wild bootstrap-t on a clustered OLS coefficient."""
-    base = ols.ols_cluster(x, y, cl)
-    t_obs = base["beta"][coef_i] / base["se"][coef_i] if base["se"][coef_i] else 0.0
-    # null-imposed residuals
-    b = base["beta"]
-    y_hat = [sum(b[j] * xr[j] for j in range(len(xr))) for xr in x]
-    resid = [y[i] - y_hat[i] for i in range(len(y))]
-    # cluster ids for re-sampling
-    uniq = sorted(set(cl))
-    cid = [uniq.index(c) for c in cl]
-    rng = random.Random(SEED)
-    t_star = []
-    for _ in range(reps):
-        w = {u: rng.choice([-1.0, 1.0]) for u in range(len(uniq))}
-        y_star = [y_hat[i] + resid[i] * w[cid[i]] for i in range(len(y))]
-        fit = ols.ols_cluster(x, y_star, cl)
-        t_star.append(fit["beta"][coef_i] / fit["se"][coef_i] if fit["se"][coef_i] else 0.0)
-    tail = sum(1 for t in t_star if abs(t) >= abs(t_obs))
-    return tail / reps
+    """Null-imposed wild cluster bootstrap-t (Rademacher) via ols helper."""
+    return ols.wild_bootstrap_t(x, y, cl, j=coef_i, reps=reps, seed=SEED)["p"]
 
 
 def main() -> None:
@@ -110,17 +93,18 @@ def main() -> None:
     out: dict = {}
     for name, (_base, ctrls) in specs.items():
         data = [o for o in rows if o["absor"] is not None and all(o[c] is not None for c in ctrls)]
-        years = sorted({o["anyo"] for o in data})[1:]
-        y, x, cl = [], [], []
-        for o in data:
-            y.append(o["d_price"])
-            x.append(
-                [o["absor"]]
-                + [o[c] for c in ctrls]
-                + [1.0]
-                + [1.0 if o["anyo"] == t else 0.0 for t in years]
-            )
-            cl.append(o["prov"])
+        # Correct two-way within: province-demean y, regressors AND the
+        # year dummies (previously the province FE was missing entirely
+        # and the bootstrap did not impose the null; fixed 2026-10-06).
+        units = [o["prov"] for o in data]
+        periods = [o["anyo"] for o in data]
+        keys = ["d_price", "absor", *ctrls]
+        series = {k: [o[k] for o in data] for k in keys}
+        y, cols_dm, w, _kept = ols.two_way_within(
+            units, periods, series["d_price"], [series[k] for k in ["absor", *ctrls]]
+        )
+        x = [[c[i] for c in cols_dm] + w[i] for i in range(len(data))]
+        cl = list(units)
         fit = ols.ols_cluster(x, y, cl)
         coeffs = {}
         for i, name_i in enumerate(["absor"] + ctrls):
@@ -150,6 +134,7 @@ def main() -> None:
         "n_provinces": len({o["prov"] for o in rows}),
     }
     print("window:", out["window"])
+    out["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
     (ROOT / "artifacts").mkdir(exist_ok=True)
     (ROOT / "artifacts" / "panel_provincial.json").write_text(
         json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

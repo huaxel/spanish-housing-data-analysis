@@ -257,3 +257,60 @@ def test_bartik_leave_one_out():
     # Without LOO: (311-110)/110 = 1.827
     assert abs(full["A"] - 201 / 110) < 1e-9
     assert loo["A"] != full["A"]
+
+
+def _two_way_dgp(seed=5):
+    import random
+
+    rng = random.Random(seed)
+    units = [f"u{i}" for i in range(6)]
+    years = [2018, 2019, 2020, 2021]
+    u, p, x, y = [], [], [], []
+    for i, uu in enumerate(units):
+        for t in years:
+            # unbalanced: drop one cell so unit means differ by unit
+            if uu == "u5" and t == 2018:
+                continue
+            xx = rng.gauss(0, 1)
+            u.append(uu)
+            p.append(t)
+            x.append(xx)
+            y.append(1.5 * xx + i * 0.3 + (t - 2018) * 0.2 + rng.gauss(0, 0.2))
+    return u, p, x, y
+
+
+def test_two_way_within_matches_explicit_dummies():
+    from spanish_housing import ols as ols_mod
+
+    u, p, x, y = _two_way_dgp()
+    y_dm, cols_dm, w_dm, _kept = ols_mod.two_way_within(u, p, y, [x])
+    x_dm = cols_dm[0]
+    xd = [[xv] + wd for xv, wd in zip(x_dm, w_dm, strict=True)]
+    got = ols_mod.ols_cluster(xd, y_dm, u)["beta"][0]
+    # Explicit two-way OLS: intercept + x + unit dummies + year dummies.
+    uus, tts = sorted(set(u))[1:], sorted(set(p))[1:]
+    xe = [
+        [xx, 1.0] + [1.0 if uu == q else 0.0 for q in uus] + [1.0 if tt == s else 0.0 for s in tts]
+        for uu, tt, xx in zip(u, p, x, strict=True)
+    ]
+    want = ols_mod.ols_cluster(xe, y, u)["beta"][0]
+    assert abs(got - want) < 1e-9
+
+
+def test_two_way_within_differs_from_raw_dummies():
+    """The old pattern (demeaned X + RAW year dummies) is a different model."""
+
+    from spanish_housing import ols as ols_mod
+
+    u, p, x, y = _two_way_dgp()
+    y_dm, cols_dm, _w, kept = ols_mod.two_way_within(u, p, y, [x])
+    x_dm = cols_dm[0]
+    x_bad = [[xv] + [1.0 if tt == s else 0.0 for s in kept] for xv, tt in zip(x_dm, p, strict=True)]
+    bad = ols_mod.ols_cluster(x_bad, y_dm, u)["beta"][0]
+    uus, tts = sorted(set(u))[1:], sorted(set(p))[1:]
+    xe = [
+        [xx, 1.0] + [1.0 if uu == q else 0.0 for q in uus] + [1.0 if tt == s else 0.0 for s in tts]
+        for uu, tt, xx in zip(u, p, x, strict=True)
+    ]
+    want = ols_mod.ols_cluster(xe, y, u)["beta"][0]
+    assert abs(bad - want) > 1e-6

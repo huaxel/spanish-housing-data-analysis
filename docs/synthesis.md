@@ -73,26 +73,39 @@ valor-tasado YoY % (appraisal outcome, not transactions), provincia panel
 
 | | base | + province trends | drop Madrid/Barcelona |
 | --- | --- | --- | --- |
-| 2SLS | +0.67 (0.11) | +0.76 (0.12) | +0.65 (0.12) |
-| first-stage F | 47.7 | 56.3 | 35.5 |
-| AR region (grid, uncalibrated) | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
+| OLS | +0.00 (0.06) | −0.02 (0.08) | −0.01 (0.06) |
+| 2SLS | +0.34 (0.13) | +1.04 (0.27) | +0.29 (0.13) |
+| first-stage F | 27.3 | 52.8 | 20.3 |
+| AR region (grid, uncalibrated) | [−0.20, 0.80] | [0.40, 2.35] | [−0.45, 0.75] |
 
-The bust-only estimate (+0.84, first-stage F = 88) is the headline:
-one point faster inflow growth raises appraised prices ~0.8pp that year
-among instrument compliers. The pooled +0.67 aggregates an identified
-bust period with an unidentified recovery (2014–21: F = 0.13, tau +2.29
-SE 4.84, AR grid fully accepted) and is reported as a descriptive
-aggregation, not the estimand. The 4–5× IV/OLS multiplier (+0.67 vs
-+0.14) is a plausible attenuation/LATE-complier pattern, not an
-established 4–5× causal ratio — the repo does not estimate exposure
-reliability, complier characteristics, or rule out residual exclusion
-failure. Province trends partly address differential *linear* trends
-(the estimate moves 0.67 → 0.76); exclusion remains untested, and
-mortgage-selection bias may correlate with instrumented inflows (the
-outcome is appraisals, not transactions). Full threats + read record in
-[the IV note](docs/explorations/iv_migration.md); estimator machinery in
-`src/spanish_housing/` (tested); numbers pinned in
-`explorations/iv_results.json` (re-run reproduces it deterministically).
+(Corrected 2026-10-06: the two-way within transform now demeans the year
+dummies too — the previous build regressed demeaned outcomes on demeaned
+regressors plus *raw* year dummies, which biased every column. The pooled
+estimate halved, 0.67 → 0.34, and the bust-only headline fell, 0.84 →
+0.48. The old province-trends spec was additionally singular — province
+trends sum to a common time trend the year FE already absorb — and solved
+only on rounding noise; it now carries G−1 trends and is identified.)
+
+The bust-only estimate (+0.48, first-stage F = 58) is the headline:
+one point faster inflow growth raises appraised prices ~0.5pp that year
+among instrument compliers. The pooled +0.34 aggregates an identified
+bust period with an unidentified recovery (2014–21: F = 0.22, tau +3.25
+SE 6.28, AR grid fully accepted) and is reported as a descriptive
+aggregation, not the estimand. The OLS association is now ~zero (+0.00),
+so there is no finite IV/OLS multiplier to quote — the gap is consistent
+with full attenuation of a noisy exposure measure, with LATE compliers in
+tight markets, or with residual exclusion failure; the repo adjudicates
+none of the three. The trends spec no longer corroborates the base: it
+moves the estimate to +1.04 with a wide AR region ([0.40, 2.35]), which
+is sensitivity to the trend specification, not robustness — differential
+trends remain a live threat rather than a discharged one. Exclusion
+remains untested, and mortgage-selection bias may correlate with
+instrumented inflows (the outcome is appraisals, not transactions). Full
+threats + read record in [the IV note](docs/explorations/iv_migration.md);
+estimator machinery in `src/spanish_housing/` (tested); numbers pinned in
+`explorations/iv_results.json` (re-run reproduces it deterministically;
+`make audit` additionally fails when the committed output predates its
+estimator code or input data).
 
 ## The split (why national ratios mislead)
 

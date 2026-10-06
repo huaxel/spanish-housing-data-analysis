@@ -74,30 +74,21 @@ def build(spec_extra: list[str] | None = None, y0: int = 1999, y1: int = 2021):
         for o in obs
         if o["exposure"] is not None and o["pred"] is not None and y0 <= o["anyo"] <= y1
     ]
-    cpros = sorted({o["cpro"] for o in rows})
-    years = sorted({o["anyo"] for o in rows})[1:]
-    feats = ["exposure", *(spec_extra or [])]
-    means = {c: {v: 0.0 for v in ["d_eur", *feats, "pred"]} for c in cpros}
-    counts = {c: 0 for c in cpros}
-    for o in rows:
-        counts[o["cpro"]] += 1
-        for v in ["d_eur", *feats, "pred"]:
-            means[o["cpro"]][v] += o[v]
-    for c in cpros:
-        for v in means[c]:
-            means[c][v] /= counts[c]
-    y, d, w, z, cl = [], [], [], [], []
-    for o in rows:
-        m = means[o["cpro"]]
-        y.append(o["d_eur"] - m["d_eur"])
-        d.append(o["exposure"] - m["exposure"])
-        w.append(
-            [o[v] - m[v] for v in (spec_extra or [])]
-            + [1.0 if o["anyo"] == t else 0.0 for t in years]
-        )
-        z.append([o["pred"] - m["pred"]])
-        cl.append(o["cpro"])
-    return y, d, w, z, cl, rows
+    # Correct two-way within: demean y, regressors, instrument AND the
+    # year dummies by province (Frisch-Waugh). Demeaned X + raw dummies
+    # is a different model and biases tau (fixed 2026-10-06).
+    units = [o["cpro"] for o in rows]
+    periods = [o["anyo"] for o in rows]
+    keys = ["exposure", "pred", *(spec_extra or [])]
+    series = {k: [o[k] for o in rows] for k in ["d_eur", *keys]}
+    y, cols_dm, w, _kept = ols.two_way_within(
+        units, periods, series["d_eur"], [series[k] for k in keys]
+    )
+    d, z = cols_dm[0], [[v] for v in cols_dm[1]]
+    extra = cols_dm[2:]
+    for i in range(len(rows)):
+        w[i] = [e[i] for e in extra] + w[i]
+    return y, d, w, z, list(units), rows
 
 
 def run_all(y, d, w, z, cl, rows, label):
@@ -122,14 +113,17 @@ def run_all(y, d, w, z, cl, rows, label):
 
 def build_trends():
     # Base design + province-specific linear trends (absorbs differential
-    # trends as the exclusion threat; costs ~50 df).
+    # trends as the exclusion threat; costs ~49 df). Trend terms are
+    # unit-demeaned like every other continuous regressor. Only G-1 trends
+    # are included: province trends sum to a common time trend, which the
+    # year FE already absorb, so the full set is exactly collinear (the old
+    # raw-trends spec was singular and solved only on rounding noise).
     y, d, w, z, cl, rows = build()
-    cpros = sorted(set(cl))
+    cpros = sorted(set(cl))[1:]
     t0 = min(o["anyo"] for o in rows)
-    w2 = [
-        w[oi] + [(o["anyo"] - t0) if o["cpro"] == c else 0.0 for c in cpros]
-        for oi, o in enumerate(rows)
-    ]
+    raw_trends = [[(o["anyo"] - t0) if o["cpro"] == c else 0.0 for c in cpros] for o in rows]
+    dm_trends = [ols.demean_by_unit([r[j] for r in raw_trends], cl) for j in range(len(cpros))]
+    w2 = [w[oi] + [dm_trends[j][oi] for j in range(len(cpros))] for oi in range(len(rows))]
     return y, d, w2, list(z), cl, rows
 
 
@@ -159,7 +153,13 @@ for name, (yy, dd, ww, zz, cc, rr) in specs.items():
     results[name] = run_all(yy, dd, ww, zz, cc, rr, name)
     print(json.dumps(results[name], indent=1))
 
+results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "iv_migration.json").write_text(
+    json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
+)
+# The audit checks the committed copy (including the _meta freshness
+# key): keep it byte-identical to the script output.
+(ROOT / "explorations" / "iv_results.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
 )

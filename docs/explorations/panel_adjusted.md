@@ -7,18 +7,20 @@ Computed by `explorations/panel_adjusted.py` from the CCAA mart
 effects (the year dummies absorb the national rate cycle); SEs clustered by
 CCAA (CR1V). **Adjusted description only** — income, credit, and population
 are jointly determined with prices, so no coefficient below is a structural
-or causal estimate. Re-run 2026-10-06 with the mart at 184 claims:
-S0 gains 2025 without moving its coefficients (n 193→194).
+or causal estimate. Corrected 2026-10-06 after an external-model review
+caught an incorrect two-way within transform (year dummies entered raw
+after unit-demeaning — every coefficient below moved; S3's headline
+inflow association did not survive).
 
 ## Results
 
 | | S0: absorption only | S1: + demand controls |
 | --- | --- | --- |
-| absorption (dwellings per new person) | −0.111 (0.044) [−0.20, −0.03], wild-p **0.064** | −0.071 (0.044) [−0.16, +0.01], wild-p 0.178 |
-| mortgage-count growth (pp) | — | +0.050 (0.027) [−0.00, +0.10], wild-p 0.103 |
-| income growth (pp) | — | +0.031 (0.043) [−0.05, +0.12], wild-p 0.456 |
-| 20–34 share change (pp) | — | +3.81 (1.28) [+1.30, +6.32], wild-p **0.032** |
-| n / clusters / within-R² | 194 / 17 / 0.91 | 178 / 17 / 0.91 |
+| absorption (dwellings per new person) | −0.141 (0.058) [−0.25, −0.03], wild-p 0.082 | −0.112 (0.053) [−0.22, −0.01], wild-p 0.116 |
+| mortgage-count growth (pp) | — | +0.033 (0.028) [−0.02, +0.09], wild-p 0.263 |
+| income growth (pp) | — | +0.003 (0.041) [−0.08, +0.08], wild-p 0.935 |
+| 20–34 share change (pp) | — | +3.39 (1.47) [+0.52, +6.27], wild-p 0.068 |
+| n / clusters / within-R² | 194 / 17 / 0.93 | 178 / 17 / 0.92 |
 
 (Coefficient (CR1V clustered SE) [95% CI]; wild-p from 2,999-rep
 Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
@@ -27,36 +29,38 @@ Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
 
 | regressor | b (SE) | wild-p |
 | --- | --- | --- |
-| absorption | +0.011 (0.064) | 0.844 |
-| mortgage growth | +0.114 (0.033) | **0.003** |
-| income growth | +0.138 (0.050) | **0.029** |
-| 20–34 share Δ | +6.33 (1.79) | **0.003** |
-| L.absorption | −0.033 (0.073) | 0.665 |
-| L.mortgage growth | +0.060 (0.022) | **0.030** |
-| L.income growth | −0.154 (0.084) | 0.205 |
+| absorption | −0.051 (0.043) | 0.151 |
+| mortgage growth | +0.021 (0.033) | 0.551 |
+| income growth | +0.039 (0.057) | 0.464 |
+| 20–34 share Δ | +2.17 (2.02) | 0.371 |
+| L.absorption | −0.162 (0.055) | **0.040** |
+| L.mortgage growth | −0.003 (0.016) | 0.859 |
+| L.income growth | −0.090 (0.059) | 0.259 |
 
-Timing does not rescue supply: contemporaneous absorption is fully dead
-(+0.01, p = 0.84) and last year's is too (−0.03, p = 0.66). What persists
-across both years is credit — current (+0.11, p = 0.003) *and* lagged
-(+0.06, p = 0.030), a signature of approvals preceding prices while
-current volumes co-move. Income flips sign (current +0.14 significant,
-lag −0.15 not): transitory-blip behavior, net near zero over two years —
-consistent with S1's null, now with the dynamics visible. The cohort
-association strengthens (+6.3, p = 0.003), same reverse-causality warning.
+(Corrected 2026-10-06: the old S2 credit dynamics — current +0.11,
+lagged +0.06, both wild-significant — were an artifact of the broken
+within transform and do not survive it.) Timing reverses the story:
+contemporaneous absorption is weak (−0.05, p = 0.15) but *last year's*
+absorption is the only wild-significant association in the panel
+(−0.16, p = 0.040) — supply shows up with a one-year lag, consistent
+with completions-to-price transmission. Credit, income, and cohort are
+all dead in both years once the year effects are correctly absorbed. The
+cohort association collapses (+2.2, p = 0.37); same reverse-causality
+warning, now without even an association to warn about.
 
 ## Reading
 
-- The absorption sign survives the panel arithmetically (−0.11, analytic CI
-  clear of zero) but **fails the wild bootstrap (p = 0.064)** even before
+- The absorption sign survives the panel arithmetically (−0.14, analytic CI
+  clear of zero) but **fails the wild bootstrap (p = 0.082)** even before
   controls — with 17 clusters, the "significant" S0 is analytic-SE
-  optimism. With demand covariates it attenuates further (−0.07, wild-p
-  0.18). Double attenuation — by controls and by honest SEs — is the
+  optimism. With demand covariates it attenuates further (−0.11, wild-p
+  0.12). Double attenuation — by controls and by honest SEs — is the
   finding: the supply–price link is partly demand in disguise and partly
   small-sample noise, exactly as hypothesis-01 argued from the denominator.
-- Credit (+0.05, t ≈ 1.9) and the young-cohort share (+3.8 per pp, t ≈ 3.0)
-  carry the tightening story better than unit counts do. The cohort number
-  is large because a 1pp age-share shift is a big demographic event — and
-  it is the most reverse-caused regressor here (the young move to booming
+- Neither credit (+0.03, p = 0.26) nor the young-cohort share (+3.4 per pp,
+  p = 0.068) clears the bootstrap in S1. The cohort number is large
+  because a 1pp age-share shift is a big demographic event — and it is
+  the most reverse-caused regressor here (the young move to booming
   markets), so read it as association with an arrow going both ways.
 - Income near zero is not "incomes don't matter": the year FEs absorb the
   national income cycle, leaving only idiosyncratic CCAA deviations to
@@ -72,25 +76,29 @@ association strengthens (+6.3, p = 0.003), same reverse-causality warning.
 
 | regressor | b (SE) | wild-p |
 | --- | --- | --- |
-| absorption | −0.061 (0.053) | 0.281 |
-| mortgage growth | +0.050 (0.032) | 0.093 |
-| income growth | +0.090 (0.052) | 0.180 |
-| 20–34 share Δ | +5.78 (1.51) | 0.011 |
-| **foreign-inflow growth (pp)** | **+0.094 (0.024)** | **0.004** |
+| absorption | −0.114 (0.058) | 0.095 |
+| mortgage growth | +0.014 (0.033) | 0.698 |
+| income growth | +0.015 (0.059) | 0.784 |
+| 20–34 share Δ | +3.46 (1.70) | 0.115 |
+| foreign-inflow growth (pp) | +0.005 (0.031) | 0.893 |
 
-Sample is 2009–2021 (flows start 2008, end 2021). Foreign-inflow growth
-is the strongest association in the whole panel exercise: 10pp faster
-inflow growth ↔ +0.94pp price growth, holding credit, income, cohort and
-the national cycle constant. Same reverse-causality warning as the cohort
-(migrants go where the jobs — and the building — already are), but the
-timing fits the narrative S2 couldn't see: the 2017–19 price recovery
-rode the 2016–19 inflow surge (352k → 666k) while credit was still
-subdued. Demand, measured directly for once, beats supply everywhere.
+Sample is 2009–2021 (flows start 2008, end 2021). The old headline —
+foreign-inflow growth as the strongest association in the panel (+0.094,
+p = 0.004) — **did not survive the within-transform correction** (+0.005,
+p = 0.89). Inflow growth is strongly pro-cyclical nationally, and the
+broken transform had left the national cycle inside the regressor; once
+the year effects are correctly absorbed there is nothing left. This is
+the same confounding the year FE are *for*, and the correction working
+as intended — but it means the 2017–19 inflow-surge narrative no longer
+has panel support here. (The commissioned IV in `iv_migration.md` tests
+the migration channel with an instrument instead of controls and is the
+place to look, with its own qualifications.)
 
 - **G = 17 clusters** is below the ~30–50 comfort zone: the wild-t
   (Rademacher, null-imposed, 2,999 reps, fixed seed) is the reported
-  significance, not the analytic t. Only the cohort association clears it
-  (p = 0.032) — and it is the most reverse-caused regressor.
+  significance, not the analytic t. Nothing in S1/S3 clears it; the only
+  wild-significant association in the exercise is lagged absorption in S2
+  (p = 0.040).
 - One annual lag only; completion-to-price timing below yearly frequency is
   blurred, and S2's complete-case n=133 compounds the selection above.
   Credit itself is reverse-caused in part (expectations drive applications

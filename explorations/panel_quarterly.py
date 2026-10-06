@@ -135,26 +135,21 @@ def main() -> None:
     spec = ["h", "L1h", "L2h", "L3h", "L4h", "L5h", "L6h", "L7h", "L8h", "dr", "L1dr"]
     rows = [o for o in obs if all(o[v] is not None for v in ["d_vt", *spec])]
     ux = sorted({o["ccaa"] for o in rows})
-    uy = sorted({o["yq"][0] for o in rows})[1:]
-    uq = [2, 3, 4]
-    means: dict[str, dict[str, float]] = {c: {} for c in ux}
-    for o in rows:
-        for v in ["d_vt", *spec]:
-            means[o["ccaa"]][v] = means[o["ccaa"]].get(v, 0.0) + o[v]
-    n_c = {c: sum(1 for o in rows if o["ccaa"] == c) for c in ux}
-    for c in ux:
-        for v in means[c]:
-            means[c][v] /= n_c[c]
-    x, yv, cl = [], [], []
-    for o in rows:
-        m = means[o["ccaa"]]
-        yv.append(o["d_vt"] - m["d_vt"])
-        x.append(
-            [o[v] - m[v] for v in spec]
-            + [1.0 if o["yq"][0] == t else 0.0 for t in uy]
-            + [1.0 if o["yq"][1] == t else 0.0 for t in uq]
-        )
-        cl.append(o["ccaa"])
+    # Correct two-way within: unit-demean y, regressors AND the year +
+    # season dummies (demeaned X + raw dummies biases coefs; fixed 2026-10-06).
+    units = [o["ccaa"] for o in rows]
+    yperiods = [o["yq"][0] for o in rows]
+    qperiods = [o["yq"][1] for o in rows]
+    series = {v: [o[v] for o in rows] for v in ["d_vt", *spec]}
+    yv, cols_dm, wy, _uy = ols.two_way_within(
+        units, yperiods, series["d_vt"], [series[v] for v in spec]
+    )
+    _yq, _qc, wq, _uq = ols.two_way_within(
+        units, qperiods, series["d_vt"], [series[v] for v in spec]
+    )
+    _ = _yq, _qc
+    x = [[c[i] for c in cols_dm] + wy[i] + wq[i] for i in range(len(rows))]
+    cl = list(units)
     fit = ols.ols_cluster(x, yv, cl)
     coefs = {}
     for i, v in enumerate(spec):
@@ -174,6 +169,7 @@ def main() -> None:
         "wild_bootstrap": wb,
         "ccaa": ux,
     }
+    results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
     (ROOT / "artifacts").mkdir(exist_ok=True)
     (ROOT / "artifacts" / "panel_quarterly.json").write_text(
         json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

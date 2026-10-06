@@ -52,23 +52,16 @@ for muni, rows in by_muni.items():
 
 def run(ykey: str, spec: list[str]) -> dict:
     rows = [o for o in obs if o[ykey] is not None and all(o[v] is not None for v in spec)]
-    munis = sorted({o["muni"] for o in rows})
-    years = sorted({o["anyo"] for o in rows})[1:]
-    means = {m: {v: 0.0 for v in [ykey, *spec]} for m in munis}
-    counts = {m: 0 for m in munis}
-    for o in rows:
-        counts[o["muni"]] += 1
-        for v in [ykey, *spec]:
-            means[o["muni"]][v] += o[v]
-    for m in munis:
-        for v in means[m]:
-            means[m][v] /= counts[m]
-    x, y, cl = [], [], []
-    for o in rows:
-        m = means[o["muni"]]
-        y.append(o[ykey] - m[ykey])
-        x.append([o[v] - m[v] for v in spec] + [1.0 if o["anyo"] == t else 0.0 for t in years])
-        cl.append(o["muni"])
+    # Correct two-way within: year dummies are unit-demeaned too
+    # (demeaned X + raw dummies biases the coefficients; fixed 2026-10-06).
+    units = [o["muni"] for o in rows]
+    periods = [o["anyo"] for o in rows]
+    series = {v: [o[v] for o in rows] for v in [ykey, *spec]}
+    y, cols_dm, w, _kept = ols.two_way_within(
+        units, periods, series[ykey], [series[v] for v in spec]
+    )
+    x = [[c[i] for c in cols_dm] + w[i] for i in range(len(rows))]
+    cl = list(units)
     fit = ols.ols_cluster(x, y, cl)
     out = {
         "y": ykey,
@@ -101,11 +94,14 @@ results = {
     "rent_with_pop": run("d_rent", ["d_tour", "d_pop"]),
 }
 
+results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_tourist.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
 )
 for name, r in results.items():
+    if name.startswith("_"):
+        continue
     c = r["coefs"]["d_tour"]
     wb = r["wild_bootstrap"]["d_tour"]
     print(f"== {name}: n={r['n']} G={r['clusters']} R2={r['r2_within']} ==")

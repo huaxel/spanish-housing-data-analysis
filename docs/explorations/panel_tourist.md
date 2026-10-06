@@ -11,9 +11,9 @@ licensing follows demand and regulation jointly with prices.
 
 | | sale, tour only | sale + pop | rent, tour only | rent + pop |
 | --- | --- | --- | --- | --- |
-| d_tour | −0.23 (0.30) | −0.19 (0.31) | +0.01 (0.23) | +0.02 (0.23) |
-| wild-p | 0.45 | 0.55 | 0.94 | 0.94 |
-| n / clusters / R² | 1159 / 130 / 0.04 | same | 2109 / 253 / 0.03 | same |
+| d_tour | −0.21 (0.31) | −0.18 (0.31) | +0.01 (0.23) | +0.01 (0.23) |
+| wild-p | 0.49 | 0.56 | 0.96 | 0.96 |
+| n / clusters / R² | 1159 / 130 / 0.04 | same / 0.05 | 2109 / 253 / 0.03 | same |
 
 (Coefficient (clustered SE) per +1 tourist dwelling per 1,000 inhabitants.)
 

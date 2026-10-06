@@ -18,23 +18,35 @@ YoY % (no provincial IPV exists). Province + year FE; CR1V SEs.
 
 | | base | + province trends | drop Madrid/Barcelona |
 | --- | --- | --- | --- |
-| OLS | +0.145 (0.057) | +0.152 (0.061) | +0.129 (0.059) |
-| 2SLS | **+0.67 (0.11)** | **+0.76 (0.12)** | **+0.65 (0.12)** |
-| first-stage F | 47.7 | 56.3 | 35.5 |
-| AR set | [0.35, 1.00] | [0.40, 1.15] | [0.25, 1.05] |
+| OLS | +0.002 (0.058) | −0.023 (0.079) | −0.009 (0.061) |
+| 2SLS | **+0.34 (0.13)** | **+1.04 (0.27)** | **+0.29 (0.13)** |
+| first-stage F | 27.3 | 52.8 | 20.3 |
+| AR set | [−0.20, 0.80] | [0.40, 2.35] | [−0.45, 0.75] |
 | n / clusters | 1000 / 50 | 1000 / 50 | 960 / 48 |
+
+(Corrected 2026-10-06 after an external-model review caught an incorrect
+two-way within transform: year dummies are now province-demeaned alongside
+y, exposure, and the instrument. The pooled estimate halved, 0.67 → 0.34;
+the trends spec previously ran a singular design — G trends plus year FE
+contain the common time trend twice — and solved only on rounding noise.
+It now carries G−1 trends, is identified, and diverges from the base
+instead of confirming it.)
 
 (Coefficient (clustered SE, sandwich with transposed right bread — corrected 2026-10-06 after independent review caught the missing .T). AR = Anderson-Rubin acceptance region over a grid (F<10 cutoff, uncalibrated — NOT a calibrated 95% set; see review finding).)
 
 Reading (corrected 2026-10-06 after independent review): 1pp faster
-foreign-inflow growth raises appraised prices ~0.7–0.8pp that year among
-bust-era instrument compliers — 4–5× the OLS association, stable across
-province trends (which partly address differential *linear* trends;
-exclusion remains untested) and top-2 dominance (LOO working as
-designed). First stage is strong in the bust era (F ≥ 35); AR acceptance
-regions are bounded and informative there, and exclude both zero and OLS.
-The recovery half (2014–21) has no first stage (F = 0.13) and its AR
-region is the full search grid — unidentified, reported for completeness.
+foreign-inflow growth raises appraised prices ~0.3–0.5pp that year among
+bust-era instrument compliers — against an OLS association of ~zero, so
+the gap reads as full attenuation of a noisy exposure measure, LATE
+compliers in tight markets, or residual exclusion failure (unadjudicated).
+The estimate is NOT stable across the trends spec (+1.04, AR [0.40,
+2.35]): differential trends are a live threat, not a discharged one. The
+top-2 drop is close to the base (+0.29, LOO working as designed). First
+stage is strong in the bust era (F ≥ 20); the base AR region is bounded
+but covers zero ([−0.20, 0.80]), so even the pooled sign is not
+AR-robust. The recovery half (2014–21) has no first stage (F = 0.22) and
+its AR region is the full search grid — unidentified, reported for
+completeness.
 
 ## Why 2SLS >> OLS (three readings, not one)
 
@@ -65,12 +77,13 @@ region is the full search grid — unidentified, reported for completeness.
 
 | | bust 2002–13 | recovery 2014–21 |
 | --- | --- | --- |
-| 2SLS | +0.84 (0.15) | +2.29 (4.84) — uninformative |
-| first-stage F | 88.4 | **0.13** |
-| AR set | [0.45, 1.40] | full grid (no information) |
+| OLS | +0.03 (0.11) | +0.02 (0.03) |
+| 2SLS | +0.48 (0.15) | +3.25 (6.28) — uninformative |
+| first-stage F | 57.7 | **0.22** |
+| AR set | [0.05, 1.05] | full grid (no information) |
 
-The pooled +0.67 is bust-driven: 1998 settlement geography predicts
-2002–13 inflows (F = 88) but nothing about 2014–21 flows (F = 0.13).
+The pooled +0.34 is bust-driven: 1998 settlement geography predicts
+2002–13 inflows (F = 58) but nothing about 2014–21 flows (F = 0.22).
 Post-crisis migration decoupled from historical networks — new origins
 (Venezuela, Honduras), dispersal, ECP-era patterns. Consequence: the
 recovery half of the story (S3's inflow surge) remains descriptive;

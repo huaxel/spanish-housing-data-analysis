@@ -19,7 +19,7 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried; fails
+- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy) re-queried, plus 6 model-freshness checks (each estimator output must postdate its script, `ols.py`, and `marts.duckdb` — a green audit can no longer pass on stale model numbers); fails
   on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.
 

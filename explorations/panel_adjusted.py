@@ -94,24 +94,16 @@ attach_lags()
 
 def build_design(spec: list[str]) -> tuple[list, list, list, list]:
     rows = [o for o in obs if all(o[v] is not None for v in ["d_ipv", *spec])]
-    ccaas = sorted({o["ccaa"] for o in rows})
-    years = sorted({o["anyo"] for o in rows})[1:]
-    means = {c: {v: 0.0 for v in ["d_ipv", *spec]} for c in ccaas}
-    counts = {c: 0 for c in ccaas}
-    for o in rows:
-        counts[o["ccaa"]] += 1
-        for v in ["d_ipv", *spec]:
-            means[o["ccaa"]][v] += o[v]
-    for c in ccaas:
-        for v in means[c]:
-            means[c][v] /= counts[c]
-    x, y, cl = [], [], []
-    for o in rows:
-        m = means[o["ccaa"]]
-        y.append(o["d_ipv"] - m["d_ipv"])
-        x.append([o[v] - m[v] for v in spec] + [1.0 if o["anyo"] == t else 0.0 for t in years])
-        cl.append(o["ccaa"])
-    return x, y, cl, rows
+    # Correct two-way within: year dummies are unit-demeaned too
+    # (demeaned X + raw dummies biases the coefficients; fixed 2026-10-06).
+    units = [o["ccaa"] for o in rows]
+    periods = [o["anyo"] for o in rows]
+    series = {v: [o[v] for o in rows] for v in ["d_ipv", *spec]}
+    y, cols_dm, w, _kept = ols.two_way_within(
+        units, periods, series["d_ipv"], [series[v] for v in spec]
+    )
+    x = [[c[i] for c in cols_dm] + w[i] for i in range(len(rows))]
+    return x, y, list(units), rows
 
 
 def run(spec: list[str]) -> dict:
@@ -165,6 +157,7 @@ add_bootstrap(
     ["absor", "d_hip", "d_renta", "d_coh", "d_inmig"],
 )
 
+results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_adjusted.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

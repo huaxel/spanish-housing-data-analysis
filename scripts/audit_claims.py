@@ -13,9 +13,60 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
+ROOT = Path(__file__).resolve().parents[1]
+
+# (label, output json, estimator script). The output must carry a _meta
+# freshness key (see ols.model_meta); the audit fails when the committed
+# result predates its estimator code or its input data, so a green audit
+# can no longer pass on stale model numbers. Added 2026-10-06: the audit
+# previously compared docs against saved JSON without checking whether
+# the JSON still reflected the code (it did not — see iv_results.json
+# carrying pre-transpose-fix SEs while the script had moved on).
+MODEL_FRESHNESS = [
+    ("iv_migration", "explorations/iv_results.json", "explorations/iv_migration.py"),
+    ("panel_saiz", "explorations/panel_saiz_results.json", "explorations/panel_saiz.py"),
+    ("panel_provincial", "artifacts/panel_provincial.json", "explorations/panel_provincial.py"),
+    ("panel_adjusted", "artifacts/panel_adjusted.json", "explorations/panel_adjusted.py"),
+    ("panel_tourist", "artifacts/panel_tourist.json", "explorations/panel_tourist.py"),
+    ("panel_quarterly", "artifacts/panel_quarterly.json", "explorations/panel_quarterly.py"),
+]
+
+
+def check_freshness() -> int:
+    """Fail when a model output predates its code or data. Returns failures."""
+    import json
+
+    failures = 0
+    ols_sha = ols.sha_file(str(Path(ols.__file__)))
+    for label, rel_json, rel_script in MODEL_FRESHNESS:
+        p = ROOT / rel_json
+        if not p.exists():
+            print(f"[SKIP] {label}: {rel_json} absent (not built yet)")
+            continue
+        meta = json.loads(p.read_text()).get("_meta")
+        if not meta:
+            print(f"[FAIL] {label}: {rel_json} has no _meta key — re-run {rel_script}")
+            failures += 1
+            continue
+        ok = True
+        if meta.get("script_sha") != ols.sha_file(str(ROOT / rel_script)):
+            print(f"[FAIL] {label}: estimator {rel_script} changed since output — re-run it")
+            ok = False
+        if meta.get("ols_sha") != ols_sha:
+            print(f"[FAIL] {label}: src/spanish_housing/ols.py changed since output — re-run")
+            ok = False
+        for rel_data, want in (meta.get("data_sha") or {}).items():
+            if ols.sha_file(str(ROOT / rel_data)) != want:
+                print(f"[FAIL] {label}: input {rel_data} changed since output — re-run")
+                ok = False
+        if ok:
+            print(f"[OK] {label}: output fresh vs code + data")
+        failures += not ok
+    return failures
 
 
 # (doc, description, sql, expected, tolerance)
@@ -545,19 +596,21 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
 # Mart SQL cannot recompute 2SLS; instead the doc numbers must match the
 # committed estimator output, and re-running explorations/iv_migration.py
 # (deterministic) must reproduce that file. Guards transcription drift.
+# Corrected 2026-10-06: the two-way within transform now demeans the year
+# dummies too (demeaned X + raw dummies biased every estimate below).
 IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
-    ("synthesis", "IV 2SLS tau (base)", "base.tsls.tau", 0.67, 0.005),
-    ("synthesis", "IV AR lower bound (base)", "base.ar_set.0", 0.35, 0.005),
-    ("synthesis", "IV AR upper bound (base)", "base.ar_set.1", 1.0, 0.005),
-    ("synthesis", "IV first-stage F (base)", "base.first_stage_F", 47.67, 0.05),
-    ("synthesis", "IV first-stage F (bust)", "bust_2002_2013.first_stage_F", 88.4, 0.05),
-    ("synthesis", "IV first-stage F (recovery)", "recovery_2014_2021.first_stage_F", 0.13, 0.05),
-    ("synthesis", "IV 2SLS tau (+province trends)", "province_trends.tsls.tau", 0.762, 0.005),
+    ("synthesis", "IV 2SLS tau (base)", "base.tsls.tau", 0.336, 0.005),
+    ("synthesis", "IV AR lower bound (base)", "base.ar_set.0", -0.2, 0.005),
+    ("synthesis", "IV AR upper bound (base)", "base.ar_set.1", 0.8, 0.005),
+    ("synthesis", "IV first-stage F (base)", "base.first_stage_F", 27.25, 0.05),
+    ("synthesis", "IV first-stage F (bust)", "bust_2002_2013.first_stage_F", 57.72, 0.05),
+    ("synthesis", "IV first-stage F (recovery)", "recovery_2014_2021.first_stage_F", 0.22, 0.05),
+    ("synthesis", "IV 2SLS tau (+province trends)", "province_trends.tsls.tau", 1.042, 0.005),
     (
         "synthesis",
         "IV first-stage F (+province trends)",
         "province_trends.first_stage_F",
-        56.28,
+        52.77,
         0.05,
     ),
     (
@@ -571,40 +624,40 @@ IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
         "synthesis",
         "IV AR upper bound (+province trends)",
         "province_trends.ar_set.1",
-        1.15,
+        2.35,
         0.005,
     ),
     (
         "synthesis",
         "IV 2SLS tau (drop Madrid/Barcelona)",
         "drop_madrid_barcelona.tsls.tau",
-        0.653,
+        0.288,
         0.005,
     ),
     (
         "synthesis",
         "IV first-stage F (drop Madrid/Barcelona)",
         "drop_madrid_barcelona.first_stage_F",
-        35.45,
+        20.31,
         0.05,
     ),
     (
         "synthesis",
         "IV AR lower bound (drop Madrid/Barcelona)",
         "drop_madrid_barcelona.ar_set.0",
-        0.25,
+        -0.45,
         0.005,
     ),
     (
         "synthesis",
         "IV AR upper bound (drop Madrid/Barcelona)",
         "drop_madrid_barcelona.ar_set.1",
-        1.05,
+        0.75,
         0.005,
     ),
-    ("synthesis", "IV 2SLS tau (bust 2002-13)", "bust_2002_2013.tsls.tau", 0.841, 0.005),
-    ("synthesis", "IV AR lower bound (bust)", "bust_2002_2013.ar_set.0", 0.45, 0.005),
-    ("synthesis", "IV AR upper bound (bust)", "bust_2002_2013.ar_set.1", 1.4, 0.005),
+    ("synthesis", "IV 2SLS tau (bust 2002-13)", "bust_2002_2013.tsls.tau", 0.482, 0.005),
+    ("synthesis", "IV AR lower bound (bust)", "bust_2002_2013.ar_set.0", 0.05, 0.005),
+    ("synthesis", "IV AR upper bound (bust)", "bust_2002_2013.ar_set.1", 1.05, 0.005),
 ]
 
 
@@ -723,26 +776,26 @@ PANEL_SAIZ_CLAIMS = [
         0.005,
     ),
     ("panel_saiz", "median constraint", "median_constraint", 0.445, 0.005),
-    ("panel_saiz", "low-constraint 2SLS tau", "low_constraint.tsls.tau", 0.636, 0.005),
-    ("panel_saiz", "low-constraint first-stage F", "low_constraint.first_stage_F", 40.28, 0.05),
+    ("panel_saiz", "low-constraint 2SLS tau", "low_constraint.tsls.tau", 0.321, 0.005),
+    ("panel_saiz", "low-constraint first-stage F", "low_constraint.first_stage_F", 28.65, 0.05),
     ("panel_saiz", "low-constraint AR upper", "low_constraint.ar_set.1", 1.3, 0.005),
-    ("panel_saiz", "high-constraint 2SLS tau", "high_constraint.tsls.tau", 0.74, 0.005),
+    ("panel_saiz", "high-constraint 2SLS tau", "high_constraint.tsls.tau", 0.405, 0.005),
     (
         "panel_saiz",
         "high-constraint first-stage F",
         "high_constraint.first_stage_F",
-        22.82,
+        10.8,
         0.05,
     ),
-    ("panel_saiz", "high-constraint AR upper", "high_constraint.ar_set.1", 1.3, 0.005),
-    ("panel_saiz", "low-constraint OLS tau", "low_constraint.ols.tau", 0.066, 0.005),
-    ("panel_saiz", "high-constraint OLS tau", "high_constraint.ols.tau", 0.246, 0.005),
-    ("panel_saiz", "interaction coefficient", "interaction_ols.interaction", 0.288, 0.005),
+    ("panel_saiz", "high-constraint AR upper", "high_constraint.ar_set.1", 1.6, 0.005),
+    ("panel_saiz", "low-constraint OLS tau", "low_constraint.ols.tau", -0.081, 0.005),
+    ("panel_saiz", "high-constraint OLS tau", "high_constraint.ols.tau", 0.108, 0.005),
+    ("panel_saiz", "interaction coefficient", "interaction_ols.interaction", 0.314, 0.005),
     (
         "panel_saiz",
         "interaction wild p",
         "interaction_ols.wild_p_interaction",
-        0.3313,
+        0.2873,
         0.005,
     ),
 ]
@@ -994,11 +1047,11 @@ def main() -> int:
         (Path(__file__).resolve().parents[1] / "artifacts" / "panel_provincial.json").read_text()
     )
     for desc, path, expected, tol in (
-        ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.025, 0.005),
-        ("prov panel S0 absor se", "s0_absorption_only.coefs.absor.se", 0.007, 0.005),
-        ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.423, 0.01),
+        ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),
+        ("prov panel S0 absor se", "s0_absorption_only.coefs.absor.se", 0.008, 0.005),
+        ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.1932, 0.01),
         ("prov panel S0 n", "s0_absorption_only.n", 777, 0),
-        ("prov panel S1 absor b", "s1_with_controls.coefs.absor.b", -0.21, 0.01),
+        ("prov panel S1 absor b", "s1_with_controls.coefs.absor.b", -0.012, 0.01),
         ("prov panel S1 n", "s1_with_controls.n", 178, 0),
         ("prov panel window max", "window.max", 2025, 0),
         ("prov panel n provinces", "window.n_provinces", 50, 0),
@@ -1009,7 +1062,10 @@ def main() -> int:
         failures += not ok
     total += 8
     print(f"{total - failures}/{total} claims hold")
-    return 1 if failures else 0
+    fresh_failures = check_freshness()
+    total += len(MODEL_FRESHNESS)
+    print(f"{len(MODEL_FRESHNESS) - fresh_failures}/{len(MODEL_FRESHNESS)} model outputs fresh")
+    return 1 if (failures or fresh_failures) else 0
 
 
 if __name__ == "__main__":

@@ -227,3 +227,23 @@ non-independent diagnostics).
 **Milestone-5 gate: satisfied.** Independent read before release —
 both verdicts adjudicated in-repo. Remaining release act: custom domain
 (user DNS action).
+
+## Addendum (2026-10-06): post-record estimation correction
+
+A subsequent model-level review found an incorrect two-way within
+transform in every panel estimator: year dummies entered raw after
+unit-demeaning y and X, which biases all coefficients (the Section 2
+quotes above — +0.67 pooled, +0.84 bust, trends 0.76 — are the biased
+values the reviewers saw). Corrected via a shared `ols.two_way_within`
+helper (regression-tested against explicit dummy OLS), the provincial
+panel gained its missing province FE plus a genuinely null-imposed
+bootstrap, and the old singular province-trends spec (G trends + year FE
+contain the common trend twice) now carries G−1 trends. Corrected
+headlines: pooled +0.34 (AR [−0.20, 0.80]), bust-only +0.48 (F = 58),
+trends spec +1.04 (diverges — sensitivity, not robustness). OLS is now
+~zero, so no finite IV/OLS multiplier exists. `make audit` now also fails
+when a committed model output predates its estimator code or input data
+(`_meta` freshness keys), closing the staleness hole this episode
+exposed. This addendum preserves the original brief text as the record of
+what was reviewed; the corrected numbers live in
+`docs/explorations/iv_migration.md` and `docs/synthesis.md`.

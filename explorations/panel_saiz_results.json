@@ -19,16 +19,16 @@
     "n": 520,
     "clusters": 26,
     "ols": {
-      "tau": 0.066,
-      "se": 0.095
+      "tau": -0.081,
+      "se": 0.096
     },
     "tsls": {
-      "tau": 0.636,
-      "se": 0.176
+      "tau": 0.321,
+      "se": 0.174
     },
-    "first_stage_F": 40.28,
+    "first_stage_F": 28.65,
     "ar_set": [
-      0.25,
+      -0.1,
       1.3
     ]
   },
@@ -37,28 +37,35 @@
     "n": 480,
     "clusters": 24,
     "ols": {
-      "tau": 0.246,
-      "se": 0.04
+      "tau": 0.108,
+      "se": 0.042
     },
     "tsls": {
-      "tau": 0.74,
-      "se": 0.148
+      "tau": 0.405,
+      "se": 0.186
     },
-    "first_stage_F": 22.82,
+    "first_stage_F": 10.8,
     "ar_set": [
-      0.1,
-      1.3
+      -2.0,
+      1.6
     ]
   },
   "interaction_ols": {
-    "tau_exposure": 0.009,
-    "tau_exposure_se": 0.166,
-    "interaction": 0.288,
-    "interaction_se": 0.264,
-    "wild_p_interaction": 0.3313,
-    "wild_t_interaction": 1.089,
+    "tau_exposure": -0.147,
+    "tau_exposure_se": 0.163,
+    "interaction": 0.314,
+    "interaction_se": 0.263,
+    "wild_p_interaction": 0.2873,
+    "wild_t_interaction": 1.195,
     "n": 1000,
     "clusters": 50,
     "note": "descriptive; exposure is endogenous here, so do not read as causal"
+  },
+  "_meta": {
+    "script_sha": "8c6186efcb62cb39592c96bda616c85dd7b46d511b86cd0fa70701cd204eeb1e",
+    "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
+    "data_sha": {
+      "data/processed/marts.duckdb": "49a6032d9726a84a8fcdaf9e1209673c9942b62428f4ab6209379f71a46b5220"
+    }
   }
 }

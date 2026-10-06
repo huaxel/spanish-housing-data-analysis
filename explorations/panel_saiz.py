@@ -142,30 +142,20 @@ def build(subset, spec_extra=None):
         and o["d_eur"] is not None
         and subset(o)
     ]
-    cpros = sorted({o["cpro"] for o in rows})
-    years = sorted({o["anyo"] for o in rows})[1:]
-    feats = ["exposure", *(spec_extra or [])]
-    means = {c: dict.fromkeys(["d_eur", *feats, "pred"], 0.0) for c in cpros}
-    counts = {c: 0 for c in cpros}
-    for o in rows:
-        counts[o["cpro"]] += 1
-        for v in ["d_eur", *feats, "pred"]:
-            means[o["cpro"]][v] += o[v]
-    for c in cpros:
-        for v in means[c]:
-            means[c][v] /= counts[c]
-    y, d, w, z, cl = [], [], [], [], []
-    for o in rows:
-        m = means[o["cpro"]]
-        y.append(o["d_eur"] - m["d_eur"])
-        d.append(o["exposure"] - m["exposure"])
-        w.append(
-            [o[v] - m[v] for v in (spec_extra or [])]
-            + [1.0 if o["anyo"] == t else 0.0 for t in years]
-        )
-        z.append([o["pred"] - m["pred"]])
-        cl.append(o["cpro"])
-    return y, d, w, z, cl, rows
+    # Correct two-way within: year dummies are unit-demeaned too
+    # (demeaned X + raw dummies biases the coefficients; fixed 2026-10-06).
+    units = [o["cpro"] for o in rows]
+    periods = [o["anyo"] for o in rows]
+    keys = ["exposure", "pred", *(spec_extra or [])]
+    series = {k: [o[k] for o in rows] for k in ["d_eur", *keys]}
+    y, cols_dm, w, _kept = ols.two_way_within(
+        units, periods, series["d_eur"], [series[k] for k in keys]
+    )
+    d, z = cols_dm[0], [[v] for v in cols_dm[1]]
+    extra = cols_dm[2:]
+    for i in range(len(rows)):
+        w[i] = [e[i] for e in extra] + w[i]
+    return y, d, w, z, list(units), rows
 
 
 def run_iv(y, d, w, z, cl, rows, label):
@@ -230,24 +220,22 @@ for label, pred in (
 rows = [
     o for o in obs if o["exposure"] is not None and o["d_eur"] is not None and o["pred"] is not None
 ]
-cpros = sorted({o["cpro"] for o in rows})
-years = sorted({o["anyo"] for o in rows})[1:]
-means = {c: {"d_eur": 0.0, "exposure": 0.0} for c in cpros}
-counts = dict.fromkeys(cpros, 0)
-for o in rows:
-    counts[o["cpro"]] += 1
-    means[o["cpro"]]["d_eur"] += o["d_eur"]
-    means[o["cpro"]]["exposure"] += o["exposure"]
-for c in cpros:
-    for v in means[c]:
-        means[c][v] /= counts[c]
-y, x, cl = [], [], []
-for o in rows:
-    m = means[o["cpro"]]
-    dm = o["exposure"] - m["exposure"]
-    y.append(o["d_eur"] - m["d_eur"])
-    x.append([dm, dm * o["constraint"]] + [1.0 if o["anyo"] == t else 0.0 for t in years])
-    cl.append(o["cpro"])
+# Correct two-way within (demeaned X + demeaned year dummies; fixed 2026-10-06).
+# The interaction uses demeaned exposure x raw constraint: constraint is
+# time-invariant, so its unit mean is itself and dm*e == (e - ebar)*c.
+units = [o["cpro"] for o in rows]
+periods = [o["anyo"] for o in rows]
+inter = [o["exposure"] * o["constraint"] for o in rows]
+series = {
+    "d_eur": [o["d_eur"] for o in rows],
+    "exposure": [o["exposure"] for o in rows],
+    "inter": inter,
+}
+y, cols_dm, w, _kept = ols.two_way_within(
+    units, periods, series["d_eur"], [series["exposure"], series["inter"]]
+)
+x = [[cols_dm[0][i], cols_dm[1][i]] + w[i] for i in range(len(rows))]
+cl = list(units)
 fit = ols.ols_cluster(x, y, cl)
 wb = ols.wild_bootstrap_t(x, y, cl, j=1, reps=999)
 results["interaction_ols"] = {
@@ -263,6 +251,7 @@ results["interaction_ols"] = {
 }
 print(json.dumps(results["interaction_ols"], indent=1))
 
+results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_saiz.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

@@ -156,6 +156,78 @@ def ols_cluster(x: list[list[float]], y: list[float], clusters: list[str | int])
     }
 
 
+def demean_by_unit(vals: list[float], units: list) -> list[float]:
+    """Unit-demean a series (Frisch-Waugh first step for unit FE)."""
+    means: dict = {}
+    counts: dict = {}
+    for v, u in zip(vals, units, strict=True):
+        means[u] = means.get(u, 0.0) + v
+        counts[u] = counts.get(u, 0) + 1
+    for u in means:
+        means[u] /= counts[u]
+    return [v - means[u] for v, u in zip(vals, units, strict=True)]
+
+
+def two_way_within(
+    units: list,
+    periods: list,
+    y: list[float],
+    cols: list[list[float]],
+) -> tuple[list[float], list[list[float]], list[list[float]], list]:
+    """Correct within transform for a two-way (unit + period) FE design.
+
+    Partials out unit FE by demeaning y, every continuous column, AND the
+    period dummies by unit (Frisch-Waugh). The period dummies must be
+    demeaned too: regressing demeaned y on demeaned X plus RAW period
+    dummies is a different model (it re-introduces unit means through the
+    dummies) and biases the coefficients. Drops the first period; returns
+    (y_dm, cols_dm, w_dm, kept_periods) where w_dm holds the demeaned
+    dummies with no intercept (the demeaned intercept is identically zero).
+    """
+    y_dm = demean_by_unit(y, units)
+    cols_dm = [demean_by_unit(c, units) for c in cols]
+    kept = sorted(set(periods))[1:]
+    counts: dict = {}
+    hits: dict = {}
+    for u, p in zip(units, periods, strict=True):
+        counts[u] = counts.get(u, 0) + 1
+        hits[(u, p)] = hits.get((u, p), 0) + 1
+    w_dm = [
+        [(1.0 if p == t else 0.0) - hits.get((u, t), 0) / counts[u] for t in kept]
+        for u, p in zip(units, periods, strict=True)
+    ]
+    return y_dm, cols_dm, w_dm, kept
+
+
+def sha_file(path: str) -> str:
+    """SHA-256 of a file (freshness keys for model outputs)."""
+    import hashlib
+
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def model_meta(script_path: str, data_paths: list[str]) -> dict:
+    """Freshness key stamped into model-output JSON.
+
+    Records the hashes of the estimator script, this module, and the
+    input database, so `scripts/audit_claims.py` can fail loudly when a
+    committed result predates its code or data instead of passing on
+    stale numbers. Data keys are repo-relative (portable across
+    checkouts); they resolve against the repo root."""
+    import os
+
+    root = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
+    return {
+        "script_sha": sha_file(script_path),
+        "ols_sha": sha_file(os.path.join(os.path.dirname(__file__), "ols.py")),
+        "data_sha": {p: sha_file(os.path.join(root, p)) for p in data_paths},
+    }
+
+
 def _mat_vec(m: list[list[float]], v: list[float]) -> list[float]:
     return [sum(row[j] * v[j] for j in range(len(v))) for row in m]
 
