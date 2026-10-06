@@ -82,7 +82,7 @@ order by anyo
   xAxisTitle="Año"
   y=viv_por_hogar
   yFmt="num2"
-  title="Viviendas por hogar (desde 2021)"
+  title="Viviendas por hogar (censo 2011, ECH, ECP)"
 />
 
 ## Valor tasado y esfuerzo de renta
@@ -98,6 +98,29 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
   y=eur_m2_libre
   yFmt="num0"
   title="Valor tasado vivienda libre (€/m²)"
+/>
+
+```sql nacional_real
+select m.anyo, round(m.eur_m2_libre * i100.ipc / i.ipc, 0) as eur_m2_2025
+from housing.mart_ccaa_anual m
+join housing.ipc_anual i on i.territorio = 'Nacional' and i.anyo = m.anyo
+join housing.ipc_anual i100 on i100.territorio = 'Nacional' and i100.anyo = 2025
+where m.ccaa = 'Nacional' and m.eur_m2_libre is not null
+order by m.anyo
+```
+
+En euros de 2025 (IPC base 2021) la recuperación es menor de lo que el
+nominal sugiere: el nivel nacional sigue un 27% por debajo de 2007 —
+y en Madrid ni siquiera existe recuperación (capital −7,5% real).
+
+<LineChart
+  data={nacional_real}
+  x=anyo
+  xFmt="0"
+  xAxisTitle="Año"
+  y=eur_m2_2025
+  yFmt="num0"
+  title="Valor tasado en euros de 2025 (€/m²)"
 />
 
 <LineChart
