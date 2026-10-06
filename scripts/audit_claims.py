@@ -848,6 +848,35 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_saiz_madrid: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
+    ratio = json.loads(
+        (Path(__file__).resolve().parents[1] / "artifacts" / "ratio_ccaa.json").read_text()
+    )
+    for desc, path, expected, tol in (
+        ("national r01", "national.r01", 511.6, 0.1),
+        ("national r07", "national.r07", 531.7, 0.1),
+        ("national r25", "national.r25", 551.6, 0.1),
+        ("stock growth 01-25", "national.stock_growth_01_25_pct", 28.8, 0.1),
+        ("pop growth 01-25", "national.pop_growth_01_25_pct", 19.5, 0.1),
+        ("Madrid ratio change", "ccaa.Madrid, Comunidad de.d_07_25", -29.7, 0.1),
+        ("Cataluña ratio change", "ccaa.Cataluña.d_07_25", -27.6, 0.1),
+        ("Asturias ratio change", "ccaa.Asturias, Principado de.d_07_25", 130.3, 0.1),
+        ("CyL ratio change", "ccaa.Castilla y León.d_07_25", 122.0, 0.1),
+        ("Pearson ratio-vs-price", "corr_ratio_vs_real_price.pearson", -0.385, 0.005),
+        ("Spearman ratio-vs-price", "corr_ratio_vs_real_price.spearman", -0.407, 0.005),
+        ("n", "corr_ratio_vs_real_price.n", 17, 0),
+        (
+            "median real price scarcity",
+            "groups.median_real_price.scarcity",
+            -8.6,
+            0.1,
+        ),
+        ("median real price overstock", "groups.median_real_price.overstock", -23.6, 0.1),
+    ):
+        got = _json_path(ratio, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 14
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 
