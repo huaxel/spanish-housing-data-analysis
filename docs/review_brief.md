@@ -141,8 +141,19 @@ Disclosed here so the reviewer judges them rather than finding them later:
   reruns the same diagnostics at municipal grain (310 municipios, real
   starts/completions, 0.00-1.00 constraint spread, density control) and
   **still** gets nulls, which closes the "provincial averaging hid it"
-  hypothesis. Review should weigh whether these nulls are evidence about the
-  mechanism, about the outcome (price *growth*, not levels), or about power.
+  hypothesis. The documented reopen condition ("a second province, price
+  levels") was then attempted in Madrid
+  (`docs/explorations/panel_saiz_municipal.md` §Madrid leg,
+  `explorations/panel_saiz_madrid.py`): the join works (28/28) but priced
+  municipios span constraint 0.00–0.25 against the province's 0.00–0.98,
+  so the test has no leverage where the question lives, and its one
+  significant association (negative price levels, t≈−2) is a
+  centrality gradient wearing a terrain proxy (periphery ~1,700 €/m² vs
+  flat NW suburbs ~3,200). Review should weigh whether the nulls are
+  evidence about the mechanism, about the outcome (price *growth*, not
+  levels), or about power — and whether the Madrid leg's failure is a
+  data-availability close or a sign the cross-sectional design itself
+  cannot separate terrain from centrality.
 
 ## Output
 
