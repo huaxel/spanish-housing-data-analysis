@@ -106,6 +106,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/hipotecas_rates.parquet",
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
+    "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/padron_municipios_mad.parquet",
     "data/raw/parquet/censo2011_municipios.parquet",
     "data/raw/diba_opendata.zip",
@@ -651,6 +652,15 @@ def main() -> None:
     con.execute("CREATE OR REPLACE TABLE valor_tasado_anual AS SELECT * FROM vt_df")
     con.register("rates_df", pa.Table.from_pylist(rates_rows))
     con.execute("CREATE OR REPLACE TABLE tipos_hipoteca_nacional AS SELECT * FROM rates_df")
+    ipc_buckets: dict[tuple[str, int], list[float]] = {}
+    for r in load_parquet("ipc_ccaa.parquet"):
+        ipc_buckets.setdefault((r["territorio"], r["anyo"]), []).append(r["ipc"])
+    ipc_rows = [
+        {"territorio": t, "anyo": a, "ipc": round(sum(v) / len(v), 3), "n_months": len(v)}
+        for (t, a), v in sorted(ipc_buckets.items())
+    ]
+    con.register("ipc_df", pa.Table.from_pylist(ipc_rows))
+    con.execute("CREATE OR REPLACE TABLE ipc_anual AS SELECT * FROM ipc_df")
     mun = [
         {
             "codigo": r["Código territorio"],
@@ -853,6 +863,7 @@ def main() -> None:
         "dim_territorio",
         "valor_tasado_anual",
         "tipos_hipoteca_nacional",
+        "ipc_anual",
         "valor_municipal_madrid",
         "muni_madrid",
         "censo2011_mad",
@@ -879,6 +890,8 @@ def main() -> None:
         "hipotecas_window": "2003+ monthly Viviendas; complete years in marts "
         "(prov NULL before 2003); importe in thousands of EUR; national rates table",
         "valor_window": "1995+ quarterly Libre/Protegida; marts carry Libre annual means + n_trim",
+        "ipc_window": "2002+ monthly general index (base 2021), CCAA + Nacional (+Ceuta/Melilla"
+        " separately); ipc_anual carries annual means + n_months",
         "known_gaps": [
             "provincial ECP population (Tempus3 56945) unreachable "
             "(volume-blocked; probed 2026-10-06) — provincia mart ends 2021",

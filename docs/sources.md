@@ -21,6 +21,7 @@ Verification (`make verify`) fails on changed bytes — re-fetch, don't edit.
 | INE Turísticas (Tempus3 39364/46141) | `.../DATOS_TABLA/39364`, `.../46141` | CCAA/provincia × mes, 2020– | December snapshot; duplicate uniprovincial series asserted identical |
 | INE Hipotecas CCAA/prov/rates (Tempus3 76316/76317/76315) | `.../DATOS_TABLA/76316` etc. | CCAA/provincia × mes (2003–), rates nacional | Viviendas only; territory↔measure positions swap between tables; importe in thousands of EUR |
 | INE ECV renta por hogar (Tempus3 9949) | `servicios.ine.es/wstempus/js/es/DATOS_TABLA/9949` | CCAA × encuesta, 2008– | renta_anyo = encuesta − 1; neta + con-alquiler-imputado (marts use neta); Base 2013 |
+| INE IPC general (Tempus3 76136) | `.../DATOS_TABLA/76136` | CCAA/Nacional × mes, 2002– | general index levels only (variations recomputed); base 2021; `ipc_anual` annual means |
 | MIVAU Valor Tasado (VDP006_01 CSV) | `cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv` | provincia/CCAA × trimestre, 1995– | `;`-separated, BOM; Régimen Libre/Protegida; quirks: CPRO literal `'null'` on aggregates, aggregate rows keyed by `Provincia='Total CCAA'`, Murcia aggregate with empty CODAUTO (`Murcia, Region de`, unaccented), no provincial rows for 28/30/31/33, no CCAA aggregate for Balears/Cantabria/Rioja (single-province fallback), 844 unpublished quarter-cells, one junk `Total CCAA`/empty row (skipped: empty Valor) |
 
 Unreachable (probed 2026-10-06, do not retry blindly): provincial ECP population

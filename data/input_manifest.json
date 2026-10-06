@@ -54,7 +54,9 @@
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
     "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
-    "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02"
+    "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
+    "data/raw/ipc_ccaa.json": "3fc94f9c62597754edbbd4c41a30b7431967570484cadaec4947a049b2eb466d",
+    "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -367,6 +369,17 @@
       "operation": "CENSOPV 2011",
       "accessed": "2026-10-06",
       "note": "missing cells dropped"
+    },
+    "data/raw/ipc_ccaa.json": {
+      "api": "wstempus/DATOS_TABLA/76136",
+      "operation": "IPC general",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/ipc_ccaa.parquet": {
+      "api": "wstempus/DATOS_TABLA/76136",
+      "operation": "IPC general",
+      "accessed": "2026-10-06",
+      "note": "general index levels only; base 2021"
     }
   }
 }

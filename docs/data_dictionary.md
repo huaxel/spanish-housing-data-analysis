@@ -87,3 +87,10 @@ Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
 ## dim_territorio
 
 `cpro`, `provincia`, `ccaa` — canonical mapping (MIVAU codes, INE names).
+
+## ipc_anual
+
+INE general CPI (base 2021), CCAA + Nacional (+ Ceuta/Melilla separately):
+`territorio`, `anyo`, `ipc` (annual mean), `n_months` (completeness flag).
+Deflator for real-terms levels — join on territory/year, never average
+across territories.

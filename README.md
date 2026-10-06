@@ -74,10 +74,13 @@ at port 8091 (binds to all interfaces).
 | INE Turísticas (VTE) | Registered tourist dwellings, Dec snapshots from 2020 |
 | ECP edad/tamaño + Censo 2011 | 20–34 cohort, 1-person households; 2011 vacancy/vintage splits |
 | Municipios (Madrid + Barcelona) | Valor tasado + padrón (Mad); sale/rent/burdens via DIBA (BCN) |
+| INE IPC general (base 2021) | Monthly CPI, CCAA + Nacional → `ipc_anual`; deflator for real-terms levels |
 | Evidence marts | `mart_ccaa_anual`, `mart_provincia_anual` + `dim_territorio` + `muni_*` |
 
 Annual pre-2021 households (ECH) and the Censo 2021 anchor check are queued
 sources — see [project plan](docs/project_plan.md). Missing cells stay missing.
+All municipal €/m² are nominal unless stated; Madrid in 2025 euros: capital
+−7.5%, Fuenlabrada −28.4%, Getafe −30.3%, Parla −38.1% real (2007–25).
 
 ## License
 

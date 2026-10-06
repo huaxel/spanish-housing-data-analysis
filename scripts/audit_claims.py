@@ -17,7 +17,20 @@ from spanish_housing.data_paths import PROCESSED  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 
+
 # (doc, description, sql, expected, tolerance)
+def _real_change_sql(municipio: str) -> str:
+    """Real 2007-25 % change of Madrid municipal €/m² (Madrid CPI deflator)."""
+    i25 = "(SELECT ipc FROM ipc_anual WHERE territorio='Madrid, Comunidad de' AND anyo=2025)"
+    i07 = "(SELECT ipc FROM ipc_anual WHERE territorio='Madrid, Comunidad de' AND anyo=2007)"
+    v25 = "MAX(CASE WHEN m.anyo=2025 THEN m.eur_m2 END)"
+    v07 = "MAX(CASE WHEN m.anyo=2007 THEN m.eur_m2 END)"
+    return (
+        f"SELECT ({v25} - {v07} * {i25} / {i07}) / ({v07} * {i25} / {i07}) * 100 "
+        f"FROM valor_municipal_madrid m WHERE m.municipio='{municipio}'"
+    )
+
+
 CLAIMS: list[tuple[str, str, str, float, float]] = [
     (
         "synthesis",
@@ -336,6 +349,16 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         8.0,
         0.1,
     ),
+    ("madrid", "capital real change 2007-25 (Madrid CPI)", _real_change_sql("Madrid"), -7.5, 0.15),
+    (
+        "madrid",
+        "Fuenlabrada real change 2007-25 (Madrid CPI)",
+        _real_change_sql("Fuenlabrada"),
+        -28.4,
+        0.15,
+    ),
+    ("madrid", "Getafe real change 2007-25 (Madrid CPI)", _real_change_sql("Getafe"), -30.3, 0.15),
+    ("madrid", "Parla real change 2007-25 (Madrid CPI)", _real_change_sql("Parla"), -38.1, 0.15),
     (
         "boom_bust",
         "viv/1000 2021-25 population effect",

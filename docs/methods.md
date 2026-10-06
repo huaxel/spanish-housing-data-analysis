@@ -56,6 +56,12 @@
   before 2003) and a `tipos_hipoteca_nacional` table. CCAA/provincia grain
   for volumes; rates national-only. Layout swap between tables handled
   structurally (territory↔measure positions differ).
+- **IPC (INE, 76136, base 2021):** general consumer-price index, monthly,
+  CCAA + Nacional (+ Ceuta/Melilla separately). `ipc_anual` carries annual
+  means with an `n_months` flag. This is the deflator for real-terms price
+  levels — join on territory/year, never average across territories, and
+  note the base (2021 = 100: Madrid 71.2 in 2007, i.e. +40% cumulative
+  inflation to 2025, which is why nominal recoveries mislead).
 - **Edades (ECP 56940 single-year detail, CCAA):** `scripts/parse_edad.py`
   aggregates to 0–19/20–34/35–49/50–64/65+ at 1-January. Overlap guards
   verified arithmetically: single years 85–99 and both centenarian series
