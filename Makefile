@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build verify audit evidence-install evidence-dev evidence-build clean
+.PHONY: sync test lint fetch build verify audit dashboard evidence-install evidence-dev evidence-build clean
 
 sync:
 	uv sync --group dev
@@ -41,6 +41,10 @@ audit:
 
 # Full local gate: fetch -> build -> verify -> audit -> test
 gates: fetch build verify audit test
+
+dashboard:
+	uv run python scripts/render_preview.py
+	python3 -m http.server -d artifacts/preview 8091 --bind 0.0.0.0
 
 evidence-install:
 	cd evidence && npm install

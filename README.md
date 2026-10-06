@@ -34,12 +34,16 @@ uv sync --group dev
 make gates   # fetch -> build -> verify -> test
 ```
 
-Then, for the explorer:
+Then, for the dashboard:
 
 ```bash
-make evidence-install
-make evidence-dev   # open the printed localhost URL
+uv run python scripts/render_preview.py
+python3 -m http.server -d artifacts/preview 8091 --bind 0.0.0.0
+# open http://<host>:8091/ — Nacional + per-CCAA charts, no build step
 ```
+
+(The Evidence app in `evidence/` stays scaffolded for when upstream
+fixes its build; the static dashboard above is the working explorer.)
 
 `data/` artefacts are git-ignored and pinned by `data/input_manifest.json`
 (SHA-256). Never edit `data/raw` by hand — re-run `make fetch`.
