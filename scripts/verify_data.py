@@ -195,6 +195,13 @@ def main() -> int:
         "THEN viviendas END) FROM censo2011_vintage WHERE ccaa = '' AND provincia = ''"
     ).fetchone()
     print(f"vintage: new-vacant share nacional={vin[0] / vin[1]:.3f}")
+    ten = con.execute(
+        "SELECT SUM(hogares) FROM censo2011_tenencia WHERE ccaa = '' AND provincia = '' "
+        "AND tamano = 'Total (tamaño del hogar)' "
+        "AND tenencia = 'Propia, por compra, con pagos pendientes (hipotecas)'"
+    ).fetchone()[0]
+    print(f"tenencia: mortgaged households nacional 2011={ten}")
+    assert ten == 5940928, f"mortgaged anchor drifted: {ten}"
     assert vin[0] is not None and vin[1] is not None, "vintage nacional missing"
     cen_v = con.execute("SELECT COUNT(DISTINCT municipio) FROM censo2011_val").fetchone()[0]
     print(f"censo2011_val: municipios={cen_v}")

@@ -52,7 +52,9 @@
     "data/raw/transmisiones.csv": "b6d9cc60eca2c82f40d057b209e1f9707389d01f3e13506ef6663f10e6697ecd",
     "data/raw/parquet/transmisiones.parquet": "a1fd79b11cb59bc26142022cc5fcf45083dee93577ecb807e4d521aa6ba8d0c5",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
-    "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a"
+    "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
+    "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
+    "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02"
   },
   "sources": {
     "data/raw/parque_viviendas.csv": {
@@ -352,6 +354,19 @@
       "operation": "CENSOPV 2011",
       "accessed": "2026-10-06",
       "note": "'..' suppressed kept missing"
+    },
+    "data/raw/censo2011_tenencia.csv": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv",
+      "publisher": "INE",
+      "operation": "CENSOPV 2011",
+      "accessed": "2026-10-06"
+    },
+    "data/raw/parquet/censo2011_tenencia.parquet": {
+      "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv",
+      "publisher": "INE",
+      "operation": "CENSOPV 2011",
+      "accessed": "2026-10-06",
+      "note": "missing cells dropped"
     }
   }
 }

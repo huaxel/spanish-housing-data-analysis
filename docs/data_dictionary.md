@@ -49,6 +49,12 @@ municipios with published appraisals (28, capital complete 2005–2025).
 Same split for 9 Valencia focus municipios (coast + capitals) — the
 second-home coast (Torrevieja 51%) vs vacant towns (Dénia 31%).
 
+## censo2011_tenencia
+
+`ccaa`, `provincia`, `tamano`, `tenencia`, `hogares` — 2011 household size
+× tenure (pagada/hipoteca/herencia/alquilada/cedida/otra). Mortgaged anchor
+5,940,928.
+
 ## censo2011_vintage
 
 `ccaa`, `provincia`, `tipo` (principal/secundaria/vacia), `vintage`

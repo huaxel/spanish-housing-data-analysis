@@ -373,3 +373,10 @@ def test_transmisiones_strip_code():
     assert strip_code("18 Ceuta") == "Ceuta"
     assert strip_code("") == ""
     assert strip_code("Total Nacional") == "Total Nacional"
+
+
+def test_tenencia_num_markers():
+    from fetch_censo2011_tenencia import num
+
+    assert num("18.083.692") == 18083692
+    assert num("") is None and num("..") is None and num(".") is None

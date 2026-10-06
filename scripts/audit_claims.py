@@ -168,6 +168,15 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        "credit",
+        "mortgaged households Nacional 2011",
+        "SELECT SUM(hogares) FROM censo2011_tenencia WHERE ccaa = '' AND provincia = '' "
+        "AND tamano = 'Total (tamaño del hogar)' "
+        "AND tenencia = 'Propia, por compra, con pagos pendientes (hipotecas)'",
+        5940928.0,
+        1.0,
+    ),
+    (
         "bust",
         "new-vacant share Nacional 2011 (boom fringe)",
         "SELECT ROUND(SUM(CASE WHEN tipo='vacia' AND vintage='De 2002 a 2011' "

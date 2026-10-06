@@ -829,6 +829,14 @@ def main() -> None:
     ]
     con.register("vint_df", pa.Table.from_pylist(vint_rows))
     con.execute("CREATE OR REPLACE TABLE censo2011_vintage AS SELECT * FROM vint_df")
+    ten_rows = [
+        {"ccaa": r["ccaa"], "provincia": r["provincia"], "tamano": r["tamano"],
+         "tenencia": r["tenencia"], "hogares": r["hogares"]}
+        for r in load_parquet("censo2011_tenencia.parquet")
+    ]
+    con.register("ten_df", pa.Table.from_pylist(ten_rows))
+    con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
+    con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
     for name in (
         "mart_provincia_anual",
         "mart_ccaa_anual",
@@ -842,6 +850,7 @@ def main() -> None:
         "censo2011_bcn",
         "censo2011_val",
         "censo2011_vintage",
+        "censo2011_tenencia",
     ):
         con.execute(f"COPY (SELECT * FROM {name}) TO '{PROCESSED / name}.parquet' (FORMAT PARQUET)")
     coverage = {

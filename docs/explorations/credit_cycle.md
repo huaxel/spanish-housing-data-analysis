@@ -33,6 +33,16 @@ cheap money. The fixed-rate share shift (fijo ≈ variable by 2024 vs
 variable-dominated pre-2015) is in `tipos_hipoteca_nacional` for the
 follow-up on payment sensitivity.
 
+## Update: leverage geography at the trough (`censo2011_tenencia`)
+
+Mortgaged share of households, 2011: Valencia 36.7%, Murcia 36.2%, Madrid
+34.8%, Cataluña 34.1% — against Galicia 23.0%, Asturias 28.4%. The regions
+that fell hardest (Cataluña −46%, Madrid −42%, Valencia −32% IPV 2007–13)
+were the most leveraged; the mildest falls sat on outright ownership.
+5.94M households paid mortgages at the trough (32.9% nationally; rented
+only 13.5%). Negative equity's geography is leverage geography — the bust's
+pain distributed by balance sheet, not just by price fall.
+
 ## What this does to Hypothesis 01
 
 The per-window instability (±0.5 CCAA, ≈0 provincial) now has a name:
