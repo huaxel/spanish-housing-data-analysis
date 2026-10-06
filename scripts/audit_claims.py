@@ -657,6 +657,62 @@ SENSITIVITY_CLAIMS = [
     ("saiz_gis_probe", "Pyrenees steep 180m", "pyrenees_steep", "180m", 0.853, 0.005),
 ]
 
+# (doc, description, json path, expected, tolerance) against
+# explorations/panel_saiz_results.json -- terrain x migration diagnostics.
+PANEL_SAIZ_CLAIMS = [
+    (
+        "panel_saiz",
+        "premise build coef /0.1",
+        "premise_build_on_constraint.coef_per_0p1",
+        -0.054,
+        0.005,
+    ),
+    (
+        "panel_saiz",
+        "premise build se /0.1",
+        "premise_build_on_constraint.se_per_0p1",
+        0.165,
+        0.005,
+    ),
+    (
+        "panel_saiz",
+        "exclusion d_eur coef /0.1",
+        "exclusion_d_eur_on_constraint.coef_per_0p1",
+        -0.052,
+        0.005,
+    ),
+    (
+        "panel_saiz",
+        "exclusion d_eur se /0.1",
+        "exclusion_d_eur_on_constraint.se_per_0p1",
+        0.075,
+        0.005,
+    ),
+    ("panel_saiz", "median constraint", "median_constraint", 0.445, 0.005),
+    ("panel_saiz", "low-constraint 2SLS tau", "low_constraint.tsls.tau", 0.636, 0.005),
+    ("panel_saiz", "low-constraint first-stage F", "low_constraint.first_stage_F", 40.28, 0.05),
+    ("panel_saiz", "low-constraint AR upper", "low_constraint.ar_set.1", 1.3, 0.005),
+    ("panel_saiz", "high-constraint 2SLS tau", "high_constraint.tsls.tau", 0.74, 0.005),
+    (
+        "panel_saiz",
+        "high-constraint first-stage F",
+        "high_constraint.first_stage_F",
+        22.82,
+        0.05,
+    ),
+    ("panel_saiz", "high-constraint AR upper", "high_constraint.ar_set.1", 1.3, 0.005),
+    ("panel_saiz", "low-constraint OLS tau", "low_constraint.ols.tau", 0.066, 0.005),
+    ("panel_saiz", "high-constraint OLS tau", "high_constraint.ols.tau", 0.246, 0.005),
+    ("panel_saiz", "interaction coefficient", "interaction_ols.interaction", 0.288, 0.005),
+    (
+        "panel_saiz",
+        "interaction wild p",
+        "interaction_ols.wild_p_interaction",
+        0.3313,
+        0.005,
+    ),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -707,6 +763,13 @@ def main() -> int:
     failures += not ok
 
     total = len(CLAIMS) + len(IV_CLAIMS) + len(PROBE_CLAIMS) + len(SENSITIVITY_CLAIMS) + 1
+    saiz_panel = json.loads((expl / "panel_saiz_results.json").read_text())
+    for doc, desc, path, expected, tol in PANEL_SAIZ_CLAIMS:
+        got = _json_path(saiz_panel, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(PANEL_SAIZ_CLAIMS)
     print(f"{total - failures}/{total} claims hold")
     return 1 if failures else 0
 

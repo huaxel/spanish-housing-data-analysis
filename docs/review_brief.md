@@ -43,7 +43,7 @@ analysis, not to improve the code.
 ```bash
 uv sync --group dev
 make gates      # verify + audit + test + lint
-make audit      # 109 headline doc numbers re-queried against marts/models/probe
+make audit      # 124 headline doc numbers re-queried against marts/models/probe
 ```
 
 `make audit` is the anti-drift device: every quotable number in the docs is a
@@ -133,7 +133,12 @@ Disclosed here so the reviewer judges them rather than finding them later:
   weeks not days" claim was **wrong** — the full 52-provincia series takes
   ~2 minutes and 2.6 GB from public Copernicus DEM. That probe needs
   reviewing too, and its own exclusion argument (terrain correlates with
-  coastal amenity/tourism) is the sharpest open question on the list.
+  coastal amenity/tourism) is the sharpest open question on the list —
+  **now partly answered against it**: `docs/explorations/panel_saiz.md`
+  finds a *null* direct terrain→price association, a *null* build-suppression
+  premise, and a right-signed but indistinguishable mechanism
+  (high-constraint τ 0.74 vs low 0.64). Review should weigh whether that
+  null is evidence about the mechanism or about provincia averaging.
 
 ## Output
 

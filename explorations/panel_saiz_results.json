@@ -1,0 +1,64 @@
+{
+  "premise_build_on_constraint": {
+    "coef_per_0p1": -0.054,
+    "se_per_0p1": 0.165,
+    "n": 1020,
+    "clusters": 51,
+    "note": "cross-sectional, year FE, no province FE (constraint is time-invariant); dwellings added per 1000 pop; negative == Saiz premise holds"
+  },
+  "exclusion_d_eur_on_constraint": {
+    "coef_per_0p1": -0.052,
+    "se_per_0p1": 0.075,
+    "n": 1017,
+    "clusters": 51,
+    "note": "cross-sectional, year FE; direct terrain -> price channel; large == design B exclusion at risk"
+  },
+  "median_constraint": 0.445,
+  "low_constraint": {
+    "spec": "low_constraint",
+    "n": 520,
+    "clusters": 26,
+    "ols": {
+      "tau": 0.066,
+      "se": 0.095
+    },
+    "tsls": {
+      "tau": 0.636,
+      "se": 0.176
+    },
+    "first_stage_F": 40.28,
+    "ar_set": [
+      0.25,
+      1.3
+    ]
+  },
+  "high_constraint": {
+    "spec": "high_constraint",
+    "n": 480,
+    "clusters": 24,
+    "ols": {
+      "tau": 0.246,
+      "se": 0.04
+    },
+    "tsls": {
+      "tau": 0.74,
+      "se": 0.148
+    },
+    "first_stage_F": 22.82,
+    "ar_set": [
+      0.1,
+      1.3
+    ]
+  },
+  "interaction_ols": {
+    "tau_exposure": 0.009,
+    "tau_exposure_se": 0.166,
+    "interaction": 0.288,
+    "interaction_se": 0.264,
+    "wild_p_interaction": 0.3313,
+    "wild_t_interaction": 1.089,
+    "n": 1000,
+    "clusters": 50,
+    "note": "descriptive; exposure is endogenous here, so do not read as causal"
+  }
+}

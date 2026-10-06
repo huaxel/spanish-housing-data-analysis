@@ -24,6 +24,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Tourist intensity panel](docs/explorations/panel_tourist.md) — municipal null: tourist changes don't track price/rent accelerations (wild-p 0.45–0.94)
 - [**Independent review brief**](docs/review_brief.md) — milestone-5 package (scope, reproduction, adversarial questions, disclosed limitations); **review not yet run**
 - [Saiz GIS probe](docs/explorations/saiz_gis_probe.md) — design B feasibility: full 52-provincia developable-land series, 2.6 GB / ~2 min from public Copernicus DEM; the memo's "data not in reach" was wrong
+- [Land constraint vs the migration→price gradient](docs/explorations/panel_saiz.md) — null with precision: premise and direct-price checks null, mechanism right-signed but indistinguishable (high τ 0.74 vs low 0.64)
 - [Affordability: years of income for 90 m²](docs/explorations/affordability.md)
 - [Young-adult squeeze: collapse, refill, two household surges](docs/explorations/young_squeeze.md)
 - [Credit cycle: the bust's other half](docs/explorations/credit_cycle.md)
