@@ -15,6 +15,13 @@ fine print in sources before quoting beyond averages.
 | Badalona | 1,787 → 2,672 (+50%) | 541 → 883 (+63%) | 220k → 227k |
 | Santa Coloma de Gramenet | 1,768 → 2,310 (+31%) | 481 → 702 (+46%) | 120k → 121k |
 
+All €/m² above are nominal. Deflated by Cataluña CPI (79.0→97.6, base
+2021; `ipc_anual`), 2013→24 real gains: Barcelona **+33.4%**, Hospitalet
++19.9%, Badalona +21.0%, Sant Adrià +13.7%, Santa Coloma +5.7%. The
+contrast with Madrid is the point: Madrid's recovery was nominal-only
+(capital −7.5% real), Barcelona's was real everywhere — a demand recovery
+against tight stock, not a nominal illusion over stagnation.
+
 ## Burdens 2022: the market prices out its workers
 
 Average rent took **51% of gross income in Barcelona** (54–58% in Badalona,

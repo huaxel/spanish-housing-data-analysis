@@ -19,6 +19,19 @@ con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 
 
 # (doc, description, sql, expected, tolerance)
+def _bcn_real_sql(municipio: str) -> str:
+    """Real 2013-24 % change of Barcelona-metro sale €/m² (Cataluña CPI)."""
+    i24 = "(SELECT ipc FROM ipc_anual WHERE territorio='Cataluña' AND anyo=2024)"
+    i13 = "(SELECT ipc FROM ipc_anual WHERE territorio='Cataluña' AND anyo=2013)"
+    v24 = "MAX(CASE WHEN m.anyo=2024 THEN m.sale_eur_m2 END)"
+    v13 = "MAX(CASE WHEN m.anyo=2013 THEN m.sale_eur_m2 END)"
+    safe = municipio.replace("'", "''")
+    return (
+        f"SELECT ({v24} - {v13} * {i24} / {i13}) / ({v13} * {i24} / {i13}) * 100 "
+        f"FROM muni_bcn m WHERE m.municipio='{safe}'"
+    )
+
+
 def _real_change_sql(municipio: str) -> str:
     """Real 2007-25 % change of Madrid municipal €/m² (Madrid CPI deflator)."""
     i25 = "(SELECT ipc FROM ipc_anual WHERE territorio='Madrid, Comunidad de' AND anyo=2025)"
@@ -405,6 +418,41 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "FROM c JOIN mart_provincia_anual m ON c.cpro = m.cpro WHERE m.anyo = 2021",
         0.77,
         0.03,
+    ),
+    (
+        "barcelona",
+        "Barcelona city real sale change 2013-24",
+        _bcn_real_sql("Barcelona"),
+        33.4,
+        0.15,
+    ),
+    (
+        "barcelona",
+        "Hospitalet real sale change 2013-24",
+        _bcn_real_sql("L'Hospitalet de Llobregat"),
+        19.9,
+        0.15,
+    ),
+    (
+        "barcelona",
+        "Badalona real sale change 2013-24",
+        _bcn_real_sql("Badalona"),
+        21.0,
+        0.15,
+    ),
+    (
+        "barcelona",
+        "Sant Adria real sale change 2013-24",
+        _bcn_real_sql("Sant Adrià de Besòs"),
+        13.7,
+        0.15,
+    ),
+    (
+        "barcelona",
+        "Santa Coloma real sale change 2013-24",
+        _bcn_real_sql("Santa Coloma de Gramenet"),
+        5.7,
+        0.15,
     ),
     (
         "boom_bust",
