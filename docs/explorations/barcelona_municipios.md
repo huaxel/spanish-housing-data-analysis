@@ -1,5 +1,11 @@
 # Barcelona: the burdened metropolis and its stretched corona
 
+> Pre-2013 municipal prices: closed 2026-10-06. IDESCAT Anuari is
+> comarca-grain (nothing over valor tasado) and the 2000–12 TECNIGRAMA
+> series is survey offer-prices for big cities only — methodologically
+> incompatible with DIBA transactions. DIBA from 2013 stands; revisit
+> only for registry-based municipal history.
+
 From `muni_bcn` (Diputació de Barcelona open data + Padrón: sale €/m²
 2013–, rents 2005–, registered vacant/tourist, rent/mortgage burdens
 2015–2022, population). Burden indicators are DIBA-computed averages
