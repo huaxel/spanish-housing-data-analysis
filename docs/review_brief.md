@@ -194,3 +194,36 @@ Return findings as: file → claim → why it fails → suggested remedy class
 (rewrite / narrow / remove / disclose / re-run), ordered by severity. Append the
 verdict block and the reviewer's identity + date at the bottom of this file so
 the read becomes part of the record.
+
+## Review record (2026-10-06)
+
+Two independent opposite-family reviewers executed this brief via
+orchestrated agents (read-only; findings in /tmp, since removed).
+All 16 findings were verified against the code, fixed or narrowed in
+the repo, and re-gated (199/199 claims, 53 tests) — commits `1e140de`
+(Spearman fix), `42682f2` (2SLS/AR/language), `fc47232` (all 16
+adjudications), `44eb9b3` (lint).
+
+**Section 1 (descriptive) — reviewer: Codex / GPT-6-Sol medium.**
+Verdict: **OVERCLAIMED** (rent–vacancy null; long-arc interpretation;
+two-group/only-two-regions framing; boom–bust causal rhetoric). 9
+findings: buggy Spearman (confirmed, fixed, re-ran — rent-vacancy
+−0.024→−0.507, DIBA-SERPAVI 0.82→0.866); long-arc direction backwards
+(rewritten); 13/17 not 2 CCAA falling (corrected); regime-1 rhetoric
+narrowed; two-group disclosed as selected tails; regime-3 net-net
+terminology; SERPAVI yield sample/quartiles corrected; censo probe
+grain fixed + build-time seam guard added; methods base-year wording
+fixed. Numbers reproducible; conclusions did not follow.
+
+**Section 2 (causal IV) + terrain — reviewer: Copilot CLI.** Verdict:
+**OVERCLAIMED** (IV) / **SOUND-WITH-CAVEATS** (terrain). 7 findings:
+AR intervals mislabeled (f_crit=10.0 placeholder — "95%" removed
+everywhere); 2SLS bread-transpose omission (fixed + regression test +
+re-run; SEs shift 3rd decimal); trends≠rejection, multiplier
+unadjudicated, pooled headline, appraisal selection, "independent
+nulls" — all narrowed (bust-only +0.84 headline primary; convergent
+non-independent diagnostics).
+
+**Milestone-5 gate: satisfied.** Independent read before release —
+both verdicts adjudicated in-repo. Remaining release act: custom domain
+(user DNS action).
