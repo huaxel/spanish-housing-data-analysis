@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import date
 from pathlib import Path
 
 from .data_paths import MANIFEST
@@ -38,6 +39,17 @@ def record(relative_path: str, source: dict) -> None:
     man.setdefault("sha256", {})[relative_path] = sha256(full)
     man.setdefault("sources", {})[relative_path] = source
     MANIFEST.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def snapshot_age_days(man: dict, today: date | None = None) -> int | None:
+    """Age of the manifest snapshot in days; None if missing/unparseable."""
+    snap = man.get("snapshot_date")
+    if not snap:
+        return None
+    try:
+        return ((today or date.today()) - date.fromisoformat(snap)).days
+    except ValueError:
+        return None
 
 
 def check(expected: dict[str, str]) -> tuple[list[str], list[str]]:

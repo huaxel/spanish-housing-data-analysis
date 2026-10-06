@@ -380,3 +380,15 @@ def test_tenencia_num_markers():
 
     assert num("18.083.692") == 18083692
     assert num("") is None and num("..") is None and num(".") is None
+
+
+def test_manifest_snapshot_age():
+    from datetime import date
+
+    from spanish_housing import manifest
+
+    assert manifest.snapshot_age_days({"snapshot_date": "2026-10-06"}, date(2026, 10, 6)) == 0
+    assert manifest.snapshot_age_days({"snapshot_date": "2026-10-06"}, date(2027, 1, 1)) == 87
+    assert manifest.snapshot_age_days({"snapshot_date": None}) is None
+    assert manifest.snapshot_age_days({}) is None
+    assert manifest.snapshot_age_days({"snapshot_date": "not-a-date"}) is None

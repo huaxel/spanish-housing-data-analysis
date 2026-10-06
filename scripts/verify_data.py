@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -23,6 +24,17 @@ def main() -> int:
         print(f"FAIL missing={missing} mismatched={mismatched}")
         return 1
     print(f"manifest OK: {len(man['sha256'])} pinned files")
+    age = manifest.snapshot_age_days(man)
+    warn_days = int(os.environ.get("MANIFEST_WARN_DAYS", "90"))
+    if age is None:
+        print("WARNING: manifest snapshot_date missing/unparseable")
+    else:
+        print(f"manifest snapshot: {man['snapshot_date']} ({age}d old)")
+        if age > warn_days:
+            print(
+                f"WARNING: snapshot is {age}d old (> {warn_days}d) — "
+                "re-run make fetch to refresh (upstream tables get revised)"
+            )
     if not MARTS_DB.exists():
         print("marts.duckdb absent — run make build")
         return 1

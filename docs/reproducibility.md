@@ -13,7 +13,12 @@ make gates   # lint -> fetch -> build -> verify -> audit -> test
   `data/processed/marts.duckdb`, `mart_*.parquet`, `dim_territorio.parquet`,
   `coverage.json`.
 - `make verify` — manifest hashes + mart integrity (51 territories, no null
-  keys, IPV base identity via build).
+  keys, IPV base identity via build). Warns when the manifest snapshot is
+  older than 90 days (`MANIFEST_WARN_DAYS=` overrides) — upstream tables get
+  revised, so a stale snapshot means `make fetch` may not reproduce bytes.
+- `make backup` / `make restore FILE=` — timestamped tarball of `data/`
+  (git-ignored, not redistributable) under `~/backups/spanish-housing`
+  (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
 - `make audit` — 38 headline doc numbers re-queried against the marts; fails
   on drift. Add a claim whenever a doc states a quotable number.
 - `make test` / `make lint` — offline parser/join-rule tests, ruff.

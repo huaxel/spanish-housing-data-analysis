@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build verify audit dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
+.PHONY: sync test lint fetch build verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
 
 sync:
 	uv sync --group dev
@@ -65,6 +65,22 @@ evidence-smoke:
 
 evidence-smoke-browser:
 	bash scripts/smoke_browser.sh
+
+# Local-only copy of data/ (git-ignored, publisher data). Override the
+# destination with BACKUP_DIR=/path/to/dir. Restore with:
+#   make restore FILE=<tarball>   (re-verifies after unpacking)
+BACKUP_DIR ?= $(HOME)/backups/spanish-housing
+BACKUP_FILE = $(BACKUP_DIR)/spanish-housing-data-$(shell date +%F).tar.gz
+
+backup:
+	mkdir -p $(BACKUP_DIR)
+	tar -czf $(BACKUP_FILE) data/
+	@echo "wrote $(BACKUP_FILE)"
+
+restore:
+	@if [ -z "$(FILE)" ]; then echo "usage: make restore FILE=<tarball>"; exit 1; fi
+	tar -xzf $(FILE)
+	uv run python scripts/verify_data.py
 
 clean:
 	rm -rf .pytest_cache src/spanish_housing/__pycache__ tests/__pycache__
