@@ -39,19 +39,33 @@ def main() -> None:
         tmp_path = tmp.name
     Path(tmp_path).replace(RAW_CSV)
     _, rows = csvx.read_csv_records(RAW_CSV, delimiter="\t")
-    out = [{"ccaa": r["Comunidades y Ciudades Autónomas"], "provincia": r["Provincias"],
-            "tamano": r["Tamaño del hogar"], "tenencia": r["Régimen de tenencia"],
-            "hogares": num(r["Total"])}
-           for r in rows]
+    out = [
+        {
+            "ccaa": r["Comunidades y Ciudades Autónomas"],
+            "provincia": r["Provincias"],
+            "tamano": r["Tamaño del hogar"],
+            "tenencia": r["Régimen de tenencia"],
+            "hogares": num(r["Total"]),
+        }
+        for r in rows
+    ]
     if not out:
         raise SystemExit("tenencia: zero rows — format changed?")
     n = csvx.write_parquet([r for r in out if r["hogares"] is not None], RAW_PARQUET)
-    manifest.record("data/raw/censo2011_tenencia.csv",
-                    {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011",
-                     "accessed": "2026-10-06"})
-    manifest.record("data/raw/parquet/censo2011_tenencia.parquet",
-                    {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011",
-                     "accessed": "2026-10-06", "note": "missing cells dropped"})
+    manifest.record(
+        "data/raw/censo2011_tenencia.csv",
+        {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011", "accessed": "2026-10-06"},
+    )
+    manifest.record(
+        "data/raw/parquet/censo2011_tenencia.parquet",
+        {
+            "url": URL,
+            "publisher": "INE",
+            "operation": "CENSOPV 2011",
+            "accessed": "2026-10-06",
+            "note": "missing cells dropped",
+        },
+    )
     print(f"tenencia: {n} valued rows ({len(out) - n} missing)")
 
 

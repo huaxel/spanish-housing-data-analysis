@@ -22,9 +22,11 @@ from spanish_housing.data_paths import RAW  # noqa: E402
 URL = "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
 RAW_CSV = RAW / "censo2011_vintage.csv"
 RAW_PARQUET = RAW / "parquet" / "censo2011_vintage.parquet"
-TIPOS = {"2.1 Total viviendas principales": "principal",
-         "2.21 Viviendas secundarias": "secundaria",
-         "2.22 Viviendas vacias": "vacia"}
+TIPOS = {
+    "2.1 Total viviendas principales": "principal",
+    "2.21 Viviendas secundarias": "secundaria",
+    "2.22 Viviendas vacias": "vacia",
+}
 
 
 def main() -> None:
@@ -43,21 +45,32 @@ def main() -> None:
         v = (r["Total"] or "").strip()
         # Spanish thousands use dots here ('18.083.692'); '..' = suppressed.
         num = int(v.replace(".", "").replace(",", "")) if v not in ("", "..") else None
-        out.append({"ccaa": r["Comunidades y Ciudades Autónomas"],
-                    "provincia": r["Provincias"],
-                    "tipo": TIPOS[r["Tipo de vivienda"]],
-                    "vintage": r["Año de construcción (agregado) del edificio"],
-                    "viviendas": num})
+        out.append(
+            {
+                "ccaa": r["Comunidades y Ciudades Autónomas"],
+                "provincia": r["Provincias"],
+                "tipo": TIPOS[r["Tipo de vivienda"]],
+                "vintage": r["Año de construcción (agregado) del edificio"],
+                "viviendas": num,
+            }
+        )
     if not out:
         raise SystemExit("vintage: zero rows — format changed?")
     n = csvx.write_parquet(out, RAW_PARQUET)
-    manifest.record("data/raw/censo2011_vintage.csv",
-                    {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011",
-                     "accessed": "2026-10-06"})
-    manifest.record("data/raw/parquet/censo2011_vintage.parquet",
-                    {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011",
-                     "accessed": "2026-10-06",
-                     "note": "'..' suppressed kept missing"})
+    manifest.record(
+        "data/raw/censo2011_vintage.csv",
+        {"url": URL, "publisher": "INE", "operation": "CENSOPV 2011", "accessed": "2026-10-06"},
+    )
+    manifest.record(
+        "data/raw/parquet/censo2011_vintage.parquet",
+        {
+            "url": URL,
+            "publisher": "INE",
+            "operation": "CENSOPV 2011",
+            "accessed": "2026-10-06",
+            "note": "'..' suppressed kept missing",
+        },
+    )
     print(f"vintage: {n} rows; skipped types {sorted(set(skipped))}")
 
 

@@ -14,16 +14,36 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
+
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 
-COLS = ["ccaa", "anyo", "viv_por_1000_hab", "viv_por_hogar", "eur_m2_libre",
-        "ipv_general", "afford_90m2_years", "hip_viv_num", "share_20_34",
-        "share_1persona", "hogares", "poblacion", "share_nueva", "trx_total",
-        "viv_turisticas", "share_turistica_no_princ", "pop_source"]
-rows = [dict(zip(COLS, r, strict=True)) for r in con.execute(
-    f"SELECT {', '.join(COLS)} FROM mart_ccaa_anual ORDER BY ccaa, anyo").fetchall()]
+COLS = [
+    "ccaa",
+    "anyo",
+    "viv_por_1000_hab",
+    "viv_por_hogar",
+    "eur_m2_libre",
+    "ipv_general",
+    "afford_90m2_years",
+    "hip_viv_num",
+    "share_20_34",
+    "share_1persona",
+    "hogares",
+    "poblacion",
+    "share_nueva",
+    "trx_total",
+    "viv_turisticas",
+    "share_turistica_no_princ",
+    "pop_source",
+]
+rows = [
+    dict(zip(COLS, r, strict=True))
+    for r in con.execute(
+        f"SELECT {', '.join(COLS)} FROM mart_ccaa_anual ORDER BY ccaa, anyo"
+    ).fetchall()
+]
 data = {}
 for r in rows:
     data.setdefault(r["ccaa"], []).append({k: v for k, v in r.items() if k != "ccaa"})
@@ -31,9 +51,14 @@ for r in rows:
 table25 = con.execute(
     "SELECT ccaa, eur_m2_libre, afford_90m2_years, viv_por_hogar, viv_por_1000_hab,"
     " hip_viv_num, share_turistica_no_princ FROM mart_ccaa_anual"
-    " WHERE anyo = 2025 AND ccaa != 'Nacional' ORDER BY eur_m2_libre DESC").fetchall()
-aff24 = {r[0]: r[1] for r in con.execute(
-    "SELECT ccaa, afford_90m2_years FROM mart_ccaa_anual WHERE anyo = 2024").fetchall()}
+    " WHERE anyo = 2025 AND ccaa != 'Nacional' ORDER BY eur_m2_libre DESC"
+).fetchall()
+aff24 = {
+    r[0]: r[1]
+    for r in con.execute(
+        "SELECT ccaa, afford_90m2_years FROM mart_ccaa_anual WHERE anyo = 2024"
+    ).fetchall()
+}
 
 
 def pct(t) -> str:
@@ -43,11 +68,13 @@ def pct(t) -> str:
 table = "".join(
     f"<tr><td>{c}</td><td>{e:,.0f}</td><td>{aff24.get(c) or '—'}</td>"
     f"<td>{h or '—'}</td><td>{v:,.0f}</td><td>{n:,.0f}</td><td>{pct(t)}</td></tr>"
-    for c, e, _a, h, v, n, t in table25)
+    for c, e, _a, h, v, n, t in table25
+)
 
 options = "".join(f"<option>{c}</option>" for c in sorted(data))
 
-html = """<!doctype html><html lang="es"><head><meta charset="utf-8">
+html = (
+    """<!doctype html><html lang="es"><head><meta charset="utf-8">
 <title>Vivienda en España — panel</title>
 <style>body{font-family:sans-serif;max-width:720px;margin:auto;padding:16px}
 table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:4px 8px;font-size:13px;text-align:right}
@@ -57,14 +84,20 @@ select{font-size:15px;padding:4px 8px;margin:8px 0}svg{max-width:100%}</style>
 <h1>Vivienda en España: precios, stock y población</h1>
 <p class="note">Panel interactivo sobre los marts (<code>make gates</code> en verde).
 El visor Evidence sigue bloqueado upstream — esta página lo sustituye.</p>
-<label>Territorio: <select id="terr">""" + options + """</select></label>
+<label>Territorio: <select id="terr">"""
+    + options
+    + """</select></label>
 <div id="charts"></div>
 <h3>CCAA 2025 (asequibilidad 2024)</h3>
 <table><tr><th>CCAA</th><th>€/m²</th><th>años renta</th><th>viv/hogar</th>
-<th>viv/1000</th><th>hipotecas</th><th>% tur/no-princ</th></tr>""" + table + """</table>
+<th>viv/1000</th><th>hipotecas</th><th>% tur/no-princ</th></tr>"""
+    + table
+    + """</table>
 <p class="note">Métodos y límites en <code>docs/methods.md</code>. Celdas vacías pre-2021/2022/2025 según ventana de cada fuente.</p>
 <script>
-const DATA = """ + json.dumps(data) + """;
+const DATA = """
+    + json.dumps(data)
+    + """;
 function line(el, title, years, left, right, ll, rl) {
   const W = 660, H = 250, P = 46;
   const L = left.filter(v => v != null), R = right.filter(v => v != null);
@@ -122,9 +155,9 @@ sel.value = "Nacional";
 sel.addEventListener("change", () => render(sel.value));
 render("Nacional");
 </script></body></html>"""
+)
 
 outdir = ROOT / "artifacts" / "preview"
 outdir.mkdir(parents=True, exist_ok=True)
 (outdir / "index.html").write_text(html, encoding="utf-8")
-print(f"dashboard: {outdir / 'index.html'} ({len(html) // 1024} KiB, "
-      f"{len(data)} territorios)")
+print(f"dashboard: {outdir / 'index.html'} ({len(html) // 1024} KiB, {len(data)} territorios)")

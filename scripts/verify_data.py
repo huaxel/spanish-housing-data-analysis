@@ -185,8 +185,10 @@ def main() -> int:
     trx_p_bad = con.execute(
         "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo >= 2007 AND trx_total IS NULL"
     ).fetchone()[0]
-    print(f"transactions: ccaa null={trx_c}, prov null={trx_p} "
-          f"(pre2007-leak={trx_p_ok}, post2007-gap={trx_p_bad})")
+    print(
+        f"transactions: ccaa null={trx_c}, prov null={trx_p} "
+        f"(pre2007-leak={trx_p_ok}, post2007-gap={trx_p_bad})"
+    )
     assert trx_c == 0, "ccaa transactions must be complete 2007-2025"
     assert trx_p_ok == 0 and trx_p_bad == 0, "prov transactions must cover 2007-2021 only"
     vin = con.execute(

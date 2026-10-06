@@ -355,9 +355,9 @@ def main() -> None:
     # Transactions (registrars, 2007-). Additive guard: nueva + usada == total.
     trx: dict[tuple[str, int], dict] = {}
     for r in load_parquet("transmisiones.parquet"):
-        trx.setdefault((N(r["territorio"]), r["grain"], r["anyo"]), {})[r[
-            "categoria"
-        ]] = r["transacciones"]
+        trx.setdefault((N(r["territorio"]), r["grain"], r["anyo"]), {})[r["categoria"]] = r[
+            "transacciones"
+        ]
     trx_bad = {
         k: v
         for k, v in trx.items()
@@ -823,15 +823,25 @@ def main() -> None:
     if vint_bad:
         raise SystemExit(f"vintage additive check failed: {dict(list(vint_bad.items())[:3])}")
     vint_rows = [
-        {"ccaa": r["ccaa"], "provincia": r["provincia"], "tipo": r["tipo"],
-         "vintage": r["vintage"], "viviendas": r["viviendas"]}
+        {
+            "ccaa": r["ccaa"],
+            "provincia": r["provincia"],
+            "tipo": r["tipo"],
+            "vintage": r["vintage"],
+            "viviendas": r["viviendas"],
+        }
         for r in load_parquet("censo2011_vintage.parquet")
     ]
     con.register("vint_df", pa.Table.from_pylist(vint_rows))
     con.execute("CREATE OR REPLACE TABLE censo2011_vintage AS SELECT * FROM vint_df")
     ten_rows = [
-        {"ccaa": r["ccaa"], "provincia": r["provincia"], "tamano": r["tamano"],
-         "tenencia": r["tenencia"], "hogares": r["hogares"]}
+        {
+            "ccaa": r["ccaa"],
+            "provincia": r["provincia"],
+            "tamano": r["tamano"],
+            "tenencia": r["tenencia"],
+            "hogares": r["hogares"],
+        }
         for r in load_parquet("censo2011_tenencia.parquet")
     ]
     con.register("ten_df", pa.Table.from_pylist(ten_rows))

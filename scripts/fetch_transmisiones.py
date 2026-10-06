@@ -22,8 +22,13 @@ from spanish_housing.data_paths import RAW  # noqa: E402
 URL = "https://www.ine.es/jaxiT3/files/t/csv_bd/6155.csv"
 RAW_CSV = RAW / "transmisiones.csv"
 RAW_PARQUET = RAW / "parquet" / "transmisiones.parquet"
-CATS = {"Viviendas: Total": "total", "Vivienda nueva": "nueva", "Vivienda usada": "usada",
-        "Vivienda libre": "libre", "Vivienda protegida": "protegida"}
+CATS = {
+    "Viviendas: Total": "total",
+    "Vivienda nueva": "nueva",
+    "Vivienda usada": "usada",
+    "Vivienda libre": "libre",
+    "Vivienda protegida": "protegida",
+}
 
 
 def strip_code(s: str) -> str:
@@ -46,20 +51,36 @@ def main() -> None:
         ccaa = strip_code(r["Comunidades y Ciudades Autónomas"])
         prov = strip_code(r["Provincias"])
         terr = prov or ccaa or "Total Nacional"
-        out.append({"territorio": terr,
-                    "grain": "provincia" if prov else ("ccaa" if ccaa else "nacional"),
-                    "categoria": CATS[r["Régimen y estado"]],
-                    "anyo": int(r["Periodo"]),
-                    "transacciones": int(r["Total"].replace(".", ""))})
+        out.append(
+            {
+                "territorio": terr,
+                "grain": "provincia" if prov else ("ccaa" if ccaa else "nacional"),
+                "categoria": CATS[r["Régimen y estado"]],
+                "anyo": int(r["Periodo"]),
+                "transacciones": int(r["Total"].replace(".", "")),
+            }
+        )
     if not out:
         raise SystemExit("transmisiones: zero rows — format changed?")
     n = csvx.write_parquet(out, RAW_PARQUET)
-    manifest.record("data/raw/transmisiones.csv",
-                    {"url": URL, "publisher": "INE (registradores)",
-                     "operation": "Transmisiones", "accessed": "2026-10-06"})
-    manifest.record("data/raw/parquet/transmisiones.parquet",
-                    {"url": URL, "publisher": "INE (registradores)",
-                     "operation": "Transmisiones", "accessed": "2026-10-06"})
+    manifest.record(
+        "data/raw/transmisiones.csv",
+        {
+            "url": URL,
+            "publisher": "INE (registradores)",
+            "operation": "Transmisiones",
+            "accessed": "2026-10-06",
+        },
+    )
+    manifest.record(
+        "data/raw/parquet/transmisiones.parquet",
+        {
+            "url": URL,
+            "publisher": "INE (registradores)",
+            "operation": "Transmisiones",
+            "accessed": "2026-10-06",
+        },
+    )
     print(f"transmisiones: {n} rows; skipped {len(set(skipped))} categories")
 
 
