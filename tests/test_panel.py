@@ -81,3 +81,23 @@ def test_wild_bootstrap_null_not_significant():
     cl = [i // 4 for i in range(16)]
     r = ols_mod.wild_bootstrap_t(x, y, cl, j=1, reps=200, seed=7)
     assert r["p"] > 0.05
+
+
+def test_quarterize_requires_full_quarter():
+    import sys as _sys
+    from pathlib import Path as _P
+
+    _sys.path.insert(0, str(_P(__file__).resolve().parents[1] / "explorations"))
+    from panel_quarterly import qoq, quarterize
+
+    m = {
+        (2024, 1): 10.0,
+        (2024, 2): 10.0,
+        (2024, 3): 10.0,
+        (2024, 4): 10.0,
+        (2024, 5): 10.0,
+        (2024, 7): 10.0,
+    }
+    assert quarterize(m) == {(2024, 1): 30.0}
+    assert qoq(100.0, 101.0) == 1.0
+    assert qoq(None, 101.0) is None and qoq(0.0, 101.0) is None
