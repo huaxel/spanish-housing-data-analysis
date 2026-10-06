@@ -12,12 +12,12 @@ explicit extensions, not v1.
 
 ## Scope
 
-- Time: 2001–2025 (census-anchored stock series; IPV from 2007; Padrón to 2021).
+- Time: 2001–2025 (census-anchored stock series; IPV from 2007; Padrón to 2021, ECP from 2022 at CCAA/national grain — provincia mart ends 2021).
 - Geography: national + CCAA + provincia. Prices join at CCAA/national only —
   INE publishes no provincial IPV (see methods §1).
-- Units: counts, ratios (dwellings per 1,000 inhabitants, share of
-  non-principal dwellings), quality-adjusted price *indices*. No €/m² levels
-  until valor tasado is pinned.
+- Units: counts, ratios (dwellings per 1,000 inhabitants, dwellings per
+  household, share of non-principal dwellings), quality-adjusted price
+  *indices* (IPV) plus appraised price *levels* (€/m², valor tasado).
 
 ## Source queue
 
@@ -31,11 +31,17 @@ explicit extensions, not v1.
 | 6 | MIVAU valor tasado (€/m² levels) | DONE 2026-10-06 — Libre annual means in marts (prov + CCAA), 0.95 YoY corr vs IPV |
 | 7 | Households | DONE 2026-10-06 — ECP hogares 2021+ with tamaño detail (`viv_por_hogar`, `share_1persona`); ECH annual pre-2021 + census anchors queued |
 | 8 | INE Censo viviendas 2021 | TODO — third anchor; stock already embeds its rebase |
+| 9 | INE ECV renta hogares (Tempus3 9949) | DONE 2026-10-06 — CCAA mean net income, `afford_90m2_years` in CCAA mart |
+| 10 | INE Hipotecas (HPT) + Transmisiones | DONE 2026-10-06 — mortgage volumes/tickets + transaction liquidity in marts |
+| 11 | INE Turísticas (VTE) | DONE 2026-10-06 — registered tourist dwellings (Dec snapshot) in marts |
+| 12 | ECP edad/tamaño detail + Censo 2011 vintage/tenencia | DONE 2026-10-06 — 20–34 cohort, 1-person share; 2011 vacancy/vintage splits |
+| 13 | Municipios (Madrid valor tasado + padrón; DIBA Barcelona) | DONE 2026-10-06 — `muni_madrid` / `muni_bcn` tables, municipal explorer pages |
+| 14 | ECH annual households (pre-2021) | TODO — yearly dwellings-per-household before 2021 |
 
 ## Milestones
 
 1. Pipeline v1 (done 2026-10-05): fetch/build/verify green, marts + coverage.
-2. Evidence explorer v1: national + CCAA pages (price vs stock-per-capita).
+2. Evidence explorer v1 (done 2026-10-06): nacional + CCAA + comparar + municipios pages.
 3. Source completions 5–8, one at a time, each with manifest pin + methods note.
 4. Households layer: dwellings-per-household by provincia (census years first,
    ECH annual second) — the closest observable to "shortage".
@@ -51,7 +57,8 @@ toolchain fix — the 2022–25 tightening (viv/1000 ↓, viv/hogar ↓, IPV ↑
 ## Exclusions (v1)
 
 No causal attribution of price moves to construction volumes; no
-municipal-level claims from provincial aggregates; no splicing of index bases;
-no forward-filling of 2022+ population. The 2022–2025 price surge is visible
-in IPV but has no population denominator yet — say so on the page, don't
-work around it.
+municipal-level claims from provincial aggregates; no splicing of index bases.
+Population from 2022 comes from ECP (methodology differs from Padrón — the
+2021 overlap is quantified in `coverage.json`, never silently spliced).
+Provincial ECP is API-blocked, so the provincia mart ends 2021 while
+CCAA/national run to 2025.

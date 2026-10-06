@@ -31,19 +31,30 @@ Python 3.11+, `uv`, and `make` are required. Node/npm only for the Evidence app.
 
 ```bash
 uv sync --group dev
-make gates   # fetch -> build -> verify -> test
+make gates   # lint -> fetch -> build -> verify -> audit -> test
 ```
 
-Then, for the dashboard:
+Then, for the Evidence dev dashboard (Node/npm required):
 
 ```bash
-uv run python scripts/render_preview.py
-python3 -m http.server -d artifacts/preview 8091 --bind 0.0.0.0
-# open http://<host>:8091/ — Nacional + per-CCAA charts, no build step
+make evidence-install
+make evidence-dev
+# open http://localhost:3000/ — Nacional, CCAA, comparisons, municipios
 ```
 
-(The Evidence app in `evidence/` stays scaffolded for when upstream
-fixes its build; the static dashboard above is the working explorer.)
+Starting dev automatically exports the existing DuckDB marts into Evidence's
+browser-queryable data. After rebuilding the marts, restart dev to refresh it.
+`/comparar/` compares two communities (or the national benchmark) over a shared,
+inclusive year range. Inverted year selections are ordered automatically;
+missing observations stay missing.
+`/municipios/` drills into Madrid (valor tasado + population, 2005–2025)
+and Barcelona (sale, rent, burdens, 2007–2024) with multi-municipality
+selectors; the two metros use different sources and are read separately.
+`make evidence-build` produces a static site in `evidence/build/`.
+See [reproducible setup](docs/reproducibility.md#evidence-explorer) for details.
+
+The lightweight static alternative remains available via `make dashboard`
+at port 8091 (binds to all interfaces).
 
 `data/` artefacts are git-ignored and pinned by `data/input_manifest.json`
 (SHA-256). Never edit `data/raw` by hand — re-run `make fetch`.
@@ -55,11 +66,16 @@ fixes its build; the static dashboard above is the working explorer.)
 | INE IPV (quality-adjusted index, base 2025) | Price *trend* by CCAA, 2007–; no provincial grain |
 | MIVAU Estimación del Parque de Viviendas | Dwelling *counts* by provincia, 2001–2025, principal/no-principal |
 | INE Padrón → ECP | Population to 2021 (provincia) / 2025 (CCAA); hogares 2021+; seam quantified |
-| Evidence marts | `mart_ccaa_anual`, `mart_provincia_anual` + `dim_territorio` |
+| MIVAU valor tasado | Appraised €/m² *levels* (prov + CCAA), complement to IPV trend |
+| INE ECV renta | Mean net household income (CCAA) → affordability in years of income |
+| INE Hipotecas + Transmisiones | Mortgage volumes/tickets + transaction liquidity (credit cycle) |
+| INE Turísticas (VTE) | Registered tourist dwellings, Dec snapshots from 2020 |
+| ECP edad/tamaño + Censo 2011 | 20–34 cohort, 1-person households; 2011 vacancy/vintage splits |
+| Municipios (Madrid + Barcelona) | Valor tasado + padrón (Mad); sale/rent/burdens via DIBA (BCN) |
+| Evidence marts | `mart_ccaa_anual`, `mart_provincia_anual` + `dim_territorio` + `muni_*` |
 
-Price *levels* (€/m², MIVAU valor tasado), post-2021 population (Cifras de
-Población), and annual households (ECH) are queued sources — see
-[project plan](docs/project_plan.md). Missing cells stay missing.
+Annual pre-2021 households (ECH) and the Censo 2021 anchor check are queued
+sources — see [project plan](docs/project_plan.md). Missing cells stay missing.
 
 ## License
 
