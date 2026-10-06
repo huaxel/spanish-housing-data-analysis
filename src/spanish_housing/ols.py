@@ -61,9 +61,7 @@ def xty(x: list[list[float]], y: list[float]) -> list[float]:
     return out
 
 
-def ols_cluster(
-    x: list[list[float]], y: list[float], clusters: list[str | int]
-) -> dict:
+def ols_cluster(x: list[list[float]], y: list[float], clusters: list[str | int]) -> dict:
     """OLS with CR1V cluster-robust covariance.
 
     V = c * bread @ meat @ bread, meat = sum_g s_g s_g' with scores

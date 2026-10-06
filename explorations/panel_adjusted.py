@@ -72,10 +72,7 @@ def run(spec: list[str]) -> dict:
     for o in rows:
         m = means[o["ccaa"]]
         y.append(o["d_ipv"] - m["d_ipv"])
-        x.append(
-            [o[v] - m[v] for v in spec]
-            + [1.0 if o["anyo"] == t else 0.0 for t in years]
-        )
+        x.append([o[v] - m[v] for v in spec] + [1.0 if o["anyo"] == t else 0.0 for t in years])
         cl.append(o["ccaa"])
     fit = ols.ols_cluster(x, y, cl)
     out = {
