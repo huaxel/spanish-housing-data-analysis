@@ -13,6 +13,7 @@ Measured, this session, on this machine:
 | Tiles | 103 on disk of 112 candidates (9 are all-ocean 1° cells, 404 as expected) |
 | Volume | **2.6 GB** |
 | Compute | **~2 minutes** wall clock, 16-thread prefetch, 52 provincias |
+| Reproducibility | full re-run reproduced the committed JSON **byte-identical** (determinism verified) |
 | New dependencies | none committed — `rasterio` + `numpy` via `uv run --with` |
 | Code | `scripts/probe_saiz_gis.py` (one file, ~280 lines) |
 | Output | `explorations/saiz_probe_results.json` |
@@ -141,9 +142,11 @@ instrument, and the difference is deliberate:
    second manifest class, or pin the tile list + source version and treat
    the rasters as reproducible-but-not-committed, like `data/` itself.
    The latter matches how this repo already treats `data/`.
-3. **Determinism.** `block_mean` depends on `mean` over float32; the
-   reduction should be asserted stable, and the province series should
-   get audit claims the way `iv_results.json` did.
+3. **Determinism — verified.** A full re-run reproduced
+   `saiz_probe_results.json` **byte-identical**, so the committed series is
+   stable across runs on this toolchain. What is *not* yet true is
+   pinning the tile bytes themselves (item 2), so determinism currently
+   holds conditional on the same upstream tiles.
 4. **A resolution/threshold sensitivity table** should ship with the
    series, since both are analyst choices (see trap 3).
 
