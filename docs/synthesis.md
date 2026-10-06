@@ -2,8 +2,10 @@
 
 Core question: how has the evolution of Spanish housing prices related to
 the amount of housing stock built and to population/household growth?
-Evidence: five pinned sources, two marts, four explorations — all descriptive,
-no causal claims. Start from the national spine, then the split.
+Evidence: 30 pinned sources, 20 mart tables, 24 explorations — all
+descriptive, no causal claims (the one causal estimate is the commissioned
+IV, separately qualified below). Start from the national spine, then the
+split.
 
 ## The spine (Nacional)
 
@@ -87,18 +89,38 @@ descriptive. Full threats + read record in
   changes don't track subsequent price/rent moves at all (municipal panel
   null, wild-p 0.45–0.94) — the footnote, confirmed.
 - **Interior** (Galicia, Castilla y León, Asturias): 650–770/1000, shrinking
-  young cohorts, mild prices — abundance without demand.
+  young cohorts, mild prices — abundance without demand. The 2021
+  electricity-based vacancy makes the abundance concrete: Galicia 28.8%
+  vacant vs Madrid 6.3% (4.5×), and the vacancy share tracks the ratio
+  rise across CCAA (Pearson +0.52, n=17).
 
 ## What predicts prices? Honestly: no single ratio
 
-- Absorption ratio (built per new person): pooled rank −0.41 CCAA, −0.06
-  provincial, mute in 2021–25. Descriptor of regimes, not predictor —
-  the denominator is demand itself.
+- Absorption ratio (built per new person): pooled rank −0.41 CCAA,
+  −0.38 provincial (n=153, was −0.06 before the 2021–25 window became
+  observable). The 2021–25 provincial window is the most negative yet
+  (−0.42, CI [−0.64, −0.14]) — in the scarcity regime, provinces that
+  built more per new person saw smaller price rises. Descriptor of
+  regimes, not predictor — the denominator is demand itself.
+- Provincial absorption panel (50 provinces × 2002–2025, first time past
+  2021 thanks to the Censo Anual extension): negative everywhere, wild-
+  robust nowhere (S0 −0.025, wild-p 0.42; S1 2021–25 −0.21, wild-p 0.55)
+  — consistent with the CCAA panel: the naive t overstates precision.
+- The two-group ratio split: national viv/1000 flatness hides scarcity CCAA
+  (Madrid −29.7, Cataluña −27.6) vs overstock (+100…+130 interior), and
+  the **electricity-based vacancy** (2021 census, 59531) confirms the
+  overstock is objectively empty: Galicia 28.8% vacant vs Madrid 6.3%.
+- Rents (SERPAVI, municipal 2011–2024): DIBA cross-validated (Pearson
+  0.825); gross yield 3.6% in Barcelona vs 4.6% corona median; tourist
+  intensity does not predict rents at any grain (municipal null,
+  provincial level = scale artifact, Spearman 0.016).
 - Credit volumes track the bust; household formation tracks the tightening;
   incomes outran prices over the full period (affordability 6.2→4.4 years
   despite record prices) while concentrating pain in magnets.
-- The missing covariates, in order: vacant-vs-touristic split, LTV/effort
-  distributions, municipal grain, age×income joint detail.
+- The missing covariates, in order: LTV/effort distributions, age×income
+  joint detail, transaction prices at municipal grain (the repo has
+  appraisal + DIBA transactions; valor-referencia and construction-flow
+  probes are parked with reopen conditions).
 
 ## Reproduce everything
 
