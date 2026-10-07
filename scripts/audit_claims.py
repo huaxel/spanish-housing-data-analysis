@@ -42,6 +42,11 @@ MODEL_FRESHNESS = [
     ("ratio_ccaa", "artifacts/ratio_ccaa.json", "explorations/ratio_ccaa.py"),
     ("serpavi_analysis", "artifacts/serpavi_analysis.json", "explorations/serpavi_analysis.py"),
     (
+        "municipios_nacional",
+        "artifacts/municipios_nacional.json",
+        "explorations/municipios_nacional.py",
+    ),
+    (
         "madrid_vacancy",
         "artifacts/madrid_vacancy_terrain.json",
         "explorations/panel_saiz_madrid_vacancy.py",
@@ -2060,6 +2065,30 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] madrid_vacancy: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 7
+    mn = _model_output("artifacts/municipios_nacional.json")
+    for desc, path, expected, tol in (
+        ("rent median 2024", "rent_geo_2024.median", 5.22, 0.02),
+        ("rent p25", "rent_geo_2024.p25", 3.97, 0.02),
+        ("rent p75", "rent_geo_2024.p75", 6.77, 0.02),
+        ("rent n 2024", "rent_geo_2024.n", 2515, 0),
+        ("rent max level", "rent_geo_2024.max.rent", 14.63, 0.02),
+        ("rent min level", "rent_geo_2024.min.rent", 1.84, 0.02),
+        ("growth n", "rent_growth_2011_2024.n", 1678, 0),
+        ("growth median pct", "rent_growth_2011_2024.median_pct", 29.0, 0.1),
+        ("fastest growth pct", "rent_growth_2011_2024.fastest.growth_pct", 223.4, 0.1),
+        ("rent-vac pearson", "rent_vs_vacancy.pearson", -0.393, 0.005),
+        ("rent-vac spearman", "rent_vs_vacancy.spearman", -0.434, 0.005),
+        ("rent-vac n", "rent_vs_vacancy.n", 1927, 0),
+        ("pop-rent pearson", "pop_vs_rent_growth.pearson", 0.051, 0.005),
+        ("pop-rent spearman", "pop_vs_rent_growth.spearman", 0.115, 0.005),
+        ("pop-rent n", "pop_vs_rent_growth.n", 1678, 0),
+        ("coverage municipios", "coverage.municipios", 8136, 0),
+    ):
+        got = _json_path(mn, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] municipios_nacional: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 16
     pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),

@@ -21,6 +21,21 @@ Cross-checks against the single-province tables are exact: València
 840,792 inhabitants in 2025, Sevilla city rent 9.17 €/m² in 2024 —
 `muni_all` reproduces `muni_vlc`/`muni_sev` cell for cell on the overlap.
 
+## National findings (`explorations/municipios_nacional.py`, descriptive)
+
+2024 rents (2,515 municipios, unweighted): median 5.22 €/m² (P25 3.97,
+P75 6.77), from Carballeda de Valdeorras (1.84) to Sant Josep de sa
+Talaia (14.63). Paired 2011→2024 growth (1,678 municipios): median
++29.0%; the extreme (Sahún, +223.4%) is a thin-cell village — small
+cells dominate both tails, read maxima as anecdotes not markets.
+
+2024 rent vs 2011 vacancy (1,927 municipios): Pearson −0.393, Spearman
+−0.434 — the overhang geography holds nationally (emptier places rent
+cheaper), matching the SERPAVI–2021-vacancy read (−0.429/−0.507).
+Population growth 2011→2024 vs rent growth (1,678): Pearson 0.051,
+Spearman 0.115 — rents rose ~everywhere regardless of local headcount:
+a national price level shift, not local demand sorting. Descriptive only.
+
 ## What this does not show
 
 No sale prices, no burdens, no tourist series at this grain. The 8,136

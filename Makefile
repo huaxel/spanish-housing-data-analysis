@@ -66,39 +66,42 @@ audit-docs:
 # Deterministic estimators whose outputs audit requires (git-ignored
 # artifacts/ JSONs + committed explorations/*.json freshness copies).
 # bartik_predict first: iv_migration + panel_saiz read its instrument.
-# ~30 min total (hypothesis_01 is seconds): pure-Python wild bootstraps dominate (panel_quarterly
+# ~30 min total (hypothesis_01 + municipios_nacional are seconds):
+# pure-Python wild bootstraps dominate (panel_quarterly
 # alone ~11 min, panel_adjusted ~5 min). Progress prints per script.
 analysis:
-	@echo "[analysis 1/15] bartik_predict (instrument)"
+	@echo "[analysis 1/16] bartik_predict (instrument)"
 	uv run python explorations/bartik_predict.py
-	@echo "[analysis 2/15] iv_migration"
+	@echo "[analysis 2/16] iv_migration"
 	uv run python explorations/iv_migration.py
-	@echo "[analysis 3/15] panel_saiz"
+	@echo "[analysis 3/16] panel_saiz"
 	uv run python explorations/panel_saiz.py
-	@echo "[analysis 4/15] panel_provincial"
+	@echo "[analysis 4/16] panel_provincial"
 	uv run python explorations/panel_provincial.py
-	@echo "[analysis 5/15] panel_adjusted (~5 min)"
+	@echo "[analysis 5/16] panel_adjusted (~5 min)"
 	uv run python explorations/panel_adjusted.py
-	@echo "[analysis 6/15] panel_tourist"
+	@echo "[analysis 6/16] panel_tourist"
 	uv run python explorations/panel_tourist.py
-	@echo "[analysis 7/15] panel_quarterly (~11 min)"
+	@echo "[analysis 7/16] panel_quarterly (~11 min)"
 	uv run python explorations/panel_quarterly.py
-	@echo "[analysis 8/15] ratio_ccaa"
+	@echo "[analysis 8/16] ratio_ccaa"
 	uv run python explorations/ratio_ccaa.py
-	@echo "[analysis 9/15] serpavi_analysis"
+	@echo "[analysis 9/16] serpavi_analysis"
 	uv run python explorations/serpavi_analysis.py
-	@echo "[analysis 10/15] tourist_rents"
+	@echo "[analysis 10/16] tourist_rents"
 	uv run python explorations/tourist_rents.py
-	@echo "[analysis 11/15] panel_saiz_municipal"
+	@echo "[analysis 11/16] panel_saiz_municipal"
 	uv run python explorations/panel_saiz_municipal.py
-	@echo "[analysis 12/15] panel_saiz_madrid"
+	@echo "[analysis 12/16] panel_saiz_madrid"
 	uv run python explorations/panel_saiz_madrid.py
-	@echo "[analysis 13/15] panel_saiz_madrid_vacancy"
+	@echo "[analysis 13/16] panel_saiz_madrid_vacancy"
 	uv run python explorations/panel_saiz_madrid_vacancy.py
-	@echo "[analysis 14/15] wild_ar_bust"
+	@echo "[analysis 14/16] wild_ar_bust"
 	uv run python explorations/wild_ar_bust.py
-	@echo "[analysis 15/15] test_absorption_hypothesis"
+	@echo "[analysis 15/16] test_absorption_hypothesis"
 	uv run python explorations/test_absorption_hypothesis.py
+	@echo "[analysis 16/16] municipios_nacional (descriptive)"
+	uv run python explorations/municipios_nacional.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
 gates: lint fetch build analysis verify audit test
