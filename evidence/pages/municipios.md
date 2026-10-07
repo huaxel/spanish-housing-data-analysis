@@ -2,7 +2,7 @@
 title: Municipios
 ---
 
-# Municipios: Madrid, Barcelona, Valencia y Sevilla
+# Municipios: toda España
 
 El grano municipal muestra lo que la media autonómica esconde.
 [Panorama nacional](/) · [Comparar territorios](/comparar/).
@@ -254,6 +254,72 @@ El Aljarafe (Espartinas, Mairena) y la capital marcan los alquileres más
 altos; la vacancia 2011 más alta está en la campiña y las sierras.
 Relaciones descriptivas, no causales.
 
+## Toda España: 8.136 municipios
+
+Padrón municipal de las 52 tablas DPOP (1996–2025) con la renta mediana
+SERPAVI (2011–2024) y la vacancia del Censo 2011. Elige primero la
+provincia y después los municipios. Detalle en
+[Todos los municipios](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/municipios_nacional.md).
+
+```sql provincias_all
+select distinct provincia
+from housing.muni_all
+order by provincia
+```
+
+<Dropdown data={provincias_all} name=prov_all value=provincia
+  title="Provincia" defaultValue="Madrid"/>
+
+```sql lista_all
+select distinct municipio
+from housing.muni_all
+where provincia = '${inputs.prov_all.value}'
+order by municipio
+```
+
+<!-- Trust boundary: both inputs feed SQL interpolation, but prov_all is a
+  constrained Dropdown over mart values and munis_all over the filtered
+  list — never free text. -->
+<Dropdown data={lista_all} name=munis_all value=municipio
+  title="Municipios" multiple=true
+  defaultValue={["Madrid (ciudad)"]}/>
+
+```sql serie_all
+select municipio, anyo, poblacion, rent_eur_m2
+from housing.muni_all
+where provincia = '${inputs.prov_all.value}'
+  and municipio in ${inputs.munis_all.value}
+order by anyo, municipio
+```
+
+<LineChart data={serie_all} x=anyo y=rent_eur_m2 series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
+  title="Alquiler mediano SERPAVI (€/m²/mes)"/>
+
+<LineChart data={serie_all} x=anyo y=poblacion series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Población municipal"/>
+
+```sql vacancia_all
+select municipio, dwellings_2011, vacant_2011,
+       100.0 * vacant_2011 / nullif(dwellings_2011, 0) as pct_vacia
+from housing.muni_all
+where anyo = 2011 and dwellings_2011 is not null
+  and provincia = '${inputs.prov_all.value}'
+  and municipio in ${inputs.munis_all.value}
+order by pct_vacia desc
+```
+
+<DataTable data={vacancia_all} rows=20>
+  <Column id=municipio title="Municipio"/>
+  <Column id=dwellings_2011 title="Viviendas 2011" fmt="num0"/>
+  <Column id=vacant_2011 title="Vacías 2011" fmt="num0"/>
+  <Column id=pct_vacia title="% vacía" fmt="num1"/>
+</DataTable>
+
+Sin precios de venta a este grano en ninguna provincia (solo Madrid y
+Barcelona tienen series propias, arriba). Relaciones descriptivas.
+
 ## Datos y cobertura
 
 Series municipales con huecos según fuente y año; el guion es dato ausente,
@@ -264,4 +330,4 @@ población y vacancia 2011. Sevilla, igual: Padrón 1996–2025, alquiler
 2011–2024, vacancia 2011, sin venta.
 
 ---
-*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, Valencia 1996–2025 y Sevilla 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, toda España 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
