@@ -6,6 +6,7 @@ Add a claim whenever a doc states a number someone might quote.
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -37,16 +38,35 @@ MODEL_FRESHNESS = [
 ]
 
 
+def _model_output(rel: str) -> dict:
+    """Load a model-output JSON, failing with guidance when absent.
+
+    The artifacts/ copies are git-ignored and exist only after `make
+    analysis`; on a fresh clone the audit must say what to run instead of
+    crashing with a traceback (or silently skipping the claims those
+    files back)."""
+    p = ROOT / rel
+    if not p.exists():
+        print(
+            f"FAIL: {rel} missing — model outputs not built; "
+            "run `make analysis` (or `make gates`), then make audit"
+        )
+        sys.exit(2)
+    return json.loads(p.read_text())
+
+
 def check_freshness() -> int:
     """Fail when a model output predates its code or data. Returns failures."""
-    import json
-
     failures = 0
     ols_sha = ols.sha_file(str(Path(ols.__file__)))
     for label, rel_json, rel_script in MODEL_FRESHNESS:
         p = ROOT / rel_json
         if not p.exists():
-            print(f"[SKIP] {label}: {rel_json} absent (not built yet)")
+            print(
+                f"[FAIL] {label}: {rel_json} absent — run `make analysis` "
+                "(or `make gates`) before auditing"
+            )
+            failures += 1
             continue
         meta = json.loads(p.read_text()).get("_meta")
         if not meta:
@@ -61,7 +81,13 @@ def check_freshness() -> int:
             print(f"[FAIL] {label}: src/spanish_housing/ols.py changed since output — re-run")
             ok = False
         for rel_data, want in (meta.get("data_sha") or {}).items():
-            if ols.sha_file(str(ROOT / rel_data)) != want:
+            if not (ROOT / rel_data).exists():
+                print(
+                    f"[FAIL] {label}: input {rel_data} absent — run "
+                    "`make analysis` (or `make gates`) before auditing"
+                )
+                ok = False
+            elif ols.sha_file(str(ROOT / rel_data)) != want:
                 print(f"[FAIL] {label}: input {rel_data} changed since output — re-run")
                 ok = False
         if ok:
@@ -815,7 +841,6 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
-    import json
 
     iv = json.loads(
         (Path(__file__).resolve().parents[1] / "explorations" / "iv_results.json").read_text()
@@ -902,9 +927,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_saiz_madrid: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
-    ratio = json.loads(
-        (Path(__file__).resolve().parents[1] / "artifacts" / "ratio_ccaa.json").read_text()
-    )
+    ratio = _model_output("artifacts/ratio_ccaa.json")
     for desc, path, expected, tol in (
         ("national r01", "national.r01", 511.6, 0.1),
         ("national r07", "national.r07", 531.7, 0.1),
@@ -937,9 +960,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 21
-    serp = json.loads(
-        (Path(__file__).resolve().parents[1] / "artifacts" / "serpavi_analysis.json").read_text()
-    )
+    serp = _model_output("artifacts/serpavi_analysis.json")
     for desc, path, expected, tol in (
         ("diba-serpavi pearson", "rent_cross_diba_2023.pearson", 0.825, 0.005),
         ("diba-serpavi spearman", "rent_cross_diba_2023.spearman", 0.866, 0.005),
@@ -956,9 +977,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] serpavi: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 9
-    tr = json.loads(
-        (Path(__file__).resolve().parents[1] / "artifacts" / "tourist_rents.json").read_text()
-    )
+    tr = _model_output("artifacts/tourist_rents.json")
     for desc, path, expected, tol in (
         (
             "bcn tour-rent level pearson",
@@ -1026,11 +1045,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] tourist_rents: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 10
-    mv = json.loads(
-        (
-            Path(__file__).resolve().parents[1] / "artifacts" / "madrid_vacancy_terrain.json"
-        ).read_text()
-    )
+    mv = _model_output("artifacts/madrid_vacancy_terrain.json")
     for desc, path, expected, tol in (
         ("named both n", "n_named_both", 135, 0),
         ("constraint max", "constraint_max", 0.8263, 0.005),
@@ -1044,9 +1059,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] madrid_vacancy: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
-    pp = json.loads(
-        (Path(__file__).resolve().parents[1] / "artifacts" / "panel_provincial.json").read_text()
-    )
+    pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),
         ("prov panel S0 absor se", "s0_absorption_only.coefs.absor.se", 0.008, 0.005),
@@ -1062,9 +1075,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_provincial: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 8
-    wb = json.loads(
-        (Path(__file__).resolve().parents[1] / "artifacts" / "wild_ar_bust.json").read_text()
-    )
+    wb = _model_output("artifacts/wild_ar_bust.json")
     for desc, path, expected, tol in (
         ("wild-AR bust set lower", "set.0", 0.25, 0.001),
         ("wild-AR bust set upper", "set.1", 1.0, 0.001),

@@ -11,3 +11,5 @@ evidence/build-cf/
 .playwright-cli/
 artifacts/
 evidence/.wrangler/
+# Pi agent session state (todos etc.)
+.pi/

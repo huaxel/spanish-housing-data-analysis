@@ -56,6 +56,16 @@ for terr, pop in tot98.items():
         pop_by_cpro[match[0]] = pop
 pop_by_cpro["51+52"] = tot98.get("Ceuta", 0) + tot98.get("Melilla", 0)
 
+# Name matching above is substring-based and silent: an upstream raw-padrón
+# rename would drop provinces to None per-1000 with no error. Ceuta (51) and
+# Melilla (52) are the only legitimate misses — dim_territorio models them as
+# the single 51+52 aggregate, so their per-1000 normalization stays None and
+# the estimator drops them (n=50 provinces, as documented in the IV note).
+# Any other unmatched unit is a break: assert coverage.
+EXCLUDED_UNITS = {"51", "52"}
+missing_pop = [u for u in units if not pop_by_cpro.get(u) and u not in EXCLUDED_UNITS]
+assert not missing_pop, f"1998 population match failed for {missing_pop}"
+
 # Predicted inflow LEVELS: base-year origin levels x national growth.
 # (bartik.shares normalizes over foreigners; here levels carry the scale.)
 base98 = {(u, o): stocks.get((u, o, 1998), 0.0) for u in units for o in origins}

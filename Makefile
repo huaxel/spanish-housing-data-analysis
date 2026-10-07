@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
+.PHONY: sync test lint fetch geo build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -57,18 +57,32 @@ audit:
 # Deterministic estimators whose outputs audit requires (git-ignored
 # artifacts/ JSONs + committed explorations/*.json freshness copies).
 # bartik_predict first: iv_migration + panel_saiz read its instrument.
+# ~30 min total: pure-Python wild bootstraps dominate (panel_quarterly
+# alone ~11 min, panel_adjusted ~5 min). Progress prints per script.
 analysis:
+	@echo "[analysis 1/12] bartik_predict (instrument)"
 	uv run python explorations/bartik_predict.py
+	@echo "[analysis 2/12] iv_migration"
 	uv run python explorations/iv_migration.py
+	@echo "[analysis 3/12] panel_saiz"
 	uv run python explorations/panel_saiz.py
+	@echo "[analysis 4/12] panel_provincial"
 	uv run python explorations/panel_provincial.py
+	@echo "[analysis 5/12] panel_adjusted (~5 min)"
 	uv run python explorations/panel_adjusted.py
+	@echo "[analysis 6/12] panel_tourist"
 	uv run python explorations/panel_tourist.py
+	@echo "[analysis 7/12] panel_quarterly (~11 min)"
 	uv run python explorations/panel_quarterly.py
+	@echo "[analysis 8/12] ratio_ccaa"
 	uv run python explorations/ratio_ccaa.py
+	@echo "[analysis 9/12] serpavi_analysis"
 	uv run python explorations/serpavi_analysis.py
+	@echo "[analysis 10/12] tourist_rents"
 	uv run python explorations/tourist_rents.py
+	@echo "[analysis 11/12] panel_saiz_madrid_vacancy"
 	uv run python explorations/panel_saiz_madrid_vacancy.py
+	@echo "[analysis 12/12] wild_ar_bust"
 	uv run python explorations/wild_ar_bust.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
@@ -97,7 +111,26 @@ evidence-build:
 # to the build blobs — see worker.js); build-cf is build/ minus *.wasm.
 # Re-run after every evidence-build (hashed filenames change). Custom domain
 # vivienda.juanbenjumea.me attaches via workers.dev dashboard/API once.
-evidence-deploy:
+# worker.js proxies *.wasm from jsDelivr at request time with no
+# request-time integrity check; this gate enforces the md5 identity its
+# header documents instead of trusting it. Runs before every deploy.
+WASM_VERSION = $(shell grep -o 'WASM_VERSION = "[^"]*"' evidence/worker.js | cut -d'"' -f2)
+
+wasm-verify:
+	@set -e; ls evidence/build/_app/immutable/assets/duckdb-*.wasm >/dev/null 2>&1 \
+	  || { echo "no wasm blobs in evidence/build — run make evidence-build"; exit 1; }; \
+	for b in evidence/build/_app/immutable/assets/duckdb-*.wasm; do \
+	  kind=$$(basename "$$b" | sed 's/\..*//'); \
+	  url="https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@$(WASM_VERSION)/dist/$$kind.wasm"; \
+	  if [ "$$(curl -fsSL "$$url" | md5sum | cut -d' ' -f1)" = "$$(md5sum "$$b" | cut -d' ' -f1)" ]; then \
+	    echo "wasm OK: $$kind matches CDN $(WASM_VERSION)"; \
+	  else \
+	    echo "wasm MISMATCH: $$b differs from $$url — bump WASM_VERSION in evidence/worker.js"; \
+	    exit 1; \
+	  fi; \
+	done
+
+evidence-deploy: wasm-verify
 	rm -rf evidence/build-cf && cp -r evidence/build evidence/build-cf
 	rm -f evidence/build-cf/_app/immutable/assets/*.wasm
 	cd evidence && npx wrangler deploy

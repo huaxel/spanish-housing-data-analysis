@@ -18,6 +18,9 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
   audit freshness-checks). `bartik_predict` runs first: `iv_migration` +
   `panel_saiz` read its instrument. Required on a clean checkout (where
   `artifacts/` is absent) and after every `make build` (see below).
+  Runtime: ~30 min (pure-Python wild bootstraps dominate; `panel_quarterly`
+  alone ~11 min, `panel_adjusted` ~5 min) — the Makefile prints per-script
+  progress.
 - `make verify` — manifest hashes + mart integrity (51 territories, no null
   keys, IPV base identity via build). Warns when the manifest snapshot is
   older than 90 days (`MANIFEST_WARN_DAYS=` overrides) — upstream tables get
@@ -25,7 +28,7 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 199 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy + 2 wild-AR) re-queried, plus 7 model-freshness checks (each estimator output must postdate its script, `ols.py`, and `marts.duckdb`; the IV + Saiz outputs additionally key on `artifacts/bartik_predicted.json`, the instrument they read) — a green audit can no longer pass on stale model numbers); fails
+- `make audit` — 201 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 6 madrid_vacancy + 2 wild-AR) re-queried, plus 7 model-freshness checks (each estimator output must postdate its script, `ols.py`, and `marts.duckdb`; the IV + Saiz outputs additionally key on `artifacts/bartik_predicted.json`, the instrument they read) — a green audit can no longer pass on stale model numbers; fails
   on drift. Add a claim whenever a doc states a quotable number. Note:
   `marts.duckdb` is not byte-stable across rebuilds (container metadata
   drifts even with identical inputs), so every `make build` invalidates
@@ -75,9 +78,11 @@ Two subtleties, both load-bearing:
 
 - DuckDB WASM blobs exceed the 25 MiB asset limit, so `worker.js`
   proxies `*.wasm` from pinned jsDelivr npm bytes (verified
-  md5-identical to the build blobs). Bump `WASM_VERSION` when
-  `@duckdb/duckdb-wasm` updates. An R2-bucket variant was tried and
-  abandoned (jurisdictional shadowing); the bucket has been deleted.
+  md5-identical to the build blobs; the check is enforced at deploy time
+  by `make wasm-verify`, which `evidence-deploy` runs first — the CDN
+  has no request-time integrity check of its own). Bump `WASM_VERSION`
+  when `@duckdb/duckdb-wasm` updates. An R2-bucket variant was tried
+  and abandoned (jurisdictional shadowing); the bucket has been deleted.
 - Smoke scripts assert shipped content only: dev renders
   query-inspector chrome (`'N records ...'`) that static builds omit.
 - Deploy record: rebuilt + redeployed 2026-10-06 19:37 UTC after the

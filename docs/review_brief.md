@@ -1,6 +1,10 @@
 # Independent review brief (milestone 5)
 
-Status: **OPEN — reviewer not yet run.** This file is the package. It covers the
+Status: **CLOSED — the read ran 2026-10-06 and was adjudicated in-repo; two
+round-2 addenda follow.** (This status line alone is amended 2026-10-07 per
+repo review: it had stale-said "OPEN — reviewer not yet run" long after the
+Review record below was complete. The rest of this file is the unmodified
+record of what was briefed.) This file is the package. It covers the
 project-wide methods/limitations read (plan milestone 5) **and** the causal IV
 read that `docs/explorations/iv_migration.md` §Read plan step 1 asked for,
 because both are outstanding and the IV merge skipped its own gate.
