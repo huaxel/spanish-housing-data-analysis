@@ -21,6 +21,7 @@ import math  # noqa: E402
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
@@ -169,6 +170,7 @@ results["pooled"] = {
 
 from spanish_housing.data_paths import ROOT  # noqa: E402
 
+results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "hypothesis_01.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

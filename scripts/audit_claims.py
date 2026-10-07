@@ -56,6 +56,11 @@ MODEL_FRESHNESS = [
         "explorations/panel_saiz_madrid_results.json",
         "explorations/panel_saiz_madrid.py",
     ),
+    (
+        "hypothesis_01",
+        "artifacts/hypothesis_01.json",
+        "explorations/test_absorption_hypothesis.py",
+    ),
 ]
 
 
@@ -1139,6 +1144,20 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] wild_ar_bust: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 4
+    h1 = _model_output("artifacts/hypothesis_01.json")
+    for desc, path, expected, tol in (
+        ("pooled spearman ccaa", "pooled.ccaa.spearman", -0.406, 0.005),
+        ("pooled spearman prov", "pooled.prov.spearman", -0.381, 0.005),
+        ("pooled n prov", "pooled.prov.n", 153, 0),
+        ("prov 21-25 spearman", "prov_windows.2021-2025.spearman", -0.421, 0.005),
+        ("prov 21-25 ci lo", "prov_windows.2021-2025.spearman_ci95.0", -0.64, 0.01),
+        ("prov 21-25 ci hi", "prov_windows.2021-2025.spearman_ci95.1", -0.14, 0.01),
+    ):
+        got = _json_path(h1, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] hypothesis_01: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 6
     print(f"{total - failures}/{total} claims hold")
     fresh_failures = check_freshness()
     total += len(MODEL_FRESHNESS)

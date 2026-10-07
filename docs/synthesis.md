@@ -114,8 +114,12 @@ program is on hold, not abandoned — see the identification memo.
   regimes, not predictor — the denominator is demand itself.
 - Provincial absorption panel (50 provinces × 2002–2025, first time past
   2021 thanks to the Censo Anual extension): negative everywhere, wild-
-  robust nowhere (S0 −0.025, wild-p 0.42; S1 2021–25 −0.21, wild-p 0.55)
+  robust nowhere (S0 −0.024, wild-p 0.19; S1 −0.012, wild-p 0.97)
   — consistent with the CCAA panel: the naive t overstates precision.
+  **Correction 2026-10-07 (repo review):** this paragraph quoted pre-
+  two-way-transform numbers (S0 wild-p 0.42; S1 −0.21, wild-p 0.55);
+  corrected to the repaired estimates the explorer doc and audit carry.
+  Verdict unchanged.
 - The two-group ratio split: national viv/1000 flatness hides scarcity CCAA
   (Madrid −29.7, Cataluña −27.6) vs overstock (+100…+130 interior), and
   the **electricity-based vacancy** (2021 census, 59531) confirms the
