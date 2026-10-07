@@ -89,9 +89,9 @@ Two subtleties, both load-bearing:
   Censo Anual extension carried the provincia mart to 2025 (previous
   build 12:15 was pre-extension; the public site now serves provincial
   data through 2025). Version `76415706-4181-43b2-9673-d9405d05796f`.
-- Custom domain `vivienda.juanbenjumea.me` still needs a one-time
-  dashboard attach (deploy token lacks zone scope) — live on
-  `vivienda-explorer.juakke.workers.dev` meanwhile.
+- Custom domain `vivienda.juanbenjumea.me` is attached and serving
+  byte-identical content to the workers.dev URL (verified 2026-10-07) —
+  the dashboard attach happened outside this repo.
 
 Open `http://localhost:3000/` (or the URL printed if the port is occupied).
 Dev and build automatically run strict source extraction first. The five SQL
