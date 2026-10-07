@@ -122,6 +122,9 @@ for label, (dep, ctrls) in {
     print(f"{label:<28} {per_01:+.4f} ({se_01:.4f})  t={per_01 / se_01:+.2f}  n={n} G={g}")
 
 (ROOT / "artifacts").mkdir(exist_ok=True)
+results["_meta"] = ols.model_meta(
+    __file__, ["data/processed/marts.duckdb", "explorations/saiz_municipal_mad.json"]
+)
 for out in (
     ROOT / "artifacts" / "panel_saiz_madrid.json",
     ROOT / "explorations" / "panel_saiz_madrid_results.json",

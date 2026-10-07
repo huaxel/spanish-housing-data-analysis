@@ -60,29 +60,33 @@ audit:
 # ~30 min total: pure-Python wild bootstraps dominate (panel_quarterly
 # alone ~11 min, panel_adjusted ~5 min). Progress prints per script.
 analysis:
-	@echo "[analysis 1/12] bartik_predict (instrument)"
+	@echo "[analysis 1/14] bartik_predict (instrument)"
 	uv run python explorations/bartik_predict.py
-	@echo "[analysis 2/12] iv_migration"
+	@echo "[analysis 2/14] iv_migration"
 	uv run python explorations/iv_migration.py
-	@echo "[analysis 3/12] panel_saiz"
+	@echo "[analysis 3/14] panel_saiz"
 	uv run python explorations/panel_saiz.py
-	@echo "[analysis 4/12] panel_provincial"
+	@echo "[analysis 4/14] panel_provincial"
 	uv run python explorations/panel_provincial.py
-	@echo "[analysis 5/12] panel_adjusted (~5 min)"
+	@echo "[analysis 5/14] panel_adjusted (~5 min)"
 	uv run python explorations/panel_adjusted.py
-	@echo "[analysis 6/12] panel_tourist"
+	@echo "[analysis 6/14] panel_tourist"
 	uv run python explorations/panel_tourist.py
-	@echo "[analysis 7/12] panel_quarterly (~11 min)"
+	@echo "[analysis 7/14] panel_quarterly (~11 min)"
 	uv run python explorations/panel_quarterly.py
-	@echo "[analysis 8/12] ratio_ccaa"
+	@echo "[analysis 8/14] ratio_ccaa"
 	uv run python explorations/ratio_ccaa.py
-	@echo "[analysis 9/12] serpavi_analysis"
+	@echo "[analysis 9/14] serpavi_analysis"
 	uv run python explorations/serpavi_analysis.py
-	@echo "[analysis 10/12] tourist_rents"
+	@echo "[analysis 10/14] tourist_rents"
 	uv run python explorations/tourist_rents.py
-	@echo "[analysis 11/12] panel_saiz_madrid_vacancy"
+	@echo "[analysis 11/14] panel_saiz_municipal"
+	uv run python explorations/panel_saiz_municipal.py
+	@echo "[analysis 12/14] panel_saiz_madrid"
+	uv run python explorations/panel_saiz_madrid.py
+	@echo "[analysis 13/14] panel_saiz_madrid_vacancy"
 	uv run python explorations/panel_saiz_madrid_vacancy.py
-	@echo "[analysis 12/12] wild_ar_bust"
+	@echo "[analysis 14/14] wild_ar_bust"
 	uv run python explorations/wild_ar_bust.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test

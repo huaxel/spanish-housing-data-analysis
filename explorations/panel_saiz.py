@@ -254,7 +254,12 @@ results["interaction_ols"] = {
 print(json.dumps(results["interaction_ols"], indent=1))
 
 results["_meta"] = ols.model_meta(
-    __file__, ["data/processed/marts.duckdb", "artifacts/bartik_predicted.json"]
+    __file__,
+    [
+        "data/processed/marts.duckdb",
+        "artifacts/bartik_predicted.json",
+        "explorations/saiz_probe_results.json",
+    ],
 )
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "panel_saiz.json").write_text(

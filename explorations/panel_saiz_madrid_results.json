@@ -32,5 +32,13 @@
     "t": -2.25,
     "n": 539,
     "clusters": 28
+  },
+  "_meta": {
+    "script_sha": "7c3d6af6f78147b128b79a5b47a83dc91e2c9d6db728c8e496347cb309aedbfe",
+    "ols_sha": "97711b173fdc651a44cbd8368ebc0cdf2f574ba22cccef10c456500b587fd56a",
+    "data_sha": {
+      "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0",
+      "explorations/saiz_municipal_mad.json": "8da0e19d81422a038d26578c77ffb712a6b0ff2a25bda532e50da69ca6b12051"
+    }
   }
 }

@@ -46,6 +46,16 @@ MODEL_FRESHNESS = [
         "artifacts/madrid_vacancy_terrain.json",
         "explorations/panel_saiz_madrid_vacancy.py",
     ),
+    (
+        "panel_saiz_municipal",
+        "explorations/panel_saiz_municipal_results.json",
+        "explorations/panel_saiz_municipal.py",
+    ),
+    (
+        "panel_saiz_madrid",
+        "explorations/panel_saiz_madrid_results.json",
+        "explorations/panel_saiz_madrid.py",
+    ),
 ]
 
 

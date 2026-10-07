@@ -147,6 +147,9 @@ for key in ("starts_pc", "d_price"):
     print(f"mean {key} = {results[f'mean_{key}']}")
 
 (ROOT / "artifacts").mkdir(exist_ok=True)
+results["_meta"] = ols.model_meta(
+    __file__, ["data/processed/marts.duckdb", "explorations/saiz_municipal_bcn.json"]
+)
 (ROOT / "artifacts" / "panel_saiz_municipal.json").write_text(
     json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
 )
