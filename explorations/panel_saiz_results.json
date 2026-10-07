@@ -63,7 +63,7 @@
   },
   "_meta": {
     "script_sha": "0f93e1be1744ded4cd85b48d9fcd98cad6a4781242d14c00742dbb26cd4aafbc",
-    "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
+    "ols_sha": "f48655e0632553375e17b735d5c3bd2536bb662b0364780615b0118970c08bfa",
     "data_sha": {
       "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0",
       "artifacts/bartik_predicted.json": "a01e7159449db05e5d2f204144d83f221e38b7b922fe428002968ca9578a2a0f"

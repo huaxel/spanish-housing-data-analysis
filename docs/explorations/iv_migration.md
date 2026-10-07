@@ -188,3 +188,26 @@ origin-level 1998 base for 51/52 aggregation in `bartik_predict.py`, no
 Exclusion-untested, appraisal outcome, single instrument: unchanged.
 Design stays out of the synthesis in both directions — no causal claim and
 no null claim — until calibrated inference plus a new read says otherwise.
+
+## Wild-bootstrap AR calibration (2026-10-07): bust signal is robust, still unidentified
+
+Built `ols.wild_ar_ci` (null-imposed wild cluster bootstrap of the AR Wald;
+unit-tested for coverage + determinism) and ran it on the bust spec
+(`explorations/wild_ar_bust.py`, 29-pt grid, 299 reps, seed-pinned →
+`artifacts/wild_ar_bust.json`, freshness- and transcription-checked by
+`make audit`). Three answers side by side for bust tau (+0.46):
+
+- placeholder F<10: AR [−0.10, 1.40] (covers zero);
+- F(1,49) ≈ 4.04: AR [0.10, 0.95] (excludes zero);
+- **wild bootstrap: AR [0.25, 1.00]** (excludes zero; per-grid critical
+  values 3.7–7.9, i.e. between the two shortcuts).
+
+The inference question round 2 left open is now answered: the bust-era
+association is AR-robust under bootstrap calibration (caveats: 299 reps of
+Monte Carlo noise; coarse 0.25 grid). This does **not** revive the causal
+claim — exclusion (bubble geography) is untouched by calibration, and a
+robust-but-unidentified association stays out of the synthesis. It does
+retire the "identified null" reading of the repair: the repaired bust
+result is a robust positive association in search of an instrument, not a
+null. Recovery half (−0.06, uncalibrated AR covering zero) was not
+recalibrated — nothing there to rescue either way.

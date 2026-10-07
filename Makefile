@@ -69,6 +69,7 @@ analysis:
 	uv run python explorations/serpavi_analysis.py
 	uv run python explorations/tourist_rents.py
 	uv run python explorations/panel_saiz_madrid_vacancy.py
+	uv run python explorations/wild_ar_bust.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
 gates: lint fetch build analysis verify audit test

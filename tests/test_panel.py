@@ -314,3 +314,18 @@ def test_two_way_within_differs_from_raw_dummies():
     ]
     want = ols_mod.ols_cluster(xe, y, u)["beta"][0]
     assert abs(bad - want) > 1e-6
+
+
+def test_wild_ar_ci_covers_truth_and_deterministic():
+    from spanish_housing import ols as ols_mod
+
+    # Small strong-IV DGP: calibrated set must cover the truth (2.0) and be
+    # deterministic; coarse grid + few reps keep it fast.
+    y, d, w, z, cl = _iv_dgp(n=120, ncl=12, strength=1.0, seed=3)
+    r1 = ols_mod.wild_ar_ci(y, d, w, z, cl, lo=0.0, hi=4.0, steps=9, reps=99, seed=11)
+    r2 = ols_mod.wild_ar_ci(y, d, w, z, cl, lo=0.0, hi=4.0, steps=9, reps=99, seed=11)
+    assert r1 == r2
+    assert r1["set"], "calibrated AR set empty under strong IV"
+    assert r1["set"][0] <= 2.0 <= r1["set"][1]
+    assert len(r1["grid"]) == 9 and len(r1["keep"]) == 9 and len(r1["crit_95"]) == 9
+    assert all(c > 0 for c in r1["crit_95"])

@@ -397,3 +397,64 @@ def ar_ci(
         grid.append(round(b0, 4))
         keep.append(f < f_crit)
     return {"grid": grid, "keep": keep, "kz": kz, "f_crit": f_crit}
+
+
+def wild_ar_ci(
+    y: list[float],
+    d: list[float],
+    w: list[list[float]],
+    z: list[list[float]],
+    clusters: list[str | int],
+    lo: float,
+    hi: float,
+    steps: int = 29,
+    reps: int = 299,
+    seed: int = 20261007,
+    alpha: float = 0.05,
+) -> dict:
+    """Wild-cluster-bootstrap-calibrated Anderson-Rubin set for tau.
+
+    Replaces ar_ci's placeholder cutoff: at each grid b0, the null-imposed
+    model e(b0) = y - D*b0 is fit on the exogenous controls W alone
+    (restricted fit), bootstrap DGP e* = W*g0 + v_g*r0 with Rademacher v_g
+    per cluster, and the 1-alpha quantile of the bootstrapped cluster-robust
+    Wald statistics becomes that grid point's critical value. Keeps b0 when
+    the observed Wald falls below it. Deterministic for a fixed seed.
+    Cost is steps*(1+reps) Wald fits — keep the grid coarse."""
+    import random
+
+    rng = random.Random(seed)
+    kz = len(z[0])
+    groups: dict[str | int, list[int]] = {}
+    for i, g in enumerate(clusters):
+        groups.setdefault(g, []).append(i)
+    keys = list(groups)
+    x = [zi + wi for zi, wi in zip(z, w, strict=True)]
+    grid, keep, crits = [], [], []
+    for s in range(steps):
+        b0 = lo + (hi - lo) * s / (steps - 1) if steps > 1 else lo
+        e = [yi - di * b0 for yi, di in zip(y, d, strict=True)]
+        f_obs = _wald_sub(e, x, clusters, kz)
+        g0 = solve(xtx(w), xty(w, e))
+        fit0 = predict(w, g0)
+        r0 = [ei - fh for ei, fh in zip(e, fit0, strict=True)]
+        f_stars = []
+        for _ in range(reps):
+            v = {g: 1.0 if rng.random() < 0.5 else -1.0 for g in keys}
+            e_star = [fh + v[clusters[i]] * r0[i] for i, fh in enumerate(fit0)]
+            f_stars.append(_wald_sub(e_star, x, clusters, kz))
+        f_stars.sort()
+        crit = f_stars[min(reps - 1, int((1 - alpha) * reps))]
+        grid.append(round(b0, 4))
+        crits.append(round(crit, 3))
+        keep.append(f_obs < crit)
+    inside = [b for b, k in zip(grid, keep, strict=True) if k]
+    return {
+        "grid": grid,
+        "keep": keep,
+        "crit_95": crits,
+        "set": [min(inside), max(inside)] if inside else [],
+        "kz": kz,
+        "reps": reps,
+        "seed": seed,
+    }
