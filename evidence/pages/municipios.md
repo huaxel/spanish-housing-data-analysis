@@ -2,7 +2,7 @@
 title: Municipios
 ---
 
-# Municipios: Madrid y Barcelona
+# Municipios: Madrid, Barcelona y Valencia
 
 El grano municipal muestra lo que la media autonómica esconde.
 [Panorama nacional](/) · [Comparar territorios](/comparar/).
@@ -148,11 +148,67 @@ rentas mucho más bajas) y el turismo es hiperlocal: Barcelona ciudad concentra
 miles de pisos turísticos; Santa Coloma, decenas. Detalle en
 [Barcelona: metrópoli tensionada](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/barcelona_municipios.md).
 
+## Valencia: alquileres y vacancia, sin precios de venta
+
+Padrón municipal (266 municipios, 1996–2025) con la renta mediana SERPAVI
+(€/m²/mes, 2011–2024) y la vivienda vacía del Censo 2011. No hay serie de
+precios de venta a grano municipal valenciano: ningún espejo regional
+publica el valor tasado municipal y el portal estadístico de la Generalitat
+no es accesible para la ingesta automática. Detalle en
+[Valencia: municipios sin precio de venta](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/valencia_municipios.md).
+
+```sql lista_vlc
+select distinct municipio
+from housing.muni_vlc
+order by municipio
+```
+
+<Dropdown data={lista_vlc} name=munis_vlc value=municipio
+  title="Municipios de Valencia" multiple=true
+  defaultValue={["València", "Torrent", "Gandia", "Sagunt/Sagunto"]}/>
+
+```sql serie_vlc
+select municipio, anyo, poblacion, rent_eur_m2
+from housing.muni_vlc
+where municipio in ${inputs.munis_vlc.value}
+order by anyo, municipio
+```
+
+<LineChart data={serie_vlc} x=anyo y=rent_eur_m2 series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
+  title="Alquiler mediano SERPAVI (€/m²/mes)"/>
+
+<LineChart data={serie_vlc} x=anyo y=poblacion series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Población municipal"/>
+
+```sql vacancia_vlc
+select municipio, dwellings_2011, vacant_2011,
+       100.0 * vacant_2011 / nullif(dwellings_2011, 0) as pct_vacia
+from housing.muni_vlc
+where anyo = 2011 and dwellings_2011 is not null
+  and municipio in ${inputs.munis_vlc.value}
+order by pct_vacia desc
+```
+
+<DataTable data={vacancia_vlc} rows=20>
+  <Column id=municipio title="Municipio"/>
+  <Column id=dwellings_2011 title="Viviendas 2011" fmt="num0"/>
+  <Column id=vacant_2011 title="Vacías 2011" fmt="num0"/>
+  <Column id=pct_vacia title="% vacía" fmt="num1"/>
+</DataTable>
+
+La capital y su corona metropolitana concentran los alquileres más altos;
+los máximos de vacancia 2011 están en municipios pequeños del interior.
+Relaciones descriptivas, no causales.
+
 ## Datos y cobertura
 
 Series municipales con huecos según fuente y año; el guion es dato ausente,
 nunca cero. El valor tasado madrileño y los precios DIBA no son comparables
 entre sí (distintas fuentes y metodologías): cada metro se lee por separado.
+Valencia no tiene precios de venta municipales: solo alquiler SERPAVI,
+población y vacancia 2011.
 
 ---
-*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024; el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, Valencia 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
