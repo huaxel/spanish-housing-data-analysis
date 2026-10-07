@@ -270,6 +270,28 @@ def main() -> int:
     assert vlc_rent == (2011, 2024), f"valencia rent window broken: {vlc_rent}"
     assert vlc_city == 840792, f"valencia city pop drifted: {vlc_city}"
     assert vlc_city_rent == 8.18, f"valencia city rent drifted: {vlc_city_rent}"
+    sev = con.execute(
+        "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_sev"
+    ).fetchone()
+    sev_rent = con.execute(
+        "SELECT MIN(anyo), MAX(anyo) FROM muni_sev WHERE rent_eur_m2 IS NOT NULL"
+    ).fetchone()
+    sev_city = con.execute(
+        "SELECT poblacion FROM muni_sev WHERE municipio = 'Sevilla (ciudad)' AND anyo = 2025"
+    ).fetchone()[0]
+    sev_city_rent = con.execute(
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio = 'Sevilla (ciudad)' AND anyo = 2024"
+    ).fetchone()[0]
+    print(
+        f"muni_sev: municipios={sev[0]} years={sev[1]}-{sev[2]}; "
+        f"rent window={sev_rent[0]}-{sev_rent[1]}; "
+        f"Sevilla city 2025={sev_city}, rent 2024={sev_city_rent}"
+    )
+    assert sev == (106, 1996, 2025), f"sevilla coverage broken: {sev}"
+    assert sev_rent == (2011, 2024), f"sevilla rent window broken: {sev_rent}"
+    assert sev_city == 689423, f"sevilla city pop drifted: {sev_city}"
+    assert sev_city_rent == 9.17, f"sevilla city rent drifted: {sev_city_rent}"
     hog11 = con.execute(
         "SELECT COUNT(*) FROM mart_provincia_anual WHERE anyo=2011 AND hogares IS NULL"
     ).fetchone()[0]

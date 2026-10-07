@@ -131,6 +131,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/diba_m13.parquet",
     "data/raw/parquet/padron_municipios_bcn.parquet",
     "data/raw/parquet/padron_municipios_vlc.parquet",
+    "data/raw/parquet/padron_municipios_sev.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -977,6 +978,70 @@ def main() -> None:
         raise SystemExit(f"too few VLC municipios: {len(vlc_munis)}")
     con.register("vlc_df", pa.Table.from_pylist(vlc_rows))
     con.execute("CREATE OR REPLACE TABLE muni_vlc AS SELECT * FROM vlc_df")
+    # Sevilla municipal join: same design as muni_vlc (Padrón DPOP 2895 ×
+    # SERPAVI median rent ALQM2_LV_M_VC + Censo 2011 vacancy on the 2011 row
+    # only). No municipal sale-price source for Sevilla either.
+    from spanish_housing.muni_names import muni_key as _mk_sev
+
+    SEV_ALIAS: dict[str, str] = {}
+    pad_sev_rows = load_parquet("padron_municipios_sev.parquet")
+    pad_sev_key_names: dict[str, set] = {}
+    for r in pad_sev_rows:
+        pad_sev_key_names.setdefault(_mk_sev(r["territorio"]), set()).add(r["territorio"])
+    dup_sev = {k: v for k, v in pad_sev_key_names.items() if len(v) > 1}
+    if dup_sev:
+        raise SystemExit(f"muni_sev key collisions: {dict(list(dup_sev.items())[:5])}")
+    display_sev = {k: next(iter(v)) for k, v in pad_sev_key_names.items()}
+    rent_sev: dict[tuple[str, int], float] = {}
+    for r in load_parquet("serpavi_municipal.parquet"):
+        if r["cpro"] != "41" or r["medida"] != "ALQM2_LV_M_VC":
+            continue
+        if r["valor"] is None:
+            continue
+        rent_sev[(_mk_sev(r["municipio"]), r["anyo"])] = r["valor"]
+    sev_keys = set(pad_sev_key_names)
+    cen_sev_names: dict[str, set] = {}
+    for r in load_parquet("censo2011_municipios.parquet"):
+        if _mk_sev(r["municipio"]) in sev_keys:
+            cen_sev_names.setdefault(_mk_sev(r["municipio"]), set()).add(r["municipio"])
+    dup_cen_sev = {k: v for k, v in cen_sev_names.items() if len(v) > 1}
+    if dup_cen_sev:
+        print(f"muni_sev: censo homonyms skipped (no vacancy): {sorted(dup_cen_sev)}")
+    vac_sev: dict[str, dict] = {}
+    for r in load_parquet("censo2011_municipios.parquet"):
+        if r["tipo"] not in ("Total viviendas", "Vivienda vacía"):
+            continue
+        if _mk_sev(r["municipio"]) not in sev_keys:
+            continue
+        vac_sev.setdefault(_mk_sev(r["municipio"]), {})[r["tipo"]] = r["viviendas"]
+    sev_rows, sev_rent_hit, sev_vac_hit = [], 0, 0
+    for r in pad_sev_rows:
+        key = SEV_ALIAS.get(_mk_sev(r["territorio"]), _mk_sev(r["territorio"]))
+        rent = rent_sev.get((key, r["anyo"]))
+        vac = vac_sev.get(key)
+        sev_rent_hit += rent is not None
+        row = {
+            "municipio": display_sev[_mk_sev(r["territorio"])],
+            "anyo": r["anyo"],
+            "poblacion": r["poblacion"],
+            "rent_eur_m2": rent,
+            "dwellings_2011": None,
+            "vacant_2011": None,
+        }
+        if r["anyo"] == 2011 and vac and vac.get("Total viviendas"):
+            row["dwellings_2011"] = vac["Total viviendas"]
+            row["vacant_2011"] = vac.get("Vivienda vacía")
+            sev_vac_hit += 1
+        sev_rows.append(row)
+    sev_munis = {row["municipio"] for row in sev_rows}
+    print(
+        f"muni_sev: {len(sev_rows)} rows, {len(sev_munis)} municipios, "
+        f"rent cells {sev_rent_hit}, 2011 vacancy rows {sev_vac_hit}"
+    )
+    if len(sev_munis) < 90:
+        raise SystemExit(f"too few SEV municipios: {len(sev_munis)}")
+    con.register("sev_df", pa.Table.from_pylist(sev_rows))
+    con.execute("CREATE OR REPLACE TABLE muni_sev AS SELECT * FROM sev_df")
     # flat() already unifies 'Rozas de Madrid (Las)' vs ', Las' variants.
     valor_names = {flat(r["Territorio"]) for r in load_parquet("valor_municipal_madrid.parquet")}
     cen11 = [
@@ -1158,6 +1223,7 @@ def main() -> None:
         "censo2011_mad",
         "muni_bcn",
         "muni_vlc",
+        "muni_sev",
         "censo2011_bcn",
         "censo2011_val",
         "censo2011_vintage",

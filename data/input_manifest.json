@@ -23,6 +23,7 @@
     "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
     "data/raw/padron_municipios_bcn.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
     "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
+    "data/raw/padron_municipios_sev.json": "b8a436d864f740c6c3e12253cf4b79f33e30ce0955c8b9e8e0b6fcf3aca1059d",
     "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
@@ -57,6 +58,7 @@
     "data/raw/parquet/padron_extranjeros_origen.parquet": "e3157a1c4fffc5ca5ed4002ecc8e5a6051b13f68e0470f8b2b3590f86b5fc417",
     "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6",
     "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86",
+    "data/raw/parquet/padron_municipios_sev.parquet": "8940bdb5b31f35c3116e7ffd59c3f6cd9c48b0f9e799b957a71b263371a28de7",
     "data/raw/parquet/padron_municipios_vlc.parquet": "66c720885bf349df415f1d0cc79e0829988a0515682cd30a8e4bd8b6da1c2937",
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
     "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
@@ -199,6 +201,11 @@
     "data/raw/padron_municipios_mad.json": {
       "accessed": "2026-10-07",
       "api": "wstempus/DATOS_TABLA/2881",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_sev.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_vlc.json": {
@@ -405,6 +412,11 @@
     "data/raw/parquet/padron_municipios_mad.parquet": {
       "accessed": "2026-10-07",
       "api": "wstempus/DATOS_TABLA/2881",
+      "operation": "DPOP"
+    },
+    "data/raw/parquet/padron_municipios_sev.parquet": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_vlc.parquet": {

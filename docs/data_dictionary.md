@@ -91,6 +91,13 @@ No municipal stock: per-capita housing still unavailable at this grain.
 repeated). No sale prices — no reachable municipal source. Censo
 homonyms (`l'Alcúdia`, `Oliva`) carry no vacancy. Joined via `muni_key()`.
 
+## muni_sev
+
+Same design as `muni_vlc` for Sevilla (DPOP 2895; 106 municipios,
+1996–2025): `municipio`, `anyo`, `poblacion`, `rent_eur_m2` (SERPAVI
+2011–2024), `dwellings_2011`/`vacant_2011` (2011 row only). City is
+'Sevilla (ciudad)'. No censo homonyms in the Sevilla key set.
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /

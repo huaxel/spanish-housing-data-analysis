@@ -489,6 +489,130 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Sevilla city pop 2025",
+        "SELECT poblacion FROM muni_sev WHERE municipio='Sevilla (ciudad)' AND anyo=2025",
+        689423.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Sevilla city rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Sevilla (ciudad)' AND anyo=2024",
+        9.17,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Sevilla city rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Sevilla (ciudad)' AND anyo=2011",
+        7.01,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Sevilla city vacant share 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_sev "
+        "WHERE municipio='Sevilla (ciudad)' AND anyo=2011",
+        14.3,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Sevilla city vacant dwellings 2011",
+        "SELECT vacant_2011 FROM muni_sev WHERE municipio='Sevilla (ciudad)' AND anyo=2011",
+        48178.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Sevilla city share of province 2025",
+        "SELECT ROUND(100.0 * (SELECT poblacion FROM muni_sev "
+        "WHERE municipio='Sevilla (ciudad)' AND anyo=2025) / "
+        "(SELECT SUM(poblacion) FROM muni_sev WHERE anyo=2025), 1)",
+        34.9,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Espartinas rent 2024 (highest SEV)",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev WHERE municipio='Espartinas' AND anyo=2024",
+        9.67,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Puebla de Cazalla vacant 2011 (highest SEV)",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_sev "
+        "WHERE municipio='Puebla de Cazalla, La' AND anyo=2011",
+        26.0,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Dos Hermanas rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev WHERE municipio='Dos Hermanas' AND anyo=2024",
+        7.45,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Dos Hermanas rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev WHERE municipio='Dos Hermanas' AND anyo=2011",
+        5.88,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Alcala rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Alcalá de Guadaíra' AND anyo=2024",
+        6.29,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Alcala rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Alcalá de Guadaíra' AND anyo=2011",
+        5.14,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Mairena rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Mairena del Aljarafe' AND anyo=2024",
+        8.44,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Mairena rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_sev "
+        "WHERE municipio='Mairena del Aljarafe' AND anyo=2011",
+        6.6,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Puebla de los Infantes vacant 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_sev "
+        "WHERE municipio='Puebla de los Infantes, La' AND anyo=2011",
+        25.4,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Villanueva del Rio vacant 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_sev "
+        "WHERE municipio='Villanueva del Río y Minas' AND anyo=2011",
+        24.6,
+        0.1,
+    ),
+    (
+        "municipios",
         "Madrid city vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_mad "
         "WHERE municipio='Madrid' AND tipo='Vivienda vacía'",
