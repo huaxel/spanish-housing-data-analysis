@@ -15,15 +15,33 @@ differences). Instrument: shift-share predicted inflow (1998 origin
 levels × leave-one-out national growth). Outcome: valor-tasado Libre
 YoY % (no provincial IPV exists). Province + year FE; CR1V SEs.
 
-## Results
+## Results (repaired 2026-10-07: annual-flow instrument — provisional, new read pending)
 
 | | base | + province trends | drop Madrid/Barcelona |
 | --- | --- | --- | --- |
 | OLS | +0.002 (0.058) | −0.023 (0.079) | −0.009 (0.061) |
-| 2SLS | **+0.34 (0.13)** | **+1.04 (0.27)** | **+0.29 (0.13)** |
-| first-stage F | 27.3 | 52.8 | 20.3 |
-| AR set | [−0.20, 0.80] | [0.40, 2.35] | [−0.45, 0.75] |
+| 2SLS | +0.08 (0.09) | +0.20 (0.11) | +0.08 (0.09) |
+| first-stage F | 44.5 | 44.2 | 40.7 |
+| AR set | [−0.20, 0.40] | [−0.15, 0.65] | [−0.20, 0.40] |
 | n / clusters | 1000 / 50 | 1000 / 50 | 960 / 48 |
+
+| | bust 2002–13 | recovery 2014–21 |
+| --- | --- | --- |
+| 2SLS | +0.46 (0.20), F 34.4, AR [−0.10, 1.40] | −0.06 (0.03), F 30.9, AR [−0.20, 0.05] |
+
+The repair changes the story, not just the digits: with a flow instrument
+the first stage exists in *both* halves (F ≈ 31–45 everywhere — the old
+"bust-only instrument" was an artifact of the cumulative construction),
+and **no spec has an AR region excluding zero**. The old +0.48 bust headline
+is now +0.46 with AR [−0.10, 1.40] (covers zero); the recovery half is an
+identified near-null (−0.06, AR [−0.20, 0.05]). The trends spec (+0.20) now
+sits close to the base (+0.08) instead of tripling it — the violent
+sensitivity the first read flagged was partly the levels/flows artifact.
+The exclusion threat (bubble geography) is NOT discharged by this repair
+and goes to the new reader. Superseded numbers (cumulative-instrument
+vintage: pooled +0.34, bust +0.48/F 58, recovery unidentified, trends
++1.04) are preserved in git history and the read record below — do not
+quote them; quote this table only as *provisional pending the new read*.
 
 (Corrected 2026-10-06 after an external-model review caught an incorrect
 two-way within transform: year dummies are now province-demeaned alongside
@@ -35,7 +53,9 @@ instead of confirming it.)
 
 (Coefficient (clustered SE, sandwich with transposed right bread — corrected 2026-10-06 after independent review caught the missing .T). AR = Anderson-Rubin acceptance region over a grid (F<10 cutoff, uncalibrated — NOT a calibrated 95% set; see review finding).)
 
-Reading (corrected 2026-10-06 after independent review): 1pp faster
+Reading below is the REJECTED-vintage reading (cumulative instrument,
+2026-10-06 correction) — kept for the record, superseded by the repaired
+table above. Original text: 1pp faster
 foreign-inflow growth raises appraised prices ~0.3–0.5pp that year among
 bust-era instrument compliers — against an OLS association of ~zero, so
 the gap reads as full attenuation of a noisy exposure measure, LATE
@@ -49,7 +69,11 @@ AR-robust. The recovery half (2014–21) has no first stage (F = 0.22) and
 its AR region is the full search grid — unidentified, reported for
 completeness.
 
-## Why 2SLS >> OLS (three readings, not one)
+## Why 2SLS >> OLS (three readings — REJECTED vintage, kept for the record)
+
+Struck through 2026-10-07: under the repaired instrument pooled 2SLS is
++0.08 vs OLS +0.002 (statistically indistinguishable), so there is no
+large multiplier left to explain. Original text follows unmodified:
 
 1. **Measurement attenuation (plausible hypothesis, not established):** exposure = Δstock/pop mixes
    inflows with outflows, deaths, and naturalizations (naturalized
@@ -74,22 +98,21 @@ completeness.
 - 2002–2021 window only (flows + tasado overlap); 2022+ refill wave
   untested, COVID year inside the sample.
 
-## Split-sample: the instrument is a bust-era instrument (branch)
+## Split-sample (repaired 2026-10-07: both halves identified — provisional)
 
 | | bust 2002–13 | recovery 2014–21 |
 | --- | --- | --- |
 | OLS | +0.03 (0.11) | +0.02 (0.03) |
-| 2SLS | +0.48 (0.15) | +3.25 (6.28) — uninformative |
-| first-stage F | 57.7 | **0.22** |
-| AR set | [0.05, 1.05] | full grid (no information) |
+| 2SLS | +0.46 (0.20) | −0.06 (0.03) |
+| first-stage F | 34.4 | 30.9 |
+| AR set | [−0.10, 1.40] (covers zero) | [−0.20, 0.05] (covers zero) |
 
-The pooled +0.34 is bust-driven: 1998 settlement geography predicts
-2002–13 inflows (F = 58) but nothing about 2014–21 flows (F = 0.22).
-Post-crisis migration decoupled from historical networks — new origins
-(Venezuela, Honduras), dispersal, ECP-era patterns. Consequence: the
-recovery half of the story (S3's inflow surge) remains descriptive;
-only the bust-half effect is identified. If merged, the synthesis
-paragraph needs this qualifier, not just the pooled number.
+The old "bust-only instrument" (F = 58 vs 0.22) was an artifact of the
+cumulative construction: with a flow instrument both halves are identified
+(F ≈ 31–34) and neither AR region excludes zero. The bust point estimate
+stays positive (+0.46) but is no longer AR-robust; the recovery half is a
+near-null (−0.06). Superseded vintage numbers above are struck through by
+this section — see git history and the read record if you need them.
 
 ## Read plan
 
@@ -125,3 +148,43 @@ paragraph needs this qualifier, not just the pooled number.
   already marks. Remedy applied same day: causal section removed from
   `docs/synthesis.md` (pointer left), numbers preserved here and in
   `explorations/iv_results.json`.
+
+## Round-2 read (2026-10-07): REJECT AGAIN — inference itself is unsettled
+
+Second independent read (external model, repaired numbers) verdict: REJECT
+AGAIN — the repaired results may not be claimed as an "identified null"
+either. Three findings, each independently verified or dispositioned:
+
+1. **Stale companion docs (confirmed, fixed same day).** `panel_saiz.md`
+   still narrated the rejected-vintage split (+0.32/+0.41, "both reproduce
+   +0.34") against JSON holding +0.05/+0.137; the "Why 2SLS >> OLS" section
+   here was unmarked; audit labels still said "synthesis". All fixed:
+   Saiz note now reads flat-at-zero, vintage sections struck, audit IV
+   claims relabeled `iv_note`.
+2. **Calibrated AR cuts the other way (confirmed by replication).** The
+   repo's F<10 cutoff is a documented placeholder. Re-running the bust AR
+   set through the repo's own `ols.ar_ci` with F(1,49) ≈ 4.04 gives
+   **[0.10, 0.95] — excludes zero** (reader reported [0.09, 0.95]; the
+   0.01 gap is grid resolution). But F(1,G−1) quantiles are themselves
+   optimistic with G=50 (`ols.ar_ci` docstring), and the wild-bootstrap
+   calibration the code calls for does not exist yet. Status: the bust
+   "null" rests on a placeholder cutoff and the "positive" on an
+   optimistic one — **neither is established**. If this design is ever
+   revived, the prerequisite is wild-bootstrap-calibrated AR, not another
+   cutoff argument.
+3. **Normalization dispute (recorded, not adjudicated).** The reader calls
+   the YoY-rate construction (ΔN/N_{t−1}) a dimensional error and wants
+   first-differenced cumulative levels (ΔN/N_1998, Card-flow form). The
+   YoY-rate form is the canonical Bartik growth-rate construction; the two
+   differ in implicit origin weighting over time (Spain's foreign stock grew
+   ~7×, so the choice matters arithmetically). Adjudication would need the
+   both-normalizations comparison, which no one has run. Either way it does
+   not touch finding (a) from round 1 — bubble-geography exclusion failure
+   stands under both normalizations.
+
+Coverage footnote (both vintages): Ceuta y Melilla never enter (no
+origin-level 1998 base for 51/52 aggregation in `bartik_predict.py`, no
+`51+52` stock key in the estimator) — n=1000 is 50 provinces × 20 years.
+Exclusion-untested, appraisal outcome, single instrument: unchanged.
+Design stays out of the synthesis in both directions — no causal claim and
+no null claim — until calibrated inference plus a new read says otherwise.

@@ -40,8 +40,11 @@ STOCK = {
     ).fetchall()
 }
 
+# Annual-flow instrument (repair 2026-10-07): predicted year-t inflow from
+# base-year levels x year-over-year national growth. The cumulative-level key
+# was the rejected design's flaw — see the IV read record.
 PRED = json.loads((ROOT / "artifacts" / "bartik_predicted.json").read_text())[
-    "pred_inflow_rate_per_1000_1998pop"
+    "pred_annual_flow_per_1000_1998pop"
 ]
 
 by_unit: dict[str, list] = {}

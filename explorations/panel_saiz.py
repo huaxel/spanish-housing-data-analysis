@@ -50,8 +50,10 @@ STOCK = {
         "GROUP BY cpro, anyo"
     ).fetchall()
 }
+# Annual-flow instrument (repair 2026-10-07, same flaw as the IV): predicted
+# year-t inflow from base-year levels x year-over-year national growth.
 PRED = json.loads((ROOT / "artifacts" / "bartik_predicted.json").read_text())[
-    "pred_inflow_rate_per_1000_1998pop"
+    "pred_annual_flow_per_1000_1998pop"
 ]
 
 # --- terrain crosswalk: project provincia name -> probe name -------------

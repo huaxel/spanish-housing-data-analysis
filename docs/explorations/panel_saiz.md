@@ -9,11 +9,13 @@ increasing order of how much they can bear:
 | --- | --- | --- |
 | 1 | Premise: do constrained provinces build less? | −0.05 (0.17) per 0.1 constraint — **null** |
 | 2 | Exclusion threat: does terrain predict prices directly? | −0.05 (0.08) per 0.1 — **null** |
-| 3 | Mechanism: is τ larger where land is scarce? | high 0.41 (0.19) vs low 0.32 (0.17) — right direction, **not distinguishable** |
+| 3 | Mechanism: is τ larger where land is scarce? | high 0.14 (0.10) vs low 0.05 (0.11) — flat at ~zero, **not distinguishable** |
 
 (Corrected 2026-10-06 with the within-transform fix from the IV review:
 year dummies are now province-demeaned; the split taus fell with the
-headline, 0.64/0.74 → 0.32/0.41.)
+headline, 0.64/0.74 → 0.32/0.41. Repaired 2026-10-07 with the annual-flow
+instrument (the cumulative-level construction was rejected on independent
+read): the split taus fell again, 0.32/0.41 → 0.05/0.14 — see §3.)
 
 Code: `explorations/panel_saiz.py`; numbers pinned in
 `explorations/panel_saiz_results.json` and audited by `make audit`.
@@ -56,27 +58,26 @@ Splitting the design-A IV at the median constraint (0.445):
 
 | | low constraint | high constraint |
 | --- | --- | --- |
-| 2SLS τ | +0.32 (0.17) | +0.41 (0.19) |
-| first-stage F | 28.7 | 10.8 |
-| AR region (grid, uncalibrated) | [−0.10, 1.30] | [−2.00, 1.60] |
+| 2SLS τ | +0.05 (0.11) | +0.14 (0.10) |
+| first-stage F | 51.1 | 21.3 |
+| AR region (grid, uncalibrated) | [−0.45, 0.30] | [−0.20, 0.65] |
 | clusters | 26 | 24 |
 | OLS τ | −0.08 (0.10) | +0.11 (0.04) |
 
-Both subsamples reproduce the corrected headline (+0.34): the causal
-estimate is **not** an artifact of pooling provinces with very different
-terrain. The high-constraint point estimate is larger, which is the
-direction Saiz predicts, but the AR sets overlap almost exactly and the
+Neither subsample shows an effect with the repaired (annual-flow)
+instrument: both AR sets cover zero almost symmetrically, and the
 descriptive interaction is +0.31 (0.26) with wild-cluster p = 0.29.
-Two caveats sharpened by the correction: the high-constraint first stage
-is now borderline (F = 10.8) and its AR region hits the grid floor
-(unbounded below) — the high-side τ is weakly identified. And the OLS
-column flipped sign on the low side (−0.08 vs +0.11), so whatever 2SLS is
-correcting for differs across terrain groups.
+The high-constraint first stage is now solid (F = 21.3, was borderline
+10.8) and its AR region is bounded ([−0.20, 0.65]) — the repair bought
+identification and the effect vanished with it. The OLS column still
+flips sign on the low side (−0.08 vs +0.11), so whatever 2SLS corrects
+for differs across terrain groups, but with both 2SLS taus at ~zero
+there is no gradient to explain.
 
-Conclusion: migration raises prices by a similar amount in land-scarce and
-land-abundant provinces. That is a real (if modest) result — it says the
-migration→price channel is not primarily a supply-scarcity amplifier in
-this panel.
+Conclusion (repaired vintage): no migration→price gradient is detectable
+in either terrain group — flat at ~zero, not "similarly positive". The
+old reading (both reproduce +0.34) belonged to the rejected cumulative
+instrument and is struck through; see git history for those numbers.
 
 ## A bug worth recording
 

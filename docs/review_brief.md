@@ -271,3 +271,20 @@ full read record; numbers preserved in `explorations/iv_results.json` and
 still guarded by `make audit`. No causal claim remains in the synthesis;
 design B is likewise null, so the causal program is on hold pending a new
 design with its own read.
+
+## Addendum (2026-10-07): round-2 read on the repaired instrument — REJECT AGAIN
+
+The annual-flow repair (first-differenced national growth, both estimators
+re-run, audit repinned) went to a second independent read. Verdict: REJECT
+AGAIN — principally on inference grounds. Independently replicated in-repo:
+the repo's placeholder AR cutoff (F<10) covers zero in the bust, but the
+calibrated F(1,49) ≈ 4.04 cutoff gives AR [0.10, 0.95], excluding it — while
+F(1,G−1) itself is optimistic at G=50 and the wild-bootstrap calibration
+`ols.ar_ci` calls for is unbuilt. So neither "identified null" nor
+"significant positive" is established; the design is out of the synthesis in
+both directions. The read also caught real staleness (Saiz note narrating
+rejected-vintage splits, unmarked multiplier section, "synthesis" audit
+labels) — all fixed same day — and disputes the YoY-rate normalization
+(recorded unadjudicated; canonical Bartik form vs Card-flow form). Ceuta y
+Melilla confirmed absent from both vintages (n=1000 = 50×20). Prerequisite
+for any revival: wild-bootstrap-calibrated AR plus a third read.

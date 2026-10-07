@@ -12,13 +12,13 @@
       "se": 0.058
     },
     "tsls": {
-      "tau": 0.336,
-      "se": 0.128
+      "tau": 0.083,
+      "se": 0.09
     },
-    "first_stage_F": 27.25,
+    "first_stage_F": 44.51,
     "ar_set": [
       -0.2,
-      0.8
+      0.4
     ]
   },
   "province_trends": {
@@ -34,13 +34,13 @@
       "se": 0.079
     },
     "tsls": {
-      "tau": 1.042,
-      "se": 0.269
+      "tau": 0.201,
+      "se": 0.114
     },
-    "first_stage_F": 52.77,
+    "first_stage_F": 44.16,
     "ar_set": [
-      0.4,
-      2.35
+      -0.15,
+      0.65
     ]
   },
   "drop_madrid_barcelona": {
@@ -56,13 +56,13 @@
       "se": 0.061
     },
     "tsls": {
-      "tau": 0.288,
-      "se": 0.134
+      "tau": 0.079,
+      "se": 0.093
     },
-    "first_stage_F": 20.31,
+    "first_stage_F": 40.66,
     "ar_set": [
-      -0.45,
-      0.75
+      -0.2,
+      0.4
     ]
   },
   "bust_2002_2013": {
@@ -78,13 +78,13 @@
       "se": 0.109
     },
     "tsls": {
-      "tau": 0.482,
-      "se": 0.148
+      "tau": 0.458,
+      "se": 0.2
     },
-    "first_stage_F": 57.72,
+    "first_stage_F": 34.44,
     "ar_set": [
-      0.05,
-      1.05
+      -0.1,
+      1.4
     ]
   },
   "recovery_2014_2021": {
@@ -100,21 +100,21 @@
       "se": 0.03
     },
     "tsls": {
-      "tau": 3.245,
-      "se": 6.276
+      "tau": -0.059,
+      "se": 0.034
     },
-    "first_stage_F": 0.22,
+    "first_stage_F": 30.85,
     "ar_set": [
-      -2.0,
-      5.0
+      -0.2,
+      0.05
     ]
   },
   "_meta": {
-    "script_sha": "385616c8ed5b508a53c4c40b1312c5938c354e02567654e6bb14fc62b94d3a3f",
+    "script_sha": "4a9168fa9643722a1ac06cf0a85c9af5ebb87d4fcfb16833ef2f91d36b9fac25",
     "ols_sha": "c366a545786e26c677569af796b7d36ca836264517d6b6d58509e546516632b4",
     "data_sha": {
       "data/processed/marts.duckdb": "f6aeb5bf45d6ca649f24312297db53af3ed088b0fcbb54aa4c1f09d33a5d45e0",
-      "artifacts/bartik_predicted.json": "ecaa677d53412585d6327a061cbc291ef233d7f9f9ffa13a9c88610aa95479ca"
+      "artifacts/bartik_predicted.json": "a01e7159449db05e5d2f204144d83f221e38b7b922fe428002968ca9578a2a0f"
     }
   }
 }

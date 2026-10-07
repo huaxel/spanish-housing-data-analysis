@@ -77,10 +77,40 @@ per_1000 = {
     for u in units
 }
 
+# Annual predicted INFLOW (repair 2026-10-07): base-year origin levels x
+# year-over-year national growth (leave-one-out). The key above is a
+# *cumulative* predicted level since 1998 — instrumenting the annual
+# exposure rate with it was the rejected design's mechanical flaw (see the
+# IV read record). Estimators must use the flow key below, which matches
+# the annual timing of exposure (t minus t-1) and d_eur (YoY %).
+flow: dict[str, dict[int, float]] = {}
+for u in units:
+    flow[u] = {}
+    for t in years:
+        g = bartik.national_growth(stocks, origins, units, t - 1, t, leave_out=u)
+        flow[u][t] = sum(base98[(u, o)] * g[o] for o in origins)
+assert all(v == v and abs(v) != float("inf") for u in units for v in flow[u].values())
+flow_per_1000 = {
+    u: {t: (flow[u][t] / pop_by_cpro[u] * 1000 if pop_by_cpro.get(u) else None) for t in years}
+    for u in units
+}
+
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "bartik_predicted.json").write_text(
-    json.dumps({"pred_inflow_rate_per_1000_1998pop": per_1000}, indent=2, ensure_ascii=False),
+    json.dumps(
+        {
+            "pred_inflow_rate_per_1000_1998pop": per_1000,
+            "pred_annual_flow_per_1000_1998pop": flow_per_1000,
+        },
+        indent=2,
+        ensure_ascii=False,
+    ),
     encoding="utf-8",
 )
 print(f"bartik predicted: {len(units)} units x {len(years)} years; asserts hold")
 print("example Madrid 2008:", round(per_1000.get("28", {}).get(2008, 0.0), 2), "per 1000")
+print(
+    "example Madrid 2008 annual flow:",
+    round(flow_per_1000.get("28", {}).get(2008, 0.0), 2),
+    "per 1000",
+)
