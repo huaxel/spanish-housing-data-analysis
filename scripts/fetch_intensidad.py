@@ -24,6 +24,7 @@ from __future__ import annotations
 import csv
 import sys
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -36,7 +37,7 @@ from spanish_housing.data_paths import RAW  # noqa: E402
 
 TABLE_ID = 59531
 URL = f"https://www.ine.es/jaxi/files/tpx/csv_bd/{TABLE_ID}.csv"
-ACCESSED = "2026-10-06"
+ACCESSED = date.today().isoformat()
 
 # National anchors (2021): the table's own totals, pinned here.
 TOTAL_2021 = 26_623_708

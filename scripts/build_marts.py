@@ -997,7 +997,6 @@ def main() -> None:
     ]
     con.register("ten_df", pa.Table.from_pylist(ten_rows))
     con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
-    con.execute("CREATE OR REPLACE TABLE censo2011_tenencia AS SELECT * FROM ten_df")
     # Third anchor: 2021 census totals vs parque 2021 (rebase cross-check).
     # Totals only — the 2021 tipo split is occupancy-based and diverges
     # definitionally from MIVAU modelled principal/no-principal (up to ~20%).

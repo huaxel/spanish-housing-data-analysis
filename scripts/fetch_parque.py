@@ -12,6 +12,7 @@ from __future__ import annotations
 import sys
 import tempfile
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -41,7 +42,7 @@ def main() -> None:
             "url": URL,
             "publisher": "MIVAU",
             "dataset": "VDP002_01",
-            "accessed": "2026-10-05",
+            "accessed": date.today().isoformat(),
             "note": "(parsed copy in data/raw/parquet/)",
         },
     )
@@ -51,7 +52,7 @@ def main() -> None:
             "url": URL,
             "publisher": "MIVAU",
             "dataset": "VDP002_01",
-            "accessed": "2026-10-05",
+            "accessed": date.today().isoformat(),
             "note": "parquet mirror of the pinned CSV",
         },
     )

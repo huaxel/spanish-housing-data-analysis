@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -115,7 +116,7 @@ def main() -> None:
             "url": URL,
             "publisher": "INE",
             "operation": "Censo 2021 tpx=59521",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "browser-exported CSV via playwright-cli; normalized cp1252->UTF-8",
         },
     )
@@ -125,7 +126,7 @@ def main() -> None:
             "url": URL,
             "publisher": "INE",
             "operation": "Censo 2021 tpx=59521",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "all tipo x banda cells; anchor uses Total x Total",
         },
     )

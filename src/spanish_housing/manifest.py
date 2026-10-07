@@ -2,7 +2,8 @@
 
 Mirrors the four-prices discipline on a smaller scale: every raw input is
 pinned by bytes; build_marts refuses to run on unpinned or changed inputs
-unless --refresh-manifest is passed explicitly after review.
+(re-run make fetch to re-pin — there is deliberately no --refresh-manifest
+escape hatch).
 """
 
 from __future__ import annotations

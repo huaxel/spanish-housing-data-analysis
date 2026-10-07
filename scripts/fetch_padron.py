@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -60,14 +61,18 @@ def fetch_one(table_id: int, grain: str) -> None:
     con.execute(f"COPY (SELECT * FROM padron_rows) TO '{out}' (FORMAT PARQUET)")
     manifest.record(
         f"data/raw/padron_{grain}.json",
-        {"api": f"wstempus/DATOS_TABLA/{table_id}", "operation": "DPOP", "accessed": "2026-10-05"},
+        {
+            "api": f"wstempus/DATOS_TABLA/{table_id}",
+            "operation": "DPOP",
+            "accessed": date.today().isoformat(),
+        },
     )
     manifest.record(
         f"data/raw/parquet/padron_{grain}.parquet",
         {
             "api": f"wstempus/DATOS_TABLA/{table_id}",
             "operation": "DPOP",
-            "accessed": "2026-10-05",
+            "accessed": date.today().isoformat(),
             "note": "sexo=Total only",
         },
     )

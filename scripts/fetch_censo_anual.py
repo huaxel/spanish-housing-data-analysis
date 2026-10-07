@@ -26,6 +26,7 @@ from __future__ import annotations
 import csv
 import sys
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -39,7 +40,7 @@ from spanish_housing.data_paths import RAW  # noqa: E402
 TABLE_ID = 68521
 URL = f"https://www.ine.es/jaxiT3/files/t/es/csv_bd/{TABLE_ID}.csv"
 MARGIN = ("Total", "Todas las edades", "Total")  # Sexo, Edad, País de nacionalidad
-ACCESSED = "2026-10-06"
+ACCESSED = date.today().isoformat()
 
 
 def download(url: str, dest: Path) -> None:

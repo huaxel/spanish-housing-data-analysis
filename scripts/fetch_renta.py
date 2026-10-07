@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -69,14 +70,18 @@ def main() -> None:
     pq.write_table(pa.Table.from_pylist(rows), RAW_PARQUET)
     manifest.record(
         "data/raw/renta_hogar_ccaa.json",
-        {"api": f"wstempus/DATOS_TABLA/{TABLE_ID}", "operation": "ECV", "accessed": "2026-10-06"},
+        {
+            "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
+            "operation": "ECV",
+            "accessed": date.today().isoformat(),
+        },
     )
     manifest.record(
         "data/raw/parquet/renta_hogar_ccaa.parquet",
         {
             "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
             "operation": "ECV",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "renta_anyo = encuesta_anyo - 1",
         },
     )

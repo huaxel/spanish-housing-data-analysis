@@ -18,6 +18,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -141,7 +142,7 @@ def main() -> None:
             {
                 "api": f"wstempus/DATOS_TABLA/{table_id}",
                 "operation": "ECP",
-                "accessed": "2026-10-06",
+                "accessed": date.today().isoformat(),
                 **opts,
             },
         )
@@ -150,7 +151,7 @@ def main() -> None:
             {
                 "api": f"wstempus/DATOS_TABLA/{table_id}",
                 "operation": "ECP",
-                "accessed": "2026-10-06",
+                "accessed": date.today().isoformat(),
                 "note": "1-Jan (FK_Periodo 19) rows only",
             },
         )

@@ -12,6 +12,7 @@ from __future__ import annotations
 import sys
 import tempfile
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -67,7 +68,7 @@ def main() -> None:
     n = csvx.write_parquet(out, RAW_PARQUET)
     manifest.record(
         "data/raw/ech_hogares.csv",
-        {"url": URL, "publisher": "INE", "operation": "ECH", "accessed": "2026-10-06"},
+        {"url": URL, "publisher": "INE", "operation": "ECH", "accessed": date.today().isoformat()},
     )
     manifest.record(
         "data/raw/parquet/ech_hogares.parquet",
@@ -75,7 +76,7 @@ def main() -> None:
             "url": URL,
             "publisher": "INE",
             "operation": "ECH",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "Total x Total margin only; thousands -> units",
         },
     )

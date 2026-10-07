@@ -13,6 +13,7 @@ from __future__ import annotations
 import sys
 import tempfile
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -46,7 +47,7 @@ def main() -> None:
         {
             "url": URL,
             "publisher": "datos.comunidad.madrid (MIVAU mirror)",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "cp1252 original; stored as UTF-8",
         },
     )
@@ -55,7 +56,7 @@ def main() -> None:
         {
             "url": URL,
             "publisher": "datos.comunidad.madrid (MIVAU mirror)",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "published values only; '-' dropped, counted in print",
         },
     )

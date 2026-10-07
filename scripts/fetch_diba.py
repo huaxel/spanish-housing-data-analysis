@@ -16,6 +16,7 @@ import sys
 import tempfile
 import urllib.request
 import zipfile
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -46,7 +47,7 @@ def main() -> None:
     Path(tmp_path).replace(RAW_ZIP)
     manifest.record(
         "data/raw/diba_opendata.zip",
-        {"url": URL, "publisher": "Diputació de Barcelona", "accessed": "2026-10-06"},
+        {"url": URL, "publisher": "Diputació de Barcelona", "accessed": date.today().isoformat()},
     )
     with zipfile.ZipFile(RAW_ZIP) as z:
         names = {n.lower(): n for n in z.namelist()}
@@ -86,7 +87,7 @@ def main() -> None:
                 {
                     "url": URL,
                     "publisher": "Diputació de Barcelona",
-                    "accessed": "2026-10-06",
+                    "accessed": date.today().isoformat(),
                     "note": f"tb_{code} ({label})",
                 },
             )

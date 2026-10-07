@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -64,14 +65,18 @@ def main() -> None:
     con.execute(f"COPY (SELECT * FROM ipv_rows) TO '{RAW_PARQUET}' (FORMAT PARQUET)")
     manifest.record(
         "data/raw/ipv_ccaa_anual.json",
-        {"api": f"wstempus/DATOS_TABLA/{TABLE_ID}", "operation": "IPV", "accessed": "2026-10-05"},
+        {
+            "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
+            "operation": "IPV",
+            "accessed": date.today().isoformat(),
+        },
     )
     manifest.record(
         "data/raw/parquet/ipv_ccaa_anual.parquet",
         {
             "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
             "operation": "IPV",
-            "accessed": "2026-10-05",
+            "accessed": date.today().isoformat(),
             "note": "parsed index levels only",
         },
     )

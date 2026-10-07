@@ -22,6 +22,7 @@ import json
 import subprocess
 import sys
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -30,7 +31,7 @@ from spanish_housing import manifest  # noqa: E402
 from spanish_housing.data_paths import RAW  # noqa: E402
 
 URL = "https://gisco-services.ec.europa.eu/distribution/v2/lau/topojson/LAU_RG_01M_2021_4326.json"
-ACCESSED = "2026-10-06"
+ACCESSED = date.today().isoformat()
 MAPSHAPER = "mapshaper@0.7.79"  # pinned: simplification must reproduce
 EXPECTED_FEATURES = 8131
 MIN_JOIN = 3139  # named vacancy municipios (46 Resto xx999 codes excluded)

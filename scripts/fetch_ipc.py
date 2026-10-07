@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -58,7 +59,7 @@ def main() -> None:
         {
             "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
             "operation": "IPC general",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
         },
     )
     manifest.record(
@@ -66,7 +67,7 @@ def main() -> None:
         {
             "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
             "operation": "IPC general",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "general index levels only; base 2021",
         },
     )

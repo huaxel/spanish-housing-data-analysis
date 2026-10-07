@@ -27,6 +27,7 @@ from __future__ import annotations
 import re
 import sys
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -41,7 +42,7 @@ URL = (
     "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/"
     "2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
 )
-ACCESSED = "2026-10-06"
+ACCESSED = date.today().isoformat()
 # Validated anchors (probe doc): Barcelona city 2024 median, collective.
 BARCELONA_2024 = 13.680434782608694
 YEAR_RE = re.compile(r"_(\d{2})$")

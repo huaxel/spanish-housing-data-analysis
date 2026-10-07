@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import sys
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -82,11 +83,19 @@ def main() -> None:
     pq.write_table(pa.Table.from_pylist(rows), RAW_PARQUET)
     manifest.record(
         "data/raw/padron_municipios_bcn.json",
-        {"api": f"wstempus/DATOS_TABLA/{TABLE_ID}", "operation": "DPOP", "accessed": "2026-10-06"},
+        {
+            "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
+            "operation": "DPOP",
+            "accessed": date.today().isoformat(),
+        },
     )
     manifest.record(
         "data/raw/parquet/padron_municipios_bcn.parquet",
-        {"api": f"wstempus/DATOS_TABLA/{TABLE_ID}", "operation": "DPOP", "accessed": "2026-10-06"},
+        {
+            "api": f"wstempus/DATOS_TABLA/{TABLE_ID}",
+            "operation": "DPOP",
+            "accessed": date.today().isoformat(),
+        },
     )
     print(
         f"padron municipal bcn: {len(rows)} rows, "

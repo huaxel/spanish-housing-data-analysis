@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -105,7 +106,7 @@ def main() -> None:
         {
             "api": "wstempus/DATOS_TABLA/56940",
             "operation": "ECP",
-            "accessed": "2026-10-06",
+            "accessed": date.today().isoformat(),
             "note": "1-Jan age bands parsed from pinned ecp_pob_ccaa.json",
         },
     )
