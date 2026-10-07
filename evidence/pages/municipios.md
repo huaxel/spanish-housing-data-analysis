@@ -2,7 +2,7 @@
 title: Municipios
 ---
 
-# Municipios: Madrid, Barcelona y Valencia
+# Municipios: Madrid, Barcelona, Valencia y Sevilla
 
 El grano municipal muestra lo que la media autonómica esconde.
 [Panorama nacional](/) · [Comparar territorios](/comparar/).
@@ -202,13 +202,66 @@ La capital y su corona metropolitana concentran los alquileres más altos;
 los máximos de vacancia 2011 están en municipios pequeños del interior.
 Relaciones descriptivas, no causales.
 
+## Sevilla: la capital tira del alquiler metropolitano
+
+Padrón municipal (106 municipios, 1996–2025) con la renta mediana SERPAVI
+(€/m²/mes, 2011–2024) y la vivienda vacía del Censo 2011. Como en Valencia,
+no hay serie de precios de venta a grano municipal. Detalle en
+[Sevilla: alquileres sin precio de venta](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/sevilla_municipios.md).
+
+```sql lista_sev
+select distinct municipio
+from housing.muni_sev
+order by municipio
+```
+
+<Dropdown data={lista_sev} name=munis_sev value=municipio
+  title="Municipios de Sevilla" multiple=true
+  defaultValue={["Sevilla (ciudad)", "Dos Hermanas", "Alcalá de Guadaíra", "Mairena del Aljarafe"]}/>
+
+```sql serie_sev
+select municipio, anyo, poblacion, rent_eur_m2
+from housing.muni_sev
+where municipio in ${inputs.munis_sev.value}
+order by anyo, municipio
+```
+
+<LineChart data={serie_sev} x=anyo y=rent_eur_m2 series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
+  title="Alquiler mediano SERPAVI (€/m²/mes)"/>
+
+<LineChart data={serie_sev} x=anyo y=poblacion series=municipio
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Población municipal"/>
+
+```sql vacancia_sev
+select municipio, dwellings_2011, vacant_2011,
+       100.0 * vacant_2011 / nullif(dwellings_2011, 0) as pct_vacia
+from housing.muni_sev
+where anyo = 2011 and dwellings_2011 is not null
+  and municipio in ${inputs.munis_sev.value}
+order by pct_vacia desc
+```
+
+<DataTable data={vacancia_sev} rows=20>
+  <Column id=municipio title="Municipio"/>
+  <Column id=dwellings_2011 title="Viviendas 2011" fmt="num0"/>
+  <Column id=vacant_2011 title="Vacías 2011" fmt="num0"/>
+  <Column id=pct_vacia title="% vacía" fmt="num1"/>
+</DataTable>
+
+El Aljarafe (Espartinas, Mairena) y la capital marcan los alquileres más
+altos; la vacancia 2011 más alta está en la campiña y las sierras.
+Relaciones descriptivas, no causales.
+
 ## Datos y cobertura
 
 Series municipales con huecos según fuente y año; el guion es dato ausente,
 nunca cero. El valor tasado madrileño y los precios DIBA no son comparables
 entre sí (distintas fuentes y metodologías): cada metro se lee por separado.
 Valencia no tiene precios de venta municipales: solo alquiler SERPAVI,
-población y vacancia 2011.
+población y vacancia 2011. Sevilla, igual: Padrón 1996–2025, alquiler
+2011–2024, vacancia 2011, sin venta.
 
 ---
-*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, Valencia 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, Valencia 1996–2025 y Sevilla 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
