@@ -6,26 +6,32 @@ the assembled layers say about Spain's two archetypal markets.
 
 ## Madrid: the magnet that never overbuilt
 
-Fewest dwellings per capita in Spain (459→429/1000, 2007–25 — *falling* the
-whole period), lowest non-primary share (19→14%), most expensive (€3,686/m²,
-6.15 years of income). Madrid's bust (−33% €/m², affordability 8.0→5.8 years)
+Fewest dwellings per capita in Spain since 2010 (459→429/1000, 2007–25
+endpoints; País Vasco was lower in 2007 at 454), low and falling
+non-primary share (19→12%), most expensive (€3,686/m² in 2025;
+second-worst affordability at 6.2 years in 2024, after Balears 6.4).
+Madrid's bust (−33% €/m², affordability 8.0→5.8 years)
 was pure credit: mortgages collapsed 137k→32k while the stock barely moved.
-Its recovery is young migrants (20–34 share 16.9→18.5%, +160k young ≈
-+162k households 2021–25). Every margin binds at once: land, credit history,
+Its recovery is young migrants (20–34 share 17.1→18.5% 2021–25, +160k young ≈
++162k households). Every margin binds at once: land, credit history,
 demographic inflow. Building more is the necessary (not sufficient) answer.
+**Correction 2026-10-07 (repo review):** this paragraph overstated
+superlatives (fewest since 2007, lowest non-primary share, worst
+affordability — País Vasco was lower on stock and non-primary share in
+2007, Balears less affordable in 2024) and carried stale endpoints
+(non-primary 14% is ~2021, 2025 is 12%; share 16.9% is 2019, the
+2021–25 window runs 17.1→18.5%).
 
 ## Valencia: tight statistics on top of abundant bricks
 
 The CCAA built 0.23 dwellings per new household 2021–25 (tightest in Spain)
-— yet Alicante holds 720 dwellings per 1,000 people and Castellón 762
-(vs Madrid's 429), because **44–46% of those dwellings aren't primary
-residences**. And the tourist-flat suspect is acquitted: registered tourist
+— yet Alicante holds 676 dwellings per 1,000 people and Castellón 717
+(vs Madrid's 429), because **44–46% of those dwellings weren't primary
+residences in 2020**. And the tourist-flat suspect is acquitted: registered tourist
 dwellings are only **4.3% of Valencia's non-primary stock** (48k of 1.12M,
 2025), 5–6% in Cataluña, 4% in Madrid — *falling* 2021→25 in most markets
 (Balears 29k→19k) while prices rose. The sea beside primary housing is
-second homes and vacant inheritance, not tourist flats. Prices (€1,070
-Castellón → €1,708 CCAA mean, 2021–25) and mortgages (20k→61k) recovered
-without the magnet's demographics (young share only 15.9→16.7%).
+second homes and vacant inheritance, not tourist flats. Prices recovered from 2021 lows (Castellón €1,070→€1,299; CCAA mean €1,254→€1,708) and mortgages roughly tripled off the 2013 trough (20k→61k) without the magnet's demographics (young share only 15.9→16.7% 2021–25).
 
 ## Update 2026-10-06: the 2011 split decomposes the sea (`censo2011_val`)
 

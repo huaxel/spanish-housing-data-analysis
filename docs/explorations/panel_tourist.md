@@ -35,8 +35,8 @@ flat since 2015) while prices moved on other demand.
   stock is invisible by construction.
 - Post-2015 licensing freezes truncate the very variation being tested —
   a null under a freeze does not generalize to an unregulated counterfactual.
-- Sale sample (128 municipios with DIBA prices) skews larger/urban vs
-  the rent sample (244); neither is the full demarcation.
+- Sale sample (130 municipios with DIBA prices) skews larger/urban vs
+  the rent sample (253); neither is the full demarcation.
 - Barcelona only — Balears/Canarias, where tourist shares are higher,
   are the external-validity question. **Now tested**: see
   `tourist_rents.md` — SERPAVI extends rents nationally; the level

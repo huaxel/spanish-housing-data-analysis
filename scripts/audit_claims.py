@@ -889,6 +889,411 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         675.64,
         0.05,
     ),
+    (
+        "affordability",
+        "renta rise pct 2008-24",
+        "SELECT ROUND((MAX(CASE WHEN anyo=2024 THEN renta_hogar_neta END) "
+        "- MAX(CASE WHEN anyo=2008 THEN renta_hogar_neta END)) "
+        "/ MAX(CASE WHEN anyo=2008 THEN renta_hogar_neta END)*100,1) "
+        "FROM mart_ccaa_anual WHERE ccaa='Nacional'",
+        29.8,
+        0.1,
+    ),
+    (
+        "affordability",
+        "eur fall pct 2008-24",
+        "SELECT ROUND((MAX(CASE WHEN anyo=2024 THEN eur_m2_libre END) "
+        "- MAX(CASE WHEN anyo=2008 THEN eur_m2_libre END)) "
+        "/ MAX(CASE WHEN anyo=2008 THEN eur_m2_libre END)*100,1) "
+        "FROM mart_ccaa_anual WHERE ccaa='Nacional'",
+        -7.6,
+        0.1,
+    ),
+    (
+        "affordability",
+        "Madrid renta 2024",
+        "SELECT renta_hogar_neta FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2024",
+        47375.0,
+        1.0,
+    ),
+    (
+        "affordability",
+        "highest renta 2024 (superlative check)",
+        "SELECT MAX(renta_hogar_neta) FROM mart_ccaa_anual WHERE ccaa!='Nacional' AND anyo=2024",
+        47375.0,
+        1.0,
+    ),
+    (
+        "barcelona_municipios",
+        "Sant Adria rent burden 2022",
+        "SELECT rent_burden FROM muni_bcn WHERE municipio='Sant Adrià de Besòs' AND anyo=2022",
+        66.84037527446937,
+        0.1,
+    ),
+    (
+        "barcelona_municipios",
+        "Cornella rent burden 2022",
+        "SELECT rent_burden FROM muni_bcn WHERE municipio='Cornellà de Llobregat' AND anyo=2022",
+        50.895847994370165,
+        0.1,
+    ),
+    (
+        "barcelona_municipios",
+        "Badalona rent burden 2022",
+        "SELECT rent_burden FROM muni_bcn WHERE municipio='Badalona' AND anyo=2022",
+        57.93296289657645,
+        0.1,
+    ),
+    (
+        "barcelona_municipios",
+        "Santa Coloma rent burden 2022",
+        "SELECT rent_burden FROM muni_bcn WHERE municipio='Santa Coloma de Gramenet' AND anyo=2022",
+        54.60951564509216,
+        0.1,
+    ),
+    (
+        "barcelona_municipios",
+        "Cornella mortgage burden 2022",
+        "SELECT mortgage_burden FROM muni_bcn "
+        "WHERE municipio='Cornellà de Llobregat' AND anyo=2022",
+        62.122235088715115,
+        0.1,
+    ),
+    (
+        "ratio_ccaa",
+        "national ratio growth pct 07-25",
+        "WITH p AS (SELECT SUM(viviendas_total) s, SUM(poblacion) p "
+        "FROM mart_provincia_anual WHERE anyo=2007), "
+        "c AS (SELECT viviendas_total s, poblacion p FROM mart_ccaa_anual "
+        "WHERE ccaa='Nacional' AND anyo=2025) "
+        "SELECT ROUND((c.s/c.p-p.s/p.p)/(p.s/p.p)*100,1) FROM p, c",
+        3.7,
+        0.1,
+    ),
+    (
+        "censo_anual_probe",
+        "Nacional pop 2025 (Censo Anual cross-check)",
+        "SELECT poblacion FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2025",
+        49128297.0,
+        1.0,
+    ),
+    (
+        "censo_anual_probe",
+        "mart Nacional pop 2021 (seam base)",
+        "SELECT poblacion FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2021",
+        47385107.0,
+        1.0,
+    ),
+    (
+        "ratio_ccaa",
+        "Madrid pop growth pct 01-21",
+        "SELECT ROUND((SUM(CASE WHEN anyo=2021 THEN poblacion END) "
+        "-SUM(CASE WHEN anyo=2001 THEN poblacion END)) "
+        "/SUM(CASE WHEN anyo=2001 THEN poblacion END)*100,1) "
+        "FROM mart_provincia_anual WHERE ccaa='Madrid, Comunidad de' AND anyo IN (2001,2021)",
+        25.7,
+        0.1,
+    ),
+    (
+        "ratio_ccaa",
+        "Madrid stock growth pct 01-21",
+        "SELECT ROUND((SUM(CASE WHEN anyo=2021 THEN viviendas_total END) "
+        "-SUM(CASE WHEN anyo=2001 THEN viviendas_total END)) "
+        "/SUM(CASE WHEN anyo=2001 THEN viviendas_total END)*100,1) "
+        "FROM mart_provincia_anual WHERE ccaa='Madrid, Comunidad de' AND anyo IN (2001,2021)",
+        20.0,
+        0.1,
+    ),
+    (
+        "ratio_ccaa",
+        "CyL stock growth pct 01-21",
+        "SELECT ROUND((SUM(CASE WHEN anyo=2021 THEN viviendas_total END) "
+        "-SUM(CASE WHEN anyo=2001 THEN viviendas_total END)) "
+        "/SUM(CASE WHEN anyo=2001 THEN viviendas_total END)*100,1) "
+        "FROM mart_provincia_anual WHERE ccaa='Castilla y León' AND anyo IN (2001,2021)",
+        26.0,
+        0.1,
+    ),
+    (
+        "ratio_ccaa",
+        "CyL pop growth pct 01-21",
+        "SELECT ROUND((SUM(CASE WHEN anyo=2021 THEN poblacion END) "
+        "-SUM(CASE WHEN anyo=2001 THEN poblacion END)) "
+        "/SUM(CASE WHEN anyo=2001 THEN poblacion END)*100,1) "
+        "FROM mart_provincia_anual WHERE ccaa='Castilla y León' AND anyo IN (2001,2021)",
+        -3.9,
+        0.1,
+    ),
+    (
+        "ratio_ccaa",
+        "Asturias pop growth pct 01-21",
+        "SELECT ROUND((SUM(CASE WHEN anyo=2021 THEN poblacion END) "
+        "-SUM(CASE WHEN anyo=2001 THEN poblacion END)) "
+        "/SUM(CASE WHEN anyo=2001 THEN poblacion END)*100,1) "
+        "FROM mart_provincia_anual WHERE ccaa='Asturias, Principado de' AND anyo IN (2001,2021)",
+        -5.9,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid ratio 2007",
+        "SELECT viv_por_1000_hab FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2007",
+        459.1,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid ratio 2025",
+        "SELECT viv_por_1000_hab FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2025",
+        429.41,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid fewest ratio 2025 (superlative check)",
+        "SELECT MIN(viv_por_1000_hab) FROM mart_ccaa_anual WHERE ccaa!='Nacional' AND anyo=2025",
+        429.41,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid non-primary 2007",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_ccaa_anual WHERE ccaa='Madrid, Comunidad de' AND anyo=2007",
+        18.7,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid non-primary 2025",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_ccaa_anual WHERE ccaa='Madrid, Comunidad de' AND anyo=2025",
+        11.6,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid most expensive 2025 (superlative check)",
+        "SELECT MAX(eur_m2_libre) FROM mart_ccaa_anual WHERE ccaa!='Nacional' AND anyo=2025",
+        3685.6,
+        0.5,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid bust eur fall pct",
+        "SELECT ROUND((b.eur_m2_libre-a.eur_m2_libre)/a.eur_m2_libre*100,1) "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Madrid, Comunidad de' AND a.anyo=2007 AND b.anyo=2013",
+        -32.6,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid affordability 2007",
+        "SELECT afford_90m2_years FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2007",
+        7.97,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid affordability 2013",
+        "SELECT afford_90m2_years FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2013",
+        5.76,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid mortgages 2007",
+        "SELECT hip_viv_num FROM mart_ccaa_anual WHERE ccaa='Madrid, Comunidad de' AND anyo=2007",
+        137344.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid mortgages 2013",
+        "SELECT hip_viv_num FROM mart_ccaa_anual WHERE ccaa='Madrid, Comunidad de' AND anyo=2013",
+        31843.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid young share 2021 pct",
+        "SELECT ROUND(share_20_34*100,2) FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2021",
+        17.12,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid young share 2025 pct",
+        "SELECT ROUND(share_20_34*100,2) FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2025",
+        18.5,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid young inflow 21-25",
+        "SELECT b.pob_20_34-a.pob_20_34 FROM mart_ccaa_anual a "
+        "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Madrid, Comunidad de' AND a.anyo=2021 AND b.anyo=2025",
+        160279.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Madrid household inflow 21-25",
+        "SELECT b.hogares-a.hogares FROM mart_ccaa_anual a "
+        "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Madrid, Comunidad de' AND a.anyo=2021 AND b.anyo=2025",
+        161957.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Castellon ratio 2025",
+        "SELECT viv_por_1000_hab FROM mart_provincia_anual "
+        "WHERE provincia='Castellón/Castelló' AND anyo=2025",
+        717.24,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Balears affordability 2024 (worst)",
+        "SELECT afford_90m2_years FROM mart_ccaa_anual WHERE ccaa='Balears, Illes' AND anyo=2024",
+        6.41,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Castellon eur 2021",
+        "SELECT eur_m2_libre FROM mart_provincia_anual "
+        "WHERE provincia='Castellón/Castelló' AND anyo=2021",
+        1069.6,
+        0.5,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Castellon eur 2025",
+        "SELECT eur_m2_libre FROM mart_provincia_anual "
+        "WHERE provincia='Castellón/Castelló' AND anyo=2025",
+        1298.8,
+        0.5,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia eur 2021",
+        "SELECT eur_m2_libre FROM mart_ccaa_anual WHERE ccaa='Comunitat Valenciana' AND anyo=2021",
+        1253.8,
+        0.5,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia eur 2025",
+        "SELECT eur_m2_libre FROM mart_ccaa_anual WHERE ccaa='Comunitat Valenciana' AND anyo=2025",
+        1707.8,
+        0.5,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia mortgages 2013",
+        "SELECT hip_viv_num FROM mart_ccaa_anual WHERE ccaa='Comunitat Valenciana' AND anyo=2013",
+        19905.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia mortgages 2025",
+        "SELECT hip_viv_num FROM mart_ccaa_anual WHERE ccaa='Comunitat Valenciana' AND anyo=2025",
+        60543.0,
+        1.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia young share 2021 pct",
+        "SELECT ROUND(share_20_34*100,2) FROM mart_ccaa_anual "
+        "WHERE ccaa='Comunitat Valenciana' AND anyo=2021",
+        15.87,
+        0.05,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Valencia young share 2025 pct",
+        "SELECT ROUND(share_20_34*100,2) FROM mart_ccaa_anual "
+        "WHERE ccaa='Comunitat Valenciana' AND anyo=2025",
+        16.72,
+        0.05,
+    ),
+    (
+        "panel_saiz_municipal",
+        "Madrid-leg Arganda 2025",
+        "SELECT eur_m2 FROM muni_madrid WHERE municipio='Arganda del Rey' AND anyo=2025",
+        2280.0,
+        0.5,
+    ),
+    (
+        "panel_saiz_municipal",
+        "Madrid-leg Aranjuez 2025",
+        "SELECT eur_m2 FROM muni_madrid WHERE municipio='Aranjuez' AND anyo=2025",
+        1930.6,
+        0.5,
+    ),
+    (
+        "panel_saiz_municipal",
+        "Madrid-leg Valdemoro 2025",
+        "SELECT eur_m2 FROM muni_madrid WHERE municipio='Valdemoro' AND anyo=2025",
+        2355.7,
+        0.5,
+    ),
+    (
+        "panel_saiz_municipal",
+        "Madrid-leg Pozuelo 2025",
+        "SELECT eur_m2 FROM muni_madrid WHERE municipio='Pozuelo de Alarcón' AND anyo=2025",
+        4794.1,
+        0.5,
+    ),
+    (
+        "panel_saiz_municipal",
+        "Madrid-leg Madrid city 2025",
+        "SELECT eur_m2 FROM muni_madrid WHERE municipio='Madrid' AND anyo=2025",
+        4993.3,
+        0.5,
+    ),
+    (
+        "identification",
+        "origen cell count (coverage anchor)",
+        "SELECT COUNT(*) FROM padron_extranjeros_origen",
+        544575.0,
+        0.0,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Alicante non-primary 2020",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_provincia_anual WHERE provincia='Alicante/Alacant' AND anyo=2020",
+        44.1,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Castellon non-primary 2020",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_provincia_anual WHERE provincia='Castellón/Castelló' AND anyo=2020",
+        46.7,
+        0.1,
+    ),
+    (
+        "madrid_vs_valencia",
+        "Pais Vasco ratio 2007 (below Madrid then)",
+        "SELECT viv_por_1000_hab FROM mart_ccaa_anual WHERE ccaa='País Vasco' AND anyo=2007",
+        453.54,
+        0.05,
+    ),
 ]
 
 
@@ -956,6 +1361,13 @@ IV_CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.005,
     ),
     ("iv_note", "IV 2SLS tau (bust 2002-13)", "bust_2002_2013.tsls.tau", 0.458, 0.005),
+    ("iv_note", "IV OLS tau (base)", "base.ols.tau", 0.002, 0.005),
+    ("iv_note", "IV OLS tau (bust 2002-13)", "bust_2002_2013.ols.tau", 0.032, 0.005),
+    ("iv_note", "IV OLS tau (recovery 2014-21)", "recovery_2014_2021.ols.tau", 0.02, 0.005),
+    ("iv_note", "IV n (base)", "base.n", 1000, 0),
+    ("iv_note", "IV n (bust 2002-13)", "bust_2002_2013.n", 600, 0),
+    ("iv_note", "IV n (recovery 2014-21)", "recovery_2014_2021.n", 400, 0),
+    ("iv_note", "IV n (drop Madrid/Barcelona)", "drop_madrid_barcelona.n", 960, 0),
     ("iv_note", "IV AR lower bound (bust)", "bust_2002_2013.ar_set.0", -0.1, 0.005),
     ("iv_note", "IV AR upper bound (bust)", "bust_2002_2013.ar_set.1", 1.4, 0.005),
 ]
@@ -1088,6 +1500,8 @@ PANEL_SAIZ_CLAIMS = [
         0.05,
     ),
     ("panel_saiz", "high-constraint AR upper", "high_constraint.ar_set.1", 0.65, 0.005),
+    ("panel_saiz", "low-constraint AR lower", "low_constraint.ar_set.0", -0.45, 0.005),
+    ("panel_saiz", "high-constraint AR lower", "high_constraint.ar_set.0", -0.2, 0.005),
     ("panel_saiz", "low-constraint OLS tau", "low_constraint.ols.tau", -0.081, 0.005),
     ("panel_saiz", "high-constraint OLS tau", "high_constraint.ols.tau", 0.108, 0.005),
     ("panel_saiz", "interaction coefficient", "interaction_ols.interaction", 0.314, 0.005),
@@ -1227,12 +1641,28 @@ def main() -> int:
         ("vacancy galicia pct", "vacancy_2021.by_ccaa_pct.Galicia", 28.81, 0.05),
         ("vacancy madrid pct", "vacancy_2021.by_ccaa_pct.Madrid, Comunidad de", 6.34, 0.05),
         ("vacancy CyL pct", "vacancy_2021.by_ccaa_pct.Castilla y León", 19.38, 0.05),
+        ("vacancy CLM pct", "vacancy_2021.by_ccaa_pct.Castilla - La Mancha", 22.51, 0.05),
+        ("vacancy Extremadura pct", "vacancy_2021.by_ccaa_pct.Extremadura", 17.61, 0.05),
+        ("vacancy PV pct", "vacancy_2021.by_ccaa_pct.País Vasco", 6.48, 0.05),
+        ("vacancy Cataluna pct", "vacancy_2021.by_ccaa_pct.Cataluña", 10.67, 0.05),
+        ("Balears d_07_25", "ccaa.Balears, Illes.d_07_25", -13.3, 0.1),
+        ("Canarias d_07_25", "ccaa.Canarias.d_07_25", -1.2, 0.1),
+        ("Galicia d_07_25", "ccaa.Galicia.d_07_25", 107.4, 0.1),
+        ("Pais Vasco d_07_25", "ccaa.País Vasco.d_07_25", 36.2, 0.1),
+        ("Aragon d_07_25", "ccaa.Aragón.d_07_25", 59.3, 0.1),
+        ("Rioja d_07_25", "ccaa.Rioja, La.d_07_25", 64.8, 0.1),
+        ("CLM d_07_25", "ccaa.Castilla - La Mancha.d_07_25", 65.5, 0.1),
+        ("Cantabria d_07_25", "ccaa.Cantabria.d_07_25", 69.7, 0.1),
+        ("median real price scarcity", "groups.median_real_price.scarcity", -8.6, 0.1),
+        ("median real price overstock", "groups.median_real_price.overstock", -23.6, 0.1),
+        ("Extremadura r25", "ccaa.Extremadura.r25", 671.3, 0.05),
+        ("CLM r25", "ccaa.Castilla - La Mancha.r25", 642.7, 0.05),
     ):
         got = _json_path(ratio, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 20
+    total += 36
     serp = _model_output("artifacts/serpavi_analysis.json")
     for desc, path, expected, tol in (
         ("diba-serpavi pearson", "rent_cross_diba_2023.pearson", 0.825, 0.005),
@@ -1244,12 +1674,16 @@ def main() -> int:
         ("rent-vac spearman", "rent_vs_vacancy_2023.spearman", -0.507, 0.005),
         ("rent-vac n", "rent_vs_vacancy_2023.n", 2237, 0),
         ("serpavi munis 2024 rent", "coverage.serpavi_munis_2024_rent", 2555, 0),
+        ("yield p25", "gross_yield_bcn_2023.stats.p25", 4.11, 0.02),
+        ("yield p75", "gross_yield_bcn_2023.stats.p75", 5.23, 0.02),
+        ("bcn sale level", "gross_yield_bcn_2023.barcelona.sale", 4370.96, 0.05),
+        ("bcn rent_m2 level", "gross_yield_bcn_2023.barcelona.rent_m2", 13.14, 0.02),
     ):
         got = _json_path(serp, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] serpavi: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 9
+    total += 13
     tr = _model_output("artifacts/tourist_rents.json")
     for desc, path, expected, tol in (
         (
@@ -1301,7 +1735,10 @@ def main() -> int:
             0.005,
         ),
         ("tourist-rents n prov", "provincial.n", 45, 0),
+        ("tourist-rents n bcn", "bcn_municipal.n", 199, 0),
         ("Tenerife rent growth", "provincial.top_tourist", 27.95, 0.01),
+        ("Balears rent growth", "provincial.top_tourist.1.rent_growth_pct", 22.96, 0.01),
+        ("Girona rent growth", "provincial.top_tourist.0.rent_growth_pct", 18.73, 0.01),
     ):
         if desc == "Tenerife rent growth":
             got = next(
@@ -1317,12 +1754,13 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] tourist_rents: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 10
+    total += 13
     mv = _model_output("artifacts/madrid_vacancy_terrain.json")
     for desc, path, expected, tol in (
         ("named both n", "n_named_both", 135, 0),
         ("constraint max", "constraint_max", 0.8263, 0.005),
         ("vacancy max", "vacancy_max", 38.52, 0.05),
+        ("vacancy min", "vacancy_min", 2.67, 0.05),
         ("corr pearson", "pearson", 0.375, 0.005),
         ("corr spearman", "spearman", 0.557, 0.005),
         ("steep in table", "steep_villages_in_table", 0, 0),
@@ -1331,7 +1769,7 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] madrid_vacancy: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 6
+    total += 7
     pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),
@@ -1339,6 +1777,8 @@ def main() -> int:
         ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.194, 0.01),
         ("prov panel S0 n", "s0_absorption_only.n", 777, 0),
         ("prov panel S1 absor b", "s1_with_controls.coefs.absor.b", -0.012, 0.01),
+        ("prov panel S1 absor se", "s1_with_controls.coefs.absor.se", 0.137, 0.005),
+        ("prov panel S1 wild-p", "s1_with_controls.coefs.absor.wild_p", 0.972, 0.005),
         ("prov panel S1 n", "s1_with_controls.n", 178, 0),
         ("prov panel window max", "window.max", 2025, 0),
         ("prov panel n provinces", "window.n_provinces", 50, 0),
@@ -1347,7 +1787,7 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] panel_provincial: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 8
+    total += 10
     pq = _model_output("artifacts/panel_quarterly.json")
     for desc, path, expected, tol in (
         ("quarterly n", "n", 1156, 0),
@@ -1403,6 +1843,23 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_tourist: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 4
+    for desc, path, expected, tol in (
+        ("sale b", "sale_tour_only.coefs.d_tour.b", -0.2107, 0.001),
+        ("sale n", "sale_tour_only.n", 1159, 0),
+        ("sale+pop b", "sale_with_pop.coefs.d_tour.b", -0.1818, 0.001),
+        ("sale+pop n", "sale_with_pop.n", 1159, 0),
+        ("rent b", "rent_tour_only.coefs.d_tour.b", 0.0091, 0.001),
+        ("rent n", "rent_tour_only.n", 2109, 0),
+        ("rent+pop b", "rent_with_pop.coefs.d_tour.b", 0.0125, 0.001),
+        ("rent+pop n", "rent_with_pop.n", 2109, 0),
+        ("sale clusters", "sale_tour_only.clusters", 130, 0),
+        ("rent clusters", "rent_tour_only.clusters", 253, 0),
+    ):
+        got = _json_path(pt, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_tourist: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 10
     h1 = _model_output("artifacts/hypothesis_01.json")
     for desc, path, expected, tol in (
         ("pooled spearman ccaa", "pooled.ccaa.spearman", -0.406, 0.005),
@@ -1417,6 +1874,52 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] hypothesis_01: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
+    pa = _model_output("artifacts/panel_adjusted.json")
+    for desc, path, expected, tol in (
+        ("S0 absor b", "s0_absorption_only.coefs.absor.b", -0.141, 0.001),
+        ("S0 absor wild-p", "s0_absorption_only.wild_bootstrap.absor.p", 0.0823, 0.002),
+        ("S0 n", "s0_absorption_only.n", 194, 0),
+        ("S1 absor b", "s1_with_demand_controls.coefs.absor.b", -0.112, 0.001),
+        ("S1 absor wild-p", "s1_with_demand_controls.wild_bootstrap.absor.p", 0.1163, 0.002),
+        ("S1 d_hip b", "s1_with_demand_controls.coefs.d_hip.b", 0.033, 0.001),
+        ("S1 d_hip wild-p", "s1_with_demand_controls.wild_bootstrap.d_hip.p", 0.2637, 0.002),
+        ("S1 d_renta b", "s1_with_demand_controls.coefs.d_renta.b", 0.003, 0.001),
+        ("S1 d_renta wild-p", "s1_with_demand_controls.wild_bootstrap.d_renta.p", 0.9347, 0.002),
+        ("S1 d_coh b", "s1_with_demand_controls.coefs.d_coh.b", 3.392, 0.001),
+        ("S1 d_coh wild-p", "s1_with_demand_controls.wild_bootstrap.d_coh.p", 0.068, 0.002),
+        ("S1 n", "s1_with_demand_controls.n", 178, 0),
+        ("S2 absor b", "s2_with_lags.coefs.absor.b", -0.051, 0.001),
+        ("S2 absor wild-p", "s2_with_lags.wild_bootstrap.absor.p", 0.151, 0.002),
+        ("S2 d_hip b", "s2_with_lags.coefs.d_hip.b", 0.021, 0.001),
+        ("S2 d_hip wild-p", "s2_with_lags.wild_bootstrap.d_hip.p", 0.5513, 0.002),
+        ("S2 d_renta b", "s2_with_lags.coefs.d_renta.b", 0.039, 0.001),
+        ("S2 d_renta wild-p", "s2_with_lags.wild_bootstrap.d_renta.p", 0.4643, 0.002),
+        ("S2 d_coh b", "s2_with_lags.coefs.d_coh.b", 2.168, 0.001),
+        ("S2 d_coh wild-p", "s2_with_lags.wild_bootstrap.d_coh.p", 0.3707, 0.002),
+        ("S2 L_absor b", "s2_with_lags.coefs.L_absor.b", -0.162, 0.001),
+        ("S2 L_absor wild-p", "s2_with_lags.wild_bootstrap.L_absor.p", 0.04, 0.002),
+        ("S2 L_d_hip b", "s2_with_lags.coefs.L_d_hip.b", -0.003, 0.001),
+        ("S2 L_d_hip wild-p", "s2_with_lags.wild_bootstrap.L_d_hip.p", 0.8593, 0.002),
+        ("S2 L_d_renta b", "s2_with_lags.coefs.L_d_renta.b", -0.09, 0.001),
+        ("S2 L_d_renta wild-p", "s2_with_lags.wild_bootstrap.L_d_renta.p", 0.259, 0.002),
+        ("S2 n", "s2_with_lags.n", 133, 0),
+        ("S3 absor b", "s3_with_migration.coefs.absor.b", -0.114, 0.001),
+        ("S3 absor wild-p", "s3_with_migration.wild_bootstrap.absor.p", 0.095, 0.002),
+        ("S3 d_hip b", "s3_with_migration.coefs.d_hip.b", 0.014, 0.001),
+        ("S3 d_hip wild-p", "s3_with_migration.wild_bootstrap.d_hip.p", 0.6977, 0.002),
+        ("S3 d_renta b", "s3_with_migration.coefs.d_renta.b", 0.015, 0.001),
+        ("S3 d_renta wild-p", "s3_with_migration.wild_bootstrap.d_renta.p", 0.7843, 0.002),
+        ("S3 d_coh b", "s3_with_migration.coefs.d_coh.b", 3.46, 0.001),
+        ("S3 d_coh wild-p", "s3_with_migration.wild_bootstrap.d_coh.p", 0.1157, 0.002),
+        ("S3 d_inmig b", "s3_with_migration.coefs.d_inmig.b", 0.005, 0.001),
+        ("S3 d_inmig wild-p", "s3_with_migration.wild_bootstrap.d_inmig.p", 0.8927, 0.002),
+        ("S3 n", "s3_with_migration.n", 119, 0),
+    ):
+        got = _json_path(pa, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_adjusted: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 38
     print(f"{total - failures}/{total} claims hold")
     fresh_failures = check_freshness()
     total += len(MODEL_FRESHNESS)

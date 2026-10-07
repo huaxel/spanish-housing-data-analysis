@@ -125,8 +125,8 @@ t = −2.25), while growth is null (−0.134, t = −1.00). Taken at face value
 that contradicts both the supply-scarcity story (constraint ⇒ dearer) and
 the amenity story (mountains ⇒ dearer). Look at the municipios carrying
 the slope and neither story is needed: the "constrained" ones are the
-periphery (Arganda 1,707 €/m², Aranjuez 1,611, Valdemoro 1,784) while the
-dear flat ones are the NW suburbs (Pozuelo 3,214, Madrid city 3,280). The
+periphery (Arganda 2,280 €/m², Aranjuez 1,931, Valdemoro 2,356 in 2025) while the
+dear flat ones are the NW suburbs (Pozuelo 4,794, Madrid city 4,993). The
 slope is a **centrality/wealth gradient wearing a terrain proxy** —
 within a 0.00–0.25 range, "hillier" mostly means "farther from the
 centre".

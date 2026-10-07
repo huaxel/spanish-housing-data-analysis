@@ -30,7 +30,7 @@ against tight stock, not a nominal illusion over stagnation.
 
 ## Burdens 2022: the market prices out its workers
 
-Average rent took **51% of gross income in Barcelona** (54–58% in Badalona,
+Average rent took **51% of gross income in Barcelona** (51–58% in Badalona,
 Santa Coloma, Cornellà) and a new mortgage **63.6%** (71.9% in Sant Adrià,
 62.1% in Cornellà). The corona is *more* mortgage-stretched than the city:
 cheaper flats, much lower incomes. Santa Coloma (5 tourist flats, 2022) and

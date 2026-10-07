@@ -31,9 +31,9 @@ the 2001–08 boom built ahead of the immigration wave. The national 2007→25
 (+3.7%) is the difference of two big opposing forces, not a stable system.
 
 - **Group 1 (Madrid, Cataluña, Balears, Canarias):** population ran ahead of
-  stock. Madrid +25.7% pop vs +20.0% stock since 2001; the ratio fell ~30.
+  stock. Madrid +25.7% pop vs +20.0% stock 2001→2021; the ratio fell ~30.
 - **Group 2 (interior + north-west):** the boom built for a population that
-  then shrank. CyL stock +26% but population **−3.9%**; Asturias −5.9%.
+  then shrank. CyL stock +26% but population **−3.9%** 2001→2021; Asturias −5.9%.
   Ratio +100 to +130 — the overhang, measured as dwellings per person.
 
 ## The price cross

@@ -87,7 +87,7 @@ unchanged — both reads' verdicts stand.
 ## The split (why national ratios mislead)
 
 - **Madrid** (absolute scarcity): 429 dwellings/1000, 12% non-primary (2025; was 19% in 2007),
-  young-migrant refill, worst affordability (6.2y). Municipally: capital
+  young-migrant refill, second-worst affordability (6.2y in 2024, after Balears 6.4). Municipally: capital
   +30% vs south never recovered nominally (Parla −13%, Fuenlabrada +0.5%
   in 18y) — and neither recovered really (capital −7.5%, south −28 to
   −38% in 2025 euros); 2011 south was already vacancy (Parla 6%,
