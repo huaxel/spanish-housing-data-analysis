@@ -1,11 +1,12 @@
-# IV: migration exposure → prices (MERGED — independent read still owed)
+# IV: migration exposure → prices (NEGATIVE RESULT — independent read rejected it)
 
-Merged into `docs/synthesis.md` in `1616d9f`/`82aa409` (user-directed).
-Read plan step 1 — an independent reader on exclusion and LATE vs
-attenuation — has **not** run; the questions are carried in
-[`docs/review_brief.md`](../review_brief.md) §Section 2, folded into the
-milestone-5 read. Until that returns, treat this estimate as provisional
-and the split-sample caveat below as binding on any quotation.
+Merged into `docs/synthesis.md` in `1616d9f`/`82aa409` (user-directed),
+then **removed from the synthesis on 2026-10-07** after the milestone-5
+independent read returned REMOVE (read record below + [`docs/review_brief.md`](../review_brief.md)).
+Per the pre-committed protocol this note is kept as a documented negative
+result: the numbers stay pinned in `explorations/iv_results.json` (still
+freshness- and transcription-checked by `make audit`), but nothing here is
+quotable as a causal finding.
 
 Computed by `explorations/iv_migration.py` (`artifacts/iv_migration.json`,
 git-ignored). Provincia panel 2002–2021 (n=1,000, G=50 clusters).
@@ -106,5 +107,21 @@ paragraph needs this qualifier, not just the pooled number.
 ## Read record
 
 - Merged without an independent read (process gap, disclosed in the brief).
-- Milestone-5 read pending; reviewer identity + verdict to be appended to
-  `docs/review_brief.md` when it runs.
+- Milestone-5 independent read ran 2026-10-07 (agnostic external model,
+  read-only, briefed with the corrected +0.34-base numbers — not the stale
+  +0.67 values quoted in `docs/review_brief.md` §Section 2). Verdict:
+  **REMOVE to a documented negative result.** Exclusion FAIL: 1998
+  settlement geography (Mediterranean arc, agro belts, Madrid) coincides
+  with the Cajas-credit/construction-bubble footprint, and the trends spec
+  triples tau (+0.34 → +1.04) instead of corroborating it. Attenuation
+  cannot explain 2SLS ~150× OLS (would need >99.4% noise in Padrón stock
+  differences). Mechanism finding: the instrument as built is a *cumulative*
+  predicted level since 1998 (`bartik_predict.py`: growth computed 1998→t)
+  behind annual-flow language, instrumenting an *annual* inflow rate — the
+  first stage rides a non-stationary stock trajectory through the within
+  transform, consistent with the violent trends-spec sensitivity. Strongest
+  reason it is wrong: the first stage exists only 2002–13 (F = 58 vs 0.22
+  after), i.e. exactly the bubble/bust window the instrument's geography
+  already marks. Remedy applied same day: causal section removed from
+  `docs/synthesis.md` (pointer left), numbers preserved here and in
+  `explorations/iv_results.json`.

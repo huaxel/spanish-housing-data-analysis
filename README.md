@@ -20,7 +20,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Panel: absorption with demand controls](docs/explorations/panel_adjusted.md) — adjusted description (CCAA + year FE, clustered SEs); attenuation is the finding
 - [Quarterly credit timing](docs/explorations/panel_quarterly.md) — no mortgage lead once year effects are correctly absorbed (the old L3/L5/L6 shape was transform artifact); supply unobservable at this frequency
 - [Identification memo](docs/explorations/identification.md) — what a causal extension would take (scoping only: migration shift-share first, Saiz GIS second)
-- [IV: migration exposure → prices](docs/explorations/iv_migration.md) — commissioned design-A estimate (+0.34, AR [−0.20, 0.80]); threats + read record included
+- [IV: migration exposure → prices](docs/explorations/iv_migration.md) — commissioned design A, **rejected on independent read** (exclusion fails; instrument is cumulative behind flow language); kept as a documented negative result, removed from synthesis
 - [Tourist intensity panel](docs/explorations/panel_tourist.md) — municipal null: tourist changes don't track price/rent accelerations (wild-p 0.45–0.94)
 - [**Independent review brief**](docs/review_brief.md) — milestone-5 package (scope, reproduction, adversarial questions, disclosed limitations); **review not yet run**
 - [Saiz GIS probe](docs/explorations/saiz_gis_probe.md) — design B feasibility: full 52-provincia developable-land series, 2.6 GB / ~2 min from public Copernicus DEM; the memo's "data not in reach" was wrong

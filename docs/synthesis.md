@@ -63,49 +63,21 @@ post-2021 household surge pushed it to 1.39 — past 2011 tightness. The
 Read the measured 2011→2025 movement (1.40→1.44→1.39) as the
 comparable arc, not the proxy-anchored endpoints.
 
-## Causal extension: migration exposure and appraised prices (commissioned IV, bust-era compliers)
+## Causal extension: withdrawn after independent read (design A is a negative result)
 
-First causal estimate in this project (design A from the identification
-memo): shift-share instrument (1998 origin levels × leave-one-out
-national waves) for foreign net inflow per 1,000 inhabitants →
-valor-tasado YoY % (appraisal outcome, not transactions), provincia panel
-2002–2021, province + year FE, SEs clustered by provincia (G=50).
-
-| | base | + province trends | drop Madrid/Barcelona |
-| --- | --- | --- | --- |
-| OLS | +0.00 (0.06) | −0.02 (0.08) | −0.01 (0.06) |
-| 2SLS | +0.34 (0.13) | +1.04 (0.27) | +0.29 (0.13) |
-| first-stage F | 27.3 | 52.8 | 20.3 |
-| AR region (grid, uncalibrated) | [−0.20, 0.80] | [0.40, 2.35] | [−0.45, 0.75] |
-
-(Corrected 2026-10-06: the two-way within transform now demeans the year
-dummies too — the previous build regressed demeaned outcomes on demeaned
-regressors plus *raw* year dummies, which biased every column. The pooled
-estimate halved, 0.67 → 0.34, and the bust-only headline fell, 0.84 →
-0.48. The old province-trends spec was additionally singular — province
-trends sum to a common time trend the year FE already absorb — and solved
-only on rounding noise; it now carries G−1 trends and is identified.)
-
-The bust-only estimate (+0.48, first-stage F = 58) is the headline:
-one point faster inflow growth raises appraised prices ~0.5pp that year
-among instrument compliers. The pooled +0.34 aggregates an identified
-bust period with an unidentified recovery (2014–21: F = 0.22, tau +3.25
-SE 6.28, AR grid fully accepted) and is reported as a descriptive
-aggregation, not the estimand. The OLS association is now ~zero (+0.00),
-so there is no finite IV/OLS multiplier to quote — the gap is consistent
-with full attenuation of a noisy exposure measure, with LATE compliers in
-tight markets, or with residual exclusion failure; the repo adjudicates
-none of the three. The trends spec no longer corroborates the base: it
-moves the estimate to +1.04 with a wide AR region ([0.40, 2.35]), which
-is sensitivity to the trend specification, not robustness — differential
-trends remain a live threat rather than a discharged one. Exclusion
-remains untested, and mortgage-selection bias may correlate with
-instrumented inflows (the outcome is appraisals, not transactions). Full
-threats + read record in [the IV note](docs/explorations/iv_migration.md);
-estimator machinery in `src/spanish_housing/` (tested); numbers pinned in
-`explorations/iv_results.json` (re-run reproduces it deterministically;
-`make audit` additionally fails when the committed output predates its
-estimator code or input data).
+Removed 2026-10-07 on the milestone-5 independent read (verdict: REMOVE;
+read record in [the IV note](docs/explorations/iv_migration.md) and
+[the review brief](docs/review_brief.md)). The shift-share IV (+0.34 pooled,
++0.48 bust-only) failed exclusion: 1998 settlement geography coincides with
+the territorial footprint of the credit/construction bubble, the trends spec
+triples the estimate (+0.34 → +1.04) instead of confirming it, and the
+instrument as built is a cumulative predicted level since 1998 behind
+annual-flow language. Per the pre-committed protocol the estimate is kept as
+a documented negative result, not a softer claim: numbers stay pinned in
+`explorations/iv_results.json` (still freshness-checked by `make audit`),
+and nothing causal sits in this synthesis until a new design passes its own
+read. Design B (Saiz terrain) is likewise null at both grains; the causal
+program is on hold, not abandoned — see the identification memo.
 
 ## The split (why national ratios mislead)
 

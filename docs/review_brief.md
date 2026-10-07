@@ -247,3 +247,27 @@ when a committed model output predates its estimator code or input data
 exposed. This addendum preserves the original brief text as the record of
 what was reviewed; the corrected numbers live in
 `docs/explorations/iv_migration.md` and `docs/synthesis.md`.
+
+## Addendum (2026-10-07): milestone-5 IV read ran — verdict REMOVE
+
+An independent read-only review (external model, briefed with the corrected
++0.34-base numbers since §Section 2 still quotes the stale +0.67 series)
+returned **REMOVE to a documented negative result**:
+
+- Exclusion FAIL — 1998 settlement geography coincides with the
+  Cajas-credit/bubble footprint; the trends spec triples tau (+0.34 → +1.04).
+- Attenuation cannot explain 2SLS ~150× OLS (needs >99.4% noise).
+- New mechanism finding: the instrument is a *cumulative* predicted level
+  since 1998 behind annual-flow language (`bartik_predict.py` grows 1998→t),
+  instrumenting an *annual* rate — first stage rides a non-stationary stock
+  trajectory through the within transform.
+- First stage exists only 2002–13 (F = 58 vs 0.22), exactly the bubble/bust
+  window the instrument geography already marks.
+
+Remedy applied same day per the pre-committed protocol (removal, not softer
+wording): causal section removed from `docs/synthesis.md` (pointer left);
+`docs/explorations/iv_migration.md` re-headed as a negative result with the
+full read record; numbers preserved in `explorations/iv_results.json` and
+still guarded by `make audit`. No causal claim remains in the synthesis;
+design B is likewise null, so the causal program is on hold pending a new
+design with its own read.
