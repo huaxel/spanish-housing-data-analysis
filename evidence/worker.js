@@ -35,6 +35,29 @@ export default {
       ctx.waitUntil(cache.put(req, res.clone()));
       return res;
     }
+    // Content-hashed build files (_app/immutable/…) never change bytes
+    // under the same name: serve edge-cached with an immutable year.
+    // (Static Assets default here is must-revalidate, i.e. a round trip
+    // on every repeat visit — the main repeat-load cost on mobile after
+    // the gzipped ~2 MB route bundle.) Anything else passes through.
+    if (url.pathname.startsWith("/_app/immutable/")) {
+      const cache = caches.default;
+      const cached = await cache.match(req);
+      if (cached) return cached;
+      const res = await env.ASSETS.fetch(req);
+      if (res.ok) {
+        const fixed = new Response(res.body, {
+          status: res.status,
+          headers: {
+            ...Object.fromEntries(res.headers),
+            "cache-control": "public, max-age=31536000, immutable",
+          },
+        });
+        ctx.waitUntil(cache.put(req, fixed.clone()));
+        return fixed;
+      }
+      return res;
+    }
     return env.ASSETS.fetch(req);
   },
 };

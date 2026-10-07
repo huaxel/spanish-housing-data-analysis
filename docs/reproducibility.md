@@ -96,6 +96,13 @@ Two subtleties, both load-bearing:
 - `worker.js` serves WASM cache-first from `caches.default`, filled via
   `waitUntil`. Keys are the hashed build paths, so a dependency bump
   fills new keys and can never serve stale bytes within a pinned version.
+  Hashed `/_app/immutable/` files get the same treatment with an immutable
+  year (Static Assets defaults those to must-revalidate — a round trip on
+  every repeat visit). Verified live on both domains.
+- Bundle weight (measured 2026-10-07): each route ships a ~4.8 MB JS bundle
+  (~2 MB gzip), near-identical across routes — Evidence architecture, not
+  fixable from here. `DataTable` already scrolls horizontally
+  (`overflow-x: auto`), so wide tables need no responsive treatment.
 - On any data refresh, update the `Instantánea de datos` footer date in
   every `evidence/pages/*.md` to the new manifest snapshot date before
   rebuilding — the footers are static text, not wired to the manifest.
