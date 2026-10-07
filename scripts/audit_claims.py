@@ -613,6 +613,76 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "national muni count",
+        "SELECT COUNT(DISTINCT (cpro, municipio)) FROM muni_all",
+        8136.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Madrid city pop 2025 (national table)",
+        "SELECT poblacion FROM muni_all WHERE municipio='Madrid (ciudad)' AND anyo=2025",
+        3506730.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Madrid city rent 2024 (national table)",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_all "
+        "WHERE municipio='Madrid (ciudad)' AND anyo=2024",
+        13.97,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Sant Josep rent 2024 (highest national)",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_all "
+        "WHERE municipio='Sant Josep de sa Talaia' AND anyo=2024",
+        14.63,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Donostia rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_all "
+        "WHERE municipio='Donostia/San Sebastián' AND anyo=2024",
+        13.99,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Yebes vacant 2011 (highest national)",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_all "
+        "WHERE municipio='Yebes' AND anyo=2011",
+        60.0,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Ezcaray vacant 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_all "
+        "WHERE municipio='Ezcaray' AND anyo=2011",
+        49.1,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Chilches vacant 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_all "
+        "WHERE municipio='Chilches/Xilxes' AND anyo=2011",
+        45.1,
+        0.1,
+    ),
+    (
+        "municipios",
+        "national rent municipios 2024",
+        "SELECT COUNT(DISTINCT (cpro, municipio)) FROM muni_all "
+        "WHERE anyo=2024 AND rent_eur_m2 IS NOT NULL",
+        2515.0,
+        1.0,
+    ),
+    (
+        "municipios",
         "Madrid city vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_mad "
         "WHERE municipio='Madrid' AND tipo='Vivienda vacía'",

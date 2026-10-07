@@ -53,6 +53,7 @@ COVERED_DOCS = [
     "docs/explorations/barcelona_municipios.md",
     "docs/explorations/valencia_municipios.md",
     "docs/explorations/sevilla_municipios.md",
+    "docs/explorations/municipios_nacional.md",
     "docs/explorations/madrid_vs_valencia.md",
     "docs/explorations/censo_anual_probe.md",
     "docs/explorations/serpavi_probe.md",
@@ -495,6 +496,10 @@ ALLOW = {
         (27.0, "display table pct, spot-verified 2026-10-07"),
         (22.0, "display table pct, spot-verified 2026-10-07"),
         (28.0, "display table pct, spot-verified 2026-10-07"),
+    ],
+    "docs/explorations/municipios_nacional.md": [
+        (52.0, "DPOP municipal tables (structural)"),
+        (2270.0, "rows with 2011 vacancy (coverage fact)"),
     ],
     "docs/explorations/valor_referencia_probe.md": [
         (25.0, "publication day-of-month (administrative fact)"),

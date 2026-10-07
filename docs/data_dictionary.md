@@ -98,6 +98,15 @@ Same design as `muni_vlc` for Sevilla (DPOP 2895; 106 municipios,
 2011–2024), `dwellings_2011`/`vacant_2011` (2011 row only). City is
 'Sevilla (ciudad)'. No censo homonyms in the Sevilla key set.
 
+## muni_all
+
+National merge of all 52 DPOP municipal tables: `municipio`, `provincia`
+(DPOP table name), `cpro` (via `mart_provincia_anual` names + 51/52 for
+Ceuta/Melilla), `anyo` (1996–2025), `poblacion`, `rent_eur_m2` (SERPAVI
+2011–2024; Granada Pinar/Píñar twins keep population only), 2011 vacancy
+(2011 rows only; 3 national censo homonym keys + 52 cross-province
+homonym keys skipped). 235,376 rows, 8,136 municipios.
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /

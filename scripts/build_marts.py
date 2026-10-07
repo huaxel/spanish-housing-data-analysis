@@ -132,6 +132,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/padron_municipios_bcn.parquet",
     "data/raw/parquet/padron_municipios_vlc.parquet",
     "data/raw/parquet/padron_municipios_sev.parquet",
+    "data/raw/parquet/padron_municipios_all.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -1042,6 +1043,101 @@ def main() -> None:
         raise SystemExit(f"too few SEV municipios: {len(sev_munis)}")
     con.register("sev_df", pa.Table.from_pylist(sev_rows))
     con.execute("CREATE OR REPLACE TABLE muni_sev AS SELECT * FROM sev_df")
+    # National municipal join: all-provinces Padrón × SERPAVI median rent
+    # (ALQM2_LV_M_VC) + Censo 2011 vacancy. Additive: muni_mad/muni_bcn/
+    # muni_vlc/muni_sev stay untouched. Province→cpro via mart_provincia_anual
+    # (official names, built above) — SERPAVI's short names ('Alicante') do
+    # not match DPOP prefixes ('Alicante/Alacant').
+    from spanish_housing.muni_names import muni_key as _mk_all
+
+    cpro_by_prov: dict[str, str] = {}
+    for r in prov_rows:
+        k = _mk_all(r["provincia"])
+        if k in cpro_by_prov and cpro_by_prov[k] != r["cpro"]:
+            raise SystemExit(f"provincia cpro conflict: {k}")
+        cpro_by_prov[k] = r["cpro"]
+    # Ceuta/Melilla ride combined ('Ceuta y Melilla') in the provincia mart;
+    # INE standard codes 51/52 for the separate DPOP tables.
+    cpro_by_prov[_mk_all("Ceuta")] = "51"
+    cpro_by_prov[_mk_all("Melilla")] = "52"
+    pad_all_rows = load_parquet("padron_municipios_all.parquet")
+    tabla_cpro: dict[str, str] = {}
+    for prefix in {r["provincia_tabla"] for r in pad_all_rows}:
+        hits = [c for k, c in cpro_by_prov.items() if k == _mk_all(prefix)]
+        if len(hits) != 1:
+            raise SystemExit(f"no cpro for tabla {prefix!r}: {len(hits)} hits")
+        tabla_cpro[prefix] = hits[0]
+    # Within-province key collisions would silently merge distinct
+    # municipios — fail loudly instead.
+    all_key_names: dict[tuple[str, str], set] = {}
+    for r in pad_all_rows:
+        all_key_names.setdefault(
+            (tabla_cpro[r["provincia_tabla"]], _mk_all(r["territorio"])), set()
+        ).add(r["territorio"])
+    # Intra-province key twins ('Pinar, El' vs 'Píñar', Granada) cannot take
+    # rent/vacancy without an INE-code crosswalk: both keep population, both
+    # skip rent and vacancy. Omission, never a guess.
+    dup_all = {k: v for k, v in all_key_names.items() if len(v) > 1}
+    if dup_all:
+        print(f"muni_all: intra-province twins skipped (pop only): {sorted(dup_all)}")
+    display_all = {k: next(iter(v)) for k, v in all_key_names.items()}
+    rent_all: dict[tuple[str, str, int], float] = {}
+    for r in load_parquet("serpavi_municipal.parquet"):
+        if r["medida"] != "ALQM2_LV_M_VC" or r["valor"] is None:
+            continue
+        rent_all[(r["cpro"], _mk_all(r["municipio"]), r["anyo"])] = r["valor"]
+    # National censo ambiguity: exactly the 3 known homonym keys are
+    # skipped (same omission policy as the VLC table).
+    CEN_SKIP = {"ALCUDIA", "GRANADA", "OLIVA"}
+    vac_all: dict[str, dict] = {}
+    for r in load_parquet("censo2011_municipios.parquet"):
+        if r["tipo"] not in ("Total viviendas", "Vivienda vacía"):
+            continue
+        if _mk_all(r["municipio"]) in CEN_SKIP:
+            continue
+        vac_all.setdefault(_mk_all(r["municipio"]), {})[r["tipo"]] = r["viviendas"]
+    # Same-named municipios in different provinces (Torrent × 2, ...) must
+    # not share one censo row: vacancy attaches only to province-unique keys.
+    key_cpros: dict[str, set] = {}
+    for r in pad_all_rows:
+        key_cpros.setdefault(_mk_all(r["territorio"]), set()).add(tabla_cpro[r["provincia_tabla"]])
+    multi_prov = {k for k, v in key_cpros.items() if len(v) > 1}
+    if multi_prov:
+        print(f"muni_all: cross-province homonyms skipped (no vacancy): {len(multi_prov)}")
+    all_rows_muni, all_rent_hit, all_vac_hit = [], 0, 0
+    for r in pad_all_rows:
+        cpro = tabla_cpro[r["provincia_tabla"]]
+        key = _mk_all(r["territorio"])
+        twin = (cpro, key) in dup_all
+        rent = None if twin else rent_all.get((cpro, key, r["anyo"]))
+        vac = vac_all.get(key) if key not in multi_prov and not twin else None
+        all_rent_hit += rent is not None
+        row = {
+            # Twins share a canonical key but are distinct municipios:
+            # each keeps its own published display name.
+            "municipio": r["territorio"] if (cpro, key) in dup_all else display_all[(cpro, key)],
+            "provincia": r["provincia_tabla"],
+            "cpro": cpro,
+            "anyo": r["anyo"],
+            "poblacion": r["poblacion"],
+            "rent_eur_m2": rent,
+            "dwellings_2011": None,
+            "vacant_2011": None,
+        }
+        if r["anyo"] == 2011 and vac and vac.get("Total viviendas"):
+            row["dwellings_2011"] = vac["Total viviendas"]
+            row["vacant_2011"] = vac.get("Vivienda vacía")
+            all_vac_hit += 1
+        all_rows_muni.append(row)
+    all_munis = {(row["cpro"], row["municipio"]) for row in all_rows_muni}
+    print(
+        f"muni_all: {len(all_rows_muni)} rows, {len(all_munis)} municipios, "
+        f"rent cells {all_rent_hit}, 2011 vacancy rows {all_vac_hit}"
+    )
+    if len(all_munis) < 8000:
+        raise SystemExit(f"too few national municipios: {len(all_munis)}")
+    con.register("all_df", pa.Table.from_pylist(all_rows_muni))
+    con.execute("CREATE OR REPLACE TABLE muni_all AS SELECT * FROM all_df")
     # flat() already unifies 'Rozas de Madrid (Las)' vs ', Las' variants.
     valor_names = {flat(r["Territorio"]) for r in load_parquet("valor_municipal_madrid.parquet")}
     cen11 = [
@@ -1224,6 +1320,7 @@ def main() -> None:
         "muni_bcn",
         "muni_vlc",
         "muni_sev",
+        "muni_all",
         "censo2011_bcn",
         "censo2011_val",
         "censo2011_vintage",

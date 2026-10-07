@@ -21,6 +21,58 @@
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
     "data/raw/padron_ccaa.json": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
     "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
+    "data/raw/padron_municipios_all_2854.json": "0a11b8d9649006798ce21b4f1d57f18a84efb2e98f220b553bafd14bde2d21cf",
+    "data/raw/padron_municipios_all_2855.json": "7456ed630565edef2e5ec3460f0a3931ed7a2935c69e58513f35e3d006fbd4b3",
+    "data/raw/padron_municipios_all_2856.json": "e3784ec148cc91318f9d15415fa653f39e9fa6ca8b5662715a7f3cf0a94f349f",
+    "data/raw/padron_municipios_all_2857.json": "22c9b6ecd9465405b38fad9fc21d5cc63b51a5610e158946014b454dad322cb2",
+    "data/raw/padron_municipios_all_2858.json": "3f48a05cf3350a7487f91f33339f5e11c61d41ff823cdf981480897714f5c39e",
+    "data/raw/padron_municipios_all_2859.json": "6b0e57ddb770ec1aae6998b1af64baa5814a1f9ba708047bcab8100f2c5d1bbf",
+    "data/raw/padron_municipios_all_2860.json": "3172c4a52d8acd4a8269d999fc6b4588d3ac879917afd9b4af7b4893dc5b0e84",
+    "data/raw/padron_municipios_all_2861.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
+    "data/raw/padron_municipios_all_2862.json": "ca59a6304dc97202094e50f65b01d8d030e33e2132a225ec8544fb8730d087d8",
+    "data/raw/padron_municipios_all_2863.json": "57fc21cddf491b021864e22e84caddc74c637a758065a29cbdf63bdef918545f",
+    "data/raw/padron_municipios_all_2864.json": "7996a05ebf47b9a3680aa7470b09e5cd757e35fc6b9b3e67a5226c3277fe4ac0",
+    "data/raw/padron_municipios_all_2865.json": "56175df5b73c3b0bea09971736ee1e079a38404cd77dbfbe68008c92cb89591d",
+    "data/raw/padron_municipios_all_2866.json": "a21c4f5c5a78aa83ec190bd40ef4258dfedcc6d8742acf28c959797f3facded4",
+    "data/raw/padron_municipios_all_2868.json": "acbdbe120e46c4bd6fa65bc1a0963d2a263246ee8f089a99b39b9fa2fe8fafb6",
+    "data/raw/padron_municipios_all_2869.json": "a76bc1589a22a1542bec2ef008b65aad1c5681d73910d00c4ff1858d83b8011b",
+    "data/raw/padron_municipios_all_2870.json": "5cdb069af89f3ed1158d72f79b9c4d584cf1fba99a32cbfe8a4b9e0b678c4480",
+    "data/raw/padron_municipios_all_2871.json": "eb0a917b15aa4259e7c341cbb8a8dad37ede3aafbd6ddc00620ec92830a208c6",
+    "data/raw/padron_municipios_all_2872.json": "48dff2aee9bc1ac2537a9ddfa344352d67826f8d658d827afd64b3515e6e1bfe",
+    "data/raw/padron_municipios_all_2873.json": "c9e331bc3fac3612b9fceae2dc65103025ebea273d592498c56b5025c1cba8cf",
+    "data/raw/padron_municipios_all_2874.json": "b45525afc6616591d0c1c638704a51eaeab49a10ade6624a1d0c0de88bc97834",
+    "data/raw/padron_municipios_all_2875.json": "8ba5be3b4e7bfd8beef83e0a8d8a391c4cd38c035bd9016423a99e19945b4125",
+    "data/raw/padron_municipios_all_2876.json": "8ebc88b9a1b61770dbea68313f86d70c72164028fb15e04d9206efd5c2a05518",
+    "data/raw/padron_municipios_all_2877.json": "0574cc74f1635e17dc0bb26969616486049a7984abf212fac1addae3215e49bf",
+    "data/raw/padron_municipios_all_2878.json": "714773cce30e9cdd7d2e4806e25341f42d10fae8fba07468a811836489c8ef18",
+    "data/raw/padron_municipios_all_2879.json": "571131427dc9dbd67916de905b72efe8fd75ab54581f55cd65a48fa618bde718",
+    "data/raw/padron_municipios_all_2880.json": "ff955a69f1cfdb31ed01cb3761b04e859ce61ba5822dfee7ed0d9fa49eb2741f",
+    "data/raw/padron_municipios_all_2881.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
+    "data/raw/padron_municipios_all_2882.json": "af198628d02cde0c6ce8de4c552c9a26bd1e66c4da54d528f6d44d52082b3f8d",
+    "data/raw/padron_municipios_all_2883.json": "45de9e402e88e8eb5c0ab6db3c063ff9faa077d37e33f0eb4ce02ed8b6d0c449",
+    "data/raw/padron_municipios_all_2884.json": "c86670edc48d51754f43e592f254aa09110aabe87b6beb89235b7a52fb871c6e",
+    "data/raw/padron_municipios_all_2885.json": "e6d5288d95a6188fee3e8933e5e1aae8dd599c71014d50745b78c448992fbeb7",
+    "data/raw/padron_municipios_all_2886.json": "63746a0e62117365f629368d40b719432e72abb454d841d8908399c584aa0e27",
+    "data/raw/padron_municipios_all_2888.json": "f491db63e5a684e0ede9d8402831e962e381e157a41e14264189634a82193106",
+    "data/raw/padron_municipios_all_2889.json": "d2f3f127f8fa90919a1674647a704cdc797a08af61ef1d0b77a25eabac54f923",
+    "data/raw/padron_municipios_all_2890.json": "dc5fa70f8e1493dc12c8456678734344364eb1a1cde2d7e6c239c95dad1fd2e3",
+    "data/raw/padron_municipios_all_2891.json": "a9ddf997a578900fcb6203e3c1eee30963f76dc58a2cb23ab3e6e738ebc345e7",
+    "data/raw/padron_municipios_all_2892.json": "44faa224eaaf3b1ad984ebcd02569566e4fde9a61aa1f3194c4eee955e342401",
+    "data/raw/padron_municipios_all_2893.json": "5b9ad1ae63462039d66255caccb622645214ad3e9ad4f28c55164bf5a377c033",
+    "data/raw/padron_municipios_all_2894.json": "efcb74032ae1f1a65fe349d97641158633dab422659ec6f628b60736fa5b6668",
+    "data/raw/padron_municipios_all_2895.json": "b8a436d864f740c6c3e12253cf4b79f33e30ce0955c8b9e8e0b6fcf3aca1059d",
+    "data/raw/padron_municipios_all_2896.json": "4a7fc7d18e1cf24f8e59971883a2de8d75a66efb8cf318c465fd6bbb7f4b5d3b",
+    "data/raw/padron_municipios_all_2899.json": "39552b3d1617cab711d53b5d9b232acc11c788456b9efdb4e2fac017196ef2fc",
+    "data/raw/padron_municipios_all_2900.json": "7b7fed7dd1cf772196ae97892b9cdfac72fbd5aefb6a642b9d2d83006e485e2d",
+    "data/raw/padron_municipios_all_2901.json": "b746370e4e61e2ae5e9f91be47baeff2d47574aa9e559bc134a61d4ea4cd5588",
+    "data/raw/padron_municipios_all_2902.json": "c65f311407feaecb500b219aee201c9f0e0721a1db20989e3d2f88d7a0986b2a",
+    "data/raw/padron_municipios_all_2903.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
+    "data/raw/padron_municipios_all_2904.json": "4a7d0c9f2c8982aed0a8bd34ddfbdeb6156286c22b958d0b7a8176655195f623",
+    "data/raw/padron_municipios_all_2905.json": "44d1c38152c08799eed2578646dd4e465aa181423908b1e69a1615ed59cf61e9",
+    "data/raw/padron_municipios_all_2906.json": "5c8642f62c2334d5d7d2d66a86e2450d4159cd8ef32da3daa02eff98495d3a2f",
+    "data/raw/padron_municipios_all_2907.json": "f9883a249f117ccb6b9f8f5f685e80c53f1639a8b02247c9ecb7a11885565c89",
+    "data/raw/padron_municipios_all_2908.json": "6a7aaf2160a286ff1385ceac68d5a76196bf69c3812de9c40e3de7e056444e4a",
+    "data/raw/padron_municipios_all_2909.json": "35bc83565bd1bae93556601d498759c50f892c1fee63dbe7fc12594ae8b294ef",
     "data/raw/padron_municipios_bcn.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
     "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
     "data/raw/padron_municipios_sev.json": "b8a436d864f740c6c3e12253cf4b79f33e30ce0955c8b9e8e0b6fcf3aca1059d",
@@ -56,6 +108,7 @@
     "data/raw/parquet/padron_ccaa.parquet": "495e970541579aa086c3f0ddf760b600734f4b73d672a1fec2aa8e844e07cf4d",
     "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed",
     "data/raw/parquet/padron_extranjeros_origen.parquet": "e3157a1c4fffc5ca5ed4002ecc8e5a6051b13f68e0470f8b2b3590f86b5fc417",
+    "data/raw/parquet/padron_municipios_all.parquet": "e8649a9754aad75473ca36aeaa2a8fb279008987e7774c241d115f3075462db5",
     "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6",
     "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86",
     "data/raw/parquet/padron_municipios_sev.parquet": "8940bdb5b31f35c3116e7ffd59c3f6cd9c48b0f9e799b957a71b263371a28de7",
@@ -192,6 +245,266 @@
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
+    },
+    "data/raw/padron_municipios_all_2854.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2854",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2855.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2855",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2856.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2856",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2857.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2857",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2858.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2858",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2859.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2859",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2860.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2860",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2861.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2861",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2862.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2862",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2863.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2863",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2864.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2864",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2865.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2865",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2866.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2866",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2868.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2868",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2869.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2869",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2870.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2870",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2871.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2871",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2872.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2872",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2873.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2873",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2874.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2874",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2875.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2875",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2876.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2876",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2877.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2877",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2878.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2878",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2879.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2879",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2880.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2880",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2881.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2881",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2882.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2882",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2883.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2883",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2884.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2884",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2885.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2885",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2886.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2886",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2888.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2888",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2889.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2889",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2890.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2890",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2891.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2891",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2892.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2892",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2893.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2893",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2894.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2894",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2895.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2895",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2896.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2896",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2899.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2899",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2900.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2900",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2901.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2901",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2902.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2902",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2903.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2903",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2904.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2904",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2905.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2905",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2906.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2906",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2907.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2907",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2908.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2908",
+      "operation": "DPOP"
+    },
+    "data/raw/padron_municipios_all_2909.json": {
+      "accessed": "2026-10-07",
+      "api": "wstempus/DATOS_TABLA/2909",
+      "operation": "DPOP"
     },
     "data/raw/padron_municipios_bcn.json": {
       "accessed": "2026-10-07",
@@ -403,6 +716,10 @@
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
+    },
+    "data/raw/parquet/padron_municipios_all.parquet": {
+      "accessed": "2026-10-07",
+      "derived": "52 DPOP municipal tables"
     },
     "data/raw/parquet/padron_municipios_bcn.parquet": {
       "accessed": "2026-10-07",
