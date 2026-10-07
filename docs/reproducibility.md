@@ -100,7 +100,10 @@ project root. If the database is missing, run `make gates` first.
 After `make build` (marts), restart the service
 (`systemctl --user restart housing-evidence`) or run
 `cd evidence && npm run sources` to refresh the dashboard data.
-Page edits hot-reload without a restart.
+Page edits hot-reload without a restart, but **new files under
+`evidence/static/` do not** — Evidence snapshots static assets at
+startup, so `make geo` (or any new static file) needs a service
+restart before the dev server serves it.
 `make evidence-dev` and `make evidence-build` refuse to run while port
 3000 is busy or the service is active (both regenerate the same
 `.evidence/template/` directory); stop the service first, then restart it

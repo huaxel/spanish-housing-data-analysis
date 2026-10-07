@@ -48,6 +48,7 @@ re-add 56945 to `scripts/fetch_ecp.py` and extend the provincia mart past 2021. 
 
 | SERPAVI alquiler municipal (MIVAU, fianzas tax exploitation) | `cdn.mivau.gob.es/.../bd_SERPAVI_2011-2024.xlsx` | municipio × 20 medidas, 2011–2024 | 71 MB Excel wide matrix; €/m² mediana/P25/P75 (VC/VU), superficie, contratos; 2,555 municipios at 2024 (29%), all named; validated vs DIBA Barcelona (13.68 €/m² ≈ 1,147 €/mo); probe in docs/explorations/serpavi_probe.md |
 | INE Índice de Precios de Vivienda en Alquiler (Tempus3) | live in API | CCAA/prov | redundant with SERPAVI (see construction probe) |
+| Eurostat GISCO LAU 2021 (municipal polygons, map asset only) | `gisco-services.ec.europa.eu/distribution/v2/lau/topojson/LAU_RG_01M_2021_4326.json` | 8,131 municipios, EPSG:4326 | 43 MB TopoJSON (whole Europe); LAU_ID = 5-digit INE code, no name join needed; `make geo` keeps ES features, simplifies to 7% (~3.8 MB `evidence/static/geo/municipios.geojson`); vacancy join 3,139/3,185 (46 `xx999` Resto aggregates have no polygon) |
 
 Methodology references: INE IPV metodología Base 2025
 (`ine.es/daco/daco42/ipv/metodologia2025.pdf`); MIVAU parque metodología

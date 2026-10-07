@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
+.PHONY: sync test lint fetch geo build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser clean
 
 sync:
 	uv sync --group dev
@@ -37,6 +37,13 @@ fetch:
 	uv run python scripts/fetch_censo2011_tenencia.py
 	uv run python scripts/fetch_diba.py
 	uv run python scripts/fetch_padron_municipios_bcn.py
+
+# Frontend geography (vendored evidence/static asset, not an analysis input):
+# Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
+# Re-run after evidence/static/geo/municipios.geojson is deleted; restart
+# the dev service afterwards (Evidence snapshots static/ at startup).
+geo:
+	uv run python scripts/fetch_muni_geo.py
 
 build:
 	uv run python scripts/build_marts.py

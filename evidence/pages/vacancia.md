@@ -19,23 +19,24 @@ from housing.vacancy_municipal
 order by vac_pct desc
 ```
 
+<AreaMap
+  data={vac_munis}
+  geoJsonUrl='/geo/municipios.geojson'
+  geoId='CODIGOINE'
+  areaCol=codigo
+  value=vac_pct
+  valueFmt=num1
+  title="Vivienda vacía por municipio, Censo 2021 (%)"
+  height=560
+  startingLat=40.2
+  startingLong=-3.7
+  startingZoom=6
+/>
+
 <DataTable data={vac_munis} rows=20>
   <Column id=municipio title="Municipio"/>
   <Column id=vac_pct title="% vacía" fmt="num1"/>
 </DataTable>
-
-## Los más vacíos (2021)
-
-```sql top_vac
-select municipio, vac_pct
-from housing.vacancy_municipal
-where vac_pct > 60
-order by vac_pct desc
-limit 15
-```
-
-<BarChart data={top_vac} x=municipio y=vac_pct
-  yFmt="num1" title="Municipios con >60% de vivienda vacía"/>
 
 ## Los más vacíos (2021)
 
