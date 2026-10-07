@@ -37,7 +37,7 @@
     "script_sha": "7c3d6af6f78147b128b79a5b47a83dc91e2c9d6db728c8e496347cb309aedbfe",
     "ols_sha": "97711b173fdc651a44cbd8368ebc0cdf2f574ba22cccef10c456500b587fd56a",
     "data_sha": {
-      "data/processed/marts.duckdb": "85b3a792741f3a84dcda6eccc8ef8550f06f13097e8d03c75d3f1877b27198e3",
+      "data/processed/marts.duckdb": "df166c4858ce2cc778e2a684f581cc20d04085a6cc8965ebdd9b1d0a6a47c54b",
       "explorations/saiz_municipal_mad.json": "8da0e19d81422a038d26578c77ffb712a6b0ff2a25bda532e50da69ca6b12051"
     }
   }

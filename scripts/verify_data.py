@@ -172,6 +172,22 @@ def main() -> int:
         f"capital years={mun_cap[1]}-{mun_cap[2]} ({mun_cap[0]} rows)"
     )
     assert mun_cap[0] == mun_cap[2] - mun_cap[1] + 1, "capital must be complete"
+    bar = con.execute("SELECT MIN(anyo), MAX(anyo), COUNT(*) FROM barrios_madrid").fetchone()
+    bar_city = con.execute(
+        "SELECT eur_m2 FROM barrios_madrid WHERE distrito='Ciudad de Madrid' "
+        "AND barrio='Ciudad de Madrid' AND anyo=2025 AND tipo='Total'"
+    ).fetchone()[0]
+    bar_top = con.execute(
+        "SELECT barrio, eur_m2 FROM barrios_madrid WHERE anyo=2025 AND tipo='Total' "
+        "ORDER BY eur_m2 DESC LIMIT 1"
+    ).fetchone()
+    print(
+        f"barrios_madrid: years={bar[0]}-{bar[1]} rows={bar[2]}; "
+        f"city 2025={bar_city}; top={bar_top}"
+    )
+    assert (bar[0], bar[1]) == (2007, 2025), f"barrio window broken: {bar}"
+    assert bar_city == 5285.72, f"barrio city drifted: {bar_city}"
+    assert bar_top[0] == "041. Recoletos", f"barrio top moved: {bar_top}"
     muni = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_madrid"
     ).fetchone()

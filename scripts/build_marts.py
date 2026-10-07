@@ -107,6 +107,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/hipotecas_rates.parquet",
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
+    "data/raw/parquet/barrios_madrid.parquet",
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
@@ -816,6 +817,25 @@ def main() -> None:
     ]
     con.register("mun_df", pa.Table.from_pylist(mun))
     con.execute("CREATE OR REPLACE TABLE valor_municipal_madrid AS SELECT * FROM mun_df")
+    # Madrid barrios: registry declared prices (Banco de datos export).
+    # Straight mirror of the fetched cube — no join partner exists at
+    # barrio grain (Padrón municipal is city-level). Suppressed cells
+    # (<15 cases) stay null; a literal 0.0 is passed through untouched
+    # (Aeropuerto 2025 reads 0.0 upstream — degenerate cell, not our call).
+    bar_rows = [
+        {
+            "distrito": r["distrito"],
+            "barrio": r["barrio"],
+            "anyo": r["anyo"],
+            "tipo": r["tipo"],
+            "eur_m2": r["eur_m2"],
+        }
+        for r in load_parquet("barrios_madrid.parquet")
+    ]
+    if {r["tipo"] for r in bar_rows} != {"Total", "Nuevas", "Usadas"}:
+        raise SystemExit("barrio vivienda types changed upstream")
+    con.register("bar_df", pa.Table.from_pylist(bar_rows))
+    con.execute("CREATE OR REPLACE TABLE barrios_madrid AS SELECT * FROM bar_df")
     pad_mun = {
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("padron_municipios_mad.parquet")
@@ -1315,6 +1335,7 @@ def main() -> None:
         "tipos_hipoteca_nacional",
         "ipc_anual",
         "valor_municipal_madrid",
+        "barrios_madrid",
         "muni_madrid",
         "censo2011_mad",
         "muni_bcn",

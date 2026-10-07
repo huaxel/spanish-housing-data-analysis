@@ -54,6 +54,7 @@ COVERED_DOCS = [
     "docs/explorations/valencia_municipios.md",
     "docs/explorations/sevilla_municipios.md",
     "docs/explorations/municipios_nacional.md",
+    "docs/explorations/barrios_madrid.md",
     "docs/explorations/madrid_vs_valencia.md",
     "docs/explorations/censo_anual_probe.md",
     "docs/explorations/serpavi_probe.md",
@@ -500,6 +501,19 @@ ALLOW = {
     "docs/explorations/municipios_nacional.md": [
         (52.0, "DPOP municipal tables (structural)"),
         (2270.0, "rows with 2011 vacancy (coverage fact)"),
+    ],
+    "docs/explorations/barrios_madrid.md": [
+        (504020100060.0, "Banco de datos series identifier"),
+        (153.0, "barrio coverage count"),
+        (8721.0, "fetched rows (coverage fact)"),
+        (3546.0, "suppressed nulls (coverage fact)"),
+        (15.0, "bank publication threshold (cases)"),
+        (7.4, "display ratio, spot-verified 2026-10-07"),
+        (96.0, "source-reported coverage range lower bound"),
+        (98.0, "source-reported coverage range upper bound"),
+        (46.0, "barrio number in barrio label, structural name"),
+        (121.0, "barrio number in barrio label, structural name"),
+        (172.0, "barrio number in barrio label, structural name"),
     ],
     "docs/explorations/valor_referencia_probe.md": [
         (25.0, "publication day-of-month (administrative fact)"),

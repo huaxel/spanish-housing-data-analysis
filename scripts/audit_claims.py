@@ -688,6 +688,92 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Madrid barrios city 2025 Total",
+        "SELECT eur_m2 FROM barrios_madrid WHERE distrito='Ciudad de Madrid' "
+        "AND barrio='Ciudad de Madrid' AND anyo=2025 AND tipo='Total'",
+        5285.72,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Madrid barrios city 2025 Nuevas",
+        "SELECT eur_m2 FROM barrios_madrid WHERE distrito='Ciudad de Madrid' "
+        "AND barrio='Ciudad de Madrid' AND anyo=2025 AND tipo='Nuevas'",
+        5041.46,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Madrid barrios city 2025 Usadas",
+        "SELECT eur_m2 FROM barrios_madrid WHERE distrito='Ciudad de Madrid' "
+        "AND barrio='Ciudad de Madrid' AND anyo=2025 AND tipo='Usadas'",
+        5333.59,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Recoletos 2025",
+        "SELECT eur_m2 FROM barrios_madrid "
+        "WHERE barrio='041. Recoletos' AND anyo=2025 AND tipo='Total'",
+        14108.83,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Castellana 2025",
+        "SELECT eur_m2 FROM barrios_madrid "
+        "WHERE barrio='046. Castellana' AND anyo=2025 AND tipo='Total'",
+        11685.39,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Almagro 2025",
+        "SELECT eur_m2 FROM barrios_madrid "
+        "WHERE barrio='074. Almagro' AND anyo=2025 AND tipo='Total'",
+        10795.41,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Orcasitas 2025",
+        "SELECT eur_m2 FROM barrios_madrid "
+        "WHERE barrio='121. Orcasitas' AND anyo=2025 AND tipo='Total'",
+        2357.51,
+        0.01,
+    ),
+    (
+        "municipios",
+        "San Cristobal 2025",
+        "SELECT eur_m2 FROM barrios_madrid "
+        "WHERE barrio='172. San Cristóbal' AND anyo=2025 AND tipo='Total'",
+        1909.6,
+        0.01,
+    ),
+    (
+        "municipios",
+        "barrios count",
+        "SELECT COUNT(DISTINCT barrio) FROM barrios_madrid",
+        153,
+        0,
+    ),
+    (
+        "municipios",
+        "barrios null count",
+        "SELECT COUNT(*) FROM barrios_madrid WHERE eur_m2 IS NULL",
+        3546,
+        0,
+    ),
+    (
+        "municipios",
+        "barrio top-bottom ratio",
+        "SELECT ROUND(MAX(eur_m2) / MIN(eur_m2), 1) FROM barrios_madrid "
+        "WHERE anyo=2025 AND tipo='Total' AND eur_m2 > 0",
+        7.4,
+        0.1,
+    ),
+    (
+        "municipios",
         "Madrid city vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_mad "
         "WHERE municipio='Madrid' AND tipo='Vivienda vacía'",

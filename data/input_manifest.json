@@ -1,5 +1,6 @@
 {
   "sha256": {
+    "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
@@ -79,6 +80,7 @@
     "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+    "data/raw/parquet/barrios_madrid.parquet": "bf90c6f737d93929ed0e597ba17e9d13efb44895fea198750d2aeabbba150d92",
     "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
     "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
@@ -132,6 +134,12 @@
   },
   "snapshot_date": "2026-10-07",
   "sources": {
+    "data/raw/barrios_madrid.csv": {
+      "accessed": "2026-10-07",
+      "note": "session-built CSV export; bank query builder, no static file",
+      "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
+      "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
+    },
     "data/raw/censo2011_municipios.json": {
       "accessed": "2026-10-07",
       "api": "wstempus/DATOS_TABLA/3456",
@@ -537,6 +545,12 @@
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
+    },
+    "data/raw/parquet/barrios_madrid.parquet": {
+      "accessed": "2026-10-07",
+      "note": "suppressed (<15 cases) cells stay null",
+      "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
+      "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
     },
     "data/raw/parquet/censo2011_municipios.parquet": {
       "accessed": "2026-10-07",

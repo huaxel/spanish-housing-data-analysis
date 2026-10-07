@@ -107,6 +107,13 @@ Ceuta/Melilla), `anyo` (1996–2025), `poblacion`, `rent_eur_m2` (SERPAVI
 (2011 rows only; 3 national censo homonym keys + 52 cross-province
 homonym keys skipped). 235,376 rows, 8,136 municipios.
 
+## barrios_madrid
+
+`distrito`, `barrio`, `anyo` (2007–2025), `tipo`
+(Total/Nuevas/Usadas), `eur_m2` (precio medio declarado registral).
+Straight mirror of the bank export; suppressed cells null; literal 0.0
+passed through (Aeropuerto 2025 degenerate cell).
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
