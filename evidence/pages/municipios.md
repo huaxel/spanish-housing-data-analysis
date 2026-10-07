@@ -68,6 +68,51 @@ Crecer no es revalorizarse: Rivas (+74% población) y Parla (+39%) absorben
 gente sin recuperar precios; la capital (+12%) es la que más se aprecia.
 Ver [Madrid capital vs corona](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/madrid_municipios.md).
 
+### Madrid por barrios: el registro confirma la brecha
+
+Precio medio declarado registral (€/m², Banco de datos del Ayuntamiento,
+2007–2025, Total/Nuevas/Usadas). Elige primero el distrito. Los barrios
+con menos de 15 compraventas no publican dato (guion, nunca cero).
+Detalle en
+[Madrid por barrios](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/barrios_madrid.md).
+
+```sql distritos_bar
+select distinct distrito
+from housing.barrios_madrid
+where distrito != 'Ciudad de Madrid'
+order by distrito
+```
+
+<Dropdown data={distritos_bar} name=distrito_bar value=distrito
+  title="Distrito" defaultValue="01. Centro"/>
+
+```sql lista_bar
+select distinct barrio
+from housing.barrios_madrid
+where distrito = '${inputs.distrito_bar.value}'
+order by barrio
+```
+
+<Dropdown data={lista_bar} name=barrios_sel value=barrio
+  title="Barrios" multiple=true
+  defaultValue={["041. Recoletos", "012. Embajadores"]}/>
+
+```sql serie_bar
+select barrio, anyo, eur_m2
+from housing.barrios_madrid
+where distrito = '${inputs.distrito_bar.value}'
+  and barrio in ${inputs.barrios_sel.value}
+  and tipo = 'Total'
+order by anyo, barrio
+```
+
+<LineChart data={serie_bar} x=anyo y=eur_m2 series=barrio
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Precio registral (€/m²): barrios del distrito"/>
+
+Recoletos multiplica por siete a San Cristóbal: la brecha intraurbana es
+mayor que la intermunicipal. Precios declarados en escritura, no oferta.
+
 ## Barcelona: la metrópoli tensionada y su corona
 
 Demarcación de Barcelona (Diputació + Padrón, 2007–2024): venta (€/m²,
