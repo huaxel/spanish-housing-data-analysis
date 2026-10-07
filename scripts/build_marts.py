@@ -130,6 +130,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/diba_m12.parquet",
     "data/raw/parquet/diba_m13.parquet",
     "data/raw/parquet/padron_municipios_bcn.parquet",
+    "data/raw/parquet/padron_municipios_vlc.parquet",
 ]
 # Affordability reference dwelling. A single explicit assumption (documented
 # in methods §2), not an empirical claim about what households buy.
@@ -901,6 +902,81 @@ def main() -> None:
     print(f"muni_bcn: {len(bcn_rows)} rows, missing pop for {bcn_missing_pop}")
     con.register("bcn_df", pa.Table.from_pylist(bcn_rows))
     con.execute("CREATE OR REPLACE TABLE muni_bcn AS SELECT * FROM bcn_df")
+    # Valencia municipal join: Padrón (all 266, 1996-2025) × SERPAVI median
+    # rent (ALQM2_LV_M_VC — the same series the explorer renta page shows,
+    # 2011-2024) + Censo 2011 vacancy. There is no sale-price source for
+    # Valencia municipalities (no regional valor-tasado mirror exists and the
+    # GVA statistics portal is unreachable from the fetch network), so this
+    # table carries rents and vacancy only — the explorer page says so.
+    from spanish_housing.muni_names import muni_key as _mk_vlc
+
+    # Cross-publisher renames (verified, fail loudly on more): none yet.
+    VLC_ALIAS: dict[str, str] = {}
+    pad_vlc_rows = load_parquet("padron_municipios_vlc.parquet")
+    pad_vlc_key_names: dict[str, set] = {}
+    for r in pad_vlc_rows:
+        pad_vlc_key_names.setdefault(_mk_vlc(r["territorio"]), set()).add(r["territorio"])
+    dup_vlc = {k: v for k, v in pad_vlc_key_names.items() if len(v) > 1}
+    if dup_vlc:
+        raise SystemExit(f"muni_vlc key collisions: {dict(list(dup_vlc.items())[:5])}")
+    display_vlc = {k: next(iter(v)) for k, v in pad_vlc_key_names.items()}
+    rent_vlc: dict[tuple[str, int], float] = {}
+    for r in load_parquet("serpavi_municipal.parquet"):
+        if r["cpro"] != "46" or r["medida"] != "ALQM2_LV_M_VC":
+            continue
+        if r["valor"] is None:
+            continue
+        rent_vlc[(_mk_vlc(r["municipio"]), r["anyo"])] = r["valor"]
+    # Censo 2011 is national: canonical keys collide across provinces
+    # ('OLIVA' = Valencia + others), so only keys in the VLC padrón set
+    # may join — and two censo names sharing one VLC key still fail loudly.
+    vlc_keys = set(pad_vlc_key_names)
+    cen_vlc_names: dict[str, set] = {}
+    for r in load_parquet("censo2011_municipios.parquet"):
+        if _mk_vlc(r["municipio"]) in vlc_keys:
+            cen_vlc_names.setdefault(_mk_vlc(r["municipio"]), set()).add(r["municipio"])
+    # Cross-province homonyms (ALCUDIA, OLIVA, ...) cannot be attributed
+    # without a province column, so those municipios get no vacancy —
+    # omission, never a guess. Counted below.
+    dup_cen = {k: v for k, v in cen_vlc_names.items() if len(v) > 1}
+    if dup_cen:
+        print(f"muni_vlc: censo homonyms skipped (no vacancy): {sorted(dup_cen)}")
+    vac_vlc: dict[str, dict] = {}
+    for r in load_parquet("censo2011_municipios.parquet"):
+        if r["tipo"] not in ("Total viviendas", "Vivienda vacía"):
+            continue
+        if _mk_vlc(r["municipio"]) not in vlc_keys:
+            continue
+        vac_vlc.setdefault(_mk_vlc(r["municipio"]), {})[r["tipo"]] = r["viviendas"]
+    vlc_rows, vlc_rent_hit, vlc_vac_hit = [], 0, 0
+    for r in pad_vlc_rows:
+        key = VLC_ALIAS.get(_mk_vlc(r["territorio"]), _mk_vlc(r["territorio"]))
+        rent = rent_vlc.get((key, r["anyo"]))
+        vac = vac_vlc.get(key)
+        vlc_rent_hit += rent is not None
+        row = {
+            "municipio": display_vlc[_mk_vlc(r["territorio"])],
+            "anyo": r["anyo"],
+            "poblacion": r["poblacion"],
+            "rent_eur_m2": rent,
+            "dwellings_2011": None,
+            "vacant_2011": None,
+        }
+        # 2011 attributes live on the 2011 row only — never repeated.
+        if r["anyo"] == 2011 and vac and vac.get("Total viviendas"):
+            row["dwellings_2011"] = vac["Total viviendas"]
+            row["vacant_2011"] = vac.get("Vivienda vacía")
+            vlc_vac_hit += 1
+        vlc_rows.append(row)
+    vlc_munis = {row["municipio"] for row in vlc_rows}
+    print(
+        f"muni_vlc: {len(vlc_rows)} rows, {len(vlc_munis)} municipios, "
+        f"rent cells {vlc_rent_hit}, 2011 vacancy rows {vlc_vac_hit}"
+    )
+    if len(vlc_munis) < 200:
+        raise SystemExit(f"too few VLC municipios: {len(vlc_munis)}")
+    con.register("vlc_df", pa.Table.from_pylist(vlc_rows))
+    con.execute("CREATE OR REPLACE TABLE muni_vlc AS SELECT * FROM vlc_df")
     # flat() already unifies 'Rozas de Madrid (Las)' vs ', Las' variants.
     valor_names = {flat(r["Territorio"]) for r in load_parquet("valor_municipal_madrid.parquet")}
     cen11 = [
@@ -1081,6 +1157,7 @@ def main() -> None:
         "muni_madrid",
         "censo2011_mad",
         "muni_bcn",
+        "muni_vlc",
         "censo2011_bcn",
         "censo2011_val",
         "censo2011_vintage",

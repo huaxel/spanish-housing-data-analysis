@@ -37,6 +37,7 @@ fetch:
 	uv run python scripts/fetch_censo2011_tenencia.py
 	uv run python scripts/fetch_diba.py
 	uv run python scripts/fetch_padron_municipios_bcn.py
+	uv run python scripts/fetch_padron_municipios_vlc.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.

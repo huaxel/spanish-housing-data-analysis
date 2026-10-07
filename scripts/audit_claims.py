@@ -393,6 +393,102 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
     (
         "municipios",
+        "Valencia city pop 2025",
+        "SELECT poblacion FROM muni_vlc WHERE municipio='València' AND anyo=2025",
+        840792.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Valencia city rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='València' AND anyo=2024",
+        8.18,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Valencia city rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='València' AND anyo=2011",
+        5.15,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Valencia city vacant share 2011",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_vlc "
+        "WHERE municipio='València' AND anyo=2011",
+        13.6,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Valencia city vacant dwellings 2011",
+        "SELECT vacant_2011 FROM muni_vlc WHERE municipio='València' AND anyo=2011",
+        57193.0,
+        1.0,
+    ),
+    (
+        "municipios",
+        "Canet rent 2024 (highest VLC)",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc "
+        "WHERE municipio='Canet d''En Berenguer' AND anyo=2024",
+        8.33,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Font de la Figuera vacant 2011 (highest VLC)",
+        "SELECT ROUND(100.0 * vacant_2011 / dwellings_2011, 1) FROM muni_vlc "
+        "WHERE municipio='Font de la Figuera, la' AND anyo=2011",
+        44.4,
+        0.1,
+    ),
+    (
+        "municipios",
+        "Torrent rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='Torrent' AND anyo=2024",
+        6.28,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Gandia rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='Gandia' AND anyo=2024",
+        5.22,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Torrent rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='Torrent' AND anyo=2011",
+        4.22,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Gandia rent 2011",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='Gandia' AND anyo=2011",
+        3.93,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Loriguilla rent 2024",
+        "SELECT ROUND(rent_eur_m2, 2) FROM muni_vlc WHERE municipio='Loriguilla' AND anyo=2024",
+        8.26,
+        0.01,
+    ),
+    (
+        "municipios",
+        "Valencia city share of province 2025",
+        "SELECT ROUND(100.0 * (SELECT poblacion FROM muni_vlc "
+        "WHERE municipio='València' AND anyo=2025) / "
+        "(SELECT SUM(poblacion) FROM muni_vlc WHERE anyo=2025), 1)",
+        30.5,
+        0.1,
+    ),
+    (
+        "municipios",
         "Madrid city vacant dwellings 2011",
         "SELECT viviendas_2011 FROM censo2011_mad "
         "WHERE municipio='Madrid' AND tipo='Vivienda vacía'",

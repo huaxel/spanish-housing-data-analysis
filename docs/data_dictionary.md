@@ -83,6 +83,14 @@ Barcelona city, joined to Padrón via `muni_key()`.
 municipal (DPOP 2881; 28 municipios, 2005–2025; explicit name aliases).
 No municipal stock: per-capita housing still unavailable at this grain.
 
+## muni_vlc
+
+`municipio`, `anyo`, `poblacion` (DPOP 2903; 266 municipios, 1996–2025),
+`rent_eur_m2` (SERPAVI `ALQM2_LV_M_VC` median, 2011–2024),
+`dwellings_2011`/`vacant_2011` (Censo 2011; on the 2011 row only, never
+repeated). No sale prices — no reachable municipal source. Censo
+homonyms (`l'Alcúdia`, `Oliva`) carry no vacancy. Joined via `muni_key()`.
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /
