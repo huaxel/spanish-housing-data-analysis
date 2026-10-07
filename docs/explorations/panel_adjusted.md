@@ -17,13 +17,16 @@ inflow association did not survive).
 | | S0: absorption only | S1: + demand controls |
 | --- | --- | --- |
 | absorption (dwellings per new person) | −0.141 (0.058) [−0.25, −0.03], wild-p 0.082 | −0.112 (0.053) [−0.22, −0.01], wild-p 0.116 |
-| mortgage-count growth (pp) | — | +0.033 (0.028) [−0.02, +0.09], wild-p 0.263 |
+| mortgage-count growth (pp) | — | +0.033 (0.028) [−0.02, +0.09], wild-p 0.264 |
 | income growth (pp) | — | +0.003 (0.041) [−0.08, +0.08], wild-p 0.935 |
 | 20–34 share change (pp) | — | +3.39 (1.47) [+0.52, +6.27], wild-p 0.068 |
 | n / clusters / within-R² | 194 / 17 / 0.93 | 178 / 17 / 0.92 |
 
 (Coefficient (CR1V clustered SE) [95% CI]; wild-p from 2,999-rep
-Rademacher bootstrap-t, null-imposed, seed-fixed. regressors YoY % or pp.)
+Rademacher bootstrap-t, null-imposed, seed-fixed, in the
+(count+1)/(reps+1) finite-rep form — recomputed 2026-10-07 when that
+correction was applied to `ols.wild_bootstrap_t`; no verdict changes.
+regressors YoY % or pp.)
 
 ## S2: adding one-year lags (n=133, G=17, R² 0.91)
 
@@ -79,7 +82,7 @@ warning, now without even an association to warn about.
 | absorption | −0.114 (0.058) | 0.095 |
 | mortgage growth | +0.014 (0.033) | 0.698 |
 | income growth | +0.015 (0.059) | 0.784 |
-| 20–34 share Δ | +3.46 (1.70) | 0.115 |
+| 20–34 share Δ | +3.46 (1.70) | 0.116 |
 | foreign-inflow growth (pp) | +0.005 (0.031) | 0.893 |
 
 Sample is 2009–2021 (flows start 2008, end 2021). The old headline —

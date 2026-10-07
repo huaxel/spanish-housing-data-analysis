@@ -796,7 +796,7 @@ PANEL_SAIZ_CLAIMS = [
         "panel_saiz",
         "interaction wild p",
         "interaction_ols.wild_p_interaction",
-        0.2873,
+        0.288,
         0.005,
     ),
 ]
@@ -1050,7 +1050,7 @@ def main() -> int:
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),
         ("prov panel S0 absor se", "s0_absorption_only.coefs.absor.se", 0.008, 0.005),
-        ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.1932, 0.01),
+        ("prov panel S0 wild-p", "s0_absorption_only.coefs.absor.wild_p", 0.194, 0.01),
         ("prov panel S0 n", "s0_absorption_only.n", 777, 0),
         ("prov panel S1 absor b", "s1_with_controls.coefs.absor.b", -0.012, 0.01),
         ("prov panel S1 n", "s1_with_controls.n", 178, 0),

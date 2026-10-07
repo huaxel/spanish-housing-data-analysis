@@ -16,17 +16,21 @@ mortgage growth leading prices at L3/L5/L6 — does not survive the fix.)
 
 | regressor | b (SE) | wild-p |
 | --- | --- | --- |
-| mortgage growth, per 10pp | −0.067 (0.051) | 0.255 |
+| mortgage growth, per 10pp | −0.067 (0.051) | 0.256 |
 | L1 | −0.028 (0.048) | 0.595 |
-| L2 | −0.067 (0.036) | 0.088 |
-| L3 | +0.066 (0.034) | 0.078 |
+| L2 | −0.067 (0.036) | 0.089 |
+| L3 | +0.066 (0.034) | 0.079 |
 | L4 | −0.002 (0.037) | 0.949 |
-| L5 | +0.069 (0.047) | 0.195 |
-| L6 | +0.055 (0.038) | 0.196 |
-| L7 | −0.099 (0.030) | **0.007** |
-| L8 | −0.040 (0.031) | 0.231 |
+| L5 | +0.069 (0.047) | 0.196 |
+| L6 | +0.055 (0.038) | 0.197 |
+| L7 | −0.099 (0.030) | **0.008** |
+| L8 | −0.040 (0.031) | 0.232 |
 | national rate change (pp) | −0.055 (0.207) | 0.806 |
-| L1 rate change | −0.350 (0.173) | 0.057 |
+| L1 rate change | −0.350 (0.173) | 0.058 |
+
+Wild-p values are the (count+1)/(reps+1) finite-rep form, recomputed
+2026-10-07 when that correction was applied to `ols.wild_bootstrap_t`;
+no verdict changes (all shifts ≤ 0.001, no significance flip).
 
 ## Reading
 
@@ -35,13 +39,13 @@ mortgage growth leading prices at L3/L5/L6 — does not survive the fix.)
   quarters" shape was national-cycle leakage through the broken
   transform. Mortgage counts move with the national cycle, and once the
   year effects are correctly absorbed there is no timing evidence left.
-- The only wild-significant lag is **L7, negative** (−0.099, p = 0.007).
+- The only wild-significant lag is **L7, negative** (−0.099, p = 0.008).
   A negative price response to mortgage growth seven quarters earlier has
   no economic reading — it is lag-collinearity wiggle (8 correlated lags,
   single-lag sign flips are expected noise), now the *only* thing
   standing where a finding used to be. Do not quote it.
 - Neither rate coefficient clears the bootstrap (current −0.06, p = 0.81;
-  lag −0.35, p = 0.057). Same verdict as before — 'probably nothing' —
+  lag −0.35, p = 0.058). Same verdict as before — 'probably nothing' —
   now with the sign naive intuition expects, which is itself just the
   cycle being absorbed properly.
 - Magnitudes are small — quarterly appraisal moves are ~±1% while mortgage

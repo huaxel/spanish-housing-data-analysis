@@ -63,8 +63,9 @@ def wild_bootstrap_t(
     Restricted fit drops column j; bootstrap DGP is y* = X0 b0 + v_g e0 with
     Rademacher v_g per cluster; each replicate refits the full model and
     records t*_j = b*_j / se*_j (CR1V). Returns the observed t, the
-    bootstrap two-sided p-value, and the 2.5/97.5 percentiles of t*.
-    Deterministic for a fixed seed."""
+    bootstrap two-sided p-value in the (count+1)/(reps+1) finite-rep form
+    (strictly positive, mildly conservative), and the 2.5/97.5 percentiles
+    of t*. Deterministic for a fixed seed."""
     import random
 
     rng = random.Random(seed)
@@ -88,7 +89,10 @@ def wild_bootstrap_t(
         fb = ols_cluster(x, y_star, clusters)
         t_stars.append(fb["beta"][j] / fb["se"][j] if fb["se"][j] > 0 else 0.0)
     t_stars.sort()
-    p = sum(1 for t in t_stars if abs(t) >= abs(t_obs)) / reps
+    # (count+1)/(reps+1): the standard finite-rep bootstrap p — strictly
+    # positive and mildly conservative (c/reps reports p=0.000 on a clean
+    # rejection, overstating evidence). Fixed 2026-10-07 per repo review.
+    p = (sum(1 for t in t_stars if abs(t) >= abs(t_obs)) + 1) / (reps + 1)
 
     def q(p_: float) -> float:
         return t_stars[min(reps - 1, int(p_ * reps))]
