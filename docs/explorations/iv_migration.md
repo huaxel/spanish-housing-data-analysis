@@ -182,6 +182,14 @@ either. Three findings, each independently verified or dispositioned:
    not touch finding (a) from round 1 — bubble-geography exclusion failure
    stands under both normalizations.
 
+   **Amendment 2026-10-07 (round-3 read):** "stands under both" overstates
+   what was shown: the comparison is unrun, so the threat is *plausible*
+   under both (shared 1998 geography) but demonstrated under neither.
+   The round-1 REMOVE verdict does not depend on this sentence (it rested
+   on the built construction's exclusion problem), and the
+   both-normalizations comparison is now an explicit prerequisite for
+   any revival: see the round-3 addendum in `docs/review_brief.md`.
+
 Coverage footnote (both vintages): Ceuta y Melilla never enter (no
 origin-level 1998 base for 51/52 aggregation in `bartik_predict.py`, no
 `51+52` stock key in the estimator) — n=1000 is 50 provinces × 20 years.
@@ -202,12 +210,15 @@ unit-tested for coverage + determinism) and ran it on the bust spec
 - **wild bootstrap: AR [0.25, 1.00]** (excludes zero; per-grid critical
   values 3.7–7.9, i.e. between the two shortcuts).
 
-The inference question round 2 left open is now answered: the bust-era
-association is AR-robust under bootstrap calibration (caveats: 299 reps of
-Monte Carlo noise; coarse 0.25 grid). This does **not** revive the causal
-claim — exclusion (bubble geography) is untouched by calibration, and a
-robust-but-unidentified association stays out of the synthesis. It does
+The inference question round 2 left open is now answered as far as the
+placeholder-vs-optimistic dispute goes: the bust-era null is rejected on
+the tested 29-point grid under wild-bootstrap calibration (caveats: 299
+reps of Monte Carlo noise; coarse 0.25 grid, so [0.25, 1.00] are grid
+summaries, not precise endpoints; the rejection reproduces exactly at
+two alternate seeds). This does **not** revive the causal
+claim — exclusion (bubble geography) is untouched by calibration, and an association that rejects zero under this calibration but stays
+unidentified remains out of the synthesis. It does
 retire the "identified null" reading of the repair: the repaired bust
-result is a robust positive association in search of an instrument, not a
-null. Recovery half (−0.06, uncalibrated AR covering zero) was not
+result is a positive association that rejects zero under this calibration,
+in search of an instrument, not a null. Recovery half (−0.06, uncalibrated AR covering zero) was not
 recalibrated — nothing there to rescue either way.

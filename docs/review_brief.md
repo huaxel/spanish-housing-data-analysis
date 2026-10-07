@@ -123,6 +123,11 @@ Attack these specifically:
 
 ## Section 2 — The causal IV (the part most likely to be overclaimed)
 
+> **Status note (2026-10-07): the +0.67/+0.84 figures below are the
+> pre-repair vintage the first read saw. Corrected numbers (pooled +0.34,
+> bust +0.46 with first stages 34.4/30.9) live in `iv_migration.md` and
+> the addenda. This section is preserved as the record of what was briefed.**
+
 Scope: `docs/explorations/iv_migration.md`, `explorations/iv_migration.py`,
 `explorations/iv_results.json`, `src/spanish_housing/ols.py`.
 
@@ -292,3 +297,50 @@ labels) — all fixed same day — and disputes the YoY-rate normalization
 (recorded unadjudicated; canonical Bartik form vs Card-flow form). Ceuta y
 Melilla confirmed absent from both vintages (n=1000 = 50×20). Prerequisite
 for any revival: wild-bootstrap-calibrated AR plus a third read.
+
+## Addendum (2026-10-07): round-3 read on the wild-AR-calibrated bust result — KEEP OUT
+
+The third independent read ran (read-only reviewer agent, briefed with the
+calibrated numbers; no write access). Verdict: **KEEP OUT** — the synthesis
+posture (no causal claim, no null claim) is correct. Six findings, all
+verified against the code and dispositioned same day:
+
+1. Exclusion language overstated (this note, round-2 finding 3): "stands
+   under both normalizations" presented an unrun comparison as
+   established; the credit probe supports *unresolved confounding*, not a
+demonstrated failure. Disposition: narrowed by dated amendment to
+   plausible-under-both, demonstrated-under-neither.
+2. Wild-bootstrap AR provisional (`ols.wild_ar_ci`, 299 reps, 0.25 grid):
+   method null-imposed and sound, but [0.25, 1.00] are grid summaries
+   and the 95th-percentile cutoff is MC-noisy. Disposition: language
+   narrowed to "rejects the null on the tested grid under this
+   calibration"; seed-stability checked in-repo (two alternate seeds
+   reproduce [0.25, 1.00] exactly at identical settings; /tmp only, no
+   repo state touched).
+3. Normalization comparison is a revival prerequisite: current flow =
+   1998 levels x YoY growth (`bartik_predict.py`); proposed =
+   first-differenced levels scaled to 1998 stocks — different origin
+   weighting, potentially different first stage. Not run; no decision
+   value for the current KEEP OUT posture, so deferred, not
+   commissioned. Recorded here as an explicit prerequisite.
+4. Quarterly rate correction (dr -0.055 to +1.00) leaves exclusion
+   untouched: within-year national-cycle co-movement at CCAA grain,
+   testing nothing about 1998 settlement geography to 2002-13 prices.
+   Checked: no doc cites it as IV corroboration; recorded as context.
+5. Audit scope: pins transcription/freshness (now including wild-AR reps
+   + seed as claims), not inferential validity — already disclosed
+   ("audit checks the pipeline, not the inference"). Section 2's stale
+   vintage now carries a status banner; original text preserved.
+6. Saiz chain: no drift; consistent with the repaired vintage.
+
+Vintage note: the "F = 58 vs 0.22" figures in the round-2 addendum
+above describe the pre-repair cumulative instrument; the repaired
+design's first stages are 34.4/30.9 (note split-sample table,
+re-runnable code, committed `iv_results.json`). Preserved above as
+written; corrected here.
+
+Revival prerequisites (supplanting "calibrated AR plus a third read,"
+both now done without reviving the claim): (a) the both-normalizations
+comparison under matched specifications and inference; (b) materially
+higher bootstrap precision (reps, grid, seed sensitivity) for any revived
+set claim; (c) a fourth independent read of the result.

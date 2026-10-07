@@ -1131,12 +1131,14 @@ def main() -> int:
     for desc, path, expected, tol in (
         ("wild-AR bust set lower", "set.0", 0.25, 0.001),
         ("wild-AR bust set upper", "set.1", 1.0, 0.001),
+        ("wild-AR reps", "reps", 299, 0),
+        ("wild-AR seed", "seed", 20261007, 0),
     ):
         got = _json_path(wb, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] wild_ar_bust: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 2
+    total += 4
     print(f"{total - failures}/{total} claims hold")
     fresh_failures = check_freshness()
     total += len(MODEL_FRESHNESS)
