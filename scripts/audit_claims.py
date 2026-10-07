@@ -35,6 +35,17 @@ MODEL_FRESHNESS = [
     ("panel_tourist", "artifacts/panel_tourist.json", "explorations/panel_tourist.py"),
     ("panel_quarterly", "artifacts/panel_quarterly.json", "explorations/panel_quarterly.py"),
     ("wild_ar_bust", "artifacts/wild_ar_bust.json", "explorations/wild_ar_bust.py"),
+    # Descriptive outputs (no estimator math, but quotable numbers): stamped
+    # + registered 2026-10-07 — a rebuild + audit without analysis used to
+    # pass on stale-but-doc-consistent JSONs.
+    ("tourist_rents", "artifacts/tourist_rents.json", "explorations/tourist_rents.py"),
+    ("ratio_ccaa", "artifacts/ratio_ccaa.json", "explorations/ratio_ccaa.py"),
+    ("serpavi_analysis", "artifacts/serpavi_analysis.json", "explorations/serpavi_analysis.py"),
+    (
+        "madrid_vacancy",
+        "artifacts/madrid_vacancy_terrain.json",
+        "explorations/panel_saiz_madrid_vacancy.py",
+    ),
 ]
 
 

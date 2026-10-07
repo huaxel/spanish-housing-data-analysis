@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 from spanish_housing.ine_api import norm_name as N  # noqa: E402
 
@@ -166,6 +167,7 @@ print(
     f"spearman={rent_vac['spearman']:.3f}"
 )
 
+out["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "serpavi_analysis.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

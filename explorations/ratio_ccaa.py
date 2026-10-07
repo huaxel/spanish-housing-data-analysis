@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
@@ -178,6 +179,7 @@ out["vacancy_2021"] = {
 print(f"vacancy: n={n2} pearson={pearson2} spearman={spearman2}")
 print("galicia vac%:", vacancy.get("Galicia"), "madrid:", vacancy.get("Madrid, Comunidad de"))
 
+out["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "ratio_ccaa.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

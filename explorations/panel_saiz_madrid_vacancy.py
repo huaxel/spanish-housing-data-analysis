@@ -38,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 from spanish_housing.muni_names import muni_key  # noqa: E402
 
@@ -109,6 +110,10 @@ print(
 )
 print(f"steep villages in vacancy table: {out['steep_villages_in_table']}/{len(steep_status)}")
 
+out["_meta"] = ols.model_meta(
+    __file__,
+    ["data/processed/marts.duckdb", "explorations/saiz_municipal_mad.json"],
+)
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "madrid_vacancy_terrain.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

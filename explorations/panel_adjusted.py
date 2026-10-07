@@ -51,14 +51,20 @@ for r in ROWS:
 obs = []
 for ccaa, rows in by_ccaa.items():
     for prev, cur in zip(rows, rows[1:], strict=False):
-        d_pop = cur[3] - prev[3]
+        d_pop = cur[3] - prev[3] if cur[3] is not None and prev[3] is not None else None
         obs.append(
             {
                 "ccaa": ccaa,
                 "anyo": cur[1],
-                "d_ipv": (cur[4] - prev[4]) / prev[4] * 100,
-                "absor": (cur[2] - prev[2]) / d_pop if d_pop > 0 else None,
-                "d_hip": (cur[5] - prev[5]) / prev[5] * 100,
+                "d_ipv": (cur[4] - prev[4]) / prev[4] * 100
+                if cur[4] is not None and prev[4]
+                else None,
+                "absor": (cur[2] - prev[2]) / d_pop
+                if d_pop is not None and d_pop > 0 and cur[2] is not None and prev[2] is not None
+                else None,
+                "d_hip": (cur[5] - prev[5]) / prev[5] * 100
+                if cur[5] is not None and prev[5]
+                else None,
                 "d_renta": (cur[6] - prev[6]) / prev[6] * 100
                 if prev[6] is not None and cur[6] is not None
                 else None,
