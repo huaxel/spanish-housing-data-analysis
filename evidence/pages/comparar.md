@@ -34,6 +34,9 @@ order by anyo
 El intervalo incluye ambos extremos. Si inviertes los años, se ordenan
 automáticamente; si eliges el mismo territorio dos veces, se muestra una sola serie.
 
+<!-- Trust boundary: territorio/desde/hasta interpolate here, but every value
+  originates from a constrained Dropdown populated by distinct mart values —
+  never free text. A free-text input must never be interpolated into SQL. -->
 ```sql comparacion
 select ccaa, anyo, ipv_general, viv_por_1000_hab, viv_por_hogar,
        eur_m2_libre, afford_90m2_years, share_20_34, hip_viv_num, pop_source
@@ -224,3 +227,6 @@ descriptivas, no causales.
   <Column id=hip_viv_num title="Hipotecas sobre viviendas" fmt="num0"/>
   <Column id=pop_source title="Fuente de población"/>
 </DataTable>
+
+---
+*Instantánea de datos: 2026-10-07 · cobertura 2007–2025 según el periodo elegido · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

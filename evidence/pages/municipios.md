@@ -153,3 +153,6 @@ miles de pisos turísticos; Santa Coloma, decenas. Detalle en
 Series municipales con huecos según fuente y año; el guion es dato ausente,
 nunca cero. El valor tasado madrileño y los precios DIBA no son comparables
 entre sí (distintas fuentes y metodologías): cada metro se lee por separado.
+
+---
+*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024; el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

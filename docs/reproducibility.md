@@ -88,6 +88,17 @@ Two subtleties, both load-bearing:
   and abandoned (jurisdictional shadowing); the bucket has been deleted.
 - Smoke scripts assert shipped content only: dev renders
   query-inspector chrome (`'N records ...'`) that static builds omit.
+- `make evidence-build` runs `scripts/fix_build_meta.py` afterwards:
+  the Evidence template hardcodes `<html lang="en">` and is regenerated
+  on every build, so the script repairs it to `es` and injects per-route
+  meta descriptions post-build (idempotent; fails loudly if the build
+  layout changes out from under it).
+- `worker.js` serves WASM cache-first from `caches.default`, filled via
+  `waitUntil`. Keys are the hashed build paths, so a dependency bump
+  fills new keys and can never serve stale bytes within a pinned version.
+- On any data refresh, update the `Instantánea de datos` footer date in
+  every `evidence/pages/*.md` to the new manifest snapshot date before
+  rebuilding — the footers are static text, not wired to the manifest.
 - Deploy record: rebuilt + redeployed 2026-10-06 19:37 UTC after the
   Censo Anual extension carried the provincia mart to 2025 (previous
   build 12:15 was pre-extension; the public site now serves provincial

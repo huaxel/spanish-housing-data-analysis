@@ -65,3 +65,5 @@ limit 10
 Nota: renta mediana de contratos nuevos/renovados declarados a efectos
 fiscales (fianzas); subalquiler y renovaciones recientes pueden faltar.
 Fuente: `docs/explorations/serpavi.md`.
+---
+*Instantánea de datos: 2026-10-07 · SERPAVI 2011–2024, contratos declarados · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

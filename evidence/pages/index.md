@@ -182,3 +182,6 @@ Puedes ordenar las columnas y descargar la tabla.
   <Column id=ipv_nueva title="IPV nueva (2025 = 100)" fmt="num1"/>
   <Column id=ipv_segunda_mano title="IPV usada (2025 = 100)" fmt="num1"/>
 </DataTable>
+
+---
+*Instantánea de datos: 2026-10-07 · cobertura nacional 2007–2025 · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
