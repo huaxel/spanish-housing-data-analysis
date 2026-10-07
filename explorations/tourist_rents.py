@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
+from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 from spanish_housing.ine_api import norm_name as N  # noqa: E402
 
@@ -74,12 +75,16 @@ tour = con.execute(
     "SELECT municipio, anyo, tourist, poblacion FROM muni_bcn "
     "WHERE tourist IS NOT NULL AND poblacion IS NOT NULL"
 ).fetchall()
-tour_pc: dict[str, float] = {}
+tour_pc: dict[str, dict[int, float]] = {}
 for m, a, t, p in tour:
     if p and t is not None:
-        tour_pc.setdefault(m, []).append((a, t / p * 1000))
-# 2019 tourist intensity (pre-regulatory peak), like the old panel
-tour_base = {m: sorted(v)[-1][1] for m, v in tour_pc.items()}
+        tour_pc.setdefault(m, {})[a] = t / p * 1000
+# 2019 tourist intensity (pre-regulatory peak), predating the 2021-24 rent
+# window. (2026-10-07 review: this previously took each municipio's LATEST
+# year — 2024, since the DIBA series runs to 2024 — making exposure
+# contemporaneous with the growth outcome it was correlated against.
+# All 310 municipios carry 2019, so the fix loses no coverage.)
+tour_base = {m: v[2019] for m, v in tour_pc.items() if 2019 in v}
 
 serp = con.execute(
     "SELECT municipio, anyo, valor FROM serpavi_municipal "
@@ -216,6 +221,10 @@ for r in out["provincial"]["top_tourist"]:
         f" rent24={r['rent_2024']:>6} g={r['rent_growth_pct']:>6}%"
     )
 
+out["_meta"] = ols.model_meta(
+    __file__,
+    ["data/processed/marts.duckdb", "data/raw/parquet/turisticas_counts.parquet"],
+)
 (ROOT / "artifacts").mkdir(exist_ok=True)
 (ROOT / "artifacts" / "tourist_rents.json").write_text(
     json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"

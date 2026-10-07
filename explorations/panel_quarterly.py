@@ -1,7 +1,8 @@
 """Quarterly credit-timing panel from pinned raw inputs (no new fetch).
 
 y = QoQ % change of MIVAU valor tasado (vivienda libre, CCAA grain) on
-QoQ % mortgage-count growth + 4 quarterly lags + national rate changes.
+QoQ % mortgage-count growth + 8 quarterly lags + national rate changes
+(quarterized monthly rates, complete quarters only).
 CCAA + year FE + quarter-season dummies; SEs clustered by CCAA (CR1V);
 wild bootstrap-t for the headline credit lags. Complete quarters only
 (all 3 months present for mortgages; both endpoints present for prices).
@@ -47,6 +48,22 @@ def quarterize(monthly: dict[tuple[int, int], float]) -> dict[tuple[int, int], f
     return {k: round(sum(v), 2) for k, v in acc.items() if len(v) == 3}
 
 
+def quarterize_mean(monthly: dict[tuple[int, int], list[float]]) -> dict[tuple[int, int], float]:
+    """Average months into quarters; keep only complete quarters.
+
+    The rates series is MONTHLY (FK_Periodo = month, 1-12): it must be
+    quarterized exactly like the counts before any (year, quarter) lookup.
+    A 2026-10-07 review found the panel was keying rates by month through a
+    (year, QUARTER) lookup — Q1 hit January, Q2 February, Q3 March, Q4
+    April, so the rate-change regressors were a month-vs-quarter mixture
+    (Q1 compared January with the prior year's April) instead of quarterly
+    changes."""
+    acc: dict[tuple[int, int], list[float]] = {}
+    for (y, m), vals in monthly.items():
+        acc.setdefault((y, (m - 1) // 3 + 1), []).extend(vals)
+    return {k: sum(v) / len(v) for k, v in acc.items() if len(v) == 3}
+
+
 def load_valor() -> dict[tuple[str, int, int], float]:
     out = {}
     with (RAW / "valor_tasado.csv").open(encoding="utf-8-sig") as f:
@@ -82,7 +99,7 @@ def load_hipotecas() -> tuple[dict, dict]:
             for x in s["Data"]:
                 counts.setdefault(ccaa, {})[(x["Anyo"], x["FK_Periodo"])] = x["Valor"]
     hq = {c: quarterize(m) for c, m in counts.items()}
-    rq = {k: sum(v) / len(v) for k, v in rates.items() if len(v) == 1}
+    rq = quarterize_mean(rates)
     return hq, rq
 
 
@@ -169,7 +186,14 @@ def main() -> None:
         "wild_bootstrap": wb,
         "ccaa": ux,
     }
-    results["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
+    results["_meta"] = ols.model_meta(
+        __file__,
+        [
+            "data/raw/hipotecas_ccaa.json",
+            "data/raw/hipotecas_rates.json",
+            "data/raw/valor_tasado.csv",
+        ],
+    )
     (ROOT / "artifacts").mkdir(exist_ok=True)
     (ROOT / "artifacts" / "panel_quarterly.json").write_text(
         json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"

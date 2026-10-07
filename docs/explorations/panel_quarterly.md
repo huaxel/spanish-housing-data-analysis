@@ -1,53 +1,70 @@
 # Quarterly credit timing: no mortgage lead once year effects are absorbed
 
 Computed by `explorations/panel_quarterly.py` from pinned raw inputs
-(valor tasado quarterly cells + HPT monthly counts → complete quarters only;
-raw output: `artifacts/panel_quarterly.json`, git-ignored). Quarterly panel,
-17 CCAA × 2003–2025; y = valor-tasado Libre QoQ %; CCAA + year FE + quarter
-dummies via the correct two-way within transform; SEs clustered by CCAA;
-wild bootstrap-t (999 reps). Descriptive.
+(valor tasado quarterly cells + HPT monthly counts/rates → complete
+quarters only; raw output: `artifacts/panel_quarterly.json`, git-ignored).
+Quarterly panel, 17 CCAA × 2003–2025; y = valor-tasado Libre QoQ %; CCAA +
+year FE + quarter dummies via the correct two-way within transform; SEs
+clustered by CCAA; wild bootstrap-t (999 reps). Descriptive.
 
 (Corrected 2026-10-06: the previous build regressed CCAA-demeaned
 outcomes on CCAA-demeaned regressors plus *raw* year/season dummies, which
 left the national cycle inside the credit lags. The old headline —
 mortgage growth leading prices at L3/L5/L6 — does not survive the fix.)
 
-## Results (n=1,156, G=17, R² 0.48)
+**Correction 2026-10-07 (repo review, rate series):** the rate-change
+regressors were mis-keyed — the INE rates series is *monthly*, but the
+panel looked it up by (year, *quarter*), so dr mixed month-over-month
+changes (Q2→February, Q3→March, Q4→April) with a nine-month gap in Q1
+(January vs the prior year's April). With rates correctly quarterized
+(mean of the quarter's three months, complete quarters only), the rate
+columns change materially and one verdict reverses — see Reading. All
+values below are the corrected ones.
+
+## Results (n=1,156, G=17, R² 0.483)
 
 | regressor | b (SE) | wild-p |
 | --- | --- | --- |
-| mortgage growth, per 10pp | −0.067 (0.051) | 0.256 |
-| L1 | −0.028 (0.048) | 0.595 |
-| L2 | −0.067 (0.036) | 0.089 |
-| L3 | +0.066 (0.034) | 0.079 |
-| L4 | −0.002 (0.037) | 0.949 |
-| L5 | +0.069 (0.047) | 0.196 |
-| L6 | +0.055 (0.038) | 0.197 |
-| L7 | −0.099 (0.030) | **0.008** |
-| L8 | −0.040 (0.031) | 0.232 |
-| national rate change (pp) | −0.055 (0.207) | 0.806 |
-| L1 rate change | −0.350 (0.173) | 0.058 |
+| mortgage growth, per 10pp | −0.048 (0.049) | 0.429 |
+| L1 | −0.014 (0.049) | 0.792 |
+| L2 | −0.063 (0.036) | 0.108 |
+| L3 | +0.071 (0.035) | 0.057 |
+| L4 | −0.006 (0.039) | 0.885 |
+| L5 | +0.055 (0.045) | 0.272 |
+| L6 | +0.025 (0.035) | 0.513 |
+| L7 | −0.127 (0.034) | **0.005** |
+| L8 | −0.065 (0.032) | 0.064 |
+| national rate change (pp) | +1.001 (0.368) | **0.018** |
+| L1 rate change | +0.595 (0.303) | 0.059 |
 
-Wild-p values are the (count+1)/(reps+1) finite-rep form, recomputed
-2026-10-07 when that correction was applied to `ols.wild_bootstrap_t`;
-no verdict changes (all shifts ≤ 0.001, no significance flip).
+Wild-p values are the (count+1)/(reps+1) finite-rep form (applied to
+`ols.wild_bootstrap_t` the same day).
 
 ## Reading
 
 - **No mortgage lead.** L3/L5/L6 are all positive but none clears the
-  bootstrap (p = 0.08/0.20/0.20); the old "credit-then-appraisal at 3–6
+  bootstrap (p = 0.06/0.27/0.51); the old "credit-then-appraisal at 3–6
   quarters" shape was national-cycle leakage through the broken
-  transform. Mortgage counts move with the national cycle, and once the
-  year effects are correctly absorbed there is no timing evidence left.
-- The only wild-significant lag is **L7, negative** (−0.099, p = 0.008).
-  A negative price response to mortgage growth seven quarters earlier has
-  no economic reading — it is lag-collinearity wiggle (8 correlated lags,
+  transform (and, for the rate columns, the mis-keyed series). Mortgage
+  counts move with the national cycle, and once the year effects are
+  correctly absorbed there is no timing evidence left. L3 sits at the
+  analytic-SE edge (t = 2.05, CI clears zero) but not at the bootstrap's.
+- The only wild-significant lags are **negative and late**: L7 (−0.127,
+  p = 0.005), with L8 near it (−0.065, p = 0.064). A negative price
+  response to mortgage growth seven-to-eight quarters earlier has no
+  economic reading — it is lag-collinearity wiggle (8 correlated lags,
   single-lag sign flips are expected noise), now the *only* thing
   standing where a finding used to be. Do not quote it.
-- Neither rate coefficient clears the bootstrap (current −0.06, p = 0.81;
-  lag −0.35, p = 0.058). Same verdict as before — 'probably nothing' —
-  now with the sign naive intuition expects, which is itself just the
-  cycle being absorbed properly.
+- **Rates co-move with appraisal growth within the year — the opposite
+  of the old reading.** With the rate series fixed, dr is +1.00
+  (p = 0.018): quarters where the average new-mortgage rate rose saw
+  *higher* appraisal growth. This is the 2022–24 inflation cycle (rates
+  and prices rose together; in 2009–12 they fell together) — a
+  co-movement the year FEs leave in and the lag structure does not
+  absorb. The old "probably nothing, sign naive intuition expects"
+  reading was an artifact of the broken series and is withdrawn. Rates
+  are endogenous to the same cycle here; nothing in this design
+  identifies a causal rate effect.
 - Magnitudes are small — quarterly appraisal moves are ~±1% while mortgage
   counts swing ~±20% — so this was ever timing evidence, not size
   evidence; now it is not even timing evidence.

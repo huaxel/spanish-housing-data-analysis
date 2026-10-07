@@ -8,18 +8,19 @@ SERPAVI now provides municipal rents nationwide. This extension
 the two tests the old panel could not:
 
 1. **Replication with an independent rent source** (Barcelona municipios,
-   n=199): tourist intensity (DIBA `muni_bcn.tourist`, per 1,000) vs
-   SERPAVI rent level (2024) and growth (2021→2024).
+   n=199): tourist intensity (DIBA `muni_bcn.tourist`, **2019**,
+   pre-regulatory peak, per 1,000) vs SERPAVI rent level (2024) and
+   growth (2021→2024).
 2. **Provincial cross-section** (n=45): INE turísticas intensity (2020,
    per 1,000 pop) vs SERPAVI median municipal rent level (2024) and
    growth (2020→2024) — includes Balears, Canarias, Girona, Málaga.
 
-## Results (corrected 2026-10-06)
+## Results (corrected 2026-10-06; BCN base year corrected 2026-10-07)
 
 | Test | Pearson | Spearman | n |
 | --- | --- | --- | --- |
-| BCN municipal: tour vs rent level | 0.087 | 0.005 | 199 |
-| BCN municipal: tour vs rent growth | 0.020 | 0.145 | 199 |
+| BCN municipal: tour vs rent level | 0.157 | 0.085 | 199 |
+| BCN municipal: tour vs rent growth | 0.000 | 0.169 | 199 |
 | Provincial: tour vs rent level | **0.619** | **0.525** | 45 |
 | Provincial: tour vs rent growth | 0.225 | 0.304 | 45 |
 
@@ -30,6 +31,14 @@ values above are the true two-sided figures. The provincial level
 Spearman moves 0.016 → **0.525**: the association survives ranking and
 is no longer dismissable as pure scale.
 
+**Correction 2026-10-07 (repo review, base year):** the BCN intensity
+was supposed to be 2019 (pre-regulatory peak, predating the rent
+window) but the code took each municipio's *latest* year — 2024 —
+making exposure contemporaneous with the growth outcome. Fixed to the
+documented 2019 base (all 310 municipios carry 2019; n unchanged). The
+municipal null survives unchanged; provincial columns were always
+2020-based and do not move.
+
 ## Reading
 
 - **The provincial tourist→rent-level association is substantial on
@@ -39,8 +48,8 @@ is no longer dismissable as pure scale.
   from coastal demand, size, or income (n=45, no controls). The
   identification problem the original panel documented stands; but the
   association itself is real, not a scale artifact.
-- **The municipal replication is a clean null** (levels 0.087/0.005,
-  growth 0.020/0.145): within Barcelona, tourist intensity does not
+- **The municipal replication is a clean null** (levels 0.157/0.085,
+  growth 0.000/0.169): within Barcelona, tourist intensity does not
   predict SERPAVI rents — confirming the old panel's DIBA-based null
   with an independent rent source.
 - **Growth is moderately positive at provincial rank (0.30)** and the

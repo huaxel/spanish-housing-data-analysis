@@ -982,25 +982,25 @@ def main() -> int:
         (
             "bcn tour-rent level pearson",
             "bcn_municipal.corr_tour_vs_rent_level.pearson",
-            0.087,
+            0.157,
             0.005,
         ),
         (
             "bcn tour-rent level spearman",
             "bcn_municipal.corr_tour_vs_rent_level.spearman",
-            0.005,
+            0.085,
             0.005,
         ),
         (
             "bcn tour-rent growth pearson",
             "bcn_municipal.corr_tour_vs_rent_growth.pearson",
-            0.020,
+            0.0,
             0.005,
         ),
         (
             "bcn tour-rent growth spearman",
             "bcn_municipal.corr_tour_vs_rent_growth.spearman",
-            0.145,
+            0.169,
             0.005,
         ),
         (
@@ -1075,6 +1075,37 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_provincial: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 8
+    pq = _model_output("artifacts/panel_quarterly.json")
+    for desc, path, expected, tol in (
+        ("quarterly n", "n", 1156, 0),
+        ("h b", "coefs.h.b", -0.048, 0.001),
+        ("h wild-p", "wild_bootstrap.h.p", 0.429, 0.005),
+        ("L1 b", "coefs.L1h.b", -0.014, 0.001),
+        ("L1 wild-p", "wild_bootstrap.L1h.p", 0.792, 0.005),
+        ("L2 b", "coefs.L2h.b", -0.063, 0.001),
+        ("L2 wild-p", "wild_bootstrap.L2h.p", 0.108, 0.005),
+        ("L3 b", "coefs.L3h.b", 0.071, 0.001),
+        ("L3 wild-p", "wild_bootstrap.L3h.p", 0.057, 0.005),
+        ("L4 b", "coefs.L4h.b", -0.006, 0.001),
+        ("L4 wild-p", "wild_bootstrap.L4h.p", 0.885, 0.005),
+        ("L5 b", "coefs.L5h.b", 0.055, 0.001),
+        ("L5 wild-p", "wild_bootstrap.L5h.p", 0.272, 0.005),
+        ("L6 b", "coefs.L6h.b", 0.025, 0.001),
+        ("L6 wild-p", "wild_bootstrap.L6h.p", 0.513, 0.005),
+        ("L7 b", "coefs.L7h.b", -0.127, 0.001),
+        ("L7 wild-p", "wild_bootstrap.L7h.p", 0.005, 0.005),
+        ("L8 b", "coefs.L8h.b", -0.065, 0.001),
+        ("L8 wild-p", "wild_bootstrap.L8h.p", 0.064, 0.005),
+        ("dr b", "coefs.dr.b", 1.001, 0.001),
+        ("dr wild-p", "wild_bootstrap.dr.p", 0.018, 0.005),
+        ("L1dr b", "coefs.L1dr.b", 0.595, 0.001),
+        ("L1dr wild-p", "wild_bootstrap.L1dr.p", 0.059, 0.005),
+    ):
+        got = _json_path(pq, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_quarterly: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 23
     wb = _model_output("artifacts/wild_ar_bust.json")
     for desc, path, expected, tol in (
         ("wild-AR bust set lower", "set.0", 0.25, 0.001),

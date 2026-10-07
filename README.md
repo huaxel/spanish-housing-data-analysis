@@ -18,7 +18,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Exploration 01: boom-bust vs tightening](docs/explorations/boom_bust_vs_tightening.md)
 - [Hypothesis 01: absorption ratio vs prices](docs/explorations/absorption_hypothesis.md) — verdict: descriptor, not a huge predictor
 - [Panel: absorption with demand controls](docs/explorations/panel_adjusted.md) — adjusted description (CCAA + year FE, clustered SEs); attenuation is the finding
-- [Quarterly credit timing](docs/explorations/panel_quarterly.md) — no mortgage lead once year effects are correctly absorbed (the old L3/L5/L6 shape was transform artifact); supply unobservable at this frequency
+- [Quarterly credit timing](docs/explorations/panel_quarterly.md) — no mortgage lead once year effects are correctly absorbed (the old L3/L5/L6 shape was transform artifact); mortgage-rate changes co-move with appraisal growth within years (2022–24 inflation cycle — descriptive, not causal); supply unobservable at this frequency
 - [Identification memo](docs/explorations/identification.md) — what a causal extension would take (scoping only: migration shift-share first, Saiz GIS second)
 - [IV: migration exposure → prices](docs/explorations/iv_migration.md) — commissioned design A, **rejected on independent read** (exclusion fails; instrument is cumulative behind flow language); kept as a documented negative result, removed from synthesis
 - [Tourist intensity panel](docs/explorations/panel_tourist.md) — municipal null: tourist changes don't track price/rent accelerations (wild-p 0.45–0.94)
