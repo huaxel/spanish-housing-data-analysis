@@ -32,7 +32,7 @@ genuine local overhang. Credit and geographic overhang remain competing
 explanations; the "backwards / mostly still-needed" rhetoric is
 withdrawn.
 2. **Stagnation–recovery (2013–19): demography diverges.** Prices recover
-   while the 20–34 cohort collapses 9.0M→7.7M and population stagnates.
+   while the 20–34 cohort collapses 9.0M→7.6M and population stagnates.
    Per-capita stock peaks (564) — the only moment "too many homes" is
    arithmetically true, and only in emptying regions.
 3. **Tightening (2021–25): households outrun everything.** Stock still grows
@@ -67,17 +67,22 @@ comparable arc, not the proxy-anchored endpoints.
 
 Removed 2026-10-07 on the milestone-5 independent read (verdict: REMOVE;
 read record in [the IV note](docs/explorations/iv_migration.md) and
-[the review brief](docs/review_brief.md)). The shift-share IV (+0.34 pooled,
-+0.48 bust-only) failed exclusion: 1998 settlement geography coincides with
-the territorial footprint of the credit/construction bubble, the trends spec
-triples the estimate (+0.34 → +1.04) instead of confirming it, and the
-instrument as built is a cumulative predicted level since 1998 behind
-annual-flow language. Per the pre-committed protocol the estimate is kept as
+[the review brief](docs/review_brief.md)). The shift-share IV (repaired
+flow instrument: +0.08 pooled, +0.46 bust-only) failed exclusion: 1998
+settlement geography coincides with the territorial footprint of the
+credit/construction bubble; the trends spec runs hot (+0.20 vs +0.08
+base) instead of confirming it; and a second independent read rejected
+the repaired design on inference grounds (unidentified in both
+directions without calibrated AR). Per the pre-committed protocol the estimate is kept as
 a documented negative result, not a softer claim: numbers stay pinned in
 `explorations/iv_results.json` (still freshness-checked by `make audit`),
 and nothing causal sits in this synthesis until a new design passes its own
 read. Design B (Saiz terrain) is likewise null at both grains; the causal
 program is on hold, not abandoned — see the identification memo.
+**Correction 2026-10-07 (repo review):** this paragraph quoted
+pre-repair numbers (+0.34/+0.48/+1.04, cumulative instrument); corrected
+to the repaired flow-instrument estimates. The withdrawal rationale is
+unchanged — both reads' verdicts stand.
 
 ## The split (why national ratios mislead)
 
@@ -87,8 +92,9 @@ program is on hold, not abandoned — see the identification memo.
   in 18y) — and neither recovered really (capital −7.5%, south −28 to
   −38% in 2025 euros); 2011 south was already vacancy (Parla 6%,
   Torrejón 8%). Needs net new stock.
-- **Coastal Valencia** (composition crisis, decomposed): 720+ dwellings/1000
-  at 44–46% non-primary = a second-home coast (Torrevieja 51%, Benidorm 43%)
+- **Coastal Valencia** (composition crisis, decomposed): Alicante province
+  peaked at 724 dwellings/1000 (2018; 676 in 2025) with 44% non-primary
+  in 2020 (40% in 2025) = a second-home coast (Torrevieja 51%, Benidorm 43%)
   *plus* vacant towns (Dénia 31%), tourist flats a 4.3% footnote. Needs
   mobilization, not just construction.
 - **Barcelona** (burdened metropolis): city +65% sale / +68% rents 2013–24
@@ -97,7 +103,7 @@ program is on hold, not abandoned — see the identification memo.
   tourist flats in the city vs 28 in Santa Coloma; 514 starts in 13 years
   there. Built on absorbing a 10.9% 2011 vacancy. Within-municipio tourist
   changes don't track subsequent price/rent moves at all (municipal panel
-  null, wild-p 0.45–0.94) — the footnote, confirmed.
+  null, wild-p 0.49–0.96) — the footnote, confirmed.
 - **Interior** (Galicia, Castilla y León, Asturias): 650–770/1000, shrinking
   young cohorts, mild prices — abundance without demand. The 2021
   electricity-based vacancy makes the abundance concrete: Galicia 28.8%

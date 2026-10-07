@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis verify audit backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -51,8 +51,14 @@ build:
 verify:
 	uv run python scripts/verify_data.py
 
-audit:
+audit: audit-docs
 	uv run python scripts/audit_claims.py
+
+# Doc-number cross-check: every result-like number in the narrative docs
+# must match an audited claim or an explicit allowlist entry (closes the
+# audit's blind spot — it pins artifacts, not docs).
+audit-docs:
+	uv run python scripts/audit_doc_numbers.py
 
 # Deterministic estimators whose outputs audit requires (git-ignored
 # artifacts/ JSONs + committed explorations/*.json freshness copies).

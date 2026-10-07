@@ -28,8 +28,11 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 232 headline doc numbers (66 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 21 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 23 panel_quarterly + 6 madrid_vacancy + 4 wild-AR + 6 hypothesis_01) re-queried, plus 14 model-freshness checks (each estimator output must postdate its script, `ols.py`, and the inputs it actually reads — `marts.duckdb` for the marts-based ones, the raw hipotecas/valor files for the quarterly panel, `bartik_predicted.json` for the IV + Saiz outputs, the committed terrain JSONs for the Saiz family); a green audit can no longer pass on stale model numbers; fails
-  on drift. Add a claim whenever a doc states a quotable number. Note:
+- `make audit` — 264 headline doc numbers (95 mart + 17 committed-model + 19 probe + 6 sensitivity + 15 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 20 ratio_ccaa + 9 serpavi + 10 tourist_rents + 8 panel_provincial + 23 panel_quarterly + 6 madrid_vacancy + 4 wild-AR + 6 hypothesis_01 + 4 panel_tourist) re-queried, plus 15 model-freshness checks (each estimator output must postdate its script, `ols.py`, and the inputs it actually reads — `marts.duckdb` for the marts-based ones, the raw hipotecas/valor files for the quarterly panel, `bartik_predicted.json` for the IV + Saiz outputs, the committed terrain JSONs for the Saiz family); a green audit can no longer pass on stale model numbers; fails
+  on drift. Add a claim whenever a doc states a quotable number. `make audit` also runs
+  `make audit-docs`, which inverts the check for the narrative surface (synthesis + README):
+  every result-like number there must match an audited claim or an explicit allowlist entry —
+  the claims pin artifacts, the doc check pins the docs. Note:
   `marts.duckdb` is not byte-stable across rebuilds (container metadata
   drifts even with identical inputs), so every `make build` invalidates
   the six model freshness keys — run `make analysis` after a rebuild

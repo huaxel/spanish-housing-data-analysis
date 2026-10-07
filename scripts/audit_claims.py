@@ -61,6 +61,11 @@ MODEL_FRESHNESS = [
         "artifacts/hypothesis_01.json",
         "explorations/test_absorption_hypothesis.py",
     ),
+    (
+        "panel_tourist",
+        "artifacts/panel_tourist.json",
+        "explorations/panel_tourist.py",
+    ),
 ]
 
 
@@ -642,6 +647,248 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         -20.3,
         0.1,
     ),
+    (
+        "synthesis",
+        "EUR/m2 Nacional 2013",
+        "SELECT eur_m2_libre FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2013",
+        1495.3,
+        0.5,
+    ),
+    (
+        "synthesis",
+        "viv/1000 Nacional 2013",
+        "SELECT viv_por_1000_hab FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2013",
+        543.62,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "EUR/m2 Nacional 2021",
+        "SELECT eur_m2_libre FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2021",
+        1657.6,
+        0.5,
+    ),
+    (
+        "synthesis",
+        "viv/1000 Nacional 2021",
+        "SELECT viv_por_1000_hab FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2021",
+        563.89,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "mortgages Nacional 2021",
+        "SELECT hip_viv_num FROM mart_ccaa_anual WHERE ccaa='Nacional' AND anyo=2021",
+        418058.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "bust IPV fall pct 2007-13",
+        "SELECT ROUND((b.ipv_general-a.ipv_general)/a.ipv_general*100,1) "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2007 AND b.anyo=2013",
+        -35.7,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "mortgage count fall pct 2007-13",
+        "SELECT ROUND((1-b.hip_viv_num*1.0/a.hip_viv_num)*100,1) "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2007 AND b.anyo=2013",
+        83.9,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "new-vacant count Nacional 2011",
+        "SELECT SUM(viviendas) FROM censo2011_vintage "
+        "WHERE ccaa='' AND provincia='' AND tipo='vacia' AND vintage='De 2002 a 2011'",
+        767925.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "20-34 cohort 2013",
+        "SELECT SUM(pob_20_34) FROM mart_ccaa_anual WHERE ccaa!='Nacional' AND anyo=2013",
+        8999575.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "20-34 cohort 2019",
+        "SELECT SUM(pob_20_34) FROM mart_ccaa_anual WHERE ccaa!='Nacional' AND anyo=2019",
+        7618270.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "net dwelling additions 2021-25",
+        "SELECT b.viviendas_total-a.viviendas_total FROM mart_ccaa_anual a "
+        "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
+        379651.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "net household additions 2021-25",
+        "SELECT b.hogares-a.hogares FROM mart_ccaa_anual a "
+        "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
+        981823.0,
+        1.0,
+    ),
+    (
+        "synthesis",
+        "IPV rise pct 2021-25",
+        "SELECT ROUND((b.ipv_general-a.ipv_general)/a.ipv_general*100,1) "
+        "FROM mart_ccaa_anual a JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
+        "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
+        36.4,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Madrid affordability 2024",
+        "SELECT afford_90m2_years FROM mart_ccaa_anual "
+        "WHERE ccaa='Madrid, Comunidad de' AND anyo=2024",
+        6.15,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "Barcelona sale rise pct 2013-24",
+        "SELECT ROUND((MAX(CASE WHEN anyo=2024 THEN sale_eur_m2 END) "
+        "- MAX(CASE WHEN anyo=2013 THEN sale_eur_m2 END)) "
+        "/ MAX(CASE WHEN anyo=2013 THEN sale_eur_m2 END)*100,1) "
+        "FROM muni_bcn WHERE municipio='Barcelona'",
+        64.8,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Barcelona rent rise pct 2013-24",
+        "SELECT ROUND((MAX(CASE WHEN anyo=2024 THEN rent_month END) "
+        "- MAX(CASE WHEN anyo=2013 THEN rent_month END)) "
+        "/ MAX(CASE WHEN anyo=2013 THEN rent_month END)*100,1) "
+        "FROM muni_bcn WHERE municipio='Barcelona'",
+        68.3,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Barcelona mortgage burden 2022",
+        "SELECT mortgage_burden FROM muni_bcn WHERE municipio='Barcelona' AND anyo=2022",
+        63.592250410969044,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Sant Adria mortgage burden 2022",
+        "SELECT mortgage_burden FROM muni_bcn WHERE municipio='Sant Adrià de Besòs' AND anyo=2022",
+        71.87417256544035,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Alicante ratio peak",
+        "SELECT MAX(viv_por_1000_hab) FROM mart_provincia_anual WHERE provincia='Alicante/Alacant'",
+        724.04,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "Alicante non-primary 2020",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_provincia_anual WHERE provincia='Alicante/Alacant' AND anyo=2020",
+        44.1,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Alicante non-primary 2025",
+        "SELECT ROUND(100.0*viviendas_no_principales/viviendas_total,1) "
+        "FROM mart_provincia_anual WHERE provincia='Alicante/Alacant' AND anyo=2025",
+        40.3,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "interior ratio min 2025 (Galicia)",
+        "SELECT MIN(viv_por_1000_hab) FROM mart_ccaa_anual "
+        "WHERE ccaa IN ('Galicia','Castilla y León','Asturias, Principado de') AND anyo=2025",
+        652.85,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "interior ratio max 2025 (CyL)",
+        "SELECT MAX(viv_por_1000_hab) FROM mart_ccaa_anual "
+        "WHERE ccaa IN ('Galicia','Castilla y León','Asturias, Principado de') AND anyo=2025",
+        770.67,
+        0.05,
+    ),
+    (
+        "synthesis",
+        "national ratio growth pct 01-25",
+        "WITH p AS (SELECT SUM(viviendas_total) s, SUM(poblacion) p "
+        "FROM mart_provincia_anual WHERE anyo=2001), "
+        "c AS (SELECT viviendas_total s, poblacion p FROM mart_ccaa_anual "
+        "WHERE ccaa='Nacional' AND anyo=2025) "
+        "SELECT ROUND((c.s/c.p-p.s/p.p)/(p.s/p.p)*100,1) FROM p, c",
+        7.8,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "absorption min 2021-25",
+        "WITH a AS (SELECT * FROM mart_ccaa_anual WHERE anyo=2021), "
+        "b AS (SELECT * FROM mart_ccaa_anual WHERE anyo=2025) "
+        "SELECT ROUND(MIN((b.viviendas_total-a.viviendas_total)*1.0/(b.hogares-a.hogares)),3) "
+        "FROM a JOIN b ON a.ccaa=b.ccaa WHERE b.ccaa!='Nacional' AND b.hogares>a.hogares",
+        0.234,
+        0.005,
+    ),
+    (
+        "synthesis",
+        "absorption max 2021-25",
+        "WITH a AS (SELECT * FROM mart_ccaa_anual WHERE anyo=2021), "
+        "b AS (SELECT * FROM mart_ccaa_anual WHERE anyo=2025) "
+        "SELECT ROUND(MAX((b.viviendas_total-a.viviendas_total)*1.0/(b.hogares-a.hogares)),3) "
+        "FROM a JOIN b ON a.ccaa=b.ccaa WHERE b.ccaa!='Nacional' AND b.hogares>a.hogares",
+        0.899,
+        0.005,
+    ),
+    (
+        "synthesis",
+        "Benidorm second homes 2011",
+        "SELECT ROUND(SUM(CASE WHEN tipo='Vivienda secundaria' THEN viviendas_2011 END) "
+        "* 100.0 / SUM(CASE WHEN tipo='Total viviendas' THEN viviendas_2011 END), 1) "
+        "FROM censo2011_val WHERE municipio='Benidorm'",
+        43.3,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "overstock min d_07_25 (Extremadura)",
+        "WITH p AS (SELECT SUM(viviendas_total) s, SUM(poblacion) p "
+        "FROM mart_provincia_anual WHERE anyo=2007 AND ccaa='Extremadura'), "
+        "c AS (SELECT viviendas_total s, poblacion p FROM mart_ccaa_anual "
+        "WHERE ccaa='Extremadura' AND anyo=2025) "
+        "SELECT ROUND(1000.0*c.s/c.p-1000.0*p.s/p.p,1) FROM p, c",
+        100.0,
+        0.1,
+    ),
+    (
+        "synthesis",
+        "Alicante ratio 2025",
+        "SELECT viv_por_1000_hab FROM mart_provincia_anual "
+        "WHERE provincia='Alicante/Alacant' AND anyo=2025",
+        675.64,
+        0.05,
+    ),
 ]
 
 
@@ -985,7 +1232,7 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] ratio_ccaa: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 21
+    total += 20
     serp = _model_output("artifacts/serpavi_analysis.json")
     for desc, path, expected, tol in (
         ("diba-serpavi pearson", "rent_cross_diba_2023.pearson", 0.825, 0.005),
@@ -1142,6 +1389,18 @@ def main() -> int:
         got = _json_path(wb, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] wild_ar_bust: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 4
+    pt = _model_output("artifacts/panel_tourist.json")
+    for desc, path, expected, tol in (
+        ("sale wild-p", "sale_tour_only.wild_bootstrap.d_tour.p", 0.494, 0.005),
+        ("sale+pop wild-p", "sale_with_pop.wild_bootstrap.d_tour.p", 0.561, 0.005),
+        ("rent wild-p", "rent_tour_only.wild_bootstrap.d_tour.p", 0.9605, 0.005),
+        ("rent+pop wild-p", "rent_with_pop.wild_bootstrap.d_tour.p", 0.9615, 0.005),
+    ):
+        got = _json_path(pt, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] panel_tourist: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 4
     h1 = _model_output("artifacts/hypothesis_01.json")
