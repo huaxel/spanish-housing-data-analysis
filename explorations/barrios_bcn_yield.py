@@ -93,7 +93,8 @@ def year_median(year: int) -> dict:
         "r ON r.codi = s.codi"
     ).fetchall()
     ys = sorted(100 * rent * 12 / sale for rent, sale in cells if sale and sale > 0)
-    return {"n": len(ys), "median_yield": round(ys[min(len(ys) - 1, len(ys) // 2)], 2)}
+    idx = (len(ys) - 1) // 2  # same rule as the explorer quantile_disc chart
+    return {"n": len(ys), "median_yield": round(ys[idx], 2)}
 
 
 out = {

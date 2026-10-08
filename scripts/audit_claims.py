@@ -2516,7 +2516,7 @@ def main() -> int:
         ("yield top pct", "top.yield_pct", 7.71, 0.02),
         ("yield bottom pct", "bottom.yield_pct", 2.02, 0.02),
         ("rent-vs-sale pearson", "rent_vs_sale_pearson", 0.754, 0.005),
-        ("yield median 2023 (peak)", "by_year.2023.median_yield", 4.72, 0.02),
+        ("yield median 2023 (peak)", "by_year.2023.median_yield", 4.71, 0.02),
         ("yield median 2018", "by_year.2018.median_yield", 4.15, 0.02),
     ):
         got = _json_path(by_, path)

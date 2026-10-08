@@ -285,6 +285,25 @@ order by rendimiento desc
 Rentas de contratos nuevos sobre precios de escritura: la periferia rinde
 más porque el suelo es barato, no porque alquilar sea caro.
 
+```sql tendencia_yield_bcn
+select s.anyo as anyo,
+       quantile_disc(100.0 * r.lloguer_m2 * 12.0 / s.sale_m2, 0.5) as mediana
+from (select codi, anyo, avg(eur_m2_total) as sale_m2
+      from housing.barrios_bcn_compraventes
+      where ambit = 'barri' and eur_m2_total is not null
+      group by codi, anyo) s
+join (select codi, anyo, lloguer_m2 from housing.barrios_bcn_lloguer_anual
+      where ambit = 'barri' and lloguer_m2 is not null) r
+  on r.codi = s.codi and r.anyo = s.anyo
+where s.anyo <= 2024
+group by s.anyo order by s.anyo
+```
+
+<LineChart data={tendencia_yield_bcn} x=anyo y=mediana
+  xFmt="0" xAxisTitle="Año (sin 2020: hueco de publicación)" yFmt="num1"
+  handleMissing="gap" markers=true
+  title="Rentabilidad bruta mediana (%): subió hasta 2023, cedió en 2024"/>
+
 ## Valencia: alquileres y vacancia, sin precios de venta
 
 Padrón municipal (266 municipios, 1996–2025) con la renta mediana SERPAVI

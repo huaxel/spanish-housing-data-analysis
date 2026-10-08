@@ -106,7 +106,7 @@ level-driven (cheap sale prices, not high rents). Two thin cells (under 15
 transactions) are flagged, not dropped. Flow rents overstate sitting-tenant
 reality in a rising market; read as a cross-sectional sorting, not a return
 promise.
-The median rose from 4.15% (2018) to a 4.72% peak in 2023, then eased
+The median rose from 4.15% (2018) to a 4.71% peak in 2023, then eased
 to 4.51% in 2024: rents outpaced prices into 2023, prices caught up
 somewhat after. No 2020 cell exists (publication gap).
 
