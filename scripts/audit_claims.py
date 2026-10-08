@@ -2232,7 +2232,7 @@ PANEL_SAIZ_CLAIMS = [
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
-        data = data[int(part) if part.isdigit() else part]
+        data = data[int(part)] if isinstance(data, list) and part.isdigit() else data[part]
     return data
 
 
@@ -2516,6 +2516,8 @@ def main() -> int:
         ("yield top pct", "top.yield_pct", 7.71, 0.02),
         ("yield bottom pct", "bottom.yield_pct", 2.02, 0.02),
         ("rent-vs-sale pearson", "rent_vs_sale_pearson", 0.754, 0.005),
+        ("yield median 2023 (peak)", "by_year.2023.median_yield", 4.72, 0.02),
+        ("yield median 2018", "by_year.2018.median_yield", 4.15, 0.02),
     ):
         got = _json_path(by_, path)
         if isinstance(expected, str):
@@ -2524,7 +2526,7 @@ def main() -> int:
             ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] barrios_bcn_yield: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 5
+    total += 7
     pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),

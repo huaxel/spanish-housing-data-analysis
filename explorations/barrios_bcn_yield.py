@@ -29,6 +29,8 @@ con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 
 YEAR = 2024
 THIN_TRX = 15
+# Sale workbooks have no 2020 file (publication gap); yearly medians skip it.
+YEARS = [2018, 2019, 2021, 2022, 2023, 2024]
 
 rows = con.execute(
     """
@@ -80,6 +82,20 @@ def pearson(xs: list[float], ys: list[float]) -> float | None:
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys, strict=True)) / (vx * vy)
 
 
+def year_median(year: int) -> dict:
+    cells = con.execute(
+        "SELECT r.lloguer_m2, s.sale_m2 FROM "
+        "(SELECT codi, AVG(eur_m2_total) AS sale_m2 FROM barrios_bcn_compraventes "
+        f"WHERE ambit = 'barri' AND anyo = {year} AND eur_m2_total IS NOT NULL "
+        "GROUP BY codi) s JOIN "
+        "(SELECT codi, lloguer_m2 FROM barrios_bcn_lloguer_anual "
+        f"WHERE ambit = 'barri' AND anyo = {year} AND lloguer_m2 IS NOT NULL) "
+        "r ON r.codi = s.codi"
+    ).fetchall()
+    ys = sorted(100 * rent * 12 / sale for rent, sale in cells if sale and sale > 0)
+    return {"n": len(ys), "median_yield": round(ys[min(len(ys) - 1, len(ys) // 2)], 2)}
+
+
 out = {
     "year": YEAR,
     "n": len(yields),
@@ -94,11 +110,13 @@ out = {
     ),
     "top5": yields[:5],
     "bottom5": yields[-5:],
+    "by_year": {str(y): year_median(y) for y in YEARS},
 }
 print(f"yields {YEAR}: n={out['n']} thin={out['n_thin']} median={out['median_yield']}%")
 top, bottom = yields[0], yields[-1]
 print(f"top={top['barrio']} {top['yield_pct']}% | bottom={bottom['barrio']} {bottom['yield_pct']}%")
 print(f"rent-vs-sale pearson={out['rent_vs_sale_pearson']}")
+print(f"by_year={out['by_year']}")
 
 out["_meta"] = ols.model_meta(__file__, ["data/processed/marts.duckdb"])
 (ROOT / "artifacts").mkdir(exist_ok=True)

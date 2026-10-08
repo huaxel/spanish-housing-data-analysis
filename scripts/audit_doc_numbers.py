@@ -681,6 +681,7 @@ ALLOW = {
         (2021.0, "compravendes post-gap resume year"),
         (2024.0, "compravendes anchor year"),
         (15.0, "yield thin-cell transaction threshold"),
+        (2023.0, "yield peak year"),
     ],
     "docs/explorations/saiz_gis_probe.md": [
         (99.4, "probe headline validation, arithmetic from pinned anchor"),
