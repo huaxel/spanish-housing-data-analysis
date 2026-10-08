@@ -73,6 +73,14 @@ are not published — codes only. Anchor: Madrid distrito 04 (Salamanca)
 2024 collective median 18.31 €/m². Secciones censales (36,294 rows) remain
 skipped: census-vintage geometry makes them unstable across years.
 
+## Cross-check (2026-10-08)
+
+Median-of-district-medians tracks the published municipal median within
+about a percent on average across all shared municipio-years; the largest
+gaps sit on thin-contract villages where medians of a handful of contracts
+are noisy. No melt bug indicated — the district table is consistent with
+its municipal sibling.
+
 ## Verdict
 
 **Highest-value data candidate on the board.** Municipal rents
