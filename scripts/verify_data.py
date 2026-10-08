@@ -350,6 +350,15 @@ def main() -> int:
     ).fetchone()
     assert desah_anchor == (141,), f"Cádiz 2024Q4 launch anchor drifted: {desah_anchor}"
     print("CGPJ launches: 50 provinces, 2013Q1–2026Q1; foreclosures 2007Q1–")
+    serp_prov = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT provincia), MIN(anyo), MAX(anyo) FROM serpavi_provincial"
+    ).fetchone()
+    assert serp_prov == (13620, 52, 2011, 2024), f"SERPAVI provincial coverage drifted: {serp_prov}"
+    bcn_prov = con.execute(
+        "SELECT ROUND(valor, 2) FROM serpavi_provincial WHERE provincia='Barcelona' "
+        "AND anyo=2024 AND medida='ALQM2_LV_M_VC'"
+    ).fetchone()
+    assert bcn_prov == (10.98,), f"Barcelona provincial anchor drifted: {bcn_prov}"
     muni = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_madrid"
     ).fetchone()

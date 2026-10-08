@@ -65,6 +65,11 @@ launches fell to 1,383 in 2020Q2 (moratorium) and stood at 24,540 in
 8 other). Service-common figures are excluded by construction. One upstream
 off-by-one cell exists (Almería 2022Q4 total vs causes); verify pins it
 instead of forcing a silent fix.
+Launches per capita track provincial rents only modestly (2024,
+50 provinces: Pearson 0.28, Spearman 0.359): Girona 95.6 per 100k at the
+top, Jaén 13.1 at the bottom, 42.4 nationally. Affordability stress leaves
+a trace, but court practice and contract density confound it — descriptive,
+not a rent-causes-eviction claim (see `desahucios_renta`).
 
 ## Limits
 

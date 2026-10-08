@@ -360,6 +360,11 @@ ALLOW = {
         (3850.0, "launch mart rows, pinned in claims"),
         (2024.0, "Cadiz anchor year"),
         (4.0, "2024Q4 quarter label"),
+        (95.6, "Girona launch rate, pinned in claims"),
+        (13.1, "Jaen launch rate, pinned in claims"),
+        (42.4, "national launch rate, pinned in claims"),
+        (0.28, "launch-rent pearson, pinned in claims"),
+        (0.359, "launch-rent spearman, pinned in claims"),
     ],
     "docs/explorations/affordability.md": [
         (2071.0, "display table cell, bulk-verified 2026-10-07"),

@@ -145,6 +145,7 @@
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
     "data/raw/parquet/serpavi_distritos.parquet": "aed37f04b35c27a9bcea888fb74d68f8dda3cbf96b4b94824e27d7f7073194b2",
     "data/raw/parquet/serpavi_municipal.parquet": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
+    "data/raw/parquet/serpavi_provincial.parquet": "e6cac3651200385e67a459cd96f7073a7c0d73e858d1210a5035c109c241f141",
     "data/raw/parquet/sevilla_oferta_zona_2024.parquet": "d509d795ba1699b2c0f27fc3f468206a4761b05cd3a97d1d5c0265c2a4643e1b",
     "data/raw/parquet/sevilla_sim_pob_hog.parquet": "0e5c24f3dc1a5b020ac0c22cdc8316115846edbe7db50659f72b67642cd6a27b",
     "data/raw/parquet/sevilla_sim_turismo.parquet": "a590e384e60f4c11fab1e353c9ec12b0305983eecd9028a443ce7a4e68286f76",
@@ -972,6 +973,12 @@
       "accessed": "2026-10-08",
       "note": "long melt: municipio x anyo x medida; populated cells only",
       "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    },
+    "data/raw/parquet/serpavi_provincial.parquet": {
+      "accessed": "2026-10-08",
+      "note": "long melt: provincia x anyo x medida; populated cells only",
+      "operation": "SERPAVI alquiler provincial (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/parquet/sevilla_oferta_zona_2024.parquet": {

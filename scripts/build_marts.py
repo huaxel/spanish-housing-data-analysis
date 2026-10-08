@@ -119,6 +119,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/barrios_bcn_compraventes.parquet",
     "data/raw/parquet/serpavi_distritos.parquet",
     "data/raw/parquet/desahucios_provincia.parquet",
+    "data/raw/parquet/serpavi_provincial.parquet",
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
@@ -960,6 +961,11 @@ def main() -> None:
         raise SystemExit("CGPJ launch coverage changed")
     con.register("desah_df", pa.Table.from_pylist(desah_rows))
     con.execute("CREATE OR REPLACE TABLE desahucios_provincia AS SELECT * FROM desah_df")
+    serp_prov_rows = load_parquet("serpavi_provincial.parquet")
+    if len(serp_prov_rows) != 13620 or len({r["provincia"] for r in serp_prov_rows}) != 52:
+        raise SystemExit("SERPAVI provincial coverage changed")
+    con.register("serp_prov_df", pa.Table.from_pylist(serp_prov_rows))
+    con.execute("CREATE OR REPLACE TABLE serpavi_provincial AS SELECT * FROM serp_prov_df")
     pad_mun = {
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("padron_municipios_mad.parquet")
@@ -1471,6 +1477,7 @@ def main() -> None:
         "barrios_bcn_compraventes",
         "serpavi_distritos",
         "desahucios_provincia",
+        "serpavi_provincial",
         "muni_madrid",
         "censo2011_mad",
         "muni_bcn",

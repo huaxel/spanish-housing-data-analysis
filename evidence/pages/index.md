@@ -193,6 +193,21 @@ group by anyo order by anyo
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Ejecuciones hipotecarias presentadas (nacional, desde 2007)"/>
 
+```sql lanzamientos_pc_2024
+select d.provincia as provincia,
+       100000.0 * sum(d.lanz_lau) / max(p.poblacion) as por_100k
+from housing.desahucios_provincia d
+join housing.mart_provincia_anual p
+  on p.provincia = d.provincia and p.anyo = d.anyo
+where d.anyo = 2024
+group by d.provincia
+order by por_100k desc
+limit 12
+```
+
+<BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k
+  yFmt="num0" title="Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)"/>
+
 ## Datos y cobertura
 
 Cada guion indica un dato no disponible; no se imputa ni se interpreta como cero.

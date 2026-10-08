@@ -77,40 +77,42 @@ audit-docs:
 # pure-Python wild bootstraps dominate (panel_quarterly
 # alone ~11 min, panel_adjusted ~5 min). Progress prints per script.
 analysis:
-	@echo "[analysis 1/17] bartik_predict (instrument)"
+	@echo "[analysis 1/18] bartik_predict (instrument)"
 	uv run python explorations/bartik_predict.py
-	@echo "[analysis 2/17] iv_migration"
+	@echo "[analysis 2/18] iv_migration"
 	uv run python explorations/iv_migration.py
-	@echo "[analysis 3/17] panel_saiz"
+	@echo "[analysis 3/18] panel_saiz"
 	uv run python explorations/panel_saiz.py
-	@echo "[analysis 4/17] panel_provincial"
+	@echo "[analysis 4/18] panel_provincial"
 	uv run python explorations/panel_provincial.py
-	@echo "[analysis 5/17] panel_adjusted (~5 min)"
+	@echo "[analysis 5/18] panel_adjusted (~5 min)"
 	uv run python explorations/panel_adjusted.py
-	@echo "[analysis 6/17] panel_tourist"
+	@echo "[analysis 6/18] panel_tourist"
 	uv run python explorations/panel_tourist.py
-	@echo "[analysis 7/17] panel_quarterly (~11 min)"
+	@echo "[analysis 7/18] panel_quarterly (~11 min)"
 	uv run python explorations/panel_quarterly.py
-	@echo "[analysis 8/17] ratio_ccaa"
+	@echo "[analysis 8/18] ratio_ccaa"
 	uv run python explorations/ratio_ccaa.py
-	@echo "[analysis 9/17] serpavi_analysis"
+	@echo "[analysis 9/18] serpavi_analysis"
 	uv run python explorations/serpavi_analysis.py
-	@echo "[analysis 10/17] tourist_rents"
+	@echo "[analysis 10/18] tourist_rents"
 	uv run python explorations/tourist_rents.py
-	@echo "[analysis 11/17] panel_saiz_municipal"
+	@echo "[analysis 11/18] panel_saiz_municipal"
 	uv run python explorations/panel_saiz_municipal.py
-	@echo "[analysis 12/17] panel_saiz_madrid"
+	@echo "[analysis 12/18] panel_saiz_madrid"
 	uv run python explorations/panel_saiz_madrid.py
-	@echo "[analysis 13/17] panel_saiz_madrid_vacancy"
+	@echo "[analysis 13/18] panel_saiz_madrid_vacancy"
 	uv run python explorations/panel_saiz_madrid_vacancy.py
-	@echo "[analysis 14/17] wild_ar_bust"
+	@echo "[analysis 14/18] wild_ar_bust"
 	uv run python explorations/wild_ar_bust.py
-	@echo "[analysis 15/17] test_absorption_hypothesis"
+	@echo "[analysis 15/18] test_absorption_hypothesis"
 	uv run python explorations/test_absorption_hypothesis.py
-	@echo "[analysis 16/17] municipios_nacional (descriptive)"
+	@echo "[analysis 16/18] municipios_nacional (descriptive)"
 	uv run python explorations/municipios_nacional.py
-	@echo "[analysis 17/17] barrios_bcn_yield (descriptive)"
+	@echo "[analysis 17/18] barrios_bcn_yield (descriptive)"
 	uv run python explorations/barrios_bcn_yield.py
+	@echo "[analysis 18/18] desahucios_renta (descriptive)"
+	uv run python explorations/desahucios_renta.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
 gates: lint fetch build analysis verify audit test

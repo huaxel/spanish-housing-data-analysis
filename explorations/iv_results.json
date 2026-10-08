@@ -113,7 +113,7 @@
     "script_sha": "4a9168fa9643722a1ac06cf0a85c9af5ebb87d4fcfb16833ef2f91d36b9fac25",
     "ols_sha": "97711b173fdc651a44cbd8368ebc0cdf2f574ba22cccef10c456500b587fd56a",
     "data_sha": {
-      "data/processed/marts.duckdb": "6c66a4031f9c67c082c781a3d3f9c596f6e460ac414a44aa1e69b73c3f3da7b8",
+      "data/processed/marts.duckdb": "2e0f79b268589e95ad4f68a569e6e0acb11ddf17f79a0a6725001314a9d8f20b",
       "artifacts/bartik_predicted.json": "a01e7159449db05e5d2f204144d83f221e38b7b922fe428002968ca9578a2a0f"
     }
   }

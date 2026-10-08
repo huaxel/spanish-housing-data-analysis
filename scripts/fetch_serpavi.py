@@ -159,6 +159,54 @@ def parse_distritos(xlsx: Path) -> list[dict]:
     return rows
 
 
+def parse_provincial(xlsx: Path) -> list[dict]:
+    """Read the Provincias sheet; melt populated cells to long form.
+
+    Same 20 measures x 14 years, keyed by 2-digit CPRO. LITPRO names must
+    match the mart provincia set (Ceuta/Melilla aggregate included here).
+    """
+    import openpyxl  # deferred: only this fetch needs it
+
+    wb = openpyxl.load_workbook(xlsx, read_only=True, data_only=True)
+    ws = wb["Provincias"]
+    hdr = [str(c) for c in next(ws.iter_rows(min_row=1, max_row=1, values_only=True))]
+    if hdr[:2] != ["CPRO", "LITPRO"]:
+        raise SystemExit(f"serpavi: unexpected provincial header {hdr[:2]}")
+    measures: list[tuple[int, str, int]] = []
+    for i, h in enumerate(hdr[2:]):
+        m = YEAR_RE.search(h)
+        if not m:
+            raise SystemExit(f"serpavi: non-year provincial column {h}")
+        yy = int(m.group(1))
+        anyo = 2000 + yy if yy >= 11 else 2000 + yy + 100
+        measures.append((2 + i, h[: m.start()], anyo))
+    # The provincial sheet does not reuse the municipal sheet's labels for
+    # Alicante/Valencia (verified 2026-10-08; fail loudly on anything new).
+    PROV_ALIAS = {
+        "Alicante": "Alicante/Alacant",
+        "Valencia/Valéncia": "Valencia/València",
+    }
+    rows: list[dict] = []
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if row[0] is None:
+            continue
+        name = PROV_ALIAS.get(str(row[1]), str(row[1]))
+        for col, root, year in measures:
+            v = row[col]
+            if v is None or v == "":
+                continue
+            rows.append(
+                {
+                    "cpro": str(row[0]).zfill(2),
+                    "provincia": name,
+                    "anyo": year,
+                    "medida": root,
+                    "valor": float(v),
+                }
+            )
+    return rows
+
+
 def main() -> None:
     (RAW / "parquet").mkdir(parents=True, exist_ok=True)
     xlsx = RAW / "serpavi_bd.xlsx"
@@ -191,9 +239,23 @@ def main() -> None:
         got = salamanca[0] if salamanca else None
         raise SystemExit(f"serpavi: Salamanca 2024 median {got} != {SALAMANCA_2024} — drift")
     out = RAW / "parquet" / "serpavi_municipal.parquet"
+    prov_rows = parse_provincial(xlsx)
+    if not prov_rows:
+        raise SystemExit("serpavi: zero provincial rows — format changed?")
     dist_out = RAW / "parquet" / "serpavi_distritos.parquet"
+    prov_out = RAW / "parquet" / "serpavi_provincial.parquet"
     pq.write_table(pa.Table.from_pylist(rows), out)
     pq.write_table(pa.Table.from_pylist(dist_rows), dist_out)
+    pq.write_table(pa.Table.from_pylist(prov_rows), prov_out)
+    manifest.record(
+        "data/raw/parquet/serpavi_provincial.parquet",
+        {
+            "url": URL,
+            "operation": "SERPAVI alquiler provincial (MIVAU, fianzas)",
+            "accessed": ACCESSED,
+            "note": "long melt: provincia x anyo x medida; populated cells only",
+        },
+    )
     manifest.record(
         "data/raw/parquet/serpavi_distritos.parquet",
         {
@@ -222,6 +284,7 @@ def main() -> None:
         f"{len({r['distrito'] for r in dist_rows})} districts, "
         f"Salamanca2024 median={salamanca[0]:.2f}"
     )
+    print(f"serpavi provincial: {len(prov_rows)} cells")
 
 
 if __name__ == "__main__":
