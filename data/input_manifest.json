@@ -173,19 +173,19 @@
   "snapshot_date": "2026-10-08",
   "sources": {
     "data/raw/barrios_madrid.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "session-built CSV export; bank query builder, no static file",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
     },
     "data/raw/barrios_sevilla_compra.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
     },
     "data/raw/barrios_sevilla_ipra.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
@@ -287,43 +287,43 @@
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
     },
     "data/raw/censo2011_municipios.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/3456",
       "operation": "CENSOPV"
     },
     "data/raw/censo2011_tenencia.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv"
     },
     "data/raw/censo2011_vintage.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
     },
     "data/raw/censo2021_intensidad.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "static jaxi CSV; tab-separated, dot-thousands, BOM; 18 measures",
       "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/censo2021_viviendas.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "browser-exported CSV via playwright-cli; normalized cp1252->UTF-8",
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
     },
     "data/raw/censo_anual_68521.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "static jaxiT3 CSV export; 208 MB; tab-separated, dot-thousands, BOM",
       "operation": "Censo Anual de Población (68521)",
       "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/censo_viviendas_2001_2011.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
@@ -335,28 +335,28 @@
       "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/diba_opendata.zip": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/ech_hogares.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "ECH",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv"
     },
     "data/raw/ecp_hog_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/60131",
       "operation": "ECP"
     },
     "data/raw/ecp_hog_prov.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/60133",
       "operation": "ECP"
     },
     "data/raw/ecp_pob_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/56940",
       "operation": "ECP"
     },
@@ -366,333 +366,333 @@
       "table": "LAU 2021 RG 01M 4326"
     },
     "data/raw/hipotecas_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76316",
       "operation": "HPT"
     },
     "data/raw/hipotecas_prov.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76317",
       "operation": "HPT"
     },
     "data/raw/hipotecas_rates.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76315",
       "operation": "HPT"
     },
     "data/raw/ipc_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76136",
       "operation": "IPC general"
     },
     "data/raw/ipv_ccaa_anual.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/80271",
       "operation": "IPV"
     },
     "data/raw/migracion_flujos.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/24322",
       "operation": "EM flujos"
     },
     "data/raw/padron_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2853",
       "operation": "DPOP"
     },
     "data/raw/padron_extranjeros.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/padron_municipios_all_2854.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2854",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2855.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2855",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2856.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2856",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2857.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2857",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2858.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2858",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2859.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2859",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2860.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2860",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2861.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2862.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2862",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2863.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2863",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2864.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2864",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2865.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2865",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2866.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2866",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2868.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2868",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2869.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2869",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2870.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2870",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2871.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2871",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2872.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2872",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2873.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2873",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2874.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2874",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2875.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2875",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2876.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2876",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2877.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2877",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2878.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2878",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2879.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2879",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2880.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2880",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2881.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2882.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2882",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2883.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2883",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2884.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2884",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2885.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2885",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2886.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2886",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2888.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2888",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2889.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2889",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2890.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2890",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2891.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2891",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2892.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2892",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2893.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2893",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2894.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2894",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2895.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2896.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2896",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2899.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2899",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2900.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2900",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2901.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2901",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2902.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2902",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2903.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2904.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2904",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2905.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2905",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2906.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2906",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2907.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2907",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2908.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2908",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2909.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2909",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_bcn.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_mad.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_sev.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_vlc.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/padron_provincia.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2852",
       "operation": "DPOP"
     },
     "data/raw/parque_viviendas.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "dataset": "VDP002_01",
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
@@ -717,63 +717,63 @@
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
     },
     "data/raw/parquet/barrios_madrid.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "suppressed (<15 cases) cells stay null",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
     },
     "data/raw/parquet/barrios_sevilla_compra.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171"
     },
     "data/raw/parquet/barrios_sevilla_ipra.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179"
     },
     "data/raw/parquet/censo2011_municipios.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/3456",
       "operation": "CENSOPV"
     },
     "data/raw/parquet/censo2011_tenencia.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "missing cells dropped",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv"
     },
     "data/raw/parquet/censo2011_vintage.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "'..' suppressed kept missing",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
     },
     "data/raw/parquet/censo2021_intensidad.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "municipio grain; named + Resto aggregates; 18 measures",
       "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/parquet/censo2021_viviendas.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "all tipo x banda cells; anchor uses Total x Total",
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
     },
     "data/raw/parquet/censo_anual_pob_prov.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "Total × Todas las edades × Total margin only; 2021-2025",
       "operation": "Censo Anual de Población (68521)",
       "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
@@ -785,179 +785,179 @@
       "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/parquet/diba_h18a.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_h18a (tourist)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_h9a.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_h9a (vacant_reg)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m11d.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m11d (rent_burden)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m11e.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m11e (mortgage_burden)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m12.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m12 (starts)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m13.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m13 (completions)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m19.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m19 (sale_eur_m2)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m23.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "tb_m23 (rent_month)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/ech_hogares.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "Total x Total margin only; thousands -> units",
       "operation": "ECH",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv"
     },
     "data/raw/parquet/ecp_edad_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/56940",
       "note": "1-Jan age bands parsed from pinned ecp_pob_ccaa.json",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_hog_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/60131",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_hog_prov.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/60133",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_pob_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/56940",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/hipotecas_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76316",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/hipotecas_prov.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76317",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/hipotecas_rates.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76315",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/ipc_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/76136",
       "note": "general index levels only; base 2021",
       "operation": "IPC general"
     },
     "data/raw/parquet/ipv_ccaa_anual.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/80271",
       "note": "parsed index levels only",
       "operation": "IPV"
     },
     "data/raw/parquet/migracion_flujos.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/24322",
       "note": "Ambos sexos, Total edad; annual (FK_Periodo 28) only",
       "operation": "EM flujos"
     },
     "data/raw/parquet/padron_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2853",
       "note": "sexo=Total only",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_extranjeros.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "TOTAL EXTRANJEROS x Ambos sexos only; full detail in raw CSV",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/parquet/padron_extranjeros_origen.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "all 137 nacionalidades x sexo (rollups duplicate leaves)",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/parquet/padron_municipios_all.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "derived": "52 DPOP municipal tables"
     },
     "data/raw/parquet/padron_municipios_bcn.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_mad.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_sev.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_vlc.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_provincia.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2852",
       "note": "sexo=Total only",
       "operation": "DPOP"
     },
     "data/raw/parquet/parque_viviendas.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "dataset": "VDP002_01",
       "note": "parquet mirror of the pinned CSV",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
     "data/raw/parquet/renta_hogar_ccaa.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/9949",
       "note": "renta_anyo = encuesta_anyo - 1",
       "operation": "ECV"
@@ -975,62 +975,62 @@
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/parquet/sevilla_oferta_zona_2024.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
       "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
       "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
     },
     "data/raw/parquet/sevilla_sim_pob_hog.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30"
     },
     "data/raw/parquet/sevilla_sim_turismo.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4"
     },
     "data/raw/parquet/sevilla_sim_vivienda.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133"
     },
     "data/raw/parquet/transmisiones.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "Transmisiones",
       "publisher": "INE (registradores)",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bd/6155.csv"
     },
     "data/raw/parquet/turisticas_con_pct.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/46141",
       "note": "December snapshot per year",
       "operation": "VTE"
     },
     "data/raw/parquet/turisticas_counts.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/39364",
       "note": "December snapshot per year",
       "operation": "VTE"
     },
     "data/raw/parquet/valor_municipal_madrid.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "published values only; '-' dropped, counted in print",
       "publisher": "datos.comunidad.madrid (MIVAU mirror)",
       "url": "https://datos.comunidad.madrid/dataset/8cb70b8c-c1e2-43f7-826a-1a22c573a743/resource/ef4a2c7a-4273-4116-9ff2-d5f77020ca04/download/valor-tasado-de-la-vivienda-libre-por-municipios-de-mas-de-25.00-habitantes.-total-base-2005.-mu.csv"
     },
     "data/raw/parquet/valor_tasado.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "dataset": "VDP006_01",
       "note": "raw quarterly rows; empty Valor = unpublished",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
     },
     "data/raw/renta_hogar_ccaa.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/9949",
       "operation": "ECV"
     },
@@ -1041,77 +1041,77 @@
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/sevilla_anuario_2025_7_3_9.xls": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
       "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
       "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
     },
     "data/raw/sevilla_sim_caracteristicas.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS barrio layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
     },
     "data/raw/sevilla_sim_hogares.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30/query"
     },
     "data/raw/sevilla_sim_poblacion.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26/query"
     },
     "data/raw/sevilla_sim_rehabilitacion.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-02-10; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101/query"
     },
     "data/raw/sevilla_sim_tipologia.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2/query"
     },
     "data/raw/sevilla_sim_turismo.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
     },
     "data/raw/sevilla_sim_uso.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133/query"
     },
     "data/raw/transmisiones.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "operation": "Transmisiones",
       "publisher": "INE (registradores)",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bd/6155.csv"
     },
     "data/raw/turisticas_con_pct.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/46141",
       "operation": "VTE"
     },
     "data/raw/turisticas_counts.json": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/39364",
       "operation": "VTE"
     },
     "data/raw/valor_municipal_madrid.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "cp1252 original; stored as UTF-8",
       "publisher": "datos.comunidad.madrid (MIVAU mirror)",
       "url": "https://datos.comunidad.madrid/dataset/8cb70b8c-c1e2-43f7-826a-1a22c573a743/resource/ef4a2c7a-4273-4116-9ff2-d5f77020ca04/download/valor-tasado-de-la-vivienda-libre-por-municipios-de-mas-de-25.00-habitantes.-total-base-2005.-mu.csv"
     },
     "data/raw/valor_tasado.csv": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "dataset": "VDP006_01",
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
