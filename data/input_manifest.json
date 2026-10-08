@@ -1,6 +1,24 @@
 {
   "sha256": {
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
+    "data/raw/barrios_sevilla_compra.json": "1ce6e2978b40a5061bbbbd6eff0f428aa9aa9fc193f4742e463d2d89c3ea6d88",
+    "data/raw/barrios_sevilla_ipra.json": "5f858d4bc5677ece95db93ee33f1a1c48f507d6beba76336accce2201365b387",
+    "data/raw/bcn_compra_BCN_trimestral_2018.xlsx": "37fd8cccf8197046a1e3ea283d1bdab4fad35ad329b6816303134ecc5bdffee1",
+    "data/raw/bcn_compra_BCN_trimestral_2019.xlsx": "9a4a497d84d6b63d7023f68e05bc3a3def2093fff8e2331c653052021ac3948d",
+    "data/raw/bcn_compra_BCN_trimestral_2021.xlsx": "ac6027d0b1f2d7d986fc70072a308ff45d200f94af40b8e7e334643566870ac8",
+    "data/raw/bcn_compra_BCN_trimestral_2022.xlsx": "b69ecb9553801a1bde796e5081b08a065ac75d8fd86ccc5d28fe0a6e4c04d5ba",
+    "data/raw/bcn_compra_BCN_trimestral_2023.xlsx": "152dee342594f771841aaec8f21e20af633f2840de5b42eec335172b47c27991",
+    "data/raw/bcn_compra_BCN_trimestral_2024.xlsx": "641915222931b0f72f6ab631c3fa80bf2baebcdfba63e228eeafce94a854b5aa",
+    "data/raw/bcn_compra_Trimestrals_Barcelona_2025.xlsx": "387a5938fe27e887c4ea9cb0dbd00beed648d39c79287113ae4d5e88d6ff6a7e",
+    "data/raw/bcn_compra_Trimestrals_Barcelona_2026.xlsx": "f1d46a029571c175aed648b9769c70b58a958cfacd6926b4de169e6c727ab630",
+    "data/raw/bcn_lloguers_anual_bcn_contractes.xlsx": "22c2b5ab1c4e4e9e84658fcdd58fcf4f2e43a86e9f0ddc5c2745df1de457ec5b",
+    "data/raw/bcn_lloguers_anual_bcn_lloguer.xlsx": "90d7d307cce4aa5d7378b28a5a2412e3de96b7796959db1224a867e38b31fe57",
+    "data/raw/bcn_lloguers_anual_bcn_lloguer_m2.xlsx": "7abb13a31e02ed8a000ef4903fc3b8801a359690893b6c72b64aa901021e5383",
+    "data/raw/bcn_lloguers_anual_bcn_sup.xlsx": "48faed583df063b4d1bf32d15f9ebc7b5809c3d39296db1d1feec53a03723dff",
+    "data/raw/bcn_lloguers_trimestral_bcn_contractes.xlsx": "581d545512f0831ba39811f9461d9b9fc8bb5b2d98f1797290e405b75c0a6403",
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": "1aaaa8d6b31c47b02cff7e50e51cb7d314d6df3adca28fa05b58a9704fa02d1a",
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": "710f1bcdda778eed3ead4a829bbde32ce6c3922712f5cd1a41bbd54649189945",
+    "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": "86322156666afebe9483cd8117e4dca3b8746a04ca28d93cba247cc527a27e05",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
@@ -8,6 +26,7 @@
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
     "data/raw/censo_anual_68521.csv": "cdd0b707a40ce4af62d0f967fb02d88f2e70098c2ac4dbd846e3bcb7abcf0b52",
     "data/raw/censo_viviendas_2001_2011.csv": "8a4f18414c1d2953003c26d1b22455269f21fc34a6ce9883f710b82b94330dab",
+    "data/raw/cgpj_crisis_provincias.xlsx": "065ba5674539dad999dda6e15e93ba0b41884162115c7cfe20e23672c2f8c5a7",
     "data/raw/diba_opendata.zip": "01bb0bd88e67b9add2f015b2294a7e4c0cd632deb7ecba605c82df1c41db3b9a",
     "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
     "data/raw/ecp_hog_ccaa.json": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
@@ -80,7 +99,12 @@
     "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+    "data/raw/parquet/barrios_bcn_compraventes.parquet": "25a96a88ba7ea3f86f83b0b6cec850a7c55972c9e7cb80c55a23cf73fe3c9bef",
+    "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": "8bf9a2fc513835080dcaa394449eea621df99ad9fef7ad03142ec4e6b1f86a51",
+    "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": "3767a5a846345ef4a0cd132854e7db2236d9b20a063b35ab5f5cc63f4b753e70",
     "data/raw/parquet/barrios_madrid.parquet": "bf90c6f737d93929ed0e597ba17e9d13efb44895fea198750d2aeabbba150d92",
+    "data/raw/parquet/barrios_sevilla_compra.parquet": "7f866c6f158ea29afdf727eb105d69549abe20b3bef7caa504bafe05dcc7c573",
+    "data/raw/parquet/barrios_sevilla_ipra.parquet": "bf3859636666d661f855fcf2e907394699ca390043c837076aa0b8f049d845f3",
     "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
     "data/raw/parquet/censo2011_vintage.parquet": "41e3ed2de96072bf76b4eae1cc82986b5fec5e11fefa1e8146312131dcca920a",
@@ -88,6 +112,7 @@
     "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
     "data/raw/parquet/censo_anual_pob_prov.parquet": "8ea764f83d9e78f94783b9acd304866e89aa94f8f0c6c988a9cf3a1ca031ab46",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": "42040a0a9a5593538fe7a21c05c707a8c44c5524efba2176a943b2e08d514c14",
+    "data/raw/parquet/desahucios_provincia.parquet": "61e1b51e957727c6c2552af1e8038e05ef1bf35e5c639e9bfc882d28314eac45",
     "data/raw/parquet/diba_h18a.parquet": "951b7b80c4925c83bc230e3ed52285fbf0b7c7314c3a20bafad0d2525337e68c",
     "data/raw/parquet/diba_h9a.parquet": "a648c6dcedff125a190531f0ebbb42126fe91906fd8180d6535829a291a7e2c5",
     "data/raw/parquet/diba_m11d.parquet": "971faaaf2883abbc9780936bfa092281ff3f8eb4c0135b438e8cfc187103a3aa",
@@ -118,7 +143,12 @@
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
     "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
+    "data/raw/parquet/serpavi_distritos.parquet": "aed37f04b35c27a9bcea888fb74d68f8dda3cbf96b4b94824e27d7f7073194b2",
     "data/raw/parquet/serpavi_municipal.parquet": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
+    "data/raw/parquet/sevilla_oferta_zona_2024.parquet": "d509d795ba1699b2c0f27fc3f468206a4761b05cd3a97d1d5c0265c2a4643e1b",
+    "data/raw/parquet/sevilla_sim_pob_hog.parquet": "0e5c24f3dc1a5b020ac0c22cdc8316115846edbe7db50659f72b67642cd6a27b",
+    "data/raw/parquet/sevilla_sim_turismo.parquet": "a590e384e60f4c11fab1e353c9ec12b0305983eecd9028a443ce7a4e68286f76",
+    "data/raw/parquet/sevilla_sim_vivienda.parquet": "7c3f96c116f72cdec6d6d3dae124d9be47f1aa8dd77fdb5ec1130c730f7f0831",
     "data/raw/parquet/transmisiones.parquet": "a1fd79b11cb59bc26142022cc5fcf45083dee93577ecb807e4d521aa6ba8d0c5",
     "data/raw/parquet/turisticas_con_pct.parquet": "f328a67953abf652c713937bc78c40665ce900e33dea8f0626da83570900da7c",
     "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
@@ -126,19 +156,135 @@
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
     "data/raw/serpavi_bd.xlsx": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
+    "data/raw/sevilla_anuario_2025_7_3_9.xls": "7e2c3752a3c6243dac94701ae2fa7a105252678f87fb1a6e81e790476b4fabde",
+    "data/raw/sevilla_sim_caracteristicas.json": "0bcdecb757a3f6e17336b932b496d5221e1d70497da124fd9d7dad7df33af5f8",
+    "data/raw/sevilla_sim_hogares.json": "c8fb8645281db943adbb3eb0306a2d735fb5910d819823cbca935579becd0e6c",
+    "data/raw/sevilla_sim_poblacion.json": "6373531cf4f03cfa1e1c70303ed28e52c8d3cd41d5eb2280e65594c3c743f354",
+    "data/raw/sevilla_sim_rehabilitacion.json": "57a9b68d358b87dd4b3ebb2d2ba2d0e358581b37216ff40c90966edce973471f",
+    "data/raw/sevilla_sim_tipologia.json": "e01af404afe05f4d85ceed8633fef3387c63b1fb5c3cdeb3596e7d348cf66195",
+    "data/raw/sevilla_sim_turismo.json": "01f37554c2636c204cc6a30bb71f403a68da996ff9ab5e987657bd35c5b36467",
+    "data/raw/sevilla_sim_uso.json": "57c90e032c96f8f54829a150ee8f2c941245494e32cd9e06816fc160e37f84d1",
     "data/raw/transmisiones.csv": "b6d9cc60eca2c82f40d057b209e1f9707389d01f3e13506ef6663f10e6697ecd",
     "data/raw/turisticas_con_pct.json": "77446313d60a7dcd41bcfa24ea24578b19a8b4cc7761f7a1fc1812c12ac24fa6",
     "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
     "data/raw/valor_municipal_madrid.csv": "5b61a14a42e42210adb471784dac86648844c004367f1bca234379ecf5a13714",
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b"
   },
-  "snapshot_date": "2026-10-07",
+  "snapshot_date": "2026-10-08",
   "sources": {
     "data/raw/barrios_madrid.csv": {
       "accessed": "2026-10-07",
       "note": "session-built CSV export; bank query builder, no static file",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
+    },
+    "data/raw/barrios_sevilla_compra.json": {
+      "accessed": "2026-10-07",
+      "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
+    },
+    "data/raw/barrios_sevilla_ipra.json": {
+      "accessed": "2026-10-07",
+      "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2018.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2018; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2018/BCN_trimestral_2018.xlsx"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2019.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2019; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2019/BCN_trimestral_2019.xlsx"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2021.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2021; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2021/BCN_trimestral_2021.xlsx"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2022.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2022; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2022/BCN_trimestral_2022.xlsx"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2023.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2023; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2023/BCN_trimestral_2023.xlsx"
+    },
+    "data/raw/bcn_compra_BCN_trimestral_2024.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2024; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2024/BCN_trimestral_2024.xlsx"
+    },
+    "data/raw/bcn_compra_Trimestrals_Barcelona_2025.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2025; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2025/Trimestrals_Barcelona_2025.xlsx"
+    },
+    "data/raw/bcn_compra_Trimestrals_Barcelona_2026.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Registradores Barcelona sales 2026; quarter sheets pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2026/Trimestrals_Barcelona_2026.xlsx"
+    },
+    "data/raw/bcn_lloguers_anual_bcn_contractes.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx"
+    },
+    "data/raw/bcn_lloguers_anual_bcn_lloguer.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx"
+    },
+    "data/raw/bcn_lloguers_anual_bcn_lloguer_m2.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx"
+    },
+    "data/raw/bcn_lloguers_anual_bcn_sup.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx"
+    },
+    "data/raw/bcn_lloguers_trimestral_bcn_contractes.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx"
+    },
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx"
+    },
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx"
+    },
+    "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
     },
     "data/raw/censo2011_municipios.json": {
       "accessed": "2026-10-07",
@@ -181,6 +327,12 @@
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
+    },
+    "data/raw/cgpj_crisis_provincias.xlsx": {
+      "accessed": "2026-10-08",
+      "note": "consolidated provincial crisis series through 2026Q1; sheets pinned by fetcher",
+      "publisher": "CGPJ, Estadística Judicial (efecto de la crisis, series provinciales)",
+      "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/diba_opendata.zip": {
       "accessed": "2026-10-07",
@@ -546,11 +698,41 @@
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
+    "data/raw/parquet/barrios_bcn_compraventes.parquet": {
+      "accessed": "2026-10-08",
+      "note": "Registradores quarterly sales; zero prices/areas stored as null (suppressed <3 contracts); city total includes non-geolocated records",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2018/BCN_trimestral_2018.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2019/BCN_trimestral_2019.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2021/BCN_trimestral_2021.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2022/BCN_trimestral_2022.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2023/BCN_trimestral_2023.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2024/BCN_trimestral_2024.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2025/Trimestrals_Barcelona_2025.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2026/Trimestrals_Barcelona_2026.xlsx"
+    },
+    "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": {
+      "accessed": "2026-10-08",
+      "note": "INCASÒL deposits: city+districts 2000–2025, 73 barris 2013–2025; <6-contract cells null; filed contracts, not asking prices",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
+    },
+    "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": {
+      "accessed": "2026-10-08",
+      "note": "INCASÒL deposits quarterly: districts 2000–2013, +73 barris 2014–; latest year holds published quarters only; <6-contract cells null",
+      "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
+    },
     "data/raw/parquet/barrios_madrid.parquet": {
       "accessed": "2026-10-07",
       "note": "suppressed (<15 cases) cells stay null",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
+    },
+    "data/raw/parquet/barrios_sevilla_compra.parquet": {
+      "accessed": "2026-10-07",
+      "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171"
+    },
+    "data/raw/parquet/barrios_sevilla_ipra.parquet": {
+      "accessed": "2026-10-07",
+      "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179"
     },
     "data/raw/parquet/censo2011_municipios.parquet": {
       "accessed": "2026-10-07",
@@ -595,6 +777,12 @@
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
+    },
+    "data/raw/parquet/desahucios_provincia.parquet": {
+      "accessed": "2026-10-08",
+      "note": "quarterly launches (2013Q1–) + foreclosure filings (2007Q1–); annual totals and Evolución blocks skipped; service-common figures excluded",
+      "publisher": "CGPJ, Estadística Judicial (efecto de la crisis, series provinciales)",
+      "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/parquet/diba_h18a.parquet": {
       "accessed": "2026-10-07",
@@ -774,11 +962,41 @@
       "note": "renta_anyo = encuesta_anyo - 1",
       "operation": "ECV"
     },
+    "data/raw/parquet/serpavi_distritos.parquet": {
+      "accessed": "2026-10-08",
+      "note": "long melt: distrito x anyo x medida; populated cells only; district names unpublished (codes only); secciones skipped",
+      "operation": "SERPAVI alquiler por distrito censal (MIVAU, fianzas)",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    },
     "data/raw/parquet/serpavi_municipal.parquet": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "long melt: municipio x anyo x medida; populated cells only",
       "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    },
+    "data/raw/parquet/sevilla_oferta_zona_2024.parquet": {
+      "accessed": "2026-10-07",
+      "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
+      "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
+      "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
+    },
+    "data/raw/parquet/sevilla_sim_pob_hog.parquet": {
+      "accessed": "2026-10-07",
+      "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30"
+    },
+    "data/raw/parquet/sevilla_sim_turismo.parquet": {
+      "accessed": "2026-10-07",
+      "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4"
+    },
+    "data/raw/parquet/sevilla_sim_vivienda.parquet": {
+      "accessed": "2026-10-07",
+      "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133"
     },
     "data/raw/parquet/transmisiones.parquet": {
       "accessed": "2026-10-07",
@@ -817,10 +1035,58 @@
       "operation": "ECV"
     },
     "data/raw/serpavi_bd.xlsx": {
-      "accessed": "2026-10-07",
+      "accessed": "2026-10-08",
       "note": "71 MB Excel; Municipios sheet 8,894 rows x 280 cols",
       "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    },
+    "data/raw/sevilla_anuario_2025_7_3_9.xls": {
+      "accessed": "2026-10-07",
+      "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
+      "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
+      "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
+    },
+    "data/raw/sevilla_sim_caracteristicas.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS barrio layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
+    },
+    "data/raw/sevilla_sim_hogares.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30/query"
+    },
+    "data/raw/sevilla_sim_poblacion.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26/query"
+    },
+    "data/raw/sevilla_sim_rehabilitacion.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-02-10; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101/query"
+    },
+    "data/raw/sevilla_sim_tipologia.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2/query"
+    },
+    "data/raw/sevilla_sim_turismo.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
+    },
+    "data/raw/sevilla_sim_uso.json": {
+      "accessed": "2026-10-07",
+      "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
+      "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
+      "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133/query"
     },
     "data/raw/transmisiones.csv": {
       "accessed": "2026-10-07",

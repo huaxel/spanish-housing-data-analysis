@@ -188,6 +188,168 @@ def main() -> int:
     assert (bar[0], bar[1]) == (2007, 2025), f"barrio window broken: {bar}"
     assert bar_city == 5285.72, f"barrio city drifted: {bar_city}"
     assert bar_top[0] == "041. Recoletos", f"barrio top moved: {bar_top}"
+    sevbar = con.execute(
+        "SELECT COUNT(DISTINCT idg), MIN(anyo), MAX(anyo), COUNT(*) FROM barrios_sevilla"
+    ).fetchone()
+    sevbar_anchor = con.execute(
+        "SELECT ipra_eur_m2 FROM barrios_sevilla WHERE barrio='ALFALFA' AND anyo=2022"
+    ).fetchone()[0]
+    print(f"barrios_sevilla: barrios={sevbar[0]} years={sevbar[1]}-{sevbar[2]} rows={sevbar[3]}")
+    assert sevbar == (108, 2016, 2022, 756), f"Sevilla IPRA coverage broken: {sevbar}"
+    assert sevbar_anchor == 6.8, f"Sevilla IPRA anchor drifted: {sevbar_anchor}"
+    sev_compra = con.execute(
+        "SELECT COUNT(*), COUNT(*) FILTER (WHERE compra_unifamiliar_eur_m2 IS NULL), "
+        "MIN(compra_colectiva_eur_m2), MAX(compra_colectiva_eur_m2) "
+        "FROM barrios_sevilla_compra"
+    ).fetchone()
+    assert sev_compra == (108, 31, 796, 2585), (
+        f"Sevilla SIM purchase coverage drifted: {sev_compra}"
+    )
+    sev_offer = con.execute(
+        "SELECT COUNT(*), MIN(anyo), MAX(anyo), MIN(precio_oferta_eur_m2), "
+        "MAX(precio_oferta_eur_m2) FROM sevilla_oferta_zona"
+    ).fetchone()
+    offer_areas = con.execute(
+        "SELECT provider, COUNT(DISTINCT zona) FROM sevilla_oferta_zona "
+        "GROUP BY provider ORDER BY provider"
+    ).fetchall()
+    assert sev_offer == (336, 2024, 2024, 665.0, 3876.0), (
+        f"Sevilla offer-price coverage drifted: {sev_offer}"
+    )
+    assert offer_areas == [("Fotocasa", 11), ("Idealista", 17)], (
+        f"Sevilla offer-price geographies drifted: {offer_areas}"
+    )
+    sev_pob_hog = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT idg), MIN(anyo), MAX(anyo), "
+        "COUNT(*) FILTER (WHERE poblacion IS NULL), "
+        "COUNT(*) FILTER (WHERE hogares IS NULL) "
+        "FROM sevilla_sim_poblacion_hogares"
+    ).fetchone()
+    assert sev_pob_hog == (756, 108, 2015, 2021, 0, 0), (
+        f"Sevilla SIM population/household coverage drifted: {sev_pob_hog}"
+    )
+    sev_pob_anchor = con.execute(
+        "SELECT poblacion, hogares FROM sevilla_sim_poblacion_hogares "
+        "WHERE barrio='ALFALFA' AND anyo=2015"
+    ).fetchone()
+    assert sev_pob_anchor == (4479, 1972), f"SIM 2015 Alfalfa anchor drifted: {sev_pob_anchor}"
+    sev_housing = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT idg), "
+        "COUNT(*) FILTER (WHERE rehabilitacion_estimada IS NULL), "
+        "COUNT(*) FILTER (WHERE deshabitadas IS NULL), "
+        "COUNT(*) FILTER (WHERE unifamiliares IS NULL) "
+        "FROM sevilla_sim_vivienda"
+    ).fetchone()
+    assert sev_housing == (108, 108, 6, 7, 30), (
+        f"Sevilla SIM housing snapshot coverage drifted: {sev_housing}"
+    )
+    sev_housing_anchor = con.execute(
+        "SELECT deshabitadas_pct, rehabilitacion_estimada_pct "
+        "FROM sevilla_sim_vivienda WHERE barrio='ALFALFA'"
+    ).fetchone()
+    assert sev_housing_anchor == (7, 4), f"SIM Alfalfa housing anchor drifted: {sev_housing_anchor}"
+    sev_tourism = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT idg), "
+        "COUNT(*) FILTER (WHERE vft_2022_02_pct IS NULL) "
+        "FROM sevilla_sim_turismo"
+    ).fetchone()
+    assert sev_tourism == (108, 108, 70), (
+        f"Sevilla SIM tourism snapshot coverage drifted: {sev_tourism}"
+    )
+    sev_tourism_anchor = con.execute(
+        "SELECT vft_2008, vft_2022_02 FROM sevilla_sim_turismo WHERE barrio='ALFALFA'"
+    ).fetchone()
+    assert sev_tourism_anchor == (557, 482), (
+        f"SIM Alfalfa tourist-housing anchor drifted: {sev_tourism_anchor}"
+    )
+    print(
+        "Sevilla SIM context: 108 barrios; population/households 2015–2021; "
+        f"undated housing snapshot nulls={sev_housing[2:5]}; "
+        f"tourism 2022-02 pressure nulls={sev_tourism[2]}"
+    )
+    bcn_anual = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT codi), MIN(anyo), MAX(anyo), "
+        "COUNT(*) FILTER (WHERE ambit='barri' AND contractes IS NULL), "
+        "COUNT(*) FILTER (WHERE ambit='barri' AND anyo < 2013 AND contractes IS NOT NULL) "
+        "FROM barrios_bcn_lloguer_anual"
+    ).fetchone()
+    assert bcn_anual == (2184, 84, 2000, 2025, 949, 0), (
+        f"Barcelona INCASÒL annual coverage drifted: {bcn_anual}"
+    )
+    bcn_anchor = con.execute(
+        "SELECT contractes, ROUND(lloguer_m2, 2) FROM barrios_bcn_lloguer_anual "
+        "WHERE codi='BCN' AND anyo=2024"
+    ).fetchone()
+    assert bcn_anchor == (32903, 16.13), f"Barcelona 2024 anchor drifted: {bcn_anchor}"
+    bcn_barri_anchor = con.execute(
+        "SELECT ROUND(lloguer_m2, 2) FROM barrios_bcn_lloguer_anual "
+        "WHERE nom='la Barceloneta' AND anyo=2025"
+    ).fetchone()
+    assert bcn_barri_anchor == (22.70,), f"Barceloneta 2025 anchor drifted: {bcn_barri_anchor}"
+    bcn_trim = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT codi), MIN(anyo), MAX(anyo) "
+        "FROM barrios_bcn_lloguer_trimestral"
+    ).fetchone()
+    assert bcn_trim == (4984, 84, 2000, 2026), (
+        f"Barcelona INCASÒL quarterly coverage drifted: {bcn_trim}"
+    )
+    print(
+        "Barcelona INCASÒL: city+10 districts 2000–, 73 barris (annual 2013–, "
+        "quarterly 2014–); filed contracts, <6-contract cells null"
+    )
+    bcn_compra = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT codi), MIN(anyo), MAX(anyo), "
+        "COUNT(*) FILTER (WHERE eur_m2_total IS NULL) "
+        "FROM barrios_bcn_compraventes"
+    ).fetchone()
+    assert bcn_compra == (2520, 84, 2018, 2026, 128), (
+        f"Barcelona compravendes coverage drifted: {bcn_compra}"
+    )
+    bcn_compra_anchor = con.execute(
+        "SELECT trx_total, eur_m2_total FROM barrios_bcn_compraventes "
+        "WHERE codi='BCN' AND anyo=2024 AND trimestre=4"
+    ).fetchone()
+    assert bcn_compra_anchor == (4368, 4622.43), (
+        f"Barcelona 2024Q4 sales anchor drifted: {bcn_compra_anchor}"
+    )
+    print(
+        "Barcelona Registradores: city+10 districts+73 barris quarterly; "
+        "zero prices stored as null (<3 contracts); city total non-additive"
+    )
+    serp_dist = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT distrito), "
+        "COUNT(DISTINCT codigo), MIN(anyo), MAX(anyo) "
+        "FROM serpavi_distritos"
+    ).fetchone()
+    assert serp_dist == (1099206, 9680, 7332, 2011, 2024), (
+        f"SERPAVI district coverage drifted: {serp_dist}"
+    )
+    salamanca = con.execute(
+        "SELECT ROUND(valor, 2) FROM serpavi_distritos WHERE distrito='2807904' "
+        "AND anyo=2024 AND medida='ALQM2_LV_M_VC'"
+    ).fetchone()
+    assert salamanca == (18.31,), f"Salamanca 2024 anchor drifted: {salamanca}"
+    print("SERPAVI distritos: 9,680 districts with data (codes only, no names)")
+    desah = con.execute(
+        "SELECT COUNT(*), COUNT(DISTINCT provincia), MIN(anyo), MAX(anyo), "
+        "SUM(lanz_total) FILTER (WHERE anyo=2025), "
+        "SUM(lanz_total) FILTER (WHERE anyo=2020 AND trimestre=2) "
+        "FROM desahucios_provincia"
+    ).fetchone()
+    assert desah == (3850, 50, 2007, 2026, 24540, 1383), f"CGPJ launch coverage drifted: {desah}"
+    # Upstream off-by-one in a single cell (Almería 2022Q4: total 252 vs 89+136+28);
+    # pinned so any new mismatch fails loudly instead of passing silently.
+    desah_add = con.execute(
+        "SELECT provincia, anyo, trimestre FROM desahucios_provincia "
+        "WHERE lanz_hipoteca + lanz_lau + lanz_otros != lanz_total"
+    ).fetchall()
+    assert desah_add == [("Almería", 2022, 4)], f"launch split drifted: {desah_add}"
+    desah_anchor = con.execute(
+        "SELECT lanz_total FROM desahucios_provincia "
+        "WHERE provincia='Cádiz' AND anyo=2024 AND trimestre=4"
+    ).fetchone()
+    assert desah_anchor == (141,), f"Cádiz 2024Q4 launch anchor drifted: {desah_anchor}"
+    print("CGPJ launches: 50 provinces, 2013Q1–2026Q1; foreclosures 2007Q1–")
     muni = con.execute(
         "SELECT COUNT(DISTINCT municipio), MIN(anyo), MAX(anyo) FROM muni_madrid"
     ).fetchone()

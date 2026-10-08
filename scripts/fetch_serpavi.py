@@ -45,6 +45,8 @@ URL = (
 ACCESSED = date.today().isoformat()
 # Validated anchors (probe doc): Barcelona city 2024 median, collective.
 BARCELONA_2024 = 13.680434782608694
+# Madrid distrito 04 (Salamanca) 2024 collective median, district-sheet anchor.
+SALAMANCA_2024 = 18.30985915492958
 YEAR_RE = re.compile(r"_(\d{2})$")
 
 
@@ -106,6 +108,57 @@ def parse_municipios(xlsx: Path) -> tuple[list[dict], dict]:
     return rows, anchors
 
 
+def parse_distritos(xlsx: Path) -> list[dict]:
+    """Read the Distritos sheet; melt populated cells to long form.
+
+    Same 20 measures x 14 years as Municipios, keyed by 7-digit CUDIS district
+    code (province+municipio+district). District names are not published in
+    the workbook — only codes. Secciones censales (36,294 rows) are skipped:
+    census-vintage geometry makes them unstable across years.
+    """
+    import openpyxl  # deferred: only this fetch needs it
+
+    wb = openpyxl.load_workbook(xlsx, read_only=True, data_only=True)
+    ws = wb["Distritos"]
+    hdr = [str(c) for c in next(ws.iter_rows(min_row=1, max_row=1, values_only=True))]
+    if hdr[:5] != ["CPRO", "LITPRO", "CUMUN", "LITMUN", "CUDIS"]:
+        raise SystemExit(f"serpavi: unexpected district header {hdr[:5]}")
+    measures: list[tuple[int, str, int]] = []
+    for i, h in enumerate(hdr[5:]):
+        m = YEAR_RE.search(h)
+        if not m:
+            raise SystemExit(f"serpavi: non-year district column {h}")
+        yy = int(m.group(1))
+        anyo = 2000 + yy if yy >= 11 else 2000 + yy + 100
+        measures.append((5 + i, h[: m.start()], anyo))
+    rows: list[dict] = []
+    n_districts = 0
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if row[0] is None or row[4] is None:
+            continue
+        n_districts += 1
+        cudis = str(row[4]).zfill(7)
+        for col, root, year in measures:
+            v = row[col]
+            if v is None or v == "":
+                continue
+            rows.append(
+                {
+                    "cpro": str(row[0]).zfill(2),
+                    "provincia": str(row[1]),
+                    "codigo": str(row[2]).zfill(5),
+                    "municipio": str(row[3]),
+                    "distrito": cudis,
+                    "anyo": year,
+                    "medida": root,
+                    "valor": float(v),
+                }
+            )
+    if n_districts != 10511:
+        raise SystemExit(f"serpavi: district rows {n_districts} != 10511 — drift")
+    return rows
+
+
 def main() -> None:
     (RAW / "parquet").mkdir(parents=True, exist_ok=True)
     xlsx = RAW / "serpavi_bd.xlsx"
@@ -126,8 +179,31 @@ def main() -> None:
     med = anchors.get("ALQM2_LV_M_VC")
     if med is None or abs(med - BARCELONA_2024) > 0.01:
         raise SystemExit(f"serpavi: Barcelona 2024 median {med} != {BARCELONA_2024} — drift")
+    dist_rows = parse_distritos(xlsx)
+    if not dist_rows:
+        raise SystemExit("serpavi: zero district rows — format changed?")
+    salamanca = [
+        r["valor"]
+        for r in dist_rows
+        if r["distrito"] == "2807904" and r["anyo"] == 2024 and r["medida"] == "ALQM2_LV_M_VC"
+    ]
+    if not salamanca or abs(salamanca[0] - SALAMANCA_2024) > 0.01:
+        got = salamanca[0] if salamanca else None
+        raise SystemExit(f"serpavi: Salamanca 2024 median {got} != {SALAMANCA_2024} — drift")
     out = RAW / "parquet" / "serpavi_municipal.parquet"
+    dist_out = RAW / "parquet" / "serpavi_distritos.parquet"
     pq.write_table(pa.Table.from_pylist(rows), out)
+    pq.write_table(pa.Table.from_pylist(dist_rows), dist_out)
+    manifest.record(
+        "data/raw/parquet/serpavi_distritos.parquet",
+        {
+            "url": URL,
+            "operation": "SERPAVI alquiler por distrito censal (MIVAU, fianzas)",
+            "accessed": ACCESSED,
+            "note": "long melt: distrito x anyo x medida; populated cells only; "
+            "district names unpublished (codes only); secciones skipped",
+        },
+    )
     manifest.record(
         "data/raw/parquet/serpavi_municipal.parquet",
         {
@@ -140,6 +216,11 @@ def main() -> None:
     print(
         f"serpavi: {len(rows)} cells, {len({r['codigo'] for r in rows})} municipios, "
         f"Barcelona2024 median={med:.2f}"
+    )
+    print(
+        f"serpavi distritos: {len(dist_rows)} cells, "
+        f"{len({r['distrito'] for r in dist_rows})} districts, "
+        f"Salamanca2024 median={salamanca[0]:.2f}"
     )
 
 

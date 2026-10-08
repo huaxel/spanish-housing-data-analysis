@@ -108,6 +108,17 @@ REQUIRED_RAW = [
     "data/raw/parquet/turisticas_counts.parquet",
     "data/raw/parquet/valor_municipal_madrid.parquet",
     "data/raw/parquet/barrios_madrid.parquet",
+    "data/raw/parquet/barrios_sevilla_ipra.parquet",
+    "data/raw/parquet/barrios_sevilla_compra.parquet",
+    "data/raw/parquet/sevilla_oferta_zona_2024.parquet",
+    "data/raw/parquet/sevilla_sim_pob_hog.parquet",
+    "data/raw/parquet/sevilla_sim_vivienda.parquet",
+    "data/raw/parquet/sevilla_sim_turismo.parquet",
+    "data/raw/parquet/barrios_bcn_lloguer_anual.parquet",
+    "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet",
+    "data/raw/parquet/barrios_bcn_compraventes.parquet",
+    "data/raw/parquet/serpavi_distritos.parquet",
+    "data/raw/parquet/desahucios_provincia.parquet",
     "data/raw/parquet/ipc_ccaa.parquet",
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
@@ -836,6 +847,119 @@ def main() -> None:
         raise SystemExit("barrio vivienda types changed upstream")
     con.register("bar_df", pa.Table.from_pylist(bar_rows))
     con.execute("CREATE OR REPLACE TABLE barrios_madrid AS SELECT * FROM bar_df")
+    # Sevilla SIM/IPRA barrio rents: official ArcGIS layer (AVRA fianzas).
+    # Annual labels represent rolling three-year windows; preserve them as
+    # published and do not splice to SERPAVI or offer-price series.
+    sev_bar_rows = [
+        {
+            "idg": r["idg"],
+            "id_distrito": r["id_distrito"],
+            "distrito": r["distrito"],
+            "id_barrio": r["id_barrio"],
+            "barrio": r["barrio"],
+            "anyo": r["anyo"],
+            "ipra_eur_m2": r["ipra_eur_m2"],
+        }
+        for r in load_parquet("barrios_sevilla_ipra.parquet")
+    ]
+    if len({r["idg"] for r in sev_bar_rows}) != 108:
+        raise SystemExit("Sevilla IPRA barrio count changed")
+    con.register("sev_bar_df", pa.Table.from_pylist(sev_bar_rows))
+    con.execute("CREATE OR REPLACE TABLE barrios_sevilla AS SELECT * FROM sev_bar_df")
+    sev_compra_rows = [
+        {
+            "idg": r["idg"],
+            "id_distrito": r["id_distrito"],
+            "distrito": r["distrito"],
+            "id_barrio": r["id_barrio"],
+            "barrio": r["barrio"],
+            "compra_colectiva_eur_m2": r["compra_colectiva_eur_m2"],
+            "compra_unifamiliar_eur_m2": r["compra_unifamiliar_eur_m2"],
+        }
+        for r in load_parquet("barrios_sevilla_compra.parquet")
+    ]
+    if len({r["idg"] for r in sev_compra_rows}) != 108:
+        raise SystemExit("Sevilla SIM purchase barrio count changed")
+    con.register("sev_compra_df", pa.Table.from_pylist(sev_compra_rows))
+    con.execute("CREATE OR REPLACE TABLE barrios_sevilla_compra AS SELECT * FROM sev_compra_df")
+    sev_oferta_rows = [
+        {
+            "provider": r["provider"],
+            "zona": r["zona"],
+            "anyo": r["anyo"],
+            "mes": r["mes"],
+            "precio_oferta_eur_m2": r["precio_oferta_eur_m2"],
+        }
+        for r in load_parquet("sevilla_oferta_zona_2024.parquet")
+    ]
+    if {r["anyo"] for r in sev_oferta_rows} != {2024}:
+        raise SystemExit("Sevilla yearbook offer-price year changed")
+    if len(sev_oferta_rows) != 336:
+        raise SystemExit("Sevilla yearbook offer-price coverage changed")
+    con.register("sev_oferta_df", pa.Table.from_pylist(sev_oferta_rows))
+    con.execute("CREATE OR REPLACE TABLE sevilla_oferta_zona AS SELECT * FROM sev_oferta_df")
+    sev_pob_hog_rows = load_parquet("sevilla_sim_pob_hog.parquet")
+    if len(sev_pob_hog_rows) != 756 or {r["anyo"] for r in sev_pob_hog_rows} != set(
+        range(2015, 2022)
+    ):
+        raise SystemExit("Sevilla SIM population/household coverage changed")
+    con.register("sev_pob_hog_df", pa.Table.from_pylist(sev_pob_hog_rows))
+    con.execute(
+        "CREATE OR REPLACE TABLE sevilla_sim_poblacion_hogares AS SELECT * FROM sev_pob_hog_df"
+    )
+    sev_vivienda_rows = load_parquet("sevilla_sim_vivienda.parquet")
+    sev_turismo_rows = load_parquet("sevilla_sim_turismo.parquet")
+    for label, rows in (("housing", sev_vivienda_rows), ("tourism", sev_turismo_rows)):
+        if len(rows) != 108 or len({r["idg"] for r in rows}) != 108:
+            raise SystemExit(f"Sevilla SIM {label} barrio count changed")
+    con.register("sev_vivienda_df", pa.Table.from_pylist(sev_vivienda_rows))
+    con.register("sev_turismo_df", pa.Table.from_pylist(sev_turismo_rows))
+    con.execute("CREATE OR REPLACE TABLE sevilla_sim_vivienda AS SELECT * FROM sev_vivienda_df")
+    con.execute("CREATE OR REPLACE TABLE sevilla_sim_turismo AS SELECT * FROM sev_turismo_df")
+    bcn_anual_rows = load_parquet("barrios_bcn_lloguer_anual.parquet")
+    if len(bcn_anual_rows) != 2184 or {r["anyo"] for r in bcn_anual_rows} != set(range(2000, 2026)):
+        raise SystemExit("Barcelona INCASÒL annual coverage changed")
+    if {r["codi"] for r in bcn_anual_rows if r["ambit"] == "barri"} != {
+        f"B{i:02d}" for i in range(1, 74)
+    }:
+        raise SystemExit("Barcelona INCASÒL barri code set changed")
+    con.register("bcn_anual_df", pa.Table.from_pylist(bcn_anual_rows))
+    con.execute("CREATE OR REPLACE TABLE barrios_bcn_lloguer_anual AS SELECT * FROM bcn_anual_df")
+    bcn_trim_rows = load_parquet("barrios_bcn_lloguer_trimestral.parquet")
+    if len(bcn_trim_rows) != 4984:
+        raise SystemExit("Barcelona INCASÒL quarterly coverage changed")
+    con.register("bcn_trim_df", pa.Table.from_pylist(bcn_trim_rows))
+    con.execute(
+        "CREATE OR REPLACE TABLE barrios_bcn_lloguer_trimestral AS SELECT * FROM bcn_trim_df"
+    )
+    bcn_compra_rows = load_parquet("barrios_bcn_compraventes.parquet")
+    if len(bcn_compra_rows) != 2520 or {r["anyo"] for r in bcn_compra_rows} != {
+        2018,
+        2019,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026,
+    }:
+        raise SystemExit("Barcelona compravendes coverage changed")
+    if {r["codi"] for r in bcn_compra_rows if r["ambit"] == "barri"} != {
+        f"B{i:02d}" for i in range(1, 74)
+    }:
+        raise SystemExit("Barcelona compravendes barri code set changed")
+    con.register("bcn_compra_df", pa.Table.from_pylist(bcn_compra_rows))
+    con.execute("CREATE OR REPLACE TABLE barrios_bcn_compraventes AS SELECT * FROM bcn_compra_df")
+    serp_dist_rows = load_parquet("serpavi_distritos.parquet")
+    if len(serp_dist_rows) != 1099206 or len({r["distrito"] for r in serp_dist_rows}) != 9680:
+        raise SystemExit("SERPAVI district coverage changed")
+    con.register("serp_dist_df", pa.Table.from_pylist(serp_dist_rows))
+    con.execute("CREATE OR REPLACE TABLE serpavi_distritos AS SELECT * FROM serp_dist_df")
+    desah_rows = load_parquet("desahucios_provincia.parquet")
+    if len(desah_rows) != 3850 or len({r["provincia"] for r in desah_rows}) != 50:
+        raise SystemExit("CGPJ launch coverage changed")
+    con.register("desah_df", pa.Table.from_pylist(desah_rows))
+    con.execute("CREATE OR REPLACE TABLE desahucios_provincia AS SELECT * FROM desah_df")
     pad_mun = {
         (N(r["territorio"]), r["anyo"]): r["poblacion"]
         for r in load_parquet("padron_municipios_mad.parquet")
@@ -1336,6 +1460,17 @@ def main() -> None:
         "ipc_anual",
         "valor_municipal_madrid",
         "barrios_madrid",
+        "barrios_sevilla",
+        "barrios_sevilla_compra",
+        "sevilla_oferta_zona",
+        "sevilla_sim_poblacion_hogares",
+        "sevilla_sim_vivienda",
+        "sevilla_sim_turismo",
+        "barrios_bcn_lloguer_anual",
+        "barrios_bcn_lloguer_trimestral",
+        "barrios_bcn_compraventes",
+        "serpavi_distritos",
+        "desahucios_provincia",
         "muni_madrid",
         "censo2011_mad",
         "muni_bcn",

@@ -41,6 +41,12 @@ fetch:
 	uv run python scripts/fetch_padron_municipios_sev.py
 	uv run python scripts/fetch_padron_municipios_all.py
 	uv run python scripts/fetch_barrios_mad.py
+	uv run python scripts/fetch_barrios_sev.py
+	uv run python scripts/fetch_sevilla_oferta.py
+	uv run python scripts/fetch_sevilla_context.py
+	uv run python scripts/fetch_barrios_bcn.py
+	uv run python scripts/fetch_barrios_bcn_compra.py
+	uv run python scripts/fetch_desahucios.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
