@@ -63,6 +63,16 @@ vs DIBA `muni_bcn.rent_month` 2024 = 1,147 — consistent. Hospitalet
 - 2011–2024 window; the repo's rent coverage (DIBA M23) is 2005– and
   would remain the long series for Barcelona.
 
+## Update: district mart built (2026-10-08)
+
+The Distritos sheet (same 20 measures × 2011–2024, keyed by 7-digit CUDIS)
+is melted in the same fetch pass into `serpavi_distritos`: 1,099,206
+populated cells across 9,680 districts in 7,332 municipios (10,511 district
+rows published; fully-suppressed ones contribute no cells). District names
+are not published — codes only. Anchor: Madrid distrito 04 (Salamanca)
+2024 collective median 18.31 €/m². Secciones censales (36,294 rows) remain
+skipped: census-vintage geometry makes them unstable across years.
+
 ## Verdict
 
 **Highest-value data candidate on the board.** Municipal rents

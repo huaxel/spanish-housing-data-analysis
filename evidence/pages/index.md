@@ -159,6 +159,40 @@ y en Madrid ni siquiera existe recuperación (capital −7,5% real).
   title="Hipotecas sobre viviendas constituidas"
 />
 
+## Desahucios y ejecuciones hipotecarias
+
+Lanzamientos practicados por los juzgados (CGPJ, 50 provincias, 2013–):
+cada lanzamiento es un inmueble cuya entrega se acuerda, sea o no vivienda
+— indicador de tensión, no recuento de desahucios de inquilinos. El colapso
+de 2020 es la moratoria pandémica, no una mejora del mercado. Las
+ejecuciones hipotecarias presentadas arrancan en 2007.
+
+```sql desahucios_anual
+select anyo, 'Hipoteca' as causa, sum(lanz_hipoteca) as lanzamientos
+from housing.desahucios_provincia group by anyo
+union all
+select anyo, 'Alquiler (LAU)' as causa, sum(lanz_lau) as lanzamientos
+from housing.desahucios_provincia group by anyo
+union all
+select anyo, 'Otras' as causa, sum(lanz_otros) as lanzamientos
+from housing.desahucios_provincia group by anyo
+order by anyo, causa
+```
+
+<LineChart data={desahucios_anual} x=anyo y=lanzamientos series=causa
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Lanzamientos por causa (nacional)"/>
+
+```sql ejecuciones_anual
+select anyo, sum(ej_hipotecarias) as ejecuciones
+from housing.desahucios_provincia
+group by anyo order by anyo
+```
+
+<LineChart data={ejecuciones_anual} x=anyo y=ejecuciones
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
+  title="Ejecuciones hipotecarias presentadas (nacional, desde 2007)"/>
+
 ## Datos y cobertura
 
 Cada guion indica un dato no disponible; no se imputa ni se interpreta como cero.

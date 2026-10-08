@@ -114,6 +114,85 @@ homonym keys skipped). 235,376 rows, 8,136 municipios.
 Straight mirror of the bank export; suppressed cells null; literal 0.0
 passed through (Aeropuerto 2025 degenerate cell).
 
+## barrios_sevilla
+
+SIM/IPRA barrio rental references: `idg`, `id_distrito`, `distrito`,
+`id_barrio`, `barrio`, `anyo` (2016–2022), `ipra_eur_m2` (monthly €/m²
+built). 756 barrio-year rows; 37 missing cells. Annual labels use rolling
+three-year contract windows; the 2022 update uses 2019–2021 contracts.
+
+## barrios_sevilla_compra
+
+SIM cross-sectional purchase indicators: same barrio keys,
+`compra_colectiva_eur_m2`, `compra_unifamiliar_eur_m2`. 108 barrios; 31
+unifamiliar values missing. The service supplies no reference period or
+calculation method; do not treat these as an annual transaction series.
+
+## sevilla_oferta_zona
+
+Ayuntamiento yearbook 2025 table 7.3.9: `provider` (Fotocasa/Idealista),
+`zona` (publisher's own geography), `anyo` (2024), `mes` (1–12),
+`precio_oferta_eur_m2`. 336 rows; 11 Fotocasa districts and 17 Idealista
+zones retained separately. These are monthly asking prices, not transactions.
+
+## Provincial launches and foreclosures
+
+`desahucios_provincia` (`provincia` mart names, `anyo`, `trimestre`,
+`lanz_total`, `lanz_hipoteca`, `lanz_lau`, `lanz_otros`, `ej_hipotecarias`):
+3,850 rows = 50 provinces × 77 quarters. Launch causes are additive to the
+total except one upstream off-by-one cell pinned in verify. No Ceuta/Melilla
+rows; national TOTAL skipped. Launches since 2013Q1, filings since 2007Q1.
+
+## SERPAVI district rents
+
+`serpavi_distritos` (`cpro`, `provincia`, `codigo` 5-digit municipio,
+`municipio`, `distrito` 7-digit CUDIS, `anyo` 2011–2024, `medida` same 20 as
+municipal, `valor`): 1,099,206 populated cells across 9,680 districts in
+7,332 municipios. District names are unpublished (codes only); secciones
+censales skipped (census-vintage instability).
+
+## Barcelona INCASÒL rent tables
+
+`barrios_bcn_lloguer_anual` (`ambit` ciutat/districte/barri, `codi`
+BCN/D01–D10/B01–B73, `nom`, `anyo` 2000–2025, `contractes`, `lloguer_mitja`
+(€/month), `lloguer_m2` (€/m²/month), `superficie` (m²)): 2,184 rows = 84
+areas × 26 years. Barri cells before 2013 are null; city + districts are
+complete. `barrios_bcn_lloguer_trimestral` adds `trimestre` (1–4): 4,984
+rows; barris from 2014, 2026 holds published quarters only. Suppressed
+(<6 contracts) and unpublished cells are null. Filed-contract records from
+INCASÒL deposits, not asking prices.
+
+## Barcelona registered sales
+
+`barrios_bcn_compraventes` (`ambit`, `codi`, `nom`, `anyo`, `trimestre`):
+`trx_nou_lliure`, `trx_nou_protegit`, `trx_usat`, `trx_total`; `sup_*` mean
+areas; `preu_nou/usat/total` mean prices (thousands of €); `eur_m2_*` mean
+prices per built m²; 2026-only `eur_m2_{nou,usat}_{max,min}`. 2,520 rows
+(84 areas × 30 quarters: 2018–2019 + 2021–2025 full, 2026 partial). Zero
+prices/areas are stored null (suppressed below 3 contracts); transaction
+counts keep real zeros. City total includes non-geolocated records.
+
+## Sevilla SIM context tables
+
+`sevilla_sim_poblacion_hogares` is long-form barrio context keyed by
+`idg`, `id_distrito`, `distrito`, `id_barrio`, `barrio`, and `anyo`
+(2015–2021), with `poblacion` and `hogares` (756 rows; 108 barrios × 7
+years). Both measures have explicit year fields.
+
+`sevilla_sim_vivienda` is a one-row-per-barrio (108 rows) SIM snapshot:
+family dwellings by collective/unifamiliar type and shares; mean age,
+construction-quality score and built area by type; estimated rehabilitation
+need/count and share; and principal, secondary and uninhabited dwelling
+counts and shares. These component layers do not specify a reference year;
+nulls are preserved.
+
+`sevilla_sim_turismo` has one row per barrio (108 rows), active tourist-purpose
+dwellings and SIM pressure percentages at 2008, 2021-02, 2021-08 and 2022-02,
+plus registered dwelling/place totals without an explicit date. Pressure cells
+with no source value remain null. These are snapshot observations, not an
+annual series. The SIM accessibility layer is district-grain only and is not
+included in the barrio mart.
+
 ## valor_tasado_anual
 
 Full annual means (all `terr_key`: `P<cpro>` / `C<flat-ccaa>` / `NACIONAL` /

@@ -66,6 +66,36 @@ the city's tourist flats grew 2022–24 while Balears' shrank. Vacancy →
 absorption + tourist conversion, not new construction (19k starts in 13
 years), is the arithmetic of Barcelona's tightening.
 
+## Barrios: filed-contract rents (INCASÒL deposits)
+
+Added 2026-10-08. The Generalitat's housing statistics service publishes 8
+XLSX workbooks exploiting INCASÒL rental deposits: contract counts, mean
+contractual rent (€/month), mean rent per m² and mean area. The annual mart
+(`barrios_bcn_lloguer_anual`, 2,184 rows) carries the city + 10 districts
+for 2000–2025 and 73 barris for 2013–2025; the quarterly mart
+(`barrios_bcn_lloguer_trimestral`, 4,984 rows) carries districts from 2000
+and adds the 73 barris from 2014, with the 2026 sheet holding only the
+published quarters. Areas with fewer than 6 registered contracts are
+unpublished (null, never zero). These are filed contracts, not asking
+prices, and not directly comparable with Madrid's registrar-declared sale
+prices or Sevilla's IPRA windows. In 2024 the city filed 32,903 contracts
+at 16.13 €/m²; in 2025 la Barceloneta reached 22.70 €/m², the highest
+barrio cell that year.
+
+## Barris: preus de compravenda registrats (Registradors)
+
+Added 2026-10-08. Quarterly workbooks from Colegio de Registradores
+records: transactions split new-free / new-protected / used, mean area,
+mean total price and mean price per built m² (`barrios_bcn_compraventes`,
+2,520 rows). City + 10 districts + 73 barris for 2018–2019 and 2021–2026
+(the 2017 series had not started; the 2020 file URL returns not-found,
+a publication gap, not a market gap). Prices are unpublished below 3 contracts and appear as zero
+in the workbooks: stored as null, never zero. The city total includes
+records that could not be geolocated, so it does not equal the sum of its
+parts. In 2024Q4 the city registered 4,368 transactions at 4,622.43 €/m².
+Two 2025 barrio renames are canonicalized (B11 Poble Sec, B12 Marina del
+Prat Vermell). The 2026 sheets add max/min €/m² columns, kept as-is.
+
 ## Limits
 
 - Sale prices = Secretaria d'Habitatge (registrars), 2013–; rents = Incasòl
