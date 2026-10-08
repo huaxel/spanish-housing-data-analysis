@@ -86,6 +86,15 @@ def clean_district_name(name: str) -> str:
     return re.sub(r"^\d+\.\s*", "", name).strip()
 
 
+# The rent workbooks keep the pre-2025 long labels for B11/B12 while the
+# sales workbooks use the current short ones (same geography). Canonicalize
+# to the short labels; fail on anything new.
+NOM_ALIAS = {
+    "el Poble Sec - AEI Parc Montjuïc": "el Poble Sec",
+    "la Marina del Prat Vermell - AEI Zona Franca": "la Marina del Prat Vermell",
+}
+
+
 NO_DATA = {"nd", "n.d.", "-", "...", ""}
 
 
@@ -219,6 +228,7 @@ def join_measures(
     names: dict[tuple[str, str], str] = {}
     for _, (_, measure_names) in parsed.items():
         for geo, name in measure_names.items():
+            name = NOM_ALIAS.get(name, name)
             if geo in names and names[geo] != name:
                 raise SystemExit(f"geography label mismatch for {geo}: {names[geo]!r} vs {name!r}")
             names[geo] = name

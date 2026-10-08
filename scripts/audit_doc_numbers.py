@@ -680,6 +680,7 @@ ALLOW = {
         (2020.0, "compravendes publication-gap year"),
         (2021.0, "compravendes post-gap resume year"),
         (2024.0, "compravendes anchor year"),
+        (15.0, "yield thin-cell transaction threshold"),
     ],
     "docs/explorations/saiz_gis_probe.md": [
         (99.4, "probe headline validation, arithmetic from pinned anchor"),

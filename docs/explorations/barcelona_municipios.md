@@ -96,6 +96,17 @@ parts. In 2024Q4 the city registered 4,368 transactions at 4,622.43 €/m².
 Two 2025 barrio renames are canonicalized (B11 Poble Sec, B12 Marina del
 Prat Vermell). The 2026 sheets add max/min €/m² columns, kept as-is.
 
+## Yields 2024: periphery pays, prime costs (descriptive)
+
+Joining INCASÒL new-contract rents to Registradores sale prices on the 73
+barris (71 with both 2024 cells) gives gross yields centered at 4.51%
+(median): la Trinitat Nova 7.71% at the top, la Marina del Prat Vermell
+2.02% at the bottom. Rents and prices correlate at 0.754 — the gradient is
+level-driven (cheap sale prices, not high rents). Two thin cells (under 15
+transactions) are flagged, not dropped. Flow rents overstate sitting-tenant
+reality in a rising market; read as a cross-sectional sorting, not a return
+promise.
+
 ## Limits
 
 - Sale prices = Secretaria d'Habitatge (registrars), 2013–; rents = Incasòl

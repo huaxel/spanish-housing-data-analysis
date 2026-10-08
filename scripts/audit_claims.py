@@ -47,6 +47,11 @@ MODEL_FRESHNESS = [
         "explorations/municipios_nacional.py",
     ),
     (
+        "barrios_bcn_yield",
+        "artifacts/barrios_bcn_yield.json",
+        "explorations/barrios_bcn_yield.py",
+    ),
+    (
         "madrid_vacancy",
         "artifacts/madrid_vacancy_terrain.json",
         "explorations/panel_saiz_madrid_vacancy.py",
@@ -2504,6 +2509,22 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] municipios_nacional: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 16
+    by_ = _model_output("artifacts/barrios_bcn_yield.json")
+    for desc, path, expected, tol in (
+        ("yield n 2024", "n", 71, 0),
+        ("yield median", "median_yield", 4.51, 0.02),
+        ("yield top pct", "top.yield_pct", 7.71, 0.02),
+        ("yield bottom pct", "bottom.yield_pct", 2.02, 0.02),
+        ("rent-vs-sale pearson", "rent_vs_sale_pearson", 0.754, 0.005),
+    ):
+        got = _json_path(by_, path)
+        if isinstance(expected, str):
+            ok = got == expected
+        else:
+            ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] barrios_bcn_yield: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 5
     pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),

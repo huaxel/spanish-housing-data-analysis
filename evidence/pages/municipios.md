@@ -266,6 +266,25 @@ Precios de escrituras inscritas (Registradores), no oferta. Sin 2020
 (hueco de publicación) y serie iniciada en 2018; el total ciudad incluye
 registros sin geolocalizar.
 
+```sql rendimiento_bcn
+select s.nom as barrio,
+       100.0 * max(r.lloguer_m2) * 12.0 / avg(s.eur_m2_total) as rendimiento
+from housing.barrios_bcn_compraventes s
+join housing.barrios_bcn_lloguer_anual r
+  on r.codi = s.codi and r.anyo = s.anyo
+where s.ambit = 'barri' and r.ambit = 'barri'
+  and s.anyo = 2024 and r.anyo = 2024
+  and s.nom in ${inputs.barris_bcn.value}
+group by s.nom
+order by rendimiento desc
+```
+
+<BarChart data={rendimiento_bcn} x=barrio y=rendimiento
+  yFmt="num1" title="Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado"/>
+
+Rentas de contratos nuevos sobre precios de escritura: la periferia rinde
+más porque el suelo es barato, no porque alquilar sea caro.
+
 ## Valencia: alquileres y vacancia, sin precios de venta
 
 Padrón municipal (266 municipios, 1996–2025) con la renta mediana SERPAVI
