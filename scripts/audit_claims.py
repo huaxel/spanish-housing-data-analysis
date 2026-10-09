@@ -43,6 +43,11 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_era_rehab.json",
         "explorations/cadastre_era_rehab.py",
     ),
+    (
+        "cadastre_era_quality",
+        "artifacts/cadastre_era_quality.json",
+        "explorations/cadastre_era_quality.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2510,6 +2515,79 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_rehab: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 16
+
+    eq = _model_output("artifacts/cadastre_era_quality.json")
+    for desc, path, expected, tol in (
+        ("era-quality joined colectiva", "coverage.joined_calidad_colectiva", 107, 0),
+        ("era-quality joined unifamiliar", "coverage.joined_calidad_unifamiliar", 77, 0),
+        (
+            "era-quality spearman median year vs colectiva",
+            "correlations.median_year_vs_calidad_colectiva.spearman",
+            -0.277203,
+            0.0005,
+        ),
+        (
+            "era-quality pearson median year vs colectiva",
+            "correlations.median_year_vs_calidad_colectiva.pearson",
+            -0.223601,
+            0.0005,
+        ),
+        (
+            "era-quality spearman median year vs unifamiliar",
+            "correlations.median_year_vs_calidad_unifamiliar.spearman",
+            -0.11873,
+            0.0005,
+        ),
+        (
+            "era-quality pearson median year vs unifamiliar",
+            "correlations.median_year_vs_calidad_unifamiliar.pearson",
+            -0.04183,
+            0.0005,
+        ),
+        (
+            "era-quality spearman colectiva vs rehab",
+            "correlations.calidad_colectiva_vs_rehab.spearman",
+            0.873959,
+            0.0005,
+        ),
+        (
+            "era-quality pearson colectiva vs rehab",
+            "correlations.calidad_colectiva_vs_rehab.pearson",
+            0.865413,
+            0.0005,
+        ),
+        (
+            "era-quality colectiva vs rehab n",
+            "correlations.calidad_colectiva_vs_rehab.n",
+            101,
+            0,
+        ),
+        (
+            "era-quality oldest tercile mean score",
+            "median_year_terciles_calidad.0.mean_calidad_col",
+            5.37,
+            0.005,
+        ),
+        (
+            "era-quality middle tercile mean score",
+            "median_year_terciles_calidad.1.mean_calidad_col",
+            5.29,
+            0.005,
+        ),
+        (
+            "era-quality newest tercile mean score",
+            "median_year_terciles_calidad.2.mean_calidad_col",
+            4.86,
+            0.005,
+        ),
+        ("era-quality barzola score", "highest_score_barrios.0.calidad_colectiva", 7.0, 0),
+        ("era-quality el prado score", "lowest_score_barrios.0.calidad_colectiva", 3.24, 0),
+    ):
+        got = _json_path(eq, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_quality: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 14
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

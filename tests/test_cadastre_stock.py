@@ -659,3 +659,37 @@ def test_cadastre_era_rehab_artifact_structure():
     assert len(top) == 10
     rehab_vals = [b["rehab_pct"] for b in top]
     assert rehab_vals == sorted(rehab_vals, reverse=True)
+
+
+def test_cadastre_era_quality_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_era_quality.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    cov = data["coverage"]
+    assert cov["era_barrios"] == 107
+    assert cov["joined_calidad_colectiva"] == 107
+    assert cov["joined_calidad_unifamiliar"] == 77
+    assert len(cov["unifamiliar_null_barrios"]) == 30
+    corr = data["correlations"]
+    assert corr["median_year_vs_calidad_colectiva"]["spearman"] == -0.277203
+    assert corr["median_year_vs_calidad_unifamiliar"]["spearman"] == -0.11873
+    # collinearity block is the strongest correlation and near +0.87
+    col = corr["calidad_colectiva_vs_rehab"]
+    assert col["spearman"] == 0.873959
+    assert col["pearson"] == 0.865413
+    assert col["n"] == 101
+    terciles = data["median_year_terciles_calidad"]
+    assert [t["mean_calidad_col"] for t in terciles] == [5.37, 5.29, 4.86]
+    # monotone: older terciles never score lower than newer ones
+    assert terciles[0]["mean_calidad_col"] >= terciles[1]["mean_calidad_col"]
+    assert terciles[1]["mean_calidad_col"] > terciles[2]["mean_calidad_col"]
+    high = data["highest_score_barrios"]
+    assert [b["calidad_colectiva"] for b in high] == sorted(
+        (b["calidad_colectiva"] for b in high), reverse=True
+    )
+    # every top-score barrio has 90+ rehab or is a known-null outlier
+    for b in high:
+        assert b["rehab_pct"] is None or b["rehab_pct"] >= 90
