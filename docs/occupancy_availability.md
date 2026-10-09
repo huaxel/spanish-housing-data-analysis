@@ -45,6 +45,9 @@ for large rental markets; the 2024 edition is the latest verified. The
 series incorporates the dwelling module published inside the IRPF
 statistics since 2019, crossed with Catastro for location and surfaces.
 
+Status 2026-10-09: integrated in `scripts/fetch_aeat_viviendas.py` (both
+published vintages pinned; Total rows excluded per the pinned publisher gap).
+
 Why this is the strongest candidate: annual cadence, official methodology
 ([FAQ](https://sede.agenciatributaria.gob.es/Sede/estadisticas/estadisticas-impuesto/estadistica-viviendas-declaradas-irpf/metodologia/preguntas-frecuentes.html)),
 matched reference year across stock/use/rent variables, and finer grain

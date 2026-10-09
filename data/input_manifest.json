@@ -5,6 +5,8 @@
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
     "data/processed/stock_capitals.duckdb": "359da3e660c12b804f4bc65e9d292d5c2e8f72ff6e92cfd10012942a160d3840",
     "data/processed/stock_province.duckdb": "242b8afede651dd5ea42e95841bd97cdbe8a6b476380ce5ad87bcec0e341d6f4",
+    "data/raw/aeat_viviendas_uso_2023.html": "b245c718e67114ab676d5d66221a594848d0e4b4d376a94210a23f06d9081539",
+    "data/raw/aeat_viviendas_uso_2024.html": "af70a287833542a6c816cab07aa7ad07dabb44d6fe590d854ffe2cff91fd0a94",
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
     "data/raw/barrios_sevilla_compra.json": "1ce6e2978b40a5061bbbbd6eff0f428aa9aa9fc193f4742e463d2d89c3ea6d88",
     "data/raw/barrios_sevilla_ipra.json": "5f858d4bc5677ece95db93ee33f1a1c48f507d6beba76336accce2201365b387",
@@ -228,6 +230,7 @@
     "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+    "data/raw/parquet/aeat_viviendas_uso.parquet": "9a1d8317a908144e22b41845713d326d68079254265cdcc35cf333f7b47eb6d4",
     "data/raw/parquet/barrios_bcn_compraventes.parquet": "25a96a88ba7ea3f86f83b0b6cec850a7c55972c9e7cb80c55a23cf73fe3c9bef",
     "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": "dfefa78bd98a3422d405c21f5387529f0968739315f8b1479f5a8a5f89598f8b",
     "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": "d589dfbe5711244932770d1d3e8fe1dc9dbe5ada3f80f298a138777017bda393",
@@ -445,6 +448,18 @@
       "accessed": "2026-10-09",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
+    },
+    "data/raw/aeat_viviendas_uso_2023.html": {
+      "accessed": "2026-10-09",
+      "operation": "IRPFVIV",
+      "publisher": "AEAT",
+      "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2023/jrubik19cd43289fdbce9fbcbd2391abc7741113e371d8.html"
+    },
+    "data/raw/aeat_viviendas_uso_2024.html": {
+      "accessed": "2026-10-09",
+      "operation": "IRPFVIV",
+      "publisher": "AEAT",
+      "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik61a05e3830ecee0fbb552daa3b8d60a57826ffd9.html"
     },
     "data/raw/barrios_madrid.csv": {
       "accessed": "2026-10-08",
@@ -1715,6 +1730,15 @@
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
+    },
+    "data/raw/parquet/aeat_viviendas_uso.parquet": {
+      "accessed": "2026-10-09",
+      "operation": "IRPFVIV",
+      "publisher": "AEAT",
+      "urls": {
+        "2023": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2023/jrubik19cd43289fdbce9fbcbd2391abc7741113e371d8.html",
+        "2024": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik61a05e3830ecee0fbb552daa3b8d60a57826ffd9.html"
+      }
     },
     "data/raw/parquet/barrios_bcn_compraventes.parquet": {
       "accessed": "2026-10-08",
