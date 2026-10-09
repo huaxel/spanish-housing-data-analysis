@@ -171,7 +171,7 @@ def test_empty_acceptance_requires_resolution_warning():
     source = inv_payload()
     source["models"]["sale_tour_only"]["p"] = [0.02, 0.02, 0.02]
     source["models"]["sale_tour_only"]["keep"] = [False, False, False]
-    with pytest.raises(ValueError, match="resolution warning"):
+    with pytest.raises(ValueError, match="warnings inconsistent"):
         inference.parse_inversion(source)
     source["models"]["sale_tour_only"]["warnings"] = ["no_candidate_accepted_at_this_resolution"]
     candidates, summaries = inference.parse_inversion(source)
@@ -231,3 +231,47 @@ def test_missing_sidecar_fails_with_rebuild_guidance(tmp_path, monkeypatch):
             inv_meta_rows,
             {"inversion_script_sha": "x", "inversion_artifact_sha": "y", "inversion_meta": "{}"},
         )
+
+
+@pytest.mark.parametrize(
+    "mutate,message",
+    [
+        (
+            lambda d: d["models"]["sale_tour_only"].update(keep=[True, True, False]),
+            "keep mask inconsistent",
+        ),
+        (
+            lambda d: d["models"]["sale_tour_only"].update(warnings=["disjoint_accepted_set"]),
+            "warnings inconsistent",
+        ),
+        (
+            lambda d: d["models"]["sale_tour_only"].update(
+                warnings=["accepted_set_may_extend_below_grid"]
+            ),
+            "warnings inconsistent",
+        ),
+        (
+            lambda d: d["models"]["sale_tour_only"].update(keep=[True, False, False]),
+            "keep mask inconsistent",
+        ),
+    ],
+)
+def test_inversion_mask_and_warning_consistency_enforced(mutate, message):
+    source = inv_payload()
+    mutate(source)
+    with pytest.raises(ValueError, match=message):
+        inference.parse_inversion(source)
+
+
+def test_inversion_mask_alpha_and_contiguous_warnings_pass_when_consistent():
+    source = inv_payload()
+    # Keep mask matches p >= alpha; edge-accepted warnings follow the mask.
+    source["models"]["sale_tour_only"].update(
+        p=[0.9, 0.02, 0.02],
+        keep=[True, False, False],
+        warnings=["accepted_set_may_extend_below_grid"],
+    )
+    candidates, summaries = inference.parse_inversion(source)
+    sale = next(s for s in summaries if s["model_key"] == "sale_tour_only")
+    assert sale["accepted_min_c"] == -0.5 and sale["accepted_count"] == 1
+    assert sale["warnings"] == "accepted_set_may_extend_below_grid"

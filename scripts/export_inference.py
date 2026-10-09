@@ -170,15 +170,31 @@ def parse_inversion(payload):
             isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1 for v in p
         ):
             raise ValueError(f"{key}: invalid candidate p")
+        if keep != [pv >= payload["alpha"] for pv in p]:
+            raise ValueError(f"{key}: keep mask inconsistent with p-values")
+        warnings = model.get("warnings")
+        if not isinstance(warnings, list) or not all(isinstance(w, str) for w in warnings):
+            raise ValueError(f"{key}: warnings malformed")
+        expected_warnings = []
+        if not any(keep):
+            expected_warnings.append("no_candidate_accepted_at_this_resolution")
+        if keep and keep[0]:
+            expected_warnings.append("accepted_set_may_extend_below_grid")
+        if keep and keep[-1]:
+            expected_warnings.append("accepted_set_may_extend_above_grid")
+        if any(keep):
+            first = keep.index(True)
+            last = len(keep) - 1 - keep[::-1].index(True)
+            if any(not keep[s] for s in range(first, last + 1)):
+                expected_warnings.append("disjoint_accepted_set")
+        if warnings != expected_warnings:
+            raise ValueError(f"{key}: warnings inconsistent with the acceptance mask")
         n = positive_integer(model["n"], "n")
         clusters = positive_integer(model["clusters"], "clusters")
         b = number(model["b"], "b")
         se = number(model["se"], "se")
         if se <= 0:
             raise ValueError(f"{key}: nonpositive inversion se")
-        warnings = model.get("warnings")
-        if not isinstance(warnings, list) or not all(isinstance(w, str) for w in warnings):
-            raise ValueError(f"{key}: warnings malformed")
         accepted = [c for c, kp in zip(grid, keep, strict=True) if kp]
         if not accepted:
             if model["warnings"] != ["no_candidate_accepted_at_this_resolution"]:

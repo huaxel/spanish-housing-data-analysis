@@ -112,6 +112,17 @@ def source_is_fresh() -> dict:
     return payload
 
 
+def meta() -> dict:
+    result = ols.model_meta(
+        str(Path(__file__).resolve()),
+        [str(DATABASE.relative_to(ROOT)), str(SOURCE.relative_to(ROOT))],
+    )
+    # The grid algorithm lives in wild_grid.py, which model_meta does not
+    # cover; pin it so a helper change fails the artifact freshness check.
+    result["wild_grid_sha"] = ols.sha_file(str(ROOT / "src/spanish_housing/wild_grid.py"))
+    return result
+
+
 def compute(payload: dict) -> dict:
     results = {"models": {}}
     for key, (outcome, specification, y, spec) in MODELS.items():
@@ -144,10 +155,7 @@ def compute(payload: dict) -> dict:
     results["reps"] = REPS
     results["seed"] = SEED
     results["alpha"] = ALPHA
-    results["_meta"] = ols.model_meta(
-        str(Path(__file__).resolve()),
-        [str(DATABASE.relative_to(ROOT)), str(SOURCE.relative_to(ROOT))],
-    )
+    results["_meta"] = meta()
     return results
 
 
@@ -165,10 +173,7 @@ def cheap_check(stored: dict) -> dict:
         raise ValueError("stored grid/reps changed; recompute")
     if stored.get("seed") != SEED or stored.get("alpha") != ALPHA:
         raise ValueError("stored seed/alpha changed; recompute")
-    if stored.get("_meta") != ols.model_meta(
-        str(Path(__file__).resolve()),
-        [str(DATABASE.relative_to(ROOT)), str(SOURCE.relative_to(ROOT))],
-    ):
+    if stored.get("_meta") != meta():
         raise ValueError("tourist_inversion artifact stale vs code/data; run make inference")
     for key, (_outcome, _specification, y, spec) in MODELS.items():
         model = stored["models"].get(key)
@@ -189,6 +194,23 @@ def cheap_check(stored: dict) -> dict:
             raise ValueError(f"{key}: grid length differs")
         if not all(isinstance(v, bool) for v in model["keep"]):
             raise ValueError(f"{key}: keep mask malformed")
+        if model["keep"] != [pv >= ALPHA for pv in model["p"]]:
+            raise ValueError(f"{key}: keep mask inconsistent with p-values")
+        expected_warnings = []
+        keep = model["keep"]
+        if not any(keep):
+            expected_warnings.append("no_candidate_accepted_at_this_resolution")
+        if keep and keep[0]:
+            expected_warnings.append("accepted_set_may_extend_below_grid")
+        if keep and keep[-1]:
+            expected_warnings.append("accepted_set_may_extend_above_grid")
+        if any(keep):
+            first = keep.index(True)
+            last = len(keep) - 1 - keep[::-1].index(True)
+            if any(not keep[s] for s in range(first, last + 1)):
+                expected_warnings.append("disjoint_accepted_set")
+        if model.get("warnings") != expected_warnings:
+            raise ValueError(f"{key}: warnings inconsistent with the acceptance mask")
         if not all(0 < p <= 1 for p in model["p"]):
             raise ValueError(f"{key}: invalid p-value")
     print(f"tourist_inversion: {len(stored['models'])} models, grid anchors and meta verified")

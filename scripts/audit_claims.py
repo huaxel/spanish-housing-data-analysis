@@ -127,6 +127,11 @@ def check_freshness() -> int:
         if meta.get("ols_sha") != ols_sha:
             print(f"[FAIL] {label}: src/spanish_housing/ols.py changed since output — re-run")
             ok = False
+        if label == "tourist_inversion" and meta.get("wild_grid_sha") != ols.sha_file(
+            str(ROOT / "src/spanish_housing/wild_grid.py")
+        ):
+            print(f"[FAIL] {label}: src/spanish_housing/wild_grid.py changed since output — re-run")
+            ok = False
         for rel_data, want in (meta.get("data_sha") or {}).items():
             if not (ROOT / rel_data).exists():
                 print(
