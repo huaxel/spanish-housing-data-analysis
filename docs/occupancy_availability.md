@@ -63,6 +63,11 @@ here, rental first there — do not mix the two splits).
 
 ## 2. Census at section grain: one aligned source
 
+Status 2026-10-09: integrated in `scripts/fetch_censo_secciones.py` and
+wired into the marts as `censo2021_secciones` (34,970 usable sections,
+1,363 suppressed carry persons only) with occupancy ratios; 2021 vintage
+quarantined, cartography join keys verified not vendored.
+
 The [Censo 2021 query system](https://www.ine.es/dynt3/inebase/index.htm?capsel=9817&padre=8952)
 publishes dwellings, persons and households down to inframunicipal scope
 (distritos y secciones censales), with [section indicator files](https://www.ine.es/uc/Kpj8DYAg)

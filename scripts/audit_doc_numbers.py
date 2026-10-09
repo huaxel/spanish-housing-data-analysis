@@ -160,6 +160,7 @@ ALLOW = {
         (1181.0, "Valencian register dwellings 2026, external source fact"),
         (635919.0, "AEAT IRPF unoccupied Valencian dwellings 2024, external source fact"),
         (150.0, "San Sebastian IBI vacancy surcharge rate, external source fact"),
+        (1363.0, "suppressed census sections (persons only), verified file count"),
     ],
     "docs/explorations/panel_quarterly.md": [
         (999.0, "bootstrap reps parameter"),

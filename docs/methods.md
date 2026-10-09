@@ -117,7 +117,14 @@
   (Málaga 2001) and 0.51% (Cáceres 2011); build fails past 2.0%. CCAA
   aggregates match their province sums to one dwelling (three 2011 unit
   diffs are publisher rounding) and the nacional total reconciles exactly,
-  both years.
+  both years. Section indicators put 34,970 usable sections (1,363
+  suppressed carry persons only) with persons, dwellings and households
+  at 2021-01-01 plus occupancy ratios; households equal principales in
+  every usable section (file identity, so hogares-per-dwelling is the
+  principal share), and the persons total includes suppressed sections
+  while dwelling/household totals exclude them — compare universes, not
+  just numbers. The 2021 vintage is quarantined, never joined to the
+  current series.
   The 2021 *tipo* split is NOT checked: census occupancy-based
   principal/no-principal diverges definitionally from MIVAU modelled
   stock (up to ~20% on no-principal) — totals anchor, splits don't.

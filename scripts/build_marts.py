@@ -127,6 +127,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/censo2021_intensidad.parquet",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet",
     "data/raw/parquet/aeat_viviendas_uso.parquet",
+    "data/raw/parquet/censo2021_secciones.parquet",
     "data/raw/parquet/serpavi_municipal.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
@@ -385,6 +386,22 @@ def census_0111_anchor_rows(census_rows, cpro_by_prov, cpro_ccaa):
 # preserves the CCAA sums and nacional reconciliations and slips under this
 # threshold — narrow, since most same-CCAA pairs differ greatly in size.
 CENSO_0111_MAX_GAP_PCT = 2.0
+
+
+def section_ratios(row):
+    """Occupancy ratios for one usable census-section row.
+
+    Precondition: validated inputs (counts present, t18_1/t19_1 positive) —
+    enforced by the fetch parser and re-asserted by the build block.
+    personas/hogares per dwelling are occupancy composition at 2021-01-01,
+    never availability; alquiler_share is tenure mix of principal dwellings
+    (tenure splits can fall short of principales: unimputed, not missing).
+    """
+    return {
+        "personas_por_vivienda": row["t1_1"] / row["t18_1"],
+        "hogares_por_vivienda": row["t21_1"] / row["t18_1"],
+        "alquiler_share": row["t20_2"] / row["t19_1"],
+    }
 
 
 def main() -> None:
@@ -1599,6 +1616,28 @@ def main() -> None:
     print(f"aeat uso: {len(aeat_rows)} rows (2023-2024, no Total rows, no foral rows)")
     con.register("aeat_df", pa.Table.from_pylist(aeat_rows))
     con.execute("CREATE OR REPLACE TABLE aeat_viviendas_uso AS SELECT * FROM aeat_df")
+    # Censo 2021 section indicators (01/01/2021 vintage, quarantined):
+    # dwellings/persons/households by census section plus occupancy ratios.
+    # Suppressed sections carry persons only; no estimator reads this table.
+    sec_rows = load_parquet("censo2021_secciones.parquet")
+    if len(sec_rows) != 36333:
+        raise SystemExit(f"censo2021 secciones: {len(sec_rows)} rows, want 36333")
+    usable_sec = [r for r in sec_rows if not r["suprimido"]]
+    if len(usable_sec) != 34970:
+        raise SystemExit(f"censo2021 secciones: {len(usable_sec)} usable, want 34970")
+    for r in sec_rows:
+        if r["suprimido"]:
+            r["personas_por_vivienda"] = None
+            r["hogares_por_vivienda"] = None
+            r["alquiler_share"] = None
+            continue
+        if r["t18_1"] <= 0 or r["t19_1"] <= 0:
+            raise SystemExit(f"censo2021 secciones: non-positive denominator at {r['seccion']}")
+        r.update(section_ratios(r))
+    n_sup = len(sec_rows) - len(usable_sec)
+    print(f"censo2021 secciones: {len(usable_sec)} usable + {n_sup} suppressed")
+    con.register("sec_df", pa.Table.from_pylist(sec_rows))
+    con.execute("CREATE OR REPLACE TABLE censo2021_secciones AS SELECT * FROM sec_df")
     # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
     # electricity consumption. Municipal grain (named + Resto aggregates).
     con.register("inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet")))
@@ -1679,6 +1718,7 @@ def main() -> None:
         "censo2021_viviendas",
         "censo2001_2011_viviendas",
         "aeat_viviendas_uso",
+        "censo2021_secciones",
         "migra_anual",
         "padron_extranjeros",
         "padron_extranjeros_origen",
@@ -1702,6 +1742,8 @@ def main() -> None:
         " (<2.0%; CCAA sums match provinces to 1 dwelling; nacional reconciles exactly)",
         "aeat_uso": "dwellings by use 2023-2024, 40 provinces + 6 singles + 9 CCAA rows/year;"
         " Total rows excluded per pinned publisher gaps; foral territories absent",
+        "censo2021_secciones": "dwellings/persons/households by census section, 2021-01-01 only;"
+        " 34970 usable + 1363 suppressed (persons only); do not join to current series",
         "padron_extranjeros_window": "1998-2022 annual foreign stocks by provincia"
         " (TOTAL EXTRANJEROS x Ambos sexos; Bartik shares base)",
         "migracion_window": "2008-2021 annual foreign/Spanish inflows by provincia"
