@@ -166,10 +166,78 @@ The 2026 ordinance compilation at [guiafiscal.es](https://guiafiscal.es/download
 dwelling with nobody registered; Soria, Pontevedra and others use
 registration-plus-consumption tests; most capitals restrict the surcharge
 to large holders (four or more, sometimes ten or more dwellings) with two
-years of unjustified vacancy. These ordinances create vacancy-detection
-machinery (Pontevedra even compiles a vacancy census for application) but
-publish no statistical output. No integration: tax instruments with
-jurisdiction-specific definitions are not comparable dwelling counts.
+years of unjustified vacancy. The [Directorate-General for Cadastre](https://www.catastro.hacienda.gob.es/es-ES/estadisticas_9.html)
+also publishes municipal ordinance/rate tables. These record the instrument
+adopted, not how many dwellings were actually declared vacant or charged.
+Article 34 of Law 12/2023 separately requires annual aggregate publication of
+vacant-home and applied-surcharge counts, but does not prescribe a single
+central municipal dataset. Bounded portal check (2026-10-09): Sevilla's 2026
+ordinance regulates the surcharge, but no annual count of assessed homes was
+located; Madrid's reviewed 2026 ordinance does not appear to adopt the
+vacancy surcharge, and no Article 34 vacancy return was located there.
+Barcelona's reviewed municipal material describes an ordinance surcharge,
+but no annual applied-home count surfaced. Zaragoza's 2026 ordinance retains
+a conditional surcharge but leaves qualifying conditions to regulation; no
+annual count surfaced. Málaga's reviewed 2026 IBI sources show no adopted
+vacancy surcharge. Alicante's reviewed ordinance also has no vacancy
+surcharge; no Article 34 return surfaced. Press reporting says Palma removed
+its surcharge for 2025; no applied-home count surfaced. Bilbao's July 2026
+municipal inventory estimates six thousand nine
+hundred thirty-five dwellings with indicators of vacancy (four point two
+percent of the stock), using padrón, public registers and abnormally low
+water use; one thousand five hundred sixty-five are estimated to have been unoccupied
+for at least two years. These are indicators/estimates, not formal legal
+vacancy declarations or an IBI surcharge count; no annual applied-home total
+surfaced. The city announced a new ordinance process to mobilize the stock,
+so this may merit a later follow-up, but it is not yet a reusable legal-status
+series. One positive city-level signal surfaced
+in València: a
+municipal announcement
+said the surcharge would apply to 41 homes held by six large holders, based
+on the regional register dated 31 December 2022. A later press report citing
+a municipal response says 26 were actually charged in 2023, while also
+quoting an earlier figure of 29; the difference between announced, eligible
+and billed counts is unresolved. These are a narrow large-holder
+administrative subset, not a full vacant-stock count or an annual Article 34
+series. The spot check is not a Spain-wide absence claim. No integration:
+ordinance rates and locally declared counts are not comparable
+availability measures.
+
+If pursuing the gap, the next reproducible step is a public-information
+request to a municipality that operates the surcharge (València is the clearest
+lead). Request annual aggregate counts of residential properties formally
+identified as vacant, cases assessed the surcharge, and cases actually
+liquidated/collected, by fiscal year; ask for the applicable definition,
+reference date and coverage, and a zero/not-collected distinction. Request
+no owner names, addresses or property-level records. Draft for València
+(not submitted):
+
+> Al amparo del derecho de acceso a la información pública, solicito para
+> cada ejercicio disponible desde 2023 los datos agregados municipales sobre:
+> (a) viviendas habituales y viviendas identificadas formalmente como vacías
+> o deshabitadas; (b) inmuebles a los que se inició o resolvió aplicar el
+> recargo del IBI por desocupación; y (c) inmuebles efectivamente liquidados
+> y recaudación, si se dispone de esos datos. Para cada cifra, indiquen el
+> ejercicio de referencia, fecha de corte, definición y cobertura; distingan
+> cero de dato no disponible/no publicado. Solicito el fichero o tabla en
+> formato reutilizable y excluyo expresamente nombres, direcciones y cualquier
+> dato identificativo o registro de inmueble individual.
+
+No request has been submitted. València's official [public-information access procedure](https://sede.valencia.es/sede/registro/procedimiento/AD.IS.50?lang=1)
+accepts requests online, including a route without a digital certificate;
+filing requires the requester to provide contact and notification details.
+Sources: [Law 12/2023, Article 34](https://www.boe.es/buscar/act.php?id=BOE-A-2023-12203&p=20231228&tn=0),
+[Sevilla 2026 fiscal ordinance](https://www.sevilla.org/servicios/agencia-tributaria-de-sevilla/ordenanzas-fiscales/ordenanzas_2026/ordenanzas-2026-libro.pdf),
+[Madrid 2026 IBI ordinance comments](https://transparencia.madrid.es/UnidadWeb/UGNormativas/Normativa/HUELLANORMATIVA/Fiscales/2026/IBI/Ficheros/MemoriaAlegaciones20251126.pdf),
+[Barcelona housing-policy note](https://bcnroc.ajuntament.barcelona.cat/jspui/bitstream/11703/141817/1/Quaderns%20habitatge_n%C3%BAm%201_2025.pdf),
+[Zaragoza IBI ordinance](https://www.zaragoza.es/sede/servicio/normativa/3444),
+[Málaga IBI information](https://gestrisam.malaga.eu/tributos/tributos-destacados/i.b.i./),
+[Alicante IBI ordinance](https://www.alicante.es/es/normativa/impuesto-bienes-inmuebles),
+[Palma IBI ordinance](https://seuelectronica.palma.es/portal/PALMA/sede/RecursosWeb/DOCUMENTOS/1/1_153224_1.pdf),
+[reported Palma removal](https://www.ultimahora.es/noticias/palma/2024/09/16/2242399/psoe-denuncia-cort-elimina-recargo-del-50-por-ciento-del-ibi-viviendas-grandes-tenedores-desocupadas.html),
+[Bilbao vacancy-inventory update](https://www.bilbao.eus/cs/Satellite?autoplay=si&c=BIO_Noticia_FA&cid=1279249697409&language=es&pageid=3000075248&pagename=Bilbaonet%2FBIO_Noticia_FA%2FBIO_Noticia),
+[València surcharge announcement](https://www.valencia.es/es/-/0222-ibi-grandes-propietarios-1),
+[reported 2023 billed count](https://elpais.com/espana/comunidad-valenciana/2024-02-05/solo-26-inmuebles-de-grandes-tenedores-pagan-en-valencia-el-recargo-del-ibi-por-permanecer-vacios.html).
 
 ## 7. Portal listings: commercial-only
 
@@ -195,8 +263,17 @@ dependency and no grey-zone extraction in this pipeline.
   registers exclude small holders by design and the census snapshot does
   not repeat. The one regional exception is the Basque EUV survey
   (Euskadi-only, biennial) — see the second hunt round below.
-- Water-consumption vacancy beyond the 2020 census snapshot was not
-  surveyed (utility publications unchecked).
+- Water-consumption vacancy beyond the 2020 census snapshot: utility
+  publications checked 2026-10-09; no reusable national dwelling-level
+  series found. INE's water-supply survey publishes household-use results
+  by autonomous community, not municipality, so it cannot fill the
+  municipality panel. Sevilla's EMVISESA 2022 update describes use of
+  EMASESA domestic-consumption records, but the dwelling-level file was
+  not located as a public download. Its existence is a lead for a future
+  public-information request, not a reproducible data source today.
+  Aggregate billed-water totals cannot identify vacant dwellings.
+  Sources: [INE 2024 water survey](https://www.ine.es/dyngs/Prensa/en/ESSA2024.htm),
+  [EMVISESA 2022 update](https://www.emvisesa.org/wp-content/uploads/2023/06/ESTUDIOESPECIFICOACTUALIZACIONVIVIENDAVACIA2022.pdf).
 
 ## Second hunt round (2026-10-09): small-holder vacancy + asking-stock
 

@@ -66,17 +66,36 @@ The windows test endpoint sensitivity, not equal-duration growth or causal
 identification. Neither removes model revisions or source-definition seams.
 No price regression has been re-estimated for this chapter.
 
-## Next data layer (not yet implemented)
+## Remaining data gaps
 
-Prioritize published housing-cost burden distributions by tenure, age and
-income, with an explicit denominator of households. Check whether income is
-net or gross, costs include utilities, and rent refers to sitting tenants,
-new contracts or offers. Do not combine incompatible populations.
+The national published burden panels and the separately documented 2025 ECV
+age × poverty × tenure analysis are now implemented; see
+[the ECV benchmark and scope note](ecv_joint_burden.md) and
+[the joint-cell scope](ecv_joint_scope.md). They do not establish municipal
+or provincial distributional burden: ECV publishes municipality-size groups,
+not individual municipality estimates, and its public microdata do not
+identify municipality. INE's Household Income Distribution Atlas supplies
+local income, while Urban Indicators supplies rent expenditure for selected
+cities, but combining area averages would not recover the ECV rate (person
+share above 40% of household disposable income after total housing costs).
+That would be a distinct rent-to-income proxy, not observed burden. No local
+burden integration is justified without an independently validated compatible
+source and household denominator; do not infer local rates from national or
+regional marginals. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
+[ADRH](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177088&idp=1254735976608&menu=resultados),
+[Urban Indicators](https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&cid=1254736176957&idp=1254735976608&menu=ultiDatos).
 
 For first-time buyers, the [purchase scenario calculator](purchase_scenarios.md)
 now shows cash deposit, transaction-cost assumptions and debt service under
-editable inputs. It is hypothetical, not observed borrower outcomes.
-Actual first-time-buyer income, savings and lending conditions remain missing.
+editable inputs. It is hypothetical, not observed borrower outcomes. The
+Banco de España's [2026 Financial Stability Report](https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/FSR_2026_1_Box4_1.pdf)
+now provides national evidence on mortgage-financed first-time buyers and
+financial-capacity constraints, while its Annual Report 2025 describes recent
+buyers by age and household income. These are published analyses, not a
+reusable local borrower microdata series; INE mortgage counts also do not
+identify first-time buyers. Local first-time-buyer income, savings and lending
+conditions therefore remain unmeasured in this project. Do not treat the
+calculator inputs as observed outcomes.
 
 For vacancy, seek habitability, legal status, location relative to employment,
 and evidence of entry into rental/owner-occupation. Retain census-definition
@@ -87,6 +106,17 @@ collection for new contracts has a legal break from 2026-01-24. Legacy
 receipts/refunds, cash balances and tenancy turnover cannot identify currently
 available homes or a fall in rental supply. A privacy-preserving aggregate
 request is drafted, not submitted.
+
+A focused source check found no national table that cross-classifies the
+census vacant-dwelling stock by habitability. INE's 2021 ECEPOV publishes
+building condition and accessibility for main dwellings, with municipality
+detail limited to provincial capitals and selected larger municipalities; it
+cannot describe the vacant units themselves. A broader INE building-condition
+table has wider municipal coverage but is from the 2011 census. These are
+useful context, not a current vacant-home habitability measure, so neither is
+integrated. Sources: [2021 condition table](https://www.ine.es/jaxi/Tabla.htm?tpx=56906),
+[2021 accessibility table](https://www.ine.es/jaxi/Tabla.htm?L=0&tpx=56908),
+[2011 municipal building-condition table](https://datos.gob.es/es/catalogo/ea0042823-edificios-destinados-principal-o-exclusivamente-a-viviendas-y-n-de-inmuebles-por-municipios-con-mas-de-2-000-habitantes-estado-del-edificio-y-ano-de-construccion-agregado-identificador-api-t20-e244-edificios-p04-l0-2mun45-px1).
 
 For estimator robustness, separately pre-specify geography, leave-one-out
 influence, weighting, alternative windows, price measurement, and intervals
