@@ -536,3 +536,28 @@ def test_cadastre_eras_artifact_structure():
     assert glob["dated_properties"] == 323736
     assert glob["missing_property_pct"] == 0.0
     assert glob["era_pct"]["1971-1990"] == 37.7
+
+
+def test_censo_vintage_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "censo_vintage.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    assert "nacional_total" in data and "nacional_bandas" in data
+    assert "boom_vs_postboom" in data and "boom_by_province" in data
+    assert "total_by_province" in data
+    tot = data["nacional_total"]
+    assert tot["viviendas_total"] == 26623708
+    assert tot["viviendas_principal"] == 18536616
+    assert tot["viviendas_no_principal"] == 8087092
+    assert tot["pct_no_principal"] == 30.4
+    bvp = data["boom_vs_postboom"]
+    assert bvp["boom_2001_2010"] == 5240772
+    assert bvp["post_boom_2011_2020"] == 734659
+    assert bvp["ratio_boom_to_post"] == 7.13
+    assert len(data["boom_by_province"]) == 52
+    assert len(data["total_by_province"]) == 52
+    assert data["boom_by_province"]["05"]["pct_no_principal"] == 52.0
+    assert data["boom_by_province"]["28"]["pct_no_principal"] == 14.7

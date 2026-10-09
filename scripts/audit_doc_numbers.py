@@ -67,6 +67,7 @@ COVERED_DOCS = [
     "docs/explorations/serpavi_probe.md",
     "docs/explorations/identification.md",
     "docs/explorations/cadastre_eras.md",
+    "docs/explorations/censo_vintage.md",
     "docs/explorations/credit_probe.md",
     "docs/explorations/construction_probe.md",
     "docs/explorations/valor_referencia_probe.md",
@@ -534,6 +535,10 @@ ALLOW = {
         (4.7, "global 2011+ era share, verified in audit"),
         (1000.0, "excluded non-housing records, coverage fact"),
         (3500.0, "excluded properties, coverage fact"),
+    ],
+    "docs/explorations/censo_vintage.md": [
+        (2.8, "post-bust 2011-2020 additions share of total stock"),
+        (85.0, "descriptive threshold for primary absorption in urban centers"),
     ],
     "docs/explorations/credit_probe.md": [
         (37.0, "historical caja count (literature fact)"),

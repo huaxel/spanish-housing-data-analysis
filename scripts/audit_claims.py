@@ -37,6 +37,7 @@ MODEL_FRESHNESS = [
     ("wild_ar_bust", "artifacts/wild_ar_bust.json", "explorations/wild_ar_bust.py"),
     ("tourist_inversion", "artifacts/tourist_inversion.json", "scripts/invert_tourist.py"),
     ("cadastre_eras", "artifacts/cadastre_eras.json", "explorations/cadastre_eras.py"),
+    ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
     # pass on stale-but-doc-consistent JSONs.
@@ -2358,6 +2359,30 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_eras: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 9
+
+    cv = _model_output("artifacts/censo_vintage.json")
+    for desc, path, expected, tol in (
+        ("censo vintage total viviendas", "nacional_total.viviendas_total", 26623708, 0),
+        ("censo vintage principal", "nacional_total.viviendas_principal", 18536616, 0),
+        ("censo vintage no principal", "nacional_total.viviendas_no_principal", 8087092, 0),
+        ("censo vintage pct no principal", "nacional_total.pct_no_principal", 30.4, 0.05),
+        ("censo vintage boom 2001-2010", "boom_vs_postboom.boom_2001_2010", 5240772, 0),
+        ("censo vintage post-boom 2011-20", "boom_vs_postboom.post_boom_2011_2020", 734659, 0),
+        ("censo vintage ratio boom post", "boom_vs_postboom.ratio_boom_to_post", 7.13, 0.05),
+        ("censo vintage avila boom", "boom_by_province.05.pct_no_principal", 52.0, 0.05),
+        ("censo vintage castellon boom", "boom_by_province.12.pct_no_principal", 49.2, 0.05),
+        ("censo vintage alicante boom", "boom_by_province.03.pct_no_principal", 44.1, 0.05),
+        ("censo vintage madrid boom", "boom_by_province.28.pct_no_principal", 14.7, 0.05),
+        ("censo vintage barcelona boom", "boom_by_province.08.pct_no_principal", 13.8, 0.05),
+        ("censo vintage bizkaia boom", "boom_by_province.48.pct_no_principal", 10.7, 0.05),
+        ("censo vintage avila total", "total_by_province.05.pct_no_principal", 59.4, 0.05),
+        ("censo vintage madrid total", "total_by_province.28.pct_no_principal", 13.9, 0.05),
+    ):
+        got = _json_path(cv, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] censo_vintage: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 15
 
     ratio = _model_output("artifacts/ratio_ccaa.json")
     for desc, path, expected, tol in (
