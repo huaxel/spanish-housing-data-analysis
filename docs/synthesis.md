@@ -3,9 +3,10 @@
 Core question: how has the evolution of Spanish housing prices related to
 the amount of housing stock built and to population/household growth?
 Evidence: 30 pinned sources, 20 mart tables, 24 explorations — all
-descriptive, no causal claims (the one causal estimate is the commissioned
-IV, separately qualified below). Start from the national spine, then the
-split.
+descriptive, no retained causal claims (the commissioned IV was withdrawn
+after independent review, as documented below). Start from the national
+spine, then the split. For access rather than stock alone, see the
+[housing-access chapter](housing_access.md).
 
 ## The spine (Nacional)
 
@@ -91,19 +92,23 @@ unchanged — both reads' verdicts stand.
   +30% vs south never recovered nominally (Parla −13%, Fuenlabrada +0.5%
   in 18y) — and neither recovered really (capital −7.5%, south −28 to
   −38% in 2025 euros); 2011 south was already vacancy (Parla 6%,
-  Torrejón 8%). Needs net new stock.
+  Torrejón 8%). Motivates evaluating new usable supply; these ratios do not
+  establish the effect or optimal location of construction.
 - **Coastal Valencia** (composition crisis, decomposed): Alicante province
   peaked at 724 dwellings/1000 (2018; 676 in 2025) with 44% non-primary
   in 2020 (40% in 2025) = a second-home coast (Torrevieja 51%, Benidorm 43%)
   *plus* vacant towns (Dénia 31%), tourist flats a 4.3% footnote. Needs
-  mobilization, not just construction.
+  investigating mobilization alongside construction; historical non-primary
+  stock is not evidence of current, habitable supply available to households.
 - **Barcelona** (burdened metropolis): city +65% sale / +68% rents 2013–24
   (+33% real — the recovery was real, unlike Madrid's), 51% rent burden,
   64% new-mortgage burden; corona more stretched (Sant Adrià 72%); 10k
   tourist flats in the city vs 28 in Santa Coloma; 514 starts in 13 years
-  there. Built on absorbing a 10.9% 2011 vacancy. Within-municipio tourist
-  changes don't track subsequent price/rent moves at all (municipal panel
-  null, wild-p 0.49–0.96) — the footnote, confirmed.
+  there. Entered recovery with 10.9% vacancy in 2011; subsequent absorption
+  is not measured by that snapshot. Within-municipio tourist changes show no
+  statistically detectable association with price/rent growth (municipal panel
+  wild-p 0.49–0.96). This does not establish negligible effects, especially
+  under licensing constraints and incomplete registry coverage.
 - **Interior** (Galicia, Castilla y León, Asturias): 650–770/1000, shrinking
   young cohorts, mild prices — abundance without demand. The 2021
   electricity-based vacancy makes the abundance concrete: Galicia 28.8%
@@ -133,7 +138,7 @@ unchanged — both reads' verdicts stand.
 - Rents (SERPAVI, municipal 2011–2024): DIBA cross-validated (Pearson
   0.825, Spearman 0.87); gross yield 3.6% in Barcelona vs 4.6% corona
   median; tourist intensity does not predict rents within municipios
-  (clean null) but tracks rent levels across provinces (Pearson 0.62,
+  (no detected association, not an equivalence result) but tracks rent levels across provinces (Pearson 0.62,
   Spearman 0.53 — confounded with coastal demand, not identified). Rent–
   vacancy is substantially negative on ranks (−0.51), consistent with
   overhang, not causal.
@@ -144,6 +149,30 @@ unchanged — both reads' verdicts stand.
   joint detail, transaction prices at municipal grain (the repo has
   appraisal + DIBA transactions; valor-referencia and construction-flow
   probes are parked with reopen conditions).
+
+## Physical-stock extension: what the Sevilla pilot adds
+
+The [physical-stock explorer](../evidence/pages/stock.md) moves beyond regional
+stock ratios using cadastral footprints, parcel-grouped construction-date
+ranges, declared housing-property counts and gross floor area. A reproducible
+reader summary connects physical density and record-date proxies with rents,
+while keeping global and district/income-adjusted correlations, income-year
+samples and geographic/weighting sensitivities distinct. It does not select
+a preferred causal specification.
+
+Physical density is not available supply. A positive density/rent association
+can reflect location, demand and composition rather than the price effect of
+adding housing. Weighting parcel-grouped record dates by property counts does
+not observe individual dwelling ages; gross floor area is not residential-only
+floor area. Household context, current stock and rental contracts have different
+vintages, so this pilot does not establish a contemporary local stock-demand
+balance or retroactively predict rents.
+
+The next substantive gap is matched-date, matched-geography stock, households
+and rent with occupancy/availability evidence—not another control added to
+these snapshots. [Stock methods](cadastre_stock.md) and
+[income definitions](sevilla_income.md) document exclusions, source semantics
+and the reproducible report; the central models remain separate.
 
 ## Reproduce everything
 

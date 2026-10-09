@@ -2628,6 +2628,18 @@ def main() -> int:
         ("rent n", "rent_tour_only.n", 2109, 0),
         ("rent+pop b", "rent_with_pop.coefs.d_tour.b", 0.0125, 0.001),
         ("rent+pop n", "rent_with_pop.n", 2109, 0),
+        ("sale SE", "sale_tour_only.coefs.d_tour.se", 0.3092, 0.0001),
+        ("sale normal CI lower", "sale_tour_only.coefs.d_tour.ci95.0", -0.8168, 0.0001),
+        ("sale normal CI upper", "sale_tour_only.coefs.d_tour.ci95.1", 0.3955, 0.0001),
+        ("sale+pop SE", "sale_with_pop.coefs.d_tour.se", 0.3138, 0.0001),
+        ("sale+pop normal CI lower", "sale_with_pop.coefs.d_tour.ci95.0", -0.7968, 0.0001),
+        ("sale+pop normal CI upper", "sale_with_pop.coefs.d_tour.ci95.1", 0.4332, 0.0001),
+        ("rent SE", "rent_tour_only.coefs.d_tour.se", 0.2302, 0.0001),
+        ("rent normal CI lower", "rent_tour_only.coefs.d_tour.ci95.0", -0.442, 0.0001),
+        ("rent normal CI upper", "rent_tour_only.coefs.d_tour.ci95.1", 0.4602, 0.0001),
+        ("rent+pop SE", "rent_with_pop.coefs.d_tour.se", 0.2332, 0.0001),
+        ("rent+pop normal CI lower", "rent_with_pop.coefs.d_tour.ci95.0", -0.4445, 0.0001),
+        ("rent+pop normal CI upper", "rent_with_pop.coefs.d_tour.ci95.1", 0.4695, 0.0001),
         ("sale clusters", "sale_tour_only.clusters", 130, 0),
         ("rent clusters", "rent_tour_only.clusters", 253, 0),
     ):
@@ -2635,7 +2647,7 @@ def main() -> int:
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] panel_tourist: {desc} = {got} (doc: {expected})")
         failures += not ok
-    total += 10
+    total += 22
     h1 = _model_output("artifacts/hypothesis_01.json")
     for desc, path, expected, tol in (
         ("pooled spearman ccaa", "pooled.ccaa.spearman", -0.406, 0.005),

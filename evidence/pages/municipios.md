@@ -567,10 +567,15 @@ order by barrio
   <Column id=colectivas_pct title="Colectivas %" fmt="num1"/>
   <Column id=unifamiliares_pct title="Unifamiliares %" fmt="num1"/>
   <Column id=rehabilitacion_estimada_pct title="Necesidad estimada de rehabilitación %" fmt="num1"/>
-  <Column id=antiguedad_colectiva_anos title="Antigüedad colectiva (años)" fmt="num1"/>
+  <Column id=antiguedad_colectiva_anos title="Referencia anual colectiva (SIM)" fmt="0"/>
   <Column id=calidad_colectiva title="Calidad constructiva colectiva" fmt="num2"/>
   <Column id=superficie_colectiva_m2 title="Superficie colectiva (m²)" fmt="num0"/>
 </DataTable>
+
+La referencia constructiva SIM contiene valores de año, no edades transcurridas;
+el nombre interno heredado termina en `_anos`, pero no restamos un año de
+referencia desconocido. Para polígonos y fechas constructivas individuales,
+ver el [piloto de stock físico catastral](/stock/).
 
 ```sql turismo_contexto_sev
 select barrio,

@@ -19,15 +19,23 @@ licensing follows demand and regulation jointly with prices.
 
 ## Reading
 
-Null everywhere: within-municipio changes in tourist intensity do not
-track sale or rent accelerations, with or without population controls,
-at sale grain (130 municipios with DIBA prices) or rent grain (253).
-R² ≈ 0.03–0.05 — the regressors explain essentially nothing once
-municipio and year effects are absorbed. This is the within-variation
-version of the repo's composition finding: the crisis is second homes,
-vacancy, and incomes — tourist flats are a footnote even where they
-concentrate, because licensing froze the margin (registry snapshots
-flat since 2015) while prices moved on other demand.
+No statistically detectable association: within-municipio changes in tourist
+intensity do not reliably track sale or rent accelerations in these
+specifications, with or without population controls, at sale grain
+(130 municipios with DIBA prices) or rent grain (253).
+R² ≈ 0.03–0.05. This is not an equivalence test: the results do not establish
+that tourism's effects are small, nor identify what would happen without
+licensing restrictions. Registry coverage, limited within variation and
+endogenous regulation constrain interpretation. The composition of total
+stock is a separate descriptive question, not established by these nulls.
+
+**Interpretation correction 2026-10-08:** the earlier "footnote even where
+concentrated" conclusion was not warranted by insignificant estimates.
+Coefficients and wild-p values are unchanged; no estimator was rerun.
+
+The [uncertainty chapter](../uncertainty.md) now exposes the existing
+normal-approximation ranges alongside these zero-null tests, without
+inventing bootstrap coefficient intervals or equivalence conclusions.
 
 ## Limits
 
@@ -40,5 +48,6 @@ flat since 2015) while prices moved on other demand.
 - Barcelona only — Balears/Canarias, where tourist shares are higher,
   are the external-validity question. **Now tested**: see
   `tourist_rents.md` — SERPAVI extends rents nationally; the level
-  signal is a scale artifact (prov Spearman 0.016) and growth is
-  weakly positive (0.041), not distinguishable from zero.
+  association is positive on ranks too (prov Spearman 0.525), with
+  positive provincial growth associations (Pearson 0.225, Spearman 0.304).
+  These cross-sections do not separate tourism from coastal demand.

@@ -1,0 +1,4 @@
+name: inference
+type: duckdb
+options:
+  filename: '../../../data/processed/inference.duckdb'

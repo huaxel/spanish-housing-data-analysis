@@ -29,6 +29,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 COVERED_DOCS = [
     "docs/synthesis.md",
+    "docs/housing_access.md",
+    "docs/housing_overburden.md",
+    "docs/ecv_joint_scope.md",
+    "docs/purchase_scenarios.md",
+    "docs/uncertainty.md",
+    "docs/cadastre_stock.md",
     "README.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
@@ -69,6 +75,28 @@ COVERED_DOCS = [
 # parameters, census anchors quoted for provenance rather than as findings.
 # Each entry: (value, reason). Years 1990-2030 are skipped globally.
 ALLOW = {
+    "docs/uncertainty.md": [
+        (1.96, "normal critical value in existing panel_tourist interval construction"),
+        (95.0, "nominal confidence level of normal approximation, not an empirical finding"),
+    ],
+    "docs/housing_overburden.md": [
+        (40.0, "Eurostat housing-cost overburden threshold, official indicator definition"),
+        (60.0, "Eurostat at-risk-of-poverty threshold relative to national median income"),
+    ],
+    "docs/ecv_joint_scope.md": [
+        (0.60, "Official poverty factor, independently defined national income reference"),
+        (90.0, "Six age by three poverty by five tenure coordinates, tested complete grid"),
+        (50.0, "Predeclared project minimum valid sample persons, not official reliability"),
+        (30.0, "Predeclared project minimum represented households; also age boundary"),
+        (5.0, "Predeclared project maximum weighted cost loss percent"),
+        (18.0, "Person age category boundary"),
+        (24.0, "Person age category boundary"),
+        (25.0, "Person age category boundary"),
+        (29.0, "Person age category boundary"),
+        (64.0, "Person age category boundary"),
+        (65.0, "Person age category boundary"),
+        (1.0, "Newborn reference age -1 maps to zero, official age convention"),
+    ],
     "docs/synthesis.md": [
         (18083692.0, "2011 census household anchor (provenance, not a finding)"),
         (310.0, "municipios with tourist data (coverage count)"),

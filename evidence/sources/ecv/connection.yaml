@@ -1,0 +1,4 @@
+name: ecv
+type: duckdb
+options:
+  filename: '../../../data/processed/ecv_joint_burden.duckdb'

@@ -28,13 +28,14 @@ contrast with Madrid is the point: Madrid's recovery was nominal-only
 (capital −7.5% real), Barcelona's was real everywhere — a demand recovery
 against tight stock, not a nominal illusion over stagnation.
 
-## Burdens 2022: the market prices out its workers
+## Burdens 2022: high market-effort indicators
 
 Average rent took **51% of gross income in Barcelona** (51–58% in Badalona,
 Santa Coloma, Cornellà) and a new mortgage **63.6%** (71.9% in Sant Adrià,
 62.1% in Cornellà). The corona is *more* mortgage-stretched than the city:
-cheaper flats, much lower incomes. Santa Coloma (5 tourist flats, 2022) and
-Sant Adrià carry no tourist distortion at all — pure income-vs-price gaps.
+cheaper flats, much lower incomes. Santa Coloma (5 registered tourist flats, 2022) illustrates that high
+market-effort indicators can coexist with few registered tourist units.
+That does not identify tourism effects or exclude unregistered activity.
 
 ## Tourist geography is hyper-local
 
@@ -52,8 +53,9 @@ Badalona 6,570 → 5,271; Viladecans 2,358 → 1,050; Sant Joan Despí
 people**. Demarcation total: 105,696 starts, 84,164 completions in thirteen
 years. The city built infill at ~1,500 starts/year against +90k population
 2013–24; Santa Coloma built essentially nothing while its rent burden hit
-54.6%. Supply geography mirrors the burden map — construction didn't go
-where the workers are.
+54.6%. These totals illustrate uneven construction alongside high market-effort
+indicators; they do not locate workers or establish where unmet housing
+needs were greatest.
 
 ## Update: the 2011 vacant overhang (`censo2011_bcn`)
 
@@ -61,10 +63,10 @@ Vacant share of dwellings, 2011: Barcelona **10.9%** · Sant Adrià 10.6% ·
 Badalona 9.6% · Cornellà 7.3% · Santa Coloma 4.9%. Barcelona city alone held
 ~88k vacant flats (scale: more than all of Santa Coloma's stock). The metro
 entered the recovery sitting on a larger vacant overhang than Madrid's south
-— then absorbed it through a decade of migration *and* converted part of it:
-the city's tourist flats grew 2022–24 while Balears' shrank. Vacancy →
-absorption + tourist conversion, not new construction (19k starts in 13
-years), is the arithmetic of Barcelona's tightening.
+— but this snapshot does not measure subsequent absorption or conversion.
+Tourist registrations and construction starts (19k in 13 years) do not
+track transitions of those particular vacant units. The roles of absorption,
+conversion and new construction remain hypotheses.
 
 ## Barrios: filed-contract rents (INCASÒL deposits)
 
@@ -114,8 +116,9 @@ somewhat after. No 2020 cell exists (publication gap).
 
 - Sale prices = Secretaria d'Habitatge (registrars), 2013–; rents = Incasòl
   deposits (census-like). Different populations, same direction.
-- Burdens are DIBA's 2015–2022 ratios of averages — distributional reality
-  (new contracts, young renters) is worse; don't soften with the mean.
+- Burdens are DIBA's 2015–2022 ratios of averages, not average individual
+  burdens or shares of overburdened households. Young/low-income renter
+  burdens require distributional evidence; these means cannot establish them.
 - Registered vacant (Barcelona 1,350) undercounts true vacancy by an order
   of magnitude — registry, not census.
 - Padrón municipal runs to 2025; sale prices to 2024; burdens to 2022 —

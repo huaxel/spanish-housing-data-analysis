@@ -33,6 +33,26 @@ DESCRIPTIONS = {
         "Renta de alquiler por municipio (SERPAVI 2011–2024): niveles, "
         "esfuerzo y relación con la vivienda vacía."
     ),
+    "incertidumbre/index.html": (
+        "Incertidumbre del panel municipal de turismo: coeficientes, rangos "
+        "normales aproximados y pruebas wild-bootstrap, sin equivalencia causal."
+    ),
+    "compra/index.html": (
+        "Escenarios hipotéticos de compra: entrada, gastos iniciales, "
+        "cuotas hipotecarias y sensibilidad a tipos bajo supuestos editables."
+    ),
+    "acceso/index.html": (
+        "Acceso a la vivienda en Madrid, Barcelona y la costa valenciana: "
+        "stock, disponibilidad, esfuerzo medio y sensibilidad descriptiva."
+    ),
+    "stock-2021/index.html": (
+        "Sevilla municipal con referencia 2021: viviendas y hogares censales, "
+        "alquiler anual y contexto de uso eléctrico, con fechas y cobertura explícitas."
+    ),
+    "stock/index.html": (
+        "Stock físico catastral de Sevilla: huellas, fechas constructivas y "
+        "superficies por barrio, con unidades y cobertura espacial explícitas."
+    ),
     "vacancia/index.html": (
         "Vivienda vacía por consumo eléctrico (Censo 2021): mapa municipal "
         "de la desocupación en España."

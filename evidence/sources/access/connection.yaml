@@ -1,0 +1,4 @@
+name: access
+type: duckdb
+options:
+  filename: '../../../data/processed/housing_access.duckdb'

@@ -44,7 +44,7 @@ Población residente (FeatureServer/26) and households (FeatureServer/30)
 provide 108 barrio series for 2015–2021. The vivienda familiar typology
 layer (service `ñññ`, layer 2) reports collective/unifamiliar counts and
 shares. The joined barrio layer (`TTT`, layer 4) additionally supplies
-average age, construction quality (SIM scale 1–9), and built area for each
+a construction-year-like reference, construction quality (SIM scale 1–9), and built area for each
 typology; these variables have no reference year in the fields. Estimated
 rehabilitation need comes from `rrr`, layer 101. Housing use/vacancy comes
 from `VIVVAC`, layer 133. The last two layers also lack a field identifying
@@ -65,6 +65,17 @@ is district-grain, so no barrio interpolation or allocation is made.
 For those reasons, the explorer charts population/household series separately
 and presents the undated housing and tourist snapshots in separate tables;
 none are presented as current price or causal evidence.
+
+### Correction: SIM construction reference is not elapsed age
+
+The legacy fields `antiguedad_colectiva_anos` and
+`antiguedad_unifamiliar_anos` contain year-like values, not elapsed ages.
+The explorer now labels the collective field as an annual SIM reference.
+The precise treatment of reforms and the snapshot reference year remain
+unresolved; do not subtract it from the service edit date. Internal field
+names are retained for compatibility without rebuilding the central marts.
+For independently documented individual BU date ranges and footprints,
+see [the physical-stock pilot](../cadastre_stock.md).
 
 ## District/zone offer prices, 2024 (separate from transaction data)
 

@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis inference stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -47,6 +47,11 @@ fetch:
 	uv run python scripts/fetch_barrios_bcn.py
 	uv run python scripts/fetch_barrios_bcn_compra.py
 	uv run python scripts/fetch_desahucios.py
+	uv run python scripts/fetch_housing_overburden.py
+	uv run python scripts/fetch_cadastre_stock.py
+	uv run python scripts/fetch_sevilla_income.py
+	uv run python scripts/build_sevilla_2021.py
+	uv run python scripts/build_ecv_joint.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
@@ -60,6 +65,13 @@ build:
 
 verify:
 	uv run python scripts/verify_data.py
+	uv run python scripts/verify_housing_overburden.py
+	uv run python scripts/build_ecv_joint.py --check
+	uv run python scripts/fetch_cadastre_stock.py --check
+	uv run python scripts/build_sevilla_2021.py --check
+	uv run python scripts/analyze_stock_rent.py --check
+	uv run python scripts/export_inference.py --check
+	uv run python scripts/invert_tourist.py --check
 
 audit: audit-docs
 	uv run python scripts/audit_claims.py
@@ -113,6 +125,16 @@ analysis:
 	uv run python explorations/barrios_bcn_yield.py
 	@echo "[analysis 18/18] desahucios_renta (descriptive)"
 	uv run python explorations/desahucios_renta.py
+	uv run python scripts/analyze_stock_rent.py
+	uv run python scripts/export_inference.py
+	uv run python scripts/invert_tourist.py
+
+stock-rent:
+	uv run python scripts/analyze_stock_rent.py
+
+inference:
+	uv run python scripts/export_inference.py
+	uv run python scripts/invert_tourist.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
 gates: lint fetch build analysis verify audit test
@@ -135,6 +157,10 @@ evidence-dev:
 # injects per-route descriptions. Always runs post-build so deploys inherit it.
 evidence-build:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Refusing: dev server/service owns .evidence/template/. Stop it first: systemctl --user stop housing-evidence (or make evidence-build ALLOW=1)."; exit 1; fi
+	uv run python scripts/export_inference.py
+	uv run python scripts/fetch_cadastre_stock.py --check
+	uv run python scripts/build_sevilla_2021.py --check
+	uv run python scripts/analyze_stock_rent.py
 	cd evidence && npm run build
 	uv run python scripts/fix_build_meta.py
 
@@ -172,6 +198,15 @@ evidence-smoke:
 
 evidence-smoke-browser:
 	bash scripts/smoke_browser.sh
+
+evidence-smoke-purchase:
+	bash scripts/smoke_purchase.sh
+
+evidence-smoke-uncertainty:
+	bash scripts/smoke_uncertainty.sh
+
+evidence-smoke-stock:
+	bash scripts/smoke_stock.sh
 
 # Local-only copy of data/ (git-ignored, publisher data). Override the
 # destination with BACKUP_DIR=/path/to/dir. Restore with:

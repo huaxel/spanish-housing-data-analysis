@@ -24,7 +24,8 @@ check_page() { # check_page <path> <min canvases> <snippet> [snippet...]
 		page.on('pageerror', (e) => errs.push(String(e && e.message || e)));
 		await page.goto('$BASE$path', { waitUntil: 'domcontentloaded' });
 		await page.waitForFunction(
-			(n) => document.querySelectorAll('canvas').length >= n, $min_canvases, { timeout: 30000 });
+			(n) => document.querySelectorAll('canvas').length >= n && (document.querySelector('h1')?.innerText.length ?? 0) > 0,
+			$min_canvases, { timeout: 30000 });
 		const text = await page.evaluate(() => document.body.innerText);
 		const canvases = await page.evaluate(() => document.querySelectorAll('canvas').length);
 		const missing = $snippets_json.filter((s) => !text.includes(s));
@@ -99,5 +100,8 @@ check_page "/comparar/"  7 "Resumen del periodo" "comunitat valenciana" || fail=
 check_page "/municipios/" 5 "la capital se despega" "Santa Coloma de Gramenet" || fail=1
 check_page "/renta/"      2 "Renta municipal" "SERPAVI" || fail=1
 check_page "/vacancia/"   1 "Vivienda vacía" "consumo eléctrico" || fail=1
+check_page "/acceso/" 0 "Stock no es acceso" "Por quintil de ingresos" || fail=1
+check_page "/compra/" 1 "efectivo inicial y cuota" "Supuestos editables" || fail=1
+check_page "/incertidumbre/" 0 "No detectar no es demostrar ausencia" "Tamaño y precisión" || fail=1
 check_map "/vacancia/" || fail=1
 exit $fail

@@ -69,3 +69,34 @@ open-data readme `cdn.mivau.gob.es/.../Readme_VDP002_01.pdf`).
 Table IDs were resolved via `OPERACIONES_DISPONIBLES` + `TABLAS_OPERACION`
 (see `scripts/ine_discover.py`), not copied from search snippets — two
 snippet-suggested IDs (67202/67232) turned out to be unrelated tables.
+
+## EU-SILC housing-cost overburden (Eurostat, national Spain)
+
+Added 2026-10-08. `ilc_lvho07a` (age, total sex/poverty status),
+`ilc_lvho07b` (income quintile) and `ilc_lvho07c` (tenure) are retrieved
+through the official JSON-stat dissemination API, with raw responses and
+derived sidecar pinned in the input manifest. These are percentages of
+persons living in households with excessive housing costs, not shares of
+households or local estimates. Survey-year timing, flags, overlapping age
+groups and separate marginal populations are documented in
+[housing_overburden.md](housing_overburden.md).
+
+The Evidence `access` source reads `data/processed/housing_access.duckdb`;
+the central housing marts and existing estimator inputs are unchanged.
+Fetch with `scripts/fetch_housing_overburden.py`, rebuild from verified pins
+with `--offline`, and verify exact derivation with
+`scripts/verify_housing_overburden.py` (included in `make verify`).
+
+## Cadastral physical stock (DGC INSPIRE BU, Sevilla pilot)
+
+The official municipal BU archive provides parcel-grouped construction
+footprints, earliest/latest construction dates, gross floor area and counts
+of cadastral properties destined to housing. SIM barrio geometry uses the
+same keyed geography as existing household context; labels and IDs are
+validated across pinned inputs. Cadastral and INE municipality codes differ.
+
+The stock sidecar, `data/processed/stock.duckdb`, leaves central marts and
+estimator inputs unchanged. `scripts/fetch_cadastre_stock.py` downloads and
+pins inputs, supports offline rebuild, and verifies pins/code freshness with
+`--check` (included in `make verify`). See [cadastre_stock.md](cadastre_stock.md)
+for the official specification and allocation/measurement limitations.

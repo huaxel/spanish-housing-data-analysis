@@ -10,6 +10,16 @@ viviendas por cada 1.000 habitantes. Ámbito nacional; detalle regional en
 y bajar al [grano municipal](/municipios/) en Madrid y Barcelona, ver la
 [renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024), o la
 [vivienda vacía por consumo eléctrico](/vacancia/) (Censo 2021).
+El capítulo de [acceso a la vivienda](/acceso/) distingue stock, disponibilidad
+y esfuerzo, con años y límites explícitos; los [escenarios de compra](/compra/)
+separan efectivo inicial, cuota y sensibilidad a tipos. La
+[incertidumbre de los modelos](/incertidumbre/) distingue tamaño, rangos
+aproximados y pruebas de coeficiente cero. El [stock físico](/stock/) añade
+huellas catastrales, fechas constructivas y superficies en Sevilla, con
+cobertura espacial y unidades explícitas. Su lectura rápida separa las
+asociaciones stock–alquiler de lo que no se observa: disponibilidad efectiva
+y un efecto causal de oferta. El [perfil municipal de Sevilla con referencia 2021](/stock-2021/)
+reúne stock y hogares censales con alquiler anual, sin mezclarlos con el BU actual.
 
 ```sql nacional
 select anyo, viviendas_total, poblacion, pop_source, viv_por_1000_hab,

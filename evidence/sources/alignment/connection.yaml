@@ -1,0 +1,4 @@
+name: alignment
+type: duckdb
+options:
+  filename: '../../../data/processed/sevilla_2021.duckdb'
