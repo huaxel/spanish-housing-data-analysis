@@ -716,3 +716,64 @@ contratos o la desalineación temporal.
   <Column id=distrito_ingreso title="Asociación reajustada tras omisión" fmt="num3"/>
   <Column id=estado title="Estado del ajuste"/>
 </DataTable>
+
+## Capitales andaluzas: la misma forma de era
+
+El piloto se extiende a Málaga, Granada y Córdoba en grano municipal, con
+la misma definición de era ponderada por inmuebles. Las cuatro capitales
+comparten el pico de 1971–1990; Granada el más acusado.
+
+```sql capitales_eras
+select ciudad, era, sum(inmuebles) as inmuebles
+from stock_capitals.eras_municipales
+group by ciudad, era
+```
+
+<BarChart data={capitales_eras} x=era y=inmuebles series=ciudad
+  title="Inmuebles declarados por era y capital"/>
+
+```sql capitales_totales
+select ciudad, registros, inmuebles, registros_asignados
+from stock_capitals.totales
+```
+
+<DataTable data={capitales_totales} rows=4>
+  <Column id=ciudad title="Capital"/>
+  <Column id=registros title="Registros BU" fmt="num0"/>
+  <Column id=inmuebles title="Inmuebles declarados" fmt="num0"/>
+  <Column id=registros_asignados title="Registros con barrio/distrito" fmt="num0"/>
+</DataTable>
+
+Málaga aporta desglose por barrio (419 oficiales) y Granada por distrito
+(8 oficiales, geometría ED50 reproyectada); Córdoba permanece municipal
+hasta disponer de geometrías con licencia. Grano municipal en todos los
+casos salvo esos desgloses; mismas cautelas de proxy que en Sevilla.
+
+## Provincia de Sevilla: el pico llega una generación después
+
+Los 106 municipios suman 891.374 inmuebles declarados; la capital
+concentra el 36,7%. En el conjunto provincial domina la expansión de
+1991–2010, no el boom de 1971–1990 de las capitales.
+
+```sql provincia_eras
+select ambito, era, sum(inmuebles) as inmuebles
+from stock_province.eras_capital_resto
+group by ambito, era
+```
+
+<BarChart data={provincia_eras} x=era y=inmuebles series=ambito
+  title="Capital frente al resto de la provincia por era"/>
+
+```sql provincia_top
+select municipio, registros, inmuebles
+from stock_province.totales limit 10
+```
+
+<DataTable data={provincia_top} rows=10>
+  <Column id=municipio title="Municipio"/>
+  <Column id=registros title="Registros BU" fmt="num0"/>
+  <Column id=inmuebles title="Inmuebles declarados" fmt="num0"/>
+</DataTable>
+
+Perfil por municipio disponible en la exploración provincial; grano
+municipal en toda la provincia.

@@ -225,6 +225,18 @@ def database():
         con.execute("""create table income.barrios_income as
                        select 'A' as idg, 'Alpha' as barrio, 'District' as distrito,
                               2019 as anyo, 30000.0 as renta_neta_eur""")
+        con.execute("create schema stock_capitals")
+        con.execute("""create table stock_capitals.eras_municipales as
+                       select 'Malaga' as ciudad, '1971–1990' as era, 3 as inmuebles""")
+        con.execute("""create table stock_capitals.totales as
+                       select 'Malaga' as ciudad, 2 as registros,
+                              3 as inmuebles, 1 as registros_asignados""")
+        con.execute("create schema stock_province")
+        con.execute("""create table stock_province.eras_capital_resto as
+                       select 'Sevilla capital' as ambito, '1971–1990' as era,
+                              3 as inmuebles""")
+        con.execute("""create table stock_province.totales as
+                       select 'Sevilla' as municipio, 2 as registros, 3 as inmuebles""")
         yield con
 
 

@@ -1,0 +1,4 @@
+name: stock_province
+type: duckdb
+options:
+  filename: '../../../data/processed/stock_province.duckdb'

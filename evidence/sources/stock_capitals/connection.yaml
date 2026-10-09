@@ -1,0 +1,4 @@
+name: stock_capitals
+type: duckdb
+options:
+  filename: '../../../data/processed/stock_capitals.duckdb'
