@@ -98,7 +98,7 @@ Two subtleties, both load-bearing:
   fills new keys and can never serve stale bytes within a pinned version.
   Hashed `/_app/immutable/` files get the same treatment with an immutable
   year (Static Assets defaults those to must-revalidate — a round trip on
-  every repeat visit). Verified live on both domains.
+  every repeat visit). Verified live on the workers.dev URL and the custom domain serving at the time.
 - Bundle weight (measured 2026-10-07): each route ships a ~4.8 MB JS bundle
   (~2 MB gzip), near-identical across routes — Evidence architecture, not
   fixable from here. `DataTable` already scrolls horizontally
@@ -111,10 +111,15 @@ Two subtleties, both load-bearing:
   CCAA table, youth with parents; sidecar-only, no estimator change).
   Version `5f54ae4d-9b5e-40c2-96be-28b38752f4d6` (previous:
   `808eea0b-a2ee-4722-ab03-2eeb2ef2d28e`, dashboard footer additions).
-  Live verified on both domains (module section present in served HTML).
+  Live verified on the workers.dev URL and the custom domain (module section present in served HTML).
 - Custom domain `vivienda.juanbenjumea.me` is attached and serving
   byte-identical content to the workers.dev URL (verified 2026-10-09) —
   the dashboard attach happened outside this repo.
+- Domain migration (observed 2026-10-09 evening): the `eubenjumea.com`
+  domains no longer resolve; `vivienda.juanbenjumea.me` is the canonical
+  custom domain and serves the latest build including the /acceso/ module
+  sections. Older notes above naming "both domains" refer to the
+  workers.dev URL plus whichever custom domain served at the time.
 
 Open `http://localhost:3000/` (or the URL printed if the port is occupied).
 Dev and build automatically run strict source extraction first. The five SQL
