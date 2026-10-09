@@ -179,7 +179,7 @@ the condition layers to test that.
 
 The next substantive gap is matched-date, matched-geography stock, households
 and rent with occupancy/availability evidence—not another control added to
-these snapshots. [Stock methods](cadastre_stock.md) and
+these snapshots ([source hunt](occupancy_availability.md)). [Stock methods](cadastre_stock.md) and
 [income definitions](sevilla_income.md) document exclusions, source semantics
 and the reproducible report; the central models remain separate.
 

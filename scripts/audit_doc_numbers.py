@@ -83,6 +83,7 @@ COVERED_DOCS = [
     "docs/explorations/credit_probe.md",
     "docs/explorations/construction_probe.md",
     "docs/explorations/valor_referencia_probe.md",
+    "docs/occupancy_availability.md",
 ]
 
 # Numbers that are structural, not results: doc/page counts, ports, sizes,
@@ -149,6 +150,16 @@ ALLOW = {
         (8091.0, "preview dashboard port"),
         (56945.0, "INE table identifier (blocked provincial ECP)"),
         (1000.0, "per-1000 unit label"),
+    ],
+    "docs/occupancy_availability.md": [
+        (452670.0, "MIVAU unsold-new dwellings 2025-12-31, external source fact"),
+        (455280.0, "MIVAU unsold-new dwellings 2024-12-31, external source fact"),
+        (25443.0, "Catalan vacant-dwelling register 2024-12-31, external source fact"),
+        (3237.0, "Valencian register dwellings 2023, external source fact"),
+        (1281.0, "Valencian register dwellings 2025, external source fact"),
+        (1181.0, "Valencian register dwellings 2026, external source fact"),
+        (635919.0, "AEAT IRPF unoccupied Valencian dwellings 2024, external source fact"),
+        (150.0, "San Sebastian IBI vacancy surcharge rate, external source fact"),
     ],
     "docs/explorations/panel_quarterly.md": [
         (999.0, "bootstrap reps parameter"),
