@@ -2,7 +2,7 @@
 title: Stock físico
 ---
 
-# Qué vivienda existe y dónde: piloto catastral de Sevilla
+# Qué vivienda existe y dónde: Sevilla, capitales andaluzas y provincia
 
 Polígonos, fechas constructivas y superficies del Catastro, no solo ratios
 regionales. [Acceso](/acceso/) · [Municipios](/municipios/) · [Perfil municipal 2021](/stock-2021/) · [Panorama nacional](/).
@@ -15,6 +15,8 @@ Instantánea municipal INSPIRE BU publicada:
 <Value data={fecha_stock} column=snapshot_date/>.
 Código catastral **41900**, código INE **41091**: no son intercambiables.
 Autor y propietario: Dirección General del Catastro, Ministerio de Hacienda.
+Las secciones de capitales y provincia al final usan los mismos proxies
+con grano municipal.
 
 ## Lectura rápida: físico no significa disponible
 
