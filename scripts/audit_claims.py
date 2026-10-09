@@ -63,6 +63,7 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_household_alignment.json",
         "explorations/cadastre_household_alignment.py",
     ),
+    ("cadastre_capitals", "artifacts/cadastre_capitals.json", "explorations/cadastre_capitals.py"),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2811,6 +2812,31 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_households: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 12
+
+    cc = _model_output("artifacts/cadastre_capitals.json")
+    for desc, path, expected, tol in (
+        ("capitals malaga props", "cities.29067.total_properties", 261269, 0),
+        ("capitals granada props", "cities.18087.total_properties", 140818, 0),
+        ("capitals cordoba props", "cities.14021.total_properties", 158873, 0),
+        ("capitals sevilla props", "cities.41091.total_properties", 327237, 0),
+        ("capitals malaga records", "cities.29067.n_records", 40231, 0),
+        ("capitals granada records", "cities.18087.n_records", 18149, 0),
+        ("capitals cordoba records", "cities.14021.n_records", 32852, 0),
+        ("capitals malaga median year", "cities.29067.median_year_property_weighted", 1979, 0),
+        ("capitals granada median year", "cities.18087.median_year_property_weighted", 1977, 0),
+        ("capitals cordoba median year", "cities.14021.median_year_property_weighted", 1980, 0),
+        ("capitals sevilla median year", "cities.41091.median_year_property_weighted", 1976, 0),
+        ("capitals malaga peak share", "cities.29067.era_share_pct.1971-1990", 39.5, 0.05),
+        ("capitals granada peak share", "cities.18087.era_share_pct.1971-1990", 42.1, 0.05),
+        ("capitals cordoba peak share", "cities.14021.era_share_pct.1971-1990", 34.7, 0.05),
+        ("capitals sevilla peak share", "cities.41091.era_share_pct.1971-1990", 37.9, 0.05),
+        ("capitals cordoba 2011+ share", "cities.14021.era_share_pct.2011+", 6.8, 0.05),
+    ):
+        got = _json_path(cc, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_capitals: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 16
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

@@ -796,3 +796,39 @@ def test_cadastre_household_alignment_artifact_structure():
     for row in data["barrios"].values():
         expect = row["sim_households_2021"] / row["cadastre_properties"]
         assert abs(row["households_per_property"] - round(expect, 4)) < 1e-9
+
+
+def test_cadastre_capitals_fetch_and_artifact():
+    import json
+
+    spec = importlib.util.spec_from_file_location(
+        "cadastre_capitals", ROOT / "scripts/fetch_cadastre_capitals.py"
+    )
+    cap = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cap)
+
+    assert [(s, c, i) for s, c, i, _n, _p in cap.CITIES] == [
+        ("malaga", "29900", "29067"),
+        ("granada", "18900", "18087"),
+        ("cordoba", "14900", "14021"),
+    ]
+    assert cap.DATABASE.name == "stock_capitals.duckdb"
+    for _slug, cat, _ine, _name, prov in cap.CITIES:
+        assert f"/{cat}-" in cap.zip_url(cat, "X", prov)
+        assert f"atom_{prov}.xml" in cap.feed_url(prov)
+
+    artifact_path = ROOT / "artifacts" / "cadastre_capitals.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    cities = data["cities"]
+    assert set(cities) == {"29067", "18087", "14021", "41091"}
+    assert cities["29067"]["total_properties"] == 261269
+    assert cities["18087"]["total_properties"] == 140818
+    assert cities["14021"]["total_properties"] == 158873
+    assert cities["41091"]["total_properties"] == 327237
+    assert cities["18087"]["era_share_pct"]["1971-1990"] == 42.1
+    assert cities["14021"]["median_year_property_weighted"] == 1980
+    # era shares sum to ~100 per city
+    for city in cities.values():
+        assert abs(sum(city["era_share_pct"].values()) - 100.0) < 0.5

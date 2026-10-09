@@ -3,6 +3,7 @@
     "data/processed/ecv_joint_burden.duckdb": "bc51de54f43e49b84285322d1cea1c41613ea329dc12737a4bd331003d8e442b",
     "data/processed/housing_access.duckdb": "46c1c89edce3319bb678028cbb288b793acc2dc1ca8c54aa8f703cd548cb69f0",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
+    "data/processed/stock_capitals.duckdb": "990c720515a7ac8d83b09b05b66ff2e44a03bed5ccf40cb9956f146a26c7f136",
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
     "data/raw/barrios_sevilla_compra.json": "1ce6e2978b40a5061bbbbd6eff0f428aa9aa9fc193f4742e463d2d89c3ea6d88",
     "data/raw/barrios_sevilla_ipra.json": "5f858d4bc5677ece95db93ee33f1a1c48f507d6beba76336accce2201365b387",
@@ -22,6 +23,12 @@
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": "1aaaa8d6b31c47b02cff7e50e51cb7d314d6df3adca28fa05b58a9704fa02d1a",
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": "710f1bcdda778eed3ead4a829bbde32ce6c3922712f5cd1a41bbd54649189945",
     "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": "86322156666afebe9483cd8117e4dca3b8746a04ca28d93cba247cc527a27e05",
+    "data/raw/cadastre_cordoba_buildings.zip": "7124770efc5ad2220203fbc012eb73c99585380264ae63e3d7ee2a99d0d8ca53",
+    "data/raw/cadastre_cordoba_feed.xml": "de1d8ab58b5844c5b21b234386337e4ba59ba51954992963a9041ab3638650ed",
+    "data/raw/cadastre_granada_buildings.zip": "1938fca88bd064b00310ca9349d3561344710257362daed76cd13947d2e7f5b2",
+    "data/raw/cadastre_granada_feed.xml": "dd00be6649a1a28fda30289f92f412dbaecd119375b78bf5d49e110e49492a87",
+    "data/raw/cadastre_malaga_buildings.zip": "50c8dd485c6c73943714a5d21e18877ffa7b4820657a177f8234d24d9cd88668",
+    "data/raw/cadastre_malaga_feed.xml": "f84b966296f45729f3c4a8bc25627e6b7a447b1ebcb8fe1efef280b0383c3347",
     "data/raw/cadastre_sevilla_buildings.zip": "192f915f33b4132facb1a53c639577fc5fe6a41358e3df8635c621a9260d9a42",
     "data/raw/cadastre_sevilla_feed.xml": "9e9966e4c82e7eb37e4c6216f5f6f56e18215179b6123b6711e39491518a89e9",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
@@ -118,6 +125,9 @@
     "data/raw/parquet/barrios_madrid.parquet": "bf90c6f737d93929ed0e597ba17e9d13efb44895fea198750d2aeabbba150d92",
     "data/raw/parquet/barrios_sevilla_compra.parquet": "7f866c6f158ea29afdf727eb105d69549abe20b3bef7caa504bafe05dcc7c573",
     "data/raw/parquet/barrios_sevilla_ipra.parquet": "bf3859636666d661f855fcf2e907394699ca390043c837076aa0b8f049d845f3",
+    "data/raw/parquet/cadastre_cordoba_buildings.parquet": "a39913c4d845550705afa147ea2c7e364fa348b6649be632da152e370ae7c2c6",
+    "data/raw/parquet/cadastre_granada_buildings.parquet": "601f2fd99c1d8db996689f4a8edb99f23471f52dd17e558c9b18c67fa1b56008",
+    "data/raw/parquet/cadastre_malaga_buildings.parquet": "5d88347f6298d127300d8c8cafa8cac302856f967643a9d4835b941fcd849b3e",
     "data/raw/parquet/cadastre_sevilla_buildings.parquet": "6ff553072d9d46f1fc97337cb258de14f0cec586a9fabab840a8a2e06fc00051",
     "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
@@ -210,6 +220,11 @@
       "accessed": "2026-10-08",
       "note": "Physical-stock pilot; all-component interior-point joins; see cadastre_stock.md",
       "publisher": "DGC INSPIRE + Ayuntamiento/EMVISESA SIM"
+    },
+    "data/processed/stock_capitals.duckdb": {
+      "accessed": "2026-10-09",
+      "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
     },
     "data/raw/barrios_madrid.csv": {
       "accessed": "2026-10-08",
@@ -324,6 +339,42 @@
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
+    },
+    "data/raw/cadastre_cordoba_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/14/14900-CORDOBA/A.ES.SDGC.BU.14900.zip"
+    },
+    "data/raw/cadastre_cordoba_feed.xml": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/14/ES.SDGC.bu.atom_14.xml"
+    },
+    "data/raw/cadastre_granada_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/18/18900-GRANADA/A.ES.SDGC.BU.18900.zip"
+    },
+    "data/raw/cadastre_granada_feed.xml": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/18/ES.SDGC.bu.atom_18.xml"
+    },
+    "data/raw/cadastre_malaga_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/29/29900-MALAGA/A.ES.SDGC.BU.29900.zip"
+    },
+    "data/raw/cadastre_malaga_feed.xml": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/29/ES.SDGC.bu.atom_29.xml"
     },
     "data/raw/cadastre_sevilla_buildings.zip": {
       "accessed": "2026-10-08",
@@ -832,6 +883,21 @@
       "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179"
+    },
+    "data/raw/parquet/cadastre_cordoba_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_granada_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_malaga_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_sevilla_buildings.parquet": {
       "accessed": "2026-10-08",
