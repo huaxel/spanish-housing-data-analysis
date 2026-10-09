@@ -83,7 +83,12 @@ mask, plus the extreme accepted candidates and warnings per model. It is not
 a continuous confidence interval, a causal range or an equivalence test.
 Warnings distinguish "accepted set may extend below/above the grid" from "no
 candidate accepted at this resolution." No model is re-estimated; the published
-1999-rep zero-null p-values are unchanged.
+1999-rep zero-null p-values are unchanged. Each model's acceptance mask is
+per-model nominal 95%: the inverted models carry no joint coverage claim
+across models. The panel-bootstrap path floors near-zero standard errors
+while the grid-inversion path tests exact zero, so degenerate-cluster
+behavior can differ between the two paths; all published results are
+non-degenerate and unaffected.
 
 ## Reproduction and fail-closed freshness
 

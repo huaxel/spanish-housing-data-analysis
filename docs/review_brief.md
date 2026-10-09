@@ -344,3 +344,30 @@ both now done without reviving the claim): (a) the both-normalizations
 comparison under matched specifications and inference; (b) materially
 higher bootstrap precision (reps, grid, seed sensitivity) for any revived
 set claim; (c) a fourth independent read of the result.
+
+## Addendum (2026-10-09): milestone-5 delta read — SOUND-WITH-CAVEATS
+
+Plan milestone 5 still reads STILL OPEN ("required before sharing beyond
+workers.dev") while the explorer is public, so a delta read ran covering
+the 51 commits since round 3 (2026-10-07): estimator/inference changes
+plus the new descriptive surface. Read-only subagent, offline checks only.
+
+Verdict: Scope A (estimators/inference) SOUND-WITH-CAVEATS, Scope B
+(descriptive surface) SOUND, overall SOUND-WITH-CAVEATS. No causal claim
+crept back anywhere; KEEP-OUT posture intact and further narrowed in the
+delta. New mart tables (AEAT/secciones/RMDVP) have no estimator consumer
+(verified by search); quarantines disclosed where numbers appear.
+
+Two documentation-class caveats, both disclosed same day in
+`docs/uncertainty.md` (no code change, no re-run required):
+degenerate-cluster guard thresholds differ between the panel-bootstrap
+and grid-inversion paths (published results non-degenerate, unaffected);
+inversion acceptance masks are per-model nominal with no joint coverage
+across models. The bootstrap vectorization itself was verified
+numerically identical; the candidate-grid inversion methods sound with
+prespecification honestly qualified.
+
+Reviewer identity: pi subagent milestone5-review (same-model family,
+read-only, no write access), 2026-10-09. Transcript retained in-session;
+worker stopped after delivery. This addendum, not a new brief: round-3
+record above is unmodified.
