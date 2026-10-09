@@ -55,6 +55,16 @@ Evidence's `access` connection reads it separately from the central marts.
 No existing estimator reads this database, so adding the source does not
 invalidate unrelated estimator artifacts.
 
+Companion tables (2026-10-09, `scripts/fetch_housing_conditions.py`):
+`overcrowding` (published overcrowding rate by age, tenure, urbanisation
+and income quintile), `underoccupation` (under-occupation share by age,
+tenure and urbanisation) and `burden_median` (median of the housing-cost
+burden distribution by age and urbanisation) — same Spain annual person
+rates/medians, same JSON-stat validation, verified by
+`scripts/verify_housing_conditions.py` (also in `make verify`). Break
+flags appear in mid-2000s and early-2010s cuts of the new tables and are
+retained, not smoothed.
+
 The parser validates dimensions and category indexing, selects Spain,
 annual percentage units, total sex and total poverty status for age, and
 retains every selected group/year cell. Unpublished cells remain null; true

@@ -1,7 +1,7 @@
 {
   "sha256": {
-    "data/processed/ecv_joint_burden.duckdb": "bc51de54f43e49b84285322d1cea1c41613ea329dc12737a4bd331003d8e442b",
-    "data/processed/housing_access.duckdb": "46c1c89edce3319bb678028cbb288b793acc2dc1ca8c54aa8f703cd548cb69f0",
+    "data/processed/ecv_joint_burden.duckdb": "96ac36194b9d9a111c9e12db9f14c2c7ab6e7f26c91e893dafa645025ef0a85c",
+    "data/processed/housing_access.duckdb": "2dc1f06e3c759cd39e92f280cfa05639112b2d83d8aaf5b526809c2bb2597c38",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
     "data/processed/stock_capitals.duckdb": "359da3e660c12b804f4bc65e9d292d5c2e8f72ff6e92cfd10012942a160d3840",
     "data/processed/stock_province.duckdb": "242b8afede651dd5ea42e95841bd97cdbe8a6b476380ce5ad87bcec0e341d6f4",
@@ -160,9 +160,18 @@
     "data/raw/ecp_hog_ccaa.json": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
     "data/raw/ecp_hog_prov.json": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
     "data/raw/ecp_pob_ccaa.json": "2117dfcfb189dfc287a5825d0d68706d0c3f28d58de3c1e3e5799d4b682efde1",
+    "data/raw/eurostat_ilc_lvho05a_ES.json": "510ceaf54fd485f971e6dad213f3fc63cef52482016cfabc2e8b748a1af03d37",
+    "data/raw/eurostat_ilc_lvho05c_ES.json": "69ce667aba3e9401a537af68d0868abbc758d185cb1878041ac411c27213c0d7",
+    "data/raw/eurostat_ilc_lvho05d_ES.json": "2e3534ae20ba4bfcc8a741a9e66b3cb05d02c53777af62fca1c6b83adf4453c1",
+    "data/raw/eurostat_ilc_lvho05q_ES.json": "07d04f999c9f62b2655ab4856d3eb02adae38c7fce432d8e628213b2c347a34c",
     "data/raw/eurostat_ilc_lvho07a_ES.json": "71f75b584aa34e2240e23279f62e880190532862da737312f77df2f3ec05ce24",
     "data/raw/eurostat_ilc_lvho07b_ES.json": "44859329108240a6f2198680626a805c2662722ea6bfa2657fab23a078d4316b",
     "data/raw/eurostat_ilc_lvho07c_ES.json": "fbae897c4cf88ea47b0d0100ba37e53a7678bbea6575362e4ba72052c9f1f581",
+    "data/raw/eurostat_ilc_lvho08a_ES.json": "7e5f1f39e57592175e51189b11b34c80d2078b23f77972cfa4822f1cbba389ef",
+    "data/raw/eurostat_ilc_lvho08b_ES.json": "adf3c015f872ffa3d73139a077e4180039663bff131e9f7b38e686f2c98f77d0",
+    "data/raw/eurostat_ilc_lvho50a_ES.json": "90ac3ea75124b36cfbe6d5ab9ff86d6a517a5498550593badf184490eccf9fbd",
+    "data/raw/eurostat_ilc_lvho50c_ES.json": "d8dd667987a67ade1a12261a92d87335d14426235491f1c5726e70d51b19414e",
+    "data/raw/eurostat_ilc_lvho50d_ES.json": "7517ffd3caab899a4272851ae0c7d401c88e75f807d64768a89d2b51bead8171",
     "data/raw/geo/lau_2021.json": "9b0479e96ae29ae2458d8859177e4643ba22f6f975691f720fb16704aa2de971",
     "data/raw/hipotecas_ccaa.json": "7afd223280c3cf27a1343bd2f2b834844d86af9c4b798df327c338e9dadfd057",
     "data/raw/hipotecas_prov.json": "32a7ef413a69195faf85613ec8bd4c3f19831433facb26398f2ba824c263c62a",
@@ -374,6 +383,7 @@
     "data/raw/parquet/hipotecas_ccaa.parquet": "a298bd29aa42e59ebde0d7d1b3aa8082ec1151ec4f9c56a2b3d5dc49575e3905",
     "data/raw/parquet/hipotecas_prov.parquet": "446840aafade0a6f1549b0cfa8c85542f3901e6edd3a16b27d174a4727b748ff",
     "data/raw/parquet/hipotecas_rates.parquet": "6be4f31be89a283af59a4ae8d53d15db880625cb6b583f127d23aefdb194552b",
+    "data/raw/parquet/housing_conditions.parquet": "e8e310ba63f37326b2d9f50acc012985494a77d5c3f335b12e0bda07f6c01d90",
     "data/raw/parquet/housing_overburden.parquet": "25ed8117be68e65307afbc063451fcdc2567dcaa0deca4590af84dcb51c6d628",
     "data/raw/parquet/housing_overburden_age_poverty.parquet": "3e3f7fb081a92e2544611b5d8cd536082813ed28220937016364e7c4f3df4dba",
     "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b",
@@ -503,7 +513,7 @@
     },
     "data/processed/housing_access.duckdb": {
       "accessed": "2026-10-09",
-      "note": "Derived from pinned eurostat_ilc_lvho07[a,b,c]_ES.json by fetch_housing_overburden.py",
+      "note": "Derived from pinned eurostat_ilc_lvho{05a,05c,05d,05q,50a,50c,50d,08a,08b}_ES.json by fetch_housing_conditions.py",
       "publisher": "Eurostat, EU-SILC"
     },
     "data/processed/stock.duckdb": {
@@ -1447,6 +1457,30 @@
       "api": "wstempus/DATOS_TABLA/56940",
       "operation": "ECP"
     },
+    "data/raw/eurostat_ilc_lvho05a_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05a?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho05c_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05c?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho05d_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05d?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho05q_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05q?lang=EN&geo=ES&unit=PC&freq=A"
+    },
     "data/raw/eurostat_ilc_lvho07a_ES.json": {
       "accessed": "2026-10-08",
       "note": "ES, annual, percentage of persons; separate marginal breakdown",
@@ -1464,6 +1498,36 @@
       "note": "ES, annual, percentage of persons; separate marginal breakdown",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07c?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho08a_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho08a?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho08b_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho08b?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho50a_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50a?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho50c_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50c?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/eurostat_ilc_lvho50d_ES.json": {
+      "accessed": "2026-10-09",
+      "note": "ES, annual person rates/medians; published marginals only",
+      "publisher": "Eurostat, EU-SILC",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50d?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/geo/lau_2021.json": {
       "accessed": "2026-10-06",
@@ -2561,6 +2625,11 @@
       "api": "wstempus/DATOS_TABLA/76315",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
+    },
+    "data/raw/parquet/housing_conditions.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Derived from pinned eurostat_ilc_lvho{05a,05c,05d,05q,50a,50c,50d,08a,08b}_ES.json by fetch_housing_conditions.py",
+      "publisher": "Eurostat, EU-SILC"
     },
     "data/raw/parquet/housing_overburden.parquet": {
       "accessed": "2026-10-09",

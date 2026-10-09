@@ -48,6 +48,7 @@ fetch:
 	uv run python scripts/fetch_barrios_bcn_compra.py
 	uv run python scripts/fetch_desahucios.py
 	uv run python scripts/fetch_housing_overburden.py
+	uv run python scripts/fetch_housing_conditions.py
 	uv run python scripts/fetch_cadastre_stock.py
 	uv run python scripts/fetch_cadastre_capitals.py
 	uv run python scripts/fetch_cadastre_province.py
@@ -71,6 +72,7 @@ build:
 verify:
 	uv run python scripts/verify_data.py
 	uv run python scripts/verify_housing_overburden.py
+	uv run python scripts/verify_housing_conditions.py
 	uv run python scripts/build_ecv_joint.py --check
 	uv run python scripts/fetch_cadastre_stock.py --check
 	uv run python scripts/fetch_cadastre_capitals.py --check

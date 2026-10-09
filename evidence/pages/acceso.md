@@ -233,6 +233,160 @@ padres. **No identifica jóvenes inquilinos de bajos ingresos**, hogares que
 no llegaron a formarse ni condiciones municipales. La renta interviene tanto
 en la clasificación como en el denominador de la carga: una diferencia de
 tasas no identifica un efecto causal ni diferencias en costes monetarios.
+
+## España: hacinamiento, infraocupación y carga mediana
+
+La misma encuesta europea mide la dimensión de espacio: porcentaje de
+**personas que viven en viviendas** que no cumplen el estándar de
+habitaciones según tamaño del hogar y edades (hacinamiento), o que superan
+el estándar inverso (infraocupación), más la mediana de la distribución de
+la carga. Son tasas de personas en hogares privados, nacionales, del último
+año de encuesta con observaciones. No son porcentajes de hogares ni medidas
+locales. Conservamos las banderas de Eurostat y las celdas nulas sin
+completar años.
+
+```sql periodo_condiciones
+select max(survey_year) as encuesta_anyo from (
+  select survey_year from access.overcrowding where rate_pct is not null
+  union
+  select survey_year from access.underoccupation where rate_pct is not null
+  union
+  select survey_year from access.burden_median where rate_pct is not null
+)
+```
+
+Último año de encuesta publicado con observaciones (máximo conjunto de
+las tres tablas):
+<Value data={periodo_condiciones} column=encuesta_anyo fmt="0"/>.
+Las tres tablas comparten el mismo intervalo publicado; cada consulta toma
+el máximo de su tabla y no completa un desglose con años anteriores cuando
+falta en el último.
+
+```sql hacinamiento_acceso
+select breakdown, group_code, group_label, survey_year, rate_pct, status
+from access.overcrowding
+where survey_year = (select max(survey_year) from access.overcrowding where rate_pct is not null)
+order by breakdown, group_code
+```
+
+```sql hacinamiento_quintil
+select * from ${hacinamiento_acceso} where breakdown = 'quant_inc'
+```
+
+### Hacinamiento por quintil de ingresos
+
+<DataTable data={hacinamiento_quintil} rows=6>
+  <Column id=group_label title="Quintil (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Personas en viviendas hacinadas (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+```sql hacinamiento_tenencia
+select * from ${hacinamiento_acceso} where breakdown = 'tenure'
+```
+
+### Hacinamiento por régimen de tenencia
+
+<DataTable data={hacinamiento_tenencia} rows=4>
+  <Column id=group_label title="Tenencia (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Personas en viviendas hacinadas (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+```sql hacinamiento_urbano
+select * from ${hacinamiento_acceso} where breakdown = 'deg_urb'
+```
+
+### Hacinamiento por grado de urbanización
+
+<DataTable data={hacinamiento_urbano} rows=3>
+  <Column id=group_label title="Zona (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Personas en viviendas hacinadas (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+El corte de tenencia no trae total nacional publicado: el total está en el
+corte de edad y en el de quintiles, y ambos deben coincidir. Son desgloses
+marginales: una tasa alta en alquiler de mercado no identifica que el
+alquiler cause el hacinamiento.
+
+```sql infraocupacion_acceso
+select breakdown, group_code, group_label, survey_year, rate_pct, status
+from access.underoccupation
+where survey_year = (select max(survey_year) from access.underoccupation where rate_pct is not null)
+order by breakdown, group_code
+```
+
+```sql infraocupacion_edad
+select * from ${infraocupacion_acceso} where breakdown = 'age'
+```
+
+### Infraocupación por edad
+
+<DataTable data={infraocupacion_edad} rows=4>
+  <Column id=group_label title="Edad (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Personas en viviendas infraocupadas (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+```sql infraocupacion_tenencia
+select * from ${infraocupacion_acceso} where breakdown = 'tenure'
+```
+
+### Infraocupación por tenencia
+
+<DataTable data={infraocupacion_tenencia} rows=3>
+  <Column id=group_label title="Tenencia (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Personas en viviendas infraocupadas (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+Una vivienda infraocupada no es una vivienda disponible: la
+infraocupación convive con hogares que no llegan a formarse y no implica
+voluntad de alquilar, vender o compartir. No se lee como reserva movilizable.
+
+```sql carga_mediana_acceso
+select breakdown, group_code, group_label, survey_year, rate_pct, status
+from access.burden_median
+where survey_year = (select max(survey_year) from access.burden_median where rate_pct is not null)
+order by breakdown, group_code
+```
+
+```sql carga_mediana_edad
+select * from ${carga_mediana_acceso} where breakdown = 'age'
+```
+
+### Carga mediana por edad
+
+<DataTable data={carga_mediana_edad} rows=4>
+  <Column id=group_label title="Edad (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Mediana de la carga (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+```sql carga_mediana_urbano
+select * from ${carga_mediana_acceso} where breakdown = 'deg_urb'
+```
+
+### Carga mediana por grado de urbanización
+
+<DataTable data={carga_mediana_urbano} rows=3>
+  <Column id=group_label title="Zona (etiqueta Eurostat)"/>
+  <Column id=survey_year title="Encuesta" fmt="0"/>
+  <Column id=rate_pct title="Mediana de la carga (%)" fmt="num1"/>
+  <Column id=status title="Bandera de calidad"/>
+</DataTable>
+
+La mediana describe el centro de la distribución de la carga, no el
+porcentaje de personas por encima del umbral del cuarenta por ciento: es
+el complemento de la tasa de sobrecarga, no su sustituto. Ninguna de estas
+tres tablas estima intervalos de muestreo ni identifica efectos.
 Los grupos de edad se solapan; no se suman ni promedian para obtener un total.
 
 Usamos el mismo último año de encuesta que los marginales, sin rellenar

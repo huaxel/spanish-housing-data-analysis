@@ -13,7 +13,13 @@ QUERIES = dict(re.findall(r"```sql (\w+)\n(.*?)\n```", PAGE.read_text(), re.DOTA
 
 def query(name):
     sql = QUERIES[name]
-    for source in ("cambios_acceso", "sobrecarga_acceso"):
+    for source in (
+        "cambios_acceso",
+        "sobrecarga_acceso",
+        "hacinamiento_acceso",
+        "infraocupacion_acceso",
+        "carga_mediana_acceso",
+    ):
         sql = sql.replace("${" + source + "}", f"({QUERIES[source]})")
     return sql
 
@@ -92,6 +98,28 @@ def database():
         "create table access.overburden_age_poverty(age_code varchar,age_label varchar,"
         "poverty_code varchar,poverty_label varchar,survey_year integer,rate_pct double,"
         "status varchar)"
+    )
+    for name in ("overcrowding", "underoccupation", "burden_median"):
+        con.execute(
+            f"create table access.{name}(breakdown varchar, group_code varchar,"
+            " group_label varchar, survey_year integer, rate_pct double, status varchar)"
+        )
+    con.execute(
+        "insert into access.overcrowding values"
+        " ('quant_inc', 'TOTAL', 'Total', 2025, 9.5, ''),"
+        " ('quant_inc', 'QU1', 'First quintile', 2025, NULL, 'u'),"
+        " ('tenure', 'RENT_MKT', 'Market rent', 2025, 12.1, ''),"
+        " ('deg_urb', 'DEG1', 'Cities', 2024, 10.9, 'b')"
+    )
+    con.execute(
+        "insert into access.underoccupation values"
+        " ('age', 'TOTAL', 'Total', 2025, 54.3, ''),"
+        " ('tenure', 'OWN', 'Owner', 2025, 60.1, '')"
+    )
+    con.execute(
+        "insert into access.burden_median values"
+        " ('age', 'TOTAL', 'Total', 2025, 10.4, ''),"
+        " ('deg_urb', 'DEG3', 'Rural areas', 2025, 9.1, '')"
     )
     con.execute(
         "insert into access.overburden_age_poverty values "
@@ -192,6 +220,21 @@ def test_national_burden_uses_latest_survey_year_without_backfilling(database):
     low = next(row for row in rows if row[1] == "QU1")
     assert low[-2:] == (None, "u")
     assert database.execute(query("sobrecarga_edad")).fetchone()[-1] == "b"
+
+
+def test_conditions_use_latest_year_per_table_without_backfilling(database):
+    assert database.execute(query("periodo_condiciones")).fetchone() == (2025,)
+    rows = database.execute(query("hacinamiento_quintil")).fetchall()
+    assert len(rows) == 2
+    assert all(row[3] == 2025 for row in rows)
+    low = next(row for row in rows if row[1] == "QU1")
+    assert low[-2:] == (None, "u")
+    assert database.execute(query("hacinamiento_urbano")).fetchall() == []
+    # stale 2024 deg_urb is not backfilled into the 2025 table maximum
+    rows = database.execute(query("infraocupacion_tenencia")).fetchall()
+    assert rows == [("tenure", "OWN", "Owner", 2025, 60.1, "")]
+    rows = database.execute(query("carga_mediana_urbano")).fetchall()
+    assert rows == [("deg_urb", "DEG3", "Rural areas", 2025, 9.1, "")]
 
 
 def test_ecv_selectors_and_null_suppression(database):
