@@ -58,6 +58,11 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_vacancy_alignment.json",
         "explorations/cadastre_vacancy_alignment.py",
     ),
+    (
+        "cadastre_household_alignment",
+        "artifacts/cadastre_household_alignment.json",
+        "explorations/cadastre_household_alignment.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2750,6 +2755,62 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_vacancy: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 18
+
+    ha = _model_output("artifacts/cadastre_household_alignment.json")
+    for desc, path, expected, tol in (
+        ("households census 2021", "city.census_households_2021", 266703, 0),
+        (
+            "households cadastre assigned",
+            "city.cadastre_properties_barrio_assigned",
+            323737,
+            0,
+        ),
+        ("households cadastre full", "city.cadastre_properties_full_extract", 327237, 0),
+        ("households sim joined", "city.sim_households_joined", 267970, 0),
+        (
+            "households props per census hh",
+            "city.properties_per_census_household",
+            1.227,
+            0.0005,
+        ),
+        (
+            "households props per sim hh",
+            "city.properties_per_sim_household",
+            1.2081,
+            0.0005,
+        ),
+        ("households joined barrios", "coverage.joined", 107, 0),
+        ("households sim barrios", "coverage.sim_barrios", 108, 0),
+        (
+            "households spearman props vs hh",
+            "alignment.spearman_properties_vs_households",
+            0.985398,
+            0.00005,
+        ),
+        (
+            "households median hog per prop",
+            "alignment.households_per_property_median",
+            0.8278,
+            0.0005,
+        ),
+        (
+            "households min hog per prop",
+            "alignment.households_per_property_min",
+            0.5769,
+            0.0005,
+        ),
+        (
+            "households max hog per prop",
+            "alignment.households_per_property_max",
+            1.257,
+            0.0005,
+        ),
+    ):
+        got = _json_path(ha, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_households: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 12
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

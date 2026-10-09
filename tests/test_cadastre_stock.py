@@ -767,3 +767,32 @@ def test_cadastre_vacancy_alignment_artifact_structure():
         d, f, p = row["sim_deshabitadas"], row["sim_family_dwellings"], row["cadastre_properties"]
         assert abs(row["sim_own_rate_pct"] - round(d / f * 100, 2)) < 1e-9
         assert abs(row["cadastre_referenced_rate_pct"] - round(d / p * 100, 2)) < 1e-9
+
+
+def test_cadastre_household_alignment_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_household_alignment.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    city = data["city"]
+    assert city["census_households_2021"] == 266703
+    assert city["cadastre_properties_full_extract"] == 327237
+    assert city["cadastre_properties_barrio_assigned"] == 323737.0
+    assert city["sim_households_joined"] == 267970
+    assert city["properties_per_census_household"] == 1.227
+    assert city["properties_per_sim_household"] == 1.2081
+    cov = data["coverage"]
+    assert cov["joined"] == 107
+    assert cov["sim_only_codes"] == ["05061"]
+    assert cov["cadastre_only_codes"] == []
+    ali = data["alignment"]
+    assert ali["spearman_properties_vs_households"] == 0.985398
+    assert ali["households_per_property_median"] == 0.8278
+    assert ali["households_per_property_min"] == 0.5769
+    assert ali["households_per_property_max"] == 1.257
+    # every per-barrio row must recompute from its inputs
+    for row in data["barrios"].values():
+        expect = row["sim_households_2021"] / row["cadastre_properties"]
+        assert abs(row["households_per_property"] - round(expect, 4)) < 1e-9
