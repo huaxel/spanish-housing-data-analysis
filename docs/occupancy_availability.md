@@ -32,7 +32,8 @@ large-holder or fiscal instrument, not a statistical series.
 | 4 | RMDVP municipal demandante counts (Andalucía) | Demand-side waiting-list proxy; monthly .xls twins | Municipal, 2020-12.. monthly | Pulled 2026-10-09 (table 01 → `rmdvp_inscripciones`) |
 | 5 | Catalan / Valencian vacant-dwelling registers | Large-holder vacancy signals, compliance scope | Regional, 2024–2026 | Context only |
 | 6 | IBI vacancy surcharges | Fiscal instruments, not data | Municipal ordinances, heterogeneous | No integration |
-| 7 | Idealista/data listings | Commercial-only; wrappers are ToS risk | Down to sección, weekly | Park |
+| 7 | Idealista/data listings | Commercial-only; wrappers are ToS risk | Down to sección, weekly | Park (commercial API confirmed 2026-10-09) |
+| 8 | Eustat EUV non-principal dwellings (Euskadi) | Only recurring small-holder vacancy cut (owner type × offer status) | Territorio histórico / size bands, biennial | Watch (series PDF-locked; HTML tables lack owner split) |
 
 ## 1. AEAT use split: habitual, rented, at owners' disposal
 
@@ -190,10 +191,41 @@ dependency and no grey-zone extraction in this pipeline.
   (AEAT "at disposal", MIVAU/census non-principal, consumption bands).
   Only the one-off 2020 consumption snapshot ever separated them, by
   assumption-laden bands.
-- Small-holder vacancy has no recurring measurement at all; the registers
-  exclude small holders by design and the census snapshot does not repeat.
+- Small-holder vacancy has no recurring national measurement at all; the
+  registers exclude small holders by design and the census snapshot does
+  not repeat. The one regional exception is the Basque EUV survey
+  (Euskadi-only, biennial) — see the second hunt round below.
 - Water-consumption vacancy beyond the 2020 census snapshot was not
   surveyed (utility publications unchecked).
+
+## Second hunt round (2026-10-09): small-holder vacancy + asking-stock
+
+Small-holder vacancy: the only genuine recurring measurement found is
+Eustat's Encuesta sobre el Uso de la Vivienda (EUV, Euskadi-only,
+biennial survey): it classifies non-principal dwellings by owner type
+(including private individuals) and market situation (on offer for sale
+or rent vs off-market "gestionable" stock). Verdict: watch, not pull.
+The machine-readable surface is two single-year cross-section tables
+with predictable CSV twins and no owner split; the gap-filling cuts
+(owner-type series, gestionable series) live in the PDF reports only.
+The Eustat databank node carries no dataset tables for this operation
+as of now. Even pulled, Euskadi-only survey data would be a context
+sidecar, never a mart join. Revisit when a new edition extends the
+downloadable tables. ECV was confirmed structurally blind (it samples
+principal dwellings only). The Basque deshabitada canon register is
+procedural (municipality-initiated, no public municipal series found) —
+context only, alongside the IBI surcharges.
+
+Asking-stock: park confirmed. Idealista listing microdata sits behind
+commercial request-access APIs; Fotocasa publishes survey-based
+perception reports (offer/demand participation, "ineffective demand")
+as web pages with no tabular series. Both duplicate existing price
+signals or measure perceptions, not counts — no integration. Two
+context-only notes for future work: Fotocasa's ineffective-demand
+framing complements RMDVP registered demand at national survey grain;
+CaixaBank's province deficit (household creation minus completions in
+several variants) is reproducible from public inputs already mostly in
+the marts — a possible future derived series, not a source pull.
 
 ## Bounded next implementation (conditional, not started)
 
