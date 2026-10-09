@@ -311,8 +311,11 @@ signals or measure perceptions, not counts — no integration. Two
 context-only notes for future work: Fotocasa's ineffective-demand
 framing complements RMDVP registered demand at national survey grain;
 CaixaBank's province deficit (household creation minus completions in
-several variants) is reproducible from public inputs already mostly in
-the marts — a possible future derived series, not a source pull.
+several variants) is now implemented as a derived series, not a source
+pull — see the [deficit exploration](explorations/deficit_vivienda.md).
+Reproduced: finished-dwellings variant from MIVAU VDP005 plus a
+tourist-adjusted partial; not reproduced: visados variant and the
+foreign-buyer adjustment.
 
 ## Bounded next implementation (status 2026-10-09)
 

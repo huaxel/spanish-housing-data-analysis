@@ -56,6 +56,7 @@ fetch:
 	uv run python scripts/fetch_aeat_viviendas.py
 	uv run python scripts/fetch_censo_secciones.py
 	uv run python scripts/fetch_rmdvp.py
+	uv run python scripts/fetch_mivau_terminadas.py
 	uv run python scripts/fetch_sevilla_income.py
 	uv run python scripts/build_sevilla_2021.py
 	uv run python scripts/build_ecv_joint.py
@@ -79,6 +80,7 @@ verify:
 	uv run python scripts/fetch_cadastre_stock.py --check
 	uv run python scripts/fetch_cadastre_capitals.py --check
 	uv run python scripts/fetch_cadastre_province.py --check
+	uv run python scripts/fetch_mivau_terminadas.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py --check
 	uv run python scripts/export_inference.py --check
@@ -149,6 +151,7 @@ analysis:
 	uv run python explorations/cadastre_malaga_barrios.py
 	uv run python explorations/cadastre_granada_distritos.py
 	uv run python explorations/censo_vintage.py
+	uv run python explorations/deficit_vivienda.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
 
@@ -165,6 +168,7 @@ stock-rent:
 	uv run python explorations/cadastre_province.py
 	uv run python explorations/cadastre_malaga_barrios.py
 	uv run python explorations/cadastre_granada_distritos.py
+	uv run python explorations/deficit_vivienda.py
 
 inference:
 	uv run python scripts/invert_tourist.py

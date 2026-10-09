@@ -84,6 +84,7 @@ COVERED_DOCS = [
     "docs/explorations/construction_probe.md",
     "docs/explorations/valor_referencia_probe.md",
     "docs/occupancy_availability.md",
+    "docs/explorations/deficit_vivienda.md",
 ]
 
 # Numbers that are structural, not results: doc/page counts, ports, sizes,

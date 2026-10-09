@@ -205,6 +205,7 @@
     "data/raw/ipc_ccaa.json": "3fc94f9c62597754edbbd4c41a30b7431967570484cadaec4947a049b2eb466d",
     "data/raw/ipv_ccaa_anual.json": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
+    "data/raw/mivau_iniciadas_terminadas.csv": "42a7fed7f1a33efb3699b87736bd5aacd3b5b9159ec21c3d7aabe36899b501b2",
     "data/raw/padron_ccaa.json": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
     "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
     "data/raw/padron_municipios_all_2854.json": "0a11b8d9649006798ce21b4f1d57f18a84efb2e98f220b553bafd14bde2d21cf",
@@ -415,6 +416,7 @@
     "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b",
     "data/raw/parquet/ipv_ccaa_anual.parquet": "6dc32de53a18850f11773834b7455a1ecda921b88d8916687f5e9324167e9c34",
     "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
+    "data/raw/parquet/mivau_terminadas.parquet": "a389a7908aae315baf6bebb7c6fe4bdb150c5434f374de7eed9d666e7a7489d9",
     "data/raw/parquet/padron_ccaa.parquet": "495e970541579aa086c3f0ddf760b600734f4b73d672a1fec2aa8e844e07cf4d",
     "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed",
     "data/raw/parquet/padron_extranjeros_origen.parquet": "e3157a1c4fffc5ca5ed4002ecc8e5a6051b13f68e0470f8b2b3590f86b5fc417",
@@ -1746,6 +1748,12 @@
       "api": "wstempus/DATOS_TABLA/24322",
       "operation": "EM flujos"
     },
+    "data/raw/mivau_iniciadas_terminadas.csv": {
+      "accessed": "2026-10-09",
+      "note": "Monthly iniciadas/terminadas by regime and CPRO; missing months kept null",
+      "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP005_01.csv"
+    },
     "data/raw/padron_ccaa.json": {
       "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/2853",
@@ -2839,6 +2847,11 @@
       "api": "wstempus/DATOS_TABLA/24322",
       "note": "Ambos sexos, Total edad; annual (FK_Periodo 28) only",
       "operation": "EM flujos"
+    },
+    "data/raw/parquet/mivau_terminadas.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Derived from pinned mivau_iniciadas_terminadas.csv by fetch_mivau_terminadas.py",
+      "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)"
     },
     "data/raw/parquet/padron_ccaa.parquet": {
       "accessed": "2026-10-08",

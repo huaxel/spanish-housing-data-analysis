@@ -123,6 +123,11 @@ MODEL_FRESHNESS = [
         "artifacts/panel_tourist.json",
         "explorations/panel_tourist.py",
     ),
+    (
+        "deficit_vivienda",
+        "artifacts/deficit_vivienda.json",
+        "explorations/deficit_vivienda.py",
+    ),
 ]
 
 
@@ -3484,6 +3489,42 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_adjusted: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 38
+    dv = _model_output("artifacts/deficit_vivienda.json")
+    for desc, path, expected, tol in (
+        ("deficit v2 2021-2024", "windows.2021-2024.national.deficit_v2", 646035, 0),
+        ("deficit v2 2021-2025", "windows.2021-2025.national.deficit_v2", 804905, 0),
+        ("deficit v3p 2021-2024", "windows.2021-2024.national.deficit_v3p", 591068, 0),
+        ("deficit v3p 2021-2025", "windows.2021-2025.national.deficit_v3p", 796637, 0),
+        ("deficit top5 share 2021-2024", "windows.2021-2024.national.top5_share", 0.49, 0.00005),
+        ("deficit benchmark v2 2021-2024", "windows.2021-2024.benchmark.caixabank_v2", 600000, 0),
+        ("deficit benchmark v2 2021-2025", "windows.2021-2025.benchmark.caixabank_v2", 734000, 0),
+        ("deficit delta v2 2021-2024", "windows.2021-2024.benchmark.delta", 46035, 0),
+        ("deficit delta v2 2021-2025", "windows.2021-2025.benchmark.delta", 70905, 0),
+    ):
+        got = _json_path(dv, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] deficit_vivienda: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 9
+    # List-integrity checks (ranking order, exception set): verified and
+    # printed, but intentionally outside the value-claim denominator — the
+    # doc-number audit matches numeric expectations only.
+    for desc, path, expected in (
+        (
+            "deficit top5 keys 2021-2024",
+            "windows.2021-2024.national.top5_keys",
+            ["28", "08", "46", "03", "30"],
+        ),
+        (
+            "deficit negatives 2021-2024",
+            "windows.2021-2024.national.negative_keys",
+            ["42"],
+        ),
+    ):
+        got = _json_path(dv, path)
+        ok = got == expected
+        print(f"[{'OK' if ok else 'FAIL'}] deficit_vivienda: {desc} = {got} (doc: {expected})")
+        failures += not ok
     print(f"{total - failures}/{total} claims hold")
     fresh_failures = check_freshness()
     total += len(MODEL_FRESHNESS)
