@@ -28,7 +28,7 @@ large-holder or fiscal instrument, not a statistical series.
 | --- | --- | --- | --- | --- |
 | 1 | AEAT viviendas declaradas en IRPF, use split | Strongest recurring occupancy composition | CCAA + provincia (+ municipal rentals); annual tax year, 2024 latest | Integration design |
 | 2 | Censo 2021 inframunicipal dwellings/persons/households | Section-grain occupancy from one aligned source; 2021 vintage aging | Sección censal, 2021-01-01 | Verify-and-pull design |
-| 3 | MIVAU stock de vivienda nueva sin vender | Genuine availability, new segment only | CCAA + provincia, annual to 2025-12-31 | Smallest lift: provincial series |
+| 3 | MIVAU stock de vivienda nueva sin vender | Genuine availability, new segment only | CCAA + provincia, annual to 2025-12-31 | Park (PDF-only, no tabular endpoint; assessed 2026-10-09) |
 | 4 | RMDVP municipal demandante counts (Andalucía) | Demand-side waiting-list proxy; PDF-only | Municipal, 2025-03 verified live | Park (same rule as Valor de Referencia) |
 | 5 | Catalan / Valencian vacant-dwelling registers | Large-holder vacancy signals, compliance scope | Regional, 2024–2026 | Context only |
 | 6 | IBI vacancy surcharges | Fiscal instruments, not data | Municipal ordinances, heterogeneous | No integration |
@@ -91,6 +91,18 @@ and unsold — genuine availability, not a proxy. Limits: new segment only
 detail; an estimation methodology (completions minus sales), not a listing
 count; unsold does not mean affordable, habitable on arrival, or located
 where demand is.
+
+Series-pull assessment (2026-10-09): parked. The statistics page links
+only report PDFs (recent vintages plus a revised-series note) with no
+Excel, CSV or ODS endpoint; direct report downloads are bot-walled, so
+there is no reproducible fetch path, and the repo stack has no PDF-table
+tooling. A provincial annual series would mean hand-transcribing PDF
+tables year by year — grey-zone extraction under the same rule that
+parked the Valor de Referencia probe. Watch for a machine-readable
+series or request one before any integration. Data quirk for that day:
+several provinces and autonomous communities read zero in the latest
+table under a methodology note, so zeros must be treated as
+not-measured-or-suppressed, not as true zeros, before any use.
 
 ## 4. Protected-housing waiting lists: demand side, PDF-only
 
@@ -164,5 +176,6 @@ dependency and no grey-zone extraction in this pipeline.
    exclusion handling, use-priority semantics vs SERPAVI, annual cadence.
 2. Section-grain census pull design: indicator files plus cartography join
    keys, ratio definitions, 2021-vintage quarantine.
-3. MIVAU unsold-new provincial series: smallest lift, annual PDF table.
+3. MIVAU unsold-new provincial series: assessed 2026-10-09, parked
+   (PDF-only, no tabular endpoint, bot-walled downloads).
 4. RMDVP watch: tabular endpoint or formal machine-readable request.
