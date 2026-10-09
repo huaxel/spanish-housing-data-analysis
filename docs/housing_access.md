@@ -81,8 +81,9 @@ share above 40% of household disposable income after total housing costs).
 That would be a distinct rent-to-income proxy, not observed burden. On proxy
 feasibility: the rent side already exists in the marts (SERPAVI municipal
 medians, 2011–2024; see the SERPAVI probe), while the income side (ADRH
-municipal net income per household and per person, 2015–2023 series with CSV
-downloads) is not yet pulled. The year overlap is 2015–2023. A ratio of
+municipal net income per household and per person) is now pulled as a
+standalone series (`fetch_adrh.py`, 2015–2023). The year overlap is
+2015–2023. A ratio of
 median contract rent to mean household income would be mechanically feasible
 but carries hard incompatibilities: SERPAVI medians describe new and rolling
 tax-deposit contracts, not the sitting-tenant stock, and are suppressed in

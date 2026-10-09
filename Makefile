@@ -57,6 +57,7 @@ fetch:
 	uv run python scripts/fetch_censo_secciones.py
 	uv run python scripts/fetch_rmdvp.py
 	uv run python scripts/fetch_mivau_terminadas.py
+	uv run python scripts/fetch_adrh.py
 	uv run python scripts/fetch_sevilla_income.py
 	uv run python scripts/build_sevilla_2021.py
 	uv run python scripts/build_ecv_joint.py
@@ -81,6 +82,7 @@ verify:
 	uv run python scripts/fetch_cadastre_capitals.py --check
 	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/fetch_mivau_terminadas.py --check
+	uv run python scripts/fetch_adrh.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py --check
 	uv run python scripts/export_inference.py --check
