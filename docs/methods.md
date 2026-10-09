@@ -111,6 +111,13 @@
   series. The 2021 table (viewer tpx=59521, browser-exported via
   playwright-cli — no static CSV exists) cross-checks the embedded rebase:
   provincial totals agree within 0.77% everywhere (build fails past 1.0%).
+  The 2001/2011 table (jaxi CENSOPV nal02, pinned) anchors the series ends:
+  43 provinces resolve directly, 7 single-province CCAA at CCAA grain and
+  Ceuta+Melilla aggregated — provincial totals agree within 1.28%
+  (Málaga 2001) and 0.51% (Cáceres 2011); build fails past 2.0%. CCAA
+  aggregates match their province sums to one dwelling (three 2011 unit
+  diffs are publisher rounding) and the nacional total reconciles exactly,
+  both years.
   The 2021 *tipo* split is NOT checked: census occupancy-based
   principal/no-principal diverges definitionally from MIVAU modelled
   stock (up to ~20% on no-principal) — totals anchor, splits don't.

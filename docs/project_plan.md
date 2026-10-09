@@ -26,7 +26,7 @@ explicit extensions, not v1.
 | 1 | MIVAU Parque de Viviendas (VDP002_01, CSV) | Pinned, in marts |
 | 2 | INE IPV medias anuales CCAA (Tempus3 80271) | Pinned, in marts |
 | 3 | INE Padrón Revisión (Tempus3 2852/2853, 1996–2021) | Pinned, in marts |
-| 4 | INE Censo viviendas 2001/2011 (jaxi CSV) | Pinned, anchor checks pending |
+| 4 | INE Censo viviendas 2001/2011 (jaxi CSV) | DONE 2026-10-09 — build anchor vs parque 2001/2011 (worst gaps 1.28%/0.51%, fail past 2.0%) + 4 audit pins |
 | 5 | INE ECP población (2022+) | DONE 2026-10-06 — CCAA/nacional (56940); provincial (56945) API-blocked, see sources |
 | 6 | MIVAU valor tasado (€/m² levels) | DONE 2026-10-06 — Libre annual means in marts (prov + CCAA), 0.95 YoY corr vs IPV |
 | 7 | Households | DONE 2026-10-06 — ECP hogares 2021+ with tamaño detail (`viv_por_hogar`, `share_1persona`); ECH annual pre-2021 + census anchors queued |

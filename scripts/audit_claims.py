@@ -1296,6 +1296,38 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.03,
     ),
     (
+        "anchor",
+        "censo2001 total dwellings",
+        "SELECT SUM(viviendas) FROM censo2001_2011_viviendas WHERE periodo = 2001",
+        20946554.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "censo2011 total dwellings",
+        "SELECT SUM(viviendas) FROM censo2001_2011_viviendas WHERE periodo = 2011",
+        25208623.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "censo2001 worst provincial gap vs parque 2001 (%)",
+        "SELECT MAX(ABS(c.viviendas - m.viviendas_total) * 100.0 / m.viviendas_total) "
+        "FROM censo2001_2011_viviendas c JOIN mart_provincia_anual m "
+        "ON c.cpro = m.cpro AND c.periodo = m.anyo WHERE c.periodo = 2001",
+        1.28,
+        0.03,
+    ),
+    (
+        "anchor",
+        "censo2011 worst provincial gap vs parque 2011 (%)",
+        "SELECT MAX(ABS(c.viviendas - m.viviendas_total) * 100.0 / m.viviendas_total) "
+        "FROM censo2001_2011_viviendas c JOIN mart_provincia_anual m "
+        "ON c.cpro = m.cpro AND c.periodo = m.anyo WHERE c.periodo = 2011",
+        0.51,
+        0.03,
+    ),
+    (
         "barcelona",
         "Barcelona city real sale change 2013-24",
         _bcn_real_sql("Barcelona"),

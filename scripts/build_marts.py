@@ -22,6 +22,7 @@ Join rules (see docs/methods.md):
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -124,6 +125,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/ech_hogares.parquet",
     "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/censo2021_intensidad.parquet",
+    "data/raw/parquet/censo_viviendas_2001_2011.parquet",
     "data/raw/parquet/serpavi_municipal.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
@@ -246,6 +248,142 @@ def annualize_valor(rows: list[dict]) -> dict[tuple[str, int, str], dict]:
             raise SystemExit(f"valor tasado: unclassifiable row {r}")
         buckets.setdefault((key, int(r["Año"]), r["Régimen"]), []).append(float(r["Valor"]))
     return {k: {"eur_m2": round(sum(v) / len(v), 1), "n_trim": len(v)} for k, v in buckets.items()}
+
+
+def census_0111_anchor_rows(census_rows, cpro_by_prov, cpro_ccaa):
+    """Map 2001/2011 census dwelling rows to (cpro, periodo) totals.
+
+    census_rows: raw dicts with 'Provincias', 'Comunidades y Ciudades
+    Autónomas', 'Tipo de vivienda', 'Periodo', 'Total' (dot-thousands).
+    cpro_by_prov: muni_key(provincia) -> cpro from the mart names.
+    cpro_ccaa: cpro -> ccaa (CPRO_CCAA).
+    Grain rules: 43 provinces resolve through cpro_by_prov; the 7
+    single-province CCAA resolve through their CCAA row; Ceuta + Melilla
+    aggregate to '51+52'. Multi-province CCAA rows duplicate their
+    provinces and are consistency-checked, never counted.
+    Returns [{"cpro", "periodo", "viviendas", "grano"}]. Gaps against
+    the mart are computed by the caller. SystemExit on empty/unparsable
+    cells, unknown labels, structural drift, or internal inconsistency
+    beyond one dwelling (the published file rounds three 2011 CCAA
+    aggregates — Aragón, Galicia, País Vasco — by a single dwelling).
+    """
+    from spanish_housing.muni_names import muni_key as _mk
+
+    def _total(raw, where):
+        raw = (raw or "").strip()
+        if not re.fullmatch(r"\d{1,3}(\.\d{3})*", raw):
+            raise SystemExit(f"censo0111: unparsable Total {raw!r} at {where}")
+        return int(raw.replace(".", ""))
+
+    tipos = {r["Tipo de vivienda"] for r in census_rows}
+    expected_tipos = {
+        "Total viviendas principales (2.1)",
+        "Total viviendas no principales (2.2)",
+    }
+    if tipos != expected_tipos:
+        raise SystemExit(f"censo0111: tipo drift {sorted(tipos)}")
+    prov_tot, ccaa_tot, nacional = {}, {}, {}
+    for r in census_rows:
+        try:
+            periodo = int(r["Periodo"])
+        except (TypeError, ValueError):
+            raise SystemExit(f"censo0111: periodo drift {r['Periodo']!r}") from None
+        if periodo not in (2001, 2011):
+            raise SystemExit(f"censo0111: periodo drift {r['Periodo']!r}")
+        where = (r["Provincias"], r["Comunidades y Ciudades Autónomas"], r["Periodo"])
+        value = _total(r["Total"], where)
+        if r["Provincias"]:
+            key = (r["Provincias"], periodo)
+            prov_tot[key] = prov_tot.get(key, 0) + value
+        elif r["Comunidades y Ciudades Autónomas"]:
+            key = (r["Comunidades y Ciudades Autónomas"], periodo)
+            ccaa_tot[key] = ccaa_tot.get(key, 0) + value
+        else:
+            nacional[periodo] = nacional.get(periodo, 0) + value
+    if set(nacional) != {2001, 2011}:
+        raise SystemExit(f"censo0111: nacional periods {sorted(nacional)}")
+    groups: dict[str, list[str]] = {}
+    for cpro, ccaa in cpro_ccaa.items():
+        groups.setdefault(_mk(ccaa), []).append(cpro)
+    singles = {key: cpros[0] for key, cpros in groups.items() if len(cpros) == 1}
+    rows = []
+    for (label, periodo), value in prov_tot.items():
+        cpro = cpro_by_prov.get(_mk(label))
+        if cpro is None:
+            raise SystemExit(f"censo0111: unmapped provincia {label!r}")
+        rows.append({"cpro": cpro, "periodo": periodo, "viviendas": value, "grano": "provincia"})
+    covered = {(r["cpro"], r["periodo"]) for r in rows}
+    city_tot = {}
+    for (label, periodo), value in ccaa_tot.items():
+        key = _mk(label)
+        if key in singles:
+            cpro = singles[key]
+            if (cpro, periodo) in covered:
+                raise SystemExit(f"censo0111: {label!r} double-counted at both grains")
+            covered.add((cpro, periodo))
+            rows.append(
+                {
+                    "cpro": cpro,
+                    "periodo": periodo,
+                    "viviendas": value,
+                    "grano": "ccaa_uniprovincial",
+                }
+            )
+        elif key in ("CEUTA", "MELILLA"):
+            city_tot[(key, periodo)] = city_tot.get((key, periodo), 0) + value
+        # multi-province CCAA rows: provinces already counted; checked below
+    for city in ("CEUTA", "MELILLA"):
+        for periodo in (2001, 2011):
+            if (city, periodo) not in city_tot:
+                raise SystemExit(f"censo0111: missing {city} {periodo}")
+    for periodo in (2001, 2011):
+        rows.append(
+            {
+                "cpro": "51+52",
+                "periodo": periodo,
+                "viviendas": city_tot[("CEUTA", periodo)] + city_tot[("MELILLA", periodo)],
+                "grano": "ceuta_melilla",
+            }
+        )
+    valid = set(cpro_by_prov.values()) | {"51+52"}
+    for r in rows:
+        if r["cpro"] not in valid:
+            raise SystemExit(f"censo0111: cpro {r['cpro']} outside the mart")
+    prov_ccaa: dict[tuple[str, int], int] = {}
+    for r in rows:
+        if r["grano"] != "provincia":
+            continue
+        ccaa = cpro_ccaa.get(r["cpro"])
+        if ccaa is None:
+            raise SystemExit(f"censo0111: cpro {r['cpro']} has no CCAA")
+        key = (_mk(ccaa), r["periodo"])
+        prov_ccaa[key] = prov_ccaa.get(key, 0) + r["viviendas"]
+    multi = {key for key, cpros in groups.items() if len(cpros) > 1}
+    for (label, periodo), value in ccaa_tot.items():
+        key = _mk(label)
+        if key in singles or key in ("CEUTA", "MELILLA"):
+            continue
+        if key not in multi:
+            raise SystemExit(f"censo0111: unknown CCAA grain {label!r}")
+        if abs(value - prov_ccaa.get((key, periodo), 0)) > 1:
+            raise SystemExit(f"censo0111: {label!r} {periodo} disagrees with its provinces")
+    for periodo in (2001, 2011):
+        parts = sum(r["viviendas"] for r in rows if r["periodo"] == periodo)
+        if parts != nacional.get(periodo):
+            raise SystemExit(
+                f"censo0111: nacional mismatch {periodo}: parts={parts} row={nacional.get(periodo)}"
+            )
+    return rows
+
+
+# Worst census-vs-parque provincial gap that still builds. Catches
+# unit/mapping corruption (orders of magnitude) while tolerating
+# census-vs-modelled-series definitional differences (observed worst
+# 1.28% Málaga 2001, 0.51% Cáceres 2011). Residual blind spot: a same-CCAA
+# swap of two similarly-sized provinces (or a uniform <=2% level bias)
+# preserves the CCAA sums and nacional reconciliations and slips under this
+# threshold — narrow, since most same-CCAA pairs differ greatly in size.
+CENSO_0111_MAX_GAP_PCT = 2.0
 
 
 def main() -> None:
@@ -1411,6 +1549,31 @@ def main() -> None:
         pa.Table.from_pylist(load_parquet("censo2021_viviendas.parquet")),
     )
     con.execute("CREATE OR REPLACE TABLE censo2021_viviendas AS SELECT * FROM cen21_df")
+    # Fourth anchor: 2001/2011 census totals vs parque 2001/2011 (series ends).
+    # Same discipline as 2021, looser threshold: the modelled intercensal
+    # series drifts further from the older benchmarks.
+    anchor0111 = census_0111_anchor_rows(
+        load_parquet("censo_viviendas_2001_2011.parquet"), cpro_by_prov, CPRO_CCAA
+    )
+    cen0111 = {(r["cpro"], r["periodo"]): r["viviendas"] for r in anchor0111}
+    for yr in (2001, 2011):
+        yr_gaps = {}
+        for r in prov_rows:
+            if r["anyo"] != yr:
+                continue
+            key = (r["cpro"], yr)
+            c = cen0111.get(key)
+            if c is None:
+                raise SystemExit(f"censo0111 anchor missing {key}")
+            yr_gaps[key] = abs(c - r["viviendas_total"]) / r["viviendas_total"] * 100
+        if len(yr_gaps) != 51:
+            raise SystemExit(f"censo0111 anchor covers {len(yr_gaps)} units for {yr}, want 51")
+        worst0111 = max(yr_gaps.items(), key=lambda kv: kv[1])
+        print(f"censo{yr} anchor: 51 units, worst gap {worst0111[1]:.2f}% ({worst0111[0][0]})")
+        if worst0111[1] >= CENSO_0111_MAX_GAP_PCT:
+            raise SystemExit(f"censo{yr} anchor drifted: {worst0111}")
+    con.register("cen0111_df", pa.Table.from_pylist(anchor0111))
+    con.execute("CREATE OR REPLACE TABLE censo2001_2011_viviendas AS SELECT * FROM cen0111_df")
     # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
     # electricity consumption. Municipal grain (named + Resto aggregates).
     con.register("inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet")))
@@ -1489,6 +1652,7 @@ def main() -> None:
         "censo2011_vintage",
         "censo2011_tenencia",
         "censo2021_viviendas",
+        "censo2001_2011_viviendas",
         "migra_anual",
         "padron_extranjeros",
         "padron_extranjeros_origen",
@@ -1508,6 +1672,8 @@ def main() -> None:
         " 2011 exact (censo tenencia totals, 51 provincias); viv_por_hogar NULL otherwise",
         "censo2021_anchor": "provincial totals vs parque 2021, worst gap <1.0% (tipo split"
         " diverges definitionally, unchecked)",
+        "censo0111_anchor": "provincial totals vs parque 2001/2011, worst gaps 1.28%/0.51%"
+        " (<2.0%; CCAA sums match provinces to 1 dwelling; nacional reconciles exactly)",
         "padron_extranjeros_window": "1998-2022 annual foreign stocks by provincia"
         " (TOTAL EXTRANJEROS x Ambos sexos; Bartik shares base)",
         "migracion_window": "2008-2021 annual foreign/Spanish inflows by provincia"
