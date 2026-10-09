@@ -23,8 +23,10 @@ strict parcel-reference, reversed-date and area-definition guards.
 
 ## Grain and limits
 
-Municipal grain only. `barrio_id` is NULL and `match_status` is
-"municipal_only": no barrio or district geometry layer is attempted for
-these cities. Footprint area and centroid are still measured per record. A
-per-city barrio join needs official local geometries and is tracked as
-follow-up work.
+Municipal grain for all three capitals, plus sub-municipal joins where
+official geometries exist: Málaga barrios (419 polygons, CC BY-SA 4.0)
+and Granada districts (8 polygons, CC-BY, reprojected ED50→ETRS89) live
+in the `barrios` table with conservative match statuses; Córdoba stays
+municipal (`barrio_id` NULL, `match_status` "municipal_only") pending
+licensed geometries. Footprint area and centroid are measured per record
+where the CRS allows (25829-zone records are attribute-only by design).

@@ -19,8 +19,7 @@ fetched to /tmp to verify schema). Per-city verdicts below.
 - Same dataset family offers Distrito Municipal and Distrito Censal as
   fallbacks. License note: BY-SA 4.0 share-alike applies to derived
   geometry products.
-- **Verdict: USABLE.** Next step: vendor the 25830 GeoJSON, build the
-  interior-point join, replicate per-barrio era profiles.
+- **Verdict: USABLE — JOINED.** See the [Málaga barrio profiles](cadastre_malaga_barrios.md).
 
 ## Granada: districts usable, barrios unclear
 
@@ -32,10 +31,8 @@ fetched to /tmp to verify schema). Per-city verdicts below.
   administrative zones, not statistical barrios.
 - What Granada calls "barrios" on the municipal site is the 8-district
   list; no official barrio-polygon layer was found.
-- **Verdict: DISTRICTS USABLE (8 units, coarse); sub-district only via
-  AA.VV. zones (101, non-statistical).** Decision needed before any join:
-  accept district grain or adopt AA.VV. zones with an explicit
-  non-comparability note vs Málaga/Sevilla barrios.
+- **Verdict: DISTRICTS JOINED (8 units).** See the [Granada district profiles](cadastre_granada_distritos.md);
+  sub-district only via AA.VV. zones (101, non-statistical) if ever needed.
 
 ## Córdoba: districts usable, barrios blocked
 
@@ -51,11 +48,9 @@ fetched to /tmp to verify schema). Per-city verdicts below.
   the Ayuntamiento covering both license and barrios, or census-section
   aggregation (not assessed here).
 
-## Recommendation
+## Recommendation (status 2026-10-09: done except Córdoba)
 
-Proceed Málaga first (barrio grain, clean licensing with share-alike
-noted, same CRS). Granada at district grain only after an explicit grain
-decision. Córdoba stays municipal until barrio polygons surface or a
-request succeeds. Each city's join needs its own geometry QA pass
-(overlap/gap checks like the Sevilla pilot) before any profile is
-published.
+Málaga joined at barrio grain and Granada at district grain, each with
+its own geometry QA and published profiles (see the relation sections
+of the respective exploration docs). Córdoba stays municipal until
+barrio polygons surface or a licensed request succeeds.

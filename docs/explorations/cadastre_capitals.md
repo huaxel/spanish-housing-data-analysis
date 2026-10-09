@@ -13,11 +13,11 @@ properties — not measured dwelling ages. Artifact:
 ## Method
 
 The three capital archives (33.6 / 14.2 / 25.2 MB) are parsed with the same
-GML record logic as the Sevilla pilot; only the barrio/district geometry
-join is absent, so this is strictly municipal grain (`barrio_id` NULL,
-`match_status` "municipal_only" — 109,582 BU records total, 91,232 with a
-positive housing-property count). A per-city barrio join needs official
-local geometries and is tracked separately.
+GML record logic as the Sevilla pilot; at the time of writing the join
+was absent, so this comparison is municipal grain (109,582 BU records
+total, 91,232 with a positive housing-property count). Málaga barrio and
+Granada district joins have since landed in `stock_capitals.duckdb` with
+their own profiles (see below); Córdoba stays municipal.
 
 | City (CAT→INE) | Records | Housing properties | Missing-year share |
 |---|---|---|---|
@@ -48,8 +48,9 @@ is what differs.
 
 ## Limitations
 
-- Municipal grain only: no within-city geography (barrio join pending
-  official local geometries).
+- Municipal grain for the comparison, with Málaga barrio and Granada
+district profiles published separately (see below); Córdoba stays
+  municipal pending licensed geometries.
 - CAT municipality codes differ from INE codes (mapped explicitly above);
   mixing them up silently reassigns cities — the fetch pins both.
 - Same record-date proxy limitations as the [era profile](cadastre_eras.md):
