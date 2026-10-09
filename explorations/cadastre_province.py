@@ -44,6 +44,16 @@ def profile(rows: list[tuple]) -> dict:
     total = sum(p for _y, p, _f in rows)
     dated = [(y, p, f) for y, p, f in rows if y is not None]
     dated_props = sum(p for _y, p, _f in dated)
+    if not dated:
+        return {
+            "n_records": len(rows),
+            "total_properties": total,
+            "dated_properties": 0,
+            "missing_property_pct": None,
+            "median_year_property_weighted": None,
+            "era_share_pct": {label: None for _, _, label in ERAS},
+            "median_m2_per_property": None,
+        }
     era_counts = {label: 0 for _, _, label in ERAS}
     for y, p, _f in dated:
         era_counts[era_of(y)] += p
@@ -80,7 +90,7 @@ def main():
     statuses = {
         r[0]: r[1]
         for r in con.execute(
-            "select ine_municipality, string_agg(distinct match_status, '+') "
+            "select ine_municipality, string_agg(distinct match_status, '+' order by match_status) "
             "from prov.buildings group by ine_municipality"
         ).fetchall()
     }

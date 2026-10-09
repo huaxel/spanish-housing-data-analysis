@@ -247,10 +247,11 @@ def granada_districts() -> list[dict]:
         rings = []
         for ring in parts:
             rings.append([list(datum.ed50_utm30_to_etrs89_utm30(x, y)) for x, y in ring])
-        flat = rings
-        for ring in flat:
-            geom.validate_ring([list(p) for p in ring])
-        box = geom.bbox([flat])
+        polys = [[ring] for ring in rings]
+        for poly in polys:
+            for ring in poly:
+                geom.validate_ring([list(p) for p in ring])
+        box = geom.bbox(polys)
         if not (435000 < box[0] < box[2] < 460000 and 4105000 < box[1] < box[3] < 4125000):
             raise ValueError("Granada district coordinates out of expected range")
         area = component_area = overlap = None
@@ -258,7 +259,7 @@ def granada_districts() -> list[dict]:
         quality, note = "invalid_topology", ""
         try:
             normalized, component_area, area = geom.dissolve_source_geojson(
-                {"type": "Polygon", "coordinates": flat}
+                {"type": "MultiPolygon", "coordinates": polys}
             )
             polygons = geom.geojson_polygons(normalized)
             overlap = component_area - area

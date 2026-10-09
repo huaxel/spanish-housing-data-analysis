@@ -971,3 +971,23 @@ def test_cadastre_granada_distritos_artifact_structure():
     for row in data["barrios"].values():
         total = sum(row[label] for label in data["eras"])
         assert abs(total - 100.0) < 0.5
+
+
+def test_cadastre_province_profile_guards():
+    spec = importlib.util.spec_from_file_location(
+        "cadastre_province", ROOT / "explorations" / "cadastre_province.py"
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    empty = mod.profile([])
+    assert empty["dated_properties"] == 0
+    assert empty["median_year_property_weighted"] is None
+    assert all(v is None for v in empty["era_share_pct"].values())
+    undated = mod.profile([(None, 5, 100.0), (None, 3, 50.0)])
+    assert undated["total_properties"] == 8
+    assert undated["dated_properties"] == 0
+    assert undated["median_year_property_weighted"] is None
+    normal = mod.profile([(1980, 2, 200.0), (2000, 2, 300.0)])
+    assert normal["median_year_property_weighted"] == 1990.0
+    assert normal["missing_property_pct"] == 0.0

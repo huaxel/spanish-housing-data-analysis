@@ -292,7 +292,7 @@ def metadata(pins: dict, mapping: list[dict]) -> dict:
             sort_keys=True,
         ),
         "script_sha": manifest.sha256(Path(__file__)),
-        "parser_sha": manifest.sha256(Path(cap.__file__)),
+        "parser_sha": manifest.sha256(Path(sev.__file__)),
         "geometry_sha": manifest.sha256(Path(geom.__file__)),
         "geometry_engine": geom.ENGINE_VERSION,
     }

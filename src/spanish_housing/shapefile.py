@@ -3,8 +3,8 @@
 Supports exactly what the Granada district layer needs: shape type 5
 (Polygon) with 2D finite coordinates, plus dBase III attribute tables
 with C/N field types. Anything else -- Z/M coordinates, other shape
-types, memo fields, missing .shx index agreement -- fails loudly instead
-of being silently coerced. Attribute text is decoded as Windows-1252
+types, memo fields, .shx index disagreement, soft-deleted rows -- fails
+loudly instead of being silently coerced. Attribute text is decoded as Windows-1252
 (the usual Spanish-administration encoding for these files); names that
 do not round-trip are a loud error at join time, not here.
 """
@@ -49,6 +49,8 @@ def read_dbf(path: str | Path) -> tuple[list[str], list[dict]]:
         rec = raw[body + i * reclen : body + (i + 1) * reclen]
         if len(rec) != reclen:
             raise ValueError("Truncated DBF record")
+        if rec[0:1] == b"*":
+            raise ValueError("Soft-deleted DBF row: attribute/geometry join would be ambiguous")
         values = {}
         at = 1
         for name, kind, length, _decimals in fields:
@@ -63,18 +65,26 @@ def read_dbf(path: str | Path) -> tuple[list[str], list[dict]]:
     return names, records
 
 
-def read_shp_polygons(path: str | Path) -> list[list[list[list[float]]]]:
-    """Read Polygon shapes as lists of parts, each a list of linear rings."""
-    raw = Path(path).read_bytes()
+def check_shx(base: str | Path, offsets: list[int], count: int) -> None:
+    """Validate the .shx spatial index against the walked .shp offsets."""
+    raw = Path(str(base) + ".shx").read_bytes()
     if struct.unpack(">i", raw[0:4])[0] != 9994:
-        raise ValueError("SHP file code is not 9994")
-    if struct.unpack("<i", raw[28:32])[0] != 1000:
-        raise ValueError("SHP version is not 1000")
-    if struct.unpack("<i", raw[32:36])[0] != 5:
-        raise ValueError("SHP shape type is not Polygon")
+        raise ValueError("SHX file code is not 9994")
+    entries = (len(raw) - 100) // 8
+    if (len(raw) - 100) % 8 or entries != count:
+        raise ValueError("SHX record count disagrees with SHP")
+    for i in range(count):
+        offset_words = struct.unpack(">i", raw[100 + 8 * i : 104 + 8 * i])[0]
+        if offset_words * 2 != offsets[i]:
+            raise ValueError("SHX offset disagrees with SHP record position")
+
+
+def _walk_shapes(raw: bytes) -> tuple[list[int], list]:
     shapes = []
+    offsets = []
     pos = 100
     while pos < len(raw):
+        offsets.append(pos)
         reclen_words = struct.unpack(">i", raw[pos + 4 : pos + 8])[0]
         content = raw[pos + 8 : pos + 8 + reclen_words * 2]
         if len(content) != reclen_words * 2:
@@ -102,13 +112,40 @@ def read_shp_polygons(path: str | Path) -> list[list[list[list[float]]]]:
             parts.append(ring)
         shapes.append(parts)
         pos += 8 + reclen_words * 2
+    return offsets, shapes
+
+
+def read_shp_polygons(path: str | Path) -> list[list[list[list[float]]]]:
+    """Read Polygon shapes as lists of parts, each a list of linear rings."""
+    raw = Path(path).read_bytes()
+    try:
+        file_code = struct.unpack(">i", raw[0:4])[0]
+        version = struct.unpack("<i", raw[28:32])[0]
+        shape_type = struct.unpack("<i", raw[32:36])[0]
+    except struct.error as error:
+        raise ValueError(f"Truncated SHP header: {error}") from error
+    if file_code != 9994:
+        raise ValueError("SHP file code is not 9994")
+    if version != 1000:
+        raise ValueError("SHP version is not 1000")
+    if shape_type != 5:
+        raise ValueError("SHP shape type is not Polygon")
+    try:
+        _offsets, shapes = _walk_shapes(raw)
+    except struct.error as error:
+        raise ValueError(f"Malformed SHP binary content: {error}") from error
     return shapes
 
 
 def read_shapes(base: str | Path) -> list[tuple[dict, list]]:
     """Join .shp geometries with .dbf attributes by record order."""
     base = str(base)
-    shapes = read_shp_polygons(base + ".shp")
+    raw = Path(base + ".shp").read_bytes()
+    try:
+        offsets, shapes = _walk_shapes(raw)
+    except struct.error as error:
+        raise ValueError(f"Malformed SHP binary content: {error}") from error
+    check_shx(base, offsets, len(shapes))
     _names, records = read_dbf(base + ".dbf")
     if len(shapes) != len(records):
         raise ValueError("SHP/DBF record count mismatch")
