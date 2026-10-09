@@ -832,3 +832,23 @@ def test_cadastre_capitals_fetch_and_artifact():
     # era shares sum to ~100 per city
     for city in cities.values():
         assert abs(sum(city["era_share_pct"].values()) - 100.0) < 0.5
+
+
+def test_province_inventory_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "province_inventory.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    assert data["n_municipalities"] == 106
+    assert data["total_archive_bytes"] == 266942849
+    munis = data["municipalities"]
+    assert len(munis) == 106
+    # sorted largest-first; Sevilla city on top
+    assert munis[0]["title"] == "41900-SEVILLA buildings"
+    assert munis[0]["archive_bytes"] == 35431544
+    assert all(
+        munis[i]["archive_bytes"] >= munis[i + 1]["archive_bytes"] for i in range(len(munis) - 1)
+    )
+    assert sum(m["archive_bytes"] for m in munis) == data["total_archive_bytes"]

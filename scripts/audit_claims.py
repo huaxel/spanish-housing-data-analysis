@@ -64,6 +64,7 @@ MODEL_FRESHNESS = [
         "explorations/cadastre_household_alignment.py",
     ),
     ("cadastre_capitals", "artifacts/cadastre_capitals.json", "explorations/cadastre_capitals.py"),
+    ("province_inventory", "artifacts/province_inventory.json", "scripts/inventory_province.py"),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2837,6 +2838,19 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_capitals: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 16
+
+    pi = _model_output("artifacts/province_inventory.json")
+    for desc, path, expected, tol in (
+        ("province municipalities", "n_municipalities", 106, 0),
+        ("province total bytes", "total_archive_bytes", 266942849, 0),
+        ("province sevilla bytes", "municipalities.0.archive_bytes", 35431544, 0),
+        ("province dos hermanas bytes", "municipalities.1.archive_bytes", 14912472, 0),
+    ):
+        got = _json_path(pi, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] province_inventory: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 4
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (
