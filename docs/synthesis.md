@@ -168,6 +168,15 @@ floor area. Household context, current stock and rental contracts have different
 vintages, so this pilot does not establish a contemporary local stock-demand
 balance or retroactively predict rents.
 
+The pilot has since extended beyond Sevilla at municipal grain: the four
+capitals share the 1971–1990 construction peak (Granada strongest at 42.1%),
+while Sevilla province as a whole peaks a generation later in 1991–2010
+(35.6%), with the capital holding 36.7% of provincial properties. Málaga
+adds barrio detail and Granada district detail; Córdoba stays municipal
+pending licensed geometries. The era conclusions do not travel automatically:
+mid-century mass housing concentrates need in Sevilla, but other cities lack
+the condition layers to test that.
+
 The next substantive gap is matched-date, matched-geography stock, households
 and rent with occupancy/availability evidence—not another control added to
 these snapshots. [Stock methods](cadastre_stock.md) and

@@ -117,6 +117,7 @@ ALLOW = {
         (1.0, "Newborn reference age -1 maps to zero, official age convention"),
     ],
     "docs/synthesis.md": [
+        (1971.0, "construction-era boundary label"),
         (18083692.0, "2011 census household anchor (provenance, not a finding)"),
         (310.0, "municipios with tourist data (coverage count)"),
         (90.0, "affordability reference dwelling size (assumption, methods 2)"),

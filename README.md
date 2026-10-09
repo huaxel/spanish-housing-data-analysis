@@ -33,7 +33,7 @@ limitations. Causal estimation and price forecasting are extensions, not v1.
 - [Housing access: stock is not availability; averages are not household burdens](docs/housing_access.md) — explorer `/acceso/`, separate vintages, arithmetic sensitivity checks and national EU-SILC burden marginals
 - [Purchase scenarios: cash access and mortgage debt service](docs/purchase_scenarios.md) — explorer `/compra/`, explicit hypothetical inputs, no observed borrower claims
 - [Model uncertainty: effect sizes, approximate ranges and zero-null tests](docs/uncertainty.md) — explorer `/incertidumbre/`, no bootstrap intervals invented
-- [Physical-stock pilot: cadastral polygons, dates and areas](docs/cadastre_stock.md) — explorer `/stock/`, Sevilla; parcel-grouped records, explicit spatial coverage and no availability inference
+- [Physical-stock pilot: cadastral polygons, dates and areas](docs/cadastre_stock.md) — explorer `/stock/`, Sevilla capital plus Málaga/Granada/Córdoba capitals and Sevilla province; parcel-grouped records, explicit spatial coverage and no availability inference
 - [Synthesis: the answer in one place](docs/synthesis.md)
 - [Madrid capital vs corona: the south never recovered](docs/explorations/madrid_municipios.md)
 - [Censo Anual probe](docs/explorations/censo_anual_probe.md)
