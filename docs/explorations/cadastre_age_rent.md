@@ -31,7 +31,7 @@ rent but no housing-bearing dated records in the cadastre extract.
 | Pearson, same pair | −0.138 |
 
 The Spearman value coincides with the record-date sensitivity published on
-the [stock page](../evidence-stock) (property-weighted median year), which
+the [stock page](../../evidence/pages/stock.md) (property-weighted median year), which
 is a consistency check, not an independent estimate.
 
 **Era-share correlations reveal the non-monotonicity** the single median
@@ -93,7 +93,7 @@ are both expensive. Construction age alone does not order rents.
 
 ## Relation to existing work
 
-The [stock page](../evidence-stock) already publishes the median-year vs
+The [stock page](../../evidence/pages/stock.md) already publishes the median-year vs
 rent scatter, its Spearman, district-centered rank correlation and
 district-omission sensitivity. This exploration adds the era-share
 decomposition, which shows why the single-median gradient is weak: old
