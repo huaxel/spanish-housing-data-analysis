@@ -4,6 +4,7 @@
     "data/processed/housing_access.duckdb": "46c1c89edce3319bb678028cbb288b793acc2dc1ca8c54aa8f703cd548cb69f0",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
     "data/processed/stock_capitals.duckdb": "990c720515a7ac8d83b09b05b66ff2e44a03bed5ccf40cb9956f146a26c7f136",
+    "data/processed/stock_province.duckdb": "0d4c7c035f977ca7151ab57fe7f26d3609c493eef069b36d0fafae5b24dd45f1",
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
     "data/raw/barrios_sevilla_compra.json": "1ce6e2978b40a5061bbbbd6eff0f428aa9aa9fc193f4742e463d2d89c3ea6d88",
     "data/raw/barrios_sevilla_ipra.json": "5f858d4bc5677ece95db93ee33f1a1c48f507d6beba76336accce2201365b387",
@@ -29,6 +30,112 @@
     "data/raw/cadastre_granada_feed.xml": "dd00be6649a1a28fda30289f92f412dbaecd119375b78bf5d49e110e49492a87",
     "data/raw/cadastre_malaga_buildings.zip": "50c8dd485c6c73943714a5d21e18877ffa7b4820657a177f8234d24d9cd88668",
     "data/raw/cadastre_malaga_feed.xml": "f84b966296f45729f3c4a8bc25627e6b7a447b1ebcb8fe1efef280b0383c3347",
+    "data/raw/cadastre_prov_41001_buildings.zip": "4863365e714f6f39a0b81c3006805df183863f9579c949da7f373810bdb2bd49",
+    "data/raw/cadastre_prov_41002_buildings.zip": "35b8cfacf6034b79b2bdaf06e1f2a7c1e34790fb1e90aecf6cc052168af2a290",
+    "data/raw/cadastre_prov_41003_buildings.zip": "a215c371afd8c4055bbbde2a101b869a810b474abf58b9553df099eb11b5a155",
+    "data/raw/cadastre_prov_41004_buildings.zip": "a950fa88ba583c83cdcb1aff90f53deb3856ebfb17c2e87faa733ae82f07d3f4",
+    "data/raw/cadastre_prov_41005_buildings.zip": "0f1cd794452f02e9ee80358979bac3becf906450c47c153febbb5aa955956aa0",
+    "data/raw/cadastre_prov_41006_buildings.zip": "b573310b115806a6f491c78add20dcfc5c5f6c92652d16cd7cf8867579c66b50",
+    "data/raw/cadastre_prov_41007_buildings.zip": "133069e57e6d12a3c18041ef5c9d37691e332dbbf11ae141f0e8762259739b26",
+    "data/raw/cadastre_prov_41008_buildings.zip": "24818d6c81002a18678e27c74bdc5dc0c393a8fb1ea68b1cbdf7224aa237cbb7",
+    "data/raw/cadastre_prov_41009_buildings.zip": "89aebb2303f45eaa13f308dbf575b291af52653a88d60eb9fe807bcbbdbbdd4c",
+    "data/raw/cadastre_prov_41010_buildings.zip": "6deeb02406609b572048fc9b53e33fff82fe8f5b3cc50473800a89402f4a8801",
+    "data/raw/cadastre_prov_41011_buildings.zip": "c902a7cce4aac9964d80d9eca432201f97b9a6fdd3b7f7e62ef78e7ec58ed295",
+    "data/raw/cadastre_prov_41012_buildings.zip": "a7a95c9319c12b4bb1599ca3dfd17769b889a9bb87e0d21abeb2eb3bed62e067",
+    "data/raw/cadastre_prov_41013_buildings.zip": "2a0f2ae61d9fd11371e0aca3782c7b3bcf5ef6b53cd030c90de4bf14f7846ea7",
+    "data/raw/cadastre_prov_41014_buildings.zip": "0f7d7b2a427a6ab6273aba038577b4d79e0fa20f4ea89684caf7fcdab80099fe",
+    "data/raw/cadastre_prov_41015_buildings.zip": "60a6de5393618a2ee9cafe1d3bff7fd980a5ddbab7e3ee6dd76b417009d6eb2d",
+    "data/raw/cadastre_prov_41016_buildings.zip": "99e58ea5be5a8a38d64ffd4111bd29b511d6218e6612a131843e1b73060a58ee",
+    "data/raw/cadastre_prov_41017_buildings.zip": "38505f5fae895b83606b139be804228ec7a56b5bda515e1327c04bb63357c174",
+    "data/raw/cadastre_prov_41018_buildings.zip": "1a445df2629cee7a8230128191874ee68074e129c4838a5d4872d135a6e0ada8",
+    "data/raw/cadastre_prov_41019_buildings.zip": "db58db7b1a87c7864292c29708dba64c8760a67f47610745f3ad84b97c0f4bd3",
+    "data/raw/cadastre_prov_41020_buildings.zip": "2e67f0a368b74fe0b2b2c554f94c7e09a0242192b463d0c957f2685e74cf0249",
+    "data/raw/cadastre_prov_41021_buildings.zip": "e6e059d65de0014c9a024e377eb6c4cc12b12a5c85204f8a1d0a052392c3664e",
+    "data/raw/cadastre_prov_41022_buildings.zip": "b4a0f23c3180682cc6f422b24db796ea37c0190ffd6311d53871bdc572b39478",
+    "data/raw/cadastre_prov_41023_buildings.zip": "15cb7a3490ea2ab7d165e4189312384859b24b8a57c1aa70498efce75320ef55",
+    "data/raw/cadastre_prov_41024_buildings.zip": "41419416d7f37bfb060c43b43f5783168fdbe8e0ecda21de6ccb2fe9778ae79c",
+    "data/raw/cadastre_prov_41025_buildings.zip": "bcca9b5eb122f6cdaa76f5173ae55fb02ba405d87feffb88d6b699fd649673f7",
+    "data/raw/cadastre_prov_41026_buildings.zip": "a9cc56886cbbd89077a2f483cec360d1c0a4e3855291f908a77fa309e6da71db",
+    "data/raw/cadastre_prov_41027_buildings.zip": "6fced10b2908bc7eab08a579bb50e6eed946364bc890a4694d7b1fcf77357e85",
+    "data/raw/cadastre_prov_41028_buildings.zip": "f05888a6435230c423775013657a744555fe44f062d19365bfc9011a863dd451",
+    "data/raw/cadastre_prov_41029_buildings.zip": "c567bebf701c29f69e37610a7a14ac1c65bcc0d7c0321eeab97d839e6fedeb84",
+    "data/raw/cadastre_prov_41030_buildings.zip": "c3ebc6101eecd8cebfe9baef43430204ddf89b592a0bf0b20800bcf50085efa2",
+    "data/raw/cadastre_prov_41031_buildings.zip": "5d026eedcb1343f2fafe3d298a21dd25cd725f625aa1b99c5d92150e1adaa0f6",
+    "data/raw/cadastre_prov_41032_buildings.zip": "50f8f04c888c597836055fe75d58ac795579bc37733fa2d84b32d31bfc9c2248",
+    "data/raw/cadastre_prov_41033_buildings.zip": "64b98913da559eb98e841b794621f90df680a2c665c8c509459645fddacd9d6a",
+    "data/raw/cadastre_prov_41034_buildings.zip": "6de22d4f4a8d0dfa48eae4a889a08e0eb7d7eaf89833e52ba455696adc589da5",
+    "data/raw/cadastre_prov_41035_buildings.zip": "f5055d0bdcf91c99aa5156892f5cefacb7445574fcfc8624d55da1d56bc57f03",
+    "data/raw/cadastre_prov_41036_buildings.zip": "921198eb99d216a71b79e176aa116260658915b7a230e66bab3e55ba896e8e31",
+    "data/raw/cadastre_prov_41037_buildings.zip": "1c0537694b837b04bc41c907df1019a614d445be54bcc6a1d4ab80d240810100",
+    "data/raw/cadastre_prov_41038_buildings.zip": "6cb77152b07b034074a4f20a210fd62462c239f2179b09d19a2e77cae2d5bdfb",
+    "data/raw/cadastre_prov_41039_buildings.zip": "8b7f9878b263933444afe93039436440f65b069cf979c55b099e8ae7c51a8bdf",
+    "data/raw/cadastre_prov_41040_buildings.zip": "140f2a3bd856f03fb3ae08481d53ffdb9658df483ae277fd914e32a337494281",
+    "data/raw/cadastre_prov_41041_buildings.zip": "273a4a9a4a104a6576de1855926d883490dd000e497b410d11efae918be9552d",
+    "data/raw/cadastre_prov_41042_buildings.zip": "24dda3c1679250aa1f22813b107d9dba22c461a25d543c081e036900eb62306c",
+    "data/raw/cadastre_prov_41043_buildings.zip": "2d1ded251bbefeca0186c29bb689d0cdbfa9e5011e78f2936fd39fd98382e80b",
+    "data/raw/cadastre_prov_41044_buildings.zip": "cd27fa16854a64a8774792772c84ec8b9d0445129a5ed2103203a29c3270f1ba",
+    "data/raw/cadastre_prov_41045_buildings.zip": "37b68538bb8da18736c85479ddd8bc659b044a4fc4168ceefe37af211ba5e77e",
+    "data/raw/cadastre_prov_41046_buildings.zip": "5b3498e8f4bc852ff53e7c005b0aacca9462643daab3410577e137170b68fad7",
+    "data/raw/cadastre_prov_41047_buildings.zip": "e4cd887c364aa8a5188949c871322cdb6125d656deef398ec0bde1189b31d2c1",
+    "data/raw/cadastre_prov_41048_buildings.zip": "5b6d4f5c8db2a1012be14c106ca5ed66711608a7e14caa5c289731247eb8bc92",
+    "data/raw/cadastre_prov_41049_buildings.zip": "35ac378c4da5ca09902030e2064053241d7f8b5fc30dee762d1f4fe796ada139",
+    "data/raw/cadastre_prov_41050_buildings.zip": "29e1478d3d116a81b37968db89d99c3991feedaecd08d402d7f062514cf98ee5",
+    "data/raw/cadastre_prov_41051_buildings.zip": "c8c0fead9c4424256d4ea8c98f1a55be57783790cd9b7e10e3177f76bbca5d57",
+    "data/raw/cadastre_prov_41052_buildings.zip": "71d8ae5e78a3ca6efe162aeb6a4dc3719659a6c34fef6d4910a42a7d06402d98",
+    "data/raw/cadastre_prov_41053_buildings.zip": "890a0cf5bb080ec8ef1d24bbf3c0cca52bceba808029a5c8b3279f00c26c4576",
+    "data/raw/cadastre_prov_41054_buildings.zip": "de9de64618ea96412c2f213bf1e9f6acce1e3f9c903d1d12b0a4a9cf6e003642",
+    "data/raw/cadastre_prov_41055_buildings.zip": "7e36999fefbb5569394f1c7198a3dc3b3e2778414846056a54c62cc0b2515156",
+    "data/raw/cadastre_prov_41056_buildings.zip": "8124c28d8eb7369329e454c82230fc376e70df4f231bfbbcab5b69d061b52bd8",
+    "data/raw/cadastre_prov_41057_buildings.zip": "cb7d0b474c3b96f351dcc1a91a00d9e49e04e3b4a0d5918566669778d7845bd7",
+    "data/raw/cadastre_prov_41058_buildings.zip": "70ed447cc3e52a58835aa4ce437953ede449da360d6e1c1c9ab4cd924bf396ee",
+    "data/raw/cadastre_prov_41059_buildings.zip": "77ac9ec650b707e4dc01f24762ef73aae31945f06a182f89b2fccd9549346656",
+    "data/raw/cadastre_prov_41060_buildings.zip": "44c99c45b49692d382a516d14daca0722ef050be95e09497974329eb366978b2",
+    "data/raw/cadastre_prov_41061_buildings.zip": "68d74eaf2b839a4d96ae13044d0660b1f3571d05a0e17ba504667740a3682256",
+    "data/raw/cadastre_prov_41062_buildings.zip": "98e080fec2198b19f02c28385711553ec7157e0abf6c485f32a71de6da1e0d03",
+    "data/raw/cadastre_prov_41063_buildings.zip": "241a3b1e7adf0cc5579928e79ef38cacd60216f8eb4aa75f4b7ce55752064eea",
+    "data/raw/cadastre_prov_41064_buildings.zip": "588fb868d40e490ec8a56f0b2117e6a1f5ebed3de61c7db21a28b60dbe51393c",
+    "data/raw/cadastre_prov_41065_buildings.zip": "6238de3b270017839e88c4abd4dbc933d085d9c9f595781aa884840911ac36dd",
+    "data/raw/cadastre_prov_41066_buildings.zip": "e20fba9045861842241ab1d7463de05ff1993833613c61e25b562cbb00e28204",
+    "data/raw/cadastre_prov_41067_buildings.zip": "8e85b46d3fa0f123b06b74b356385a1a6451ca6cbe926b56c3f092e4144dbdcd",
+    "data/raw/cadastre_prov_41068_buildings.zip": "34bb161bc87f0af75ad76604336cb4dac18675666d1007f75d8ab8fab2f7b9ea",
+    "data/raw/cadastre_prov_41069_buildings.zip": "eed36eed38cb66a6acf60e35186d15bd1d629d5005cb2941aa4c71534f8ba753",
+    "data/raw/cadastre_prov_41070_buildings.zip": "dc504e478b4fdd064e98d642637a90a051f36f54548ca568ac9283bd85e815aa",
+    "data/raw/cadastre_prov_41071_buildings.zip": "01bd47a31f5c8d04bad448970206f82431b902af81e5a9184837531d94c7194a",
+    "data/raw/cadastre_prov_41072_buildings.zip": "cad33c73dc5633be224e059ae477bcc3599ebc8ee91c9899247b7abc880744ce",
+    "data/raw/cadastre_prov_41073_buildings.zip": "753b37d17492170d07b1c6fff38ba1eaed945f07c030dd361dabf8644fa0c7c5",
+    "data/raw/cadastre_prov_41074_buildings.zip": "79dae44e048312941f1fba2e56be657c0469d958bc3a02ba1379281266a79c0a",
+    "data/raw/cadastre_prov_41075_buildings.zip": "aefe77360be12b153944a5453ced28d983b6d2a7271855ce3dab870bcab7cc63",
+    "data/raw/cadastre_prov_41076_buildings.zip": "4f33145610c97f7e626bd5c04f6e55c82b5907636ba369f0f9778963a923694b",
+    "data/raw/cadastre_prov_41077_buildings.zip": "a576d15057eacbc2348aa2589b7fe0d82b42f56f33d02a530d90760dd4ca36f2",
+    "data/raw/cadastre_prov_41078_buildings.zip": "79f642bd93e0323da432e9ac5617fc0de665fedfbfad8ae8c1f76b3fde2142b7",
+    "data/raw/cadastre_prov_41079_buildings.zip": "2b061f780b71ad6ffde00d3a19c515ee49eda37d8f6d6f55c92df0a9af6d3828",
+    "data/raw/cadastre_prov_41080_buildings.zip": "0a3c4acec3707a83657921146cb3e1d39c14a71b27943cbb625c5c829492e6c0",
+    "data/raw/cadastre_prov_41081_buildings.zip": "aec29f791c350604c72d25914100a6401ba1b9f665c255ff5954a8e98e9a2f5a",
+    "data/raw/cadastre_prov_41082_buildings.zip": "f784033f228665f50f5b86886c27d107ffe5d2d77623d0b79dbcfb95d4eba624",
+    "data/raw/cadastre_prov_41083_buildings.zip": "4e9214cc62bf4eb31686a89d1f562c3892d2ec963bf8e1175a9bc69e51013b7e",
+    "data/raw/cadastre_prov_41084_buildings.zip": "334e15e339282748ecb8c1617dd849cf6a61180182964e0c747d7065c73a5a65",
+    "data/raw/cadastre_prov_41085_buildings.zip": "a7edd0f40609d5ae94da89ba8caa40c2f467679ec6e61c686aec9d923ab11687",
+    "data/raw/cadastre_prov_41086_buildings.zip": "40bb0def02edd90cce9f968dd1b272fc5c7acd765ee2e27555024c01689a2514",
+    "data/raw/cadastre_prov_41087_buildings.zip": "239a5165fed2c4ad96335a9018a5571690ee21fbcef455bd6fe5d39f480dc0e2",
+    "data/raw/cadastre_prov_41088_buildings.zip": "ea5af64f6f344a781989f3aef9854fb75add49f44ff36442805337222846dd26",
+    "data/raw/cadastre_prov_41089_buildings.zip": "cf1470f96914e6624ca331b7c8a29beffa74cb09306a67119827126846d6b5a8",
+    "data/raw/cadastre_prov_41090_buildings.zip": "a3fc024795d01c0e72f4d222a725246519dcfcea1fc9518a7ab2b570f427ebd6",
+    "data/raw/cadastre_prov_41092_buildings.zip": "06a6d1d0be799dbb9a897af043ac16cb2ab10a7b979af4adb6b653ef890eb7e1",
+    "data/raw/cadastre_prov_41093_buildings.zip": "32688915a2da76cdc96842701c5031714212b84a76965b204030eff3c982a824",
+    "data/raw/cadastre_prov_41094_buildings.zip": "ec83c99b25c96ebbdcda200143bfaf9e9a639b2ba5689d2aea9bf074131cfd9c",
+    "data/raw/cadastre_prov_41095_buildings.zip": "f6bd5485152933837f277279f48551c394e087d28ac090d290ce646aff47ffa4",
+    "data/raw/cadastre_prov_41096_buildings.zip": "d60a4c6e99daae556177c6d196e6fa77bef4b22a7ce3e5e1257cd6500f9e0cde",
+    "data/raw/cadastre_prov_41097_buildings.zip": "19ca9747fd98203a14c748c0cc180bd4163193c9f785b42be2b1d4eeabfcad06",
+    "data/raw/cadastre_prov_41098_buildings.zip": "9e929851d45b233eb887d9beac565cffc45c0b2ecf677491eb046deffb54234b",
+    "data/raw/cadastre_prov_41099_buildings.zip": "ea2d197bd5ceff599dffbde714061bb9e3899ba368ddef5ae02e570f3c062c75",
+    "data/raw/cadastre_prov_41100_buildings.zip": "6d51a044d4c047db8e3072c155141157c614c2b16ac8f4c05315d5eacfb60908",
+    "data/raw/cadastre_prov_41101_buildings.zip": "f69862f80b3c3034c0f9f6305a463a354c9d53056b1ab3d8ea3782c00781e02f",
+    "data/raw/cadastre_prov_41102_buildings.zip": "122cd40226fd9fc8d7f92f202b85d1d4338725c22d773d5b29b8fa7c09b4fc95",
+    "data/raw/cadastre_prov_41103_buildings.zip": "15abc59db39bdc27452f14c3e722683f88b0e564ff2db2c7a29030411df0a58d",
+    "data/raw/cadastre_prov_41104_buildings.zip": "5a09bca84b5ced8c2fb0aaa07d3362ebf91224d0f7f6300cf45d6bbed44fbe95",
+    "data/raw/cadastre_prov_41105_buildings.zip": "dac1e120e1c12aab9df3df934e4035330b94e81011caa16e2b6d2669d71db462",
+    "data/raw/cadastre_prov_41106_buildings.zip": "fc70830472158e5e4ac6518cd4067a3213e417e320de860244e31d76b46cc980",
+    "data/raw/cadastre_prov_41900_buildings.zip": "192f915f33b4132facb1a53c639577fc5fe6a41358e3df8635c621a9260d9a42",
     "data/raw/cadastre_sevilla_buildings.zip": "192f915f33b4132facb1a53c639577fc5fe6a41358e3df8635c621a9260d9a42",
     "data/raw/cadastre_sevilla_feed.xml": "9e9966e4c82e7eb37e4c6216f5f6f56e18215179b6123b6711e39491518a89e9",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
@@ -128,6 +235,112 @@
     "data/raw/parquet/cadastre_cordoba_buildings.parquet": "a39913c4d845550705afa147ea2c7e364fa348b6649be632da152e370ae7c2c6",
     "data/raw/parquet/cadastre_granada_buildings.parquet": "601f2fd99c1d8db996689f4a8edb99f23471f52dd17e558c9b18c67fa1b56008",
     "data/raw/parquet/cadastre_malaga_buildings.parquet": "5d88347f6298d127300d8c8cafa8cac302856f967643a9d4835b941fcd849b3e",
+    "data/raw/parquet/cadastre_prov_41001_buildings.parquet": "2ce185fb300a64c561af47b3981d2da701f3a935d26876a46dfc52fddf861728",
+    "data/raw/parquet/cadastre_prov_41002_buildings.parquet": "c8498b9231e824a9f7de752aaabafa96545be422fb56c3971959fd9497b2feee",
+    "data/raw/parquet/cadastre_prov_41003_buildings.parquet": "2ffe7712860e2b486b091b3837b596429c3eb3105bc1c58a52843cc28414ccba",
+    "data/raw/parquet/cadastre_prov_41004_buildings.parquet": "277866c84f23e3b9f82a8df13d8d37e84c5f661f628dbc2aee718b81ad7deada",
+    "data/raw/parquet/cadastre_prov_41005_buildings.parquet": "10d30d84d3de8d4e2f7dc0de66311cd58e79041d8352ab78687dd8de7c3a49b7",
+    "data/raw/parquet/cadastre_prov_41006_buildings.parquet": "3fa5c03a4e0697357ec48a61824943f58860d5e9e59d94cd3e8916fc9f1a3f9e",
+    "data/raw/parquet/cadastre_prov_41007_buildings.parquet": "0ea887cc3dc78175b82c15223b025f9263aef477e5e13100741b6ea7dbd805a6",
+    "data/raw/parquet/cadastre_prov_41008_buildings.parquet": "926a3821c552fe2e0245bcf271daa9d72f4345f121a008106dcccefb78235b64",
+    "data/raw/parquet/cadastre_prov_41009_buildings.parquet": "565b7d1c11e18cafbb79e2b465b46d02ad9b24a2899a2acf9ca02a8cfdc536dd",
+    "data/raw/parquet/cadastre_prov_41010_buildings.parquet": "78e41ba325c9fb5bbaec7eb376ea4ad7336451628f0474d4ddc95bd3ac15000b",
+    "data/raw/parquet/cadastre_prov_41011_buildings.parquet": "10137c21004bb4aa60c0f0164b2754a676522dd9ac1649075ee765c7bb176c51",
+    "data/raw/parquet/cadastre_prov_41012_buildings.parquet": "baee38737ad9627d5df2fb7a1c905cb481ca4f6eb18ecc443ddfef9030232aa6",
+    "data/raw/parquet/cadastre_prov_41013_buildings.parquet": "cceeb803608b7658ff63d6e812524541c103b6237c3332520df385cac8c7867f",
+    "data/raw/parquet/cadastre_prov_41014_buildings.parquet": "551b26715defec7d3c2881d7b2c9010f312458eb43173a0b7a558b2445d4c291",
+    "data/raw/parquet/cadastre_prov_41015_buildings.parquet": "379f312fea20e38781bcaa3e41cf08652fbd6d62147b22d0f3969da0b749453c",
+    "data/raw/parquet/cadastre_prov_41016_buildings.parquet": "72ad7854cae22dd31d1c31efddd0b97f01dd60bdb55ac73218ef990f32dfdbf1",
+    "data/raw/parquet/cadastre_prov_41017_buildings.parquet": "594fc27764e7d234b32dc96741f2e9a826bdc6c73006ff1396c0fd88696cf492",
+    "data/raw/parquet/cadastre_prov_41018_buildings.parquet": "42f0bcb770c608303146b9ca3ba79f3d964068543545ce98f803d9390328b08a",
+    "data/raw/parquet/cadastre_prov_41019_buildings.parquet": "c1e87c09669b202ebebd1f7fc91416ce1da1087fae5c3f5369262c066e7b420f",
+    "data/raw/parquet/cadastre_prov_41020_buildings.parquet": "8096fa0584e4c0b1614c123cbe6394a8640f595e59767b9d2d1816654654b63d",
+    "data/raw/parquet/cadastre_prov_41021_buildings.parquet": "318f973de7e74817070c4eb6e13fcfcd724ced9fcd161fb8468b25d4f4bc7b95",
+    "data/raw/parquet/cadastre_prov_41022_buildings.parquet": "beb613edac7e248ca34027c5e1970f3c75cae53647869d3b4b26d17ebf4d6f28",
+    "data/raw/parquet/cadastre_prov_41023_buildings.parquet": "ad9b4ef1b81636fdc551ba0f6733c1067122a22cce3d36f0b28b05c829088173",
+    "data/raw/parquet/cadastre_prov_41024_buildings.parquet": "a8fef416e7a3d9628f19704db5afd389a7f1c3c6653237be340bc295638922e4",
+    "data/raw/parquet/cadastre_prov_41025_buildings.parquet": "910fb703801b7974127803c00c7b28bbe93a44e9d354357ac4422acd8b83d98e",
+    "data/raw/parquet/cadastre_prov_41026_buildings.parquet": "4605b99704ba4a0a99e8dfe634cfbe1a84e8e561c53714d17ceb471abc621415",
+    "data/raw/parquet/cadastre_prov_41027_buildings.parquet": "13c2eccae8fe5cea938e5a9ffee21157793088c3c77318b36bb95f30cab8856c",
+    "data/raw/parquet/cadastre_prov_41028_buildings.parquet": "3b340f85e98bc5fc5ce97f4f985232745c6cab54eb84a5a153e7aa72a05cc904",
+    "data/raw/parquet/cadastre_prov_41029_buildings.parquet": "eafb8f35455c56937114c338d9fe738fe51e82cd8ba45373236a79326a673a79",
+    "data/raw/parquet/cadastre_prov_41030_buildings.parquet": "f85b54903da336766ae232239b3b5f874779d00d9c6af4aebfac56325edf6b23",
+    "data/raw/parquet/cadastre_prov_41031_buildings.parquet": "d668ba46748d55151ac07b216437c9ba5e68eebe6fde7501f1f52084edd75ae4",
+    "data/raw/parquet/cadastre_prov_41032_buildings.parquet": "4c49a09cf34eca7c9f8051c0f3d7b9d329aee008785ceb45de1447f545388d8f",
+    "data/raw/parquet/cadastre_prov_41033_buildings.parquet": "d6baf5734195ad46d71e0044e6a3e7f20bba0f42036651c0f327ea6fa65372fd",
+    "data/raw/parquet/cadastre_prov_41034_buildings.parquet": "5ad6b4ca9bbc56869f8b27425dbb0cbee4b28cf1f0feccca7dd84afb5d91a5c5",
+    "data/raw/parquet/cadastre_prov_41035_buildings.parquet": "7040f7abdd73b03a015e2916492b13a3db598fef13044a84d01531ed41b32dde",
+    "data/raw/parquet/cadastre_prov_41036_buildings.parquet": "985b94a66cdc2a0b5301c65ff507288170998298aebd89cddf52ac18281baec0",
+    "data/raw/parquet/cadastre_prov_41037_buildings.parquet": "d39e5498575259ab142eddee42a9a381dad8e4f59faf1ec25efd65d2a342fef6",
+    "data/raw/parquet/cadastre_prov_41038_buildings.parquet": "9a4922329c1cbcbad51bf74f4e2e7523645d5e2ce2d92f35d55415334eb0c12f",
+    "data/raw/parquet/cadastre_prov_41039_buildings.parquet": "d10d07f3bee03551a97b419c229af09963926c4c84d73216ab809a9bb4dad11a",
+    "data/raw/parquet/cadastre_prov_41040_buildings.parquet": "42151bcc0698ea1a4b03602ab923aebf2e25f4ee0904eb6802fb6e93994763fc",
+    "data/raw/parquet/cadastre_prov_41041_buildings.parquet": "028104b9eecf55fd4c7a9c55e0fa020f9e3f23854ee4806f824a29aa6fdbbf60",
+    "data/raw/parquet/cadastre_prov_41042_buildings.parquet": "da5394f80ef65199ea6cc7e26cc85e976e07ab65c62414e2711e9c60d5816300",
+    "data/raw/parquet/cadastre_prov_41043_buildings.parquet": "05e4adc0d04b435ec9ddee7cb484b3b82e20064125bf841563e2beb3c5f60ad9",
+    "data/raw/parquet/cadastre_prov_41044_buildings.parquet": "031e99aa3a5044b2830740f9f511e4272bb2d0d9ce84169970e908c66a968367",
+    "data/raw/parquet/cadastre_prov_41045_buildings.parquet": "c700cfc4fee4097550f9744f15722287bd22cd0fadc25179564df987c34f9d52",
+    "data/raw/parquet/cadastre_prov_41046_buildings.parquet": "8af83f756c3dd2043ce9da2bce644ccf9b2bb9c56ac1cecde570ecbf052019a1",
+    "data/raw/parquet/cadastre_prov_41047_buildings.parquet": "83ee1b6007ffa82cb48c23f348e1845cd6845491251e1732a00ad099a02b5929",
+    "data/raw/parquet/cadastre_prov_41048_buildings.parquet": "b77c9e67db5da1fd4f532b6fe836aa89ec90c37a0336540690a8d8727b0afa5b",
+    "data/raw/parquet/cadastre_prov_41049_buildings.parquet": "6ebb6d63bdfa64b37c3de6484d48ec0b305ebd65cc0c3d150eb8724eff51972e",
+    "data/raw/parquet/cadastre_prov_41050_buildings.parquet": "57c58f7886afe144d4e4d63f5ef4f0bfb0a5d5c9b8c8e608ba181726e294a45b",
+    "data/raw/parquet/cadastre_prov_41051_buildings.parquet": "a144a6c1b96ce19ac66e587cb97d9280b3e036c4ae9fe782919d7495971deb1a",
+    "data/raw/parquet/cadastre_prov_41052_buildings.parquet": "e9a3355e1c8eaa100e3051475b02d46bf282ff68871ce24744c1519d322551d9",
+    "data/raw/parquet/cadastre_prov_41053_buildings.parquet": "f7490240cc909f09d6022ae40ffc208ec333d93b85fa1e00b08456461776a943",
+    "data/raw/parquet/cadastre_prov_41054_buildings.parquet": "03e912c4a62d0c5b06e830f87bc977d1f819124bb13e8972ffab967c1ca647fd",
+    "data/raw/parquet/cadastre_prov_41055_buildings.parquet": "8ec4ce8aeca4e8015cc30bce2b4ef509e9fc5f6fc9d6a78e69f961af509cbe4d",
+    "data/raw/parquet/cadastre_prov_41056_buildings.parquet": "4fc217d8092ba62506ebe60d430e75d470f82d8d70f946b141395c9a0c19b198",
+    "data/raw/parquet/cadastre_prov_41057_buildings.parquet": "d52853a6b00491f497f03d06373597fdfda3e5f660e533a899bb75996183e2c8",
+    "data/raw/parquet/cadastre_prov_41058_buildings.parquet": "d8c15b70b71681f62544bf02da97e4065f291dfec297fcf661bd3bdc22dd8eeb",
+    "data/raw/parquet/cadastre_prov_41059_buildings.parquet": "c083c03266d3e6701051cd5bf72c0817ed888986fe82dd1744ec70bfd0305c26",
+    "data/raw/parquet/cadastre_prov_41060_buildings.parquet": "bfbad4443f35099aa7b13985257575ba0e3db08c28b963fe7d85b35f82619461",
+    "data/raw/parquet/cadastre_prov_41061_buildings.parquet": "63f846f83991cf7318eccde967738d9ab9000b0816016486a7e416a0fe519753",
+    "data/raw/parquet/cadastre_prov_41062_buildings.parquet": "2ca90ab00814b12291f7cd763ec2ceb74dd98995916667a4afdd4c232ee605c7",
+    "data/raw/parquet/cadastre_prov_41063_buildings.parquet": "0a8e69911882033dff56419881a48ecb0eada33914b5b91d3a51b666b9fa8e02",
+    "data/raw/parquet/cadastre_prov_41064_buildings.parquet": "2c7fd4bab6188159225a321efbc261f774ad7dc07b13645972bbf8036b1cd9ed",
+    "data/raw/parquet/cadastre_prov_41065_buildings.parquet": "7bbd6b54ca1e6ae13220d169feab26b668e2e69f507e2ceb062d1f79eeb5da35",
+    "data/raw/parquet/cadastre_prov_41066_buildings.parquet": "fae556032c75ca023c79e3c5267506ba01d8da7549acb0ece9bdbac443901cd6",
+    "data/raw/parquet/cadastre_prov_41067_buildings.parquet": "b6de3d6e86ce4e82ec6a78e7644cb425781f500135fe77760d075c021f94228b",
+    "data/raw/parquet/cadastre_prov_41068_buildings.parquet": "118dd4a5dd255c73be9e23ce7a18449a117fafe4cbd791e444cdd2c4c33798cc",
+    "data/raw/parquet/cadastre_prov_41069_buildings.parquet": "40bf96f5fee752d647cd89f5ee236e943d50fe8c38bffdaa034365d6c0c995a4",
+    "data/raw/parquet/cadastre_prov_41070_buildings.parquet": "2b8d42695989aa3896a0810c3fad32f8cb37a3dc04aa0db6987a3491e7c95f4a",
+    "data/raw/parquet/cadastre_prov_41071_buildings.parquet": "541468d9e4d55def747f74110bccc7320708cf600240931bc9d72fcb35ac7a44",
+    "data/raw/parquet/cadastre_prov_41072_buildings.parquet": "a811c0f542430cb0f55644df60912bc0051476a2364978aacd6188612c0ebaca",
+    "data/raw/parquet/cadastre_prov_41073_buildings.parquet": "81071eac73a770aa5138774db60fa056bffa8aaa0a692c390d73d8aae9fcd001",
+    "data/raw/parquet/cadastre_prov_41074_buildings.parquet": "6d599711d8c33dd99cf0cba59d15b69d9c91ccf92c1c99394ff02d44ff52bddc",
+    "data/raw/parquet/cadastre_prov_41075_buildings.parquet": "2f035da27b268a6f064cce68fe906eac7a28bd2055beaa7ddc1e08cea39cc454",
+    "data/raw/parquet/cadastre_prov_41076_buildings.parquet": "6df51659c07dcc78af8f37a026a46c7b1555707d7f70af12be867fd475378d78",
+    "data/raw/parquet/cadastre_prov_41077_buildings.parquet": "14eee2999967445a2c317dbbdeac97f4804f3c607164a593ef6a7b4c17e2545a",
+    "data/raw/parquet/cadastre_prov_41078_buildings.parquet": "64a9370496e29d19d9856dfd82f01dbb3894163084f246b45123148124b99ee3",
+    "data/raw/parquet/cadastre_prov_41079_buildings.parquet": "bdcb3ecaef5da67dcfce072f750adda1835b3dae30ece06f7efdcedf15afb51f",
+    "data/raw/parquet/cadastre_prov_41080_buildings.parquet": "7d7d95c6b3a6aa66e1f484c189cc8a327b33e8e67be3cde7b2dcb355a0f1562d",
+    "data/raw/parquet/cadastre_prov_41081_buildings.parquet": "a746bf916375eb9298b624e62b71110fd919731c0e50f933ce73ac4bb08112a9",
+    "data/raw/parquet/cadastre_prov_41082_buildings.parquet": "a5e72f3c84bebedbf54b52464f3b953136c23c9aa8de7aad76097ca7211112d7",
+    "data/raw/parquet/cadastre_prov_41083_buildings.parquet": "f67bf2d229433f6755e690fe6198a55ecebc285bd3d963737449ad72e641fa87",
+    "data/raw/parquet/cadastre_prov_41084_buildings.parquet": "b5ddc03241baf9d012aa1fc796331004fbbe5db83083a6cfa7e7197c502b6a0d",
+    "data/raw/parquet/cadastre_prov_41085_buildings.parquet": "6a63ad47cacddb0a979680636c5c2b92cf51f682471bb2e2dc9ffc7d190b0426",
+    "data/raw/parquet/cadastre_prov_41086_buildings.parquet": "c03902cf54816f9c5e033e7c9b730a6558e364f867224b5b23595441cb02cf2f",
+    "data/raw/parquet/cadastre_prov_41087_buildings.parquet": "70fe73b9af7e26990995e3e7d197ba97ddcef720377ebd64bfbd987667fc6e5a",
+    "data/raw/parquet/cadastre_prov_41088_buildings.parquet": "a40bfa9f9dcbe64c2fd6828645faeb4714746902b5885c80de36c733b59cef52",
+    "data/raw/parquet/cadastre_prov_41089_buildings.parquet": "832066d6d1cd2071977569bc40afc989ae2ba7867f25305ad76fdba6e8e01e4a",
+    "data/raw/parquet/cadastre_prov_41090_buildings.parquet": "ebef20fe7441de93c61a87f43ddf5c42c9f403f80765967a0ab7b4b980b94b56",
+    "data/raw/parquet/cadastre_prov_41092_buildings.parquet": "1567e0114f14b153295547b18f29a09c532c1fe2adb128cb0c3e01ccb163a318",
+    "data/raw/parquet/cadastre_prov_41093_buildings.parquet": "fe082ea35753879628a3e9620c386994dbf61ec43dbdb60c2e607e3f86bdabd5",
+    "data/raw/parquet/cadastre_prov_41094_buildings.parquet": "7d5be1181c5579596d615fa63938cc9f2a66e71819497a94e87338a844c513cf",
+    "data/raw/parquet/cadastre_prov_41095_buildings.parquet": "fb2d560212434c4e974edfb9c53e7aef81e18e2b5d8884d6f27a5d72a5c3daea",
+    "data/raw/parquet/cadastre_prov_41096_buildings.parquet": "0267ede58d76f06c8b38f3fa97e311a9a0891d44b3ece3aa9be5a0ee4d3942af",
+    "data/raw/parquet/cadastre_prov_41097_buildings.parquet": "1d47b51560dab2dcb90c76e482e2e336de02202176046b302221021916941a93",
+    "data/raw/parquet/cadastre_prov_41098_buildings.parquet": "1e16e42855c95ecaa600878de747cbaab5230ecebeca6f7d274d5d8ca172639a",
+    "data/raw/parquet/cadastre_prov_41099_buildings.parquet": "41852e82ea8539ed28cf2cd88eba9638361cd29ec2b8a182f545bc01a616f754",
+    "data/raw/parquet/cadastre_prov_41100_buildings.parquet": "3d533cffbd3dce6c3846ca89b7e263b4d5bc3d72898d48029e1f473e985ea6a4",
+    "data/raw/parquet/cadastre_prov_41101_buildings.parquet": "129f5e9381576185223b5ed6c7680a2a4b30b51968acc53e0af10081d4297e7b",
+    "data/raw/parquet/cadastre_prov_41102_buildings.parquet": "1381d172463e9a154de9572433565fb271bd742a74848c9ea8f40dd22b1d72c9",
+    "data/raw/parquet/cadastre_prov_41103_buildings.parquet": "00c807312ee020c12998ecb129a1bf43e053da0d28c05f1adc345afc31723be2",
+    "data/raw/parquet/cadastre_prov_41104_buildings.parquet": "311d28ae0bd60d7806a68feae3fb1a353efb46eb84426a01c6db70d18aa74e41",
+    "data/raw/parquet/cadastre_prov_41105_buildings.parquet": "0f64f8dfcbda5045bf03651bb77483d187447f21eb22e5c29ad927bb5a33d21b",
+    "data/raw/parquet/cadastre_prov_41106_buildings.parquet": "e9004761030cfe87fb73bf6bb1af365f2b11ba7acdf808899f55dcd4b4921b67",
+    "data/raw/parquet/cadastre_prov_41900_buildings.parquet": "23b9521492cc14535a5b1e69f05b0b8ce38b2a7f75f5876cf92146cb21f8cf95",
     "data/raw/parquet/cadastre_sevilla_buildings.parquet": "6ff553072d9d46f1fc97337cb258de14f0cec586a9fabab840a8a2e06fc00051",
     "data/raw/parquet/censo2011_municipios.parquet": "62686555b18bcf228ebf0f4c8065e70ed4e3ca6f71207a91761edd93716217a4",
     "data/raw/parquet/censo2011_tenencia.parquet": "16b2c748b21d264bcce62dfd00b06206ba45a9c5254e9f6241286f813d651b02",
@@ -224,6 +437,11 @@
     "data/processed/stock_capitals.duckdb": {
       "accessed": "2026-10-09",
       "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/processed/stock_province.duckdb": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/barrios_madrid.csv": {
@@ -375,6 +593,642 @@
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/29/ES.SDGC.bu.atom_29.xml"
+    },
+    "data/raw/cadastre_prov_41001_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41001-AGUADULCE/A.ES.SDGC.BU.41001.zip"
+    },
+    "data/raw/cadastre_prov_41002_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41002-ALANIS/A.ES.SDGC.BU.41002.zip"
+    },
+    "data/raw/cadastre_prov_41003_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41003-ALBAIDA%20DEL%20ALJARAFE/A.ES.SDGC.BU.41003.zip"
+    },
+    "data/raw/cadastre_prov_41004_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41004-ALCALA%20DE%20GUADAIRA/A.ES.SDGC.BU.41004.zip"
+    },
+    "data/raw/cadastre_prov_41005_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41005-ALCALA%20DEL%20RIO/A.ES.SDGC.BU.41005.zip"
+    },
+    "data/raw/cadastre_prov_41006_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41006-ALCOLEA%20DEL%20RIO/A.ES.SDGC.BU.41006.zip"
+    },
+    "data/raw/cadastre_prov_41007_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41007-LA%20ALGABA/A.ES.SDGC.BU.41007.zip"
+    },
+    "data/raw/cadastre_prov_41008_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41008-ALGAMITAS/A.ES.SDGC.BU.41008.zip"
+    },
+    "data/raw/cadastre_prov_41009_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41009-ALMADEN%20DE%20LA%20PLATA/A.ES.SDGC.BU.41009.zip"
+    },
+    "data/raw/cadastre_prov_41010_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41010-ALMENSILLA/A.ES.SDGC.BU.41010.zip"
+    },
+    "data/raw/cadastre_prov_41011_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41011-ARAHAL/A.ES.SDGC.BU.41011.zip"
+    },
+    "data/raw/cadastre_prov_41012_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41012-AZNALCAZAR/A.ES.SDGC.BU.41012.zip"
+    },
+    "data/raw/cadastre_prov_41013_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41013-AZNALCOLLAR/A.ES.SDGC.BU.41013.zip"
+    },
+    "data/raw/cadastre_prov_41014_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41014-BADOLATOSA/A.ES.SDGC.BU.41014.zip"
+    },
+    "data/raw/cadastre_prov_41015_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41015-BENACAZON/A.ES.SDGC.BU.41015.zip"
+    },
+    "data/raw/cadastre_prov_41016_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41016-BOLLULLOS%20DE%20LA%20MITACION/A.ES.SDGC.BU.41016.zip"
+    },
+    "data/raw/cadastre_prov_41017_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41017-BORMUJOS/A.ES.SDGC.BU.41017.zip"
+    },
+    "data/raw/cadastre_prov_41018_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41018-BRENES/A.ES.SDGC.BU.41018.zip"
+    },
+    "data/raw/cadastre_prov_41019_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41019-BURGUILLOS/A.ES.SDGC.BU.41019.zip"
+    },
+    "data/raw/cadastre_prov_41020_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41020-LAS%20CABEZAS%20DE%20SAN%20JUAN/A.ES.SDGC.BU.41020.zip"
+    },
+    "data/raw/cadastre_prov_41021_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41021-CAMAS/A.ES.SDGC.BU.41021.zip"
+    },
+    "data/raw/cadastre_prov_41022_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41022-LA%20CAMPANA/A.ES.SDGC.BU.41022.zip"
+    },
+    "data/raw/cadastre_prov_41023_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41023-CANTILLANA/A.ES.SDGC.BU.41023.zip"
+    },
+    "data/raw/cadastre_prov_41024_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41024-CARMONA/A.ES.SDGC.BU.41024.zip"
+    },
+    "data/raw/cadastre_prov_41025_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41025-CARRION%20DE%20LOS%20CESPEDES/A.ES.SDGC.BU.41025.zip"
+    },
+    "data/raw/cadastre_prov_41026_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41026-CASARICHE/A.ES.SDGC.BU.41026.zip"
+    },
+    "data/raw/cadastre_prov_41027_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41027-CASTILBLANCO%20DE%20LOS%20ARROYOS/A.ES.SDGC.BU.41027.zip"
+    },
+    "data/raw/cadastre_prov_41028_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41028-CASTILLEJA%20DE%20GUZMAN/A.ES.SDGC.BU.41028.zip"
+    },
+    "data/raw/cadastre_prov_41029_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41029-CASTILLEJA%20DE%20LA%20CUESTA/A.ES.SDGC.BU.41029.zip"
+    },
+    "data/raw/cadastre_prov_41030_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41030-CASTILLEJA%20DEL%20CAMPO/A.ES.SDGC.BU.41030.zip"
+    },
+    "data/raw/cadastre_prov_41031_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41031-EL%20CASTILLO%20DE%20LAS%20GUARDAS/A.ES.SDGC.BU.41031.zip"
+    },
+    "data/raw/cadastre_prov_41032_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41032-CAZALLA%20DE%20LA%20SIERRA/A.ES.SDGC.BU.41032.zip"
+    },
+    "data/raw/cadastre_prov_41033_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41033-CONSTANTINA/A.ES.SDGC.BU.41033.zip"
+    },
+    "data/raw/cadastre_prov_41034_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41034-CORIA%20DEL%20RIO/A.ES.SDGC.BU.41034.zip"
+    },
+    "data/raw/cadastre_prov_41035_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41035-CORIPE/A.ES.SDGC.BU.41035.zip"
+    },
+    "data/raw/cadastre_prov_41036_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41036-EL%20CORONIL/A.ES.SDGC.BU.41036.zip"
+    },
+    "data/raw/cadastre_prov_41037_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41037-LOS%20CORRALES/A.ES.SDGC.BU.41037.zip"
+    },
+    "data/raw/cadastre_prov_41038_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41038-DOS%20HERMANAS/A.ES.SDGC.BU.41038.zip"
+    },
+    "data/raw/cadastre_prov_41039_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41039-ECIJA/A.ES.SDGC.BU.41039.zip"
+    },
+    "data/raw/cadastre_prov_41040_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41040-ESPARTINAS/A.ES.SDGC.BU.41040.zip"
+    },
+    "data/raw/cadastre_prov_41041_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41041-ESTEPA/A.ES.SDGC.BU.41041.zip"
+    },
+    "data/raw/cadastre_prov_41042_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41042-FUENTES%20DE%20ANDALUCIA/A.ES.SDGC.BU.41042.zip"
+    },
+    "data/raw/cadastre_prov_41043_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41043-EL%20GARROBO/A.ES.SDGC.BU.41043.zip"
+    },
+    "data/raw/cadastre_prov_41044_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41044-GELVES/A.ES.SDGC.BU.41044.zip"
+    },
+    "data/raw/cadastre_prov_41045_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41045-GERENA/A.ES.SDGC.BU.41045.zip"
+    },
+    "data/raw/cadastre_prov_41046_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41046-GILENA/A.ES.SDGC.BU.41046.zip"
+    },
+    "data/raw/cadastre_prov_41047_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41047-GINES/A.ES.SDGC.BU.41047.zip"
+    },
+    "data/raw/cadastre_prov_41048_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41048-GUADALCANAL/A.ES.SDGC.BU.41048.zip"
+    },
+    "data/raw/cadastre_prov_41049_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41049-GUILLENA/A.ES.SDGC.BU.41049.zip"
+    },
+    "data/raw/cadastre_prov_41050_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41050-HERRERA/A.ES.SDGC.BU.41050.zip"
+    },
+    "data/raw/cadastre_prov_41051_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41051-HUEVAR%20DEL%20ALJARAFE/A.ES.SDGC.BU.41051.zip"
+    },
+    "data/raw/cadastre_prov_41052_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41052-LANTEJUELA/A.ES.SDGC.BU.41052.zip"
+    },
+    "data/raw/cadastre_prov_41053_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41053-LEBRIJA/A.ES.SDGC.BU.41053.zip"
+    },
+    "data/raw/cadastre_prov_41054_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41054-LORA%20DE%20ESTEPA/A.ES.SDGC.BU.41054.zip"
+    },
+    "data/raw/cadastre_prov_41055_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41055-LORA%20DEL%20RIO/A.ES.SDGC.BU.41055.zip"
+    },
+    "data/raw/cadastre_prov_41056_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41056-LA%20LUISIANA/A.ES.SDGC.BU.41056.zip"
+    },
+    "data/raw/cadastre_prov_41057_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41057-EL%20MADRO%C3%91O/A.ES.SDGC.BU.41057.zip"
+    },
+    "data/raw/cadastre_prov_41058_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41058-MAIRENA%20DEL%20ALCOR/A.ES.SDGC.BU.41058.zip"
+    },
+    "data/raw/cadastre_prov_41059_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41059-MAIRENA%20DEL%20ALJARAFE/A.ES.SDGC.BU.41059.zip"
+    },
+    "data/raw/cadastre_prov_41060_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41060-MARCHENA/A.ES.SDGC.BU.41060.zip"
+    },
+    "data/raw/cadastre_prov_41061_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41061-MARINALEDA/A.ES.SDGC.BU.41061.zip"
+    },
+    "data/raw/cadastre_prov_41062_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41062-MARTIN%20DE%20LA%20JARA/A.ES.SDGC.BU.41062.zip"
+    },
+    "data/raw/cadastre_prov_41063_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41063-LOS%20MOLARES/A.ES.SDGC.BU.41063.zip"
+    },
+    "data/raw/cadastre_prov_41064_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41064-MONTELLANO/A.ES.SDGC.BU.41064.zip"
+    },
+    "data/raw/cadastre_prov_41065_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41065-MORON%20DE%20LA%20FRONTERA/A.ES.SDGC.BU.41065.zip"
+    },
+    "data/raw/cadastre_prov_41066_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41066-LAS%20NAVAS%20DE%20LA%20CONCEPCION/A.ES.SDGC.BU.41066.zip"
+    },
+    "data/raw/cadastre_prov_41067_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41067-OLIVARES/A.ES.SDGC.BU.41067.zip"
+    },
+    "data/raw/cadastre_prov_41068_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41068-OSUNA/A.ES.SDGC.BU.41068.zip"
+    },
+    "data/raw/cadastre_prov_41069_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41069-LOS%20PALACIOS%20Y%20VILLAFRANCA/A.ES.SDGC.BU.41069.zip"
+    },
+    "data/raw/cadastre_prov_41070_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41070-PALOMARES%20DEL%20RIO/A.ES.SDGC.BU.41070.zip"
+    },
+    "data/raw/cadastre_prov_41071_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41071-PARADAS/A.ES.SDGC.BU.41071.zip"
+    },
+    "data/raw/cadastre_prov_41072_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41072-PEDRERA/A.ES.SDGC.BU.41072.zip"
+    },
+    "data/raw/cadastre_prov_41073_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41073-EL%20PEDROSO/A.ES.SDGC.BU.41073.zip"
+    },
+    "data/raw/cadastre_prov_41074_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41074-PE%C3%91AFLOR/A.ES.SDGC.BU.41074.zip"
+    },
+    "data/raw/cadastre_prov_41075_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41075-PILAS/A.ES.SDGC.BU.41075.zip"
+    },
+    "data/raw/cadastre_prov_41076_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41076-PRUNA/A.ES.SDGC.BU.41076.zip"
+    },
+    "data/raw/cadastre_prov_41077_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41077-LA%20PUEBLA%20DE%20CAZALLA/A.ES.SDGC.BU.41077.zip"
+    },
+    "data/raw/cadastre_prov_41078_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41078-LA%20PUEBLA%20DE%20LOS%20INFANTES/A.ES.SDGC.BU.41078.zip"
+    },
+    "data/raw/cadastre_prov_41079_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41079-LA%20PUEBLA%20DEL%20RIO/A.ES.SDGC.BU.41079.zip"
+    },
+    "data/raw/cadastre_prov_41080_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41080-EL%20REAL%20DE%20LA%20JARA/A.ES.SDGC.BU.41080.zip"
+    },
+    "data/raw/cadastre_prov_41081_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41081-LA%20RINCONADA/A.ES.SDGC.BU.41081.zip"
+    },
+    "data/raw/cadastre_prov_41082_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41082-LA%20RODA%20DE%20ANDALUCIA/A.ES.SDGC.BU.41082.zip"
+    },
+    "data/raw/cadastre_prov_41083_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41083-EL%20RONQUILLO/A.ES.SDGC.BU.41083.zip"
+    },
+    "data/raw/cadastre_prov_41084_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41084-EL%20RUBIO/A.ES.SDGC.BU.41084.zip"
+    },
+    "data/raw/cadastre_prov_41085_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41085-SALTERAS/A.ES.SDGC.BU.41085.zip"
+    },
+    "data/raw/cadastre_prov_41086_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41086-SAN%20JUAN%20DE%20AZNALFARACHE/A.ES.SDGC.BU.41086.zip"
+    },
+    "data/raw/cadastre_prov_41087_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41087-SANLUCAR%20LA%20MAYOR/A.ES.SDGC.BU.41087.zip"
+    },
+    "data/raw/cadastre_prov_41088_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41088-SAN%20NICOLAS%20DEL%20PUERTO/A.ES.SDGC.BU.41088.zip"
+    },
+    "data/raw/cadastre_prov_41089_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41089-SANTIPONCE/A.ES.SDGC.BU.41089.zip"
+    },
+    "data/raw/cadastre_prov_41090_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41090-EL%20SAUCEJO/A.ES.SDGC.BU.41090.zip"
+    },
+    "data/raw/cadastre_prov_41092_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41092-TOCINA/A.ES.SDGC.BU.41092.zip"
+    },
+    "data/raw/cadastre_prov_41093_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41093-TOMARES/A.ES.SDGC.BU.41093.zip"
+    },
+    "data/raw/cadastre_prov_41094_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41094-UMBRETE/A.ES.SDGC.BU.41094.zip"
+    },
+    "data/raw/cadastre_prov_41095_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41095-UTRERA/A.ES.SDGC.BU.41095.zip"
+    },
+    "data/raw/cadastre_prov_41096_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41096-VALENCINA%20DE%20LA%20CONCEPCION/A.ES.SDGC.BU.41096.zip"
+    },
+    "data/raw/cadastre_prov_41097_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41097-VILLAMANRIQUE%20DE%20LA%20CONDESA/A.ES.SDGC.BU.41097.zip"
+    },
+    "data/raw/cadastre_prov_41098_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41098-VILLANUEVA%20DEL%20ARISCAL/A.ES.SDGC.BU.41098.zip"
+    },
+    "data/raw/cadastre_prov_41099_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41099-VILLANUEVA%20DEL%20RIO%20Y%20MINAS/A.ES.SDGC.BU.41099.zip"
+    },
+    "data/raw/cadastre_prov_41100_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41100-VILLANUEVA%20DE%20SAN%20JUAN/A.ES.SDGC.BU.41100.zip"
+    },
+    "data/raw/cadastre_prov_41101_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41101-VILLAVERDE%20DEL%20RIO/A.ES.SDGC.BU.41101.zip"
+    },
+    "data/raw/cadastre_prov_41102_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41102-EL%20VISO%20DEL%20ALCOR/A.ES.SDGC.BU.41102.zip"
+    },
+    "data/raw/cadastre_prov_41103_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41103-CA%C3%91ADA%20ROSAL/A.ES.SDGC.BU.41103.zip"
+    },
+    "data/raw/cadastre_prov_41104_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41104-ISLA%20MAYOR/A.ES.SDGC.BU.41104.zip"
+    },
+    "data/raw/cadastre_prov_41105_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41105-EL%20CUERVO%20DE%20SEVILLA/A.ES.SDGC.BU.41105.zip"
+    },
+    "data/raw/cadastre_prov_41106_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41106-EL%20PALMAR%20DE%20TROYA/A.ES.SDGC.BU.41106.zip"
+    },
+    "data/raw/cadastre_prov_41900_buildings.zip": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla physical-stock pilot; no protected ownership data",
+      "publisher": "DGC INSPIRE",
+      "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41900-SEVILLA/A.ES.SDGC.BU.41900.zip"
     },
     "data/raw/cadastre_sevilla_buildings.zip": {
       "accessed": "2026-10-08",
@@ -897,6 +1751,536 @@
     "data/raw/parquet/cadastre_malaga_buildings.parquet": {
       "accessed": "2026-10-09",
       "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41001_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41002_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41003_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41004_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41005_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41006_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41007_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41008_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41009_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41010_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41011_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41012_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41013_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41014_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41015_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41016_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41017_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41018_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41019_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41020_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41021_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41022_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41023_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41024_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41025_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41026_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41027_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41028_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41029_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41030_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41031_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41032_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41033_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41034_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41035_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41036_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41037_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41038_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41039_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41040_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41041_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41042_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41043_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41044_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41045_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41046_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41047_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41048_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41049_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41050_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41051_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41052_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41053_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41054_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41055_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41056_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41057_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41058_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41059_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41060_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41061_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41062_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41063_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41064_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41065_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41066_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41067_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41068_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41069_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41070_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41071_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41072_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41073_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41074_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41075_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41076_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41077_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41078_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41079_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41080_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41081_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41082_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41083_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41084_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41085_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41086_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41087_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41088_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41089_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41090_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41092_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41093_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41094_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41095_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41096_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41097_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41098_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41099_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41100_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41101_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41102_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41103_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41104_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41105_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41106_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
+      "publisher": "DGC INSPIRE"
+    },
+    "data/raw/parquet/cadastre_prov_41900_buildings.parquet": {
+      "accessed": "2026-10-09",
+      "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_sevilla_buildings.parquet": {

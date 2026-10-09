@@ -50,6 +50,7 @@ fetch:
 	uv run python scripts/fetch_housing_overburden.py
 	uv run python scripts/fetch_cadastre_stock.py
 	uv run python scripts/fetch_cadastre_capitals.py
+	uv run python scripts/fetch_cadastre_province.py
 	uv run python scripts/fetch_sevilla_income.py
 	uv run python scripts/build_sevilla_2021.py
 	uv run python scripts/build_ecv_joint.py
@@ -70,6 +71,7 @@ verify:
 	uv run python scripts/build_ecv_joint.py --check
 	uv run python scripts/fetch_cadastre_stock.py --check
 	uv run python scripts/fetch_cadastre_capitals.py --check
+	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py --check
 	uv run python scripts/export_inference.py --check
@@ -136,6 +138,7 @@ analysis:
 	uv run python explorations/cadastre_vacancy_alignment.py
 	uv run python explorations/cadastre_household_alignment.py
 	uv run python explorations/cadastre_capitals.py
+	uv run python explorations/cadastre_province.py
 	uv run python explorations/censo_vintage.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
@@ -180,6 +183,7 @@ evidence-build:
 	uv run python scripts/export_inference.py
 	uv run python scripts/fetch_cadastre_stock.py --check
 	uv run python scripts/fetch_cadastre_capitals.py --check
+	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py
 	cd evidence && npm run build

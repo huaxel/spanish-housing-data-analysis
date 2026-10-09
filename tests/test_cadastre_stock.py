@@ -852,3 +852,40 @@ def test_province_inventory_artifact_structure():
         munis[i]["archive_bytes"] >= munis[i + 1]["archive_bytes"] for i in range(len(munis) - 1)
     )
     assert sum(m["archive_bytes"] for m in munis) == data["total_archive_bytes"]
+
+
+def test_cadastre_province_fetch_and_artifact():
+    import json
+
+    spec = importlib.util.spec_from_file_location(
+        "cadastre_province", ROOT / "scripts/fetch_cadastre_province.py"
+    )
+    prov = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(prov)
+
+    mapping = prov.municipality_map()
+    assert len(mapping) == 106
+    by_ine = {m["ine"]: m["cat"] for m in mapping}
+    assert by_ine["41091"] == "41900"
+    assert by_ine["41903"] == "41105"
+    # CAT codes unique, INE codes unique
+    assert len({m["cat"] for m in mapping}) == 106
+    assert len({m["ine"] for m in mapping}) == 106
+    assert prov.DATABASE.name == "stock_province.duckdb"
+
+    artifact_path = ROOT / "artifacts" / "cadastre_province.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    prov_block = data["province"]
+    assert prov_block["n_municipalities"] == 106
+    assert prov_block["total_records"] == 415518
+    assert prov_block["total_properties"] == 891374
+    assert prov_block["sevilla_city_property_share_pct"] == 36.7
+    assert prov_block["rest_median_of_median_years"] == 1986
+    assert prov_block["era_share_pct"]["1991-2010"] == 35.6
+    assert len(data["municipalities"]) == 106
+    assert data["municipalities"]["41091"]["total_properties"] == 327237
+    # era shares sum to ~100 per municipality
+    for muni in data["municipalities"].values():
+        assert abs(sum(muni["era_share_pct"].values()) - 100.0) < 0.5

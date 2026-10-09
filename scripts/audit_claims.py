@@ -65,6 +65,7 @@ MODEL_FRESHNESS = [
     ),
     ("cadastre_capitals", "artifacts/cadastre_capitals.json", "explorations/cadastre_capitals.py"),
     ("province_inventory", "artifacts/province_inventory.json", "scripts/inventory_province.py"),
+    ("cadastre_province", "artifacts/cadastre_province.json", "explorations/cadastre_province.py"),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2851,6 +2852,31 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] province_inventory: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 4
+
+    cp = _model_output("artifacts/cadastre_province.json")
+    for desc, path, expected, tol in (
+        ("province-db municipalities", "province.n_municipalities", 106, 0),
+        ("province-db housing records", "province.total_records", 415518, 0),
+        ("province-db properties", "province.total_properties", 891374, 0),
+        ("province-db sevilla share", "province.sevilla_city_property_share_pct", 36.7, 0.05),
+        ("province-db rest median year", "province.rest_median_of_median_years", 1986, 0),
+        ("province-db pre-1951 share", "province.era_share_pct.Pre-1951", 7.8, 0.05),
+        ("province-db 1951-1970 share", "province.era_share_pct.1951-1970", 20.2, 0.05),
+        ("province-db 1971-1990 share", "province.era_share_pct.1971-1990", 31.0, 0.05),
+        ("province-db 1991-2010 share", "province.era_share_pct.1991-2010", 35.6, 0.05),
+        ("province-db 2011+ share", "province.era_share_pct.2011+", 5.3, 0.05),
+        (
+            "province-db castillo pph",
+            "municipalities.41031.properties_per_household",
+            2.8161,
+            0.0005,
+        ),
+    ):
+        got = _json_path(cp, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_province: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 11
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (
