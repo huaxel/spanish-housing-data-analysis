@@ -693,3 +693,40 @@ def test_cadastre_era_quality_artifact_structure():
     # every top-score barrio has 90+ rehab or is a known-null outlier
     for b in high:
         assert b["rehab_pct"] is None or b["rehab_pct"] >= 90
+
+
+def test_cadastre_era_surface_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_era_surface.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    cov = data["coverage"]
+    assert cov["records_with_floor_and_properties"] == 50321
+    assert cov["records_with_valid_year"] == 50320
+    assert cov["records_dropped_no_year"] == 1
+    cut = data["quartile_cutoffs_m2"]
+    assert (cut["q1"], cut["q2"], cut["q3"]) == (132, 227, 623)
+    assert data["spearman_year_vs_floor_record_level"] == 0.121969
+    quart = data["quartiles"]
+    # near-equal-count quartiles: record counts within a small margin
+    # (ties at the cutoffs all fall into the lower bin, so not exact)
+    counts = [q["n_records"] for q in quart]
+    assert max(counts) - min(counts) <= max(counts) * 0.03
+    # property-weighted era shares within each quartile sum to ~100
+    for q in quart:
+        total = sum(q["era_share_pct"].values())
+        assert abs(total - 100.0) < 0.5
+    eras = data["eras"]
+    assert [e["era"] for e in eras] == ["Pre-1951", "1951-1970", "1971-1990", "1991-2010", "2011+"]
+    # per-unit size rises from mid-century onward, pre-1951 excepted
+    m2 = [e["median_m2_per_property"] for e in eras]
+    assert m2[1] < m2[2] < m2[3] < m2[4]
+    # Q4 property share is monotone across eras from 1951 on
+    q4 = [e["quartile_share_pct"]["4"] for e in eras]
+    assert q4[1] < q4[2] < q4[3] < q4[4]
+    # each era's quartile shares sum to ~100
+    for e in eras:
+        total = sum(e["quartile_share_pct"].values())
+        assert abs(total - 100.0) < 0.5

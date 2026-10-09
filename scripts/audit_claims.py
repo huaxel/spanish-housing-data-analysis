@@ -48,6 +48,11 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_era_quality.json",
         "explorations/cadastre_era_quality.py",
     ),
+    (
+        "cadastre_era_surface",
+        "artifacts/cadastre_era_surface.json",
+        "explorations/cadastre_era_surface.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2588,6 +2593,91 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_quality: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 14
+
+    es = _model_output("artifacts/cadastre_era_surface.json")
+    for desc, path, expected, tol in (
+        ("era-surface dated records", "coverage.records_with_valid_year", 50320, 0),
+        ("era-surface q1 cutoff", "quartile_cutoffs_m2.q1", 132, 0),
+        ("era-surface q2 cutoff", "quartile_cutoffs_m2.q2", 227, 0),
+        ("era-surface q3 cutoff", "quartile_cutoffs_m2.q3", 623, 0),
+        (
+            "era-surface spearman year vs floor",
+            "spearman_year_vs_floor_record_level",
+            0.121969,
+            0.0005,
+        ),
+        (
+            "era-surface pre-1951 m2 per property",
+            "eras.0.median_m2_per_property",
+            152.0,
+            0.05,
+        ),
+        (
+            "era-surface 1951-1970 m2 per property",
+            "eras.1.median_m2_per_property",
+            99.0,
+            0.05,
+        ),
+        (
+            "era-surface 1971-1990 m2 per property",
+            "eras.2.median_m2_per_property",
+            131.4,
+            0.05,
+        ),
+        (
+            "era-surface 1991-2010 m2 per property",
+            "eras.3.median_m2_per_property",
+            152.0,
+            0.05,
+        ),
+        (
+            "era-surface 2011+ m2 per property",
+            "eras.4.median_m2_per_property",
+            176.0,
+            0.05,
+        ),
+        (
+            "era-surface pre-1951 q4 share",
+            "eras.0.quartile_share_pct.4",
+            38.2,
+            0.05,
+        ),
+        (
+            "era-surface 1951-1970 q4 share",
+            "eras.1.quartile_share_pct.4",
+            67.7,
+            0.05,
+        ),
+        (
+            "era-surface 1971-1990 q4 share",
+            "eras.2.quartile_share_pct.4",
+            87.1,
+            0.05,
+        ),
+        (
+            "era-surface 1991-2010 q4 share",
+            "eras.3.quartile_share_pct.4",
+            90.1,
+            0.05,
+        ),
+        (
+            "era-surface 2011+ q4 share",
+            "eras.4.quartile_share_pct.4",
+            93.4,
+            0.05,
+        ),
+        (
+            "era-surface 2011+ median floor",
+            "eras.4.median_gross_floor_m2",
+            329.0,
+            0.05,
+        ),
+    ):
+        got = _json_path(es, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_surface: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 16
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (
