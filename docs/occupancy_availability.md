@@ -47,6 +47,8 @@ statistics since 2019, crossed with Catastro for location and surfaces.
 
 Status 2026-10-09: integrated in `scripts/fetch_aeat_viviendas.py` (both
 published vintages pinned; Total rows excluded per the pinned publisher gap).
+Wired into the marts as `aeat_viviendas_uso` with headline audit pins; no
+estimator reads it yet.
 
 Why this is the strongest candidate: annual cadence, official methodology
 ([FAQ](https://sede.agenciatributaria.gob.es/Sede/estadisticas/estadisticas-impuesto/estadistica-viviendas-declaradas-irpf/metodologia/preguntas-frecuentes.html)),

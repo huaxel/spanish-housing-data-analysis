@@ -126,6 +126,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/censo2021_viviendas.parquet",
     "data/raw/parquet/censo2021_intensidad.parquet",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet",
+    "data/raw/parquet/aeat_viviendas_uso.parquet",
     "data/raw/parquet/serpavi_municipal.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
@@ -1574,6 +1575,30 @@ def main() -> None:
             raise SystemExit(f"censo{yr} anchor drifted: {worst0111}")
     con.register("cen0111_df", pa.Table.from_pylist(anchor0111))
     con.execute("CREATE OR REPLACE TABLE censo2001_2011_viviendas AS SELECT * FROM cen0111_df")
+    # AEAT dwellings by use (2023-2024, common fiscal territory): parsed and
+    # validated at fetch (shares, CCAA sums, foral absence, pinned Total-row
+    # gaps); here only the shape contract is re-asserted before loading.
+    # No foral rows exist in either vintage: their appearance fails loudly.
+    aeat_rows = load_parquet("aeat_viviendas_uso.parquet")
+    if len(aeat_rows) != 110:
+        raise SystemExit(f"aeat uso: {len(aeat_rows)} rows, want 110")
+    mart_cpros = {r["cpro"] for r in prov_rows}
+    for yr in (2023, 2024):
+        yr_rows = [r for r in aeat_rows if r["anyo"] == yr]
+        grains: dict[str, int] = {}
+        for r in yr_rows:
+            grains[r["grano"]] = grains.get(r["grano"], 0) + 1
+        if grains != {"provincia": 40, "ccaa": 9, "ccaa_uniprovincial": 6}:
+            raise SystemExit(f"aeat uso: grain drift for {yr}: {grains}")
+        for r in yr_rows:
+            if r["grano"] in ("provincia", "ccaa_uniprovincial") and r["cpro"] not in mart_cpros:
+                raise SystemExit(f"aeat uso: cpro {r['cpro']} outside the mart")
+            for bad in ("Vasco", "Navarra", "Ceuta", "Melilla", "Euskadi"):
+                if bad in r["territorio"]:
+                    raise SystemExit(f"aeat uso: foral territory appeared: {r['territorio']!r}")
+    print(f"aeat uso: {len(aeat_rows)} rows (2023-2024, no Total rows, no foral rows)")
+    con.register("aeat_df", pa.Table.from_pylist(aeat_rows))
+    con.execute("CREATE OR REPLACE TABLE aeat_viviendas_uso AS SELECT * FROM aeat_df")
     # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
     # electricity consumption. Municipal grain (named + Resto aggregates).
     con.register("inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet")))
@@ -1653,6 +1678,7 @@ def main() -> None:
         "censo2011_tenencia",
         "censo2021_viviendas",
         "censo2001_2011_viviendas",
+        "aeat_viviendas_uso",
         "migra_anual",
         "padron_extranjeros",
         "padron_extranjeros_origen",
@@ -1674,6 +1700,8 @@ def main() -> None:
         " diverges definitionally, unchecked)",
         "censo0111_anchor": "provincial totals vs parque 2001/2011, worst gaps 1.28%/0.51%"
         " (<2.0%; CCAA sums match provinces to 1 dwelling; nacional reconciles exactly)",
+        "aeat_uso": "dwellings by use 2023-2024, 40 provinces + 6 singles + 9 CCAA rows/year;"
+        " Total rows excluded per pinned publisher gaps; foral territories absent",
         "padron_extranjeros_window": "1998-2022 annual foreign stocks by provincia"
         " (TOTAL EXTRANJEROS x Ambos sexos; Bartik shares base)",
         "migracion_window": "2008-2021 annual foreign/Spanish inflows by provincia"

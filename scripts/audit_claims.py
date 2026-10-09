@@ -1328,6 +1328,38 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0.03,
     ),
     (
+        "anchor",
+        "aeat 2023 dwellings with cadastral value (parts sum)",
+        "SELECT SUM(n_total) FROM aeat_viviendas_uso "
+        "WHERE anyo = 2023 AND grano IN ('provincia', 'ccaa_uniprovincial')",
+        17804320.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "aeat 2024 dwellings with cadastral value (parts sum)",
+        "SELECT SUM(n_total) FROM aeat_viviendas_uso "
+        "WHERE anyo = 2024 AND grano IN ('provincia', 'ccaa_uniprovincial')",
+        18221324.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "aeat 2023 at-disposition share of parts (%)",
+        "SELECT 100.0 * SUM(n_disposicion) / SUM(n_total) FROM aeat_viviendas_uso "
+        "WHERE anyo = 2023 AND grano IN ('provincia', 'ccaa_uniprovincial')",
+        26.91,
+        0.03,
+    ),
+    (
+        "anchor",
+        "aeat 2024 at-disposition share of parts (%)",
+        "SELECT 100.0 * SUM(n_disposicion) / SUM(n_total) FROM aeat_viviendas_uso "
+        "WHERE anyo = 2024 AND grano IN ('provincia', 'ccaa_uniprovincial')",
+        26.71,
+        0.03,
+    ),
+    (
         "barcelona",
         "Barcelona city real sale change 2013-24",
         _bcn_real_sql("Barcelona"),
