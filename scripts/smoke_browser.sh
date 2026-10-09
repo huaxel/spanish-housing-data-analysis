@@ -103,5 +103,6 @@ check_page "/vacancia/"   1 "Vivienda vacía" "consumo eléctrico" || fail=1
 check_page "/acceso/" 0 "Stock no es acceso" "Por quintil de ingresos" || fail=1
 check_page "/compra/" 1 "efectivo inicial y cuota" "Supuestos editables" || fail=1
 check_page "/incertidumbre/" 0 "No detectar no es demostrar ausencia" "Tamaño y precisión" || fail=1
+check_page "/stock/" 6 "Qué vivienda existe y dónde" "distribución ponderada" || fail=1
 check_map "/vacancia/" || fail=1
 exit $fail

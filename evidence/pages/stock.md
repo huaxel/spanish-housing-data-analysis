@@ -281,6 +281,47 @@ registro pesa igual; un bloque y una vivienda unifamiliar no representan el
 mismo número de viviendas. La distribución incluye registros sin asignación
 espacial; no está limitada a la muestra del mapa.
 
+### Contraste: distribución ponderada por unidades catastrales declaradas
+
+Cuando ponderamos por el número de inmuebles declarados con uso residencial
+(`dwelling_properties`), la distribución cambia sensiblemente respecto al conteo
+de registros BU: las eras de bloques residenciales colectivos (1971–1990) concentran
+el 37,9% del parque total, mientras que las construcciones de antes de 1951
+representan sólo el 6,7% de los inmuebles pese a constituir el 19,8% de los
+registros físicos de parcela.
+
+```sql eras_inmuebles_stock
+select case when year_start is null then 'Sin año válido'
+            when year_start <= 1950 then 'Hasta 1950'
+            when year_start <= 1970 then '1951–1970'
+            when year_start <= 1990 then '1971–1990'
+            when year_start <= 2010 then '1991–2010'
+            else '2011 en adelante' end as era,
+       case when year_start is null then 6
+            when year_start <= 1950 then 1
+            when year_start <= 1970 then 2
+            when year_start <= 1990 then 3
+            when year_start <= 2010 then 4
+            else 5 end as orden,
+       count(*) as registros,
+       sum(dwelling_properties) as inmuebles,
+       1.0 * sum(dwelling_properties) / sum(sum(dwelling_properties)) over () as fraccion_inmuebles
+from stock.buildings
+where dwelling_properties > 0
+group by era, orden
+order by orden
+```
+
+<BarChart data={eras_inmuebles_stock} x=era y=inmuebles yFmt="num0"
+  title="Inmuebles declarados con vivienda por era de construcción BU"/>
+
+<DataTable data={eras_inmuebles_stock} rows=6>
+  <Column id=era title="Era constructiva"/>
+  <Column id=registros title="Registros BU" fmt="num0"/>
+  <Column id=inmuebles title="Inmuebles declarados" fmt="num0"/>
+  <Column id=fraccion_inmuebles title="Fracción del parque" fmt="pct1"/>
+</DataTable>
+
 ```sql calidad_fechas_stock
 select date_quality, count(*) as registros,
        sum(case when dwelling_properties > 0 then 1 else 0 end) as con_vivienda
