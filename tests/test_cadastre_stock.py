@@ -498,3 +498,41 @@ def test_page_sql_keeps_quarantined_household_context_without_stock_or_density(d
         SQL["demanda_stock"].replace("${stock_barrios}", f"({SQL['stock_barrios']})")
     ).fetchall()
     assert demand[1] == ("Beta", None, 7, 9, 2)
+
+
+def test_cadastre_era_classification():
+    era_spec = importlib.util.spec_from_file_location(
+        "cadastre_eras", ROOT / "explorations/cadastre_eras.py"
+    )
+    mod = importlib.util.module_from_spec(era_spec)
+    era_spec.loader.exec_module(mod)
+    era = mod.era
+
+    assert era(None) is None
+    assert era(1900) == "Pre-1951"
+    assert era(1950) == "Pre-1951"
+    assert era(1951) == "1951-1970"
+    assert era(1970) == "1951-1970"
+    assert era(1971) == "1971-1990"
+    assert era(1990) == "1971-1990"
+    assert era(1991) == "1991-2010"
+    assert era(2010) == "1991-2010"
+    assert era(2011) == "2011+"
+    assert era(2025) == "2011+"
+
+
+def test_cadastre_eras_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_eras.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    assert "eras" in data and "barrios" in data and "global" in data
+    assert len(data["eras"]) == 5
+    glob = data["global"]
+    assert glob["n_barrios"] == 107
+    assert glob["total_properties"] == 323737
+    assert glob["dated_properties"] == 323736
+    assert glob["missing_property_pct"] == 0.0
+    assert glob["era_pct"]["1971-1990"] == 37.7

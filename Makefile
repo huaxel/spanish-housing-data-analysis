@@ -126,11 +126,13 @@ analysis:
 	@echo "[analysis 18/18] desahucios_renta (descriptive)"
 	uv run python explorations/desahucios_renta.py
 	uv run python scripts/analyze_stock_rent.py
+	uv run python explorations/cadastre_eras.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
 
 stock-rent:
 	uv run python scripts/analyze_stock_rent.py
+	uv run python explorations/cadastre_eras.py
 
 inference:
 	uv run python scripts/invert_tourist.py

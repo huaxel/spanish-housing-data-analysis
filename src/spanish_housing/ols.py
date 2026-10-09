@@ -81,13 +81,42 @@ def wild_bootstrap_t(
         groups.setdefault(g, []).append(i)
     keys = list(groups)
     full = ols_cluster(x, y, clusters)
-    t_obs = full["beta"][j] / full["se"][j] if full["se"][j] > 0 else 0.0
+    t_obs = full["beta"][j] / full["se"][j] if full["se"][j] > 1e-12 else 0.0
+
+    n = len(x)
+    bread = invert(xtx(x))
+    wj = [sum(bread[j][m] * x[i][m] for m in range(k)) for i in range(n)]
+    g_count = len(groups)
+    c_scale = (g_count / (g_count - 1)) * ((n - 1) / (n - k)) if g_count > 1 and n > k else 1.0
+    group_items = list(groups.values())
+    Z_g = [[sum(wj[i] * x[i][m] for i in idxs) for m in range(k)] for idxs in group_items]
+    xty0 = xty(x, fitted0)
+    s0_g = [[sum(x[i][m] * e0[i] for i in idxs) for m in range(k)] for idxs in group_items]
+    q_g = [sum(wj[i] * fitted0[i] for i in idxs) for idxs in group_items]
+    r_g = [sum(wj[i] * e0[i] for i in idxs) for idxs in group_items]
+
     t_stars = []
     for _ in range(reps):
-        v = {g: 1.0 if rng.random() < 0.5 else -1.0 for g in keys}
-        y_star = [fitted0[i] + v[clusters[i]] * e0[i] for i in range(len(y))]
-        fb = ols_cluster(x, y_star, clusters)
-        t_stars.append(fb["beta"][j] / fb["se"][j] if fb["se"][j] > 0 else 0.0)
+        v = [1.0 if rng.random() < 0.5 else -1.0 for _ in keys]
+        xty_star = [
+            xty0[m] + sum(v[grp_idx] * s0_g[grp_idx][m] for grp_idx in range(g_count))
+            for m in range(k)
+        ]
+        beta_star = [sum(bread[r][m] * xty_star[m] for m in range(k)) for r in range(k)]
+        v_jj = (
+            sum(
+                (
+                    q_g[grp_idx]
+                    - sum(Z_g[grp_idx][m] * beta_star[m] for m in range(k))
+                    + v[grp_idx] * r_g[grp_idx]
+                )
+                ** 2
+                for grp_idx in range(g_count)
+            )
+            * c_scale
+        )
+        se_star = (v_jj**0.5) if v_jj > 1e-24 else 0.0
+        t_stars.append(beta_star[j] / se_star if se_star > 1e-12 else 0.0)
     t_stars.sort()
     # (count+1)/(reps+1): the standard finite-rep bootstrap p — strictly
     # positive and mildly conservative (c/reps reports p=0.000 on a clean

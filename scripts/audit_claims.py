@@ -36,6 +36,7 @@ MODEL_FRESHNESS = [
     ("panel_quarterly", "artifacts/panel_quarterly.json", "explorations/panel_quarterly.py"),
     ("wild_ar_bust", "artifacts/wild_ar_bust.json", "explorations/wild_ar_bust.py"),
     ("tourist_inversion", "artifacts/tourist_inversion.json", "scripts/invert_tourist.py"),
+    ("cadastre_eras", "artifacts/cadastre_eras.json", "explorations/cadastre_eras.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
     # pass on stale-but-doc-consistent JSONs.
@@ -2340,6 +2341,24 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_saiz_madrid: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
+    ce = _model_output("artifacts/cadastre_eras.json")
+    for desc, path, expected, tol in (
+        ("cadastre eras barrios", "global.n_barrios", 107, 0),
+        ("cadastre eras n_buildings", "global.n_buildings", 57723, 0),
+        ("cadastre eras pre-1951 pct", "global.era_pct.Pre-1951", 6.8, 0.05),
+        ("cadastre eras 1971-1990 pct", "global.era_pct.1971-1990", 37.7, 0.05),
+        ("cadastre eras 2011+ pct", "global.era_pct.2011+", 4.7, 0.05),
+        ("cadastre eras median year heliopolis", "barrios.10104.median_year", 1929, 0.5),
+        ("cadastre eras pre-1951 heliopolis", "barrios.10104.Pre-1951", 75.0, 0.5),
+        ("cadastre eras median year palmete", "barrios.04050.median_year", 2002, 0.5),
+        ("cadastre eras 2011+ colores", "barrios.09097.2011+", 24.1, 0.5),
+    ):
+        got = _json_path(ce, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_eras: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 9
+
     ratio = _model_output("artifacts/ratio_ccaa.json")
     for desc, path, expected, tol in (
         ("national r01", "national.r01", 511.6, 0.1),
@@ -2552,6 +2571,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] desahucios_renta: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
+
     pp = _model_output("artifacts/panel_provincial.json")
     for desc, path, expected, tol in (
         ("prov panel S0 absor b", "s0_absorption_only.coefs.absor.b", -0.024, 0.005),
@@ -2701,6 +2721,7 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] hypothesis_01: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 6
+
     pa = _model_output("artifacts/panel_adjusted.json")
     for desc, path, expected, tol in (
         ("S0 absor b", "s0_absorption_only.coefs.absor.b", -0.141, 0.001),
