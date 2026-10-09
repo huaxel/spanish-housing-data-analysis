@@ -53,6 +53,11 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_era_surface.json",
         "explorations/cadastre_era_surface.py",
     ),
+    (
+        "cadastre_vacancy_alignment",
+        "artifacts/cadastre_vacancy_alignment.json",
+        "explorations/cadastre_vacancy_alignment.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2678,6 +2683,73 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_surface: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 16
+
+    va = _model_output("artifacts/cadastre_vacancy_alignment.json")
+    for desc, path, expected, tol in (
+        ("vacancy census total dwellings", "city_41091.census_total_dwellings", 327393, 0),
+        ("vacancy census empty", "city_41091.census_empty_dwellings", 24621, 0),
+        ("vacancy census low consumption", "city_41091.census_low_consumption", 4990, 0),
+        ("vacancy census sporadic", "city_41091.census_sporadic_use", 17200, 0),
+        ("vacancy upper band", "city_41091.upper_nonoccupied_band", 46811, 0),
+        (
+            "vacancy cadastre city total",
+            "city_41091.cadastre_declared_properties",
+            327237,
+            0,
+        ),
+        (
+            "vacancy cadastre to census ratio",
+            "city_41091.cadastre_to_census_ratio",
+            0.999524,
+            0.00005,
+        ),
+        ("vacancy self empty rate", "city_41091.census_self_empty_rate_pct", 7.52, 0.005),
+        ("vacancy upper band rate", "city_41091.upper_band_census_rate_pct", 14.3, 0.05),
+        ("vacancy joined barrios", "coverage.joined_with_deshabitadas", 100, 0),
+        (
+            "vacancy denominator spearman",
+            "denominator_consistency.spearman_cadastre_props_vs_sim_familiares",
+            0.99847,
+            0.00005,
+        ),
+        (
+            "vacancy joined cadastre props",
+            "denominator_consistency.joined_cadastre_properties",
+            315107,
+            0,
+        ),
+        (
+            "vacancy joined sim dwellings",
+            "denominator_consistency.joined_sim_family_dwellings",
+            313398,
+            0,
+        ),
+        (
+            "vacancy joined sim unoccupied",
+            "denominator_consistency.joined_sim_deshabitadas",
+            17977,
+            0,
+        ),
+        (
+            "vacancy denominator ratio median",
+            "denominator_consistency.denominator_ratio_median",
+            1.002395,
+            0.0005,
+        ),
+        ("vacancy sim mean rate", "rates.sim_own_rate_mean_pct", 5.28, 0.005),
+        ("vacancy cad mean rate", "rates.cadastre_referenced_rate_mean_pct", 5.33, 0.005),
+        (
+            "vacancy rate series spearman",
+            "rates.spearman_sim_rate_vs_cadastre_rate",
+            0.995644,
+            0.00005,
+        ),
+    ):
+        got = _json_path(va, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_vacancy: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 18
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

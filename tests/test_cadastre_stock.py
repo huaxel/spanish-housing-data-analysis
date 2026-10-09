@@ -730,3 +730,40 @@ def test_cadastre_era_surface_artifact_structure():
     for e in eras:
         total = sum(e["quartile_share_pct"].values())
         assert abs(total - 100.0) < 0.5
+
+
+def test_cadastre_vacancy_alignment_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_vacancy_alignment.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    city = data["city_41091"]
+    assert city["census_total_dwellings"] == 327393
+    assert city["census_empty_dwellings"] == 24621
+    assert city["upper_nonoccupied_band"] == 46811
+    assert city["cadastre_declared_properties"] == 327237
+    assert city["cadastre_to_census_ratio"] == 0.999524
+    assert city["census_self_empty_rate_pct"] == 7.52
+    assert city["upper_band_census_rate_pct"] == 14.3
+    cov = data["coverage"]
+    assert cov["era_barrios"] == 107
+    assert cov["joined_with_deshabitadas"] == 100
+    assert len(cov["cadastre_barrios_without_deshabitadas"]) == 7
+    assert cov["sim_only_codes"] == ["05061"]
+    assert cov["cadastre_only_codes"] == []
+    den = data["denominator_consistency"]
+    assert den["spearman_cadastre_props_vs_sim_familiares"] == 0.99847
+    assert den["joined_cadastre_properties"] == 315107
+    assert den["joined_sim_family_dwellings"] == 313398
+    assert den["joined_sim_deshabitadas"] == 17977
+    rates = data["rates"]
+    assert rates["spearman_sim_rate_vs_cadastre_rate"] == 0.995644
+    assert rates["sim_own_rate_mean_pct"] == 5.28
+    assert rates["cadastre_referenced_rate_mean_pct"] == 5.33
+    # every per-barrio row must recompute from its inputs
+    for row in data["barrios"].values():
+        d, f, p = row["sim_deshabitadas"], row["sim_family_dwellings"], row["cadastre_properties"]
+        assert abs(row["sim_own_rate_pct"] - round(d / f * 100, 2)) < 1e-9
+        assert abs(row["cadastre_referenced_rate_pct"] - round(d / p * 100, 2)) < 1e-9
