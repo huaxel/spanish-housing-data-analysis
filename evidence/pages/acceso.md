@@ -506,3 +506,6 @@ estado y localización del stock vacío.
 Hasta disponer de fuentes comparables, estas preguntas quedan abiertas.
 
 [Registro de afirmaciones y cobertura](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/housing_access.md).
+
+---
+*Instantánea de datos: 2026-10-09 · ECV 2025 (renta 2024), Censo 2021, paneles 2021–2025 según el indicador · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/housing_access.md).*

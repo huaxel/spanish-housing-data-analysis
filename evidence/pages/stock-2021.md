@@ -199,3 +199,6 @@ selección de contratos, vivienda no apta o demanda no satisfecha**. Los valores
 son descripciones municipales, no un déficit/excedente de viviendas utilizables.
 
 [Fuentes, fechas y reproducción](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/stock_alignment.md).
+
+---
+*Instantánea de datos: 2026-10-09 · Censo 2021 (1-ene-2021), alquiler fiscal 2021, consumo eléctrico 2020 · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/stock_alignment.md).*

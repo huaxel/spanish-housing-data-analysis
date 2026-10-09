@@ -174,3 +174,6 @@ seguimos mostrando únicamente inferencia ya calculada y sus límites; **los
 cuatro modelos no se han reestimado**.
 
 [Fuente, derivación y verificación](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/uncertainty.md).
+
+---
+*Instantánea de datos: 2026-10-09 · cuatro modelos municipales de turismo, Barcelona · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/uncertainty.md).*

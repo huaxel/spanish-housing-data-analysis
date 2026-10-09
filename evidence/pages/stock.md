@@ -779,3 +779,6 @@ from stock_province.totales limit 10
 
 Perfil por municipio disponible en la exploración provincial; grano
 municipal en toda la provincia.
+
+---
+*Instantánea de datos: 2026-10-09 · Catastro INSPIRE BU (instantánea 2026-08-21), Sevilla + capitales andaluzas + provincia · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/cadastre_stock.md).*

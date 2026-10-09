@@ -174,3 +174,6 @@ Fuentes: MIVAU valor tasado e INE ECV, ingreso alineado con el año económico.
 Medias, no distribuciones de compradores; no se atribuyen a cada municipio.
 
 [Modelo, comprobaciones y límites](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/purchase_scenarios.md).
+
+---
+*Instantánea de datos: 2026-10-09 · escenarios hipotéticos sin fecha de observación; contexto regional observado de 2024 · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/purchase_scenarios.md).*
