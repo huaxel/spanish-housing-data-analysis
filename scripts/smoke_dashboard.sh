@@ -42,6 +42,10 @@ alive "dev comparar"      "$LOCAL/comparar/"
 alive "dev municipios"    "$LOCAL/municipios/"
 alive "dev renta"         "$LOCAL/renta/"
 alive "dev vacancia"      "$LOCAL/vacancia/"
+alive "dev acceso"        "$LOCAL/acceso/"
+alive "dev compra"        "$LOCAL/compra/"
+alive "dev incertidumbre" "$LOCAL/incertidumbre/"
+alive "dev stock"         "$LOCAL/stock/"
 alive "tailnet comparar"  "http://$TAILNET_IP:3000/comparar/"
 
 content evidence/build/index.html          "build nacional"     "Precios, stock"
@@ -50,6 +54,10 @@ content evidence/build/comparar/index.html "build comparar"     "Resumen del per
 content evidence/build/municipios/index.html "build municipios" "la capital se despega"
 content evidence/build/renta/index.html    "build renta"        "Renta municipal"
 content evidence/build/vacancia/index.html "build vacancia"     "Vivienda vacía"
+content evidence/build/acceso/index.html   "build acceso"       "Stock no es acceso"
+content evidence/build/compra/index.html   "build compra"       "efectivo inicial y cuota"
+content evidence/build/incertidumbre/index.html "build incertidumbre" "No detectar no es demostrar ausencia"
+content evidence/build/stock/index.html    "build stock"        "Qué vivienda existe"
 
 if ! tailscale serve status 2>/dev/null | grep -q 'tcp://.*:3000'; then
 	echo "FAIL tailscale: no TCP :3000 proxy configured"; fail=1
