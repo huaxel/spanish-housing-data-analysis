@@ -911,3 +911,63 @@ def test_cadastre_malaga_barrios_artifact_structure():
     for row in data["barrios"].values():
         total = sum(row[label] for label in data["eras"])
         assert abs(total - 100.0) < 0.5
+
+
+def test_shapefile_reader_and_datum():
+    import math
+
+    import pytest
+
+    from spanish_housing import datum, shapefile
+
+    # UTM round-trips at cm level on both ellipsoids
+    for ellipsoid in (datum.GRS80, datum.HAYFORD):
+        x, y = datum._utm_forward(math.radians(37.18), math.radians(-3.6), ellipsoid)
+        lat, lon = datum._utm_inverse(x, y, ellipsoid)
+        assert abs((math.degrees(lat) - 37.18) * 111320) < 0.1
+        assert abs((math.degrees(lon) + 3.6) * 111320) < 0.1
+    # ED50->ETRS89 moves Granada points ~100-250 m in the known direction
+    x2, y2 = datum.ed50_utm30_to_etrs89_utm30(447000.0, 4115500.0)
+    assert -250 < x2 - 447000.0 < -50
+    assert -250 < y2 - 4115500.0 < -50
+    # strict reader rejects a non-Polygon shape type
+    import struct as st
+
+    header = st.pack(">i", 9994) + bytes(24) + st.pack("<ii", 1000, 1)
+    with pytest.raises(ValueError, match="not Polygon"):
+        shapefile.read_shp_polygons.__self__ if False else _read_bytes(header)
+
+
+def _read_bytes(header: bytes):
+    import tempfile
+
+    from spanish_housing import shapefile
+
+    with tempfile.NamedTemporaryFile(suffix=".shp", delete=False) as tmp:
+        tmp.write(header)
+        path = tmp.name
+    try:
+        return shapefile.read_shp_polygons(path)
+    finally:
+        Path(path).unlink()
+
+
+def test_cadastre_granada_distritos_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_granada_distritos.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    glob = data["global"]
+    assert glob["n_barrios"] == 8
+    assert glob["total_properties"] == 140817
+    assert glob["dated_properties"] == 140785
+    assert glob["era_pct"]["1971-1990"] == 42.1
+    statuses = {s["status"]: s for s in glob["match_status"]}
+    assert statuses["matched"]["records"] == 20274
+    assert data["barrios"]["18087-ALBAYZIN"]["median_year"] == 1960
+    assert data["barrios"]["18087-ALBAYZIN"]["Pre-1951"] == 46.7
+    for row in data["barrios"].values():
+        total = sum(row[label] for label in data["eras"])
+        assert abs(total - 100.0) < 0.5

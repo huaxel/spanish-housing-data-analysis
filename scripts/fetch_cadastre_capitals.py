@@ -26,7 +26,11 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from spanish_housing import manifest  # noqa: E402
+from spanish_housing import (  # noqa: E402
+    datum,
+    manifest,
+    shapefile,
+)
 from spanish_housing import stock_geometry as geom  # noqa: E402
 
 
@@ -57,6 +61,12 @@ MLG_BARRIOS_URL = (
     "https://datosabiertos.malaga.eu/recursos/urbanismoEInfraestructura/"
     "planimetria/callejero/da_cartografiaBarrio-25830.geojson"
 )
+GRA_DISTRITOS_URL = (
+    "https://opendata.granada.org/dataset/cf4dab5c-6e37-4cb2-996f-d72576e71f14/"
+    "resource/e3487eb6-2543-4165-8252-3fa00597579a/download/"
+    "101_distritos_municipales_20230101.zip"
+)
+GRA_DISTRITOS = RAW / "cadastre_granada_distritos_20230101.zip"
 
 
 def paths(slug: str) -> dict[str, Path]:
@@ -205,10 +215,78 @@ def malaga_barrios() -> list[dict]:
     return items
 
 
+def granada_districts() -> list[dict]:
+    """Load Granada districts from the vendored SHP, reprojected to ETRS89.
+
+    The layer is published in ED50/UTM zone 30N (.prj asserts it); every
+    ordinate is transformed to ETRS89/UTM 30N via EPSG:1632 (~1.5 m) before
+    any join, so no ED50 numbers ever enter the metric pipeline.
+    """
+    import zipfile
+
+    with zipfile.ZipFile(GRA_DISTRITOS) as zf:
+        names = zf.namelist()
+        base = "101_Distritos_Municipales_20230101"
+        prj = [n for n in names if n == base + ".prj"]
+        if len(prj) != 1:
+            raise ValueError("Expected one Granada district .prj")
+        wkt = zf.read(prj[0]).decode("utf-8", "replace")
+        if "ED_1950" not in wkt or "UTM_Zone_30N" not in wkt:
+            raise ValueError("Granada districts are not ED50/UTM zone 30N")
+        tmpdir = RAW / "tmp_gra_distritos"
+        tmpdir.mkdir(exist_ok=True)
+        for suffix in (".shp", ".shx", ".dbf"):
+            (tmpdir / (base + suffix)).write_bytes(zf.read(base + suffix))
+    pairs = shapefile.read_shapes(tmpdir / base)
+    names_seen = [attrs["DISTRITO"].strip() for attrs, _parts in pairs]
+    if len(pairs) != 8 or len(set(names_seen)) != 8:
+        raise ValueError("Expected 8 uniquely named Granada districts")
+    items = []
+    for attrs, parts in pairs:
+        name = attrs["DISTRITO"].strip()
+        rings = []
+        for ring in parts:
+            rings.append([list(datum.ed50_utm30_to_etrs89_utm30(x, y)) for x, y in ring])
+        flat = rings
+        for ring in flat:
+            geom.validate_ring([list(p) for p in ring])
+        box = geom.bbox([flat])
+        if not (435000 < box[0] < box[2] < 460000 and 4105000 < box[1] < box[3] < 4125000):
+            raise ValueError("Granada district coordinates out of expected range")
+        area = component_area = overlap = None
+        polygons = []
+        quality, note = "invalid_topology", ""
+        try:
+            normalized, component_area, area = geom.dissolve_source_geojson(
+                {"type": "Polygon", "coordinates": flat}
+            )
+            polygons = geom.geojson_polygons(normalized)
+            overlap = component_area - area
+            if abs(overlap) < 1e-6:
+                overlap = 0.0
+            quality = "overlapping_components_dissolved" if overlap > 0 else "valid"
+        except geom.InvalidTopology as error:
+            note = str(error)
+        items.append(
+            {
+                "idg": f"18087-{name}",
+                "barrio": name,
+                "distrito": name,
+                "area_km2": area / 1e6 if area is not None else None,
+                "source_overlap_m2": overlap,
+                "geometry_quality": quality,
+                "geometry_note": note,
+                "polygons": polygons,
+                "bbox": box,
+            }
+        )
+    return items
+
+
 def raw_pins() -> dict:
     pins = manifest.load()["sha256"]
     expected = {}
-    rels = [str(MLG_BARRIOS.relative_to(ROOT))]
+    rels = [str(MLG_BARRIOS.relative_to(ROOT)), str(GRA_DISTRITOS.relative_to(ROOT))]
     for slug, _cat, _ine, _name, _prov in CITIES:
         for key in ("zip", "feed"):
             rels.append(str(paths(slug)[key].relative_to(ROOT)))
@@ -228,6 +306,9 @@ def metadata(pins: dict, snapshots: dict) -> dict:
         "snapshots": json_dumps(snapshots),
         "script_sha": manifest.sha256(Path(__file__)),
         "barrios_sha": manifest.sha256(MLG_BARRIOS),
+        "distritos_sha": manifest.sha256(GRA_DISTRITOS),
+        "datum_sha": manifest.sha256(Path(datum.__file__)),
+        "shapefile_sha": manifest.sha256(Path(shapefile.__file__)),
         "parser_sha": manifest.sha256(Path(sev.__file__)),
         "geometry_sha": manifest.sha256(Path(geom.__file__)),
         "geometry_engine": geom.ENGINE_VERSION,
@@ -243,22 +324,27 @@ def json_dumps(obj) -> str:
 def build_offline() -> dict:
     pins = raw_pins()
     snapshots, tables = {}, {}
-    barrios = malaga_barrios()
+    barrios_malaga = malaga_barrios()
+    barrios_granada = granada_districts()
     for slug, cat, ine, name, _prov in CITIES:
         p = paths(slug)
         snapshots[slug] = snapshot_for(p["feed"], f"{cat}-{name} buildings")
-        rows = parse_archive(
-            p["zip"], snapshots[slug], cat, ine, barrios if slug == "malaga" else ()
-        )
+        sub = barrios_malaga if slug == "malaga" else barrios_granada if slug == "granada" else ()
+        rows = parse_archive(p["zip"], snapshots[slug], cat, ine, sub)
         tables[slug] = pa.Table.from_pylist(rows, schema=sev.SCHEMA)
         p["parquet"].parent.mkdir(parents=True, exist_ok=True)
         pq.write_table(tables[slug], p["parquet"])
     combined = pa.concat_tables([tables[s] for s, _, _, _, _ in CITIES])
     barrios_table = pa.Table.from_pylist(
         [
-            {k: item[k] for k in ["idg", "barrio", "area_km2", "geometry_quality"]}
+            {k: item[k] for k in ["idg", "barrio", "distrito", "area_km2", "geometry_quality"]}
             | {"ine_municipality": "29067"}
-            for item in barrios
+            for item in barrios_malaga
+        ]
+        + [
+            {k: item[k] for k in ["idg", "barrio", "distrito", "area_km2", "geometry_quality"]}
+            | {"ine_municipality": "18087"}
+            for item in barrios_granada
         ]
     )
     municipios = pa.Table.from_pylist(
@@ -360,6 +446,11 @@ def main():
             MLG_BARRIOS,
             10 * 1024 * 1024,
         )
+        sev.download(
+            GRA_DISTRITOS_URL,
+            GRA_DISTRITOS,
+            10 * 1024 * 1024,
+        )
         manifest.record(
             str(MLG_BARRIOS.relative_to(ROOT)),
             {
@@ -367,6 +458,15 @@ def main():
                 "publisher": "Ayuntamiento de Malaga (datosabiertos.malaga.eu)",
                 "accessed": date.today().isoformat(),
                 "note": "Official barrio polygons CC BY-SA 4.0; share-alike applies to derivatives",
+            },
+        )
+        manifest.record(
+            str(GRA_DISTRITOS.relative_to(ROOT)),
+            {
+                "url": GRA_DISTRITOS_URL,
+                "publisher": "Ayuntamiento de Granada (opendata.granada.org)",
+                "accessed": date.today().isoformat(),
+                "note": "District polygons CC-BY, ED50/UTM30 reprojected via EPSG:1632",
             },
         )
     build_offline()

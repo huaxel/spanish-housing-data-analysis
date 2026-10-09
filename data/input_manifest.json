@@ -3,7 +3,7 @@
     "data/processed/ecv_joint_burden.duckdb": "bc51de54f43e49b84285322d1cea1c41613ea329dc12737a4bd331003d8e442b",
     "data/processed/housing_access.duckdb": "46c1c89edce3319bb678028cbb288b793acc2dc1ca8c54aa8f703cd548cb69f0",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
-    "data/processed/stock_capitals.duckdb": "a64d0521bb4f074b87a7a8016b309c854e03142a1dfe25f9905b244f41895efe",
+    "data/processed/stock_capitals.duckdb": "a21ff33f496b76359ddea8b9dc2c5582ad62338b31c9a861bd49752cb6967b49",
     "data/processed/stock_province.duckdb": "0d4c7c035f977ca7151ab57fe7f26d3609c493eef069b36d0fafae5b24dd45f1",
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
     "data/raw/barrios_sevilla_compra.json": "1ce6e2978b40a5061bbbbd6eff0f428aa9aa9fc193f4742e463d2d89c3ea6d88",
@@ -27,6 +27,7 @@
     "data/raw/cadastre_cordoba_buildings.zip": "7124770efc5ad2220203fbc012eb73c99585380264ae63e3d7ee2a99d0d8ca53",
     "data/raw/cadastre_cordoba_feed.xml": "de1d8ab58b5844c5b21b234386337e4ba59ba51954992963a9041ab3638650ed",
     "data/raw/cadastre_granada_buildings.zip": "1938fca88bd064b00310ca9349d3561344710257362daed76cd13947d2e7f5b2",
+    "data/raw/cadastre_granada_distritos_20230101.zip": "ab79aaf28d51a69442756dc6c136c1a38d9eed3aedcf9299f269d74e14246245",
     "data/raw/cadastre_granada_feed.xml": "dd00be6649a1a28fda30289f92f412dbaecd119375b78bf5d49e110e49492a87",
     "data/raw/cadastre_malaga_barrios_25830.geojson": "2047b8b13b250f6950e6118b7910dc0abea491d50597521dcb312b9de241a1f2",
     "data/raw/cadastre_malaga_buildings.zip": "50c8dd485c6c73943714a5d21e18877ffa7b4820657a177f8234d24d9cd88668",
@@ -234,7 +235,7 @@
     "data/raw/parquet/barrios_sevilla_compra.parquet": "7f866c6f158ea29afdf727eb105d69549abe20b3bef7caa504bafe05dcc7c573",
     "data/raw/parquet/barrios_sevilla_ipra.parquet": "bf3859636666d661f855fcf2e907394699ca390043c837076aa0b8f049d845f3",
     "data/raw/parquet/cadastre_cordoba_buildings.parquet": "a39913c4d845550705afa147ea2c7e364fa348b6649be632da152e370ae7c2c6",
-    "data/raw/parquet/cadastre_granada_buildings.parquet": "601f2fd99c1d8db996689f4a8edb99f23471f52dd17e558c9b18c67fa1b56008",
+    "data/raw/parquet/cadastre_granada_buildings.parquet": "5bec2d1cec7a6f579e4e25fd1d4665dc3a2e94070952f75bb353d0a840f66fca",
     "data/raw/parquet/cadastre_malaga_buildings.parquet": "461e76c558d8adb10f9fa51cd45ba46d045a29695f87fc21f335feb0b039a184",
     "data/raw/parquet/cadastre_prov_41001_buildings.parquet": "2ce185fb300a64c561af47b3981d2da701f3a935d26876a46dfc52fddf861728",
     "data/raw/parquet/cadastre_prov_41002_buildings.parquet": "c8498b9231e824a9f7de752aaabafa96545be422fb56c3971959fd9497b2feee",
@@ -576,6 +577,12 @@
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/18/18900-GRANADA/A.ES.SDGC.BU.18900.zip"
+    },
+    "data/raw/cadastre_granada_distritos_20230101.zip": {
+      "accessed": "2026-10-09",
+      "note": "District polygons CC-BY, ED50/UTM30 reprojected via EPSG:1632",
+      "publisher": "Ayuntamiento de Granada (opendata.granada.org)",
+      "url": "https://opendata.granada.org/dataset/cf4dab5c-6e37-4cb2-996f-d72576e71f14/resource/e3487eb6-2543-4165-8252-3fa00597579a/download/101_distritos_municipales_20230101.zip"
     },
     "data/raw/cadastre_granada_feed.xml": {
       "accessed": "2026-10-09",

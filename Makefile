@@ -140,6 +140,7 @@ analysis:
 	uv run python explorations/cadastre_capitals.py
 	uv run python explorations/cadastre_province.py
 	uv run python explorations/cadastre_malaga_barrios.py
+	uv run python explorations/cadastre_granada_distritos.py
 	uv run python explorations/censo_vintage.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py

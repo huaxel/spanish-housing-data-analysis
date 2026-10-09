@@ -71,6 +71,11 @@ MODEL_FRESHNESS = [
         "artifacts/cadastre_malaga_barrios.json",
         "explorations/cadastre_malaga_barrios.py",
     ),
+    (
+        "granada_distritos",
+        "artifacts/cadastre_granada_distritos.json",
+        "explorations/cadastre_granada_distritos.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2899,6 +2904,26 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] malaga_barrios: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 8
+
+    gd = _model_output("artifacts/cadastre_granada_distritos.json")
+    for desc, path, expected, tol in (
+        ("granada districts joined", "global.n_barrios", 8, 0),
+        ("granada districts properties", "global.total_properties", 140817, 0),
+        ("granada districts dated", "global.dated_properties", 140785, 0),
+        ("granada districts pre-1951", "global.era_pct.Pre-1951", 6.5, 0.05),
+        ("granada districts 1951-1970", "global.era_pct.1951-1970", 24.5, 0.05),
+        ("granada districts 1971-1990", "global.era_pct.1971-1990", 42.1, 0.05),
+        ("granada districts 1991-2010", "global.era_pct.1991-2010", 23.0, 0.05),
+        ("granada districts 2011+", "global.era_pct.2011+", 3.9, 0.05),
+        ("granada albayzin median", "barrios.18087-ALBAYZIN.median_year", 1960, 0),
+        ("granada albayzin pre-1951", "barrios.18087-ALBAYZIN.Pre-1951", 46.7, 0.05),
+        ("granada centro pre-1951", "barrios.18087-CENTRO.Pre-1951", 30.0, 0.05),
+    ):
+        got = _json_path(gd, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] granada_distritos: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 11
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (
