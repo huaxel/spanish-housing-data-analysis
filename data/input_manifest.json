@@ -390,6 +390,7 @@
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
     "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
+    "data/raw/parquet/rmdvp_inscripciones.parquet": "c58834259e3a5f0f727a55c1c8f6a3ca10639b968c9bff58c8f13d605be21ecb",
     "data/raw/parquet/serpavi_distritos.parquet": "aed37f04b35c27a9bcea888fb74d68f8dda3cbf96b4b94824e27d7f7073194b2",
     "data/raw/parquet/serpavi_municipal.parquet": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
     "data/raw/parquet/serpavi_provincial.parquet": "e6cac3651200385e67a459cd96f7073a7c0d73e858d1210a5035c109c241f141",
@@ -403,6 +404,75 @@
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
+    "data/raw/rmdvp/202012_rmdvp01.xls": "aee6ba03a0ad7b1369e757941b69a0224d984bde97a80df018b8dae1d3db4133",
+    "data/raw/rmdvp/202101_rmdvp01.xls": "1356c634e0f10199e72c7223a1a47d0b69bf6b861b0068f93d90cfc6c247f3d6",
+    "data/raw/rmdvp/202102_rmdvp01.xls": "c9385932b8a7a822dcbc4a5e324db58751647aafdd3594b9236d0297e7b2e7a4",
+    "data/raw/rmdvp/202103_rmdvp01.xls": "8a7b0a3a4c74040fde04cf26facf61489f8d0c2dfcceeeaee10ad428f0ed68b3",
+    "data/raw/rmdvp/202104_rmdvp01.xls": "48bb182e7235389dddfc646e14e3de50d0d2cf86b8f8ce9e0e1fd646b0635241",
+    "data/raw/rmdvp/202105_rmdvp01.xls": "3e333dffac1aaab7dbc9113aacee091e7b2c83225f151ea57730bff6ad83412e",
+    "data/raw/rmdvp/202106_rmdvp01.xls": "1e72313c5fb33c974d19b25ceba34790a54ddb14326eb910c7a95f4e17d59bcc",
+    "data/raw/rmdvp/202107_rmdvp01.xls": "e405f0ecf1c1714fac8822fb8b644f96d7d546f06c2782b0f7e118e2ff1cf5dc",
+    "data/raw/rmdvp/202108_rmdvp01.xls": "f68738770d061fa0de0cca1b64cea76395f9b8bab6e1d05aac3e6d99e704394d",
+    "data/raw/rmdvp/202109_rmdvp01.xls": "0b3a013d8593144a759aae05dca99db277a6d7b32a0dfa8f3f439188a1f0f85a",
+    "data/raw/rmdvp/202110_rmdvp01.xls": "53671073d1294a4dfd0a060a490fc1bd3da0b49f33b79385341fe60754bafbb5",
+    "data/raw/rmdvp/202111_rmdvp01.xls": "044b206b8a8a6d21b76785ba15860c39444aeeb40744a01dd889133bb0c778ab",
+    "data/raw/rmdvp/202112_rmdvp01.xls": "d1c47029f490c31b142941b5438def1afd8e935caf434c420c1150aba5b35a49",
+    "data/raw/rmdvp/202201_rmdvp01.xls": "30cdd4bd2d0ab14621e412fdbea1a209bd1a44bfd76ec7ff8f4ae77869516de3",
+    "data/raw/rmdvp/202202_rmdvp01.xls": "dc07163781713731fd0963a16030e0477137e302080e5aa0ebfd024f4f07ac98",
+    "data/raw/rmdvp/202203_rmdvp01.xls": "85bd3755e9a2068002ff087cc940d15df85117196f53d15036d7a6ad8e8b35df",
+    "data/raw/rmdvp/202204_rmdvp01.xls": "e818fa9c5c6bbd2a8fa374da36198202cbd19a446a8cf4306f5c1d96fa08a427",
+    "data/raw/rmdvp/202205_rmdvp01.xls": "10e3f5970d2305f7860ec90a745f9419796bb287d31122cdb2869caaf940a792",
+    "data/raw/rmdvp/202206_rmdvp01.xls": "2239fd04228ec25c5c1400d3d8949909c751746e5509a8e63c6d0b6d9fc81bbb",
+    "data/raw/rmdvp/202207_rmdvp01.xls": "bca7732283592a2b566eab967e3b35c99ad4c651ce32bb3a36b5f410df3e93fe",
+    "data/raw/rmdvp/202208_rmdvp01.xls": "1c0732e0df7677d0f00d4a132e11e034a9b5a28f73857b30366c4442d4624c4c",
+    "data/raw/rmdvp/202209_rmdvp01.xls": "6a8222bfe3289f46977348206e4e7059e2979482bf497da318c2fe5cb18db59a",
+    "data/raw/rmdvp/202210_rmdvp01.xls": "7cd309c87f0569d285e3ba6439a92d89822cc776f6533e2201af93d5402893b6",
+    "data/raw/rmdvp/202211_rmdvp01.xls": "fae7c500c0a0b90df58586a660b9a2a0fd37e1658e54215a2486c29bf6fa5f5f",
+    "data/raw/rmdvp/202212_rmdvp01.xls": "980067ae965949a5907cf0be1e7a8fc84dc2784b8d1f3c8b96c8774cbc18bec6",
+    "data/raw/rmdvp/202301_rmdvp01.xls": "f3dd6d343020d7f59949be35d5b62c7148933489f99a432dd31abc8340a5c02f",
+    "data/raw/rmdvp/202302_rmdvp01.xls": "267ab28c14c4cc6c5742741ec664028d4189b848b12e4e0d35ace33e7d084caa",
+    "data/raw/rmdvp/202303_rmdvp01.xls": "c2c1a57fba40315b46f57226a8370f0b8d68664b788475b6067a8575796e123f",
+    "data/raw/rmdvp/202304_rmdvp01.xls": "3ba1cd0dc69bd97cf2aa3e5bd61f565f6258097d06ad5c6a101c7d4330d7f588",
+    "data/raw/rmdvp/202305_rmdvp01.xls": "83c4ded61678f9c2e3d16c63f9257468f80d07e7eb9ae346806ceb8098637e77",
+    "data/raw/rmdvp/202306_rmdvp01.xls": "61c7d08d8d13c2e16a95b00552e6ba487f81d5edc6cc6c6857ecb95abda0cd79",
+    "data/raw/rmdvp/202307_rmdvp01.xls": "d0871e9ac16656884cc8a404b7dcf7c4efdf61e4986ad226b97bbcab68f7a532",
+    "data/raw/rmdvp/202308_rmdvp01.xls": "36beb4b25e609c1eaa10d4feb0f45fc8ad0bd275de3dac909a2dfec4e5c82a85",
+    "data/raw/rmdvp/202309_rmdvp01.xls": "abb39c821ff1f02a0b6a847536d8829994059aac759f27d770fea825bb7cbffc",
+    "data/raw/rmdvp/202310_rmdvp01.xls": "cd9768f9e41773d6007e923d5b99e6e7702c6aae87ff2c5c5e41331d62db95c5",
+    "data/raw/rmdvp/202311_rmdvp01.xls": "ce1f3637192e936b944a145bac4e4f517c9f75bb765e05777ebae45594756d32",
+    "data/raw/rmdvp/202312_rmdvp01.xls": "75339a9dbf049956dd4a8b485810ddfaa95698800b6bab9299337aa32e1b23c6",
+    "data/raw/rmdvp/202401_rmdvp01.xls": "9cd9f4edc3342c0a433aa2381e0d8ece6a8632976c2a3cc330c97e4b7ac0371e",
+    "data/raw/rmdvp/202402_rmdvp01.xls": "1ae8e09accf27ff1bb58e393affee8257e3ce92bb38acfe4492de3016ccc4b4d",
+    "data/raw/rmdvp/202403_rmdvp01.xls": "881f7bae5b55922be70e3598065cc399a103d3c3cb11337ea60914f8185347af",
+    "data/raw/rmdvp/202404_rmdvp01.xls": "baa1186034d1a9e3ee752d49c58ad7152f3029bf642ee1aae9c1057abe4061d5",
+    "data/raw/rmdvp/202405_rmdvp01.xls": "f9ea741a1d130400f3abda8523378d99a48932297521c0ee722e31c68cf13c5f",
+    "data/raw/rmdvp/202406_rmdvp01.xls": "ad8485103cc1a5a4a4e9a95f16ca2e5bd48ecc93cca638846831e633e614d5e0",
+    "data/raw/rmdvp/202407_rmdvp01.xls": "e0c023895a820f0be0efb28ec23f1c0bc186704f9be8da0e4cfa90efc73346b8",
+    "data/raw/rmdvp/202408_rmdvp01.xls": "631572383e396148fccd3a3fac9edc60ed79efef26c43f253e7729aaff6f077a",
+    "data/raw/rmdvp/202409_rmdvp01.xls": "f42e31b9db1f3d21df88ca9e80ab8ac3178cdd9d4cae84cd87d0daf2bfbb6a26",
+    "data/raw/rmdvp/202410_rmdvp01.xls": "7c3effc20ed0a879d436075146676162eee7df32e27580adbeee6eb6f046b3d5",
+    "data/raw/rmdvp/202411_rmdvp01.xls": "13989de98d65408b6b529fca303a07607104459eeb85f2679060af05553283d6",
+    "data/raw/rmdvp/202412_rmdvp01.xls": "1d556181e9c7b9b1a5a20847784587e5e4166817ca0d383142f84621654e100c",
+    "data/raw/rmdvp/202501_rmdvp01.xls": "c95ba3dea440cc8d440b6f8a381838ac463e8ee1035b659a9bee575893cae34b",
+    "data/raw/rmdvp/202502_rmdvp01.xls": "d951f80644df93f8e1fad04b82e5fc4f001472ea117f6888c2d983e6ca30e0d6",
+    "data/raw/rmdvp/202503_rmdvp01.xls": "e771838339bdd4a16e5cef72b2fc391ebc478a7a9a973174dbe2b0a3443a896c",
+    "data/raw/rmdvp/202504_rmdvp01.xls": "c62a47068f08418958a77e0ae1b292577afa70e5e5793c36c6c7d8aaf0694c1d",
+    "data/raw/rmdvp/202505_rmdvp01.xls": "95d965bedbd191fa1395b499213a8656971993b01eb83dab4503c32cd603e755",
+    "data/raw/rmdvp/202506_rmdvp01.xls": "fc4f29d258cd62531feafe0c8d9e79881cce5618f2aa39e853bd1988eb517c68",
+    "data/raw/rmdvp/202507_rmdvp01.xls": "53b6c73b4d82ebe940ccb795510006848d0c1562c0c3698e9d516d5f2c397c7d",
+    "data/raw/rmdvp/202508_rmdvp01.xls": "7fb5c1b3e8304b697d37030765e32af323ba3c4446bb49f57643b7f0cdffad35",
+    "data/raw/rmdvp/202509_rmdvp01.xls": "ff63c8b088f1b1b94955a871f236dd887a6ee4a2c34af9152d64da7ab8e5db5d",
+    "data/raw/rmdvp/202510_rmdvp01.xls": "7259763c7ad882484827a7d6128065f443ab2f93efd4027709175c3f506a6190",
+    "data/raw/rmdvp/202511_rmdvp01.xls": "e8a25223beb4b5feb684582639d428c0a558e6845c5d8bb9fc156181981bc547",
+    "data/raw/rmdvp/202512_rmdvp01.xls": "f1ab13c14ba88708a4f41e8b6a779923117f10fac3dc3f926b02125d580dded6",
+    "data/raw/rmdvp/202601_rmdvp01.xls": "0963c748aa8abe9fc153742bfcf7e13c3ac1ac15109b77be6561e95a324e760e",
+    "data/raw/rmdvp/202602_rmdvp01.xls": "d61a8587b992a5b53e0f121b99a2b33023054e57087f99fd1f37dc8a1cc2cf16",
+    "data/raw/rmdvp/202603_rmdvp01.xls": "faf2cc883cb6bc6fc281527165b95fea1a2e9b1b02b736923e2faa1d4af062ec",
+    "data/raw/rmdvp/202604_rmdvp01.xls": "bb4b734ba9c8fbabe5a4cc483f930c13075f9667ae0affaad8c33a15a91ccf41",
+    "data/raw/rmdvp/202605_rmdvp01.xls": "f2cd73f4f655f4154d502d50f4f104c01ff506241ce501762f6bc2b2fe89e04a",
+    "data/raw/rmdvp/202606_rmdvp01.xls": "fd1d9e31f443125a4c59c05a5da261a5daff4b4ab269b21802aa615cb5df0e60",
+    "data/raw/rmdvp/202607_rmdvp01.xls": "31e29e0e1ea961201d52d92e70bdac192da680b5581184b6e80ff7858519b1de",
+    "data/raw/rmdvp/202608_rmdvp01.xls": "06b2950bbb54f789579b46b4a4d2d1eb4e1b3ba2adb3fb4bfebc48540675654a",
     "data/raw/serpavi_bd.xlsx": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
     "data/raw/sevilla_anuario_2025_7_3_9.xls": "7e2c3752a3c6243dac94701ae2fa7a105252678f87fb1a6e81e790476b4fabde",
     "data/raw/sevilla_barrios_25830.geojson": "1cd35a8e128a24185d07603a61b99a2a83a2d8427f73a5180b02b2d3c3ae2bf5",
@@ -2583,6 +2653,11 @@
       "note": "renta_anyo = encuesta_anyo - 1",
       "operation": "ECV"
     },
+    "data/raw/parquet/rmdvp_inscripciones.parquet": {
+      "months": "202012..202608",
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía"
+    },
     "data/raw/parquet/serpavi_distritos.parquet": {
       "accessed": "2026-10-08",
       "note": "long melt: distrito x anyo x medida; populated cells only; district names unpublished (codes only); secciones skipped",
@@ -2660,6 +2735,351 @@
       "accessed": "2026-10-08",
       "api": "wstempus/DATOS_TABLA/9949",
       "operation": "ECV"
+    },
+    "data/raw/rmdvp/202012_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202012_rmdvp01_solicitudes_estado_de_inscripciones_origen_2.xls"
+    },
+    "data/raw/rmdvp/202101_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202101_rmdvp01_solicitudes_estado_de_inscripciones_origen_2.xls"
+    },
+    "data/raw/rmdvp/202102_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202102_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202103_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202103_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202104_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202104_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202105_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202105_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202106_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202106_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202107_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202107_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202108_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202108_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202109_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202109_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202110_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202110_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202111_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202111_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202112_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202112_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202201_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202201_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202202_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202202_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202203_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202203_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202204_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "http://www.juntadeandalucia.es/export/drupaljda/202204_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202205_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/08/202205_rmdvp01_solicitudes_estado_de_inscripciones_origen_0.xls"
+    },
+    "data/raw/rmdvp/202206_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/08/202206_rmdvp01_solicitudes_estado_de_inscripciones_origen_0.xls"
+    },
+    "data/raw/rmdvp/202207_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/08/202207_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202208_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/09/202208_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202209_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/10/202209_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202210_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/11/202210_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202211_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2022/12/202211_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202212_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/01/202212_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202301_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/02/202301_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202302_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/03/202302_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202303_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/04/202303_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202304_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/05/202304_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202305_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/06/202305_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202306_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/07/202306_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202307_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/08/202307_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202308_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/09/202308_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202309_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/10/202309_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202310_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/11/202310_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202311_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2023/12/202311_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202312_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/01/202312_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202401_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/02/202401_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202402_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/04/202402_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202403_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/05/202403_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202404_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/05/202404_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202405_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/06/202405_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202406_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/09/202406_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202407_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/09/202407_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202408_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/09/202408_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202409_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/10/202409_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202410_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/11/202410_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202411_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/12/202411_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202412_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/02/202412_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202501_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/02/202501_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202502_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/03/202502_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202503_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/04/202503_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202504_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/05/202504_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202505_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/06/202505_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202506_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/09/202506_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202507_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/09/202507_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202508_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/09/202508_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202509_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/10/202509_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202510_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/11/202510_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202511_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2025/12/202511_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202512_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/01/202512_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202601_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202601_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202602_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202602_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202603_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202603_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202604_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202604_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202605_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202605_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202606_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202606_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202607_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202607_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
+    "data/raw/rmdvp/202608_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202608_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
     },
     "data/raw/serpavi_bd.xlsx": {
       "accessed": "2026-10-08",

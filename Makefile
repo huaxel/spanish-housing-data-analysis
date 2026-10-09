@@ -53,6 +53,7 @@ fetch:
 	uv run python scripts/fetch_cadastre_province.py
 	uv run python scripts/fetch_aeat_viviendas.py
 	uv run python scripts/fetch_censo_secciones.py
+	uv run python scripts/fetch_rmdvp.py
 	uv run python scripts/fetch_sevilla_income.py
 	uv run python scripts/build_sevilla_2021.py
 	uv run python scripts/build_ecv_joint.py

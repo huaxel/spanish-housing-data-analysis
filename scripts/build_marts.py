@@ -128,6 +128,7 @@ REQUIRED_RAW = [
     "data/raw/parquet/censo_viviendas_2001_2011.parquet",
     "data/raw/parquet/aeat_viviendas_uso.parquet",
     "data/raw/parquet/censo2021_secciones.parquet",
+    "data/raw/parquet/rmdvp_inscripciones.parquet",
     "data/raw/parquet/serpavi_municipal.parquet",
     "data/raw/parquet/migracion_flujos.parquet",
     "data/raw/parquet/padron_extranjeros.parquet",
@@ -1638,6 +1639,58 @@ def main() -> None:
     print(f"censo2021 secciones: {len(usable_sec)} usable + {n_sup} suppressed")
     con.register("sec_df", pa.Table.from_pylist(sec_rows))
     con.execute("CREATE OR REPLACE TABLE censo2021_secciones AS SELECT * FROM sec_df")
+    # RMDVP table 01 (Junta de Andalucía, monthly end-of-month stock of
+    # protected-housing demand): solicitudes + inscripciones by estado at
+    # municipio grain, with province subtotals and an Andalucía total row.
+    # Parsed and validated at fetch (layout, month binding, identities,
+    # aggregations); here the shape contract is re-asserted before loading.
+    # Listed municipalities only (518 in the 2020-12 baseline month, growing
+    # since; 785 Andalusian municipalities in total): absent municipalities have no
+    # recorded solicitudes and are NOT zero-filled downstream.
+    rmdvp_rows = load_parquet("rmdvp_inscripciones.parquet")
+    rmdvp_months = sorted({r["yyyymm"] for r in rmdvp_rows})
+    if rmdvp_months[0] != "202012":
+        raise SystemExit(f"rmdvp: series starts at {rmdvp_months[0]}, want 202012")
+    prev_ym = rmdvp_months[0]
+    for ym in rmdvp_months[1:]:
+        want = int(prev_ym[:4]) * 12 + int(prev_ym[4:]) + 1
+        if int(ym[:4]) * 12 + int(ym[4:]) != want:
+            raise SystemExit(f"rmdvp: month gap after {prev_ym}")
+        prev_ym = ym
+    for ym in rmdvp_months:
+        grains: dict[str, int] = {}
+        for r in rmdvp_rows:
+            if r["yyyymm"] == ym:
+                grains[r["grano"]] = grains.get(r["grano"], 0) + 1
+        if grains.get("provincia") != 8 or grains.get("total_andalucia") != 1:
+            raise SystemExit(f"rmdvp: grain drift for {ym}: {grains}")
+        if not grains.get("municipio") or grains["municipio"] > 785:
+            raise SystemExit(f"rmdvp: municipio coverage drift for {ym}: {grains}")
+        for r in rmdvp_rows:
+            if r["yyyymm"] != ym or r["grano"] != "municipio":
+                continue
+            if not re.fullmatch(r"(04|11|14|18|21|23|29|41)\d{3}", r["ine"] or ""):
+                raise SystemExit(f"rmdvp: INE outside Andalucía for {ym}: {r['ine']!r}")
+            parts = r["activas"] + r["canceladas"] + r["caducadas"]
+            if r["inscripciones"] != parts:
+                raise SystemExit(f"rmdvp: identity drift for {ym} at {r['ine']}")
+        prov_sub = {
+            x["provincia"]: x for x in rmdvp_rows if x["yyyymm"] == ym and x["grano"] == "provincia"
+        }
+        tot = next(x for x in rmdvp_rows if x["yyyymm"] == ym and x["grano"] == "total_andalucia")
+        for use in ("solicitudes", "inscripciones", "activas", "canceladas", "caducadas"):
+            muni_sum = sum(
+                x[use] for x in rmdvp_rows if x["yyyymm"] == ym and x["grano"] == "municipio"
+            )
+            if muni_sum != tot[use]:
+                raise SystemExit(f"rmdvp: Total reconciliation drift for {ym} on {use}")
+            prov_sum = sum(x[use] for x in prov_sub.values())
+            if prov_sum != tot[use]:
+                raise SystemExit(f"rmdvp: province reconciliation drift for {ym} on {use}")
+    span = f"{rmdvp_months[0]}..{rmdvp_months[-1]}"
+    print(f"rmdvp: {len(rmdvp_rows)} rows over {len(rmdvp_months)} months ({span})")
+    con.register("rmdvp_df", pa.Table.from_pylist(rmdvp_rows))
+    con.execute("CREATE OR REPLACE TABLE rmdvp_inscripciones AS SELECT * FROM rmdvp_df")
     # Censo 2021 viviendas por intensidad de uso (59531): objective vacancy from
     # electricity consumption. Municipal grain (named + Resto aggregates).
     con.register("inten_df", pa.Table.from_pylist(load_parquet("censo2021_intensidad.parquet")))

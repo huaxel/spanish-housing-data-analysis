@@ -1388,6 +1388,40 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         1.0,
     ),
     (
+        # Baseline month only: the series grows with each publication, so
+        # only the immutable first month is pinned; month-continuity and
+        # per-month reconciliations are asserted in build_marts.
+        "anchor",
+        "rmdvp 2020-12 listed municipalities",
+        "SELECT COUNT(*) FROM rmdvp_inscripciones WHERE yyyymm = '202012' AND grano = 'municipio'",
+        518.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "rmdvp 2020-12 solicitudes (municipio sum)",
+        "SELECT SUM(solicitudes) FROM rmdvp_inscripciones "
+        "WHERE yyyymm = '202012' AND grano = 'municipio'",
+        257208.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "rmdvp 2020-12 inscripciones (municipio sum)",
+        "SELECT SUM(inscripciones) FROM rmdvp_inscripciones "
+        "WHERE yyyymm = '202012' AND grano = 'municipio'",
+        203128.0,
+        1.0,
+    ),
+    (
+        "anchor",
+        "rmdvp 2020-12 activas (municipio sum)",
+        "SELECT SUM(activas) FROM rmdvp_inscripciones "
+        "WHERE yyyymm = '202012' AND grano = 'municipio'",
+        64471.0,
+        1.0,
+    ),
+    (
         "barcelona",
         "Barcelona city real sale change 2013-24",
         _bcn_real_sql("Barcelona"),

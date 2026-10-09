@@ -29,7 +29,7 @@ large-holder or fiscal instrument, not a statistical series.
 | 1 | AEAT viviendas declaradas en IRPF, use split | Strongest recurring occupancy composition | CCAA + provincia (+ municipal rentals); annual tax year, 2024 latest | Integration design |
 | 2 | Censo 2021 inframunicipal dwellings/persons/households | Section-grain occupancy from one aligned source; 2021 vintage aging | Sección censal, 2021-01-01 | Verify-and-pull design |
 | 3 | MIVAU stock de vivienda nueva sin vender | Genuine availability, new segment only | CCAA + provincia, annual to 2025-12-31 | Park (PDF-only, no tabular endpoint; assessed 2026-10-09) |
-| 4 | RMDVP municipal demandante counts (Andalucía) | Demand-side waiting-list proxy; PDF-only | Municipal, 2025-03 verified live | Park (same rule as Valor de Referencia) |
+| 4 | RMDVP municipal demandante counts (Andalucía) | Demand-side waiting-list proxy; monthly .xls twins | Municipal, 2020-12.. monthly | Pulled 2026-10-09 (table 01 → `rmdvp_inscripciones`) |
 | 5 | Catalan / Valencian vacant-dwelling registers | Large-holder vacancy signals, compliance scope | Regional, 2024–2026 | Context only |
 | 6 | IBI vacancy surcharges | Fiscal instruments, not data | Municipal ordinances, heterogeneous | No integration |
 | 7 | Idealista/data listings | Commercial-only; wrappers are ToS risk | Down to sección, weekly | Park |
@@ -104,7 +104,7 @@ several provinces and autonomous communities read zero in the latest
 table under a methodology note, so zeros must be treated as
 not-measured-or-suppressed, not as true zeros, before any use.
 
-## 4. Protected-housing waiting lists: demand side, PDF-only
+## 4. Protected-housing waiting lists: demand side, now pulled
 
 The Junta de Andalucía publishes [monthly RMDVP statistics](https://www.juntadeandalucia.es/organismos/viviendajuventudyordenaciondelterritorio/areas/vivienda-rehabilitacion/vivienda-protegida/paginas/rmdv-estadistica-mensual.html);
 the March 2025 municipal inscription PDF was verified live.
@@ -112,10 +112,26 @@ Registered protected-housing demand by municipality is the only
 municipal-grain demand-side count found — it measures the queue for
 regulated housing, a complement to supply-side vacancy, not a substitute.
 Limits: Andalucía only; registered demand is not total demand (eligibility
-and self-registration filter it); the page's file listings are JS-gated
-with no tabular endpoint found and no datosabiertos dataset — PDF-only,
-so parked under the same rule as the Valor de Referencia probe. Watch
-for a machine-readable series or request one before any integration.
+and self-registration filter it).
+
+Watch outcome (2026-10-09): the watch resolved POSITIVE — every monthly
+table carries a machine-readable `.xls` twin in static archive-page HTML
+(URL eras: `export/drupaljda` for older months, `sites/default/files`
+for recent ones), running 2020-12 (single month) then full monthly from
+2021-01. Table 01 (solicitudes y estado de inscripciones) is now pulled
+by `scripts/fetch_rmdvp.py` into the `rmdvp_inscripciones` mart table:
+69 monthly files, municipio grain with province subtotals and a
+reconciling Andalucía total, strict layout/month/identity/aggregation
+asserts per file. It is an end-of-month stock of registered demand with
+inscripción states (total, activas, canceladas por adjudicación,
+caducadas y otros). Baseline 2020-12: 518 listed municipalities with
+257,208 solicitudes, 203,128 inscripciones (64,471 activas) — all four
+audit-pinned; only the immutable first month is pinned because the
+series grows with each publication. Coverage grows from 518 to 543
+listed municipalities of 785 Andalusian municipalities: absent
+municipalities have no recorded solicitudes and are never zero-filled.
+Tables 02-08 (régimen, sexo, edad, IPREM, composición) remain unpulled
+PDF-adjacent demographic breakdowns, same `.xls`-twin pattern if needed.
 
 ## 5. Regional vacant-dwelling registers: large holders, compliance scope
 
@@ -178,4 +194,4 @@ dependency and no grey-zone extraction in this pipeline.
    keys, ratio definitions, 2021-vintage quarantine.
 3. MIVAU unsold-new provincial series: assessed 2026-10-09, parked
    (PDF-only, no tabular endpoint, bot-walled downloads).
-4. RMDVP watch: tabular endpoint or formal machine-readable request.
+4. RMDVP watch: resolved positive 2026-10-09, table 01 pulled.

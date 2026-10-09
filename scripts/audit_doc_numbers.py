@@ -161,6 +161,9 @@ ALLOW = {
         (635919.0, "AEAT IRPF unoccupied Valencian dwellings 2024, external source fact"),
         (150.0, "San Sebastian IBI vacancy surcharge rate, external source fact"),
         (1363.0, "suppressed census sections (persons only), verified file count"),
+        (69.0, "RMDVP table-01 months pulled 2020-12..2026-08, verified file count"),
+        (543.0, "RMDVP latest-month listed municipalities, verified file count"),
+        (785.0, "Andalusian municipalities (official count), coverage denominator"),
     ],
     "docs/explorations/panel_quarterly.md": [
         (999.0, "bootstrap reps parameter"),
