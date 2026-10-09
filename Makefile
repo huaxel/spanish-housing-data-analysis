@@ -139,6 +139,7 @@ analysis:
 	uv run python explorations/cadastre_household_alignment.py
 	uv run python explorations/cadastre_capitals.py
 	uv run python explorations/cadastre_province.py
+	uv run python explorations/cadastre_malaga_barrios.py
 	uv run python explorations/censo_vintage.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
@@ -153,6 +154,7 @@ stock-rent:
 	uv run python explorations/cadastre_vacancy_alignment.py
 	uv run python explorations/cadastre_household_alignment.py
 	uv run python explorations/cadastre_capitals.py
+	uv run python explorations/cadastre_malaga_barrios.py
 
 inference:
 	uv run python scripts/invert_tourist.py

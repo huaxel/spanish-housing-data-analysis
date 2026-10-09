@@ -66,6 +66,11 @@ MODEL_FRESHNESS = [
     ("cadastre_capitals", "artifacts/cadastre_capitals.json", "explorations/cadastre_capitals.py"),
     ("province_inventory", "artifacts/province_inventory.json", "scripts/inventory_province.py"),
     ("cadastre_province", "artifacts/cadastre_province.json", "explorations/cadastre_province.py"),
+    (
+        "malaga_barrios",
+        "artifacts/cadastre_malaga_barrios.json",
+        "explorations/cadastre_malaga_barrios.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2877,6 +2882,23 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_province: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 11
+
+    mb = _model_output("artifacts/cadastre_malaga_barrios.json")
+    for desc, path, expected, tol in (
+        ("malaga barrios joined", "global.n_barrios", 360, 0),
+        ("malaga barrios properties", "global.total_properties", 261073, 0),
+        ("malaga barrios dated", "global.dated_properties", 261066, 0),
+        ("malaga barrios pre-1951", "global.era_pct.Pre-1951", 4.2, 0.05),
+        ("malaga barrios 1951-1970", "global.era_pct.1951-1970", 22.6, 0.05),
+        ("malaga barrios 1971-1990", "global.era_pct.1971-1990", 39.5, 0.05),
+        ("malaga barrios 1991-2010", "global.era_pct.1991-2010", 28.5, 0.05),
+        ("malaga barrios 2011+", "global.era_pct.2011+", 5.2, 0.05),
+    ):
+        got = _json_path(mb, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] malaga_barrios: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 8
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

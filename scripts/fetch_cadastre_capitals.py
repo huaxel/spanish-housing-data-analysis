@@ -14,6 +14,7 @@ needs official local geometries and is tracked separately.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
@@ -51,6 +52,11 @@ CITIES = [
 ]
 
 DATABASE = PROCESSED / "stock_capitals.duckdb"
+MLG_BARRIOS = RAW / "cadastre_malaga_barrios_25830.geojson"
+MLG_BARRIOS_URL = (
+    "https://datosabiertos.malaga.eu/recursos/urbanismoEInfraestructura/"
+    "planimetria/callejero/da_cartografiaBarrio-25830.geojson"
+)
 
 
 def paths(slug: str) -> dict[str, Path]:
@@ -87,17 +93,18 @@ def snapshot_for(feed: Path, title: str) -> str:
     raise ValueError(f"Feed entry missing: {title}")
 
 
-def record(element, snapshot: str, cat: str, ine: str) -> dict:
-    """Same record semantics as the Sevilla pilot, without a barrio join."""
-    row = sev.building(element, snapshot, [])
+def record(element, snapshot: str, cat: str, ine: str, barrios=()) -> dict:
+    """Sevilla record semantics; barrio join only where polygons are given."""
+    row = sev.building(element, snapshot, list(barrios))
     row["cat_municipality"] = cat
     row["ine_municipality"] = ine
-    row["barrio_id"] = None
-    row["match_status"] = "municipal_only"
+    if not barrios:
+        row["barrio_id"] = None
+        row["match_status"] = "municipal_only"
     return row
 
 
-def parse_archive(archive: Path, snapshot: str, cat: str, ine: str) -> list[dict]:
+def parse_archive(archive: Path, snapshot: str, cat: str, ine: str, barrios=()) -> list[dict]:
     rows, seen = [], set()
     with zipfile.ZipFile(archive) as zf:
         files = [f for f in zf.infolist() if f.filename.lower().endswith(".building.gml")]
@@ -117,7 +124,7 @@ def parse_archive(archive: Path, snapshot: str, cat: str, ine: str) -> list[dict
                     candidates = [child for child in element if child.tag.endswith("}Building")]
                     if len(candidates) != 1:
                         raise ValueError("Expected one Building per featureMember")
-                    row = record(candidates[0], snapshot, cat, ine)
+                    row = record(candidates[0], snapshot, cat, ine, barrios)
                     if row["refcat"] in seen:
                         raise ValueError("Duplicate cadastral parcel record")
                     seen.add(row["refcat"])
@@ -128,15 +135,87 @@ def parse_archive(archive: Path, snapshot: str, cat: str, ine: str) -> list[dict
     return rows
 
 
+def strip_z(geometry: dict) -> dict:
+    """Drop near-zero Z ordinates from the Malaga 25830 polygons.
+
+    Every ordinate must be 2D or carry |z| < 1 cm (observed max 0.2 mm,
+    elevation noise); anything larger fails rather than being silently
+    flattened, since Z could otherwise hide a genuinely 3D dataset.
+    """
+
+    def walk(coords):
+        if isinstance(coords, list) and coords and isinstance(coords[0], (int, float)):
+            if len(coords) > 2:
+                if any(abs(v) >= 0.01 for v in coords[2:]):
+                    raise ValueError("Non-negligible Z ordinate in Malaga barrio geometry")
+                return coords[:2]
+            return coords
+        return [walk(part) for part in coords]
+
+    return {**geometry, "coordinates": walk(geometry["coordinates"])}
+
+
+def malaga_barrios() -> list[dict]:
+    """Load and validate the official Malaga barrio polygons (EPSG:25830)."""
+    payload = json.loads(MLG_BARRIOS.read_bytes())
+    if payload.get("crs", {}).get("properties", {}).get("name") != "urn:ogc:def:crs:EPSG::25830":
+        raise ValueError("Unexpected Malaga barrio coordinate system, expected EPSG:25830")
+    features = payload.get("features", [])
+    if len(features) != 419:
+        raise ValueError("Expected 419 official Malaga barrios")
+    numbers = [f["properties"]["NUMBARRIO"] for f in features]
+    names = [str(f["properties"]["NOMBARRIO"]).strip() for f in features]
+    if len(set(numbers)) != 419 or len(set(names)) != 419:
+        raise ValueError("Malaga barrio keys or names are not unique")
+    items = []
+    for feature, number, name in zip(features, numbers, names, strict=True):
+        geometry = strip_z(feature["geometry"])
+        raw = geom.raw_geojson_polygons(geometry)
+        for polygon in raw:
+            for ring in polygon:
+                geom.validate_ring(ring)
+        box = geom.bbox(raw)
+        if not (355000 < box[0] < box[2] < 390000 and 4050000 < box[1] < box[3] < 4085000):
+            raise ValueError("Malaga barrio coordinates do not match the metric CRS")
+        area = component_area = overlap = None
+        polygons = []
+        quality, note = "invalid_topology", ""
+        try:
+            normalized, component_area, area = geom.dissolve_source_geojson(geometry)
+            polygons = geom.geojson_polygons(normalized)
+            overlap = component_area - area
+            if abs(overlap) < 1e-6:
+                overlap = 0.0
+            quality = "overlapping_components_dissolved" if overlap > 0 else "valid"
+        except geom.InvalidTopology as error:
+            note = str(error)
+        items.append(
+            {
+                "idg": f"29067-{number}",
+                "barrio": name,
+                "distrito": None,
+                "area_km2": area / 1e6 if area is not None else None,
+                "source_overlap_m2": overlap,
+                "geometry_quality": quality,
+                "geometry_note": note,
+                "polygons": polygons,
+                "bbox": box,
+            }
+        )
+    return items
+
+
 def raw_pins() -> dict:
     pins = manifest.load()["sha256"]
     expected = {}
+    rels = [str(MLG_BARRIOS.relative_to(ROOT))]
     for slug, _cat, _ine, _name, _prov in CITIES:
         for key in ("zip", "feed"):
-            rel = str(paths(slug)[key].relative_to(ROOT))
-            if rel not in pins:
-                raise ValueError(f"Unpinned input {rel}; run fetch_cadastre_capitals.py")
-            expected[rel] = pins[rel]
+            rels.append(str(paths(slug)[key].relative_to(ROOT)))
+    for rel in rels:
+        if rel not in pins:
+            raise ValueError(f"Unpinned input {rel}; run fetch_cadastre_capitals.py")
+        expected[rel] = pins[rel]
     missing, changed = manifest.check(expected)
     if missing or changed:
         raise ValueError(f"Capital inputs missing={missing}, changed={changed}")
@@ -148,6 +227,7 @@ def metadata(pins: dict, snapshots: dict) -> dict:
         "input_sha": json_dumps(pins),
         "snapshots": json_dumps(snapshots),
         "script_sha": manifest.sha256(Path(__file__)),
+        "barrios_sha": manifest.sha256(MLG_BARRIOS),
         "parser_sha": manifest.sha256(Path(sev.__file__)),
         "geometry_sha": manifest.sha256(Path(geom.__file__)),
         "geometry_engine": geom.ENGINE_VERSION,
@@ -163,14 +243,24 @@ def json_dumps(obj) -> str:
 def build_offline() -> dict:
     pins = raw_pins()
     snapshots, tables = {}, {}
+    barrios = malaga_barrios()
     for slug, cat, ine, name, _prov in CITIES:
         p = paths(slug)
         snapshots[slug] = snapshot_for(p["feed"], f"{cat}-{name} buildings")
-        rows = parse_archive(p["zip"], snapshots[slug], cat, ine)
+        rows = parse_archive(
+            p["zip"], snapshots[slug], cat, ine, barrios if slug == "malaga" else ()
+        )
         tables[slug] = pa.Table.from_pylist(rows, schema=sev.SCHEMA)
         p["parquet"].parent.mkdir(parents=True, exist_ok=True)
         pq.write_table(tables[slug], p["parquet"])
     combined = pa.concat_tables([tables[s] for s, _, _, _, _ in CITIES])
+    barrios_table = pa.Table.from_pylist(
+        [
+            {k: item[k] for k in ["idg", "barrio", "area_km2", "geometry_quality"]}
+            | {"ine_municipality": "29067"}
+            for item in barrios
+        ]
+    )
     municipios = pa.Table.from_pylist(
         [
             {"cat_municipality": cat, "ine_municipality": ine, "municipio": name.title()}
@@ -183,6 +273,8 @@ def build_offline() -> dict:
         con.execute("create or replace table buildings as select * from input_buildings")
         con.register("input_municipios", municipios)
         con.execute("create or replace table municipios as select * from input_municipios")
+        con.register("input_barrios", barrios_table)
+        con.execute("create or replace table barrios as select * from input_barrios")
         con.execute("create or replace table stock_meta (key varchar, value varchar)")
         con.executemany(
             "insert into stock_meta values (?, ?)", list(metadata(pins, snapshots).items())
@@ -194,7 +286,7 @@ def build_offline() -> dict:
             {
                 "publisher": "DGC INSPIRE",
                 "accessed": date.today().isoformat(),
-                "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+                "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
             },
         )
     manifest.record(
@@ -202,7 +294,7 @@ def build_offline() -> dict:
         {
             "publisher": "DGC INSPIRE",
             "accessed": date.today().isoformat(),
-            "note": "Andalusian-capital BU pilot, municipal grain; see cadastre_capitals.md",
+            "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
         },
     )
     return metadata(pins, snapshots)
@@ -263,6 +355,20 @@ def main():
             sev.download(feed_url(province), p["feed"], 10 * 1024 * 1024)
             snapshot_for(p["feed"], f"{cat}-{name} buildings")
             sev.download(zip_url(cat, name, province), p["zip"])
+        sev.download(
+            MLG_BARRIOS_URL,
+            MLG_BARRIOS,
+            10 * 1024 * 1024,
+        )
+        manifest.record(
+            str(MLG_BARRIOS.relative_to(ROOT)),
+            {
+                "url": MLG_BARRIOS_URL,
+                "publisher": "Ayuntamiento de Malaga (datosabiertos.malaga.eu)",
+                "accessed": date.today().isoformat(),
+                "note": "Official barrio polygons CC BY-SA 4.0; share-alike applies to derivatives",
+            },
+        )
     build_offline()
     verify()
 

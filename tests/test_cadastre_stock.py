@@ -889,3 +889,25 @@ def test_cadastre_province_fetch_and_artifact():
     # era shares sum to ~100 per municipality
     for muni in data["municipalities"].values():
         assert abs(sum(muni["era_share_pct"].values()) - 100.0) < 0.5
+
+
+def test_cadastre_malaga_barrios_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_malaga_barrios.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    glob = data["global"]
+    assert glob["n_barrios"] == 360
+    assert glob["total_properties"] == 261073
+    assert glob["dated_properties"] == 261066
+    assert glob["missing_property_pct"] == 0.0
+    assert glob["era_pct"]["1971-1990"] == 39.5
+    statuses = {s["status"]: s for s in glob["match_status"]}
+    assert statuses["matched"]["records"] == 51411
+    assert statuses["matched"]["properties"] == 261073
+    # era shares sum to ~100 per barrio
+    for row in data["barrios"].values():
+        total = sum(row[label] for label in data["eras"])
+        assert abs(total - 100.0) < 0.5
