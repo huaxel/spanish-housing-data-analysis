@@ -57,4 +57,4 @@ Castilla y León 19.4%) contrasta con Madrid (6.3%) — el overhang que el
 análisis del ratio y las rentas documentan. Fuente:
 `docs/explorations/ratio_ccaa.md`.
 ---
-*Instantánea de datos: 2026-10-07 · Censo 2021, vacancia por consumo eléctrico · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-09 · Censo 2021, vacancia por consumo eléctrico · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

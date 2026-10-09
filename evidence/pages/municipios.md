@@ -736,4 +736,4 @@ población y vacancia 2011. Sevilla, igual: Padrón 1996–2025, alquiler
 2011–2024, vacancia 2011, sin venta.
 
 ---
-*Instantánea de datos: 2026-10-07 · Madrid 2005–2025, Barcelona 2007–2024, toda España 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-09 · Madrid 2005–2025, Barcelona 2007–2024, toda España 1996–2025 (alquiler 2011–2024, sin venta); el guion es dato ausente · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

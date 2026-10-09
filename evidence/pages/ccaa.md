@@ -154,4 +154,4 @@ Puedes ordenar las columnas y descargar la tabla.
 </DataTable>
 
 ---
-*Instantánea de datos: 2026-10-07 · cobertura por comunidad 2007–2025 · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-09 · cobertura por comunidad 2007–2025 · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

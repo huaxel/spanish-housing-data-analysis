@@ -229,4 +229,4 @@ descriptivas, no causales.
 </DataTable>
 
 ---
-*Instantánea de datos: 2026-10-07 · cobertura 2007–2025 según el periodo elegido · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
+*Instantánea de datos: 2026-10-09 · cobertura 2007–2025 según el periodo elegido · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*

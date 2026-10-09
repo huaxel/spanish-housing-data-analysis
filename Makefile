@@ -155,7 +155,9 @@ stock-rent:
 	uv run python explorations/cadastre_vacancy_alignment.py
 	uv run python explorations/cadastre_household_alignment.py
 	uv run python explorations/cadastre_capitals.py
+	uv run python explorations/cadastre_province.py
 	uv run python explorations/cadastre_malaga_barrios.py
+	uv run python explorations/cadastre_granada_distritos.py
 
 inference:
 	uv run python scripts/invert_tourist.py

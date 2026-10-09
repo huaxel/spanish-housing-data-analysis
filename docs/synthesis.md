@@ -67,8 +67,8 @@ comparable arc, not the proxy-anchored endpoints.
 ## Causal extension: withdrawn after independent read (design A is a negative result)
 
 Removed 2026-10-07 on the milestone-5 independent read (verdict: REMOVE;
-read record in [the IV note](docs/explorations/iv_migration.md) and
-[the review brief](docs/review_brief.md)). The shift-share IV (repaired
+read record in [the IV note](explorations/iv_migration.md) and
+[the review brief](review_brief.md)). The shift-share IV (repaired
 flow instrument: +0.08 pooled, +0.46 bust-only) failed exclusion: 1998
 settlement geography coincides with the territorial footprint of the
 credit/construction bubble; the trends spec runs hot (+0.20 vs +0.08
