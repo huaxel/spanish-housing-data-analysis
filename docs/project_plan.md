@@ -50,7 +50,11 @@ explicit extensions, not v1.
 4. Households layer (done 2026-10-06): dwellings-per-household by
    provincia — 2011 exact, ECH 2014–20, ECP 2021+, 2001 proxy.
 5. Review: independent read of methods + limitations before any public
-   release — STILL OPEN (required before sharing beyond workers.dev).
+   release — SATISFIED 2026-10-09 (delta read over the 51 commits since
+   round 3: overall SOUND-WITH-CAVEATS, both documentation caveats
+   disclosed same day; record in `docs/review_brief.md`). Prior reads:
+   2026-10-06 full read adjudicated in-repo; 2026-10-07 IV rounds 1-3
+   (REMOVE / REJECT AGAIN / KEEP OUT).
    **Package ready: [`docs/review_brief.md`](review_brief.md)** — scope,
    ground rules, reproduction commands, disclosed limitations, and the
    adversarial questions (including the IV read plan step 1 that the merge
