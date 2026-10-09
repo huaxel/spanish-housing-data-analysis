@@ -106,12 +106,16 @@ Two subtleties, both load-bearing:
 - On any data refresh, update the `Instantánea de datos` footer date in
   every `evidence/pages/*.md` to the new manifest snapshot date before
   rebuilding — the footers are static text, not wired to the manifest.
-- Deploy record: rebuilt + redeployed 2026-10-06 19:37 UTC after the
-  Censo Anual extension carried the provincia mart to 2025 (previous
-  build 12:15 was pre-extension; the public site now serves provincial
-  data through 2025). Version `76415706-4181-43b2-9673-d9405d05796f`.
+- Deploy record: rebuilt + redeployed 2026-10-09 17:35 UTC after the
+  October stock expansion (capitals + province sections, stock/rent lectura)
+  and the new access/purchase/uncertainty/stock-2021 routes — the previous
+  public build predated all of them; the site now serves `/stock/`,
+  `/acceso/`, `/compra/`, `/incertidumbre/` and `/stock-2021/`, footers
+  2026-10-09, live-smoke verified on the public domain (pinned coverage
+  hydrates, barrio map renders). Version
+  `7b2e6db3-2f70-454f-a43f-03ff1730bce9`.
 - Custom domain `vivienda.juanbenjumea.me` is attached and serving
-  byte-identical content to the workers.dev URL (verified 2026-10-07) —
+  byte-identical content to the workers.dev URL (verified 2026-10-09) —
   the dashboard attach happened outside this repo.
 
 Open `http://localhost:3000/` (or the URL printed if the port is occupied).
