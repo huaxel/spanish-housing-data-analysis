@@ -41,12 +41,15 @@ fetched to /tmp to verify schema). Per-city verdicts below.
 
 - Portal: `datosabiertos.cordoba.es` (CKAN), "Recursos Cartográficos":
   `distritos.geojson` (38.8 kB, updated 2024-04-08). License field is
-  unspecified on the resource — verify before vendoring.
+  unspecified on the resource **and** at dataset level (checked
+  2026-10-09 via the CKAN API: `notspecified`) — there is no license
+  grant, so vendoring the file is blocked regardless of technical fit.
 - Barrio polygons: not found. The portal publishes barrio *statistics*
   (population by barrio, XLS/PDF) but no barrio geometry layer.
-- **Verdict: DISTRICTS USABLE; BARRIOS BLOCKED.** Options if barrio
-  grain is required: formal data request to the Ayuntamiento, or census-
-  section aggregation (not assessed here).
+- **Verdict: DISTRICTS TECHNICALLY AVAILABLE BUT UNLICENSED — DO NOT
+  VENDOR; BARRIOS BLOCKED.** Paths forward: a formal data request to
+  the Ayuntamiento covering both license and barrios, or census-section
+  aggregation (not assessed here).
 
 ## Recommendation
 
