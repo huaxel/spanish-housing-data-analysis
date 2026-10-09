@@ -239,6 +239,9 @@ def test_dashboard_queries_keep_units_unmatched_rows_and_missing_density(databas
     assert barrios[1][4] == 0 and barrios[1][5] is None and barrios[1][6] is None
     cohorts = database.execute(SQL["cohortes_stock"]).fetchall()
     assert sum(row[2] for row in cohorts) == 2  # includes unmatched; each record gets equal weight
+    eras = database.execute(SQL["eras_inmuebles_stock"]).fetchall()
+    assert sum(row[2] for row in eras) == 2  # records: 1 dated + 1 undated
+    assert sum(row[3] for row in eras) == 10  # declared properties: 3 + 7
     demand = database.execute(
         SQL["demanda_stock"].replace("${stock_barrios}", f"({SQL['stock_barrios']})")
     ).fetchall()
@@ -621,3 +624,38 @@ def test_cadastre_age_rent_artifact_structure():
     for row in data["barrios"].values():
         total = sum(row[label] for label in era_labels)
         assert abs(total - 100.0) < 0.5
+
+
+def test_cadastre_era_rehab_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_era_rehab.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    cov = data["coverage"]
+    assert cov["era_barrios"] == 107
+    assert cov["sim_barrios"] == 108
+    assert cov["joined_with_rehab"] == 101
+    assert len(cov["era_barrios_without_rehab"]) == 6
+    corr = data["correlations"]
+    assert corr["median_year_vs_rehab"]["spearman"] == -0.503165
+    assert corr["median_year_vs_rehab"]["pearson"] == -0.503805
+    assert corr["pre_1951_share_vs_rehab"]["spearman"] == -0.382876
+    assert corr["sim_ref_year_vs_rehab"]["spearman"] == -0.555186
+    assert corr["median_year_vs_sim_ref_year"]["spearman"] == 0.848791
+    # cross-validation correlation must be the strongest of the block
+    strongest = max(abs(c["spearman"]) for c in corr.values())
+    assert abs(corr["median_year_vs_sim_ref_year"]["spearman"]) == strongest
+    terciles = data["median_year_terciles_rehab"]
+    assert [t["n_barrios"] for t in terciles] == [33, 35, 33]
+    assert terciles[0]["mean_rehab_pct"] == 56.03
+    assert terciles[1]["mean_rehab_pct"] == 50.14
+    assert terciles[2]["mean_rehab_pct"] == 19.06
+    # oldest and middle means exceed the newest mean
+    assert terciles[2]["mean_rehab_pct"] < terciles[0]["mean_rehab_pct"]
+    assert terciles[2]["mean_rehab_pct"] < terciles[1]["mean_rehab_pct"]
+    top = data["top_rehab_barrios"]
+    assert len(top) == 10
+    rehab_vals = [b["rehab_pct"] for b in top]
+    assert rehab_vals == sorted(rehab_vals, reverse=True)

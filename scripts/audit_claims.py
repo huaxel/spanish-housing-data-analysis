@@ -38,6 +38,11 @@ MODEL_FRESHNESS = [
     ("tourist_inversion", "artifacts/tourist_inversion.json", "scripts/invert_tourist.py"),
     ("cadastre_eras", "artifacts/cadastre_eras.json", "explorations/cadastre_eras.py"),
     ("cadastre_age_rent", "artifacts/cadastre_age_rent.json", "explorations/cadastre_age_rent.py"),
+    (
+        "cadastre_era_rehab",
+        "artifacts/cadastre_era_rehab.json",
+        "explorations/cadastre_era_rehab.py",
+    ),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2418,6 +2423,91 @@ def main() -> int:
         got = _json_path(ar, path)
         ok = got is not None and abs(got - expected) <= tol
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_age_rent: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 16
+
+    er = _model_output("artifacts/cadastre_era_rehab.json")
+    for desc, path, expected, tol in (
+        ("era-rehab joined barrios", "coverage.joined_with_rehab", 101, 0),
+        (
+            "era-rehab spearman median year",
+            "correlations.median_year_vs_rehab.spearman",
+            -0.503165,
+            0.0005,
+        ),
+        (
+            "era-rehab pearson median year",
+            "correlations.median_year_vs_rehab.pearson",
+            -0.503805,
+            0.0005,
+        ),
+        (
+            "era-rehab spearman pre-1951 share",
+            "correlations.pre_1951_share_vs_rehab.spearman",
+            -0.382876,
+            0.0005,
+        ),
+        (
+            "era-rehab spearman sim ref vs rehab",
+            "correlations.sim_ref_year_vs_rehab.spearman",
+            -0.555186,
+            0.0005,
+        ),
+        (
+            "era-rehab spearman median year vs sim ref",
+            "correlations.median_year_vs_sim_ref_year.spearman",
+            0.848791,
+            0.0005,
+        ),
+        (
+            "era-rehab pearson median year vs sim ref",
+            "correlations.median_year_vs_sim_ref_year.pearson",
+            0.857981,
+            0.0005,
+        ),
+        (
+            "era-rehab oldest tercile mean rehab",
+            "median_year_terciles_rehab.0.mean_rehab_pct",
+            56.03,
+            0.005,
+        ),
+        (
+            "era-rehab middle tercile mean rehab",
+            "median_year_terciles_rehab.1.mean_rehab_pct",
+            50.14,
+            0.005,
+        ),
+        (
+            "era-rehab newest tercile mean rehab",
+            "median_year_terciles_rehab.2.mean_rehab_pct",
+            19.06,
+            0.005,
+        ),
+        (
+            "era-rehab pearson pre-1951 share",
+            "correlations.pre_1951_share_vs_rehab.pearson",
+            -0.21829,
+            0.0005,
+        ),
+        (
+            "era-rehab pearson sim ref vs rehab",
+            "correlations.sim_ref_year_vs_rehab.pearson",
+            -0.560476,
+            0.0005,
+        ),
+        ("era-rehab cerezo rehab", "top_rehab_barrios.0.rehab_pct", 100, 0),
+        ("era-rehab cerezo median year", "top_rehab_barrios.0.median_year", 1970, 0),
+        (
+            "era-rehab barzola pre-1951 share",
+            "top_rehab_barrios.3.pre_1951_share",
+            58.9,
+            0.05,
+        ),
+        ("era-rehab san pablo median year", "top_rehab_barrios.5.median_year", 1963, 0),
+    ):
+        got = _json_path(er, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_era_rehab: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 16
 

@@ -128,6 +128,7 @@ analysis:
 	uv run python scripts/analyze_stock_rent.py
 	uv run python explorations/cadastre_eras.py
 	uv run python explorations/cadastre_age_rent.py
+	uv run python explorations/cadastre_era_rehab.py
 	uv run python explorations/censo_vintage.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
@@ -136,6 +137,7 @@ stock-rent:
 	uv run python scripts/analyze_stock_rent.py
 	uv run python explorations/cadastre_eras.py
 	uv run python explorations/cadastre_age_rent.py
+	uv run python explorations/cadastre_era_rehab.py
 
 inference:
 	uv run python scripts/invert_tourist.py
