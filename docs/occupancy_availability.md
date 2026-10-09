@@ -130,8 +130,17 @@ audit-pinned; only the immutable first month is pinned because the
 series grows with each publication. Coverage grows from 518 to 543
 listed municipalities of 785 Andalusian municipalities: absent
 municipalities have no recorded solicitudes and are never zero-filled.
-Tables 02-08 (régimen, sexo, edad, IPREM, composición) remain unpulled
-PDF-adjacent demographic breakdowns, same `.xls`-twin pattern if needed.
+Tables 02-08 (régimen, sexo, edad, IPREM, composición) assessed
+2026-10-09 and parked: all seven are municipal-grain crosstabs with
+the same title/filter/footer skeleton as table 01 (header layout
+ byte-identical between the oldest and latest table-02 files checked),
+so a future pull is mechanical — but their content is composition of
+the already-pulled inscription counts (tenure preference, applicant
+demographics), descriptive only with no estimator consumer and no open
+hunt gap behind them. The documented demand-side gap was the counts
+themselves. Revisit if an estimator or narrative needs demand
+composition; per-table category specs and the window-start-optional
+footer variant are recorded here for that day.
 
 ## 5. Regional vacant-dwelling registers: large holders, compliance scope
 
