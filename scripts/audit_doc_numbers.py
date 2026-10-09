@@ -507,6 +507,7 @@ ALLOW = {
     ],
     "docs/explorations/serpavi_probe.md": [
         (37000000.0, "rental observations count (coverage fact)"),
+        (3346.0, "VDP001 2024 PRECIO MEDIANA municipio codes (sampled 2026-10-09)"),
         (403.0, "HTTP status code (access note)"),
         (200.0, "HTTP status code (access note)"),
         (8894.0, "municipio coverage count"),
@@ -935,6 +936,8 @@ ALLOW = {
     ],
     "docs/explorations/valor_referencia_probe.md": [
         (25.0, "publication day-of-month (administrative fact)"),
+        (531585.0, "VDP001 sampled row count (2026-10-09)"),
+        (7331.0, "VDP001 distinct municipio codes (sampled 2026-10-09)"),
         (8131.0, "municipio coverage count"),
         (113.0, "PDF page count (coverage fact)"),
         (1.9, "PDF size in MB (coverage fact)"),

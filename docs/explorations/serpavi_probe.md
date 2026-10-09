@@ -89,3 +89,15 @@ single-file download, verified parseable. Unlocks: rents as a second
 outcome in the municipal panels (terrain, tourist, overhang), and a
 rent-vs-price wedge by municipio. Fetch pattern identical to
 `fetch_intensidad.py` (static download + pin + melt). Recommend build.
+
+## VDP001 alternative route (2026-10-09, no rebuild)
+
+The same SERPAVI source is also served long-format as MIVAU CDN
+`VDP001_01.csv` (municipio × year × colectiva/unifamiliar; `PRECIO`
+median/P25/P75 in €/month, `SUPERFICIE`, `VIVIENDA` witness counts;
+2024 `PRECIO` mediana populated for 3,346 municipio codes — same
+population as the workbook's total-rent columns, not the €/m² ones,
+which VDP001 lacks). It is **uncatalogued** (datos.gob.es publishes
+VDP002–VDP007 only; no readme) and adds no measure the workbook
+lacks, so the built XLSX route stays canonical. Recorded here only
+as a fallback if the workbook URL ever breaks.

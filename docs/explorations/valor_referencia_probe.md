@@ -57,3 +57,17 @@ reopened with a levels design; the parser cost (~1 day incl. validation)
 and the MBR/MBC-as-price caveat make it a Tier-2 build, not a quick win.
 Decision: **parked** — same reopen condition as design B (a design that
 compares terrain to terrain at municipal grain).
+
+## VDP001 check (2026-10-09): not valor de referencia — park stands
+
+MIVAU's open-data CDN serves `VDP001_01.csv`, sampled 2026-10-09
+(531,585 rows over 7,331 municipio codes, years 2011–2024; grain is
+municipio — the `COD_POSTAL` column carries the 5-digit INE municipio
+code, not a postal code). Its `PRECIO` element is
+**monthly rent** (SERPAVI aggregates from IRPF rental declarations:
+median/P25/P75 plus `SUPERFICIE` medians and `VIVIENDA` witness counts,
+by colectiva/unifamiliar) — not purchase reference values, so it has
+**zero fit** for the MBR/MBC question above. Rental content duplicates
+the already-built SERPAVI marts (see `serpavi_probe.md`); the file is
+also uncatalogued (datos.gob.es lists VDP002–VDP007 only, no readme),
+so it is a fragile route. No action; park stands.
