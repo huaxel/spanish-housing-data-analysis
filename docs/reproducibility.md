@@ -106,12 +106,12 @@ Two subtleties, both load-bearing:
 - On any data refresh, update the `Instantánea de datos` footer date in
   every `evidence/pages/*.md` to the new manifest snapshot date before
   rebuilding — the footers are static text, not wired to the manifest.
-- Deploy record: rebuilt + redeployed 2026-10-09 17:41 UTC carrying the
-  dashboard footer additions (all eleven pages now show an Instantánea de
-  datos line; no data or estimator change since 17:35 UTC). Version
-  `808eea0b-a2ee-4722-ab03-2eeb2ef2d28e` (previous:
-  `7b2e6db3-2f70-454f-a43f-03ff1730bce9`, October stock expansion and new
-  access/purchase/uncertainty/stock-2021 routes).
+- Deploy record: rebuilt + redeployed 2026-10-09 carrying the ECV 2025
+  housing-access module sections on /acceso/ (moves, blocked search incl.
+  CCAA table, youth with parents; sidecar-only, no estimator change).
+  Version `5f54ae4d-9b5e-40c2-96be-28b38752f4d6` (previous:
+  `808eea0b-a2ee-4722-ab03-2eeb2ef2d28e`, dashboard footer additions).
+  Live verified on both domains (module section present in served HTML).
 - Custom domain `vivienda.juanbenjumea.me` is attached and serving
   byte-identical content to the workers.dev URL (verified 2026-10-09) —
   the dashboard attach happened outside this repo.
