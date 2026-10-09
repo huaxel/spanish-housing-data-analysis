@@ -110,28 +110,124 @@ def test_source_rows_reject_stale_meta_and_pin_current_bytes(tmp_path, monkeypat
         inference.source_rows()
 
 
+def inv_payload():
+    return {
+        "grid": [-0.5, 0.0, 0.5],
+        "reps": 1999,
+        "seed": 20261006,
+        "alpha": 0.05,
+        "models": {
+            key: {
+                "y": y,
+                "spec": spec,
+                "n": 100,
+                "clusters": 10,
+                "b": 0.0,
+                "se": 0.1,
+                "p": [0.02, 0.6, 0.02],
+                "keep": [False, True, False],
+                "warnings": [],
+            }
+            for key, (_, _, y, spec) in inference.MODELS.items()
+        },
+        "_meta": {"fixture": "inversion"},
+    }
+
+
+def test_parse_inversion_candidate_and_summary_rows():
+    candidates, summaries = inference.parse_inversion(inv_payload())
+    assert len(candidates) == 12  # 4 models x 3 candidates
+    assert all(row["model_key"] in inference.MODELS for row in candidates)
+    assert all(row["candidate_c"] in (-0.5, 0.0, 0.5) for row in candidates)
+    kept = {row["model_key"] for row in candidates if row["keep_95"]}
+    assert kept == set(inference.MODELS)
+    assert all(
+        (s["accepted_min_c"], s["accepted_max_c"], s["accepted_count"]) == (0.0, 0.0, 1)
+        for s in summaries
+    )
+    assert all(s["warnings"] == "" for s in summaries)
+
+
+@pytest.mark.parametrize(
+    "mutate,message",
+    [
+        (lambda d: d.update(grid=[0.0, 0.0]), "increasing"),
+        (lambda d: d.update(reps=299), "reps/seed"),
+        (lambda d: d.update(alpha=0.1), "alpha"),
+        (lambda d: d["models"]["sale_tour_only"].update(keep=[True, True]), "keep mask"),
+        (lambda d: d["models"]["sale_tour_only"].update(p=[0.0, 0.6, 0.02]), "candidate p"),
+        (lambda d: d["models"].pop("rent_with_pop"), "model set"),
+        (lambda d: d["models"]["sale_tour_only"].update(se=0.0), "nonpositive"),
+    ],
+)
+def test_malformed_inversion_artifact_fails(mutate, message):
+    source = inv_payload()
+    mutate(source)
+    with pytest.raises(ValueError, match=message):
+        inference.parse_inversion(source)
+
+
+def test_empty_acceptance_requires_resolution_warning():
+    source = inv_payload()
+    source["models"]["sale_tour_only"]["p"] = [0.02, 0.02, 0.02]
+    source["models"]["sale_tour_only"]["keep"] = [False, False, False]
+    with pytest.raises(ValueError, match="resolution warning"):
+        inference.parse_inversion(source)
+    source["models"]["sale_tour_only"]["warnings"] = ["no_candidate_accepted_at_this_resolution"]
+    candidates, summaries = inference.parse_inversion(source)
+    sale = next(s for s in summaries if s["model_key"] == "sale_tour_only")
+    assert sale["accepted_count"] == 0 and sale["accepted_min_c"] is None
+
+
 def test_exact_sidecar_derivation_and_metadata_are_verified(tmp_path, monkeypatch):
     database = tmp_path / "inference.duckdb"
     monkeypatch.setattr(inference, "DATABASE", database)
     rows = inference.parse(payload())
+    inv_rows, inv_meta_rows = inference.parse_inversion(inv_payload())
     metadata = {"source_artifact_sha": "fixture-source", "export_script_sha": "fixture-code"}
+    inv_metadata = {
+        "inversion_script_sha": "fixture-inv-script",
+        "inversion_artifact_sha": "fixture-inv-artifact",
+        "inversion_meta": '{"fixture": "inversion"}',
+    }
     with duckdb.connect(str(database)) as con:
         con.register("fixture", pa.Table.from_pylist(rows, schema=inference.SCHEMA))
         con.execute("create table tourism_panel as select * from fixture")
+        con.register("inv", pa.Table.from_pylist(inv_rows, schema=inference.INV_SCHEMA))
+        con.execute("create table tourism_inversion as select * from inv")
+        con.register(
+            "inv_meta", pa.Table.from_pylist(inv_meta_rows, schema=inference.INV_META_SCHEMA)
+        )
+        con.execute("create table tourism_inversion_meta as select * from inv_meta")
         con.execute("create table export_meta (key varchar, value varchar)")
-        con.executemany("insert into export_meta values (?, ?)", list(metadata.items()))
-    inference.verify(rows, metadata)
+        con.executemany(
+            "insert into export_meta values (?, ?)",
+            list({**metadata, **inv_metadata}.items()),
+        )
+    inference.verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata)
     old_metadata = copy.deepcopy(metadata)
     old_metadata["source_artifact_sha"] = "old"
     with pytest.raises(ValueError, match="stale or changed"):
-        inference.verify(rows, old_metadata)
+        inference.verify(rows, old_metadata, inv_rows, inv_meta_rows, inv_metadata)
     with duckdb.connect(str(database)) as con:
         con.execute("update tourism_panel set wild_p_zero = 0.9")
     with pytest.raises(ValueError, match="stale or changed"):
-        inference.verify(rows, metadata)
+        inference.verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata)
+    with duckdb.connect(str(database)) as con:
+        con.execute("update tourism_panel set wild_p_zero = 0.494")
+        con.execute("update tourism_inversion set keep_95 = not keep_95 where candidate_c = 0.0")
+    with pytest.raises(ValueError, match="stale or changed"):
+        inference.verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata)
 
 
 def test_missing_sidecar_fails_with_rebuild_guidance(tmp_path, monkeypatch):
     monkeypatch.setattr(inference, "DATABASE", tmp_path / "missing.duckdb")
+    inv_rows, inv_meta_rows = inference.parse_inversion(inv_payload())
     with pytest.raises(ValueError, match="make inference"):
-        inference.verify(inference.parse(payload()), {})
+        inference.verify(
+            inference.parse(payload()),
+            {},
+            inv_rows,
+            inv_meta_rows,
+            {"inversion_script_sha": "x", "inversion_artifact_sha": "y", "inversion_meta": "{}"},
+        )

@@ -78,6 +78,11 @@ ALLOW = {
     "docs/uncertainty.md": [
         (1.96, "normal critical value in existing panel_tourist interval construction"),
         (95.0, "nominal confidence level of normal approximation, not an empirical finding"),
+        (2.0, "prespecified candidate grid endpoint (symmetric +/− 2.0 pp), not a result"),
+        (0.1, "prespecified candidate grid step, not a result"),
+        (41.0, "prespecified candidate count (41 points), not a result"),
+        (1999.0, "bootstrap repetitions shared with the published zero-null routine"),
+        (0.05, "nominal alpha level of the candidate acceptance mask"),
     ],
     "docs/housing_overburden.md": [
         (40.0, "Eurostat housing-cost overburden threshold, official indicator definition"),

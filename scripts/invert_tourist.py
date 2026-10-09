@@ -6,8 +6,8 @@ fresh panel_tourist.json artifact, then inverts the wild-cluster bootstrap-t
 test over a PRESPECIFIED grid of candidate magnitudes (H0: coefficient = c).
 Common random numbers make p-values comparable across candidates; candidate
 c = 0 with the same seed/reps reproduces the legacy zero-null wild-bootstrap
-routine exactly (the published 1999-rep p-values in panel_tourist.json are
-unchanged; this grid is a separate 299-rep inversion).
+routine exactly; candidate c = 0 therefore reproduces the published zero-null
+wild p in panel_tourist.json (1999 reps, same seed).
 
 The artifact stores TESTED POINTS ONLY: per-candidate p and an acceptance
 mask at the nominal 95% level, plus boundary warnings. It is not a

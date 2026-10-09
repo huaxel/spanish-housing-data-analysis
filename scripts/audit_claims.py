@@ -35,6 +35,7 @@ MODEL_FRESHNESS = [
     ("panel_tourist", "artifacts/panel_tourist.json", "explorations/panel_tourist.py"),
     ("panel_quarterly", "artifacts/panel_quarterly.json", "explorations/panel_quarterly.py"),
     ("wild_ar_bust", "artifacts/wild_ar_bust.json", "explorations/wild_ar_bust.py"),
+    ("tourist_inversion", "artifacts/tourist_inversion.json", "scripts/invert_tourist.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
     # pass on stale-but-doc-consistent JSONs.
@@ -2648,6 +2649,39 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] panel_tourist: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 22
+    inv = _model_output("artifacts/tourist_inversion.json")
+    for desc, path, expected, tol in (
+        ("inversion grid length", "grid", 41, 0),
+        ("inversion grid lo", "grid.0", -2.0, 0.0001),
+        ("inversion grid hi", "grid.40", 2.0, 0.0001),
+        ("inversion reps", "reps", 1999, 0),
+        ("inversion seed", "seed", 20261006, 0),
+        ("inversion alpha", "alpha", 0.05, 0.0001),
+        ("inversion sale c0 p", "models.sale_tour_only.p.20", 0.494, 0.0005),
+        ("inversion rent c0 p", "models.rent_tour_only.p.20", 0.9605, 0.0005),
+        ("inversion sale accepted lo", "models.sale_tour_only.keep.10", True, 0),
+        ("inversion sale accepted hi", "models.sale_tour_only.keep.27", True, 0),
+        ("inversion sale rejected", "models.sale_tour_only.keep.28", False, 0),
+        ("inversion sale+pop accepted lo", "models.sale_with_pop.keep.10", True, 0),
+        ("inversion sale+pop accepted hi", "models.sale_with_pop.keep.27", True, 0),
+        ("inversion rent accepted lo", "models.rent_tour_only.keep.16", True, 0),
+        ("inversion rent accepted hi", "models.rent_tour_only.keep.25", True, 0),
+        ("inversion rent rejected lo", "models.rent_tour_only.keep.15", False, 0),
+        ("inversion rent rejected hi", "models.rent_tour_only.keep.26", False, 0),
+        ("inversion rent+pop accepted lo", "models.rent_with_pop.keep.16", True, 0),
+        ("inversion rent+pop accepted hi", "models.rent_with_pop.keep.25", True, 0),
+        ("inversion sale warnings count", "models.sale_tour_only.warnings", 0, 0),
+        ("inversion sale+pop warnings count", "models.sale_with_pop.warnings", 0, 0),
+        ("inversion rent warnings count", "models.rent_tour_only.warnings", 0, 0),
+        ("inversion rent+pop warnings count", "models.rent_with_pop.warnings", 0, 0),
+    ):
+        got = _json_path(inv, path)
+        if isinstance(got, list):
+            got = len(got)
+        ok = got is not None and (got == expected or abs(got - expected) <= tol)
+        print(f"[{'OK' if ok else 'FAIL'}] tourist_inversion: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 23
     h1 = _model_output("artifacts/hypothesis_01.json")
     for desc, path, expected, tol in (
         ("pooled spearman ccaa", "pooled.ccaa.spearman", -0.406, 0.005),

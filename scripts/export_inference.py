@@ -2,6 +2,8 @@
 
 Does not refit models or invent bootstrap coefficient intervals. Source
 ci95 is the estimator's normal-approximation CR1 range; wild p tests zero.
+The tourist_inversion tables publish the prespecified wild-bootstrap
+candidate grid (tested points and acceptance mask only, no continuous CI).
 Use --check for read-only derivation/freshness verification.
 """
 
@@ -21,6 +23,8 @@ from spanish_housing import ols  # noqa: E402
 from spanish_housing.data_paths import PROCESSED, ROOT  # noqa: E402
 
 ARTIFACT = ROOT / "artifacts" / "panel_tourist.json"
+INVERSION = ROOT / "artifacts" / "tourist_inversion.json"
+INVERSION_SCRIPT = ROOT / "scripts" / "invert_tourist.py"
 ESTIMATOR = ROOT / "explorations" / "panel_tourist.py"
 DATABASE = PROCESSED / "inference.duckdb"
 MODELS = {
@@ -42,6 +46,31 @@ SCHEMA = pa.schema(
         ("n", pa.int64()),
         ("clusters", pa.int64()),
         ("bootstrap_reps", pa.int64()),
+    ]
+)
+INV_SCHEMA = pa.schema(
+    [
+        ("model_key", pa.string()),
+        ("outcome", pa.string()),
+        ("specification", pa.string()),
+        ("candidate_c", pa.float64()),
+        ("wild_p", pa.float64()),
+        ("keep_95", pa.bool_()),
+    ]
+)
+INV_META_SCHEMA = pa.schema(
+    [
+        ("model_key", pa.string()),
+        ("outcome", pa.string()),
+        ("specification", pa.string()),
+        ("n", pa.int64()),
+        ("clusters", pa.int64()),
+        ("b", pa.float64()),
+        ("se", pa.float64()),
+        ("accepted_min_c", pa.float64()),
+        ("accepted_max_c", pa.float64()),
+        ("accepted_count", pa.int64()),
+        ("warnings", pa.string()),
     ]
 )
 
@@ -103,6 +132,102 @@ def parse(payload):
     return rows
 
 
+def parse_inversion(payload):
+    """Parse the tourist_inversion artifact into candidate and summary rows."""
+    grid = payload.get("grid")
+    if not isinstance(grid, list) or len(grid) < 2 or len(set(grid)) != len(grid):
+        raise ValueError("Inversion grid missing or not strictly increasing")
+    if grid != sorted(grid):
+        raise ValueError("Inversion grid not increasing")
+    if payload.get("reps") != 1999 or payload.get("seed") != 20261006:
+        raise ValueError("Inversion reps/seed changed from the reviewed run")
+    if payload.get("alpha") != 0.05:
+        raise ValueError("Inversion alpha changed")
+    if {key for key in payload if not key.startswith("_")} != {
+        "grid",
+        "reps",
+        "seed",
+        "alpha",
+        "models",
+    }:
+        raise ValueError("Unexpected inversion artifact structure")
+    if set(payload["models"]) != set(MODELS):
+        raise ValueError("Unexpected inversion model set")
+    candidates, summaries = [], []
+    for key, (outcome, specification, y, spec) in MODELS.items():
+        model = payload["models"][key]
+        if model["y"] != y or model["spec"] != spec:
+            raise ValueError(f"{key}: inversion model definition changed")
+        p = model.get("p")
+        keep = model.get("keep")
+        if not isinstance(p, list) or len(p) != len(grid):
+            raise ValueError(f"{key}: p grid length differs")
+        if not isinstance(keep, list) or len(keep) != len(grid):
+            raise ValueError(f"{key}: keep mask length differs")
+        if not all(isinstance(v, bool) for v in keep):
+            raise ValueError(f"{key}: keep mask malformed")
+        if not all(
+            isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1 for v in p
+        ):
+            raise ValueError(f"{key}: invalid candidate p")
+        n = positive_integer(model["n"], "n")
+        clusters = positive_integer(model["clusters"], "clusters")
+        b = number(model["b"], "b")
+        se = number(model["se"], "se")
+        if se <= 0:
+            raise ValueError(f"{key}: nonpositive inversion se")
+        warnings = model.get("warnings")
+        if not isinstance(warnings, list) or not all(isinstance(w, str) for w in warnings):
+            raise ValueError(f"{key}: warnings malformed")
+        accepted = [c for c, kp in zip(grid, keep, strict=True) if kp]
+        if not accepted:
+            if model["warnings"] != ["no_candidate_accepted_at_this_resolution"]:
+                raise ValueError(f"{key}: empty acceptance without resolution warning")
+            summaries.append(
+                {
+                    "model_key": key,
+                    "outcome": outcome,
+                    "specification": specification,
+                    "n": n,
+                    "clusters": clusters,
+                    "b": b,
+                    "se": se,
+                    "accepted_min_c": None,
+                    "accepted_max_c": None,
+                    "accepted_count": 0,
+                    "warnings": ";".join(warnings),
+                }
+            )
+        else:
+            summaries.append(
+                {
+                    "model_key": key,
+                    "outcome": outcome,
+                    "specification": specification,
+                    "n": n,
+                    "clusters": clusters,
+                    "b": b,
+                    "se": se,
+                    "accepted_min_c": min(accepted),
+                    "accepted_max_c": max(accepted),
+                    "accepted_count": len(accepted),
+                    "warnings": ";".join(warnings),
+                }
+            )
+        candidates.extend(
+            {
+                "model_key": key,
+                "outcome": outcome,
+                "specification": specification,
+                "candidate_c": c,
+                "wild_p": pv,
+                "keep_95": kp,
+            }
+            for c, pv, kp in zip(grid, p, keep, strict=True)
+        )
+    return candidates, summaries
+
+
 def source_rows():
     if not ARTIFACT.is_file():
         raise ValueError("Missing panel_tourist artifact; run make analysis, then make inference")
@@ -119,19 +244,49 @@ def source_rows():
     }
 
 
+def inversion_source_rows():
+    if not INVERSION.is_file():
+        raise ValueError("Missing tourist_inversion artifact; run make inference")
+    payload = json.loads(INVERSION.read_text())
+    candidates, summaries = parse_inversion(payload)
+    metadata = {
+        "inversion_script_sha": ols.sha_file(INVERSION_SCRIPT),
+        "inversion_artifact_sha": ols.sha_file(str(INVERSION)),
+        "inversion_meta": json.dumps(payload.get("_meta", {}), sort_keys=True),
+    }
+    return candidates, summaries, metadata
+
+
 def canonical(rows):
     return sorted(rows, key=lambda row: row["model_key"])
 
 
-def verify(rows, metadata):
+def canonical_inv(rows):
+    return sorted(rows, key=lambda row: (row["model_key"], row["candidate_c"]))
+
+
+def verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata):
     if not DATABASE.is_file():
         raise ValueError("Missing inference sidecar; run make inference")
     with duckdb.connect(str(DATABASE), read_only=True) as con:
         actual = con.execute("select * from tourism_panel").to_arrow_table().to_pylist()
+        actual_inv = con.execute("select * from tourism_inversion").to_arrow_table().to_pylist()
+        actual_inv_meta = (
+            con.execute("select * from tourism_inversion_meta").to_arrow_table().to_pylist()
+        )
         actual_meta = dict(con.execute("select key, value from export_meta").fetchall())
-    if canonical(actual) != canonical(rows) or actual_meta != metadata:
+    expected_meta = {**metadata, **inv_metadata}
+    if (
+        canonical(actual) != canonical(rows)
+        or canonical_inv(actual_inv) != canonical_inv(inv_rows)
+        or canonical(actual_inv_meta) != canonical(inv_meta_rows)
+        or actual_meta != expected_meta
+    ):
         raise ValueError("Inference sidecar stale or changed; run make inference")
-    print(f"inference: {len(rows)} model rows, exact source and derivation verified")
+    print(
+        f"inference: {len(rows)} model rows, {len(inv_rows)} candidate rows, "
+        "exact source and derivation verified"
+    )
 
 
 def main():
@@ -139,18 +294,30 @@ def main():
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     rows, metadata = source_rows()
+    inv_rows, inv_meta_rows, inv_metadata = inversion_source_rows()
     if args.check:
-        verify(rows, metadata)
+        verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata)
         return
     table = pa.Table.from_pylist(rows, schema=SCHEMA)
+    inv_table = pa.Table.from_pylist(inv_rows, schema=INV_SCHEMA)
+    inv_meta_table = pa.Table.from_pylist(inv_meta_rows, schema=INV_META_SCHEMA)
     tmp = DATABASE.with_suffix(".tmp.duckdb")
     with duckdb.connect(str(tmp)) as con:
         con.register("rows_input", table)
         con.execute("create or replace table tourism_panel as select * from rows_input")
+        con.register("inv_input", inv_table)
+        con.execute("create or replace table tourism_inversion as select * from inv_input")
+        con.register("inv_meta_input", inv_meta_table)
+        con.execute(
+            "create or replace table tourism_inversion_meta as select * from inv_meta_input"
+        )
         con.execute("create or replace table export_meta (key varchar, value varchar)")
-        con.executemany("insert into export_meta values (?, ?)", list(metadata.items()))
+        con.executemany(
+            "insert into export_meta values (?, ?)",
+            list({**metadata, **inv_metadata}.items()),
+        )
     tmp.replace(DATABASE)
-    verify(rows, metadata)
+    verify(rows, metadata, inv_rows, inv_meta_rows, inv_metadata)
 
 
 if __name__ == "__main__":

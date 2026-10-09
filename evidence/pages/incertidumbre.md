@@ -90,6 +90,69 @@ contenido, tampoco demuestra un efecto causal pequeño: el diseño, la
 medición y la inferencia siguen limitándolo. No se recomputan regresiones
 al mover el control.
 
+## Inversión en magnitudes candidatas: puntos probados
+
+Para cada valor candidato `c` probamos `H₀: coeficiente = c` con el mismo
+bootstrap wild de residuos agrupados que la columna anterior (Rademacher por
+municipio, 1.999 réplicas, semilla fija). La rejilla se fijó **antes** de
+calcular p-valores: de **-2,0 a +2,0** puntos porcentuales en pasos de **0,1**
+(41 candidatos), simétrica y mayor que cualquier rango normal publicado. Una
+única secuencia de perturbaciones se reutiliza para todos los candidatos
+(números aleatorios comunes), de modo que los p-valores son comparables.
+
+```sql inversion_modelos
+select distinct model_key,
+       outcome || ' · ' || specification as modelo_label
+from inference.tourism_inversion
+order by outcome, model_key
+```
+
+<Dropdown data={inversion_modelos} name=inv_modelo value=model_key
+  label=modelo_label title="Modelo" defaultValue="sale_tour_only"/>
+
+```sql inversion_candidatos
+select candidate_c, wild_p,
+       case when keep_95 then 'No rechazada' else 'Rechazada' end as decision_95
+from inference.tourism_inversion
+where model_key = '${inputs.inv_modelo.value}'
+order by candidate_c
+```
+
+<DataTable data={inversion_candidatos} rows=41>
+  <Column id=candidate_c title="Magnitud candidata c (pp)" fmt="num2"/>
+  <Column id=wild_p title="Wild-p de H₀: coeficiente = c" fmt="num3"/>
+  <Column id=decision_95 title="Nivel nominal 95%" align=center/>
+</DataTable>
+
+```sql inversion_resumen
+select outcome, specification, b, se,
+       accepted_min_c, accepted_max_c, accepted_count, warnings
+from inference.tourism_inversion_meta
+order by outcome, specification
+```
+
+<DataTable data={inversion_resumen} rows=4>
+  <Column id=outcome title="Resultado"/>
+  <Column id=specification title="Controles"/>
+  <Column id=b title="Coeficiente (pp)" fmt="num3"/>
+  <Column id=se title="SE agrupado (pp)" fmt="num3"/>
+  <Column id=accepted_min_c title="Menor c no rechazado (pp)" fmt="num3"/>
+  <Column id=accepted_max_c title="Mayor c no rechazado (pp)" fmt="num3"/>
+  <Column id=accepted_count title="Candidatos no rechazados" fmt="num0"/>
+  <Column id=warnings title="Avisos de rejilla"/>
+</DataTable>
+
+El candidato `c = 0` reproduce exactamente el `wild_p_zero` de la primera
+tabla: es la misma prueba con la misma semilla y réplicas. Una celda marcada
+«No rechazada» significa que la prueba wild no rechaza esa magnitud al nivel
+nominal del 5%; el rango `[accepted_min_c, accepted_max_c]` es el de los
+puntos probados no rechazados. **Esto es una lista de puntos probados, no un
+intervalo de confianza continuo**: no interpolamos entre candidatos, no lo
+convertimos en un rango causal de efectos, y no es una prueba de equivalencia
+ni de que «no haya efecto». Si el conjunto aceptado toca un extremo de la
+rejilla, el aviso indica que puede extenderse más allá; si ningún candidato
+fue aceptado, no hay puntos probados que declarar (nulo, no cero).
+
 ## Qué sigue sin resolverse
 
 - Las licencias responden a demanda y regulación; la asociación ajustada
@@ -103,8 +166,10 @@ al mover el control.
 - Las correlaciones municipales o provinciales no reciben intervalos
   inventados a partir de estos cuatro modelos.
 
-Un paso posterior sería invertir pruebas bootstrap para valores candidatos,
-con criterios de precisión y magnitud preespecificados. Aquí mostramos solo
-la inferencia ya calculada y sus límites; **no se han reestimado los modelos**.
+La inversión de pruebas bootstrap sobre la rejilla preespecificada está
+implementada en la sección anterior: publica solo los puntos probados y sus
+avísos, sin inventar intervalos continuos ni reestimar los modelos. Aquí
+seguimos mostrando únicamente inferencia ya calculada y sus límites; **los
+cuatro modelos no se han reestimado**.
 
 [Fuente, derivación y verificación](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/uncertainty.md).

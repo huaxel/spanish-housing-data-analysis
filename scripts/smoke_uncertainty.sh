@@ -41,7 +41,38 @@ output="$(playwright-cli -s="$SESSION" run-code "async (page) => {
     throw Error('Changing the band changed source coefficients or tests');
   if (afterBand.length !== 4 || afterBand.some(r => !r.includes('Sí:')))
     throw Error('Wider magnitude band did not recalculate all specifications');
-  return { errors, modelRows: beforeModels.length, beforeBand, afterBand };
+  // Prespecified candidate inversion: default sale model shows all 41 points.
+  const candidates = page.locator('table').filter({ hasText: 'Wild-p de H₀: coeficiente = c' }).last();
+  const summary = page.locator('table').filter({ hasText: 'Menor c no rechazado (pp)' }).last();
+  await candidates.locator('td').first().waitFor({ timeout: 45000 });
+  await summary.locator('td').first().waitFor({ timeout: 45000 });
+  const candidateRows = async table => table.locator('tr').filter({ has: page.locator('td') }).allInnerTexts();
+  const beforeCandidates = await candidateRows(candidates);
+  const beforeSummary = await candidateRows(summary);
+  if (beforeCandidates.length !== 41) throw Error('Inversion candidate grid is not 41 tested points');
+  if (beforeSummary.length !== 4) throw Error('Inversion summary missing one of the four models');
+  if (!beforeCandidates.some(r => r.includes('No rechazada')))
+    throw Error('Default model shows no accepted candidate');
+  // Switch to the rent-only model and confirm the grid re-renders with new p.
+  const beforeText = await candidates.innerText();
+  const modelo = page.locator('button[role=combobox]').filter({ hasText: 'Modelo' });
+  await modelo.click();
+  await page.locator('input[role=combobox]').last().fill('Alquiler · Solo turismo');
+  await page.getByRole('option', { name: 'Alquiler · Solo turismo', exact: true }).click();
+  await page.waitForFunction((prev) => {
+    const t = [...document.querySelectorAll('table')]
+      .filter(x => x.innerText.includes('Wild-p de H₀: coeficiente = c')).at(-1);
+    return t && t.innerText !== prev;
+  }, beforeText, { timeout: 15000 });
+  const rentCandidates = await candidateRows(candidates);
+  if (JSON.stringify(rentCandidates) === JSON.stringify(beforeCandidates))
+    throw Error('Switching inversion model did not change the tested-point p-values');
+  const text = await page.locator('body').innerText();
+  for (const phrase of ['41 candidatos', 'no es una prueba de equivalencia',
+      'reproduce exactamente el wild_p_zero', 'nulo, no cero', 'puntos probados'])
+    if (!text.includes(phrase)) throw Error('Missing inversion caveat: ' + phrase);
+  return { errors, modelRows: beforeModels.length, beforeBand, afterBand,
+    candidateRows: beforeCandidates.length, summaryRows: beforeSummary.length };
 }" 2>&1)"
 result="$(printf '%s\n' "$output" | sed -n '/^### Result/,/^### Ran/p' | sed '1d;$d')"
 if [ -z "$result" ]; then
@@ -55,5 +86,8 @@ import sys
 result = json.loads(sys.argv[1])
 if result["errors"]:
     raise SystemExit(f"FAIL uncertainty browser: {result['errors']}")
-print("OK uncertainty browser: all models hydrate; band updates without changing estimates")
+if result["candidateRows"] != 41 or result["summaryRows"] != 4:
+    raise SystemExit(f"FAIL uncertainty browser: inversion grid/summary rows {result}")
+print("OK uncertainty browser: all models hydrate; band updates without changing estimates;")
+print("OK inversion grid: 41 tested points per model, model switch changes p, caveats present")
 PY

@@ -55,6 +55,35 @@ conclusion; moving the threshold after seeing the estimates does not perform
 a pre-specified equivalence analysis. A future analysis would need justified
 magnitudes, appropriate test inversion and a declared multiplicity policy.
 
+## Prespecified candidate inversion (tested points only)
+
+`scripts/invert_tourist.py` inverts the wild-cluster bootstrap-t over a grid
+fixed **before** p-values are computed: **−2.0 to +2.0** percentage points in
+**0.1** steps (**41** candidates), symmetric and wider than every published
+normal range. For each candidate `c` the null `H₀: coefficient = c` is imposed
+by recentering the outcome, and the same restricted-fit Rademacher bootstrap
+used for the zero null runs with **1999** reps and a fixed seed. One draw
+sequence is shared by all candidates (common random numbers). Candidate
+`c = 0` therefore reproduces `wild_p_zero` exactly. The nominal level is
+**95%** (`p ≥ 0.05` accepted).
+
+The grid helper lives in `src/spanish_housing/wild_grid.py`, deliberately
+outside `ols.py`: adding it to the estimator core would change the freshness
+key of every committed model artifact. The script reconstructs the four panel
+designs from `marts.duckdb` without modifying `explorations/panel_tourist.py`,
+verifies n/clusters/fit against the fresh artifact, then writes
+`artifacts/tourist_inversion.json` with per-candidate p, the acceptance mask,
+boundary warnings and code/data hashes. `make verify` runs a cheap `--check`
+that recomputes the design fits and the `c = 0` anchor; a stale source or
+changed grid constants fail closed.
+
+The page publishes **tested points only**: per-candidate p and the accepted
+mask, plus the extreme accepted candidates and warnings per model. It is not
+a continuous confidence interval, a causal range or an equivalence test.
+Warnings distinguish "accepted set may extend below/above the grid" from "no
+candidate accepted at this resolution." No model is re-estimated; the published
+1999-rep zero-null p-values are unchanged.
+
 ## Reproduction and fail-closed freshness
 
 ```bash
@@ -70,9 +99,11 @@ model set, model definitions, interval construction, valid p-values and
 sample/cluster counts.
 
 `data/processed/inference.duckdb` is a presentation sidecar, read through
-Evidence's `inference` connection. It contains `tourism_panel` and an export
-metadata table pinning source artifact bytes, source freshness metadata and
-exporter code. Read-only verification requires exact rows and exact metadata.
+Evidence's `inference` connection. It contains `tourism_panel`,
+`tourism_inversion` (candidate rows), `tourism_inversion_meta` (per-model
+accepted extremes, counts and warnings) and an export metadata table pinning
+source artifact bytes, source freshness metadata and exporter code. Read-only
+verification requires exact rows and exact metadata.
 Changing the source, exporter or sidecar requires regeneration; no central
 mart is mutated and no unrelated estimator is rerun.
 

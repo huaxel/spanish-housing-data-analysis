@@ -12,8 +12,9 @@ TEXT = PAGE.read_text()
 QUERIES = dict(re.findall(r"```sql (\w+)\n(.*?)\n```", TEXT, re.DOTALL))
 
 
-def query(name, magnitude=0.5):
+def query(name, magnitude=0.5, model="sale"):
     sql = QUERIES[name].replace("${inputs.magnitud}", str(magnitude))
+    sql = sql.replace("${inputs.inv_modelo.value}", model)
     return sql.replace("${modelos_turismo}", f"({QUERIES['modelos_turismo']})")
 
 
@@ -32,6 +33,27 @@ def database():
             ('sale', 'Venta', 'Solo turismo', -0.2, 0.31, -0.82, 0.40, 0.49, 1159, 130, 1999),
             ('edge', 'Venta', 'Frontera', 0, 0.25, -0.5, 0.5, 0.8, 100, 10, 1999),
             ('positive', 'Venta', 'Positivo', 0.5, 0.05, 0.4, 0.6, 0.1, 100, 10, 1999)
+        """)
+        con.execute("""
+            create table inference.tourism_inversion (
+                model_key varchar, outcome varchar, specification varchar,
+                candidate_c double, wild_p double, keep_95 boolean
+            );
+            insert into inference.tourism_inversion values
+            ('sale', 'Venta', 'Solo turismo', -0.5, 0.02, false),
+            ('sale', 'Venta', 'Solo turismo', 0.0, 0.6, true),
+            ('sale', 'Venta', 'Solo turismo', 0.5, 0.02, false)
+        """)
+        con.execute("""
+            create table inference.tourism_inversion_meta (
+                model_key varchar, outcome varchar, specification varchar,
+                n integer, clusters integer, b double, se double,
+                accepted_min_c double, accepted_max_c double,
+                accepted_count integer, warnings varchar
+            );
+            insert into inference.tourism_inversion_meta values
+            ('sale', 'Venta', 'Solo turismo', 1159, 130, -0.2, 0.31,
+             -0.5, 0.5, 1, '')
         """)
         yield con
 
@@ -75,3 +97,31 @@ def test_scalar_control_links_and_metadata_contract():
     assert "(/incertidumbre/)" in (ROOT / "evidence/pages/acceso.md").read_text()
     assert '"incertidumbre/index.html"' in (ROOT / "scripts/fix_build_meta.py").read_text()
     assert '"docs/uncertainty.md"' in (ROOT / "scripts/audit_doc_numbers.py").read_text()
+
+
+def test_inversion_candidates_are_filterable_tested_points(database):
+    for source in ("inversion_candidatos", "inversion_resumen"):
+        database.execute(query(source)).fetchall()
+
+
+def test_inversion_grid_contract_and_null_warnings():
+    text = (ROOT / "evidence/pages/incertidumbre.md").read_text()
+    assert "41 candidatos" in text and "pasos de **0,1**" in text
+    assert "de **-2,0 a +2,0**" in text
+    assert "1.999 réplicas" in text
+    for phrase in [
+        "no un\nintervalo de confianza continuo",
+        "no es una prueba de equivalencia",
+        "reproduce exactamente el `wild_p_zero`",
+        "nulo, no cero",
+    ]:
+        assert phrase.replace("\n", " ") in text.replace("\n", " ")
+    assert "${inputs.inv_modelo.value}" in text
+
+
+def test_inversion_candidates_filter_and_summary_ranges(database):
+    rows = database.execute(query("inversion_candidatos", model="sale")).fetchall()
+    assert rows == [(-0.5, 0.02, "Rechazada"), (0.0, 0.6, "No rechazada"), (0.5, 0.02, "Rechazada")]
+    summary = database.execute(query("inversion_resumen")).fetchall()
+    assert summary[0][0:3] == ("Venta", "Solo turismo", -0.2)
+    assert summary[0][5:8] == (0.5, 1, "")

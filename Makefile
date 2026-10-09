@@ -126,15 +126,15 @@ analysis:
 	@echo "[analysis 18/18] desahucios_renta (descriptive)"
 	uv run python explorations/desahucios_renta.py
 	uv run python scripts/analyze_stock_rent.py
-	uv run python scripts/export_inference.py
 	uv run python scripts/invert_tourist.py
+	uv run python scripts/export_inference.py
 
 stock-rent:
 	uv run python scripts/analyze_stock_rent.py
 
 inference:
-	uv run python scripts/export_inference.py
 	uv run python scripts/invert_tourist.py
+	uv run python scripts/export_inference.py
 
 # Full local gate: lint -> fetch -> build -> analysis -> verify -> audit -> test
 gates: lint fetch build analysis verify audit test
@@ -157,6 +157,7 @@ evidence-dev:
 # injects per-route descriptions. Always runs post-build so deploys inherit it.
 evidence-build:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Refusing: dev server/service owns .evidence/template/. Stop it first: systemctl --user stop housing-evidence (or make evidence-build ALLOW=1)."; exit 1; fi
+	uv run python scripts/invert_tourist.py --check
 	uv run python scripts/export_inference.py
 	uv run python scripts/fetch_cadastre_stock.py --check
 	uv run python scripts/build_sevilla_2021.py --check
