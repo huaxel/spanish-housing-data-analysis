@@ -58,7 +58,8 @@ magnitudes, appropriate test inversion and a declared multiplicity policy.
 ## Prespecified candidate inversion (tested points only)
 
 `scripts/invert_tourist.py` inverts the wild-cluster bootstrap-t over a grid
-fixed **before** p-values are computed: **−2.0 to +2.0** percentage points in
+fixed **before this inversion** (not preregistered before examining the already
+published panel results): **−2.0 to +2.0** percentage points in
 **0.1** steps (**41** candidates), symmetric and wider than every published
 normal range. For each candidate `c` the null `H₀: coefficient = c` is imposed
 by recentering the outcome, and the same restricted-fit Rademacher bootstrap
@@ -134,3 +135,31 @@ The review was static; executing tests and builds is a separate check.
 `scripts/smoke_uncertainty.sh` (also `make evidence-smoke-uncertainty`)
 asserts that all model rows hydrate and changing the magnitude control
 recomputes containment without changing source coefficients or tests.
+
+### Candidate-inversion review and fixes — 2026-10-09
+
+Independent read-only native Codex review confirmed the recentering, restricted
+fit, shared cluster draws, full-model refit and CR1 studentization match the
+existing zero-null routine, and found no released field that permits
+reconstructing individual outcomes. Three findings were fixed:
+
+1. `wild_grid.py` is now part of the inversion artifact's freshness key
+   (`wild_grid_sha` in `_meta`), and the audit freshness device compares it,
+   so a helper change fails both `--check` and the audit instead of leaving
+   nonzero candidates stale.
+2. `export_inference` and `--check` now enforce `keep == (p >= alpha)` and
+   that warnings exactly follow the acceptance mask (edge, resolution and
+   disjoint cases). These checks establish freshness and internal
+   consistency of the stored grid; they do not recompute the nonzero
+   candidate p-values, so byte equality with the stored JSON plus these
+   gates — not full re-derivation — is what the verify step claims.
+3. The page and this document qualify "prespecified" as fixed before this
+   inversion, not preregistered before examining the already published panel
+   results.
+
+The reviewer did not independently rerun the grid or the gates. The offline
+test suite, lint, verification, audit and model-freshness checks passed; the
+isolated strict build and hydrated browser checks (41 tested points, model
+switch, caveats) passed on both the isolated preview and the live app. The live Evidence dev
+server auto-restarted when its source cache was regenerated; no central mart,
+estimator or deployed artifact was changed.

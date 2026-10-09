@@ -94,9 +94,10 @@ al mover el control.
 
 Para cada valor candidato `c` probamos `H₀: coeficiente = c` con el mismo
 bootstrap wild de residuos agrupados que la columna anterior (Rademacher por
-municipio, 1.999 réplicas, semilla fija). La rejilla se fijó **antes** de
-calcular p-valores: de **-2,0 a +2,0** puntos porcentuales en pasos de **0,1**
-(41 candidatos), simétrica y mayor que cualquier rango normal publicado. Una
+municipio, 1.999 réplicas, semilla fija). La rejilla se fijó **antes de esta inversión** — no es un registro previo a
+examinar los resultados ya publicados del panel —: de **-2,0 a +2,0** puntos
+porcentuales en pasos de **0,1** (41 candidatos), simétrica y mayor que
+cualquier rango normal publicado. Una
 única secuencia de perturbaciones se reutiliza para todos los candidatos
 (números aleatorios comunes), de modo que los p-valores son comparables.
 
