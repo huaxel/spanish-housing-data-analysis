@@ -37,6 +37,7 @@ MODEL_FRESHNESS = [
     ("wild_ar_bust", "artifacts/wild_ar_bust.json", "explorations/wild_ar_bust.py"),
     ("tourist_inversion", "artifacts/tourist_inversion.json", "scripts/invert_tourist.py"),
     ("cadastre_eras", "artifacts/cadastre_eras.json", "explorations/cadastre_eras.py"),
+    ("cadastre_age_rent", "artifacts/cadastre_age_rent.json", "explorations/cadastre_age_rent.py"),
     ("censo_vintage", "artifacts/censo_vintage.json", "explorations/censo_vintage.py"),
     # Descriptive outputs (no estimator math, but quotable numbers): stamped
     # + registered 2026-10-07 — a rebuild + audit without analysis used to
@@ -2359,6 +2360,66 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] cadastre_eras: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += 9
+
+    ar = _model_output("artifacts/cadastre_age_rent.json")
+    for desc, path, expected, tol in (
+        ("age-rent joined barrios", "coverage.joined", 101, 0),
+        ("age-rent era barrios", "coverage.era_barrios", 107, 0),
+        (
+            "age-rent spearman median year",
+            "correlations.median_year_vs_rent.spearman",
+            -0.158908,
+            0.0005,
+        ),
+        (
+            "age-rent pearson median year",
+            "correlations.median_year_vs_rent.pearson",
+            -0.138144,
+            0.0005,
+        ),
+        (
+            "age-rent spearman pre-1951 share",
+            "correlations.era_share_vs_rent_spearman.Pre-1951",
+            0.228364,
+            0.0005,
+        ),
+        (
+            "age-rent spearman 1951-1970 share",
+            "correlations.era_share_vs_rent_spearman.1951-1970",
+            0.317634,
+            0.0005,
+        ),
+        (
+            "age-rent spearman 1971-1990 share",
+            "correlations.era_share_vs_rent_spearman.1971-1990",
+            -0.136847,
+            0.0005,
+        ),
+        (
+            "age-rent spearman 1991-2010 share",
+            "correlations.era_share_vs_rent_spearman.1991-2010",
+            -0.123281,
+            0.0005,
+        ),
+        (
+            "age-rent spearman 2011+ share",
+            "correlations.era_share_vs_rent_spearman.2011+",
+            -0.004765,
+            0.0005,
+        ),
+        ("age-rent oldest mean rent", "median_year_terciles.0.mean_rent_eur_m2", 7.22, 0.005),
+        ("age-rent middle mean rent", "median_year_terciles.1.mean_rent_eur_m2", 7.36, 0.005),
+        ("age-rent newest mean rent", "median_year_terciles.2.mean_rent_eur_m2", 6.87, 0.005),
+        ("age-rent heliopolis rent", "oldest_barrios.0.ipra_2022_eur_m2", 3.67, 0.005),
+        ("age-rent el tardon rent", "oldest_barrios.3.ipra_2022_eur_m2", 8.56, 0.005),
+        ("age-rent palmete rent", "newest_barrios.0.ipra_2022_eur_m2", 3.64, 0.005),
+        ("age-rent san bernardo rent", "newest_barrios.4.ipra_2022_eur_m2", 7.56, 0.005),
+    ):
+        got = _json_path(ar, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] cadastre_age_rent: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += 16
 
     cv = _model_output("artifacts/censo_vintage.json")
     for desc, path, expected, tol in (

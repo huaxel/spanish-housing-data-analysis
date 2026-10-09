@@ -561,3 +561,63 @@ def test_censo_vintage_artifact_structure():
     assert len(data["total_by_province"]) == 52
     assert data["boom_by_province"]["05"]["pct_no_principal"] == 52.0
     assert data["boom_by_province"]["28"]["pct_no_principal"] == 14.7
+
+
+def test_cadastre_age_rent_helpers():
+    spec = importlib.util.spec_from_file_location(
+        "cadastre_age_rent", ROOT / "explorations" / "cadastre_age_rent.py"
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    ranks, pearson, spearman = mod.ranks, mod.pearson, mod.spearman
+
+    assert ranks([3.0, 1.0, 2.0]) == [3.0, 1.0, 2.0]
+    # ties averaged: 5,5,1 -> ranks 2.5, 2.5, 1
+    assert ranks([5.0, 5.0, 1.0]) == [2.5, 2.5, 1.0]
+    # perfect monotone relations
+    assert pearson([1.0, 2.0, 3.0], [2.0, 4.0, 6.0]) == 1.0
+    assert spearman([1.0, 2.0, 3.0], [6.0, 4.0, 2.0]) == -1.0
+    # nonlinearity: spearman sees monotonicity pearson does not
+    y = [1.0, 2.0, 3.0]
+    x = [1.0, 100.0, 10000.0]
+    assert abs(spearman(x, y) - 1.0) < 1e-12
+    assert pearson(x, y) < 0.9
+    import pytest
+
+    with pytest.raises(ValueError):
+        pearson([1.0, 1.0, 1.0], [1.0, 2.0, 3.0])
+
+
+def test_cadastre_age_rent_artifact_structure():
+    import json
+
+    artifact_path = ROOT / "artifacts" / "cadastre_age_rent.json"
+    if not artifact_path.is_file():
+        return
+    data = json.loads(artifact_path.read_text())
+    cov = data["coverage"]
+    assert cov["era_barrios"] == 107
+    assert cov["joined"] == 101
+    corr = data["correlations"]
+    assert corr["median_year_vs_rent"]["n"] == 101
+    assert corr["median_year_vs_rent"]["spearman"] == -0.158908
+    assert corr["median_year_vs_rent"]["pearson"] == -0.138144
+    shares = corr["era_share_vs_rent_spearman"]
+    assert shares["1951-1970"] == 0.317634
+    assert shares["Pre-1951"] == 0.228364
+    assert shares["2011+"] == -0.004765
+    terciles = data["median_year_terciles"]
+    assert [t["n_barrios"] for t in terciles] == [33, 35, 33]
+    assert terciles[0]["mean_rent_eur_m2"] == 7.22
+    assert terciles[1]["mean_rent_eur_m2"] == 7.36
+    assert terciles[2]["mean_rent_eur_m2"] == 6.87
+    # extremes must actually be ordered oldest->newest / newest->oldest
+    oldest = [b["median_year"] for b in data["oldest_barrios"]]
+    newest = [b["median_year"] for b in data["newest_barrios"]]
+    assert oldest == sorted(oldest)
+    assert newest == sorted(newest, reverse=True)
+    # shares in each per-barrio row sum to ~100
+    era_labels = ["Pre-1951", "1951-1970", "1971-1990", "1991-2010", "2011+"]
+    for row in data["barrios"].values():
+        total = sum(row[label] for label in era_labels)
+        assert abs(total - 100.0) < 0.5
