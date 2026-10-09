@@ -78,10 +78,20 @@ identify municipality. INE's Household Income Distribution Atlas supplies
 local income, while Urban Indicators supplies rent expenditure for selected
 cities, but combining area averages would not recover the ECV rate (person
 share above 40% of household disposable income after total housing costs).
-That would be a distinct rent-to-income proxy, not observed burden. No local
-burden integration is justified without an independently validated compatible
-source and household denominator; do not infer local rates from national or
-regional marginals. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
+That would be a distinct rent-to-income proxy, not observed burden. On proxy
+feasibility: the rent side already exists in the marts (SERPAVI municipal
+medians, 2011–2024; see the SERPAVI probe), while the income side (ADRH
+municipal net income per household and per person, 2015–2023 series with CSV
+downloads) is not yet pulled. The year overlap is 2015–2023. A ratio of
+median contract rent to mean household income would be mechanically feasible
+but carries hard incompatibilities: SERPAVI medians describe new and rolling
+tax-deposit contracts, not the sitting-tenant stock, and are suppressed in
+small municipalities; ADRH means cover all households, not renters; and the
+numerator excludes utilities and other housing costs. No integration until
+the proxy semantics are explicitly accepted; never label it an overburden
+rate. No local burden integration is otherwise justified without an
+independently validated compatible source and household denominator; do not
+infer local rates from national or regional marginals. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
 [ADRH](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177088&idp=1254735976608&menu=resultados),
 [Urban Indicators](https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&cid=1254736176957&idp=1254735976608&menu=ultiDatos).
 
@@ -96,6 +106,28 @@ reusable local borrower microdata series; INE mortgage counts also do not
 identify first-time buyers. Local first-time-buyer income, savings and lending
 conditions therefore remain unmeasured in this project. Do not treat the
 calculator inputs as observed outcomes.
+
+Evidence check 2026-10-09: three further sources were assessed for reusable
+buyer-side evidence. The [ECV 2025 housing-access module](https://www.ine.es/dynt3/inebase/es/index.htm?padre=13548)
+(published tables plus free anonymized microdata) is the only directly
+reusable source for access barriers — national and regional grain, not
+municipal. The [EFF household-finance microdata](https://www.bde.es/wbe/en/estadisticas/anuncios/los-ficheros-de-microdatos-de-la-eff2022-estan-ya-disponibles-para-uso-cientifico-a-traves-de-su-web.html)
+(scientific use, registration-gated) supports wealth and savings analysis but
+is national-only and needs multiple-imputation handling, so it does not fit
+this pipeline. The [PROP registry microdata](https://www.bde.es/wbe/es/punto-informacion/contenidos/servicios/belab/contenido/microdatos-disponibles/microdatos-de-la-estadistica-registral-inmobiliaria-prop.html)
+(municipal transactions and mortgages) requires BELab researcher
+accreditation and secure-environment access, so it is out of reach here.
+Verdict (implemented 2026-10-09): ECV 2025 module tables pulled via
+`fetch_ecv_access.py` — twenty-five JAXI tables at national grain with
+demographic, tenure, quintile, urbanisation and municipality-size cuts,
+plus a single regional table (blocked-search block by CCAA); no municipal
+estimates. Single-year module (survey 2025), same sidecar treatment as the
+Eurostat conditions pull: `access_moves`, `access_blocked` and
+`access_youth` tables in `housing_access.duckdb` (under two thousand
+cells, a handful of suppressed cells kept null), headline-identity and
+reason-sum checks, cross-table headline agreement, page sections on
+/acceso/ with contract tests. The ECV joint proof was rebuilt after the
+sidecar write (all joint cells unchanged). EFF parked; PROP out of scope.
 
 For vacancy, seek habitability, legal status, location relative to employment,
 and evidence of entry into rental/owner-occupation. Retain census-definition

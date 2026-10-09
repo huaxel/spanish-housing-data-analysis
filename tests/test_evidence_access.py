@@ -19,6 +19,9 @@ def query(name):
         "hacinamiento_acceso",
         "infraocupacion_acceso",
         "carga_mediana_acceso",
+        "mudanzas_acceso",
+        "busqueda_bloqueada_acceso",
+        "juventud_acceso",
     ):
         sql = sql.replace("${" + source + "}", f"({QUERIES[source]})")
     return sql
@@ -124,6 +127,58 @@ def database():
     con.execute(
         "insert into access.overburden_age_poverty values "
         "('Y18-24','18 to 24','B_60','Below 60%',2025,NULL,'u')"
+    )
+    con.execute(
+        "create table access.access_moves(tpx integer, block varchar, breakdown varchar,"
+        " group_label varchar, geo varchar, survey_year integer, measure varchar,"
+        " kind varchar, value double, status varchar)"
+    )
+    con.execute(
+        "create table access.access_blocked(tpx integer, block varchar, breakdown varchar,"
+        " group_label varchar, geo varchar, survey_year integer, measure varchar,"
+        " kind varchar, value double, status varchar)"
+    )
+    con.execute(
+        "create table access.access_youth(tpx integer, block varchar, breakdown varchar,"
+        " group_label varchar, geo varchar, survey_year integer, measure varchar,"
+        " kind varchar, value double, status varchar)"
+    )
+    con.execute(
+        "insert into access.access_moves values "
+        "(79621, 'access_moves', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Personas de 16 o más años (miles)', 'count_thousands', 41873.1, ''),"
+        "(79621, 'access_moves', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Han cambiado de vivienda (%)', 'rate_pct', 3.9, ''),"
+        "(79621, 'access_moves', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Han cambiado de vivienda (miles)', 'count_thousands', 1622.4, ''),"
+        "(79621, 'access_moves', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Motivos económicos', 'share_pct', 9.3, ''),"
+        "(79628, 'access_moves', 'quintil', 'Total', 'ES', 2025,"
+        " 'Han cambiado de vivienda (%)', 'rate_pct', 3.9, ''),"
+        "(79628, 'access_moves', 'quintil', 'Primer quintil', 'ES', 2025,"
+        " 'Han cambiado de vivienda (%)', 'rate_pct', 5.1, '')"
+    )
+    con.execute(
+        "insert into access.access_blocked values "
+        "(79629, 'access_blocked', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Ha buscado vivienda activamente pero no se ha cambiado (%)', 'rate_pct', 7.6, ''),"
+        "(79629, 'access_blocked', 'edad_sexo', 'Ambos sexos | Total', 'ES', 2025,"
+        " 'Precio excesivo', 'share_pct', 67.2, ''),"
+        "(79637, 'access_blocked', 'ccaa', 'TOTAL', 'ES', 2025,"
+        " 'Ha buscado vivienda activamente pero no se ha cambiado (%)', 'rate_pct', 7.6, ''),"
+        "(79637, 'access_blocked', 'ccaa', 'TOTAL', 'Andalucía', 2025,"
+        " 'Ha buscado vivienda activamente pero no se ha cambiado (%)', 'rate_pct', 6.9, ''),"
+        "(79637, 'access_blocked', 'ccaa', 'TOTAL', 'Melilla', 2025,"
+        " 'Ha buscado vivienda activamente pero no se ha cambiado (%)', 'rate_pct', NULL, '')"
+    )
+    con.execute(
+        "insert into access.access_youth values "
+        "(79638, 'access_youth', 'edad_sexo', 'Total | Ambos sexos', 'ES', 2025,"
+        " 'Convive con alguno de sus padres (%)', 'rate_pct', 67.1, ''),"
+        "(79638, 'access_youth', 'edad_sexo', 'Total | Ambos sexos', 'ES', 2025,"
+        " 'No puedo permitirme alquilar una vivienda', 'share_pct', 28.3, ''),"
+        "(79644, 'access_youth', 'edad_quintil', 'Total | Total', 'ES', 2025,"
+        " 'No puedo permitirme alquilar una vivienda', 'share_pct', 28.3, '')"
     )
     con.execute("create schema ecv")
     con.execute(
@@ -286,3 +341,14 @@ def test_market_rent_matrix_keeps_all_disjoint_coordinates_and_hidden_rates(data
     sql = query("ecv_comparacion_renta").lower()
     assert "rate_pct is not null" not in sql and "limit " not in sql
     assert "sum(" not in sql and "avg(" not in sql and "coalesce(" not in sql
+
+
+def test_access_module_headlines_and_ccaa_null_last(database):
+    assert database.execute(query("mudanzas_titular")).fetchall() == [(3.9,)]
+    assert database.execute(query("busqueda_titular")).fetchall() == [(7.6,)]
+    assert database.execute(query("juventud_titular")).fetchall() == [(67.1,)]
+    assert len(database.execute(query("mudanzas_motivos")).fetchall()) == 1
+    assert len(database.execute(query("juventud_quintil")).fetchall()) == 1
+    ccaa = database.execute(query("busqueda_ccaa")).fetchall()
+    assert [row[0] for row in ccaa] == ["España (total nacional)", "Andalucía", "Melilla"]
+    assert ccaa[-1][1] is None

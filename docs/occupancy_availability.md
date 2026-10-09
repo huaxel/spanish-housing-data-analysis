@@ -100,7 +100,10 @@ there is no reproducible fetch path, and the repo stack has no PDF-table
 tooling. A provincial annual series would mean hand-transcribing PDF
 tables year by year — grey-zone extraction under the same rule that
 parked the Valor de Referencia probe. Watch for a machine-readable
-series or request one before any integration. Data quirk for that day:
+series or request one before any integration. Recheck 2026-10-09: the 2025
+edition keeps the same PDF-only format and the statistics page still lists
+no tabular endpoint; the only CSV surfaced is a Madrid-only regional series,
+which does not fill the national gap — park stands. Data quirk for that day:
 several provinces and autonomous communities read zero in the latest
 table under a methodology note, so zeros must be treated as
 not-measured-or-suppressed, not as true zeros, before any use.
@@ -188,9 +191,12 @@ percent of the stock), using padrón, public registers and abnormally low
 water use; one thousand five hundred sixty-five are estimated to have been unoccupied
 for at least two years. These are indicators/estimates, not formal legal
 vacancy declarations or an IBI surcharge count; no annual applied-home total
-surfaced. The city announced a new ordinance process to mobilize the stock,
-so this may merit a later follow-up, but it is not yet a reusable legal-status
-series. One positive city-level signal surfaced
+surfaced. Follow-up: the city has since adopted 2027 fiscal ordinances with
+a vacancy surcharge and a near-total bonus for homes entering public-rental
+programs, while the declaration ordinance itself is still in process (Pleno
+expected in the early months of 2027). Recheck after that Pleno for the
+first formal declaration counts; until then this remains an
+indicators-only lead, not a reusable legal-status series. One positive city-level signal surfaced
 in València: a
 municipal announcement
 said the surcharge would apply to 41 homes held by six large holders, based
@@ -236,6 +242,8 @@ Sources: [Law 12/2023, Article 34](https://www.boe.es/buscar/act.php?id=BOE-A-20
 [Palma IBI ordinance](https://seuelectronica.palma.es/portal/PALMA/sede/RecursosWeb/DOCUMENTOS/1/1_153224_1.pdf),
 [reported Palma removal](https://www.ultimahora.es/noticias/palma/2024/09/16/2242399/psoe-denuncia-cort-elimina-recargo-del-50-por-ciento-del-ibi-viviendas-grandes-tenedores-desocupadas.html),
 [Bilbao vacancy-inventory update](https://www.bilbao.eus/cs/Satellite?autoplay=si&c=BIO_Noticia_FA&cid=1279249697409&language=es&pageid=3000075248&pagename=Bilbaonet%2FBIO_Noticia_FA%2FBIO_Noticia),
+[Bilbao 2027 fiscal ordinances](https://www.agenciadenoticias.es/2026/09/25/el-ayuntamiento-de-bilbao-aprueba-congelar-las-tasas-de-2027-e-impulsara-la-movilizacion-de-vivienda-vacia/),
+[Bilbao ordinance-process announcement](https://www.bilbao.eus/servlet/Satellite/vvmm/es/noticias/bilbao-inicia-la-tramitacion-de-una-ordenanza-para-regular-la-incorporacion-de-la-vivienda-deshabitada-al-mercado-de-alquiler/vm_noticia_fa),
 [València surcharge announcement](https://www.valencia.es/es/-/0222-ibi-grandes-propietarios-1),
 [reported 2023 billed count](https://elpais.com/espana/comunidad-valenciana/2024-02-05/solo-26-inmuebles-de-grandes-tenedores-pagan-en-valencia-el-recargo-del-ibi-por-permanecer-vacios.html).
 
@@ -288,7 +296,9 @@ with predictable CSV twins and no owner split; the gap-filling cuts
 The Eustat databank node carries no dataset tables for this operation
 as of now. Even pulled, Euskadi-only survey data would be a context
 sidecar, never a mart join. Revisit when a new edition extends the
-downloadable tables. ECV was confirmed structurally blind (it samples
+downloadable tables. Recheck 2026-10-09: latest edition remains 2023
+(reference period 2023, published May 2024); no 2025 edition out yet and
+no next-update date announced — watch stays. ECV was confirmed structurally blind (it samples
 principal dwellings only). The Basque deshabitada canon register is
 procedural (municipality-initiated, no public municipal series found) —
 context only, alongside the IBI surcharges.
@@ -304,12 +314,12 @@ CaixaBank's province deficit (household creation minus completions in
 several variants) is reproducible from public inputs already mostly in
 the marts — a possible future derived series, not a source pull.
 
-## Bounded next implementation (conditional, not started)
+## Bounded next implementation (status 2026-10-09)
 
-1. AEAT integration design: fetch module for the use-split tables, foral
-   exclusion handling, use-priority semantics vs SERPAVI, annual cadence.
-2. Section-grain census pull design: indicator files plus cartography join
-   keys, ratio definitions, 2021-vintage quarantine.
+1. AEAT integration: DONE 2026-10-09 — `fetch_aeat_viviendas.py` plus
+   `aeat_viviendas_uso` mart with audit pins; no estimator reads it.
+2. Section-grain census pull: DONE 2026-10-09 — `fetch_censo_secciones.py`
+   plus `censo2021_secciones` mart with occupancy ratios and quarantine.
 3. MIVAU unsold-new provincial series: assessed 2026-10-09, parked
    (PDF-only, no tabular endpoint, bot-walled downloads).
 4. RMDVP watch: resolved positive 2026-10-09, table 01 pulled.

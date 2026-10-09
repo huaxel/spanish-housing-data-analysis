@@ -1,6 +1,6 @@
 # Probe: SERPAVI rent index — municipal rents for ~all of Spain
 
-**Date:** 2026-10-06 · **Status:** reachable, high value — fetch not yet built
+**Date:** 2026-10-06 · **Status:** reachable, high value — fetch built (`fetch_serpavi.py`; municipal and district marts live)
 
 ## What it is
 

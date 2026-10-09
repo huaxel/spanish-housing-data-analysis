@@ -116,10 +116,11 @@ this section — see git history and the read record if you need them.
 
 ## Read plan
 
-1. Independent reader gets: this note + identification.md + ols.py/bartik.py
+1. ~~Independent reader gets: this note + identification.md + ols.py/bartik.py
    tests + artifacts JSON. Questions for them: exclusion plausibility,
-   trends-spec adequacy, LATE vs attenuation adjudication — **now written out
-   in `docs/review_brief.md` §Section 2; not yet run.**
+   trends-spec adequacy, LATE vs attenuation adjudication.~~ SUPERSEDED:
+   three independent reads ran 2026-10-07 and the estimate was removed to a
+documented negative result — see Read record below.
 2. ~~On approval: fold ONE paragraph + the base-spec table into synthesis~~
    DONE (`1616d9f`) ahead of step 1, with audit claims for tau/AR bounds and
    the split-sample first stages; linked from synthesis, branch merged.

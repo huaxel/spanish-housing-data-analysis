@@ -400,6 +400,206 @@ Fuentes: Eurostat EU-SILC
 [edad](https://ec.europa.eu/eurostat/databrowser/view/ilc_lvho07a/default/table) y
 [definición del indicador](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Housing_cost_overburden_rate).
 
+## Módulo ECV 2025: dificultades de acceso a la vivienda
+
+El módulo especial de la ECV 2025 pregunta por tres situaciones: haber
+cambiado de vivienda en los últimos doce meses, haberla buscado
+activamente sin conseguir cambiarse, y —entre los 18 y 34 años— vivir con
+los padres. Son respuestas de personas de 16 o más años (18 a 34 en el
+tercer bloque), de un único año de encuesta, a escala nacional salvo una
+tabla autonómica. Los motivos son porcentajes **dentro** de cada grupo
+afectado (quienes se mudaron, quienes buscaron sin éxito, jóvenes que
+conviven con sus padres), no de toda la población. Ninguna tabla baja al
+municipio ni identifica efectos causales.
+
+```sql periodo_acceso_modulo
+select max(survey_year) as encuesta_anyo from (
+  select survey_year from access.access_moves where value is not null
+  union
+  select survey_year from access.access_blocked where value is not null
+  union
+  select survey_year from access.access_youth where value is not null
+)
+```
+
+Año de encuesta del módulo (máximo conjunto de las tres tablas):
+<Value data={periodo_acceso_modulo} column=encuesta_anyo fmt="0"/>.
+
+```sql mudanzas_acceso
+select breakdown, group_label, measure, kind, value
+from access.access_moves
+where survey_year = (select max(survey_year) from access.access_moves where value is not null)
+order by breakdown, group_label, measure
+```
+
+```sql mudanzas_titular
+select value from ${mudanzas_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Ambos sexos | Total'
+  and measure = 'Han cambiado de vivienda (%)'
+```
+
+Personas que cambiaron de vivienda en los últimos doce meses:
+<Value data={mudanzas_titular} column=value fmt="num1"/> %.
+
+```sql mudanzas_motivos
+select measure, value from ${mudanzas_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Ambos sexos | Total'
+  and kind = 'share_pct'
+order by case measure
+  when 'Motivos económicos' then 1
+  when 'Características de la vivienda a la que se accede' then 2
+  else 3 end
+```
+
+### Motivos del cambio (quienes se mudaron)
+
+<DataTable data={mudanzas_motivos} rows=3>
+  <Column id=measure title="Motivo principal"/>
+  <Column id=value title="% de quienes se mudaron" fmt="num1"/>
+</DataTable>
+
+```sql mudanzas_quintil
+select group_label, value from ${mudanzas_acceso}
+where breakdown = 'quintil' and measure = 'Han cambiado de vivienda (%)'
+order by case group_label
+  when 'Total' then 0
+  when 'Primer quintil' then 1
+  when 'Segundo quintil' then 2
+  when 'Tercer quintil' then 3
+  when 'Cuarto quintil' then 4
+  else 5 end
+```
+
+### Cambios de vivienda por quintil de renta
+
+<DataTable data={mudanzas_quintil} rows=6>
+  <Column id=group_label title="Quintil de renta por unidad de consumo"/>
+  <Column id=value title="Cambiaron de vivienda (%)" fmt="num1"/>
+</DataTable>
+
+Los quintiles ordenan a las personas por su renta por unidad de consumo:
+comparar el primero con el quinto describe desigualdad de movilidad, no el
+efecto de la renta sobre la mudanza.
+
+```sql busqueda_bloqueada_acceso
+select breakdown, group_label, geo, measure, kind, value
+from access.access_blocked
+where survey_year = (select max(survey_year) from access.access_blocked where value is not null)
+order by breakdown, group_label, geo, measure
+```
+
+```sql busqueda_titular
+select value from ${busqueda_bloqueada_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Ambos sexos | Total'
+  and measure = 'Ha buscado vivienda activamente pero no se ha cambiado (%)'
+```
+
+Personas que buscaron vivienda activamente sin llegar a cambiarse:
+<Value data={busqueda_titular} column=value fmt="num1"/> %.
+
+```sql busqueda_motivos
+select measure, value from ${busqueda_bloqueada_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Ambos sexos | Total'
+  and kind = 'share_pct'
+order by case measure
+  when 'Precio excesivo' then 1
+  when 'La vivienda no reunía los requisitos que busco' then 2
+  when 'Yo no reunía las condiciones necesarias para el alquiler/compra' then 3
+  else 4 end
+```
+
+### Por qué no se cambiaron (búsqueda sin éxito)
+
+<DataTable data={busqueda_motivos} rows=4>
+  <Column id=measure title="Motivo principal"/>
+  <Column id=value title="% de la búsqueda sin éxito" fmt="num1"/>
+</DataTable>
+
+```sql busqueda_ccaa
+select case when geo = 'ES' then 'España (total nacional)' else geo end as territorio,
+  value from ${busqueda_bloqueada_acceso}
+where breakdown = 'ccaa'
+  and measure = 'Ha buscado vivienda activamente pero no se ha cambiado (%)'
+order by value desc nulls last, territorio
+```
+
+### Búsqueda sin éxito por territorio
+
+<DataTable data={busqueda_ccaa} rows=20>
+  <Column id=territorio title="Territorio (nacional + CCAA)"/>
+  <Column id=value title="Buscaron sin cambiarse (%)" fmt="num1"/>
+</DataTable>
+
+Es la única tabla autonómica del módulo: compara tasas de búsqueda
+bloqueada entre territorios, no el número de personas afectadas ni las
+condiciones locales de oferta.
+
+```sql juventud_acceso
+select breakdown, group_label, measure, kind, value
+from access.access_youth
+where survey_year = (select max(survey_year) from access.access_youth where value is not null)
+order by breakdown, group_label, measure
+```
+
+```sql juventud_titular
+select value from ${juventud_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Total | Ambos sexos'
+  and measure = 'Convive con alguno de sus padres (%)'
+```
+
+Jóvenes de 18 a 34 años que conviven con alguno de sus padres:
+<Value data={juventud_titular} column=value fmt="num1"/> %.
+
+```sql juventud_motivos
+select measure, value from ${juventud_acceso}
+where breakdown = 'edad_sexo' and group_label = 'Total | Ambos sexos'
+  and kind = 'share_pct'
+order by case measure
+  when 'No me he planteado independizarme' then 1
+  when 'No puedo permitirme alquilar una vivienda' then 2
+  when 'No puedo acceder a la compra de vivienda' then 3
+  when 'Estoy ahorrando para comprar o alquilar' then 4
+  when 'Puedo pagar un alquiler o compra, pero prefiero vivir así' then 5
+  else 6 end
+```
+
+### Por qué conviven con sus padres (jóvenes de 18 a 34)
+
+<DataTable data={juventud_motivos} rows=6>
+  <Column id=measure title="Razón principal"/>
+  <Column id=value title="% de quienes conviven" fmt="num1"/>
+</DataTable>
+
+```sql juventud_quintil
+select group_label, measure, value from ${juventud_acceso}
+where breakdown = 'edad_quintil' and group_label = 'Total | Total'
+  and kind = 'share_pct'
+order by case measure
+  when 'No me he planteado independizarme' then 1
+  when 'No puedo permitirme alquilar una vivienda' then 2
+  when 'No puedo acceder a la compra de vivienda' then 3
+  when 'Estoy ahorrando para comprar o alquilar' then 4
+  when 'Puedo pagar un alquiler o compra, pero prefiero vivir así' then 5
+  else 6 end
+```
+
+### Razones por quintil de renta del hogar
+
+<DataTable data={juventud_quintil} rows=6>
+  <Column id=measure title="Razón principal"/>
+  <Column id=value title="% de quienes conviven" fmt="num1"/>
+</DataTable>
+
+El quintil es del hogar donde viven, no de sus ingresos personales: un
+joven del primer quintil puede tener empleo y un joven del quinto, ninguno.
+Los motivos no distinguen emancipación imposible de emancipación pospuesta.
+
+Fuentes: INE ECV
+[módulo 2025](https://www.ine.es/dynt3/inebase/es/index.htm?padre=13548),
+tablas [cambios](https://www.ine.es/jaxi/Tabla.htm?tpx=79621&L=0),
+[búsqueda por CCAA](https://www.ine.es/jaxi/Tabla.htm?tpx=79637&L=0) y
+[jóvenes](https://www.ine.es/jaxi/Tabla.htm?tpx=79638&L=0).
+
 ## Cruce propio ECV: edad × pobreza × tenencia
 
 **Estimación descriptiva propia con microdatos anonimizados INE**, no una
