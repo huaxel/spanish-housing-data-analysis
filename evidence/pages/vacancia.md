@@ -26,6 +26,8 @@ order by vac_pct desc
   areaCol=codigo
   value=vac_pct
   valueFmt=num1
+  basemap={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+  attribution='© OpenStreetMap'
   title="Vivienda vacía por municipio, Censo 2021 (%)"
   height=560
   startingLat=40.2

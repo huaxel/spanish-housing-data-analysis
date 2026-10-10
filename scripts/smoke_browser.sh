@@ -46,8 +46,8 @@ print(f"OK   browser {path} (canvases={result['canvases']})")
 PY
 }
 
-check_map() { # check_map <path>: Leaflet container + municipal polygons, no page errors
-	local path="$1"
+check_map() { # check_map <path> [min_polygons]: Leaflet container + polygons, no page errors
+	local path="$1" min_paths="${2:-3000}"
 	local result
 	result="$(playwright-cli -s="$SESSION" run-code "async (page) => {
 		const errs = [];
@@ -63,16 +63,16 @@ check_map() { # check_map <path>: Leaflet container + municipal polygons, no pag
 			errs
 		};
 	}" 2>/dev/null | sed -n '/^### Result/,/^### Ran/p' | sed '1d;$d')"
-	python3 - "$path" "$result" <<'PY'
+	python3 - "$path" "$result" "$min_paths" <<'PY'
 import json, sys
-path, result = sys.argv[1], json.loads(sys.argv[2])
+path, result, min_paths = sys.argv[1], json.loads(sys.argv[2]), int(sys.argv[3])
 problems = []
 if result["errs"]:
     problems.append(f"page errors: {result['errs']}")
 if result["leaflet"] < 1:
     problems.append("no leaflet container")
-if result["paths"] < 3000:
-    problems.append(f"too few polygons: {result['paths']}")
+if result["paths"] < min_paths:
+    problems.append(f"too few polygons: {result['paths']} < {min_paths}")
 if problems:
     print(f"FAIL map {path}: " + "; ".join(problems))
     sys.exit(1)
@@ -106,4 +106,5 @@ check_page "/compra/" 1 "efectivo inicial y cuota" "Supuestos editables" || fail
 check_page "/incertidumbre/" 0 "No detectar no es demostrar ausencia" "Tamaño y precisión" || fail=1
 check_page "/stock/" 8 "Qué vivienda existe y dónde" "distribución ponderada" "Capitales andaluzas" "Provincia de Sevilla" || fail=1
 check_map "/vacancia/" || fail=1
+check_map "/renta-ingresos/" 1500 || fail=1
 exit $fail

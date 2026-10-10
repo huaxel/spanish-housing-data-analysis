@@ -107,13 +107,40 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
   xFmt="num0" yFmt="num0" pointSize=6 tooltipTitle=municipio
   xAxisTitle="Renta neta media mensual del hogar (€)"
   yAxisTitle="Alquiler mediano de firma (€/mes)"
-  title="Municipios con al menos 50 contratos, 2023"/>
+  title="Municipios con al menos 50 contratos, 2023"
+  echartsOptions={{
+    series: [{
+      markLine: {
+        silent: true,
+        symbol: 'none',
+        animation: false,
+        lineStyle: { type: 'dashed', color: '#94a3b8', width: 1 },
+        label: { show: true, position: 'insideEndTop', fontSize: 11, color: '#64748b' },
+        data: [
+          [
+            { name: '15% de la renta anual', coord: [2000, 300] },
+            { coord: [8000, 1200] }
+          ],
+          [
+            { name: '20% de la renta anual', coord: [2000, 400] },
+            { coord: [6000, 1200] }
+          ],
+          [
+            { name: '25% de la renta anual', coord: [2000, 500] },
+            { coord: [4800, 1200] }
+          ]
+        ]
+      }
+    }]
+  }}/>
 
-Arriba a la derecha, municipios ricos con contratos caros. Los que más
-arriba quedan respecto a la diagonal son los de mayor esfuerzo: contrato
-caro sobre rentas medias más bajas — la renta media de todos los hogares
-(no solo inquilinos) fija el eje horizontal. Los alquileres de firma más
-altos del país no son proporcionalmente los más esforzados:
+Arriba a la derecha, municipios ricos con contratos caros. Las líneas
+discontinuas son ratios constantes: 15, 20 y 25% de la renta neta media
+anual. Los puntos por encima de la línea del 20% son el esfuerzo de
+firma extremo — contrato caro sobre rentas medias más bajas, con la
+renta media de todos los hogares (no solo inquilinos) fijando el eje
+horizontal. Los alquileres de firma más altos del país no son
+proporcionalmente los más esforzados:
 
 ```sql top_alquiler
 select municipio, round(renta_neta_hogar / 12.0, 0) as renta_mensual,
@@ -147,6 +174,36 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
 La cola derecha es el mapa del esfuerzo: once municipios — la costa
 malagueña, el cinturón de Barcelona y Pasaia — superan el 22% de la renta
 media local, y solo Benahavís pasa del 25%.
+
+## El mapa del ratio de firma
+
+```sql mapa_proxy
+select codigo, municipio, ratio_pct
+from access.rent_income
+where anyo = 2023 and contratos >= 50 and ratio_pct is not null
+```
+
+<AreaMap
+  data={mapa_proxy}
+  geoJsonUrl='/geo/municipios.geojson'
+  geoId='CODIGOINE'
+  areaCol=codigo
+  value=ratio_pct
+  valueFmt=num1
+  basemap={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+  attribution='© OpenStreetMap'
+  title="Ratio alquiler de firma / renta neta media, 2023 (≥50 contratos)"
+  height=560
+  startingLat=40.2
+  startingLong=-3.7
+  startingZoom=6
+/>
+
+Solo se colorean los municipios con datos (1.569 de 8.131); el resto
+queda sin color porque SERPAVI no publica renta mediana allí. Los
+municipios pequeños de menos de 100 habitantes pueden llevar la media
+comarcal/provincial de ADRH en lugar de renta propia (regla de difusión
+2020+, no marcada por fila).
 
 ## Qué no mide este indicador
 
