@@ -94,21 +94,37 @@ limit 15
 La costa turística malagueña encabeza con ratio en torno a 22–32%:
 mercados de firma caros sobre rentas medias locales más bajas.
 
-## Alquiler frente a renta: el mapa del esfuerzo de firma
+## El mapa del esfuerzo de firma: alquiler frente a renta
 
 ```sql scatter_proxy
 select municipio, round(renta_neta_hogar / 12.0, 0) as renta_mensual,
        round(alquiler_med, 0) as alquiler_med, contratos, ratio_pct
 from access.rent_income
 where anyo = 2023 and contratos >= 50 and ratio_pct is not null
-order by alquiler_med desc
-limit 20
 ```
 
-<BarChart data={scatter_proxy} x=municipio y=alquiler_med
-  yFmt="num0" title="Alquiler mediano de firma más alto (€/mes, 2023)"/>
+<ScatterPlot data={scatter_proxy} x=renta_mensual y=alquiler_med
+  xFmt="num0" yFmt="num0" pointSize=6 tooltipTitle=municipio
+  xAxisTitle="Renta neta media mensual del hogar (€)"
+  yAxisTitle="Alquiler mediano de firma (€/mes)"
+  title="Municipios con al menos 50 contratos, 2023"/>
 
-<DataTable data={scatter_proxy} rows=20>
+Arriba a la derecha, municipios ricos con contratos caros. Los que más
+arriba quedan respecto a la diagonal son los de mayor esfuerzo: contrato
+caro sobre rentas medias más bajas — la renta media de todos los hogares
+(no solo inquilinos) fija el eje horizontal. Los alquileres de firma más
+altos del país no son proporcionalmente los más esforzados:
+
+```sql top_alquiler
+select municipio, round(renta_neta_hogar / 12.0, 0) as renta_mensual,
+       round(alquiler_med, 0) as alquiler_med, contratos, ratio_pct
+from access.rent_income
+where anyo = 2023 and contratos >= 50 and ratio_pct is not null
+order by alquiler_med desc
+limit 12
+```
+
+<DataTable data={top_alquiler} rows=12>
   <Column id=municipio title="Municipio"/>
   <Column id=renta_mensual title="Renta neta media mensual (€)" fmt="num0"/>
   <Column id=alquiler_med title="Alquiler mediano (€/mes)" fmt="num0"/>
@@ -116,10 +132,21 @@ limit 20
   <Column id=ratio_pct title="Ratio (% de renta anual)" fmt="num1"/>
 </DataTable>
 
-Los alquileres de firma más altos del país no son proporcionalmente los
-más esforzados: el ratio depende de la renta media local (todos los
-hogares, no solo inquilinos), y los mercados turísticos combinan
-contrato caro con renta media más baja.
+## La distribución, no solo la mediana
+
+```sql dist_proxy
+select ratio_pct
+from access.rent_income
+where anyo = 2023 and contratos >= 50 and ratio_pct is not null
+```
+
+<Histogram data={dist_proxy} x=ratio_pct xFmt="num1"
+  xAxisTitle="Ratio alquiler/renta 2023 (%)"
+  title="Distribución municipal del ratio de firma (≥50 contratos)"/>
+
+La cola derecha es el mapa del esfuerzo: once municipios — la costa
+malagueña, el cinturón de Barcelona y Pasaia — superan el 22% de la renta
+media local, y solo Benahavís pasa del 25%.
 
 ## Qué no mide este indicador
 
