@@ -9,10 +9,17 @@ stock puede utilizarse? Madrid, Barcelona y la costa valenciana muestran
 por qué estas preguntas no se resuelven contando viviendas.
 [Panorama nacional](/) · [Municipios](/municipios/) · [Alquiler (€/m²)](/renta/) · [Alquiler/ingresos](/renta-ingresos/) · [Vacancia](/vacancia/) · [Escenarios de compra](/compra/) · [Incertidumbre](/incertidumbre/).
 
+**Lectura rápida:** el stock total no equivale a vivienda disponible; los
+indicadores de esfuerzo describen promedios o grupos distintos y no cuentan
+por sí solos cuántos hogares necesitan ayuda. La conclusión depende del
+territorio, la tenencia y el año de cada fuente.
+
 Esta página combina **indicadores descriptivos**, no estima causas ni el
 número de viviendas que habría que construir o movilizar. Provincias,
 comunidades y municipios se presentan por separado; no representan el mismo
-mercado ni se agregan sus precios o medianas.
+mercado ni se agregan sus precios o medianas. Para explorar primero la
+trayectoria general, vuelve al [panorama nacional](/); para precios de
+alquiler, consulta [SERPAVI por municipio](/renta/).
 
 ## Stock provincial: total y uso principal
 

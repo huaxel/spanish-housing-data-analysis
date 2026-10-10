@@ -14,3 +14,9 @@ def test_page_housing_references_have_source_exports():
         referenced.update(re.findall(pattern, page.read_text()))
     exported = {(source.parent.name, source.stem) for source in (ROOT / "sources").glob("*/*.sql")}
     assert referenced - exported == set(), f"Missing source exports: {referenced - exported}"
+
+
+def test_serpavi_district_source_exports_only_the_page_measure():
+    sql = (ROOT / "sources/housing/serpavi_distritos.sql").read_text().lower()
+    assert "where medida = 'alqm2_lv_m_vc'" in sql
+    assert "select *" not in sql

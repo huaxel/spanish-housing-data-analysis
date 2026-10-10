@@ -158,8 +158,13 @@ La precisión de área usa el sistema métrico original; no mide área en grados
 
 ## Distribución espacial del stock declarado
 
-<AreaMap data={stock_barrios} geoJsonUrl='/geo/sevilla_barrios.geojson'
-  geoId='IDG' areaCol=idg value=vivienda_por_km2 valueFmt=num0
+```sql stock_mapa
+select idg, vivienda_por_km2 as "Inmuebles / km²"
+from ${stock_barrios}
+```
+
+<AreaMap data={stock_mapa} geoJsonUrl='/geo/sevilla_barrios.geojson'
+  geoId='IDG' areaCol=idg value={'Inmuebles / km²'} valueFmt=num0
   basemap={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"}
   attribution={'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>; DGC + SIM/EMVISESA'}
   title="Inmuebles destinados a vivienda asignados por km² de geometría SIM válida"

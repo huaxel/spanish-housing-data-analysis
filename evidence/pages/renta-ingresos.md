@@ -80,7 +80,7 @@ order by ratio_pct desc
 limit 15
 ```
 
-<BarChart data={top_proxy} x=municipio y=ratio_pct
+<BarChart data={top_proxy} x=municipio y=ratio_pct swapXY
   yFmt="num1" title="Ratio alquiler/renta 2023 (≥50 contratos)"/>
 
 <DataTable data={top_proxy} rows=15>
@@ -178,7 +178,8 @@ media local, y solo Benahavís pasa del 25%.
 ## El mapa del ratio de firma
 
 ```sql mapa_proxy
-select codigo, municipio, ratio_pct
+select codigo, municipio, ratio_pct,
+       ratio_pct as "Alquiler / renta (%)"
 from access.rent_income
 where anyo = 2023 and contratos >= 50 and ratio_pct is not null
 ```
@@ -188,7 +189,7 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
   geoJsonUrl='/geo/municipios.geojson'
   geoId='CODIGOINE'
   areaCol=codigo
-  value=ratio_pct
+  value={'Alquiler / renta (%)'}
   valueFmt=num1
   basemap={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
   attribution='© OpenStreetMap'

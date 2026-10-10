@@ -19,23 +19,22 @@ spine, then the split. For access rather than stock alone, see the
 
 †2024 income year (ECV lag). Source: `mart_ccaa_anual`, ccaa = Nacional.
 
-Three regimes, three different price drivers:
+Three regimes, three different patterns of price and housing-market change:
 
 1. **Boom–bust (2007–13): a credit stop on top of growing stock.**
    Prices −36% while stock *grew* everywhere and per-capita stock *rose*
-   (532→544). Mortgage counts fell 84%. **Correction 2026-10-06
-   (independent review):** this co-movement is descriptively incompatible
-   with a *simple national stock-collapse* story, but it does not
+   (532→544). Mortgage counts fell 84%. This co-movement is descriptively
+   incompatible with a *simple national stock-collapse* story, but does not
    establish credit's relative contribution over supply, nor that units
-   were needed where built — the 2011 vintage evidence (768k vacant
-   units built 2002–11, concentrated in boom areas) is consistent with
-genuine local overhang. Credit and geographic overhang remain competing
-explanations; the "backwards / mostly still-needed" rhetoric is
-withdrawn.
+   were needed where built. The 2011 vintage evidence (768k vacant units
+   built 2002–11, concentrated in boom areas) is consistent with genuine
+   local overhang. Credit and geographic overhang remain competing
+   explanations.
 2. **Stagnation–recovery (2013–19): demography diverges.** Prices recover
    while the 20–34 cohort collapses 9.0M→7.6M and population stagnates.
-   Per-capita stock peaks (564) — the only moment "too many homes" is
-   arithmetically true, and only in emptying regions.
+   Per-capita stock peaks (564), while population stagnates. That peak
+   describes the national ratio; it does not establish that homes were
+   usable, available, or located where demand was growing.
 3. **Tightening (2021–25): households outrun everything.** Stock still grows
    (+380k net modeled additions), but households grow faster (+982k net
    ECP additions): 0.23–0.90 net dwellings per net new household in
@@ -53,16 +52,11 @@ evidence can show.
 The long arc in dwellings per household: 1.48 (2001, proxy —
 viviendas_total/viviendas_principales, not measured households) → 1.40
 (2011) → 1.41 (2014) → 1.42 (2020) → 1.44 (2021) → 1.39 (2025).
-**Correction 2026-10-06 (independent review):** the first version had
-the 2000s–2010s direction backwards. The ratio *fell* 1.48→1.40 in the
-2000s (fewer dwellings per household — household formation outran even
-boom construction), then *rose* 1.40→1.44 across 2011–2021 (the bust
-and its aftermath left more stock per household, not less), before the
-post-2021 household surge pushed it to 1.39 — past 2011 tightness. The
-2001 point is a proxy with its own tolerance (worst 2011 disagreement
-2.11%); the 2021 ECH→ECP seam makes the 2020→2021 step non-comparable.
-Read the measured 2011→2025 movement (1.40→1.44→1.39) as the
-comparable arc, not the proxy-anchored endpoints.
+The ratio fell from 1.48 to 1.40 in the 2000s, rose to 1.44 by 2021,
+then fell to 1.39 by 2025. The 2001 point is a proxy with its own
+tolerance (worst 2011 disagreement 2.11%); the 2021 ECH→ECP seam makes
+the 2020→2021 step non-comparable. Read the measured 2011→2025 movement
+(1.40→1.44→1.39) as the comparable arc, not the proxy-anchored endpoints.
 
 ## Causal extension: withdrawn after independent read (design A is a negative result)
 
@@ -80,10 +74,6 @@ a documented negative result, not a softer claim: numbers stay pinned in
 and nothing causal sits in this synthesis until a new design passes its own
 read. Design B (Saiz terrain) is likewise null at both grains; the causal
 program is on hold, not abandoned — see the identification memo.
-**Correction 2026-10-07 (repo review):** this paragraph quoted
-pre-repair numbers (+0.34/+0.48/+1.04, cumulative instrument); corrected
-to the repaired flow-instrument estimates. The withdrawal rationale is
-unchanged — both reads' verdicts stand.
 
 ## The split (why national ratios mislead)
 
@@ -127,14 +117,11 @@ unchanged — both reads' verdicts stand.
   2021 thanks to the Censo Anual extension): negative everywhere, wild-
   robust nowhere (S0 −0.024, wild-p 0.19; S1 −0.012, wild-p 0.97)
   — consistent with the CCAA panel: the naive t overstates precision.
-  **Correction 2026-10-07 (repo review):** this paragraph quoted pre-
-  two-way-transform numbers (S0 wild-p 0.42; S1 −0.21, wild-p 0.55);
-  corrected to the repaired estimates the explorer doc and audit carry.
-  Verdict unchanged.
 - The two-group ratio split: national viv/1000 flatness hides scarcity CCAA
   (Madrid −29.7, Cataluña −27.6) vs overstock (+100…+130 interior), and
-  the **electricity-based vacancy** (2021 census, 59531) confirms the
-  overstock is objectively empty: Galicia 28.8% vacant vs Madrid 6.3%.
+  the **electricity-based vacancy** measure (2021 census, 59531) shows
+  a high vacancy share in Galicia (28.8%) versus Madrid (6.3%); it does
+  not establish that vacant homes are habitable or available.
 - Rents (SERPAVI, municipal 2011–2024): DIBA cross-validated (Pearson
   0.825, Spearman 0.87); gross yield 3.6% in Barcelona vs 4.6% corona
   median; tourist intensity does not predict rents within municipios
@@ -183,9 +170,10 @@ these snapshots ([source hunt](occupancy_availability.md)). [Stock methods](cada
 [income definitions](sevilla_income.md) document exclusions, source semantics
 and the reproducible report; the central models remain separate.
 
-## Reproduce everything
+## Reproduce the analysis
 
-`make gates` rebuilds marts from pinned inputs; `explorations/*.py`
-regenerate every number above into `artifacts/`; each claim links to a
-script, a mart column, and a methods section. That chain — not any single
-chart — is the deliverable.
+`make gates` rebuilds marts from pinned inputs and runs the project checks.
+The scripts in `explorations/*.py` regenerate the reported exploration
+outputs in `artifacts/`; run the relevant script to refresh those outputs.
+Claims are traceable to scripts, mart columns, and methods sections. That
+chain — not any single chart — is the deliverable.

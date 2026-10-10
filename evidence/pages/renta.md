@@ -59,7 +59,7 @@ order by rent_eur_m2 desc
 limit 10
 ```
 
-<BarChart data={top_renta} x=municipio y=rent_eur_m2
+<BarChart data={top_renta} x=municipio y=rent_eur_m2 swapXY
   yFmt="num1" title="Municipios más caros (2024)"/>
 
 Nota: renta mediana de contratos nuevos/renovados declarados a efectos

@@ -4,8 +4,15 @@ title: Municipios
 
 # Municipios: toda España
 
-El grano municipal muestra lo que la media autonómica esconde.
-[Panorama nacional](/) · [Comparar territorios](/comparar/).
+El grano municipal muestra diferencias que las medias regionales esconden,
+pero las fuentes no son iguales entre ciudades: Madrid usa valor tasado;
+Barcelona combina registros de venta, alquiler y esfuerzo; Valencia y Sevilla
+secciones se centran en alquiler y población. **Lee cada ciudad dentro de su
+propia serie; no compares niveles entre fuentes como si fueran una medida
+común.**
+
+[Panorama nacional](/) · [Comunidades autónomas](/ccaa/) ·
+[Comparar territorios](/comparar/) · [Acceso y cargas de hogares](/acceso/).
 
 ## Madrid: la capital se despega del sur
 
@@ -68,7 +75,7 @@ Crecer no es revalorizarse: Rivas (+74% población) y Parla (+39%) absorben
 gente sin recuperar precios; la capital (+12%) es la que más se aprecia.
 Ver [Madrid capital vs corona](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/madrid_municipios.md).
 
-### Madrid por barrios: el registro confirma la brecha
+### Madrid por barrios: brechas en precios registrales
 
 Precio medio declarado registral (€/m², Banco de datos del Ayuntamiento,
 2007–2025, Total/Nuevas/Usadas). Elige primero el distrito. Los barrios
@@ -279,7 +286,7 @@ group by s.nom
 order by rendimiento desc
 ```
 
-<BarChart data={rendimiento_bcn} x=barrio y=rendimiento
+<BarChart data={rendimiento_bcn} x=barrio y=rendimiento swapXY
   yFmt="num1" title="Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado"/>
 
 Rentas de contratos nuevos sobre precios de escritura: la periferia rinde

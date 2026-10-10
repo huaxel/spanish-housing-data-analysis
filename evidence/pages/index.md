@@ -4,24 +4,22 @@ title: Nacional
 
 # Precios, stock y población (2007–2025)
 
-Evolución del precio de la vivienda (IPV, índice base 2025) frente a las
-viviendas por cada 1.000 habitantes. Ámbito nacional; detalle regional en
-[comunidades autónomas](/ccaa/). También puedes [comparar dos territorios](/comparar/),
-y bajar al [grano municipal](/municipios/) en Madrid y Barcelona, ver la
-[renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024), el
-[esfuerzo de firma alquiler/ingresos por municipio](/renta-ingresos/)
-(SERPAVI + ADRH, 2015–2023), o la
-[vivienda vacía por consumo eléctrico](/vacancia/) (Censo 2021).
-El capítulo de [acceso a la vivienda](/acceso/) distingue stock, disponibilidad
-y esfuerzo, con años y límites explícitos; los [escenarios de compra](/compra/)
-separan efectivo inicial, cuota y sensibilidad a tipos. La
-[incertidumbre de los modelos](/incertidumbre/) distingue tamaño, rangos
-aproximados y pruebas de coeficiente cero. El [stock físico](/stock/) añade
-huellas catastrales, fechas constructivas y superficies en Sevilla, con
-cobertura espacial y unidades explícitas. Su lectura rápida separa las
-asociaciones stock–alquiler de lo que no se observa: disponibilidad efectiva
-y un efecto causal de oferta. El [perfil municipal de Sevilla con referencia 2021](/stock-2021/)
-reúne stock y hogares censales con alquiler anual, sin mezclarlos con el BU actual.
+Este recorrido empieza por las tendencias nacionales, baja a las diferencias
+territoriales y termina con lo que los indicadores de stock sí —y no— dicen
+sobre acceso. Las series describen co-movimientos; por sí solas no identifican
+causas ni miden viviendas disponibles para cada hogar.
+
+**Sigue la historia:** [1. Nacional](#el-precio-cae-el-stock-por-habitante-no) →
+[2. Comunidades autónomas](/ccaa/) y [comparación](/comparar/) →
+[3. Municipios](/municipios/) → [4. Acceso: stock no es disponibilidad](/acceso/).
+
+**Explora una pregunta concreta:** [alquiler municipal](/renta/) ·
+[alquiler frente a ingresos](/renta-ingresos/) ·
+[vivienda vacía, Censo 2021](/vacancia/) ·
+[escenario hipotético de compra](/compra/) ·
+[incertidumbre de los modelos](/incertidumbre/) ·
+[stock físico en Andalucía](/stock/) ·
+[Sevilla con referencia censal 2021](/stock-2021/).
 
 ```sql nacional
 select anyo, viviendas_total, poblacion, pop_source, viv_por_1000_hab,
@@ -42,13 +40,22 @@ where ccaa = 'Nacional'
 Máximos de la serie: IPV <Value data={maximos} column=ipv_general fmt="num1"/>;
 viviendas por 1.000 habitantes <Value data={maximos} column=viv_por_1000_hab fmt="num1"/>.
 
+| Tramo | Qué muestran las series | Qué no permiten concluir |
+| --- | --- | --- |
+| 2007–2013 · caída | El IPV baja mientras el stock por habitante sube. | La trayectoria nacional no identifica el peso relativo de crédito, oferta ni desajuste local. |
+| 2013–2021 · recuperación | Los precios remontan; el indicador de viviendas por hogar pasa de 1.41 (2014) a 1.42 (2020). | El dato de 2021 cambia a ECP; la serie no es homogénea en esa transición y el cociente no mide disponibilidad. |
+| 2021–2025 · tensión | Los hogares crecen más que el stock modelado neto y el stock por hogar baja. | Adiciones netas no miden construcción bruta, formación bruta ni oferta utilizable. |
+
+Los tramos resumen cambios descriptivos, no una descomposición de causas. El
+cambio de fuente de hogares en 2021 limita la lectura del quiebre 2020–2021.
+
 ## El precio cae, el stock por habitante no
 
 Entre 2007 y 2013 el IPV nacional cayó ~36% mientras las viviendas por cada
-1.000 habitantes siguieron subiendo: el stock sobrevivió a la demanda y se
-siguió terminando. A partir de 2014 los precios se recuperan con el stock
-per cápita estancado. Co-movimientos descriptivos, no causalidad —
-ver [métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md) (en el repo).
+1.000 habitantes siguieron subiendo. A partir de 2014 los precios se
+recuperaron con el stock per cápita relativamente estable. Son trayectorias
+agregadas: no indican si el stock estaba disponible, ni permiten separar el
+papel del crédito, la oferta o la localización. Ver [métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).
 
 <LineChart
   data={nacional}
@@ -88,6 +95,9 @@ order by anyo
   yFmt="num1"
   title="Viviendas por 1.000 habitantes"
 />
+
+El tramo anterior a 2021 combina anclas censales y ECH; desde 2021 se usa
+ECP. La transición 2020–2021 no debe leerse como un cambio anual homogéneo.
 
 <LineChart
   data={nacional}
@@ -149,6 +159,11 @@ y en Madrid ni siquiera existe recuperación (capital −7,5% real).
 
 ## Población joven
 
+La cohorte de 20–34 años se contrajo durante la recuperación posterior a
+2013, incluso mientras los precios remontaban. Es contexto demográfico, no
+un recuento de hogares que buscan vivienda: edad, emancipación y formación
+de hogares no son equivalentes.
+
 <LineChart
   data={nacional}
   x=anyo
@@ -160,6 +175,11 @@ y en Madrid ni siquiera existe recuperación (capital −7,5% real).
 />
 
 ## Crédito hipotecario
+
+El número de hipotecas cayó con fuerza durante el bust y después se recuperó;
+ese paralelismo temporal es compatible con un cambio del ciclo crediticio,
+pero estos conteos no miden condiciones de préstamo ni aíslan el efecto del
+crédito sobre los precios.
 
 <LineChart
   data={nacional}
@@ -217,7 +237,7 @@ order by por_100k desc
 limit 12
 ```
 
-<BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k
+<BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k swapXY
   yFmt="num0" title="Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)"/>
 
 ## Datos y cobertura
