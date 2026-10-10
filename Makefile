@@ -71,6 +71,7 @@ geo:
 
 build:
 	uv run python scripts/build_marts.py
+	uv run python scripts/build_rent_income.py
 
 verify:
 	uv run python scripts/verify_data.py
@@ -83,6 +84,7 @@ verify:
 	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/fetch_mivau_terminadas.py --check
 	uv run python scripts/fetch_adrh.py --check
+	uv run python scripts/build_rent_income.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py --check
 	uv run python scripts/export_inference.py --check

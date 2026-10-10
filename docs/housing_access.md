@@ -88,9 +88,14 @@ median contract rent to mean household income would be mechanically feasible
 but carries hard incompatibilities: SERPAVI medians describe new and rolling
 tax-deposit contracts, not the sitting-tenant stock, and are suppressed in
 small municipalities; ADRH means cover all households, not renters; and the
-numerator excludes utilities and other housing costs. No integration until
-the proxy semantics are explicitly accepted; never label it an overburden
-rate. No local burden integration is otherwise justified without an
+numerator excludes utilities and other housing costs. **Proxy semantics
+accepted 2026-10-09** (explicit user decision): the ratio is now built as a
+labeled signing-market proxy — median SERPAVI contract rent over mean ADRH
+net household income, 2015–2023, municipio grain — surfaced as the
+`access.rent_income` sidecar table (built by `scripts/build_rent_income.py`,
+checked by `make verify`) and the site page `/renta-ingresos/`. It is never
+labeled an overburden rate, never presented as renter income, and never
+joined into the marts. No local burden integration is otherwise justified without an
 independently validated compatible source and household denominator; do not
 infer local rates from national or regional marginals. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
 [ADRH](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177088&idp=1254735976608&menu=resultados),

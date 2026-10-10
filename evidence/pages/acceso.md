@@ -7,7 +7,7 @@ title: Acceso a la vivienda
 ¿Dónde se estrecha el acceso, qué hogares soportan el coste y qué parte del
 stock puede utilizarse? Madrid, Barcelona y la costa valenciana muestran
 por qué estas preguntas no se resuelven contando viviendas.
-[Panorama nacional](/) · [Municipios](/municipios/) · [Alquiler](/renta/) · [Vacancia](/vacancia/) · [Escenarios de compra](/compra/) · [Incertidumbre](/incertidumbre/).
+[Panorama nacional](/) · [Municipios](/municipios/) · [Alquiler (€/m²)](/renta/) · [Alquiler/ingresos](/renta-ingresos/) · [Vacancia](/vacancia/) · [Escenarios de compra](/compra/) · [Incertidumbre](/incertidumbre/).
 
 Esta página combina **indicadores descriptivos**, no estima causas ni el
 número de viviendas que habría que construir o movilizar. Provincias,

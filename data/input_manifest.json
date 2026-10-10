@@ -1,7 +1,7 @@
 {
   "sha256": {
-    "data/processed/ecv_joint_burden.duckdb": "ee82536fea1ef66906e2ef414bacdcc3f30ced2abef3b85dae69a577f7d87871",
-    "data/processed/housing_access.duckdb": "7848bea910daecf7b1ddff5f1ef78a9da07bfc2ee11b342041d62d36edae8ad4",
+    "data/processed/ecv_joint_burden.duckdb": "0c3a57548c2f1f8aea4ae006377c9e3d33ab3de9339e4f673227e279b798462c",
+    "data/processed/housing_access.duckdb": "3bce046901b0ed4486f91251a736b5cd8d9a5fe349100cea448ea6c2083a3596",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
     "data/processed/stock_capitals.duckdb": "359da3e660c12b804f4bc65e9d292d5c2e8f72ff6e92cfd10012942a160d3840",
     "data/processed/stock_province.duckdb": "242b8afede651dd5ea42e95841bd97cdbe8a6b476380ce5ad87bcec0e341d6f4",
@@ -537,14 +537,14 @@
   "snapshot_date": "2026-10-10",
   "sources": {
     "data/processed/ecv_joint_burden.duckdb": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-10-10",
       "note": "Own poverty-age-tenure; project suppression; no design intervals",
       "publisher": "Own descriptive estimates from INE ECV 2025"
     },
     "data/processed/housing_access.duckdb": {
-      "accessed": "2026-10-09",
-      "note": "Derived from pinned ecv_access_79621..79645.csv by fetch_ecv_access.py",
-      "publisher": "INE, ECV 2025 housing-access module"
+      "accessed": "2026-10-10",
+      "note": "Derived from marts.duckdb serpavi_municipal and pinned adrh_renta_municipal.parquet by build_rent_income.py (table rent_income); other tables in this sidecar unchanged",
+      "publisher": "SERPAVI (MIVAU) + ADRH (INE) proxy"
     },
     "data/processed/stock.duckdb": {
       "accessed": "2026-10-08",
@@ -2806,7 +2806,7 @@
       "publisher": "INE, ECV 2025 housing-access module"
     },
     "data/raw/parquet/ecv_joint_burden.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-10-10",
       "note": "Own poverty-age-tenure; project suppression; no design intervals",
       "publisher": "Own descriptive estimates from INE ECV 2025"
     },

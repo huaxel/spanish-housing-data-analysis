@@ -8,7 +8,9 @@ Evolución del precio de la vivienda (IPV, índice base 2025) frente a las
 viviendas por cada 1.000 habitantes. Ámbito nacional; detalle regional en
 [comunidades autónomas](/ccaa/). También puedes [comparar dos territorios](/comparar/),
 y bajar al [grano municipal](/municipios/) en Madrid y Barcelona, ver la
-[renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024), o la
+[renta de alquiler por municipio](/renta/) (SERPAVI, 2011–2024), el
+[esfuerzo de firma alquiler/ingresos por municipio](/renta-ingresos/)
+(SERPAVI + ADRH, 2015–2023), o la
 [vivienda vacía por consumo eléctrico](/vacancia/) (Censo 2021).
 El capítulo de [acceso a la vivienda](/acceso/) distingue stock, disponibilidad
 y esfuerzo, con años y límites explícitos; los [escenarios de compra](/compra/)

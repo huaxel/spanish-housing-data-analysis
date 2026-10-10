@@ -9,7 +9,7 @@ SERPAVI (MIVAU, explotación fiscal de fianzas de alquiler). Cubre 2,555
 municipios en 2024 (los que tienen suficientes contratos; municipios
 pequeños suprimidos). Validación: correlación 0.825 con la serie DIBA de
 Barcelona (fuentes independientes).
-[Panorama nacional](/) · [Comparar territorios](/comparar/) · [Municipios](/municipios/).
+[Panorama nacional](/) · [Comparar territorios](/comparar/) · [Municipios](/municipios/) · [Alquiler/ingresos](/renta-ingresos/).
 
 ## Selecciona municipios
 

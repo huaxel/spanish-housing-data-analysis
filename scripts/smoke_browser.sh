@@ -99,6 +99,7 @@ check_page "/ccaa/"      7 "Comunidades autónomas" "Madrid, Comunidad de" || fa
 check_page "/comparar/"  7 "Resumen del periodo" "comunitat valenciana" || fail=1
 check_page "/municipios/" 5 "la capital se despega" "Santa Coloma de Gramenet" || fail=1
 check_page "/renta/"      2 "Renta municipal" "SERPAVI" || fail=1
+check_page "/renta-ingresos/" 2 "Cuánta renta municipal se va en firmar un contrato" "tasa de sobrecarga" "SERPAVI" || fail=1
 check_page "/vacancia/"   1 "Vivienda vacía" "consumo eléctrico" || fail=1
 check_page "/acceso/" 0 "Stock no es acceso" "Por quintil de ingresos" "Hacinamiento por quintil de ingresos" "Módulo ECV 2025" || fail=1
 check_page "/compra/" 1 "efectivo inicial y cuota" "Supuestos editables" || fail=1
