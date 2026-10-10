@@ -122,6 +122,7 @@ select a.metrica,
        a.valor_hasta - b.valor_hasta as diferencia_a_menos_b,
        a.orden_metrica
 from a join b using (metrica)
+where a.metrica <> 'IPV general (índice, 2025 = 100)'
 order by a.orden_metrica
 ```
 
@@ -131,6 +132,9 @@ Cada indicador se calcula solo con **los años extremos seleccionados**: un
 guion significa que el dato no existe en ese año concreto, aunque la serie sí
 tenga valores intermedios. El cambio en puntos no es un porcentaje salvo en la
 cuota joven; el IPV también tiene base 2025 = 100 en cada territorio.
+Los cambios que cruzan 2021 mezclan fuentes: los hogares pasan de ECH a
+ECP y la población de Padrón a ECP. Esos tramos describen niveles
+publicados, no variaciones homogéneas.
 
 <DataTable data={resumen_periodo} rows=20>
   <Column id=territorio title="Territorio"/>
@@ -142,6 +146,11 @@ cuota joven; el IPV también tiene base 2025 = 100 en cada territorio.
 </DataTable>
 
 ### Diferencia directa al año final (A − B)
+
+El IPV no entra en esta resta: cada territorio tiene su propia base
+2025 = 100, así que una diferencia de puntos de índice entre territorios
+no es una brecha de precios. Las hipotecas son recuentos absolutos: su
+diferencia refleja también el tamaño de cada territorio.
 
 <DataTable data={diferencia_territorios} rows=20>
   <Column id=metrica title="Indicador"/>

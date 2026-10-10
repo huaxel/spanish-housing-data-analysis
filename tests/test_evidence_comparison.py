@@ -115,14 +115,16 @@ def test_summary_uses_only_selected_endpoints(database):
 
 def test_direct_difference_matches_endpoint_values(database):
     rows = database.execute(render_query("diferencia_territorios")).fetchall()
-    assert len(rows) == 7
+    assert len(rows) == 6
     assert rows[0][:4] == (
-        "IPV general (índice, 2025 = 100)",
-        100.0,
-        100.0,
+        "Viviendas / 1.000 hab.",
+        550.0,
+        550.0,
         0.0,
     )
     assert " − " not in rows[0][0]
+    # The IPV is rebased per territory, so an index-point gap is not a price gap.
+    assert all("IPV" not in row[0] for row in rows)
 
 
 def test_selector_values_come_from_mart(database):
