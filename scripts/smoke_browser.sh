@@ -108,6 +108,7 @@ check_page "/stock/" 8 "Qué vivienda existe y dónde" "distribución ponderada"
 check_page "/reportaje/" 8 "Más viviendas; más hogares todavía" "variaciones netas" "vivienda equivalente" "un dato ausente no es cero" || fail=1
 check_page "/perfil/" 3 "Tu municipio: qué sabemos y qué falta" "Un dato ausente no es cero" "no es una tasa de sobrecarga" || fail=1
 check_page "/deficit/" 2 "Depende de qué restes" "Una celda ausente no es cero" "cota superior del saldo" || fail=1
+check_page "/comparar-municipios/" 1 "Dos municipios, los mismos años" "un dato ausente no es cero" "una instantánea separada" || fail=1
 check_map "/reportaje/" || fail=1
 check_map "/vacancia/" || fail=1
 check_map "/renta-ingresos/" 1500 || fail=1

@@ -126,6 +126,8 @@ where a.metrica <> 'IPV general (índice, 2025 = 100)'
 order by a.orden_metrica
 ```
 
+**[Compara dos municipios en los mismos años](/comparar-municipios/)**: una medida cada vez, con los años excluidos a la vista y sin mezclar fuentes.
+
 ## Resumen del periodo
 
 Cada indicador se calcula solo con **los años extremos seleccionados**: un

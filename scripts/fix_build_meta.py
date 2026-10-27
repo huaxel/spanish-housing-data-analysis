@@ -28,6 +28,10 @@ DESCRIPTIONS = {
         "Compara dos territorios españoles en precios, stock, esfuerzo de renta, "
         "población joven e hipotecas para el periodo que elijas."
     ),
+    "comparar-municipios/index.html": (
+        "Compara dos municipios con la misma medida y años publicados para ambos. "
+        "Alquiler, ingresos y proxy por separado, con huecos y contexto censal explícitos."
+    ),
     "deficit/index.html": (
         "Qué significa déficit de vivienda: hogares, parque neto y viviendas terminadas. "
         "Compara ventanas y provincias, con fechas y cobertura explícitas; no casas necesarias."

@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis inference deficit profile-income stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis inference deficit profile-income chart-provenance stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-provenance evidence-smoke-municipal-comparison evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -7,6 +7,7 @@ test:
 	uv run python -m pytest -v
 
 lint:
+	uv run python scripts/export_chart_provenance.py --check
 	uv run python -m ruff check --no-cache
 	uv run python -m ruff format --check --no-cache
 
@@ -178,6 +179,9 @@ stock-rent:
 	uv run python explorations/cadastre_granada_distritos.py
 	uv run python explorations/deficit_vivienda.py
 
+chart-provenance:
+	uv run python scripts/export_chart_provenance.py
+
 profile-income:
 	uv run python scripts/export_profile_income.py
 
@@ -205,6 +209,7 @@ evidence-dev:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Local dev server running? Stop it first: systemctl --user stop housing-evidence (or make evidence-dev ALLOW=1)."; exit 1; fi
 	uv run python scripts/export_deficit.py
 	uv run python scripts/export_profile_income.py
+	uv run python scripts/export_chart_provenance.py
 	cd evidence && npm run dev
 
 # fix_build_meta repairs <html lang> (Evidence template hardcodes en) and
@@ -220,6 +225,7 @@ evidence-build:
 	uv run python scripts/analyze_stock_rent.py
 	uv run python scripts/export_deficit.py
 	uv run python scripts/export_profile_income.py
+	uv run python scripts/export_chart_provenance.py
 	cd evidence && npm run build
 	uv run python scripts/fix_build_meta.py
 
@@ -257,6 +263,12 @@ evidence-smoke:
 
 evidence-smoke-browser:
 	bash scripts/smoke_browser.sh
+
+evidence-smoke-municipal-comparison:
+	bash scripts/smoke_municipal_comparison.sh
+
+evidence-smoke-provenance:
+	bash scripts/smoke_provenance.sh
 
 evidence-smoke-deficit:
 	bash scripts/smoke_deficit.sh

@@ -27,9 +27,21 @@ order by anyo
   xFmt="0" xAxisTitle="Año" yFmt="num0" markers=true handleMissing="gap"
   title="Precio de la vivienda: IPV nacional (2025 = 100)" />
 
+<EvidencePanel data={ciclo_nacional} chart="reportaje-precios"
+  columns={["anyo", "ipv_general"]}
+  files={["data/raw/ipv_ccaa_anual.json"]}
+  definition="IPV nacional: índice de precios de compraventa con ajuste de calidad, no euros por metro cuadrado."
+  coverage="Medias anuales del periodo mostrado. El cambio de índice no identifica el efecto de crédito o construcción." />
+
 <LineChart data={ciclo_nacional} x=anyo y=viv_por_1000_hab
   xFmt="0" xAxisTitle="Año" yFmt="num0" markers=true handleMissing="gap"
   title="Viviendas por cada 1.000 habitantes" />
+
+<EvidencePanel data={ciclo_nacional} chart="reportaje-stock-habitante"
+  columns={["anyo", "viv_por_1000_hab"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/padron_provincia.json", "data/raw/ecp_pob_ccaa.json"]}
+  definition="Parque modelado dividido por población, por mil habitantes; no oferta de viviendas."
+  coverage="Serie nacional por etiquetas anuales. Parque a fin de diciembre y población a principio de enero; no es un cociente de observaciones simultáneas. Se conservan los cambios de fuente poblacional." />
 
 El crédito también se desplomó: las hipotecas constituidas sobre viviendas pasaron de 1,238,890 en 2007 a 199,703 en 2013. Ese movimiento coincide con el cambio de precios, pero el recuento no mide las condiciones del préstamo ni demuestra cuánto causó el crédito. La fotografía censal de 2011 registró 768k viviendas construidas entre 2002 y 2011 que estaban vacías entonces. El excedente localizado puede coexistir con falta de vivienda en otros lugares. Fuentes: IPV, INE; parque modelado, MIVAU; hipotecas constituidas, INE; vacancia por antigüedad, Censo de Viviendas 2011.
 
@@ -59,6 +71,12 @@ order by anyo, ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="La vivienda por habitante diverge entre comunidades" />
 
+<EvidencePanel data={stock_geo} chart="reportaje-stock-territorios"
+  columns={["anyo", "ccaa", "viv_por_1000_hab"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/padron_provincia.json", "data/raw/padron_ccaa.json", "data/raw/ecp_pob_ccaa.json"]}
+  definition="La misma razón de parque por población, separada por comunidad y referencia nacional."
+  coverage="Territorios y años del gráfico, no municipios. Las fechas de parque y población difieren dentro de cada etiqueta anual; no se infiere disponibilidad." />
+
 ```sql vac_municipios
 select codigo, municipio, vac_pct, vac_pct as "Vacía (%)"
 from housing.vacancy_municipal
@@ -80,6 +98,12 @@ order by vac_pct desc
   startingLong=-3.7
   startingZoom=6
 />
+
+<EvidencePanel data={vac_municipios} chart="reportaje-vacancia"
+  columns={["codigo", "municipio", "vac_pct"]}
+  files={["data/raw/censo2021_intensidad.csv"]}
+  definition="Porcentaje de viviendas clasificadas como vacías por consumo eléctrico en el Censo."
+  coverage="Una instantánea censal. La consulta incluye agregados Resto que no se cartografían: el CSV conserva esas filas de contexto y no las reparte entre municipios. Consumo bajo no prueba habitabilidad ni disponibilidad." />
 
 El mapa lleva el contraste al territorio municipal, pero retrata una sola medición de 2021: el indicador identifica baja ocupación según consumo eléctrico, no viviendas habitables, disponibles o asequibles. Los registros agregados como «Resto de la provincia» no corresponden a un municipio cartografiable y no aparecen en el mapa. Galicia registra 28,8% y Madrid 6,3%; la diferencia es una invitación a investigar, no un inventario de oferta movilizable. Fuente: INE, Censo 2021; [definición y comparación autonómica](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/ratio_ccaa.md). Los precios del IPV solo están disponibles aquí a nivel autonómico, no provincial. [Explora el mapa y sus datos completos](/vacancia/).
 
@@ -144,6 +168,12 @@ order by anyo, serie
   xFmt="0" xAxisTitle="Año de actividad" yFmt="num0"
   title="Cambios por año de actividad: hogares y parque neto" />
 
+<EvidencePanel data={aportes_anuales} chart="reportaje-cambios-anuales"
+  columns={["anyo", "serie", "unidades"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_ccaa.json"]}
+  definition="Cambios netos por año de actividad: parque entre diciembres y hogares entre los eneros que delimitan ese año."
+  coverage="Solo hogares ECP. Cada extremo ausente mantiene el cambio nulo; no se cruza el empalme con ECH ni se confunden cambios netos y formaciones brutas." />
+
 Cada barra de parque compara cierres de diciembre; cada barra de hogares,
 inicios de enero que delimitan el año indicado. No son viviendas terminadas
 frente a hogares que buscan casa. Si falta un extremo anual, el cambio queda
@@ -177,6 +207,12 @@ order by viv_por_hogar_neto
 <BarChart data={cobertura_ccaa} x=ccaa y=viv_por_hogar_neto swapXY
   yFmt="num2" title="Parque neto por aumento neto de hogares · actividad 2021–2024" />
 
+<EvidencePanel data={cobertura_ccaa} chart="reportaje-parque-por-hogar"
+  columns={["ccaa", "parque_neto", "hogares_netos", "viv_por_hogar_neto"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_ccaa.json"]}
+  definition="Cambio neto de parque dividido por cambio neto de hogares, usando límites de año correspondientes."
+  coverage="Solo extremos completos y positivos, con crecimiento de hogares positivo. El CSV incluye los cambios que forman el cociente; no representa hogares sin casa." />
+
 Solo se muestran comunidades con ambos extremos completos y positivos y crecimiento neto de hogares positivo; no se interpolan datos ausentes. Con estos límites de año, en cada comunidad el cociente queda por debajo de una vivienda neta por hogar neto. No es una cuota de hogares sin casa: combina dos cambios agregados, y el parque incluye unidades no principales. El [comparador territorial](/comparar/) permite revisar y descargar las series; la cifra no identifica el efecto de construir más.
 
 ```sql cierre
@@ -192,6 +228,12 @@ order by h.anyo
 <LineChart data={cierre} x=anyo y=viv_por_hogar
   xFmt="0" xAxisTitle="Año de los hogares (1 de enero)" yFmt="num2" markers=true handleMissing="gap"
   title="Parque al cierre del año anterior / hogares ECP al inicio del año" />
+
+<EvidencePanel data={cierre} chart="reportaje-parque-hogares"
+  columns={["anyo", "anyo_parque", "viviendas_total", "hogares", "viv_por_hogar"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_ccaa.json"]}
+  definition="Parque al cierre del año anterior dividido por hogares ECP al inicio del año indicado."
+  coverage="El CSV conserva ambos años y ambos niveles. Todo el parque incluye vivienda no principal; la razón no mide vivienda utilizable por hogar." />
 
 La caída de viviendas por hogar después de 2021 refuerza la pregunta sobre disponibilidad, pero el cociente cuenta todo el parque. No dice qué unidades son habitables, dónde se encuentran ni si son asequibles. El gráfico empieza con hogares ECP de enero de 2021 y parque de diciembre de 2020: cada punto usa límites de año correspondientes, no el cociente de dos etiquetas anuales iguales. No se unen fuentes distintas de hogares. En las [series históricas](/), el valor de 2001 es un proxy y 2020–2021 no es un salto anual homogéneo.
 
@@ -220,6 +262,12 @@ select 'A disposición del titular', 100.0 * disposicion / total from base
 <BarChart data={aeat_usos} x=uso y=porcentaje swapXY
   yFmt="num1" title="Uso declarado de viviendas de personas físicas, 2024 (%)" />
 
+<EvidencePanel data={aeat_usos} chart="reportaje-uso-fiscal"
+  columns={["uso", "porcentaje"]}
+  files={["data/raw/aeat_viviendas_uso_2024.html"]}
+  definition="Porcentajes del uso declarado de viviendas equivalentes por personas físicas en IRPF."
+  coverage="Se suman provincias y comunidades uniprovinciales sin duplicar. Fuera del ámbito foral y sin Ceuta/Melilla; ponderación por titularidad y días. A disposición no equivale a disponible." />
+
 <DataTable data={aeat_usos} rows=3>
   <Column id=uso title="Uso declarado" />
   <Column id=porcentaje title="Porcentaje del total" fmt="num2" />
@@ -244,6 +292,12 @@ order by group_code
 
 <BarChart data={carga_por_renta} x=group_label y=rate_pct swapXY
   yFmt="num1" title="Personas en hogares con sobrecarga de vivienda, por grupo de ingresos (%)" />
+
+<EvidencePanel data={carga_por_renta} chart="reportaje-sobrecarga"
+  columns={["group_code", "group_label", "survey_year", "rate_pct", "status"]}
+  files={["data/raw/eurostat_ilc_lvho07b_ES.json"]}
+  definition="Personas en hogares con costes de vivienda por encima del umbral de sobrecarga, por grupo de ingresos."
+  coverage="Último año publicado del desglose de ingresos; nulos y banderas se conservan. Nacional, por personas, no hogares ni tasas municipales. El total no es un quintil." />
 
 <DataTable data={carga_por_renta} rows=10>
   <Column id=group_label title="Grupo de ingresos (incluye total)" />
@@ -271,4 +325,4 @@ La hipótesis de escasez de oferta utilizable se debilitaría si, en las mismas 
 [Fuentes, definiciones y cobertura](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/sources.md) · [Métodos y limitaciones](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md) · [Descargar y explorar datos](/comparar/) · [Análisis de acceso](/acceso/) · [Busca tu municipio](/perfil/).
 
 ---
-*Instantánea de datos: 2026-10-09. Las comunidades y provincias no son unidades intercambiables; cada cifra conserva su geografía, año y fuente.*
+*Las fechas de descarga y versiones fijadas se detallan en los paneles de evidencia. Las comunidades y provincias no son unidades intercambiables; cada cifra conserva su geografía, año y fuente.*

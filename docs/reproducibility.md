@@ -73,6 +73,61 @@ make evidence-build     # static build
 make evidence-deploy    # publish to Cloudflare (see below)
 ```
 
+### Reader-facing chart evidence
+
+Key charts in `/reportaje/`, `/perfil/` and `/deficit/` have native collapsible
+“¿De dónde sale este gráfico?” panels. Definitions and coverage stay beside
+the chart; the SQL text and exported rows come from its actual reactive
+Evidence Query. There is no second result calculation or manual claim/value
+register. CSV/JSON exports select the declared columns, retaining source
+precision, codes, nulls and true zeros. Context columns may accompany plotted
+values. The vacancy-map download explicitly retains non-cartographed Resto
+rows from the query; they are not allocated to municipalities.
+
+`make chart-provenance` derives `evidence/components/provenance.generated.json`
+from panel file declarations and the tracked input manifest. It ships only
+referenced public-input metadata (source URLs, recorded access dates and
+SHA-256 pins), not raw input contents or the full manifest. Observation years
+come from the query/definition; access dates and the global manifest snapshot
+are not observation years. These pages point to per-source versions instead
+of repeating a potentially stale hardcoded snapshot date in their footers.
+The manifest fingerprint is shown; pins identify bytes, not causal validity.
+
+Build/dev entry points regenerate this metadata; `make lint` checks it without
+requiring publisher files or Node. Missing pins, duplicate panel IDs, unknown
+query bindings and stale generated metadata fail closed. This complements,
+not replaces, the existing numeric audits and input verification: the generator
+checks manifest declarations, not whether the raw files currently match them.
+It does not refresh data or rerun estimators. Method links document the
+preprocessing before the browser SQL, including sidecar derivation proofs.
+
+CSV uses blank cells for nulls; JSON preserves typed `null` and original text.
+CSV text cells that could be spreadsheet formulas receive a protective
+apostrophe; JSON is the unmodified alternative. Import municipal codes as
+text in spreadsheet software to avoid its automatic loss of leading zeros.
+Downloads remain usable on mobile; no new package is required.
+
+`make evidence-smoke-provenance` checks every panel in a real browser, changes
+municipality/period/province selectors, saves both formats, and compares them
+with the actual source-query expectations. An independent Python CSV parser
+checks the round-trip after JSON/query comparisons; unrelated selectors cannot
+silently leak into a download. Null-valued/suppressed, rentless and negative
+cases are included. The test throttles downloads to respect Chromium's
+rate limit, and never disables TLS or download security.
+
+Implementation verification (2026-10-27): all 14 panels compiled in an
+isolated strict build. Offline lint/tests, data verification and audits
+passed. Browser checks opened panels by keyboard, changed selectors, and
+matched 27 downloaded JSON datasets with real query results; an independent
+Python CSV parser verified the corresponding CSV files. Mobile downloads and
+expanded-panel width passed, as did the existing whole-site browser smoke.
+Independent read-only review identified a missing direct CCAA Padrón input
+pin for the regional stock/population chart; it was added with a regression
+and the follow-up review found no important issues. These checks do not turn
+arithmetic comparisons into causal estimates or missing data into evidence
+of zero. No dataset refresh, estimator rerun, dev-service restart, commit,
+push or deployment occurred for this panel implementation.
+
 ### Public deploy (Cloudflare Workers Static Assets)
 
 `make evidence-deploy` publishes `evidence/build/` to the

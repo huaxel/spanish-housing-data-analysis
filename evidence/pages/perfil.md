@@ -63,6 +63,8 @@ Los nombres son etiquetas: **las uniones usan el código INE**, no coincidencias
 entre nombres. La ficha no armoniza cambios de límites, fusiones o segregaciones;
 compartir código no garantiza una geografía histórica constante.
 
+**[Compara dos municipios en los mismos años](/comparar-municipios/)**: una medida cada vez, con los años excluidos a la vista y sin mezclar fuentes.
+
 ## Una ficha, varias fechas
 
 Los cortes de mercado son los últimos años con algún dato de cada fuente en el
@@ -190,6 +192,12 @@ order by c.anyo
   xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num2" markers=true handleMissing="gap"
   title="Alquiler mediano declarado · vivienda colectiva (€/m²/mes nominales)" />
 
+<EvidencePanel data={historia_alquiler_perfil} chart="perfil-alquiler"
+  columns={["anyo", "eur_m2_mes", "contratos"]}
+  files={["data/raw/serpavi_bd.xlsx"]}
+  definition="Alquiler mediano declarado de vivienda colectiva por metro cuadrado y mes, en euros nominales."
+  coverage="Municipio seleccionado por código INE. El calendario conserva años ausentes; contratos publicados no representan todo el mercado. Sin homogeneizar cambios de límites." />
+
 <DataTable data={historia_alquiler_perfil} rows=14>
   <Column id=anyo title="Año" fmt="0" />
   <Column id=eur_m2_mes title="Mediana (€/m²/mes)" fmt="num2" />
@@ -221,6 +229,12 @@ order by c.anyo
 <LineChart data={historia_ingresos_perfil} x=anyo y=renta_neta_hogar
   xFmt="0" xAxisTitle="Año de ingresos" yFmt="num0" markers=true handleMissing="gap"
   title="ADRH: renta neta media anual del hogar (euros nominales)" />
+
+<EvidencePanel data={historia_ingresos_perfil} chart="perfil-ingresos"
+  columns={["anyo", "renta_neta_hogar"]}
+  files={["data/raw/adrh_renta_municipal.csv"]}
+  definition="Renta neta media anual por hogar de ADRH, independiente de que exista alquiler publicado."
+  coverage="Todos los hogares del ámbito de ADRH, no solo inquilinos. Se conservan supresiones; pueden existir sustituciones territoriales del publicador sin bandera por fila. Euros nominales, no renta real." />
 
 <DataTable data={historia_ingresos_perfil} rows=9>
   <Column id=anyo title="Año de ingresos" fmt="0" />
@@ -255,6 +269,12 @@ order by c.anyo
   xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num1" markers=true handleMissing="gap"
   title="Proxy de mercado: alquiler mediano / renta neta media (%)" />
 
+<EvidencePanel data={historia_proxy_perfil} chart="perfil-proxy"
+  columns={["anyo", "alquiler_med", "renta_neta_hogar", "ratio_pct"]}
+  files={["data/raw/serpavi_bd.xlsx", "data/raw/adrh_renta_municipal.csv"]}
+  definition="Proxy revisado de alquiler mediano mensual anualizado sobre renta neta media anual del hogar del mismo año."
+  coverage="Solo el cruce SERPAVI/ADRH ya verificado. La serie de ingresos independiente no rellena el proxy. No es una tasa de sobrecarga ni renta específica de inquilinos." />
+
 <DataTable data={historia_proxy_perfil} rows=9>
   <Column id=anyo title="Año" fmt="0" />
   <Column id=alquiler_med title="Alquiler mediano (€/mes)" fmt="num0" />
@@ -273,4 +293,4 @@ hipotéticos, no resultados observados de compradores locales.
 [Limitaciones de acceso](/acceso/)
 
 ---
-*Instantánea de datos: 2026-10-09. Los años de cada indicador se muestran por separado; no constituyen una fotografía del mercado actual.*
+*Las fechas de descarga y versiones fijadas se detallan en los paneles de evidencia. Los años de cada indicador se muestran por separado; no constituyen una fotografía del mercado actual.*

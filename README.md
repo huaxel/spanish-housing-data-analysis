@@ -84,6 +84,13 @@ means. See [profile methods and coverage](docs/municipal_profile.md).
 `/deficit/` compares household growth with completions and net stock growth
 over calendar-year windows. Incomplete completions remain subtotals, not
 exact gaps or missing-home counts; see [explainer methods](docs/deficit_explainer.md).
+`/comparar-municipios/` compares two municipalities one measure at a time,
+using only common published years and exposing excluded years; census context
+remains a separate snapshot. It does not rank affordability or harmonize markets.
+Key charts in `/reportaje/`, `/perfil/`, `/deficit/` and the municipal comparator
+include collapsible
+evidence panels: definition, coverage, pinned source versions, resolved SQL,
+and CSV/JSON downloads of the current selection (not rounded chart labels).
 `make evidence-build` produces a static site in `evidence/build/`.
 See [reproducible setup](docs/reproducibility.md#evidence-explorer) for details.
 

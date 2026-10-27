@@ -164,3 +164,80 @@ recalculation, dev-service restart, commit, push or deployment occurred.
 The full network-fetch/analysis pipeline was not rerun. Source-level null
 causes and small-municipality substitution flags remain unavailable; the
 profile does not reconstruct them.
+
+
+## Matched municipality comparison
+
+`/comparar-municipios/` is a presentation-only comparison of compatible
+published measures, not matched housing samples or causally comparable markets.
+It reuses the profile catalogue contract (tested for exact SQL equality),
+code-keyed sources and suppressed census aggregates. No raw input, mart,
+sidecar, estimator or existing rent-income proxy is changed.
+
+The reader chooses two municipal codes, one measure and inclusive years.
+Inverted year controls are ordered rather than silently clipping the window.
+Supported measures remain distinct: SERPAVI median collective-housing rent
+per square metre/month, standalone ADRH mean annual net household income,
+and the already-reviewed rent-income proxy. Income without a rental sample
+does not fill that sample or extend the proxy. Metadata shows the active
+source/unit; proxy level differences are percentage points, not percentage
+changes. All currency values are nominal.
+
+For every requested calendar year the query retains both published values,
+including genuine zeros. A year is common exactly when both values are
+nonnull in that same year for that same selected measure. The chart and its
+CSV/JSON show both series only on this common support, with explicit null
+calendar rows elsewhere, so missing interior years break lines. The audit
+table separately retains individually published values in excluded years.
+Coverage reports requested years, each side's observed years, excluded
+count and the exact list of common years; first/last common dates alone
+would conceal internal holes. No change between substituted endpoints,
+interpolation, growth ratio, implicit complete-case average or significance
+interval is computed. A displayed A-minus-B difference uses the same year
+and measure and is null without common data.
+
+If the same municipality is selected twice, the chart renders one series
+and differences are withheld: there is no independent A/B contrast. If
+there are no common years, the coverage state says so, chart values remain
+null and no historical backfill is performed. Homonyms stay distinct through
+codes/provinces and code-bearing chart labels. The catalogue includes
+historical and ADRH-only municipalities, not just complete rental cases;
+no boundary crosswalk or relocation of Resto aggregates is implied.
+
+Census population/dwellings/households and electrical vacancy are shown in a
+separate historical table. Census reference and electricity-consumption years
+remain explicit; this table does not change when the annual measure/window
+changes and is not fed into the annual comparison. Partial suppressed
+census totals stay withheld. These counts do not establish current available
+supply, habitability or the homes a locality needs.
+
+Unit tests exercise disjoint supports, interior gaps, valid zeros, metric
+isolation, inverted/single-year windows, A/B reversal, identical selections,
+name collisions and invariant censal context. Browser checks compare the
+reactive controls, coverage, chart-query downloads and historical table
+against actual source queries, including empty support and suppressed income.
+The evidence panel uses the current resolved comparison query; its listed
+source inputs cover the possible selector measures, not an assertion that
+every measure uses every file. Definitions and publisher substitutions in
+the original profile still apply. This comparison does not control dwelling
+composition, household mix, centrality, demand or changes in boundaries.
+
+### Common-year comparison verification — 2026-10-27
+
+Offline lint, all tests, input/data verification and claim/freshness audits
+passed, along with an isolated strict Evidence build. Browser checks compared
+all visible identity, unit, coverage, annual and census tables with real-source
+queries across eight control scenarios. The actual chart CSV/JSON downloads
+matched the same-year null masks, units, codes and values. Covered cases
+included inverted years, no common rental years, income without rental data,
+a suppressed latest income cell, the unchanged proxy intersection, identical
+municipalities and an ADRH-only code. Expanded evidence/download controls also
+worked at mobile width with no horizontal document overflow. The existing
+whole-site browser smoke passed, including the new route. Independent
+read-only review found no important findings.
+
+No source was fetched or re-pinned; no mart, sidecar, model or proxy was
+rewritten. The active dev service was left running. No commit, push or
+deployment was performed for this comparison implementation. Same year and
+source remain necessary publication-compatibility checks, not proof of
+comparable dwelling/household composition or stable historical boundaries.

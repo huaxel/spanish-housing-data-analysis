@@ -80,6 +80,12 @@ select 'Terminadas: suma publicada', completions_observed from ${seleccion_defic
 <BarChart data={cantidades_deficit} x=concepto y=unidades swapXY
   yFmt="num0" title="Hogares, parque y terminadas: unidades, no porcentajes" />
 
+<EvidencePanel data={cantidades_deficit} chart="deficit-cantidades"
+  columns={["concepto", "unidades"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv"]}
+  definition="Cambio neto de hogares, cambio neto de parque y suma publicada de viviendas terminadas para la ventana y provincia seleccionadas."
+  coverage="Fechas y celdas faltantes se muestran en la ficha. Con huecos, terminadas es subtotal y no total; los cambios netos no equivalen a hogares formados ni a obra nueva." />
+
 <DataTable data={cantidades_deficit} rows=3>
   <Column id=concepto title="Qué se cuenta" />
   <Column id=unidades title="Unidades (vacío = no calculable)" fmt="num0" />
@@ -128,6 +134,12 @@ from ${seleccion_deficit}
 
 <BarChart data={saldos_deficit} x=definicion y=saldo swapXY
   yFmt="num0" title="Saldos descriptivos; el signo no identifica una necesidad de construcción" />
+
+<EvidencePanel data={saldos_deficit} chart="deficit-saldos"
+  columns={["definicion", "saldo"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv"]}
+  definition="Dos restas descriptivas: hogares menos cambio neto de parque y hogares menos terminadas."
+  coverage="El saldo de terminadas es nulo si hay celdas faltantes; la cota superior se muestra aparte. Se conservan saldos negativos. Ninguna resta cuenta viviendas necesarias ni estima efectos de precios." />
 
 <DataTable data={seleccion_deficit} rows=1>
   <Column id=gap_stock title="Hogares − cambio de parque" fmt="num0" />
@@ -215,4 +227,4 @@ las tablas para revisar el reparto sin elegir solo los casos extremos.
 [Qué falta para medir acceso](/acceso/)
 
 ---
-*Instantánea de datos: 2026-10-09. Se conserva la versión fijada de las fuentes; este explorador no actualiza ni pronostica el mercado.*
+*Las fechas de descarga y versiones fijadas se detallan en los paneles de evidencia. Se conserva la versión fijada de las fuentes; este explorador no actualiza ni pronostica el mercado.*

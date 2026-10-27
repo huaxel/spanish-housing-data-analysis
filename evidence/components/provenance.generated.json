@@ -1,0 +1,84 @@
+{
+  "manifest_sha256": "c8ce63265a56d951a1e15302586e6395aa9bece0d1057e9a049ce18582ee64ac",
+  "snapshot_date": "2026-10-10",
+  "sources": {
+    "data/raw/adrh_renta_municipal.csv": {
+      "accessed": "2026-10-10",
+      "publisher": "INE ADRH, Indicadores de renta media y mediana (jaxiT3 30824)",
+      "sha256": "a8998c45abc39df71d6537856add9c2ce822cfe078f78ca9a8448773118ee3cd",
+      "url": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/30824.csv"
+    },
+    "data/raw/aeat_viviendas_uso_2024.html": {
+      "accessed": "2026-10-09",
+      "publisher": "AEAT",
+      "sha256": "af70a287833542a6c816cab07aa7ad07dabb44d6fe590d854ffe2cff91fd0a94",
+      "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik61a05e3830ecee0fbb552daa3b8d60a57826ffd9.html"
+    },
+    "data/raw/censo2021_intensidad.csv": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · Censo 2021 viviendas por intensidad de uso (59531)",
+      "sha256": "9dfcc0ea546da82bd021c0cf6ff7b34f49270873885053e5f76839a135dd5558",
+      "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
+    },
+    "data/raw/ecp_hog_ccaa.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · ECP",
+      "sha256": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/60131"
+    },
+    "data/raw/ecp_hog_prov.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · ECP",
+      "sha256": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/60133"
+    },
+    "data/raw/ecp_pob_ccaa.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · ECP",
+      "sha256": "2117dfcfb189dfc287a5825d0d68706d0c3f28d58de3c1e3e5799d4b682efde1",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940"
+    },
+    "data/raw/eurostat_ilc_lvho07b_ES.json": {
+      "accessed": "2026-10-08",
+      "publisher": "Eurostat, EU-SILC",
+      "sha256": "44859329108240a6f2198680626a805c2662722ea6bfa2657fab23a078d4316b",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07b?lang=EN&geo=ES&unit=PC&freq=A"
+    },
+    "data/raw/ipv_ccaa_anual.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · IPV",
+      "sha256": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/80271"
+    },
+    "data/raw/mivau_iniciadas_terminadas.csv": {
+      "accessed": "2026-10-09",
+      "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)",
+      "sha256": "42a7fed7f1a33efb3699b87736bd5aacd3b5b9159ec21c3d7aabe36899b501b2",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP005_01.csv"
+    },
+    "data/raw/padron_ccaa.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · DPOP",
+      "sha256": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/2853"
+    },
+    "data/raw/padron_provincia.json": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · DPOP",
+      "sha256": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
+      "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/2852"
+    },
+    "data/raw/parque_viviendas.csv": {
+      "accessed": "2026-10-08",
+      "publisher": "MIVAU",
+      "sha256": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
+    },
+    "data/raw/serpavi_bd.xlsx": {
+      "accessed": "2026-10-08",
+      "publisher": "INE · SERPAVI alquiler municipal (MIVAU, fianzas)",
+      "sha256": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+    }
+  }
+}
