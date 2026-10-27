@@ -161,6 +161,24 @@ Two subtleties, both load-bearing:
 - On any data refresh, update the `Instantánea de datos` footer date in
   every `evidence/pages/*.md` to the new manifest snapshot date before
   rebuilding — the footers are static text, not wired to the manifest.
+- Latest deploy **2026-10-27**: source commit `ab7c653` published the chart
+  evidence panels and `/comparar-municipios/` to the existing Worker.
+  Cloudflare version `eac9ecbe-1dfb-4796-b784-f69af212b47a` supersedes
+  `9d318efa-65d4-46d4-8cd6-4f88fb1fc70f`. The isolated strict build matched
+  current frontend inputs exactly, and its WASM blobs matched the pinned CDN
+  before staging/deployment using cached Wrangler 4.149.0. Fresh local
+  `make lint test verify audit` passed (775 tests; all claim/freshness checks),
+  and GitHub CI for the feature commit passed. Live checks on the custom
+  domain passed all eight municipal-comparison scenarios, including current
+  CSV/JSON downloads, null masks, same-code and no-overlap cases. All 27
+  evidence-panel query/download comparisons and independent CSV round-trips
+  passed, with keyboard and mobile checks. Whole-site browser smoke passed
+  all tested routes/maps. HTTP checks matched the root, reportaje, profile,
+  deficit and comparator HTML against the build on Workers.dev and the custom
+  domain, allowing only the unchanged custom-domain analytics injection.
+  This release did not refresh/re-pin data, refit estimators, rewrite marts
+  or existing sidecars, install packages, change Worker configuration or
+  restart the active dev service; it is not a full-pipeline reproduction.
 - Deploy record **2026-10-27**: source commit `a630cc1` published the
   reportaje, municipal profile with standalone ADRH income, and deficit
   explainer, including the reportaje's December/January timing correction.
