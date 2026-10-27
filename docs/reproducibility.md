@@ -106,6 +106,25 @@ Two subtleties, both load-bearing:
 - On any data refresh, update the `Instantánea de datos` footer date in
   every `evidence/pages/*.md` to the new manifest snapshot date before
   rebuilding — the footers are static text, not wired to the manifest.
+- Deploy record **2026-10-27**: source commit `a630cc1` published the
+  reportaje, municipal profile with standalone ADRH income, and deficit
+  explainer, including the reportaje's December/January timing correction.
+  Cloudflare version `9d318efa-65d4-46d4-8cd6-4f88fb1fc70f` serves the
+  existing `vivienda-explorer` Worker. Deployment used the verified isolated
+  strict build (current frontend inputs compared exactly), with per-route
+  Spanish metadata and cached Wrangler 4.149.0; no package update or
+  dev-service restart was needed. The exact artifact passed `wasm-verify`
+  against the pinned CDN before upload. GitHub CI for `a630cc1` passed, as did
+  the fresh local `make lint test verify audit` run (737 tests, all claim
+  and model-freshness checks). Live whole-site browser smoke and interactive
+  profile/deficit checks passed on `vivienda.juanbenjumea.me`, including
+  source-specific nulls, selector updates and mobile width. The Workers.dev
+  root and three new routes matched build HTML byte-for-byte; the custom
+  domain differed only by its existing Cloudflare analytics beacon injection
+  (all other HTML equal), which this release did not configure or change.
+  This was a frontend release of the existing pinned data snapshot, not a
+  new fetch/build/analysis reproduction; raw inputs, central marts, existing
+  sidecars, source artifacts and manifest pins were unchanged.
 - Deploy record: rebuilt + redeployed 2026-10-09 carrying the ECV 2025
   housing-access module sections on /acceso/ (moves, blocked search incl.
   CCAA table, youth with parents; sidecar-only, no estimator change).
