@@ -21,6 +21,8 @@ mercado ni se agregan sus precios o medianas. Para explorar primero la
 trayectoria general, vuelve al [panorama nacional](/); para precios de
 alquiler, consulta [SERPAVI por municipio](/renta/).
 
+**[Explora las distintas restas de déficit](/deficit/)**: hogares frente a terminadas y frente al cambio neto del parque, con fechas y huecos explícitos.
+
 ## Stock provincial: total y uso principal
 
 ```sql stock_acceso

@@ -77,6 +77,13 @@ missing observations stay missing.
 `/municipios/` drills into Madrid (valor tasado + population, 2005–2025)
 and Barcelona (sale, rent, burdens, 2007–2024) with multi-municipality
 selectors; the two metros use different sources and are read separately.
+`/perfil/` brings census population/stock, rental history, standalone ADRH
+income and the existing rent-income proxy into one code-keyed municipal profile. Each indicator keeps
+its year and scope; missing values are not backfilled or replaced by regional
+means. See [profile methods and coverage](docs/municipal_profile.md).
+`/deficit/` compares household growth with completions and net stock growth
+over calendar-year windows. Incomplete completions remain subtotals, not
+exact gaps or missing-home counts; see [explainer methods](docs/deficit_explainer.md).
 `make evidence-build` produces a static site in `evidence/build/`.
 See [reproducible setup](docs/reproducibility.md#evidence-explorer) for details.
 

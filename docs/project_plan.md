@@ -55,12 +55,11 @@ explicit extensions, not v1.
    disclosed same day; record in `docs/review_brief.md`). Prior reads:
    2026-10-06 full read adjudicated in-repo; 2026-10-07 IV rounds 1-3
    (REMOVE / REJECT AGAIN / KEEP OUT).
-   **Package ready: [`docs/review_brief.md`](review_brief.md)** — scope,
-   ground rules, reproduction commands, disclosed limitations, and the
-   adversarial questions (including the IV read plan step 1 that the merge
-   skipped). Blocked only on an available independent reviewer.
+   **Review record: [`docs/review_brief.md`](review_brief.md)** — scope,
+   reproduction commands, disclosed limitations and completed independent reads.
+   Further causal designs require their own independent review.
 
-## Status 2026-10-06 (evening)
+## Historical status 2026-10-06 (evening)
 
 All 16 queued sources live; marts verified end-to-end twice from scratch
 (byte-identical re-fetch). Analysis now spans window correlations → FE
@@ -71,13 +70,23 @@ real-€ chart); custom domain waits on zone scope. Causal designs scoped
 in the identification memo — migration shift-share needs share
 archaeology; nothing causal merges before milestone 5's independent read.
 
+## Current interpretation (updated 2026-10-26)
+
+The independent-review milestone is satisfied, not awaiting a reviewer.
+The migration shift-share IV was withdrawn after independent review; the
+terrain design remained null at both grains. No causal estimate is retained
+in the synthesis. The earlier status above is historical; see the
+[synthesis](synthesis.md) and [review record](review_brief.md) for the
+current conclusions. The public-facing [reportaje](../evidence/pages/reportaje.md)
+connects the descriptive findings, with source and availability limits kept
+beside the charts; this does not establish deployment status.
+
 ## Exclusions (v1)
 
-No causal attribution of price moves to construction volumes (the one
-causal estimate — migration exposure → prices, commissioned 2026-10-06 —
-lives in synthesis + the IV note with its threats, not as a general
-license); no municipal-level claims from provincial aggregates; no
-splicing of index bases.
+No causal attribution of price moves to construction volumes. The commissioned
+migration-exposure IV is retained only as a rejected design in its
+[exploration note](explorations/iv_migration.md), not as a synthesis finding.
+No municipal-level claims from provincial aggregates; no splicing of index bases.
 Population from 2022 comes from ECP (methodology differs from Padrón — the
 2021 overlap is quantified in `coverage.json`, never silently spliced).
 Provincial ECP is API-blocked, so the provincia mart's 2022–2025 population

@@ -250,3 +250,17 @@ INE general CPI (base 2021), CCAA + Nacional (+ Ceuta/Melilla separately):
 `territorio`, `anyo`, `ipc` (annual mean), `n_months` (completeness flag).
 Deflator for real-terms levels — join on territory/year, never average
 across territories.
+
+
+## Standalone profile income (presentation sidecar)
+
+`data/processed/profile_income.duckdb` is separate from the central marts and
+housing-access sidecar. Its `municipal` table projects the pinned ADRH
+`neta_hogar` indicator: `codigo` (five-digit municipal code), `municipio`
+(source display label), `cpro`, `anyo` (income reference year),
+`renta_neta_hogar` (mean net euros per household per year, nullable).
+All retained municipal/year cells remain present, including suppressed values;
+this is not restricted to the SERPAVI intersection. `export_meta` pins input
+and exporter bytes. The site queries it as `profile_income.municipal`; no new ratios,
+local ECV rates or renter-income estimates are computed. See the
+[profile method](municipal_profile.md).

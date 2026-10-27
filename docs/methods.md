@@ -123,8 +123,11 @@
   every usable section (file identity, so hogares-per-dwelling is the
   principal share), and the persons total includes suppressed sections
   while dwelling/household totals exclude them — compare universes, not
-  just numbers. The 2021 vintage is quarantined, never joined to the
-  current series.
+  just numbers. The 2021 vintage stays separate from current series and
+  estimators. The [municipal profile](municipal_profile.md) may display an
+  explicitly historical municipal aggregation alongside separately dated
+  market indicators; incomplete dwelling/household sums are withheld, not
+  presented as total stock. It is not a contemporary stock-demand join.
   The 2021 *tipo* split is NOT checked: census occupancy-based
   principal/no-principal diverges definitionally from MIVAU modelled
   stock (up to ~20% on no-principal) — totals anchor, splits don't.

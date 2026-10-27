@@ -1,0 +1,4 @@
+name: profile_income
+type: duckdb
+options:
+  filename: '../../../data/processed/profile_income.duckdb'

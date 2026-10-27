@@ -36,6 +36,9 @@ COVERED_DOCS = [
     "docs/uncertainty.md",
     "docs/cadastre_stock.md",
     "README.md",
+    # Public-facing interactive journalism page.
+    "evidence/pages/reportaje.md",
+    "evidence/pages/deficit.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
     "docs/explorations/panel_tourist.md",
@@ -151,6 +154,12 @@ ALLOW = {
         (8091.0, "preview dashboard port"),
         (56945.0, "INE table identifier (blocked provincial ECP)"),
         (1000.0, "per-1000 unit label"),
+    ],
+    "evidence/pages/reportaje.md": [
+        (768000.0, "Census 2011 vacant dwellings built 2002-11 (see boom_bust_vs_tightening.md)"),
+        (560.0, "map display height in pixels, not a data claim"),
+        (-3.7, "map initial longitude, not a data claim"),
+        (40.0, "Eurostat housing-cost overburden definition threshold"),
     ],
     "docs/occupancy_availability.md": [
         (452670.0, "MIVAU unsold-new dwellings 2025-12-31, external source fact"),

@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis inference stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis inference deficit profile-income stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -72,6 +72,7 @@ geo:
 build:
 	uv run python scripts/build_marts.py
 	uv run python scripts/build_rent_income.py
+	uv run python scripts/export_profile_income.py
 
 verify:
 	uv run python scripts/verify_data.py
@@ -84,10 +85,12 @@ verify:
 	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/fetch_mivau_terminadas.py --check
 	uv run python scripts/fetch_adrh.py --check
+	uv run python scripts/export_profile_income.py --check
 	uv run python scripts/build_rent_income.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py --check
 	uv run python scripts/export_inference.py --check
+	uv run python scripts/export_deficit.py --check
 	uv run python scripts/invert_tourist.py --check
 
 audit: audit-docs
@@ -156,6 +159,7 @@ analysis:
 	uv run python explorations/cadastre_granada_distritos.py
 	uv run python explorations/censo_vintage.py
 	uv run python explorations/deficit_vivienda.py
+	uv run python scripts/export_deficit.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
 
@@ -173,6 +177,12 @@ stock-rent:
 	uv run python explorations/cadastre_malaga_barrios.py
 	uv run python explorations/cadastre_granada_distritos.py
 	uv run python explorations/deficit_vivienda.py
+
+profile-income:
+	uv run python scripts/export_profile_income.py
+
+deficit:
+	uv run python scripts/export_deficit.py
 
 inference:
 	uv run python scripts/invert_tourist.py
@@ -193,6 +203,8 @@ evidence-install:
 # template both commands regenerate. Stop the service first, or set ALLOW=1.
 evidence-dev:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Local dev server running? Stop it first: systemctl --user stop housing-evidence (or make evidence-dev ALLOW=1)."; exit 1; fi
+	uv run python scripts/export_deficit.py
+	uv run python scripts/export_profile_income.py
 	cd evidence && npm run dev
 
 # fix_build_meta repairs <html lang> (Evidence template hardcodes en) and
@@ -206,6 +218,8 @@ evidence-build:
 	uv run python scripts/fetch_cadastre_province.py --check
 	uv run python scripts/build_sevilla_2021.py --check
 	uv run python scripts/analyze_stock_rent.py
+	uv run python scripts/export_deficit.py
+	uv run python scripts/export_profile_income.py
 	cd evidence && npm run build
 	uv run python scripts/fix_build_meta.py
 
@@ -243,6 +257,12 @@ evidence-smoke:
 
 evidence-smoke-browser:
 	bash scripts/smoke_browser.sh
+
+evidence-smoke-deficit:
+	bash scripts/smoke_deficit.sh
+
+evidence-smoke-profile:
+	bash scripts/smoke_profile.sh
 
 evidence-smoke-purchase:
 	bash scripts/smoke_purchase.sh

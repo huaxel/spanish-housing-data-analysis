@@ -1,0 +1,4 @@
+name: deficit
+type: duckdb
+options:
+  filename: '../../../data/processed/deficit.duckdb'

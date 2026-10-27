@@ -171,6 +171,12 @@ def test_section_table_stays_quarantined():
     for base in ("scripts", "explorations", "evidence"):
         for pattern in ("*.py", "*.md", "*.sql"):
             for path in (root / base).rglob(pattern):
+                # Generated Evidence copies are not independent consumers.
+                if base == "evidence" and any(
+                    part in {".evidence", "node_modules", "build", "build-cf"}
+                    for part in path.relative_to(root / base).parts
+                ):
+                    continue
                 try:
                     text = path.read_text(encoding="utf-8", errors="replace")
                 except OSError:
@@ -181,6 +187,11 @@ def test_section_table_stays_quarantined():
         "scripts/build_marts.py",
         "scripts/audit_claims.py",
         "scripts/fetch_censo_secciones.py",
+        # Approved historical profile presentation only: no current-series join
+        # or estimator consumer. Actual snapshot/suppression SQL is tested in
+        # test_evidence_profile.py. All other new consumers still fail here.
+        "evidence/sources/housing/perfil_censo.sql",
+        "evidence/sources/housing/perfil_catalogo.sql",
         "tests/test_censo_secciones.py",
         "docs/sources.md",
         "docs/methods.md",

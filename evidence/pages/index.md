@@ -4,6 +4,12 @@ title: Nacional
 
 # Precios, stock y población (2007–2025)
 
+**[Lee el reportaje: Más viviendas; más hogares todavía →](/reportaje/)** Una historia interactiva sobre el auge, la caída y las diferencias territoriales, con fuentes y límites a la vista.
+
+**[Busca tu municipio →](/perfil/)** Población, viviendas, alquiler e ingresos, con años y cobertura explícitos; los datos ausentes no se sustituyen por medias regionales.
+
+**[¿Qué significa el déficit de vivienda? →](/deficit/)** Compara hogares, parque y terminadas sin confundir una resta con viviendas necesarias.
+
 Este recorrido empieza por las tendencias nacionales, baja a las diferencias
 territoriales y termina con lo que los indicadores de stock sí —y no— dicen
 sobre acceso. Las series describen co-movimientos; por sí solas no identifican

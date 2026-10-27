@@ -28,6 +28,14 @@ DESCRIPTIONS = {
         "Compara dos territorios españoles en precios, stock, esfuerzo de renta, "
         "población joven e hipotecas para el periodo que elijas."
     ),
+    "deficit/index.html": (
+        "Qué significa déficit de vivienda: hogares, parque neto y viviendas terminadas. "
+        "Compara ventanas y provincias, con fechas y cobertura explícitas; no casas necesarias."
+    ),
+    "perfil/index.html": (
+        "Tu municipio: población y viviendas censales, alquiler e ingresos. "
+        "Código INE, años, unidades y cobertura explícitos; sin puntuación de asequibilidad."
+    ),
     "municipios/index.html": (
         "Grano municipal en Madrid y Barcelona: valor tasado, población "
         "y vivienda vacía por municipio 2005–2025."
@@ -59,6 +67,10 @@ DESCRIPTIONS = {
     "vacancia/index.html": (
         "Vivienda vacía por consumo eléctrico (Censo 2021): mapa municipal "
         "de la desocupación en España."
+    ),
+    "reportaje/index.html": (
+        "Reportaje interactivo: más viviendas; más hogares todavía. "
+        "Precios, stock por habitante y diferencias territoriales 2007–2025."
     ),
     "renta-ingresos/index.html": (
         "Alquiler de firma frente a renta neta municipal (SERPAVI + ADRH, "

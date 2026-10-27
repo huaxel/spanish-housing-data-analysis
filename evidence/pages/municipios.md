@@ -14,6 +14,8 @@ común.**
 [Panorama nacional](/) · [Comunidades autónomas](/ccaa/) ·
 [Comparar territorios](/comparar/) · [Acceso y cargas de hogares](/acceso/).
 
+**[Consulta la ficha de tu municipio](/perfil/)** para reunir indicadores por código INE, conservando sus fechas, unidades y datos ausentes.
+
 ## Madrid: la capital se despega del sur
 
 Valor tasado de vivienda libre (€/m², 2005–2025, 28 municipios).

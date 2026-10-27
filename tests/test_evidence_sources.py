@@ -3,6 +3,8 @@
 import re
 from pathlib import Path
 
+import duckdb
+
 ROOT = Path(__file__).resolve().parents[1] / "evidence"
 
 
@@ -14,6 +16,28 @@ def test_page_housing_references_have_source_exports():
         referenced.update(re.findall(pattern, page.read_text()))
     exported = {(source.parent.name, source.stem) for source in (ROOT / "sources").glob("*/*.sql")}
     assert referenced - exported == set(), f"Missing source exports: {referenced - exported}"
+
+
+def test_barrio_and_municipal_income_connections_extract_distinct_databases(tmp_path):
+    # The existing /stock/ income source must not be repointed at the new
+    # municipal sidecar: that compiles SQL contracts but breaks extraction.
+    datasets = [
+        ("income", "income.duckdb", "barrios_income"),
+        ("profile_income", "profile_income.duckdb", "municipal"),
+    ]
+    processed = tmp_path / "data/processed"
+    processed.mkdir(parents=True)
+    for namespace, filename, table in datasets:
+        with duckdb.connect(str(processed / filename)) as con:
+            con.execute(f"create table {table}(marker varchar)")
+            con.execute(f"insert into {table} values (?)", [namespace])
+    for namespace, _, table in datasets:
+        source = ROOT / "sources" / namespace
+        config = (source / "connection.yaml").read_text()
+        relative = re.search(r"filename:\s*['\"]([^'\"]+)['\"]", config).group(1)
+        configured = tmp_path / "evidence/sources" / namespace / relative
+        with duckdb.connect(str(configured.resolve()), read_only=True) as con:
+            assert con.execute((source / f"{table}.sql").read_text()).fetchall() == [(namespace,)]
 
 
 def test_serpavi_district_source_exports_only_the_page_measure():
