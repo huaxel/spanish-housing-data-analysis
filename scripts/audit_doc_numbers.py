@@ -44,6 +44,7 @@ COVERED_DOCS = [
     "evidence/pages/microsimulacion.md",
     "docs/explorations/catalonia_rent_control.md",
     "docs/explorations/ipva_rent_index.md",
+    "docs/explorations/proh_households.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
     "docs/explorations/panel_tourist.md",
@@ -123,6 +124,12 @@ ALLOW = {
         (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
         (52.7, "complement of the pinned 47.3% Q1-Q2 relief share (-5% cap scenario)"),
     ],
+    "docs/explorations/proh_households.md": [
+        (70.0, "INE operation id for PROH (identifier, not a result)"),
+        (54562.0, "INE table id for PROH (identifier, not a result)"),
+        (2040.0, "projection horizon label (year, not a result)"),
+        (4.0, "'under 4%' growth-rate threshold in the prose (rounding boundary)"),
+    ],
     "docs/explorations/ipva_rent_index.md": [
         (432.0, "INE operation id for the IPVA (identifier, not a result)"),
         (59060.0, "INE table id for the IPVA (identifier, not a result)"),
@@ -185,6 +192,7 @@ ALLOW = {
         (1.04, "quoted inside dated correction notes as superseded pre-repair vintage"),
     ],
     "README.md": [
+        (2040.0, "projection horizon label (year, not a result)"),
         (90.0, "affordability reference dwelling size (assumption)"),
         (2555.0, "SERPAVI municipio coverage (also a claim; kept as count)"),
         (52.0, "52-provincia coverage count"),
@@ -1205,6 +1213,7 @@ def audit_total() -> int:
         "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
         "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
         "IPVA_CLAIMS": audit_claims.IPVA_CLAIMS,
+        "PROH_CLAIMS": audit_claims.PROH_CLAIMS,
     }
     total = 0
     seen_lists: set[str] = set()

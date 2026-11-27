@@ -439,6 +439,7 @@
     "data/raw/parquet/padron_municipios_vlc.parquet": "2ed34de13967ab9300a939d01281bcdd0af63a556b76139959d237c8b51c991d",
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
     "data/raw/parquet/parque_viviendas.parquet": "5666e9ed98be8fd91c02f811162a8ebcc69fbbe1cb2edb6b9c2b5f4b39f3e0e3",
+    "data/raw/parquet/proh_hogares.parquet": "7973c9811a86334aee35eab15244c53926a1ff196468d42021c8214d4e431b6b",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
     "data/raw/parquet/rmdvp_inscripciones.parquet": "4247695d89954a5eb2d65e9a043933c5c7e261118155af3ac1aa892d08d7c19e",
     "data/raw/parquet/serpavi_distritos.parquet": "aed37f04b35c27a9bcea888fb74d68f8dda3cbf96b4b94824e27d7f7073194b2",
@@ -453,6 +454,7 @@
     "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
+    "data/raw/proh_54562.json": "90305c603f21b1a86c1007c0d2c9c73ee028e20c51b2fa914b9587a6866fb2f3",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
     "data/raw/rmdvp/202012_rmdvp01.xls": "aee6ba03a0ad7b1369e757941b69a0224d984bde97a80df018b8dae1d3db4133",
     "data/raw/rmdvp/202101_rmdvp01.xls": "1356c634e0f10199e72c7223a1a47d0b69bf6b861b0068f93d90cfc6c247f3d6",
@@ -2994,6 +2996,11 @@
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
+    "data/raw/parquet/proh_hogares.parquet": {
+      "accessed": "2026-11-27",
+      "note": "Derived from pinned proh_54562.json by fetch_proh.py",
+      "publisher": "INE · Proyección de Hogares (PROH)"
+    },
     "data/raw/parquet/renta_hogar_ccaa.parquet": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/9949",
@@ -3077,6 +3084,13 @@
       "note": "raw quarterly rows; empty Valor = unpublished",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
+    },
+    "data/raw/proh_54562.json": {
+      "accessed": "2026-11-27",
+      "api": "wstempus/DATOS_TABLA/54562?date=20260101:20401231",
+      "note": "Households at 1 January by territory and size, INE projection 2026-2040; projection base predates the latest ECP release",
+      "publisher": "INE · Proyección de Hogares (PROH)",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=54562"
     },
     "data/raw/renta_hogar_ccaa.json": {
       "accessed": "2026-11-27",

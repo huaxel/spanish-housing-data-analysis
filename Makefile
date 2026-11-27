@@ -68,6 +68,8 @@ fetch:
 	uv run python scripts/fetch_irav.py
 	# INE rent price index at municipal grain (IPVA, table 59060).
 	uv run python scripts/fetch_ipva.py
+	# INE household projection 2026-2040 (PROH, table 54562).
+	uv run python scripts/fetch_proh.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
@@ -109,6 +111,8 @@ verify:
 	uv run python scripts/build_irav_index.py --check
 	uv run python scripts/fetch_ipva.py --check
 	uv run python explorations/ipva_rent_index.py --check
+	uv run python scripts/fetch_proh.py --check
+	uv run python explorations/proh_households.py --check
 	uv run python scripts/build_claim_ledger.py --check
 
 audit: audit-docs
@@ -188,6 +192,7 @@ analysis:
 	uv run python scripts/build_ecv_microsim.py
 	uv run python scripts/build_irav_index.py
 	uv run python explorations/ipva_rent_index.py
+	uv run python explorations/proh_households.py
 	uv run python scripts/build_claim_ledger.py
 
 stock-rent:

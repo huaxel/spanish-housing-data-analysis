@@ -159,6 +159,12 @@ MODEL_FRESHNESS = [
         "artifacts/ipva_rent_index.json",
         "explorations/ipva_rent_index.py",
     ),
+    # INE household projection paired with the stock marts, added 2026-11-27.
+    (
+        "proh_households",
+        "artifacts/proh_households.json",
+        "explorations/proh_households.py",
+    ),
 ]
 
 
@@ -2734,6 +2740,62 @@ IPVA_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
 ]
 
+# INE's own household projection (PROH) paired with the stock marts: the
+# projection is an external input, so both its levels and the pairing with
+# current dwellings per household are pinned.
+PROH_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("proh_households", "projected households 2026", "national.households_first", 19759349, 0),
+    ("proh_households", "projected households 2040", "national.households_last", 21867217, 0),
+    ("proh_households", "projected change", "national.change", 2107868, 0),
+    ("proh_households", "projected change pct", "national.change_pct", 10.67, 0.005),
+    ("proh_households", "top-4 CCAA projected change", "concentration.top4_change", 1425007, 0),
+    ("proh_households", "top-4 share of growth pct", "concentration.top4_share_pct", 67.75, 0.005),
+    (
+        "proh_households",
+        "lean-stock median growth pct",
+        "stock_pairing.lean_stock_growth_median_pct",
+        11.9,
+        0.005,
+    ),
+    (
+        "proh_households",
+        "fat-stock median growth pct",
+        "stock_pairing.fat_stock_growth_median_pct",
+        7.69,
+        0.005,
+    ),
+    (
+        "proh_households",
+        "ratio vs growth Pearson",
+        "stock_pairing.pearson_ratio_vs_growth",
+        -0.316,
+        0.0005,
+    ),
+    ("proh_households", "CCAA units", "stock_pairing.n_ccaa", 17, 0),
+    ("proh_households", "Madrid projected change", "ccaa.0.change", 379306, 0),
+    (
+        "proh_households",
+        "Madrid dwellings per household 2025",
+        "ccaa.0.dwellings_per_household_2025",
+        1.128,
+        0.0005,
+    ),
+    (
+        "proh_households",
+        "ECP observed households 1-Jan-2026",
+        "ecp_check.observed_2026",
+        19761683,
+        0,
+    ),
+    (
+        "proh_households",
+        "projection base minus observed ECP",
+        "ecp_check.projection_minus_observed",
+        -2334,
+        0,
+    ),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -2837,6 +2899,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(IPVA_CLAIMS)
+    proh = _model_output("artifacts/proh_households.json")
+    for doc, desc, path, expected, tol in PROH_CLAIMS:
+        got = _json_path(proh, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(PROH_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)

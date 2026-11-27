@@ -85,6 +85,20 @@ como un cambio solo real.
   markers=true
   yFmt="num2" />
 
+<p class="text-sm font-bold mt-4 mb-1">Hogares proyectados: dónde crece la presión (INE, 2026–2040)</p>
+
+La proyección oficial de hogares del INE (**no un pronóstico de este proyecto**)
+añade **2.107.868 hogares** entre 2026 y 2040 (**+10,7%**), y concentra el
+**67,75%** de ese crecimiento en Madrid, Cataluña, Andalucía y Comunitat
+Valenciana. Emparejada con el stock que ya existe, la proyección reproduce la
+división que muestra el resto de la página: las comunidades con menos viviendas
+por hogar crecen a una mediana de **+11,9%**, frente a **+7,7%** en las que
+tienen más (correlación entre viviendas por hogar y crecimiento proyectado
+**−0,32**, n=17: direccional, no una ley). Los niveles no son intercambiables con
+la ECP observada —la base de la proyección es anterior a su última publicación—
+y no se deriva de aquí ninguna cifra de «viviendas necesarias». Detalle en
+[la nota metodológica](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/proh_households.md).
+
 ## Valor tasado y esfuerzo de renta
 
 El valor tasado no es un precio de compraventa. El esfuerzo expresa años de
