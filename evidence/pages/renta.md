@@ -9,17 +9,18 @@ title: Renta
 # Renta municipal (SERPAVI)
 
 Renta mediana de alquiler (€/m²/mes) por municipio, 2011–2024, fuente
-SERPAVI (MIVAU, explotación fiscal de fianzas de alquiler). Cubre 2,555
+SERPAVI (MIVAU, explotación fiscal de fianzas de alquiler). Cubre 2555
 municipios en 2024 (los que tienen suficientes contratos; municipios
 pequeños suprimidos).
 
 **Dos validaciones, con alcances distintos.** Frente a la serie DIBA de
 Barcelona (fuentes independientes, un solo ámbito provincial) la correlación es
-de 0.825 en niveles. Frente al índice de precios de alquiler del INE (IPVA,
-686 municipios en toda España) el acuerdo de **orden** es de 0.670, pero la
-**magnitud** de los cambios no: entre 2013 y 2023 SERPAVI sube +32,1% donde el
-IPVA sube +15,8%. Lee las tendencias de este gráfico como **ordinales**: quién
-sube más y quién menos, no cuánto exactamente.
+de 0,825 en niveles. En los 678 municipios con datos comparables de SERPAVI
+y del índice de precios de alquiler del INE (IPVA) entre 2013 y 2023,
+la correlación de rangos (Spearman) es de 0,670. Las medianas de las
+variaciones municipales difieren: +32,1% en SERPAVI y +15,8% en IPVA.
+El contraste respalda parcialmente el orden de las subidas en esa muestra,
+pero no confirma su magnitud como medida del encarecimiento a calidad constante.
 [Panorama nacional](/) · [Comparar territorios](/comparar/) · [Municipios](/municipios/) · [Alquiler/ingresos](/renta-ingresos/).
 
 ## Selecciona municipios

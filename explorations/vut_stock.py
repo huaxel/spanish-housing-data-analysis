@@ -1,24 +1,20 @@
-"""What the official tourist-dwelling register says, and what it cannot say.
+"""What INE’s experimental tourist-dwelling estimates can and cannot show.
 
 The repo's tourist claim is built on intensity panels (travellers and nights per
-resident), which measure *flow*. This script reads INE's municipal tourist
-dwelling register (VTE, operation 410, tables 39363/39366), which measures the
-*stock* — what the public debate is actually about — and reports it with its own
-accounting:
+resident), which measure *flow*. This script reads INE's experimental municipal
+tourist-dwelling estimates (VTE, operation 410, tables 39363/39366), a
+platform-based estimate of *stock* rather than *flow*:
 
 - national stock and beds in the latest snapshot, plus the path since 2020;
 - concentration: how much of the municipal stock sits in the top municipios;
 - official shares: INE's own "% of tourist dwellings over census dwellings",
   whose median and upper tail say how local the phenomenon is;
-- coverage: how many register rows can be joined to the repo's municipal
-  dimension, and how much stock that covers. INE ships no municipality code in
-  the data payload and 2,227 labels belong to more than one territory, so a
-  chunk of the stock is *not* assignable here — that is reported, never guessed.
+- coverage: how much estimated stock can be assigned to the repo's municipal
+  dimension. The payload lacks municipality codes, so ambiguous names are
+  left unassigned.
 
-Framing: a register counts what administrations have declared, not what exists.
-Every reading below is a floor on the true stock and says nothing about rents;
-the rent question is the panel in `panel_tourist.py`, which finds no
-intra-municipal association.
+These are filtered, deduplicated platform listings, not a licence count or
+a guaranteed lower bound. This analysis does not estimate rent effects.
 
 Outputs: artifacts/vut_stock.json with an `_meta` freshness key.
 Use --check to verify the artifact matches the pinned inputs.
@@ -118,7 +114,11 @@ def build() -> dict:
             "tables": [39363, 39366],
             "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39363",
             "publisher": "INE · Viviendas turísticas en España (VTE)",
-            "note": "register snapshot; declared tourist dwellings, a floor on the true stock",
+            "methodology_url": "https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm",
+            "note": (
+                "Semiannual estimates from deduplicated platform listings; "
+                "not a register of licensed dwellings"
+            ),
         },
         "snapshot": {"year": year, "period": period},
         "national": {

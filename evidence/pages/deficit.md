@@ -82,6 +82,13 @@ corresponden, pero no son la misma fecha exacta. Comparar niveles etiquetados
 2021–2024. [La operación oficial del parque](https://www.ine.es/dyngs/IOE/fichaProg.htm?cid=1259946014126)
 define la referencia a fin de diciembre.
 
+**Qué aporta el dato de enero de 2026.** La [ECP del INE](https://www.ine.es/jaxiT3/Tabla.htm?t=60131)
+registra **19.761.683 hogares en viviendas familiares** en España a 1 de enero de
+2026, **240.932 más** que a 1 de enero de 2025. Es el cambio entre los dos
+extremos del año natural 2025: por eso la ventana 2021–2025 usa ese dato de
+enero junto al parque de diciembre de 2025. Es un aumento neto observado,
+no una proyección ni un recuento de hogares que buscan vivienda.
+
 Fuentes: hogares ECP (INE), a principios de año; parque modelado (MIVAU), a
 fin de año; terminadas mensuales MIVAU, sumadas por año natural: vivienda
 libre más calificaciones definitivas de vivienda protegida, el criterio del

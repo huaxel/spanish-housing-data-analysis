@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import duckdb  # noqa: E402
 
 from spanish_housing import ols  # noqa: E402
-from spanish_housing.data_paths import PROCESSED  # noqa: E402
+from spanish_housing.data_paths import PROCESSED, RAW  # noqa: E402
 
 con = duckdb.connect(str(PROCESSED / "marts.duckdb"), read_only=True)
 ROOT = Path(__file__).resolve().parents[1]
@@ -237,6 +237,14 @@ def check_freshness() -> int:
     return failures
 
 
+def _ecp_households_sql(year: int) -> str:
+    source = str(RAW / "parquet/ecp_hog_ccaa.parquet").replace("'", "''")
+    return (
+        f"(SELECT hogares FROM read_parquet('{source}') "
+        f"WHERE territorio='Total Nacional' AND tamano='Total' AND anyo={year})"
+    )
+
+
 # (doc, description, sql, expected, tolerance)
 def _bcn_real_sql(municipio: str) -> str:
     """Real 2013-24 % change of Barcelona-metro sale €/m² (Cataluña CPI)."""
@@ -264,6 +272,20 @@ def _real_change_sql(municipio: str) -> str:
 
 
 CLAIMS: list[tuple[str, str, str, float, float]] = [
+    (
+        "deficit",
+        "national ECP households 1-Jan-2026",
+        f"SELECT {_ecp_households_sql(2026)}",
+        19_761_683,
+        0,
+    ),
+    (
+        "deficit",
+        "national net household growth during calendar 2025",
+        f"SELECT {_ecp_households_sql(2026)} - {_ecp_households_sql(2025)}",
+        240_932,
+        0,
+    ),
     (
         "synthesis",
         "IPV Nacional 2007",
@@ -2802,9 +2824,7 @@ PROH_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
 ]
 
-# Official tourist-dwelling register (INE VTE, municipal cut): the stock the
-# public debate is about, as declared. A register is a floor on the true stock,
-# so these pin what administrations report, not what exists.
+# INE VTE municipal estimates: platform-derived stock, not a licence register.
 VUT_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("vut_stock", "tourist dwellings (Spain)", "national.viviendas_turisticas", 341001, 0),
     ("vut_stock", "tourist beds (Spain)", "national.plazas", 1714702, 0),
@@ -2825,7 +2845,7 @@ VUT_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("vut_stock", "max municipal share pct", "shares.max_pct", 33.33, 0.005),
     ("vut_stock", "municipios above 5 pct", "shares.share_above_5pct", 5.34, 0.005),
     ("vut_stock", "municipios with a published share", "shares.n_municipios", 5278, 0),
-    ("vut_stock", "ambiguous labels in snapshot", "coverage.ambiguous_rows", 122, 0),
+    ("vut_stock", "stock rows with ambiguous labels", "coverage.ambiguous_rows", 122, 0),
     (
         "vut_stock",
         "assigned share of national stock pct",

@@ -3571,14 +3571,14 @@
     "data/raw/vut_municipal_39363.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/39363",
-      "note": "Register snapshot history, municipio grain (irregular reference months 2020-onwards); declared tourist dwellings under the current definition, not the true stock",
+      "note": "Semiannual estimates from deduplicated platform listings; not a register of licensed dwellings",
       "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
       "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39363"
     },
     "data/raw/vut_municipal_39366.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/39366",
-      "note": "Register snapshot history, municipio grain (irregular reference months 2020-onwards); declared tourist dwellings under the current definition, not the true stock",
+      "note": "Semiannual estimates from deduplicated platform listings; not a register of licensed dwellings",
       "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
       "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39366"
     },

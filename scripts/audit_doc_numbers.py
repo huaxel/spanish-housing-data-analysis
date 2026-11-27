@@ -131,7 +131,7 @@ ALLOW = {
     ],
     "docs/explorations/vut_stock.md": [
         (410.0, "INE operation id for VTE (identifier, not a result)"),
-        (39363.0, "INE table id for the municipal VUT register (identifier, not a result)"),
+        (39363.0, "INE table id for the municipal VUT estimates (identifier, not a result)"),
         (39366.0, "INE table id for the official share variable (identifier, not a result)"),
         (2024.0, "snapshot-month regime boundary in the prose (year label)"),
         (2.0, "cardinality word 'two provinces' in the prose, not a result"),
@@ -1307,7 +1307,10 @@ def doc_numbers(text: str) -> list[tuple[float, float, str]]:
         )
         # split digit-digit ranges on leftover hyphens: 2001-2025 -> pair
         norm = re.sub(r"(\d)-(\d)", r"\1 \2", norm)
-        # thousands separators first (1,147), then Spanish decimals (37,8)
+        # A leading zero cannot be a thousands group: 0,825 is a fraction.
+        # Do not rewrite a zero inside a larger number or a grouped count.
+        norm = re.sub(r"(?<![\d.,])0,(\d{3})(?!\d|,\d)", r"0.\1", norm)
+        # Then handle grouped thousands (1,147) and shorter decimals (37,8).
         norm = re.sub(r"(\d),(\d{3})(?!\d)", r"\1\2", norm)
         norm = re.sub(r"(\d),(\d{1,2})(?!\d)", r"\1.\2", norm)
         for m in re.finditer(r"[-+]?\d[\d,]*\.?\d*\s*[kM%]?(?![A-Za-z])", norm):

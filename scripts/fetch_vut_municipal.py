@@ -1,11 +1,11 @@
-"""Fetch INE's municipal tourist-dwelling register (VTE, operation 410).
+"""Fetch INE's experimental municipal tourist-dwelling estimates (VTE, operation 410).
 
 Two tables, both municipio-grain, each publishing the *snapshot history* of
-the register (irregular reference months — Feb/Aug before 2024, then
-May/Nov — from 2020 to the current release):
+the experiment (reference months changed from Feb/Aug to May/Nov
+in the second half of 2024):
 
 - 39363 `Viviendas turísticas, plazas, plazas por vivienda turística`: the
-  official count of tourist dwellings and beds per municipio;
+  experimental estimate of tourist dwellings and beds per municipio;
 - 39366 `Porcentaje de viviendas turísticas sobre el total de viviendas
   censadas`: the same stock as a share of census dwellings, i.e. INE's own
   denominator rather than one we invent.
@@ -15,12 +15,10 @@ Why the municipal cut matters here: the repo's tourist claim is built on
 stock. This table measures the stock — the thing the public debate is actually
 about ("cuántos pisos turísticos hay") — with official provenance.
 
-Semantics: a register snapshot of declared tourist dwellings under the current
-normative definition, refreshed monthly (the CCAA/provincial cut is already
-pinned by `fetch_turisticas.py` for its December snapshots; these municipal
-tables publish only the latest month, so no per-year history is kept).
-Under-registration is the known limitation of every such register: the count is
-what administrations have licensed/registered, not what exists.
+INE scrapes three platforms twice a year, applies eligibility rules and
+deduplicates across platforms. Listings without a valid licence may be
+included based on other observed characteristics. This is neither a list
+of licences nor a census of all tourist dwellings.
 
 Writes data/raw/vut_municipal_39363.json, data/raw/vut_municipal_39366.json
 (byte evidence) + data/raw/parquet/vut_municipal.parquet.
@@ -179,9 +177,8 @@ def main() -> None:
                     "url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table_id}",
                     "accessed": date.today().isoformat(),
                     "note": (
-                        "Register snapshot history, municipio grain (irregular reference "
-                        "months 2020-onwards); declared tourist dwellings under the current "
-                        "definition, not the true stock"
+                        "Semiannual estimates from deduplicated platform listings; "
+                        "not a register of licensed dwellings"
                     ),
                 },
             )

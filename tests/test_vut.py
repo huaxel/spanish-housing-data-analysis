@@ -1,4 +1,4 @@
-"""Tests for the municipal tourist-dwelling register fetch and its accounting."""
+"""Tests for the municipal tourist-dwelling estimate fetch and its accounting."""
 
 from __future__ import annotations
 
@@ -81,10 +81,14 @@ def test_artifact_reports_coverage_and_skew():
     cov = data["coverage"]
     sh = data["shares"]
     assert nat["viviendas_turisticas"] > 0 and nat["plazas"] > nat["viviendas_turisticas"]
-    # Municipal assignment can never exceed the national register.
+    # The assigned subset should not exceed the national estimate.
     assert 0 < cov["assigned_stock"] <= nat["viviendas_turisticas"]
     assert 0 < cov["assigned_share_of_national_pct"] <= 100
-    # The distribution is skewed by construction: median << p90 << max.
+    # The published shares in this vintage show a long right tail.
     assert sh["median_pct"] < sh["p90_pct"] < sh["max_pct"]
     assert 0 < sh["share_above_5pct"] < 100
+    assert (
+        data["source"]["methodology_url"]
+        == "https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm"
+    )
     assert data["_meta"]["script_sha"] and data["_meta"]["data_sha"]
