@@ -154,6 +154,23 @@ ni de que «no haya efecto». Si el conjunto aceptado toca un extremo de la
 rejilla, el aviso indica que puede extenderse más allá; si ningún candidato
 fue aceptado, no hay puntos probados que declarar (nulo, no cero).
 
+## Cuántas viviendas turísticas hay, según el registro
+
+El panel de intensidad turística mide **flujo** (viajeros y pernoctaciones por
+residente). El registro municipal del INE mide **stock**: en la última
+publicación hay **341.001 viviendas turísticas** declaradas (**1,28%** de las
+viviendas censadas) y 1.714.702 plazas. El fenómeno es local, no nacional: la
+mediana municipal es **0,61%**, el percentil 90 llega a **3,40%** y el máximo a
+**33,33%**; solo el **5,34%** de los municipios supera el 5%. Los diez mayores
+stocks concentran el **14,99%** del total asignable (Marbella, 6.987).
+
+Dos límites, ambos explícitos: un registro cuenta lo declarado —es un suelo, no
+un censo— y el INE no publica código de municipio en estos datos, así que
+**122** etiquetas del snapshot pertenecen a más de un territorio y quedan sin
+asignar (la cobertura asignada es del **84,52%** del stock nacional). Nada de
+esto convierte el nulo intra-municipal del panel en un efecto: son dos preguntas
+distintas. Detalle en la [nota metodológica](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/vut_stock.md).
+
 ## Dos series oficiales de alquiler que no coinciden en magnitud
 
 La incertidumbre no es solo muestral. SERPAVI (mediana de contratos depositados,

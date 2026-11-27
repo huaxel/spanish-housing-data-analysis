@@ -454,6 +454,7 @@
     "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
+    "data/raw/parquet/vut_municipal.parquet": "24d96a7836558b51a8138084e6b5f5c1d9449dab893ba503c5311579ef8b57f2",
     "data/raw/proh_54562.json": "90305c603f21b1a86c1007c0d2c9c73ee028e20c51b2fa914b9587a6866fb2f3",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
     "data/raw/rmdvp/202012_rmdvp01.xls": "aee6ba03a0ad7b1369e757941b69a0224d984bde97a80df018b8dae1d3db4133",
@@ -545,6 +546,8 @@
     "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
     "data/raw/valor_municipal_madrid.csv": "5b61a14a42e42210adb471784dac86648844c004367f1bca234379ecf5a13714",
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
+    "data/raw/vut_municipal_39363.json": "52fc75b853f219830dc950ece00d35b52383b72e3708d230f65b8e9ce0008717",
+    "data/raw/vut_municipal_39366.json": "3525a09bcb4b55f8f2eb59dc47c89b8b44cc41930a4136020bd51bd40e7bd299",
     "evidence/static/geo/sevilla_barrios.geojson": "bef1b37033d41b4c9a7aa35fe98a4245a73623dc789e8ac538ee5a6f7906c396"
   },
   "snapshot_date": "2026-11-27",
@@ -3085,6 +3088,11 @@
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
     },
+    "data/raw/parquet/vut_municipal.parquet": {
+      "accessed": "2026-11-27",
+      "note": "Derived from the pinned vut_municipal_3936*.json by fetch_vut_municipal.py",
+      "publisher": "INE · VTE municipal"
+    },
     "data/raw/proh_54562.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/54562?date=20260101:20401231",
@@ -3559,6 +3567,20 @@
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
+    },
+    "data/raw/vut_municipal_39363.json": {
+      "accessed": "2026-11-27",
+      "api": "wstempus/DATOS_TABLA/39363",
+      "note": "Register snapshot history, municipio grain (irregular reference months 2020-onwards); declared tourist dwellings under the current definition, not the true stock",
+      "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39363"
+    },
+    "data/raw/vut_municipal_39366.json": {
+      "accessed": "2026-11-27",
+      "api": "wstempus/DATOS_TABLA/39366",
+      "note": "Register snapshot history, municipio grain (irregular reference months 2020-onwards); declared tourist dwellings under the current definition, not the true stock",
+      "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39366"
     },
     "evidence/static/geo/sevilla_barrios.geojson": {
       "accessed": "2026-11-27",

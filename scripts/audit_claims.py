@@ -165,6 +165,12 @@ MODEL_FRESHNESS = [
         "artifacts/proh_households.json",
         "explorations/proh_households.py",
     ),
+    # Official tourist-dwelling stock (INE VTE municipal), added 2026-11-27.
+    (
+        "vut_stock",
+        "artifacts/vut_stock.json",
+        "explorations/vut_stock.py",
+    ),
 ]
 
 
@@ -2796,6 +2802,39 @@ PROH_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ),
 ]
 
+# Official tourist-dwelling register (INE VTE, municipal cut): the stock the
+# public debate is about, as declared. A register is a floor on the true stock,
+# so these pin what administrations report, not what exists.
+VUT_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("vut_stock", "tourist dwellings (Spain)", "national.viviendas_turisticas", 341001, 0),
+    ("vut_stock", "tourist beds (Spain)", "national.plazas", 1714702, 0),
+    ("vut_stock", "beds per tourist dwelling", "national.plazas_por_vivienda", 5.03, 0.005),
+    ("vut_stock", "share of census dwellings pct", "national.pct_censadas", 1.28, 0.005),
+    ("vut_stock", "first snapshot stock", "path.first_value", 321496, 0),
+    ("vut_stock", "change since first snapshot pct", "path.change_pct", 6.07, 0.005),
+    ("vut_stock", "top municipio stock", "concentration.top_municipio_vut", 6987, 0),
+    (
+        "vut_stock",
+        "top-10 share of assigned stock pct",
+        "concentration.top10_share_of_assigned_pct",
+        14.99,
+        0.005,
+    ),
+    ("vut_stock", "median municipal share pct", "shares.median_pct", 0.61, 0.005),
+    ("vut_stock", "p90 municipal share pct", "shares.p90_pct", 3.4, 0.005),
+    ("vut_stock", "max municipal share pct", "shares.max_pct", 33.33, 0.005),
+    ("vut_stock", "municipios above 5 pct", "shares.share_above_5pct", 5.34, 0.005),
+    ("vut_stock", "municipios with a published share", "shares.n_municipios", 5278, 0),
+    ("vut_stock", "ambiguous labels in snapshot", "coverage.ambiguous_rows", 122, 0),
+    (
+        "vut_stock",
+        "assigned share of national stock pct",
+        "coverage.assigned_share_of_national_pct",
+        84.52,
+        0.005,
+    ),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -2906,6 +2945,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(PROH_CLAIMS)
+    vut = _model_output("artifacts/vut_stock.json")
+    for doc, desc, path, expected, tol in VUT_CLAIMS:
+        got = _json_path(vut, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(VUT_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)

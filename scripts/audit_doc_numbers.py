@@ -45,6 +45,7 @@ COVERED_DOCS = [
     "docs/explorations/catalonia_rent_control.md",
     "docs/explorations/ipva_rent_index.md",
     "docs/explorations/proh_households.md",
+    "docs/explorations/vut_stock.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
     "docs/explorations/panel_tourist.md",
@@ -123,6 +124,14 @@ ALLOW = {
     "evidence/pages/microsimulacion.md": [
         (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
         (52.7, "complement of the pinned 47.3% Q1-Q2 relief share (-5% cap scenario)"),
+    ],
+    "docs/explorations/vut_stock.md": [
+        (410.0, "INE operation id for VTE (identifier, not a result)"),
+        (39363.0, "INE table id for the municipal VUT register (identifier, not a result)"),
+        (39366.0, "INE table id for the official share variable (identifier, not a result)"),
+        (2024.0, "snapshot-month regime boundary in the prose (year label)"),
+        (2.0, "cardinality word 'two provinces' in the prose, not a result"),
+        (10.0, "'top ten' cardinality in the prose, not a result"),
     ],
     "docs/explorations/proh_households.md": [
         (70.0, "INE operation id for PROH (identifier, not a result)"),
@@ -1212,6 +1221,7 @@ def audit_total() -> int:
         "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
         "IPVA_CLAIMS": audit_claims.IPVA_CLAIMS,
         "PROH_CLAIMS": audit_claims.PROH_CLAIMS,
+        "VUT_CLAIMS": audit_claims.VUT_CLAIMS,
     }
     total = 0
     seen_lists: set[str] = set()
