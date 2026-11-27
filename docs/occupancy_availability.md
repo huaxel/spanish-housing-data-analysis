@@ -313,7 +313,7 @@ framing complements RMDVP registered demand at national survey grain;
 CaixaBank's province deficit (household creation minus completions in
 several variants) is now implemented as a derived series, not a source
 pull — see the [deficit exploration](explorations/deficit_vivienda.md).
-Reproduced: finished-dwellings variant from MIVAU VDP005 plus a
+Reproduced: finished-dwellings variant from MIVAU VDP005/VDP007 plus a
 tourist-adjusted partial; not reproduced: visados variant and the
 foreign-buyer adjustment.
 

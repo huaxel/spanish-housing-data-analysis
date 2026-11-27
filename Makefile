@@ -53,7 +53,6 @@ fetch:
 	uv run python scripts/fetch_ecv_access.py
 	uv run python scripts/fetch_cadastre_stock.py
 	uv run python scripts/fetch_cadastre_capitals.py
-	uv run python scripts/fetch_cadastre_province.py
 	uv run python scripts/fetch_aeat_viviendas.py
 	uv run python scripts/fetch_censo_secciones.py
 	uv run python scripts/fetch_rmdvp.py
@@ -61,6 +60,7 @@ fetch:
 	uv run python scripts/fetch_adrh.py
 	uv run python scripts/fetch_sevilla_income.py
 	uv run python scripts/build_sevilla_2021.py
+	uv run python scripts/fetch_cadastre_province.py
 	uv run python scripts/build_ecv_joint.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):

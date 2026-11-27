@@ -94,6 +94,18 @@ COVERED_DOCS = [
 # parameters, census anchors quoted for provenance rather than as findings.
 # Each entry: (value, reason). Years 1990-2030 are skipped globally.
 ALLOW = {
+    "evidence/pages/deficit.md": [
+        (1134.0, "dated correction: superseded 2024 protected completions"),
+        (14371.0, "bulletin 2024 table 1.2; data side checked by fetch BULLETIN, prose not"),
+        (646035.0, "dated correction: superseded v2 gap 2021-2024"),
+        (804905.0, "dated correction: superseded v2 gap 2021-2025"),
+    ],
+    "docs/explorations/deficit_vivienda.md": [
+        (1134.0, "dated correction: superseded 2024 protected completions"),
+        (14371.0, "bulletin 2024 table 1.2; data side checked by fetch BULLETIN, prose not"),
+        (646035.0, "dated correction: superseded v2 gap 2021-2024"),
+        (804905.0, "dated correction: superseded v2 gap 2021-2025"),
+    ],
     "docs/uncertainty.md": [
         (1.96, "normal critical value in existing panel_tourist interval construction"),
         (95.0, "nominal confidence level of normal approximation, not an empirical finding"),
@@ -1175,6 +1187,17 @@ def audit_total() -> int:
     return total
 
 
+# Pages that write thousands as 607.250. Without normalising, the number reads as
+# 607.25 and can only be allowlisted, which unpins it from the audited claim.
+SPANISH_THOUSANDS = {"evidence/pages/deficit.md"}
+
+
+def join_spanish_thousands(text: str) -> str:
+    text = re.sub(r"https?://\S+", " ", text)
+    pattern = r"(?<![\w.,])\d{1,3}(?:\.\d{3})+(?![\d.]*\d)"
+    return re.sub(pattern, lambda m: m.group(0).replace(".", ""), text)
+
+
 def doc_numbers(text: str) -> list[tuple[float, float, str]]:
     """Extract (value, rounding-slack, context-line) triples from markdown.
 
@@ -1263,6 +1286,8 @@ def main() -> int:
         text = (ROOT / rel).read_text()
         allowed = [(v, why) for v, why in ALLOW.get(rel, [])]
         unmatched = []
+        if rel in SPANISH_THOUSANDS:
+            text = join_spanish_thousands(text)
         for val, slack, ctx in doc_numbers(text):
             if val == int(val) and 1990 <= val <= 2030:
                 continue  # calendar years are not results

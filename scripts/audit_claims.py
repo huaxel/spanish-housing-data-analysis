@@ -3491,15 +3491,15 @@ def main() -> int:
     total += 38
     dv = _model_output("artifacts/deficit_vivienda.json")
     for desc, path, expected, tol in (
-        ("deficit v2 2021-2024", "windows.2021-2024.national.deficit_v2", 646035, 0),
-        ("deficit v2 2021-2025", "windows.2021-2025.national.deficit_v2", 804905, 0),
-        ("deficit v3p 2021-2024", "windows.2021-2024.national.deficit_v3p", 591068, 0),
-        ("deficit v3p 2021-2025", "windows.2021-2025.national.deficit_v3p", 796637, 0),
-        ("deficit top5 share 2021-2024", "windows.2021-2024.national.top5_share", 0.49, 0.00005),
+        ("deficit v2 2021-2024", "windows.2021-2024.national.deficit_v2", 607250, 0),
+        ("deficit v2 2021-2025", "windows.2021-2025.national.deficit_v2", 754613, 0),
+        ("deficit v3p 2021-2024", "windows.2021-2024.national.deficit_v3p", 552283, 0),
+        ("deficit v3p 2021-2025", "windows.2021-2025.national.deficit_v3p", 746345, 0),
+        ("deficit top5 share 2021-2024", "windows.2021-2024.national.top5_share", 0.4827, 0.00005),
         ("deficit benchmark v2 2021-2024", "windows.2021-2024.benchmark.caixabank_v2", 600000, 0),
         ("deficit benchmark v2 2021-2025", "windows.2021-2025.benchmark.caixabank_v2", 734000, 0),
-        ("deficit delta v2 2021-2024", "windows.2021-2024.benchmark.delta", 46035, 0),
-        ("deficit delta v2 2021-2025", "windows.2021-2025.benchmark.delta", 70905, 0),
+        ("deficit delta v2 2021-2024", "windows.2021-2024.benchmark.delta", 7250, 0),
+        ("deficit delta v2 2021-2025", "windows.2021-2025.benchmark.delta", 20613, 0),
     ):
         got = _json_path(dv, path)
         ok = got is not None and abs(got - expected) <= tol

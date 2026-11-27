@@ -2,16 +2,23 @@
 
 The `/deficit/` page compares household growth, finished dwellings and net
 modelled stock growth over the existing exploration's two calendar-year
-windows. It adds no causal estimator, forecast, tourist adjustment or new
-source fetch. It preserves the existing exploration and its published-number
-comparisons; see [the original note](explorations/deficit_vivienda.md).
+windows. The page itself adds no causal estimator, forecast, tourist
+adjustment or source fetch beyond the exploration's inputs, and keeps its
+published-number comparisons; see [the original note](explorations/deficit_vivienda.md).
+
+The completion inputs were corrected on 2026-11-26 (see [the original
+note](explorations/deficit_vivienda.md#correction-2026-11-26-protected-completions)).
+With them the two national residuals are close. That is not independent
+confirmation: the park estimate itself incorporates construction activity and
+may draw on the same administrative records (not checked here).
 
 ## Timing contract
 
 For calendar years `a..b`, inclusive:
 
 - ECP household change is January 1 of `b+1` minus January 1 of `a`.
-- Finished dwellings sum monthly flows in years `a..b`, Libre + Protegida.
+- Finished dwellings sum monthly flows in years `a..b`: free-market
+  completions (VDP005_01) plus protected final approvals (VDP007_01).
 - Net park change is December 31 of `b` minus December 31 of `a-1`.
 
 The stock convention follows the official [INE statistical-programme entry
@@ -88,9 +95,9 @@ cell grids. There is no silent complete-case geographic reweighting.
   observed and missing monthly cells remain visible; coverage is not hidden
   by omitting affected provinces.
 
-The exploration's previous residual values remain traceable, but where there
-are missing monthly cells they are shown as subtotal-based bounds, not as
-complete totals. This page does not alter the older artifact or its audits.
+Where there are missing monthly cells, residuals are shown as subtotal-based
+bounds, not as complete totals. The page does not itself alter the artifact or
+its audits; the 2026-11-26 input correction regenerated both.
 
 ## Permitted interpretation
 

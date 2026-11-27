@@ -1,6 +1,6 @@
 {
-  "manifest_sha256": "c8ce63265a56d951a1e15302586e6395aa9bece0d1057e9a049ce18582ee64ac",
-  "snapshot_date": "2026-10-10",
+  "manifest_sha256": "f2066a1e529b4dcced7e3cca9605cb8eff4bed4d39823a77cfef3a8e4a190e72",
+  "snapshot_date": "2026-11-26",
   "sources": {
     "data/raw/adrh_renta_municipal.csv": {
       "accessed": "2026-10-10",
@@ -50,10 +50,16 @@
       "sha256": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/80271"
     },
+    "data/raw/mivau_calificaciones.csv": {
+      "accessed": "2026-11-26",
+      "publisher": "MIVAU, vivienda protegida y rehabilitación (VDP007_01)",
+      "sha256": "7749472a8d28843a563f858d2c31c398bda58c0c491328a1dbf03e3b49cbf822",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP007_01.csv"
+    },
     "data/raw/mivau_iniciadas_terminadas.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-26",
       "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)",
-      "sha256": "42a7fed7f1a33efb3699b87736bd5aacd3b5b9159ec21c3d7aabe36899b501b2",
+      "sha256": "c33f8bce61cc886f99ea5cf867f5ffd0afc09e709dd21c663b7a5782554817b3",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP005_01.csv"
     },
     "data/raw/padron_ccaa.json": {

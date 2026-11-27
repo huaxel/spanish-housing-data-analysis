@@ -13,6 +13,12 @@ ni cuánto bajarían los precios.
 [Reportaje](/reportaje/) · [Tu municipio](/perfil/) · [Stock y acceso](/acceso/) ·
 [Panorama nacional](/)
 
+**Corrección (26 de noviembre de 2026).** Antes se usaban unas cifras de
+vivienda protegida terminada muy inferiores a las del boletín del propio
+Ministerio (2024: 1.134 frente a 14.371). Con las calificaciones definitivas,
+el saldo nacional de hogares menos terminadas pasa de 646.035 a 607.250
+(2021–2024) y de 804.905 a 754.613 (2021–2025).
+
 ```sql ventanas_deficit
 select distinct window_key, flow_start, flow_end,
        replace(window_key, '-', '–') || ' (años completos)' as etiqueta
@@ -60,8 +66,13 @@ corresponden, pero no son la misma fecha exacta. Comparar niveles etiquetados
 define la referencia a fin de diciembre.
 
 Fuentes: hogares ECP (INE), a principios de año; parque modelado (MIVAU), a
-fin de año; terminadas mensuales MIVAU, vivienda libre y protegida, sumadas
-por año natural. Los cambios de parque incluyen el balance modelado de altas
+fin de año; terminadas mensuales MIVAU, sumadas por año natural: vivienda
+libre más calificaciones definitivas de vivienda protegida, el criterio del
+[boletín anual 2024 del Ministerio](https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/vivienda-agenda-urbana/Documents/2025/040725-ObservatoriodeviviendaysueloBoletnanual24.pdf)
+(tabla 1.2). Los totales nacionales coinciden con esa tabla de 2008 a 2024;
+2025 no está contrastado con ella. El parque estimado también recoge la obra
+terminada y puede usar los mismos registros (no comprobado): que dos saldos se
+parezcan no es una confirmación independiente. Los cambios de parque incluyen el balance modelado de altas
 y bajas, no solo obra nueva. Las revisiones y anclajes censales tampoco son
 movimientos orgánicos observados. Los últimos datos de hogares y terminadas
 pueden ser provisionales y revisarse.
@@ -82,7 +93,7 @@ select 'Terminadas: suma publicada', completions_observed from ${seleccion_defic
 
 <EvidencePanel data={cantidades_deficit} chart="deficit-cantidades"
   columns={["concepto", "unidades"]}
-  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv", "data/raw/mivau_calificaciones.csv"]}
   definition="Cambio neto de hogares, cambio neto de parque y suma publicada de viviendas terminadas para la ventana y provincia seleccionadas."
   coverage="Fechas y celdas faltantes se muestran en la ficha. Con huecos, terminadas es subtotal y no total; los cambios netos no equivalen a hogares formados ni a obra nueva." />
 
@@ -120,7 +131,12 @@ suma publicada de terminadas es solo un mínimo de ese flujo, porque sus
 recuentos son no negativos. Por eso la resta de hogares menos esa suma es una
 **cota superior del saldo**, no un saldo exacto ni una cota del número de
 casas que faltan. Si no hay ninguna observación, incluso la suma publicada
-queda vacía. Un cero publicado sí se conserva.
+queda vacía. Un cero publicado sí se conserva. En las calificaciones
+definitivas de vivienda protegida no hay celdas vacías, pero un cero puede ser
+falta de información: en Canarias, de julio a diciembre de 2022, figuran como
+cero mientras otros apartados del mismo fichero están vacíos para esos meses.
+Se conserva el valor publicado; así que «cobertura completa» significa que
+todas las celdas traen un valor, no que todas las regiones hayan informado.
 
 ## Dos restas, no dos estimaciones de casas necesarias
 
@@ -137,7 +153,7 @@ from ${seleccion_deficit}
 
 <EvidencePanel data={saldos_deficit} chart="deficit-saldos"
   columns={["definicion", "saldo"]}
-  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv"]}
+  files={["data/raw/parque_viviendas.csv", "data/raw/ecp_hog_prov.json", "data/raw/mivau_iniciadas_terminadas.csv", "data/raw/mivau_calificaciones.csv"]}
   definition="Dos restas descriptivas: hogares menos cambio neto de parque y hogares menos terminadas."
   coverage="El saldo de terminadas es nulo si hay celdas faltantes; la cota superior se muestra aparte. Se conservan saldos negativos. Ninguna resta cuenta viviendas necesarias ni estima efectos de precios." />
 
@@ -180,8 +196,9 @@ Son acumulados de distinta duración, **no tasas anuales ni una previsión**.
 Ampliar la ventana añade actividad y puede incorporar datos más provisionales.
 No se ajustan los resultados para que coincidan con una cifra externa.
 La [exploración original](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/deficit_vivienda.md)
-documenta diferencias de ventana, versión y cobertura frente a CaixaBank
-Research. Aquí se conserva su aritmética de hogares menos terminadas como
+compara estas cifras con las de CaixaBank
+Research y señala lo que no coincide; las diferencias restantes no se han
+descompuesto. Aquí se conserva su aritmética de hogares menos terminadas como
 subtotal/cota cuando hay huecos, sin presentarla como una reproducción exacta
 de sus estimaciones ni como hogares sin vivienda.
 

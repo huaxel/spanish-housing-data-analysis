@@ -1,8 +1,8 @@
 """Fetch INE IPV medias anuales por CCAA (Tempus3 table 80271).
 
 Operation: IPV (Id 15), "Índices por CCAA: general, vivienda nueva y de
-segunda mano. Medias anuales". Base 2015 (re-basing to 2025 in progress —
-see docs/methods.md; do NOT splice vintages silently).
+segunda mano. Medias anuales". Base 2025 (2025 = 100; see docs/methods.md;
+do NOT splice vintages silently).
 Series Nombre pattern: "{Territorio}. Media anual. {General|Vivienda nueva|
 Vivienda segunda mano}. [+ Variación anual ...]" — only index levels kept.
 Writes data/raw/ipv_ccaa_anual.json (raw API) + data/raw/parquet/ipv_ccaa_anual.parquet
