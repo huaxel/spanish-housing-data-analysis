@@ -64,6 +64,8 @@ fetch:
 	uv run python scripts/build_ecv_joint.py
 	# Catalonia rent-control evaluation inputs (INCASÒL deposits + BOE ZMRT lists).
 	uv run python scripts/fetch_catalonia_rent_control.py
+	# INE statutory rent-update reference index (IRAV, operation 481).
+	uv run python scripts/fetch_irav.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
@@ -101,6 +103,8 @@ verify:
 	uv run python scripts/fetch_catalonia_rent_control.py --check
 	uv run python explorations/catalonia_rent_control.py --check
 	uv run python scripts/build_ecv_microsim.py --check
+	uv run python scripts/fetch_irav.py --check
+	uv run python scripts/build_irav_index.py --check
 	uv run python scripts/build_claim_ledger.py --check
 
 audit: audit-docs
@@ -178,6 +182,7 @@ analysis:
 	# producer above. Seconds, not minutes (the parquet is already built).
 	uv run python explorations/catalonia_rent_control.py
 	uv run python scripts/build_ecv_microsim.py
+	uv run python scripts/build_irav_index.py
 	uv run python scripts/build_claim_ledger.py
 
 stock-rent:
@@ -244,6 +249,7 @@ evidence-build:
 	uv run python scripts/export_chart_provenance.py
 	uv run python explorations/catalonia_rent_control.py
 	uv run python scripts/build_ecv_microsim.py
+	uv run python scripts/build_irav_index.py
 	uv run python scripts/build_claim_ledger.py
 	cd evidence && npm run build
 	uv run python scripts/fix_build_meta.py

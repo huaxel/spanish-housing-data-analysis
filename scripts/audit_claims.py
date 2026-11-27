@@ -146,6 +146,13 @@ MODEL_FRESHNESS = [
         "artifacts/claim_ledger.json",
         "scripts/build_claim_ledger.py",
     ),
+    # INE statutory rent-update reference (IRAV), added 2026-11-27. Keyed to
+    # the pinned monthly series, so a new INE release invalidates the pins.
+    (
+        "irav_index",
+        "artifacts/irav.json",
+        "scripts/build_irav_index.py",
+    ),
 ]
 
 
@@ -2608,6 +2615,20 @@ LEDGER_CLAIMS: list[tuple[str, str, str, str, float, float]] = [
     ),
 ]
 
+# INE rent-update reference index (IRAV): the statutory ceiling for updating an
+# existing lease, national and monthly. Path-based against artifacts/irav.json,
+# like the policy/microsim lists. INE publishes a rolling 24-month window, so
+# these pins move with each release: `make fetch` and this list are updated
+# together (the audit fails loudly instead of drifting).
+IRAV_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("politica", "IRAV published window (months)", "window.months", 24, 0),
+    ("politica", "IRAV latest annual variation", "latest.irav_pct", 2.57, 0.005),
+    ("politica", "IRAV window minimum", "bounds.min.irav_pct", 1.98, 0.005),
+    ("politica", "IRAV window maximum", "bounds.max.irav_pct", 2.57, 0.005),
+    ("politica", "IRAV 2025 mean annual variation", "annual_means.1.mean_pct", 2.15, 0.005),
+    ("politica", "IRAV 2026 mean annual variation", "annual_means.2.mean_pct", 2.42, 0.005),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -2697,6 +2718,13 @@ def main() -> int:
             print(f"    ({len(hits)} bridge rows match {claim_id} / {needle!r})")
         failures += not ok
     total += len(LEDGER_CLAIMS)
+    irav = _model_output("artifacts/irav.json")
+    for doc, desc, path, expected, tol in IRAV_CLAIMS:
+        got = _json_path(irav, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(IRAV_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)

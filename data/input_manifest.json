@@ -210,6 +210,7 @@
     "data/raw/ine_ecv_2025.zip": "bf4f2751ac247957f6edcf02cfd85a3931785b0932b1291e8972a33ad490f617",
     "data/raw/ipc_ccaa.json": "bb9cc2f9c6b884e511aa3bebe622761ab9c03a712cdab1716a1cf493c7397874",
     "data/raw/ipv_ccaa_anual.json": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
+    "data/raw/irav_72975.json": "465a485395ce9e0df58cb0994f09d0d2ead11adc42cdf64092c3133b48229725",
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
     "data/raw/mivau_calificaciones.csv": "7749472a8d28843a563f858d2c31c398bda58c0c491328a1dbf03e3b49cbf822",
     "data/raw/mivau_iniciadas_terminadas.csv": "c33f8bce61cc886f99ea5cf867f5ffd0afc09e709dd21c663b7a5782554817b3",
@@ -423,6 +424,7 @@
     "data/raw/parquet/housing_overburden_age_poverty.parquet": "8c1ff717278998b468675d4084d1a6bdf3632817465e1f0e955487a679773cff",
     "data/raw/parquet/ipc_ccaa.parquet": "5b2e2070ea2b05eebe6c34e3292eb195b636906c885d95e8df8a6e9d788f9651",
     "data/raw/parquet/ipv_ccaa_anual.parquet": "6dc32de53a18850f11773834b7455a1ecda921b88d8916687f5e9324167e9c34",
+    "data/raw/parquet/irav.parquet": "10aac58cc0db88e2203d170ed515d9e4249bc00041bf547ef325f6c1d78e80d9",
     "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
     "data/raw/parquet/mivau_terminadas.parquet": "3c8e6e907aa37f49c437bbc7dfc1c0aaaa834d1eecebe7a02d47fde4b8f9910a",
     "data/raw/parquet/padron_ccaa.parquet": "495e970541579aa086c3f0ddf760b600734f4b73d672a1fec2aa8e844e07cf4d",
@@ -1788,6 +1790,13 @@
       "api": "wstempus/DATOS_TABLA/80271",
       "operation": "IPV"
     },
+    "data/raw/irav_72975.json": {
+      "accessed": "2026-11-27",
+      "api": "wstempus/DATOS_TABLA/72975",
+      "note": "National monthly annual variation from 2024-01; statutory rent-update reference (Ley 12/2023)",
+      "publisher": "INE · Índice de Referencia de Arrendamientos de Vivienda (IRAV)",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=72975"
+    },
     "data/raw/migracion_flujos.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/24322",
@@ -2897,6 +2906,11 @@
       "api": "wstempus/DATOS_TABLA/80271",
       "note": "parsed index levels only",
       "operation": "IPV"
+    },
+    "data/raw/parquet/irav.parquet": {
+      "accessed": "2026-11-27",
+      "note": "Derived from pinned irav_72975.json by fetch_irav.py",
+      "publisher": "INE · Índice de Referencia de Arrendamientos de Vivienda (IRAV)"
     },
     "data/raw/parquet/migracion_flujos.parquet": {
       "accessed": "2026-11-27",

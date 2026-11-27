@@ -113,6 +113,8 @@ ALLOW = {
     ],
     "evidence/pages/politica.md": [
         (140.0, "BOE Wave 1 declared municipality count; fetch --check matches 140/140"),
+        (481.0, "INE operation id for the IRAV (identifier, not a result)"),
+        (72975.0, "INE table id for the IRAV (identifier, not a result)"),
         (947.0, "Catalan municipalities with INCASOL rows (coverage count)"),
         (999.0, "wild cluster bootstrap replicate parameter (WILD_REPS)"),
     ],
@@ -1194,6 +1196,7 @@ def audit_total() -> int:
         "POLICY_EVAL_CLAIMS": audit_claims.POLICY_EVAL_CLAIMS,
         "MICROSIM_CLAIMS": audit_claims.MICROSIM_CLAIMS,
         "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
+        "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
     }
     total = 0
     seen_lists: set[str] = set()

@@ -1,0 +1,4 @@
+name: irav
+type: duckdb
+options:
+  filename: '../../../data/processed/irav.duckdb'

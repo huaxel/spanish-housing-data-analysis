@@ -1,5 +1,5 @@
 {
-  "manifest_sha256": "780a221cf6c2b26ec72594aeee75ce8a6d36fa63c22e8c858a9711ac07886f85",
+  "manifest_sha256": "36b404d1c2e20e967fd45adbc868e4b6e2cbbe56e56d66a42d60126a09b7c7df",
   "snapshot_date": "2026-11-27",
   "sources": {
     "data/raw/adrh_renta_municipal.csv": {
@@ -85,6 +85,12 @@
       "publisher": "INE · IPV",
       "sha256": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/80271"
+    },
+    "data/raw/irav_72975.json": {
+      "accessed": "2026-11-27",
+      "publisher": "INE · Índice de Referencia de Arrendamientos de Vivienda (IRAV)",
+      "sha256": "465a485395ce9e0df58cb0994f09d0d2ead11adc42cdf64092c3133b48229725",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=72975"
     },
     "data/raw/mivau_calificaciones.csv": {
       "accessed": "2026-11-27",

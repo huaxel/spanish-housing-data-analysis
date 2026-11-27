@@ -150,6 +150,48 @@ order by rel_q
   definition="Coeficientes dinámicos del estudio de eventos en log(renta) convertidos a porcentaje aproximado, con IC 95% agrupado por municipio."
   coverage="Diseño B (Ola 1 vs no tensionados activos), k = -8..+8 respecto a 2024Q2. Referencia normalizada en k = -1 (2024Q1)." />
 
+## 4. Qué permite subir el tope: el índice de referencia (IRAV)
+
+El tope no congela la renta: la Ley 12/2023 sustituye el IPC por el **Índice de
+Referencia de Arrendamientos de Vivienda (IRAV)** como referencia para la
+actualización anual de un contrato vigente. INE lo publica mensualmente, solo
+nacional, en una **ventana móvil de 24 meses** (la tabla no acumula historia:
+cada publicación retira el mes más antiguo), y la única variable publicada es la
+**variación anual**, no un nivel de índice.
+
+```sql irav_serie
+select periodo, variacion_anual_pct, anyo
+from irav.irav_serie
+order by anyo, periodo
+```
+
+<LineChart echartsOptions={ajusteGrafico()}
+  data={irav_serie}
+  x=periodo
+  y=variacion_anual_pct
+  yFmt="num2"
+  title="IRAV: variación anual de la referencia de actualización de rentas (%)"
+/>
+
+<EvidencePanel data={irav_serie} chart="politica-irav-serie"
+  columns={["periodo", "variacion_anual_pct"]}
+  files={["data/raw/irav_72975.json"]}
+  definition="Variación anual del Índice de Referencia de Arrendamientos de Vivienda (INE, operación 481, tabla 72975): la referencia legal para actualizar la renta de un contrato vigente."
+  coverage="Nacional, mensual, ventana móvil de 24 meses (2024-11 a 2026-10 en esta publicación). No es una renta observada ni un índice de precios de nuevos alquileres." />
+
+La referencia se ha movido en una banda estrecha: mínimo **+1,98%** (2025-03) y
+máximo **+2,57%** (2026-10, el último dato publicado). Su media mensual fue de
+**+2,15%** en 2025 y de **+2,42%** en los diez meses publicados de 2026, de modo
+que el techo de actualización se ha mantenido **por debajo del IPC general**
+(**+2,67%** en 2025): es el diseño explícito de la norma, no un hallazgo sobre
+precios de mercado.
+
+> **Cómo leerlo junto al resto de la página:** el IRAV es el techo de
+> actualización de un contrato que ya existe; las estimaciones DiD de arriba miden
+> la renta de **contratos nuevos**. Son dos márgenes distintos y no deben
+> compararse como si uno validara al otro: un tope puede moderar la actualización
+> anual y aun así no frenar la renta de entrada al mercado.
+
 ## Qué sí y qué no prueban estos datos
 
 - **Qué sí muestran:** la contención de rentas contractuales (−3,8% a −6,2%) y la
