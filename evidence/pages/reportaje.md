@@ -67,9 +67,10 @@ where ccaa in ('Madrid, Comunidad de', 'Cataluña', 'Galicia', 'Nacional')
 order by anyo, ccaa
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">La vivienda por habitante diverge entre comunidades</p>
+
 <LineChart data={stock_geo} x=anyo y=viv_por_1000_hab series=ccaa
-  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
-  title="La vivienda por habitante diverge entre comunidades" />
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true />
 
 <EvidencePanel data={stock_geo} chart="reportaje-stock-territorios"
   columns={["anyo", "ccaa", "viv_por_1000_hab"]}
@@ -164,9 +165,10 @@ select anyo, 'Hogares ECP (neto)' as serie, hogares_netos as unidades from cambi
 order by anyo, serie
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Cambios por año de actividad: hogares y parque neto</p>
+
 <BarChart data={aportes_anuales} x=anyo y=unidades series=serie
-  xFmt="0" xAxisTitle="Año de actividad" yFmt="num0"
-  title="Cambios por año de actividad: hogares y parque neto" />
+  xFmt="0" xAxisTitle="Año de actividad" yFmt="num0" />
 
 <EvidencePanel data={aportes_anuales} chart="reportaje-cambios-anuales"
   columns={["anyo", "serie", "unidades"]}
@@ -204,8 +206,10 @@ where ccaa != 'Nacional' and hogares_netos > 0
 order by viv_por_hogar_neto
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Parque neto por aumento neto de hogares · actividad 2021–2024</p>
+
 <BarChart data={cobertura_ccaa} x=ccaa y=viv_por_hogar_neto swapXY
-  yFmt="num2" title="Parque neto por aumento neto de hogares · actividad 2021–2024"
+  yFmt="num2"
   echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={cobertura_ccaa} chart="reportaje-parque-por-hogar"
@@ -226,9 +230,10 @@ where h.ccaa = 'Nacional' and h.anyo between 2021 and 2025
 order by h.anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Parque al cierre del año anterior / hogares ECP al inicio del año</p>
+
 <LineChart data={cierre} x=anyo y=viv_por_hogar
-  xFmt="0" xAxisTitle="Año de los hogares (1 de enero)" yFmt="num2" markers=true handleMissing="gap"
-  title="Parque al cierre del año anterior / hogares ECP al inicio del año" />
+  xFmt="0" xAxisTitle="Año de los hogares (1 de enero)" yFmt="num2" markers=true handleMissing="gap" />
 
 <EvidencePanel data={cierre} chart="reportaje-parque-hogares"
   columns={["anyo", "anyo_parque", "viviendas_total", "hogares", "viv_por_hogar"]}
@@ -260,8 +265,10 @@ union all
 select 'A disposición del titular', 100.0 * disposicion / total from base
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Uso declarado de viviendas de personas físicas, 2024 (%)</p>
+
 <BarChart data={aeat_usos} x=uso y=porcentaje swapXY
-  yFmt="num1" title="Uso declarado de viviendas de personas físicas, 2024 (%)"
+  yFmt="num1"
   echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={aeat_usos} chart="reportaje-uso-fiscal"
@@ -292,8 +299,10 @@ where breakdown = 'income'
 order by group_code
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Personas en hogares con sobrecarga de vivienda, por grupo de ingresos (%)</p>
+
 <BarChart data={carga_por_renta} x=group_label y=rate_pct swapXY
-  yFmt="num1" title="Personas en hogares con sobrecarga de vivienda, por grupo de ingresos (%)"
+  yFmt="num1"
   echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={carga_por_renta} chart="reportaje-sobrecarga"

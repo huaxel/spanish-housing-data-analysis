@@ -190,9 +190,10 @@ left join housing.perfil_alquiler a
 order by c.anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Alquiler mediano declarado · vivienda colectiva (€/m²/mes nominales)</p>
+
 <LineChart data={historia_alquiler_perfil} x=anyo y=eur_m2_mes
-  xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num2" markers=true handleMissing="gap"
-  title="Alquiler mediano declarado · vivienda colectiva (€/m²/mes nominales)" />
+  xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num2" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_alquiler_perfil} chart="perfil-alquiler"
   columns={["anyo", "eur_m2_mes", "contratos"]}
@@ -228,9 +229,10 @@ left join profile_income.municipal i
 order by c.anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">ADRH: renta neta media anual del hogar (euros nominales)</p>
+
 <LineChart data={historia_ingresos_perfil} x=anyo y=renta_neta_hogar
-  xFmt="0" xAxisTitle="Año de ingresos" yFmt="num0" markers=true handleMissing="gap"
-  title="ADRH: renta neta media anual del hogar (euros nominales)" />
+  xFmt="0" xAxisTitle="Año de ingresos" yFmt="num0" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_ingresos_perfil} chart="perfil-ingresos"
   columns={["anyo", "renta_neta_hogar"]}
@@ -267,9 +269,10 @@ left join access.rent_income r
 order by c.anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Proxy de mercado: alquiler mediano / renta neta media (%)</p>
+
 <LineChart data={historia_proxy_perfil} x=anyo y=ratio_pct
-  xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num1" markers=true handleMissing="gap"
-  title="Proxy de mercado: alquiler mediano / renta neta media (%)" />
+  xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num1" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_proxy_perfil} chart="perfil-proxy"
   columns={["anyo", "alquiler_med", "renta_neta_hogar", "ratio_pct"]}

@@ -59,9 +59,10 @@ where codigo in ('28079', '08019', '46250', '41091', '29067')
 order by anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Alquiler de firma como % de la renta neta media anual del hogar</p>
+
 <LineChart data={serie_proxy} x=anyo y=ratio_pct series=grupo
-  xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
-  title="Alquiler de firma como % de la renta neta media anual del hogar"/>
+  xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true/>
 
 El alquiler mediano de firma y la renta media municipal crecieron al
 mismo ritmo entre 2015 y 2023, así que la mediana del ratio es plana.
@@ -169,9 +170,10 @@ from access.rent_income
 where anyo = 2023 and contratos >= 50 and ratio_pct is not null
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Distribución municipal del ratio de firma (≥50 contratos)</p>
+
 <Histogram data={dist_proxy} x=ratio_pct xFmt="num1"
-  xAxisTitle="Ratio alquiler/renta 2023 (%)"
-  title="Distribución municipal del ratio de firma (≥50 contratos)"/>
+  xAxisTitle="Ratio alquiler/renta 2023 (%)"/>
 
 La cola derecha es el mapa del esfuerzo: once municipios — la costa
 malagueña, el cinturón de Barcelona y Pasaia — superan el 22% de la renta

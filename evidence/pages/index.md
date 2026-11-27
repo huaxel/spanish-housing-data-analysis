@@ -227,9 +227,10 @@ from housing.desahucios_provincia
 group by anyo order by anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Ejecuciones hipotecarias presentadas (nacional, desde 2007)</p>
+
 <LineChart data={ejecuciones_anual} x=anyo y=ejecuciones
-  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
-  title="Ejecuciones hipotecarias presentadas (nacional, desde 2007)"/>
+  xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true/>
 
 ```sql lanzamientos_pc_2024
 select d.provincia as provincia,
@@ -243,8 +244,10 @@ order by por_100k desc
 limit 12
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)</p>
+
 <BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k swapXY
-  yFmt="num0" title="Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)"
+  yFmt="num0"
   echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 ## Datos y cobertura

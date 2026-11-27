@@ -190,9 +190,10 @@ from pares p cross join elegidos e cross join ${medida_aplicada} m
 order by p.anyo, e.lado
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">La misma medida en los años publicados para ambos municipios</p>
+
 <LineChart data={serie_comun} x=anyo y=valor series=serie
-  xFmt="0" yFmt="num2" xAxisTitle="Año de la medida" handleMissing="gap" markers=true
-  title="La misma medida en los años publicados para ambos municipios" />
+  xFmt="0" yFmt="num2" xAxisTitle="Año de la medida" handleMissing="gap" markers=true />
 
 <EvidencePanel data={serie_comun} chart="comparar-municipios-serie"
   columns={["metrica", "unidad", "anyo", "lado", "codigo", "municipio", "serie", "valor"]}

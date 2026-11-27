@@ -272,8 +272,9 @@ select cohorte, orden, count(*) as registros,
 from clasificados group by cohorte, orden order by orden
 ```
 
-<BarChart data={cohortes_stock} x=cohorte y=registros yFmt="num0"
-  title="Registros BU con vivienda por año mínimo de construcción"/>
+<p class="text-sm font-bold mt-4 mb-1">Registros BU con vivienda por año mínimo de construcción</p>
+
+<BarChart data={cohortes_stock} x=cohorte y=registros yFmt="num0"/>
 
 <DataTable data={cohortes_stock} rows=7>
   <Column id=cohorte title="Año mínimo del registro"/>
@@ -319,8 +320,9 @@ group by era, orden
 order by orden
 ```
 
-<BarChart data={eras_inmuebles_stock} x=era y=inmuebles yFmt="num0"
-  title="Inmuebles declarados con vivienda por era de construcción BU"/>
+<p class="text-sm font-bold mt-4 mb-1">Inmuebles declarados con vivienda por era de construcción BU</p>
+
+<BarChart data={eras_inmuebles_stock} x=era y=inmuebles yFmt="num0"/>
 
 <DataTable data={eras_inmuebles_stock} rows=6>
   <Column id=era title="Era constructiva"/>
@@ -364,8 +366,9 @@ select intervalo, orden, count(*) as registros
 from clasificados group by intervalo, orden order by orden
 ```
 
-<BarChart data={superficies_stock} x=intervalo y=registros yFmt="num0"
-  title="Superficie bruta por registro BU con vivienda, todos sus usos"/>
+<p class="text-sm font-bold mt-4 mb-1">Superficie bruta por registro BU con vivienda, todos sus usos</p>
+
+<BarChart data={superficies_stock} x=intervalo y=registros yFmt="num0"/>
 
 Cada registro pesa igual y puede contener varias viviendas o construcciones.
 Esta distribución incluye los registros no asignados a barrios. No es una

@@ -243,9 +243,10 @@ where ambit = 'barri'
 order by anyo, barrio
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Alquiler contractual (€/m²/mes): barrios (desde 2013)</p>
+
 <LineChart data={serie_barris_bcn} x=anyo y=lloguer_m2 series=barrio
-  xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
-  title="Alquiler contractual (€/m²/mes): barrios (desde 2013)"/>
+  xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true/>
 
 <script>
   // Quarterly axes mark first quarters with the year; tooltips keep the quarter.
@@ -339,8 +340,10 @@ group by s.nom
 order by rendimiento desc
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado</p>
+
 <BarChart data={rendimiento_bcn} x=barrio y=rendimiento swapXY
-  yFmt="num1" title="Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado"
+  yFmt="num1"
   echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 Rentas de contratos nuevos sobre precios de escritura: la periferia rinde
@@ -360,10 +363,11 @@ where s.anyo <= 2024
 group by s.anyo order by s.anyo
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Rentabilidad bruta mediana (%): subió hasta 2023, cedió en 2024</p>
+
 <LineChart data={tendencia_yield_bcn} x=anyo y=mediana
   xFmt="0" xAxisTitle="Año (sin 2020: hueco de publicación)" yFmt="num1"
-  handleMissing="gap" markers=true
-  title="Rentabilidad bruta mediana (%): subió hasta 2023, cedió en 2024"/>
+  handleMissing="gap" markers=true/>
 
 ## Valencia: alquileres y vacancia, sin precios de venta
 
@@ -509,9 +513,10 @@ where distrito = '${inputs.distrito_ipra_sev.value}'
 order by anyo, barrio
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">IPRA (€/m² construido/mes; ventana móvil de 3 años)</p>
+
 <LineChart data={serie_ipra_sev} x=anyo y=ipra_eur_m2 series=barrio
-  xFmt="0" xAxisTitle="Ventana IPRA" yFmt="num2" handleMissing="gap" markers=true
-  title="IPRA (€/m² construido/mes; ventana móvil de 3 años)"/>
+  xFmt="0" xAxisTitle="Ventana IPRA" yFmt="num2" handleMissing="gap" markers=true/>
 
 ```sql compra_sim_sev
 select barrio, compra_colectiva_eur_m2, compra_unifamiliar_eur_m2
@@ -783,9 +788,10 @@ where provincia = '${inputs.prov_dist.value}'
 order by anyo, distrito
 ```
 
+<p class="text-sm font-bold mt-4 mb-1">Alquiler mediano colectiva (€/m²/mes): distritos censales</p>
+
 <LineChart data={serie_dist} x=anyo y=mediana_m2 series=distrito
-  xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
-  title="Alquiler mediano colectiva (€/m²/mes): distritos censales"/>
+  xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true/>
 
 ## Datos y cobertura
 

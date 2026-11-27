@@ -44,17 +44,19 @@ order by anyo, provincia
 
 ## Precios
 
+<p class="text-sm font-bold mt-4 mb-1">IPV general ({inputs.ccaa.value})</p>
+
 <LineChart
   data={ficha}
   x=anyo
   xFmt="0"
   xAxisTitle="Año"
   y=ipv_general
-  yFmt="num1"
-  title={"IPV general (" + inputs.ccaa.value + ")"}
-/>
+  yFmt="num1" />
 
 ## Stock y hogares
+
+<p class="text-sm font-bold mt-4 mb-1">Viviendas por 1.000 habitantes ({inputs.ccaa.value})</p>
 
 <LineChart
   data={ficha}
@@ -62,9 +64,9 @@ order by anyo, provincia
   xFmt="0"
   xAxisTitle="Año"
   y=viv_por_1000_hab
-  yFmt="num1"
-  title={"Viviendas por 1.000 habitantes (" + inputs.ccaa.value + ")"}
-/>
+  yFmt="num1" />
+
+<p class="text-sm font-bold mt-4 mb-1">Viviendas por hogar ({inputs.ccaa.value}, desde 2021)</p>
 
 <LineChart
   data={ficha}
@@ -72,14 +74,14 @@ order by anyo, provincia
   xFmt="0"
   xAxisTitle="Año"
   y=viv_por_hogar
-  yFmt="num2"
-  title={"Viviendas por hogar (" + inputs.ccaa.value + ", desde 2021)"}
-/>
+  yFmt="num2" />
 
 ## Valor tasado y esfuerzo de renta
 
 El valor tasado no es un precio de compraventa. El esfuerzo expresa años de
 renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
+
+<p class="text-sm font-bold mt-4 mb-1">Valor tasado vivienda libre, €/m² ({inputs.ccaa.value})</p>
 
 <LineChart
   data={ficha}
@@ -87,9 +89,9 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
   xFmt="0"
   xAxisTitle="Año"
   y=eur_m2_libre
-  yFmt="num0"
-  title={"Valor tasado vivienda libre, €/m² (" + inputs.ccaa.value + ")"}
-/>
+  yFmt="num0" />
+
+<p class="text-sm font-bold mt-4 mb-1">Años de renta neta para 90 m² ({inputs.ccaa.value})</p>
 
 <LineChart
   data={ficha}
@@ -97,11 +99,11 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
   xFmt="0"
   xAxisTitle="Año"
   y=afford_90m2_years
-  yFmt="num1"
-  title={"Años de renta neta para 90 m² (" + inputs.ccaa.value + ")"}
-/>
+  yFmt="num1" />
 
 ## Población joven
+
+<p class="text-sm font-bold mt-4 mb-1">Cuota de 20–34 años ({inputs.ccaa.value})</p>
 
 <LineChart
   data={ficha}
@@ -109,9 +111,7 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
   xFmt="0"
   xAxisTitle="Año"
   y=share_20_34
-  yFmt="pct1"
-  title={"Cuota de 20–34 años (" + inputs.ccaa.value + ")"}
-/>
+  yFmt="pct1" />
 
 ## Provincias
 
