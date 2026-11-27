@@ -23,8 +23,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-import audit_claims  # noqa: E402
-
 ROOT = Path(__file__).resolve().parents[1]
 
 COVERED_DOCS = [
@@ -1159,6 +1157,10 @@ def audit_total() -> int:
     `len(MODEL_FRESHNESS)` — that line runs after the "claims hold" print,
     so the printed total covers value claims only.
     """
+    # Imported here because it opens the data on import; text helpers in this
+    # module must stay usable (and testable) without data/.
+    import audit_claims
+
     src = (ROOT / "scripts" / "audit_claims.py").read_text()
     scope = {
         "CLAIMS": audit_claims.CLAIMS,
