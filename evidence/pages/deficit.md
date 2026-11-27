@@ -19,6 +19,25 @@ Ministerio (2024: 1.134 frente a 14.371). Con las calificaciones definitivas,
 el saldo nacional de hogares menos terminadas pasa de 646.035 a 607.250
 (2021–2024) y de 804.905 a 754.613 (2021–2025).
 
+<script>
+  // ECharts sizes axis labels with its fallback font unless the label names one,
+  // so long labels get clipped. Wrapping and short axis numbers keep them
+  // readable on narrow screens.
+  const opcionesBarras = {
+    grid: { right: 36 },
+    xAxis: {
+      splitNumber: 2,
+      axisLabel: {
+        fontFamily: 'Inter, sans-serif',
+        formatter: (v) => Math.abs(v) >= 1000
+          ? `${(v / 1000).toLocaleString('es-ES', { maximumFractionDigits: 2 })} mil`
+          : String(v)
+      }
+    },
+    yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif', width: 150, overflow: 'break' } }
+  };
+</script>
+
 ```sql ventanas_deficit
 select distinct window_key, flow_start, flow_end,
        replace(window_key, '-', '–') || ' (años completos)' as etiqueta
@@ -89,7 +108,8 @@ select 'Terminadas: suma publicada', completions_observed from ${seleccion_defic
 ```
 
 <BarChart data={cantidades_deficit} x=concepto y=unidades swapXY
-  yFmt="num0" title="Hogares, parque y terminadas: unidades, no porcentajes" />
+  yFmt="num0" title="Hogares, parque y terminadas, en unidades"
+  echartsOptions={opcionesBarras} />
 
 <EvidencePanel data={cantidades_deficit} chart="deficit-cantidades"
   columns={["concepto", "unidades"]}
@@ -149,7 +169,8 @@ from ${seleccion_deficit}
 ```
 
 <BarChart data={saldos_deficit} x=definicion y=saldo swapXY
-  yFmt="num0" title="Saldos descriptivos; el signo no identifica una necesidad de construcción" />
+  yFmt="num0" title="Dos saldos; no son casas necesarias"
+  echartsOptions={opcionesBarras} />
 
 <EvidencePanel data={saldos_deficit} chart="deficit-saldos"
   columns={["definicion", "saldo"]}

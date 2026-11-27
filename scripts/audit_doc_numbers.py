@@ -95,6 +95,7 @@ COVERED_DOCS = [
 # Each entry: (value, reason). Years 1990-2030 are skipped globally.
 ALLOW = {
     "evidence/pages/deficit.md": [
+        (150.0, "chart label wrap width in pixels, not a data claim"),
         (1134.0, "dated correction: superseded 2024 protected completions"),
         (14371.0, "bulletin 2024 table 1.2; data side checked by fetch BULLETIN, prose not"),
         (646035.0, "dated correction: superseded v2 gap 2021-2024"),

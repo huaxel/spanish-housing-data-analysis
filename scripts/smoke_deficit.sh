@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Real-browser contract for /deficit/: selector changes, dates, coverage, nulls.
+# Real-browser contract for /deficit/: selector changes, dates, coverage, nulls,
+# and chart text that fits at desktop, tablet and phone widths.
 # Usage: bash scripts/smoke_deficit.sh [BASE_URL]
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -82,6 +83,30 @@ output="$(playwright-cli -s="$SESSION" run-code "async (page) => {
  for(const phrase of ['Ninguna de las dos restas cuenta viviendas disponibles ni hogares sin casa',
    'Una celda ausente no es cero','cota superior del saldo','no tasas anuales ni una previsión'])
    if(!text.includes(phrase))throw Error('Missing caveat: '+phrase);
+ // Chart text must stay inside its chart, and axis numbers must not run together.
+ const layout=[];
+ // National totals give the longest axis numbers; the last case gives small ones.
+ for(const row of [cases[0],cases[cases.length-1]]){
+  await page.setViewportSize({width:1200,height:844});
+  await choose('Años de actividad',row.windowLabel);
+  await choose('España o provincia',row.label);
+  for(const size of [1200,768,390]){
+   await page.setViewportSize({width:size,height:844});
+   await page.waitForTimeout(1500);
+   layout.push(...await page.evaluate(size=>Object.values(window[Symbol.for('__evidence-chart-window-debug__')]||{}).map(chart=>{
+     const texts=chart.getZr().storage.getDisplayList(true).filter(el=>el.type==='tspan'&&!el.ignore&&!el.invisible).map(el=>{
+       const box=el.getBoundingRect().clone(); if(el.transform)box.applyTransform(el.transform);
+       return {text:el.style.text,left:box.x,right:box.x+box.width,top:box.y};
+     });
+     const outside=texts.filter(t=>t.left<-1||t.right>chart.getWidth()+1).map(t=>t.text);
+     const ticks=texts.filter(t=>/^-?[0-9.,]+( mil)?$/.test(t.text)).sort((a,b)=>a.left-b.left);
+     const crowded=ticks.slice(1).filter((t,i)=>t.left-ticks[i].right<4).map(t=>t.text);
+     return {size,texts:texts.length,ticks:ticks.length,outside,crowded};
+   }),size));
+  }
+ }
+ const broken=layout.filter(c=>!c.texts||c.ticks<2||c.outside.length||c.crowded.length);
+ if(layout.length!==12||broken.length)throw Error('Chart text layout: '+JSON.stringify({charts:layout.length,broken}));
  await page.setViewportSize({width:390,height:844});
  const width=await page.evaluate(()=>({viewport:innerWidth,page:document.documentElement.scrollWidth}));
  if(width.page>width.viewport)throw Error('Mobile overflow: '+JSON.stringify(width));
