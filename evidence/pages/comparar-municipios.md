@@ -2,6 +2,10 @@
 title: Comparar municipios
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Dos municipios, los mismos años
 
 Compara una medida cada vez, con la **misma fuente, definición y años
@@ -192,7 +196,7 @@ order by p.anyo, e.lado
 
 <p class="text-sm font-bold mt-4 mb-1">La misma medida en los años publicados para ambos municipios</p>
 
-<LineChart data={serie_comun} x=anyo y=valor series=serie
+<LineChart echartsOptions={ajusteGrafico()} data={serie_comun} x=anyo y=valor series=serie
   xFmt="0" yFmt="num2" xAxisTitle="Año de la medida" handleMissing="gap" markers=true />
 
 <EvidencePanel data={serie_comun} chart="comparar-municipios-serie"

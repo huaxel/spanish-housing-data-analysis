@@ -2,6 +2,10 @@
 title: Comunidades autónomas
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Comunidades autónomas
 
 Explora una comunidad y sus provincias. [Panorama nacional](/) ·
@@ -46,7 +50,7 @@ order by anyo, provincia
 
 <p class="text-sm font-bold mt-4 mb-1">IPV general ({inputs.ccaa.value})</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -58,7 +62,7 @@ order by anyo, provincia
 
 <p class="text-sm font-bold mt-4 mb-1">Viviendas por 1.000 habitantes ({inputs.ccaa.value})</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -72,7 +76,7 @@ como un cambio solo real.
 
 <p class="text-sm font-bold mt-4 mb-1">Viviendas por hogar ({inputs.ccaa.value}; Censo 2011, ECH y ECP)</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -88,7 +92,7 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
 
 <p class="text-sm font-bold mt-4 mb-1">Valor tasado vivienda libre, €/m² ({inputs.ccaa.value})</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -98,7 +102,7 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
 
 <p class="text-sm font-bold mt-4 mb-1">Años de renta neta para 90 m² ({inputs.ccaa.value})</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -110,7 +114,7 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
 
 <p class="text-sm font-bold mt-4 mb-1">Cuota de 20–34 años ({inputs.ccaa.value})</p>
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={ficha}
   x=anyo
   xFmt="0"
@@ -123,7 +127,7 @@ renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
 La comparación provincial muestra stock por habitante, no precios: el IPV
 no está disponible a ese nivel territorial.
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={provincias}
   x=anyo
   xFmt="0"

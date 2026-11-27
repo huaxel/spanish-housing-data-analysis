@@ -2,6 +2,10 @@
 title: Más viviendas; más hogares todavía
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Más viviendas; más hogares todavía
 
 **España no tiene una sola crisis de vivienda.** Entre 2007 y 2013, los precios cayeron mientras el parque por habitante crecía. Desde 2021, el parque también crece, pero los hogares lo hacen más deprisa. Y detrás de la media nacional conviven territorios con menos viviendas por habitante y otros con más stock no principal.
@@ -23,7 +27,7 @@ where ccaa = 'Nacional' and anyo between 2007 and 2025
 order by anyo
 ```
 
-<LineChart data={ciclo_nacional} x=anyo y=ipv_general
+<LineChart echartsOptions={ajusteGrafico()} data={ciclo_nacional} x=anyo y=ipv_general
   xFmt="0" xAxisTitle="Año" yFmt="num0" markers=true handleMissing="gap"
   title="Precio de la vivienda: IPV nacional (2025 = 100)" />
 
@@ -33,7 +37,7 @@ order by anyo
   definition="IPV nacional: índice de precios de compraventa con ajuste de calidad, no euros por metro cuadrado."
   coverage="Medias anuales del periodo mostrado. El cambio de índice no identifica el efecto de crédito o construcción." />
 
-<LineChart data={ciclo_nacional} x=anyo y=viv_por_1000_hab
+<LineChart echartsOptions={ajusteGrafico()} data={ciclo_nacional} x=anyo y=viv_por_1000_hab
   xFmt="0" xAxisTitle="Año" yFmt="num0" markers=true handleMissing="gap"
   title="Viviendas por cada 1.000 habitantes" />
 
@@ -69,7 +73,7 @@ order by anyo, ccaa
 
 <p class="text-sm font-bold mt-4 mb-1">La vivienda por habitante diverge entre comunidades</p>
 
-<LineChart data={stock_geo} x=anyo y=viv_por_1000_hab series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={stock_geo} x=anyo y=viv_por_1000_hab series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true />
 
 <EvidencePanel data={stock_geo} chart="reportaje-stock-territorios"
@@ -167,7 +171,7 @@ order by anyo, serie
 
 <p class="text-sm font-bold mt-4 mb-1">Cambios por año de actividad: hogares y parque neto</p>
 
-<BarChart data={aportes_anuales} x=anyo y=unidades series=serie
+<BarChart echartsOptions={ajusteGrafico()} data={aportes_anuales} x=anyo y=unidades series=serie
   xFmt="0" xAxisTitle="Año de actividad" yFmt="num0" />
 
 <EvidencePanel data={aportes_anuales} chart="reportaje-cambios-anuales"
@@ -210,7 +214,7 @@ order by viv_por_hogar_neto
 
 <BarChart data={cobertura_ccaa} x=ccaa y=viv_por_hogar_neto swapXY
   yFmt="num2"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 <EvidencePanel data={cobertura_ccaa} chart="reportaje-parque-por-hogar"
   columns={["ccaa", "parque_neto", "hogares_netos", "viv_por_hogar_neto"]}
@@ -232,7 +236,7 @@ order by h.anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Parque al cierre del año anterior / hogares ECP al inicio del año</p>
 
-<LineChart data={cierre} x=anyo y=viv_por_hogar
+<LineChart echartsOptions={ajusteGrafico()} data={cierre} x=anyo y=viv_por_hogar
   xFmt="0" xAxisTitle="Año de los hogares (1 de enero)" yFmt="num2" markers=true handleMissing="gap" />
 
 <EvidencePanel data={cierre} chart="reportaje-parque-hogares"
@@ -269,7 +273,7 @@ select 'A disposición del titular', 100.0 * disposicion / total from base
 
 <BarChart data={aeat_usos} x=uso y=porcentaje swapXY
   yFmt="num1"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 <EvidencePanel data={aeat_usos} chart="reportaje-uso-fiscal"
   columns={["uso", "porcentaje"]}
@@ -303,7 +307,7 @@ order by group_code
 
 <BarChart data={carga_por_renta} x=group_label y=rate_pct swapXY
   yFmt="num1"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 <EvidencePanel data={carga_por_renta} chart="reportaje-sobrecarga"
   columns={["group_code", "group_label", "survey_year", "rate_pct", "status"]}

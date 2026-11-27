@@ -2,6 +2,10 @@
 title: Escenarios de compra
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Comprar: efectivo inicial y cuota no son lo mismo
 
 Un escenario hipotético para separar la entrada, los gastos y la carga de
@@ -123,7 +127,7 @@ order by aumento_pp
   <Column id=intereses_total title="Intereses de toda la hipoteca (€)" fmt="num0"/>
 </DataTable>
 
-<BarChart data={cuotas_compra} x=escenario y=cuota_mensual
+<BarChart echartsOptions={ajusteGrafico()} data={cuotas_compra} x=escenario y=cuota_mensual
   yFmt="num0" title="Cuota mensual: tres tipos hipotéticos (€)"/>
 
 Los aumentos son **puntos porcentuales**, no porcentajes relativos. Cada fila

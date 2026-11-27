@@ -2,6 +2,10 @@
 title: Alquiler e ingresos
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Cuánta renta municipal se va en firmar un contrato
 
 La mediana de alquiler de firma cuesta cerca del 14% de la renta neta
@@ -61,7 +65,7 @@ order by anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Alquiler de firma como % de la renta neta media anual del hogar</p>
 
-<LineChart data={serie_proxy} x=anyo y=ratio_pct series=grupo
+<LineChart echartsOptions={ajusteGrafico()} data={serie_proxy} x=anyo y=ratio_pct series=grupo
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true/>
 
 El alquiler mediano de firma y la renta media municipal crecieron al
@@ -84,7 +88,7 @@ limit 15
 
 <BarChart data={top_proxy} x=municipio y=ratio_pct swapXY
   yFmt="num1" title="Ratio alquiler/renta 2023 (≥50 contratos)"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 <DataTable data={top_proxy} rows=15>
   <Column id=municipio title="Municipio"/>
@@ -111,7 +115,7 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
   xAxisTitle="Renta neta media mensual del hogar (€)"
   yAxisTitle="Alquiler mediano de firma (€/mes)"
   title="Municipios con al menos 50 contratos, 2023"
-  echartsOptions={{
+  echartsOptions={ajusteGrafico({
     series: [{
       markLine: {
         silent: true,
@@ -135,7 +139,7 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
         ]
       }
     }]
-  }}/>
+  })}/>
 
 Arriba a la derecha, municipios ricos con contratos caros. Las líneas
 discontinuas son ratios constantes: 15, 20 y 25% de la renta neta media
@@ -172,7 +176,7 @@ where anyo = 2023 and contratos >= 50 and ratio_pct is not null
 
 <p class="text-sm font-bold mt-4 mb-1">Distribución municipal del ratio de firma (≥50 contratos)</p>
 
-<Histogram data={dist_proxy} x=ratio_pct xFmt="num1"
+<Histogram echartsOptions={ajusteGrafico()} data={dist_proxy} x=ratio_pct xFmt="num1"
   xAxisTitle="Ratio alquiler/renta 2023 (%)"/>
 
 La cola derecha es el mapa del esfuerzo: once municipios — la costa

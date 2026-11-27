@@ -41,11 +41,11 @@ where municipio in ${inputs.munis_mad.value}
 order by anyo, municipio
 ```
 
-<LineChart data={serie_mad} x=anyo y=eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_mad} x=anyo y=eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Valor tasado (€/m²): capital y corona"/>
 
-<LineChart data={serie_mad} x=anyo y=poblacion series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_mad} x=anyo y=poblacion series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Población municipal"/>
 
@@ -117,7 +117,7 @@ where distrito = '${inputs.distrito_bar.value}'
 order by anyo, barrio
 ```
 
-<LineChart data={serie_bar} x=anyo y=eur_m2 series=barrio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_bar} x=anyo y=eur_m2 series=barrio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Precio registral (€/m²): barrios del distrito"/>
 
@@ -148,16 +148,16 @@ where municipio in ${inputs.munis_bcn.value}
 order by anyo, municipio
 ```
 
-<LineChart data={serie_bcn} x=anyo y=sale_eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_bcn} x=anyo y=sale_eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   emptySet="pass" emptyMessage="Sin precios de venta en la selección (disponibles desde 2013)."
   title="Precio de venta (€/m², desde 2013)"/>
 
-<LineChart data={serie_bcn} x=anyo y=rent_month series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_bcn} x=anyo y=rent_month series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Alquiler (€/mes)"/>
 
-<LineChart data={serie_bcn} x=anyo y=rent_burden series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_bcn} x=anyo y=rent_burden series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="pct1" handleMissing="gap" markers=true
   emptySet="pass" emptyMessage="Sin datos de esfuerzo en la selección (ventana 2015–2022)."
   title="Esfuerzo del alquiler (s/ renta bruta)"/>
@@ -220,7 +220,7 @@ where ambit = 'districte'
 order by anyo, distrito
 ```
 
-<LineChart data={serie_distritos_bcn} x=anyo y=lloguer_m2 series=distrito
+<LineChart echartsOptions={ajusteGrafico()} data={serie_distritos_bcn} x=anyo y=lloguer_m2 series=distrito
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
   title="Alquiler contractual (€/m²/mes): distritos"/>
 
@@ -245,10 +245,11 @@ order by anyo, barrio
 
 <p class="text-sm font-bold mt-4 mb-1">Alquiler contractual (€/m²/mes): barrios (desde 2013)</p>
 
-<LineChart data={serie_barris_bcn} x=anyo y=lloguer_m2 series=barrio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_barris_bcn} x=anyo y=lloguer_m2 series=barrio
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true/>
 
 <script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
   // Quarterly axes mark first quarters with the year; tooltips keep the quarter.
   // Overlapping labels are hidden.
   // LineChart does not pass showAllXAxisLabels on, so these use Chart + Line.
@@ -256,7 +257,6 @@ order by anyo, barrio
     grid: { right: 28 },
     xAxis: {
       axisLabel: {
-        fontFamily: 'Inter, sans-serif',
         interval: (_indice, etiqueta) => etiqueta.startsWith('T1 '),
         formatter: (etiqueta) => etiqueta.slice(3)
       }
@@ -289,7 +289,7 @@ order by q, barrio
 <Chart data={serie_trim_bcn} x=trimestre y=lloguer_m2 series=barrio
   sort=false showAllXAxisLabels="false" xAxisTitle="Trimestre (cada año marca su T1)"
   yFmt="num2" title="Alquiler trimestral (€/m²/mes): barrios"
-  echartsOptions={ejeTrimestral} seriesOptions={{ showAllSymbol: true }}>
+  echartsOptions={ajusteGrafico(ejeTrimestral)} seriesOptions={{ showAllSymbol: true }}>
   <Line handleMissing="gap" markers=true />
 </Chart>
 
@@ -318,7 +318,7 @@ order by q, barrio
 <Chart data={serie_compra_bcn} x=trimestre y=eur_m2_total series=barrio
   sort=false showAllXAxisLabels="false" xAxisTitle="Trimestre (cada año marca su T1)"
   yFmt="num0" title="Precio registrado (€/m² constr.): barrios"
-  echartsOptions={ejeTrimestral} seriesOptions={{ showAllSymbol: true }}>
+  echartsOptions={ajusteGrafico(ejeTrimestral)} seriesOptions={{ showAllSymbol: true }}>
   <Line handleMissing="gap" markers=true />
 </Chart>
 
@@ -344,7 +344,7 @@ order by rendimiento desc
 
 <BarChart data={rendimiento_bcn} x=barrio y=rendimiento swapXY
   yFmt="num1"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 Rentas de contratos nuevos sobre precios de escritura: la periferia rinde
 más porque el suelo es barato, no porque alquilar sea caro.
@@ -365,7 +365,7 @@ group by s.anyo order by s.anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Rentabilidad bruta mediana (%): subió hasta 2023, cedió en 2024</p>
 
-<LineChart data={tendencia_yield_bcn} x=anyo y=mediana
+<LineChart echartsOptions={ajusteGrafico()} data={tendencia_yield_bcn} x=anyo y=mediana
   xFmt="0" xAxisTitle="Año (sin 2020: hueco de publicación)" yFmt="num1"
   handleMissing="gap" markers=true/>
 
@@ -395,11 +395,11 @@ where municipio in ${inputs.munis_vlc.value}
 order by anyo, municipio
 ```
 
-<LineChart data={serie_vlc} x=anyo y=rent_eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_vlc} x=anyo y=rent_eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Alquiler mediano SERPAVI (€/m²/mes)"/>
 
-<LineChart data={serie_vlc} x=anyo y=poblacion series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_vlc} x=anyo y=poblacion series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Población municipal"/>
 
@@ -447,11 +447,11 @@ where municipio in ${inputs.munis_sev.value}
 order by anyo, municipio
 ```
 
-<LineChart data={serie_sev} x=anyo y=rent_eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_sev} x=anyo y=rent_eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Alquiler mediano SERPAVI (€/m²/mes)"/>
 
-<LineChart data={serie_sev} x=anyo y=poblacion series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_sev} x=anyo y=poblacion series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Población municipal"/>
 
@@ -515,7 +515,7 @@ order by anyo, barrio
 
 <p class="text-sm font-bold mt-4 mb-1">IPRA (€/m² construido/mes; ventana móvil de 3 años)</p>
 
-<LineChart data={serie_ipra_sev} x=anyo y=ipra_eur_m2 series=barrio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_ipra_sev} x=anyo y=ipra_eur_m2 series=barrio
   xFmt="0" xAxisTitle="Ventana IPRA" yFmt="num2" handleMissing="gap" markers=true/>
 
 ```sql compra_sim_sev
@@ -565,7 +565,7 @@ where provider = '${inputs.provider_sev_oferta.value}'
 order by mes, zona
 ```
 
-<LineChart data={serie_sev_oferta} x=mes y=precio_oferta_eur_m2 series=zona
+<LineChart echartsOptions={ajusteGrafico()} data={serie_sev_oferta} x=mes y=precio_oferta_eur_m2 series=zona
   xFmt="0" xAxisTitle="Mes de 2024" yFmt="num0" handleMissing="gap" markers=true
   title="Precio ofertado segunda mano (€/m²)"/>
 
@@ -605,11 +605,11 @@ where distrito = '${inputs.distrito_context_sev.value}'
 order by anyo, barrio
 ```
 
-<LineChart data={serie_context_pob_sev} x=anyo y=poblacion series=barrio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_context_pob_sev} x=anyo y=poblacion series=barrio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Población residente (SIM)"/>
 
-<LineChart data={serie_context_pob_sev} x=anyo y=hogares series=barrio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_context_pob_sev} x=anyo y=hogares series=barrio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Hogares residentes (SIM)"/>
 
@@ -712,11 +712,11 @@ where provincia = '${inputs.prov_all.value}'
 order by anyo, municipio
 ```
 
-<LineChart data={serie_all} x=anyo y=rent_eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_all} x=anyo y=rent_eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Alquiler mediano SERPAVI (€/m²/mes)"/>
 
-<LineChart data={serie_all} x=anyo y=poblacion series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_all} x=anyo y=poblacion series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Población municipal"/>
 
@@ -790,7 +790,7 @@ order by anyo, distrito
 
 <p class="text-sm font-bold mt-4 mb-1">Alquiler mediano colectiva (€/m²/mes): distritos censales</p>
 
-<LineChart data={serie_dist} x=anyo y=mediana_m2 series=distrito
+<LineChart echartsOptions={ajusteGrafico()} data={serie_dist} x=anyo y=mediana_m2 series=distrito
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true/>
 
 ## Datos y cobertura

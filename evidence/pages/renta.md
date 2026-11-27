@@ -2,6 +2,10 @@
 title: Renta
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Renta municipal (SERPAVI)
 
 Renta mediana de alquiler (€/m²/mes) por municipio, 2011–2024, fuente
@@ -30,7 +34,7 @@ where municipio in ${inputs.munis_renta.value}
 order by anyo, municipio
 ```
 
-<LineChart data={serie_renta} x=anyo y=rent_eur_m2 series=municipio
+<LineChart echartsOptions={ajusteGrafico()} data={serie_renta} x=anyo y=rent_eur_m2 series=municipio
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Renta mediana (€/m²/mes)"/>
 
@@ -61,7 +65,7 @@ limit 10
 
 <BarChart data={top_renta} x=municipio y=rent_eur_m2 swapXY
   yFmt="num1" title="Municipios más caros (2024)"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 Nota: renta mediana de contratos nuevos/renovados declarados a efectos
 fiscales (fianzas); subalquiler y renovaciones recientes pueden faltar.

@@ -2,6 +2,10 @@
 title: Nacional
 ---
 
+<script>
+  import { ajusteGrafico } from '../components/chartOptions.js';
+</script>
+
 # Precios, stock y población (2007–2025)
 
 **[Lee el reportaje: Más viviendas; más hogares todavía →](/reportaje/)** Una historia interactiva sobre el auge, la caída y las diferencias territoriales, con fuentes y límites a la vista.
@@ -63,7 +67,7 @@ recuperaron con el stock per cápita relativamente estable. Son trayectorias
 agregadas: no indican si el stock estaba disponible, ni permiten separar el
 papel del crédito, la oferta o la localización. Ver [métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -80,7 +84,7 @@ where ccaa = 'Nacional'
 order by anyo
 ```
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nueva_segunda}
   x=anyo
   xFmt="0"
@@ -92,7 +96,7 @@ order by anyo
 
 ## Stock y hogares
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -105,7 +109,7 @@ order by anyo
 El tramo anterior a 2021 combina anclas censales y ECH; desde 2021 se usa
 ECP. La transición 2020–2021 no debe leerse como un cambio anual homogéneo.
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -120,7 +124,7 @@ ECP. La transición 2020–2021 no debe leerse como un cambio anual homogéneo.
 El valor tasado no es un precio de compraventa. El esfuerzo expresa años de
 renta neta del hogar para 90 m², sin intereses ni otros costes de adquisición.
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -143,7 +147,7 @@ En euros de 2025 (IPC base 2021) la recuperación es menor de lo que el
 nominal sugiere: el nivel nacional sigue un 27% por debajo de 2007 —
 y en Madrid ni siquiera existe recuperación (capital −7,5% real).
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional_real}
   x=anyo
   xFmt="0"
@@ -153,7 +157,7 @@ y en Madrid ni siquiera existe recuperación (capital −7,5% real).
   title="Valor tasado en euros de 2025 (€/m²)"
 />
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -170,7 +174,7 @@ La cohorte de 20–34 años se contrajo durante la recuperación posterior a
 un recuento de hogares que buscan vivienda: edad, emancipación y formación
 de hogares no son equivalentes.
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -187,7 +191,7 @@ ese paralelismo temporal es compatible con un cambio del ciclo crediticio,
 pero estos conteos no miden condiciones de préstamo ni aíslan el efecto del
 crédito sobre los precios.
 
-<LineChart
+<LineChart echartsOptions={ajusteGrafico()}
   data={nacional}
   x=anyo
   xFmt="0"
@@ -217,7 +221,7 @@ from housing.desahucios_provincia group by anyo
 order by anyo, causa
 ```
 
-<LineChart data={desahucios_anual} x=anyo y=lanzamientos series=causa
+<LineChart echartsOptions={ajusteGrafico()} data={desahucios_anual} x=anyo y=lanzamientos series=causa
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Lanzamientos por causa (nacional)"/>
 
@@ -229,7 +233,7 @@ group by anyo order by anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Ejecuciones hipotecarias presentadas (nacional, desde 2007)</p>
 
-<LineChart data={ejecuciones_anual} x=anyo y=ejecuciones
+<LineChart echartsOptions={ajusteGrafico()} data={ejecuciones_anual} x=anyo y=ejecuciones
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true/>
 
 ```sql lanzamientos_pc_2024
@@ -248,7 +252,7 @@ limit 12
 
 <BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k swapXY
   yFmt="num0"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 ## Datos y cobertura
 

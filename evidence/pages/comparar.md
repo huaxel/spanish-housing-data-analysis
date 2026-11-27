@@ -2,6 +2,10 @@
 title: Comparar territorios
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Comparar territorios
 
 Dos territorios, el mismo periodo y las mismas unidades.
@@ -166,13 +170,13 @@ diferencia refleja también el tamaño de cada territorio.
 El IPV mide evolución, no niveles de precio: cada territorio tiene su propia
 base **2025 = 100**. Una línea más alta no significa que comprar allí sea más caro.
 
-<LineChart data={comparacion} x=anyo y=ipv_general series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={comparacion} x=anyo y=ipv_general series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="IPV general (2025 = 100 en cada territorio)"/>
 
 ## Stock y hogares
 
-<LineChart data={comparacion} x=anyo y=viv_por_1000_hab series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={comparacion} x=anyo y=viv_por_1000_hab series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Viviendas por 1.000 habitantes"/>
 
@@ -184,7 +188,7 @@ select * from ${comparacion}
 where exists (select 1 from ${comparacion} where viv_por_hogar is not null)
 ```
 
-<LineChart data={hogares_disponibles} x=anyo y=viv_por_hogar series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={hogares_disponibles} x=anyo y=viv_por_hogar series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
   emptySet="pass" emptyMessage="Sin datos de viviendas por hogar en el periodo seleccionado (disponibles en 2011 y desde 2014)."
   title="Viviendas por hogar (Censo 2011, ECH y ECP)"/>
@@ -195,7 +199,7 @@ El valor tasado (€/m²) permite comparar niveles, pero no es un precio de
 compraventa. El esfuerzo expresa años de renta neta del hogar para 90 m²,
 sin intereses ni otros costes de adquisición.
 
-<LineChart data={comparacion} x=anyo y=eur_m2_libre series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={comparacion} x=anyo y=eur_m2_libre series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Valor tasado de vivienda libre (€/m²)"/>
 
@@ -204,18 +208,18 @@ select * from ${comparacion}
 where exists (select 1 from ${comparacion} where afford_90m2_years is not null)
 ```
 
-<LineChart data={esfuerzo_disponible} x=anyo y=afford_90m2_years series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={esfuerzo_disponible} x=anyo y=afford_90m2_years series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   emptySet="pass" emptyMessage="Sin datos de esfuerzo de renta en el periodo seleccionado."
   title="Años de renta neta para 90 m²"/>
 
 ## Población joven y crédito
 
-<LineChart data={comparacion} x=anyo y=share_20_34 series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={comparacion} x=anyo y=share_20_34 series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="pct1" handleMissing="gap" markers=true
   title="Cuota de 20–34 años en la población"/>
 
-<LineChart data={comparacion} x=anyo y=hip_viv_num series=ccaa
+<LineChart echartsOptions={ajusteGrafico()} data={comparacion} x=anyo y=hip_viv_num series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num0" handleMissing="gap" markers=true
   title="Hipotecas sobre viviendas constituidas"/>
 

@@ -2,6 +2,10 @@
 title: Tu municipio
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Tu municipio: qué sabemos y qué falta
 
 Una ficha local de población, viviendas, alquiler e ingresos, **sin puntuación
@@ -192,7 +196,7 @@ order by c.anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Alquiler mediano declarado · vivienda colectiva (€/m²/mes nominales)</p>
 
-<LineChart data={historia_alquiler_perfil} x=anyo y=eur_m2_mes
+<LineChart echartsOptions={ajusteGrafico()} data={historia_alquiler_perfil} x=anyo y=eur_m2_mes
   xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num2" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_alquiler_perfil} chart="perfil-alquiler"
@@ -231,7 +235,7 @@ order by c.anyo
 
 <p class="text-sm font-bold mt-4 mb-1">ADRH: renta neta media anual del hogar (euros nominales)</p>
 
-<LineChart data={historia_ingresos_perfil} x=anyo y=renta_neta_hogar
+<LineChart echartsOptions={ajusteGrafico()} data={historia_ingresos_perfil} x=anyo y=renta_neta_hogar
   xFmt="0" xAxisTitle="Año de ingresos" yFmt="num0" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_ingresos_perfil} chart="perfil-ingresos"
@@ -271,7 +275,7 @@ order by c.anyo
 
 <p class="text-sm font-bold mt-4 mb-1">Proxy de mercado: alquiler mediano / renta neta media (%)</p>
 
-<LineChart data={historia_proxy_perfil} x=anyo y=ratio_pct
+<LineChart echartsOptions={ajusteGrafico()} data={historia_proxy_perfil} x=anyo y=ratio_pct
   xFmt="0" xAxisTitle="Ejercicio fiscal" yFmt="num1" markers=true handleMissing="gap" />
 
 <EvidencePanel data={historia_proxy_perfil} chart="perfil-proxy"

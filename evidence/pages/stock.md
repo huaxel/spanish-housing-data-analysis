@@ -2,6 +2,10 @@
 title: Stock físico
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Qué vivienda existe y dónde: Sevilla, capitales andaluzas y provincia
 
 Polígonos, fechas constructivas y superficies del Catastro, no solo ratios
@@ -233,7 +237,7 @@ order by s.barrio
   <Column id=fraccion_peso_con_fecha title="Fracción del peso con fecha" fmt="pct1"/>
 </DataTable>
 
-<ScatterPlot data={stock_fechas_sensibilidad} x=mediana_anyo_minimo y=mediana_anyo_minimo_ponderada
+<ScatterPlot echartsOptions={ajusteGrafico()} data={stock_fechas_sensibilidad} x=mediana_anyo_minimo y=mediana_anyo_minimo_ponderada
   xFmt="0" yFmt="0" xAxisTitle="Año mínimo BU: mediana con igual peso por registro"
   yAxisTitle="Año mínimo BU: mediana ponderada por inmuebles"/>
 
@@ -274,7 +278,7 @@ from clasificados group by cohorte, orden order by orden
 
 <p class="text-sm font-bold mt-4 mb-1">Registros BU con vivienda por año mínimo de construcción</p>
 
-<BarChart data={cohortes_stock} x=cohorte y=registros yFmt="num0"/>
+<BarChart echartsOptions={ajusteGrafico()} data={cohortes_stock} x=cohorte y=registros yFmt="num0"/>
 
 <DataTable data={cohortes_stock} rows=7>
   <Column id=cohorte title="Año mínimo del registro"/>
@@ -322,7 +326,7 @@ order by orden
 
 <p class="text-sm font-bold mt-4 mb-1">Inmuebles declarados con vivienda por era de construcción BU</p>
 
-<BarChart data={eras_inmuebles_stock} x=era y=inmuebles yFmt="num0"/>
+<BarChart echartsOptions={ajusteGrafico()} data={eras_inmuebles_stock} x=era y=inmuebles yFmt="num0"/>
 
 <DataTable data={eras_inmuebles_stock} rows=6>
   <Column id=era title="Era constructiva"/>
@@ -368,7 +372,7 @@ from clasificados group by intervalo, orden order by orden
 
 <p class="text-sm font-bold mt-4 mb-1">Superficie bruta por registro BU con vivienda, todos sus usos</p>
 
-<BarChart data={superficies_stock} x=intervalo y=registros yFmt="num0"/>
+<BarChart echartsOptions={ajusteGrafico()} data={superficies_stock} x=intervalo y=registros yFmt="num0"/>
 
 Cada registro pesa igual y puede contener varias viviendas o construcciones.
 Esta distribución incluye los registros no asignados a barrios. No es una
@@ -445,11 +449,11 @@ Solo se acepta una fila IPRA por clave y año, con barrio y distrito iguales
 a los de la geometría. Un valor ausente, duplicado o mal etiquetado queda
 nulo, sin elegir una observación arbitraria ni multiplicar los pares.
 
-<ScatterPlot data={stock_renta} x=vivienda_por_km2 y=ipra_eur_m2
+<ScatterPlot echartsOptions={ajusteGrafico()} data={stock_renta} x=vivienda_por_km2 y=ipra_eur_m2
   xAxisTitle="Asignados / km² de geometría SIM válida"
   yAxisTitle="IPRA 2022, €/m²/mes (contratos 2019–2021)"/>
 
-<ScatterPlot data={stock_renta} x=mediana_anyo_minimo y=ipra_eur_m2
+<ScatterPlot echartsOptions={ajusteGrafico()} data={stock_renta} x=mediana_anyo_minimo y=ipra_eur_m2
   xFmt="0" xAxisTitle="Mediana de año mínimo por registro BU"
   yAxisTitle="IPRA 2022, €/m²/mes (contratos 2019–2021)"/>
 
@@ -739,7 +743,7 @@ from stock_capitals.eras_municipales
 group by ciudad, era
 ```
 
-<BarChart data={capitales_eras} x=era y=inmuebles series=ciudad
+<BarChart echartsOptions={ajusteGrafico()} data={capitales_eras} x=era y=inmuebles series=ciudad
   title="Inmuebles declarados por era y capital"/>
 
 ```sql capitales_totales
@@ -771,7 +775,7 @@ from stock_province.eras_capital_resto
 group by ambito, era
 ```
 
-<BarChart data={provincia_eras} x=era y=inmuebles series=ambito
+<BarChart echartsOptions={ajusteGrafico()} data={provincia_eras} x=era y=inmuebles series=ambito
   title="Capital frente al resto de la provincia por era"/>
 
 ```sql provincia_top

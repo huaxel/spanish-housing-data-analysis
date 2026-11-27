@@ -2,6 +2,10 @@
 title: Vacancia
 ---
 
+<script>
+  import { ajusteGrafico } from '../../components/chartOptions.js';
+</script>
+
 # Vivienda vacía (Censo 2021, consumo eléctrico)
 
 El Censo 2021 estimó la vivienda vacía con un indicador basado en el
@@ -52,7 +56,7 @@ limit 15
 
 <BarChart data={top_vac} x=municipio y=vac_pct swapXY
   yFmt="num1" title="Municipios con >60% clasificada como vacía"
-  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
+  echartsOptions={ajusteGrafico()} />
 
 Nota: los municipios pequeños sin suficientes viviendas se agregan en
 "Resto de la provincia". La proporción clasificada como vacía es alta en
