@@ -1,0 +1,4 @@
+name: claim_ledger
+type: duckdb
+options:
+  filename: '../../../data/processed/claim_ledger.duckdb'

@@ -1,0 +1,4 @@
+name: policy_eval
+type: duckdb
+options:
+  filename: '../../../data/processed/policy_eval.duckdb'

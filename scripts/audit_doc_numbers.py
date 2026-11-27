@@ -37,6 +37,12 @@ COVERED_DOCS = [
     # Public-facing interactive journalism page.
     "evidence/pages/reportaje.md",
     "evidence/pages/deficit.md",
+    # Policy-evaluation lab, public claim ledger, and ECV 2025 microsimulation
+    # (added 2026-11-27). All three quote artifact numbers directly.
+    "evidence/pages/politica.md",
+    "evidence/pages/afirmaciones.md",
+    "evidence/pages/microsimulacion.md",
+    "docs/explorations/catalonia_rent_control.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
     "docs/explorations/panel_tourist.md",
@@ -105,6 +111,21 @@ ALLOW = {
         (646035.0, "dated correction: superseded v2 gap 2021-2024"),
         (804905.0, "dated correction: superseded v2 gap 2021-2025"),
     ],
+    "evidence/pages/politica.md": [
+        (140.0, "BOE Wave 1 declared municipality count; fetch --check matches 140/140"),
+        (947.0, "Catalan municipalities with INCASOL rows (coverage count)"),
+        (999.0, "wild cluster bootstrap replicate parameter (WILD_REPS)"),
+    ],
+    "evidence/pages/microsimulacion.md": [
+        (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
+        (52.7, "complement of the pinned 47.3% Q1-Q2 relief share (-5% cap scenario)"),
+    ],
+    "docs/explorations/catalonia_rent_control.md": [
+        (140.0, "BOE Wave 1 declared municipality count; fetch --check matches 140/140"),
+        (677.0, "never-treated Catalan municipalities (coverage count)"),
+        (947.0, "Catalan municipalities with INCASOL rows (coverage count)"),
+        (999.0, "wild cluster bootstrap replicate parameter (WILD_REPS)"),
+    ],
     "docs/uncertainty.md": [
         (1.96, "normal critical value in existing panel_tourist interval construction"),
         (95.0, "nominal confidence level of normal approximation, not an empirical finding"),
@@ -150,6 +171,7 @@ ALLOW = {
         (2.11, "principales-as-households proxy tolerance (build-time validation)"),
         (650.0, "rounded interior-range low end (pinned exact: Galicia 652.85)"),
         (770.0, "rounded interior-range high end (pinned exact: CyL 770.67)"),
+        (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
         (0.34, "quoted inside dated correction notes as superseded pre-repair vintage"),
         (1.04, "quoted inside dated correction notes as superseded pre-repair vintage"),
     ],
@@ -1169,6 +1191,9 @@ def audit_total() -> int:
         "SENSITIVITY_CLAIMS": audit_claims.SENSITIVITY_CLAIMS,
         "PANEL_SAIZ_CLAIMS": audit_claims.PANEL_SAIZ_CLAIMS,
         "PANEL_SAIZ_MUNI_CLAIMS": audit_claims.PANEL_SAIZ_MUNI_CLAIMS,
+        "POLICY_EVAL_CLAIMS": audit_claims.POLICY_EVAL_CLAIMS,
+        "MICROSIM_CLAIMS": audit_claims.MICROSIM_CLAIMS,
+        "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
     }
     total = 0
     seen_lists: set[str] = set()
@@ -1192,7 +1217,11 @@ def audit_total() -> int:
 
 # Pages that write thousands as 607.250. Without normalising, the number reads as
 # 607.25 and can only be allowlisted, which unpins it from the audited claim.
-SPANISH_THOUSANDS = {"evidence/pages/deficit.md"}
+SPANISH_THOUSANDS = {
+    "evidence/pages/deficit.md",
+    "evidence/pages/politica.md",
+    "evidence/pages/microsimulacion.md",
+}
 
 
 def join_spanish_thousands(text: str) -> str:
@@ -1218,6 +1247,8 @@ def doc_numbers(text: str) -> list[tuple[float, float, str]]:
     # real value and is kept by stripping only the y).
     text = re.sub(r"\b(19|20)\d{2}-\d{2}(-\d{2})?\b", " ", text)
     text = re.sub(r"\b((19|20)\d{2})/(\d{2})\b", r"\1 ", text)
+    text = re.sub(r"\bBOE-A-\d{4}-\d+\b", " ", text)  # BOE identifiers
+    text = re.sub(r"\b(19|20)\d{2}Q[1-4]\b", " ", text)  # quarter labels
     text = re.sub(r"\bmilestone-\d+\b", " ", text)
     text = re.sub(r"\bL\d+\b", " ", text)
     text = re.sub(r"\b(19|20)\d0s\b", " ", text)
@@ -1257,9 +1288,13 @@ def doc_numbers(text: str) -> list[tuple[float, float, str]]:
                 continue
             mult = 1.0
             if tok and tok[-1] in "kM%":
+                # "M€" (millones de euros) is a currency label, not a
+                # multiplier: the artifacts already report M€, so 1796 M€
+                # must compare against a claim of 1796, not 1.796e9.
+                millions_of_euros = tok[-1] == "M" and norm[m.end() : m.end() + 1] == "€"
                 if tok[-1] == "k":
                     mult = 1e3
-                elif tok[-1] == "M":
+                elif tok[-1] == "M" and not millions_of_euros:
                     mult = 1e6
                 tok = tok[:-1].strip()
             try:

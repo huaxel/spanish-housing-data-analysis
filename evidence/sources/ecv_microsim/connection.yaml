@@ -1,0 +1,4 @@
+name: ecv_microsim
+type: duckdb
+options:
+  filename: '../../../data/processed/ecv_microsim.duckdb'

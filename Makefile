@@ -62,6 +62,8 @@ fetch:
 	uv run python scripts/build_sevilla_2021.py
 	uv run python scripts/fetch_cadastre_province.py
 	uv run python scripts/build_ecv_joint.py
+	# Catalonia rent-control evaluation inputs (INCASÒL deposits + BOE ZMRT lists).
+	uv run python scripts/fetch_catalonia_rent_control.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
@@ -96,6 +98,10 @@ verify:
 	uv run python scripts/export_inference.py --check
 	uv run python scripts/export_deficit.py --check
 	uv run python scripts/invert_tourist.py --check
+	uv run python scripts/fetch_catalonia_rent_control.py --check
+	uv run python explorations/catalonia_rent_control.py --check
+	uv run python scripts/build_ecv_microsim.py --check
+	uv run python scripts/build_claim_ledger.py --check
 
 audit: audit-docs
 	uv run python scripts/audit_claims.py
@@ -166,6 +172,13 @@ analysis:
 	uv run python scripts/export_deficit.py
 	uv run python scripts/invert_tourist.py
 	uv run python scripts/export_inference.py
+	# Policy evaluation, distributional microsimulation, and the claim ledger.
+	# The ledger must run last: it hashes both marts plus the catalonia,
+	# panel_tourist, and tourist_rents artifacts, so it has to see every
+	# producer above. Seconds, not minutes (the parquet is already built).
+	uv run python explorations/catalonia_rent_control.py
+	uv run python scripts/build_ecv_microsim.py
+	uv run python scripts/build_claim_ledger.py
 
 stock-rent:
 	uv run python scripts/analyze_stock_rent.py
@@ -229,6 +242,9 @@ evidence-build:
 	uv run python scripts/export_deficit.py
 	uv run python scripts/export_profile_income.py
 	uv run python scripts/export_chart_provenance.py
+	uv run python explorations/catalonia_rent_control.py
+	uv run python scripts/build_ecv_microsim.py
+	uv run python scripts/build_claim_ledger.py
 	cd evidence && npm run build
 	uv run python scripts/fix_build_meta.py
 

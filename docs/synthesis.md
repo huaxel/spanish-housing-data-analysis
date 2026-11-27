@@ -170,6 +170,31 @@ these snapshots ([source hunt](occupancy_availability.md)). [Stock methods](cada
 [income definitions](sevilla_income.md) document exclusions, source semantics
 and the reproducible report; the central models remain separate.
 
+## Policy layer: what a rent cap does, and who a subsidy reaches
+
+Two additions put the diagnosis to work, and both keep their limits explicit.
+
+**Catalonia's *zonas tensionadas* (Ley 12/2023)**, evaluated on INCASÒL
+deposit records for all Catalan municipalities (`2019Q1–2026Q2`): contractual
+rents fall −3.79% against not-yet-treated Wave 2 municipalities and −6.19%
+against never-treated active markets (wild-cluster p = 0.001), while newly
+filed habitual contracts fall more (−12.61% and −17.10%). Seasonal rental's
+share rises +1.42 to +1.91 pp. The contract-count drop cannot separate lower
+tenant turnover from diversion into seasonal letting or exit to sale, and the
+never-treated designs fail event-study pre-trend flatness on contract counts,
+so magnitudes are anchored on the Wave-1-vs-Wave-2 and within-comarca designs.
+See [the evaluation](explorations/catalonia_rent_control.md).
+
+**Distributional microsimulation on INE ECV 2025** (29,263 households, 3,660
+market renters) prices the alternative levers. Market-renter overburden above
+40% starts at 26.8%; the Bono Alquiler Joven removes 202,337 households from
+overburden at 1,796 M€/yr, a targeted 250 €/mo subsidy for the two poorest
+quintiles reaches 480,349 households, and a progressive 30% effort shield
+reaches 666,040 for 3,866 M€/yr. A broad −5% cap lifts only 89,550 households
+and sends 47.3% of its relief to the poorest two quintiles. These are static
+first-round arithmetic: no supply, mobility, or pass-through beyond the stated
+sensitivity. See [the microsimulation](../evidence/pages/microsimulacion.md).
+
 ## Reproduce the analysis
 
 `make gates` rebuilds marts from pinned inputs and runs the project checks.

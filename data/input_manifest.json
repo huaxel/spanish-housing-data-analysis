@@ -27,6 +27,8 @@
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": "1aaaa8d6b31c47b02cff7e50e51cb7d314d6df3adca28fa05b58a9704fa02d1a",
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": "710f1bcdda778eed3ead4a829bbde32ce6c3922712f5cd1a41bbd54649189945",
     "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": "86322156666afebe9483cd8117e4dca3b8746a04ca28d93cba247cc527a27e05",
+    "data/raw/boe_zmrt_cat_wave1.xml": "edc33222a1e7882df2eb5508ba4b4aa7dfe7d33a34bb7ebb864ec9351737c3ec",
+    "data/raw/boe_zmrt_cat_wave2.xml": "f732dbc8a905a48e7cca9c6e390572400fcfaf5de0202e2fd7ce0ee0aa9827bf",
     "data/raw/cadastre_cordoba_buildings.zip": "7124770efc5ad2220203fbc012eb73c99585380264ae63e3d7ee2a99d0d8ca53",
     "data/raw/cadastre_cordoba_feed.xml": "de1d8ab58b5844c5b21b234386337e4ba59ba51954992963a9041ab3638650ed",
     "data/raw/cadastre_granada_buildings.zip": "1938fca88bd064b00310ca9349d3561344710257362daed76cd13947d2e7f5b2",
@@ -143,6 +145,9 @@
     "data/raw/cadastre_prov_41900_buildings.zip": "192f915f33b4132facb1a53c639577fc5fe6a41358e3df8635c621a9260d9a42",
     "data/raw/cadastre_sevilla_buildings.zip": "192f915f33b4132facb1a53c639577fc5fe6a41358e3df8635c621a9260d9a42",
     "data/raw/cadastre_sevilla_feed.xml": "9e9966e4c82e7eb37e4c6216f5f6f56e18215179b6123b6711e39491518a89e9",
+    "data/raw/cat_incasol_municipis_trimestral_contractes.xlsx": "9e420bbc0f3a4553afe3fe75ca86557e500fab6fc9c99cab16af04f28c91a573",
+    "data/raw/cat_incasol_municipis_trimestral_lloguer.xlsx": "12a56ab1e7c74397aeaf478641fc947c66e76cdf403ac0f79fb27ec57941aa1c",
+    "data/raw/cat_incasol_temporada_mun.xlsx": "92d6bac4f1d0e00eec0be1dd34d92d15745f06e67250a90598a2f3227f965b0b",
     "data/raw/censo2011_municipios.json": "811fb9c6baeec11c632140bd1bde2187d6128ecbdb95d71545d293ae7d3d6518",
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
@@ -693,6 +698,18 @@
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
+    },
+    "data/raw/boe_zmrt_cat_wave1.xml": {
+      "accessed": "2026-11-27",
+      "note": "BOE-A-2024-5214: Wave 1 Catalonia ZMRT (140 municipalities, effective 16/03/2024)",
+      "publisher": "Ministerio de Vivienda y Agenda Urbana (BOE núm. 66, 15/03/2024)",
+      "url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-5214"
+    },
+    "data/raw/boe_zmrt_cat_wave2.xml": {
+      "accessed": "2026-11-27",
+      "note": "BOE-A-2024-20576: Wave 2 Catalonia ZMRT (131 municipalities, effective 10/10/2024)",
+      "publisher": "Ministerio de Vivienda y Agenda Urbana (BOE núm. 244, 09/10/2024)",
+      "url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-20576"
     },
     "data/raw/cadastre_cordoba_buildings.zip": {
       "accessed": "2026-10-09",
@@ -1389,6 +1406,24 @@
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/41/ES.SDGC.bu.atom_41.xml"
+    },
+    "data/raw/cat_incasol_municipis_trimestral_contractes.xlsx": {
+      "accessed": "2026-11-27",
+      "note": "Quarterly habitual rental contracts filed by Catalan municipality (2005–latest)",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (INCASÒL fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/02_Lloguers_per_ambits_geografics/Fitxers_contractes/municipis_trimestral_contractes.xlsx"
+    },
+    "data/raw/cat_incasol_municipis_trimestral_lloguer.xlsx": {
+      "accessed": "2026-11-27",
+      "note": "Quarterly mean contractual rent (€/month) by Catalan municipality (>5 contracts)",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (INCASÒL fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/02_Lloguers_per_ambits_geografics/Lloguer_mitja/municipis_trimestral_lloguer.xlsx"
+    },
+    "data/raw/cat_incasol_temporada_mun.xlsx": {
+      "accessed": "2026-11-27",
+      "note": "Quarterly seasonal rental contracts filed by Catalan municipality (2023–latest)",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (INCASÒL fiances)",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/08_Lloguer-de-temporada/lloguer_temporada_mun.xlsx"
     },
     "data/raw/censo2011_municipios.json": {
       "accessed": "2026-10-08",

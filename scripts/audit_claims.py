@@ -128,6 +128,24 @@ MODEL_FRESHNESS = [
         "artifacts/deficit_vivienda.json",
         "explorations/deficit_vivienda.py",
     ),
+    # Policy evaluation + distributional microsimulation + claim ledger
+    # (added 2026-11-27). The ledger hashes its upstream artifacts, so it
+    # fails whenever catalonia/panel_tourist/tourist_rents moved under it.
+    (
+        "catalonia_rent_control",
+        "artifacts/catalonia_rent_control.json",
+        "explorations/catalonia_rent_control.py",
+    ),
+    (
+        "ecv_microsim",
+        "artifacts/ecv_microsim.json",
+        "scripts/build_ecv_microsim.py",
+    ),
+    (
+        "claim_ledger",
+        "artifacts/claim_ledger.json",
+        "scripts/build_claim_ledger.py",
+    ),
 ]
 
 
@@ -2412,6 +2430,184 @@ PANEL_SAIZ_CLAIMS = [
     ),
 ]
 
+# ---------------------------------------------------------------------------
+# Catalonia rent-control evaluation, ECV 2025 microsimulation, and the public
+# claim ledger (added 2026-11-27).
+#
+# Each artifact carries a _meta freshness key (MODEL_FRESHNESS below), so
+# staleness is caught there; these claims answer the doc-side question: does
+# the narrative still quote what the artifact says? Paths address rows by
+# index, mirroring the artifact's own row order (deterministic by design).
+POLICY_EVAL_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    # Design A (Wave 1 vs not-yet-treated Wave 2) — the cleanest control.
+    ("politica", "A rent effect %", "did_summary.0.effect_display", -3.79, 0.005),
+    ("politica", "A contracts effect %", "did_summary.1.effect_display", -12.61, 0.005),
+    ("politica", "A seasonal share pp", "did_summary.2.effect_display", 1.42, 0.005),
+    ("politica", "A rent wild p", "did_summary.0.wild_p", 0.001, 0.0),
+    ("politica", "A seasonal wild p", "did_summary.2.wild_p", 0.005, 0.0),
+    ("politica", "A rent placebo t", "did_summary.0.placebo_t", -0.968, 0.0005),
+    ("politica", "A contracts placebo t", "did_summary.1.placebo_t", -0.901, 0.0005),
+    # Design B (Wave 1 vs never-treated active markets, open horizon).
+    ("politica", "B rent effect %", "did_summary.3.effect_display", -6.19, 0.005),
+    ("politica", "B contracts effect %", "did_summary.4.effect_display", -17.1, 0.005),
+    ("politica", "B seasonal share pp", "did_summary.5.effect_display", 1.91, 0.005),
+    ("politica", "B rent placebo t", "did_summary.3.placebo_t", 2.06, 0.0005),
+    ("politica", "B contracts placebo t", "did_summary.4.placebo_t", -0.999, 0.0005),
+    # Design C (Wave 2 vs never-treated): contracts null, seasonal null.
+    ("politica", "C rent effect %", "did_summary.6.effect_display", -5.55, 0.005),
+    ("politica", "C contracts effect %", "did_summary.7.effect_display", -7.0, 0.005),
+    ("politica", "C contracts wild p", "did_summary.7.wild_p", 0.068, 0.0),
+    ("politica", "C seasonal share pp", "did_summary.8.effect_display", 0.73, 0.005),
+    ("politica", "C seasonal wild p", "did_summary.8.wild_p", 0.154, 0.0),
+    ("politica", "C rent placebo t", "did_summary.6.placebo_t", 1.447, 0.0005),
+    ("politica", "C contracts placebo t", "did_summary.7.placebo_t", -1.362, 0.0005),
+    # Design D (within-comarca FE).
+    ("politica", "D rent effect %", "did_summary.9.effect_display", -5.3, 0.005),
+    ("politica", "D contracts effect %", "did_summary.10.effect_display", -10.66, 0.005),
+    ("politica", "D seasonal share pp", "did_summary.11.effect_display", 0.89, 0.005),
+    ("politica", "D seasonal wild p", "did_summary.11.wild_p", 0.035, 0.0),
+    ("politica", "D contracts placebo t", "did_summary.10.placebo_t", 0.627, 0.0005),
+    # Sample and pre-trend diagnostics quoted in the doc's caveat section.
+    ("politica", "active Wave 1 municipalities", "meta.active_munis_by_wave.1", 139, 0),
+    ("politica", "active Wave 2 municipalities", "meta.active_munis_by_wave.2", 124, 0),
+    ("politica", "active never-treated municipalities", "meta.active_munis_by_wave.0", 64, 0),
+    ("politica", "A rent max pre-lead |t|", "pretrends.A_w1_vs_w2_rent.max_abs_t", 2.23, 0.005),
+    ("politica", "A rent significant pre-leads", "pretrends.A_w1_vs_w2_rent.sig_pre_leads", 1, 0),
+    (
+        "politica",
+        "B contracts significant pre-leads",
+        "pretrends.B_w1_vs_never_contracts.sig_pre_leads",
+        3,
+        0,
+    ),
+]
+
+MICROSIM_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    # Baseline overburden (Eurostat >40% rule, market renters).
+    ("microsimulacion", "valid households", "meta.valid_households", 29263, 0),
+    ("microsimulacion", "valid market renters", "meta.valid_market_renter_hh", 3660, 0),
+    ("microsimulacion", "baseline over40 all", "scenarios.0.overburden_40_all_pct", 7.17, 0.005),
+    ("microsimulacion", "baseline over40 market", "scenarios.0.overburden_40_mkt_pct", 26.8, 0.005),
+    ("microsimulacion", "baseline effort30 market", "scenarios.0.effort_30_mkt_pct", 44.02, 0.005),
+    # Bono Alquiler Joven, 0% and 50% pass-through.
+    ("microsimulacion", "bono0 over40 market", "scenarios.1.overburden_40_mkt_pct", 21.46, 0.005),
+    ("microsimulacion", "bono0 households lifted", "scenarios.1.hh_lifted_out_40", 202337, 0),
+    ("microsimulacion", "bono0 fiscal cost M€", "scenarios.1.fiscal_cost_meur", 1796.3, 0.5),
+    ("microsimulacion", "bono0 € per lifted hh", "scenarios.1.fiscal_eur_per_hh_lifted", 8878, 0),
+    ("microsimulacion", "bono0 relief to Q1-Q2 %", "scenarios.1.relief_to_q1_q2_pct", 90.0, 0.05),
+    ("microsimulacion", "bono0 eligible hh", "scenarios.1.eligible_hh", 600114, 0),
+    ("microsimulacion", "bono50 over40 market", "scenarios.2.overburden_40_mkt_pct", 23.6, 0.005),
+    ("microsimulacion", "bono50 households lifted", "scenarios.2.hh_lifted_out_40", 114314, 0),
+    ("microsimulacion", "bono50 € per lifted hh", "scenarios.2.fiscal_eur_per_hh_lifted", 15714, 0),
+    # Income-targeted Q1-Q2 subsidy.
+    (
+        "microsimulacion",
+        "targeted over40 market",
+        "scenarios.3.overburden_40_mkt_pct",
+        14.75,
+        0.005,
+    ),
+    ("microsimulacion", "targeted households lifted", "scenarios.3.hh_lifted_out_40", 480349, 0),
+    ("microsimulacion", "targeted fiscal cost M€", "scenarios.3.fiscal_cost_meur", 5115.7, 0.5),
+    (
+        "microsimulacion",
+        "targeted € per lifted hh",
+        "scenarios.3.fiscal_eur_per_hh_lifted",
+        10650,
+        0,
+    ),
+    # Broad -5% rent cap (calibrated to the Catalonia Design B range).
+    ("microsimulacion", "cap -5% over40 market", "scenarios.4.overburden_40_mkt_pct", 24.47, 0.005),
+    ("microsimulacion", "cap -5% households lifted", "scenarios.4.hh_lifted_out_40", 89550, 0),
+    ("microsimulacion", "cap -5% tenant relief M€", "scenarios.4.tenant_relief_meur", 1533.5, 0.5),
+    ("microsimulacion", "cap -5% relief to Q1-Q2 %", "scenarios.4.relief_to_q1_q2_pct", 47.3, 0.05),
+    # Progressive 30% effort shield.
+    (
+        "microsimulacion",
+        "effort shield over40 market",
+        "scenarios.5.overburden_40_mkt_pct",
+        10.05,
+        0.005,
+    ),
+    (
+        "microsimulacion",
+        "effort shield households lifted",
+        "scenarios.5.hh_lifted_out_40",
+        666040,
+        0,
+    ),
+    (
+        "microsimulacion",
+        "effort shield fiscal cost M€",
+        "scenarios.5.fiscal_cost_meur",
+        3865.8,
+        0.5,
+    ),
+    (
+        "microsimulacion",
+        "effort shield € per lifted hh",
+        "scenarios.5.fiscal_eur_per_hh_lifted",
+        5804,
+        0,
+    ),
+]
+
+# (doc, description, claim_id, definition substring, expected, tol). The
+# ledger re-derives each bridge from the marts, so pinning the bridge value
+# catches a doc quoting a definition the artifact no longer reports.
+LEDGER_CLAIMS: list[tuple[str, str, str, str, float, float]] = [
+    (
+        "afirmaciones",
+        "deficit net stock 2021-2024",
+        "C1_deficit_600k",
+        "parque neto MIVAU (2021\u20132024)",
+        600766,
+        0,
+    ),
+    (
+        "afirmaciones",
+        "deficit vs completions 2021-2024",
+        "C1_deficit_600k",
+        "terminadas",
+        607250,
+        0,
+    ),
+    ("afirmaciones", "deficit net stock 2021-2025", "C1_deficit_600k", "2021\u20132025", 746988, 0),
+    ("afirmaciones", "census vacant dwellings", "C2_empty_homes_3_8m", "vac\u00edas", 3828307, 0),
+    (
+        "afirmaciones",
+        "census sporadic-use dwellings",
+        "C2_empty_homes_3_8m",
+        "espor\u00e1dico",
+        2517628,
+        0,
+    ),
+    (
+        "afirmaciones",
+        "Galicia vs Madrid vacancy gap pp",
+        "C2_empty_homes_3_8m",
+        "Galicia",
+        22.47,
+        0.005,
+    ),
+    (
+        "afirmaciones",
+        "real valoration vs 2007 %",
+        "C4_harder_than_2007",
+        "Valor tasado",
+        -27.5,
+        0.05,
+    ),
+    (
+        "afirmaciones",
+        "90m2 affordability gap years",
+        "C4_harder_than_2007",
+        "90 m\u00b2",
+        1.99,
+        0.005,
+    ),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -2475,6 +2671,32 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(PANEL_SAIZ_MUNI_CLAIMS)
+    policy = _model_output("artifacts/catalonia_rent_control.json")
+    for doc, desc, path, expected, tol in POLICY_EVAL_CLAIMS:
+        got = _json_path(policy, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(POLICY_EVAL_CLAIMS)
+    microsim = _model_output("artifacts/ecv_microsim.json")
+    for doc, desc, path, expected, tol in MICROSIM_CLAIMS:
+        got = _json_path(microsim, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(MICROSIM_CLAIMS)
+    ledger = _model_output("artifacts/claim_ledger.json")
+    for doc, desc, claim_id, needle, expected, tol in LEDGER_CLAIMS:
+        hits = [
+            r for r in ledger["bridges"] if r["claim_id"] == claim_id and needle in r["definition"]
+        ]
+        got = hits[0]["value_num"] if len(hits) == 1 else None
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        if got is None:
+            print(f"    ({len(hits)} bridge rows match {claim_id} / {needle!r})")
+        failures += not ok
+    total += len(LEDGER_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)

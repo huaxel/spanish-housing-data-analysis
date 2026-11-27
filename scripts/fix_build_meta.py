@@ -81,6 +81,18 @@ DESCRIPTIONS = {
         "2015–2023): la mediana es plana, las grandes ciudades suben. "
         "Proxy de mercado, no tasa de sobrecarga."
     ),
+    "politica/index.html": (
+        "Evaluación cuasi-experimental de las zonas tensionadas en Cataluña "
+        "(Ley 12/2023): rentas contractuales, contratos habituales y temporada (INCASÒL)."
+    ),
+    "afirmaciones/index.html": (
+        "Registro auditable de afirmaciones públicas sobre vivienda en España: "
+        "veredictos fijados por SHA-256 y puentes metodológicos por definición."
+    ),
+    "microsimulacion/index.html": (
+        "Microsimulación distributiva de primera ronda sobre microdatos INE ECV 2025: "
+        "Bono Joven, ayudas focalizadas Q1–Q2, tope al alquiler y escudo de esfuerzo 30%."
+    ),
 }
 
 

@@ -14,6 +14,8 @@ title: Nacional
 
 **[¿Qué significa el déficit de vivienda? →](/deficit/)** Compara hogares, parque y terminadas sin confundir una resta con viviendas necesarias.
 
+**[Laboratorio de política y registro de afirmaciones →](/politica/)** Evaluación cuasi-experimental de las [zonas tensionadas en Cataluña](/politica/) · [Registro de afirmaciones públicas](/afirmaciones/) · [Microsimulación distributiva ECV 2025](/microsimulacion/).
+
 Este recorrido empieza por las tendencias nacionales, baja a las diferencias
 territoriales y termina con lo que los indicadores de stock sí —y no— dicen
 sobre acceso. Las series describen co-movimientos; por sí solas no identifican

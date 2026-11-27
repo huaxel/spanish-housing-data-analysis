@@ -22,7 +22,13 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
   `artifacts/` is absent) and after every `make build` (see below).
   Runtime: ~30 min (pure-Python wild bootstraps dominate; `panel_quarterly`
   alone ~11 min, `panel_adjusted` ~5 min) — the Makefile prints per-script
-  progress.
+  progress. Three steps run last and take seconds: the Catalonia
+  rent-control event study (`explorations/catalonia_rent_control.py`), the
+  ECV 2025 distributional microsimulation
+  (`scripts/build_ecv_microsim.py`), and the public claim ledger
+  (`scripts/build_claim_ledger.py`), which hashes both marts and the
+  catalonia/panel_tourist/tourist_rents artifacts and so must see every
+  producer above it.
 - `make verify` — manifest hashes + mart integrity (51 territories, no null
   keys, IPV base identity via build). Warns when the manifest snapshot is
   older than 90 days (`MANIFEST_WARN_DAYS=` overrides) — upstream tables get
@@ -30,7 +36,9 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 - `make backup` / `make restore FILE=` — timestamped tarball of `data/`
   (git-ignored, not redistributable) under `~/backups/spanish-housing`
   (`BACKUP_DIR=` overrides); restore re-runs verify after unpacking.
-- `make audit` — 460 headline doc numbers (192 mart + 24 committed-model + 19 probe + 6 sensitivity + 17 panel_saiz + 11 panel_saiz_municipal + 5 probe anchors + 6 madrid leg + 36 ratio_ccaa + 13 serpavi + 13 tourist_rents + 7 madrid_vacancy + 10 panel_provincial + 23 panel_quarterly + 4 wild-AR + 6 hypothesis_01 + 14 panel_tourist + 38 panel_adjusted + 16 municipios_nacional) re-queried, plus 16 model-freshness checks (each estimator output must postdate its script, `ols.py`, and the inputs it actually reads — `marts.duckdb` for the marts-based ones, the raw hipotecas/valor files for the quarterly panel, `bartik_predicted.json` for the IV + Saiz outputs, the committed terrain JSONs for the Saiz family); a green audit can no longer pass on stale model numbers; fails
+- `make audit` — every value claim in `scripts/audit_claims.py` (mart queries,
+  committed model outputs, probes, and the catalonia/microsim/claim-ledger
+  artifacts) re-checked, plus 36 model-freshness checks (each estimator output must postdate its script, `ols.py`, and the inputs it actually reads — `marts.duckdb` for the marts-based ones, the raw hipotecas/valor files for the quarterly panel, `bartik_predicted.json` for the IV + Saiz outputs, the committed terrain JSONs for the Saiz family); a green audit can no longer pass on stale model numbers; fails
   on drift. Add a claim whenever a doc states a quotable number. `make audit` also runs
   `make audit-docs`, which inverts the check for the narrative surface (synthesis + README):
   every result-like number there must match an audited claim or an explicit allowlist entry —
