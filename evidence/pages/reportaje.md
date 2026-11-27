@@ -205,7 +205,8 @@ order by viv_por_hogar_neto
 ```
 
 <BarChart data={cobertura_ccaa} x=ccaa y=viv_por_hogar_neto swapXY
-  yFmt="num2" title="Parque neto por aumento neto de hogares · actividad 2021–2024" />
+  yFmt="num2" title="Parque neto por aumento neto de hogares · actividad 2021–2024"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={cobertura_ccaa} chart="reportaje-parque-por-hogar"
   columns={["ccaa", "parque_neto", "hogares_netos", "viv_por_hogar_neto"]}
@@ -260,7 +261,8 @@ select 'A disposición del titular', 100.0 * disposicion / total from base
 ```
 
 <BarChart data={aeat_usos} x=uso y=porcentaje swapXY
-  yFmt="num1" title="Uso declarado de viviendas de personas físicas, 2024 (%)" />
+  yFmt="num1" title="Uso declarado de viviendas de personas físicas, 2024 (%)"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={aeat_usos} chart="reportaje-uso-fiscal"
   columns={["uso", "porcentaje"]}
@@ -291,7 +293,8 @@ order by group_code
 ```
 
 <BarChart data={carga_por_renta} x=group_label y=rate_pct swapXY
-  yFmt="num1" title="Personas en hogares con sobrecarga de vivienda, por grupo de ingresos (%)" />
+  yFmt="num1" title="Personas en hogares con sobrecarga de vivienda, por grupo de ingresos (%)"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <EvidencePanel data={carga_por_renta} chart="reportaje-sobrecarga"
   columns={["group_code", "group_label", "survey_year", "rate_pct", "status"]}

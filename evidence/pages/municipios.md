@@ -291,7 +291,8 @@ order by rendimiento desc
 ```
 
 <BarChart data={rendimiento_bcn} x=barrio y=rendimiento swapXY
-  yFmt="num1" title="Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado"/>
+  yFmt="num1" title="Rentabilidad bruta 2024 (%): alquiler nuevo anualizado / precio registrado"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 Rentas de contratos nuevos sobre precios de escritura: la periferia rinde
 más porque el suelo es barato, no porque alquilar sea caro.

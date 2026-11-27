@@ -60,7 +60,8 @@ limit 10
 ```
 
 <BarChart data={top_renta} x=municipio y=rent_eur_m2 swapXY
-  yFmt="num1" title="Municipios más caros (2024)"/>
+  yFmt="num1" title="Municipios más caros (2024)"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 Nota: renta mediana de contratos nuevos/renovados declarados a efectos
 fiscales (fianzas); subalquiler y renovaciones recientes pueden faltar.

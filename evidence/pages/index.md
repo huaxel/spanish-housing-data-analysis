@@ -244,7 +244,8 @@ limit 12
 ```
 
 <BarChart data={lanzamientos_pc_2024} x=provincia y=por_100k swapXY
-  yFmt="num0" title="Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)"/>
+  yFmt="num0" title="Lanzamientos de alquiler por 100.000 hab. (2024, 12 provincias más altas)"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 ## Datos y cobertura
 

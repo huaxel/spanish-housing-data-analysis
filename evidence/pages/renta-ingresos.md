@@ -81,7 +81,8 @@ limit 15
 ```
 
 <BarChart data={top_proxy} x=municipio y=ratio_pct swapXY
-  yFmt="num1" title="Ratio alquiler/renta 2023 (≥50 contratos)"/>
+  yFmt="num1" title="Ratio alquiler/renta 2023 (≥50 contratos)"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 <DataTable data={top_proxy} rows=15>
   <Column id=municipio title="Municipio"/>

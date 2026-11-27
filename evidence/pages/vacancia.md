@@ -51,7 +51,8 @@ limit 15
 ```
 
 <BarChart data={top_vac} x=municipio y=vac_pct swapXY
-  yFmt="num1" title="Municipios con >60% clasificada como vacía"/>
+  yFmt="num1" title="Municipios con >60% clasificada como vacía"
+  echartsOptions={{ yAxis: { axisLabel: { fontFamily: 'Inter, sans-serif' } } }} />
 
 Nota: los municipios pequeños sin suficientes viviendas se agregan en
 "Resto de la provincia". La proporción clasificada como vacía es alta en
