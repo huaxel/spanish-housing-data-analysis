@@ -16,8 +16,8 @@ ni cuánto bajarían los precios.
 **Corrección (26 de noviembre de 2026).** Antes se usaban unas cifras de
 vivienda protegida terminada muy inferiores a las del boletín del propio
 Ministerio (2024: 1.134 frente a 14.371). Con las calificaciones definitivas,
-el saldo nacional de hogares menos terminadas pasa de 646.035 a 607.250
-(2021–2024) y de 804.905 a 754.613 (2021–2025).
+el saldo nacional de hogares menos terminadas pasa de 646.035 a 606.955
+(2021–2024) y de 804.905 a 754.237 (2021–2025).
 
 <script>
   import { ajusteGrafico } from '../../components/chartOptions.js';

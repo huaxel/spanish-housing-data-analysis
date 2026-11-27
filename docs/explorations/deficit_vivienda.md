@@ -38,13 +38,13 @@ and the [IS IMMO 2026-1S deficit note](https://www.caixabankresearch.com/sites/d
   iniciadas and are not in the pipeline. (The bulletin says its free-market
   starts and completions series is itself built from visados of the
   architects' colleges.)
-- **Variant v2** (creation minus finished): 607,250 over 2021–2024 and
-  754,613 over 2021–2025, against published 600,000 and 734,000 — deltas
-  of 7,250 and 20,613. 2025–2026 inputs are still provisional here; the
+- **Variant v2** (creation minus finished): 606,955 over 2021–2024 and
+  754,237 over 2021–2025, against published 600,000 and 734,000 — deltas
+  of 6,955 and 20,237. 2025–2026 inputs are still provisional here; the
   remaining differences have not been decomposed and are disclosed rather
   than tuned away.
-- **Variant v3p** (minus tourist conversions, partial): 552,283 over
-  2021–2024 and 746,345 over 2021–2025, subtracting the December-snapshot
+- **Variant v3p** (minus tourist conversions, partial): 551,988 over
+  2021–2024 and 745,969 over 2021–2025, subtracting the December-snapshot
   tourist-stock net flow from the mart VTE series. The non-resident
   foreign-purchase adjustment is not reproducible from in-repo inputs
   (no buyer-nationality split) and is omitted — hence partial, never

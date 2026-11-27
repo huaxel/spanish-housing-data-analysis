@@ -1,5 +1,5 @@
 {
-  "manifest_sha256": "c8c91314f699002b09116ba616b0fb887ca7bb52d779ab95d509904ab8fccf5b",
+  "manifest_sha256": "780a221cf6c2b26ec72594aeee75ce8a6d36fa63c22e8c858a9711ac07886f85",
   "snapshot_date": "2026-11-27",
   "sources": {
     "data/raw/adrh_renta_municipal.csv": {
@@ -9,7 +9,7 @@
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/30824.csv"
     },
     "data/raw/aeat_viviendas_uso_2024.html": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "publisher": "AEAT",
       "sha256": "af70a287833542a6c816cab07aa7ad07dabb44d6fe590d854ffe2cff91fd0a94",
       "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik61a05e3830ecee0fbb552daa3b8d60a57826ffd9.html"
@@ -45,33 +45,33 @@
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/08_Lloguer-de-temporada/lloguer_temporada_mun.xlsx"
     },
     "data/raw/censo2021_intensidad.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · Censo 2021 viviendas por intensidad de uso (59531)",
       "sha256": "9dfcc0ea546da82bd021c0cf6ff7b34f49270873885053e5f76839a135dd5558",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/ecp_hog_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · ECP",
-      "sha256": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
+      "sha256": "c6ca301ab999440eecb6efa13b7d22849a9d4103f8491c298c87141998a2ef42",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/60131"
     },
     "data/raw/ecp_hog_prov.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · ECP",
-      "sha256": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
+      "sha256": "5b79aaa8da02f9cad4dcaa0d7ef6c69c7441ba9cd631de18a4bd6146be10932c",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/60133"
     },
     "data/raw/ecp_pob_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · ECP",
-      "sha256": "2117dfcfb189dfc287a5825d0d68706d0c3f28d58de3c1e3e5799d4b682efde1",
+      "sha256": "6abeabe660390182fabd735dad6123d468b0c9f5a72d776832baebd5b7ab47c1",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940"
     },
     "data/raw/eurostat_ilc_lvho07b_ES.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "Eurostat, EU-SILC",
-      "sha256": "44859329108240a6f2198680626a805c2662722ea6bfa2657fab23a078d4316b",
+      "sha256": "aff55c56a8849be5407a12d336447b69a8d5c8e60a0a20b1a0b329e6bd5e3637",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07b?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/ine_ecv_2025.zip": {
@@ -81,43 +81,43 @@
       "url": "https://www.ine.es/ftp/microdatos/ecv/ecv_b2013/datos_2025.zip"
     },
     "data/raw/ipv_ccaa_anual.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · IPV",
       "sha256": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/80271"
     },
     "data/raw/mivau_calificaciones.csv": {
-      "accessed": "2026-11-26",
+      "accessed": "2026-11-27",
       "publisher": "MIVAU, vivienda protegida y rehabilitación (VDP007_01)",
       "sha256": "7749472a8d28843a563f858d2c31c398bda58c0c491328a1dbf03e3b49cbf822",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP007_01.csv"
     },
     "data/raw/mivau_iniciadas_terminadas.csv": {
-      "accessed": "2026-11-26",
+      "accessed": "2026-11-27",
       "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)",
       "sha256": "c33f8bce61cc886f99ea5cf867f5ffd0afc09e709dd21c663b7a5782554817b3",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP005_01.csv"
     },
     "data/raw/padron_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · DPOP",
       "sha256": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/2853"
     },
     "data/raw/padron_provincia.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · DPOP",
       "sha256": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
       "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/2852"
     },
     "data/raw/parque_viviendas.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "MIVAU",
-      "sha256": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+      "sha256": "87056501b0f3cc1b7496e7cc1ee40f2b2ef014e43273d2739add3b4778797ef1",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
     "data/raw/serpavi_bd.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "INE · SERPAVI alquiler municipal (MIVAU, fianzas)",
       "sha256": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"

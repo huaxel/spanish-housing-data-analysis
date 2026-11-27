@@ -763,7 +763,7 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "national rent municipios 2024",
         "SELECT COUNT(DISTINCT (cpro, municipio)) FROM muni_all "
         "WHERE anyo=2024 AND rent_eur_m2 IS NOT NULL",
-        2515.0,
+        2512.0,
         1.0,
     ),
     (
@@ -1653,7 +1653,7 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "SELECT b.hogares-a.hogares FROM mart_ccaa_anual a "
         "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
         "WHERE a.ccaa='Nacional' AND a.anyo=2021 AND b.anyo=2025",
-        981823.0,
+        981528.0,
         1.0,
     ),
     (
@@ -2067,7 +2067,7 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "SELECT b.hogares-a.hogares FROM mart_ccaa_anual a "
         "JOIN mart_ccaa_anual b ON a.ccaa=b.ccaa "
         "WHERE a.ccaa='Madrid, Comunidad de' AND a.anyo=2021 AND b.anyo=2025",
-        161957.0,
+        161848.0,
         1.0,
     ),
     (
@@ -2561,7 +2561,7 @@ LEDGER_CLAIMS: list[tuple[str, str, str, str, float, float]] = [
         "deficit net stock 2021-2024",
         "C1_deficit_600k",
         "parque neto MIVAU (2021\u20132024)",
-        600766,
+        600471,
         0,
     ),
     (
@@ -2569,10 +2569,10 @@ LEDGER_CLAIMS: list[tuple[str, str, str, str, float, float]] = [
         "deficit vs completions 2021-2024",
         "C1_deficit_600k",
         "terminadas",
-        607250,
+        606955,
         0,
     ),
-    ("afirmaciones", "deficit net stock 2021-2025", "C1_deficit_600k", "2021\u20132025", 746988, 0),
+    ("afirmaciones", "deficit net stock 2021-2025", "C1_deficit_600k", "2021\u20132025", 746612, 0),
     ("afirmaciones", "census vacant dwellings", "C2_empty_homes_3_8m", "vac\u00edas", 3828307, 0),
     (
         "afirmaciones",
@@ -3463,10 +3463,10 @@ def main() -> int:
         ("rent median 2024", "rent_geo_2024.median", 5.22, 0.02),
         ("rent p25", "rent_geo_2024.p25", 3.97, 0.02),
         ("rent p75", "rent_geo_2024.p75", 6.77, 0.02),
-        ("rent n 2024", "rent_geo_2024.n", 2515, 0),
+        ("rent n 2024", "rent_geo_2024.n", 2512, 0),
         ("rent max level", "rent_geo_2024.max.rent", 14.63, 0.02),
         ("rent min level", "rent_geo_2024.min.rent", 1.84, 0.02),
-        ("growth n", "rent_growth_2011_2024.n", 1678, 0),
+        ("growth n", "rent_growth_2011_2024.n", 1676, 0),
         ("growth median pct", "rent_growth_2011_2024.median_pct", 29.0, 0.1),
         ("fastest growth pct", "rent_growth_2011_2024.fastest.growth_pct", 223.4, 0.1),
         ("rent-vac pearson", "rent_vs_vacancy.pearson", -0.393, 0.005),
@@ -3474,7 +3474,7 @@ def main() -> int:
         ("rent-vac n", "rent_vs_vacancy.n", 1927, 0),
         ("pop-rent pearson", "pop_vs_rent_growth.pearson", 0.051, 0.005),
         ("pop-rent spearman", "pop_vs_rent_growth.spearman", 0.115, 0.005),
-        ("pop-rent n", "pop_vs_rent_growth.n", 1678, 0),
+        ("pop-rent n", "pop_vs_rent_growth.n", 1676, 0),
         ("coverage municipios", "coverage.municipios", 8136, 0),
     ):
         got = _json_path(mn, path)
@@ -3713,15 +3713,15 @@ def main() -> int:
     total += 38
     dv = _model_output("artifacts/deficit_vivienda.json")
     for desc, path, expected, tol in (
-        ("deficit v2 2021-2024", "windows.2021-2024.national.deficit_v2", 607250, 0),
-        ("deficit v2 2021-2025", "windows.2021-2025.national.deficit_v2", 754613, 0),
-        ("deficit v3p 2021-2024", "windows.2021-2024.national.deficit_v3p", 552283, 0),
-        ("deficit v3p 2021-2025", "windows.2021-2025.national.deficit_v3p", 746345, 0),
-        ("deficit top5 share 2021-2024", "windows.2021-2024.national.top5_share", 0.4827, 0.00005),
+        ("deficit v2 2021-2024", "windows.2021-2024.national.deficit_v2", 606955, 0),
+        ("deficit v2 2021-2025", "windows.2021-2025.national.deficit_v2", 754237, 0),
+        ("deficit v3p 2021-2024", "windows.2021-2024.national.deficit_v3p", 551988, 0),
+        ("deficit v3p 2021-2025", "windows.2021-2025.national.deficit_v3p", 745969, 0),
+        ("deficit top5 share 2021-2024", "windows.2021-2024.national.top5_share", 0.4826, 0.00005),
         ("deficit benchmark v2 2021-2024", "windows.2021-2024.benchmark.caixabank_v2", 600000, 0),
         ("deficit benchmark v2 2021-2025", "windows.2021-2025.benchmark.caixabank_v2", 734000, 0),
-        ("deficit delta v2 2021-2024", "windows.2021-2024.benchmark.delta", 7250, 0),
-        ("deficit delta v2 2021-2025", "windows.2021-2025.benchmark.delta", 20613, 0),
+        ("deficit delta v2 2021-2024", "windows.2021-2024.benchmark.delta", 6955, 0),
+        ("deficit delta v2 2021-2025", "windows.2021-2025.benchmark.delta", 20237, 0),
     ):
         got = _json_path(dv, path)
         ok = got is not None and abs(got - expected) <= tol

@@ -1,10 +1,10 @@
 {
   "sha256": {
-    "data/processed/ecv_joint_burden.duckdb": "ef58d7fe5175ca7ff29c1f08b73d639dec90139628f8677e7f092edbf496b878",
-    "data/processed/housing_access.duckdb": "9866010e1b1dd3c11d35f6fe134c87dda0a22570289e5ffa7116129b0215ad82",
-    "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
-    "data/processed/stock_capitals.duckdb": "359da3e660c12b804f4bc65e9d292d5c2e8f72ff6e92cfd10012942a160d3840",
-    "data/processed/stock_province.duckdb": "242b8afede651dd5ea42e95841bd97cdbe8a6b476380ce5ad87bcec0e341d6f4",
+    "data/processed/ecv_joint_burden.duckdb": "af2708b29a527dddbd2aa599f45e228225dd27a321ec4cb473b6c41a860b5b83",
+    "data/processed/housing_access.duckdb": "5cf184c3c99d125dd9e0459321c4d7742a63b0cbac8bbf191ae028096ac0900d",
+    "data/processed/stock.duckdb": "a4baeeb97c5c678d0e8c555f44be1cd2a72f662575209ab604ad96cfd443874b",
+    "data/processed/stock_capitals.duckdb": "a6f552a7b62c6f4c667cc0cdd389a08c8ce67b370dbb6ac10d78a2efb565bc18",
+    "data/processed/stock_province.duckdb": "df4f5b24b7b6eff1f9f7d31a19a1908a0d8683e4953d1d01f2ec2bca9086f086",
     "data/raw/adrh_renta_municipal.csv": "7ac913e28963b4afb618dee9f64b6434ccd2a33821b86dd0b26e0b3ef58dfa86",
     "data/raw/aeat_viviendas_uso_2023.html": "b245c718e67114ab676d5d66221a594848d0e4b4d376a94210a23f06d9081539",
     "data/raw/aeat_viviendas_uso_2024.html": "af70a287833542a6c816cab07aa7ad07dabb44d6fe590d854ffe2cff91fd0a94",
@@ -23,10 +23,10 @@
     "data/raw/bcn_lloguers_anual_bcn_lloguer.xlsx": "90d7d307cce4aa5d7378b28a5a2412e3de96b7796959db1224a867e38b31fe57",
     "data/raw/bcn_lloguers_anual_bcn_lloguer_m2.xlsx": "7abb13a31e02ed8a000ef4903fc3b8801a359690893b6c72b64aa901021e5383",
     "data/raw/bcn_lloguers_anual_bcn_sup.xlsx": "48faed583df063b4d1bf32d15f9ebc7b5809c3d39296db1d1feec53a03723dff",
-    "data/raw/bcn_lloguers_trimestral_bcn_contractes.xlsx": "581d545512f0831ba39811f9461d9b9fc8bb5b2d98f1797290e405b75c0a6403",
-    "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": "1aaaa8d6b31c47b02cff7e50e51cb7d314d6df3adca28fa05b58a9704fa02d1a",
-    "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": "710f1bcdda778eed3ead4a829bbde32ce6c3922712f5cd1a41bbd54649189945",
-    "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": "86322156666afebe9483cd8117e4dca3b8746a04ca28d93cba247cc527a27e05",
+    "data/raw/bcn_lloguers_trimestral_bcn_contractes.xlsx": "bf7b819bebeff075563f6bd942c9727f9eb109e64c43c194117d680e2d4e0e9c",
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": "67d9edc322ce4e73e09d78c8bfc2a5848459af0c14077f12bcb57b39782122bf",
+    "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": "21b80c74fa7a3ff830e7e397fa35dcd88c70cc12d8cd760d82ad7a2449bcdae8",
+    "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": "6706e2c74967cc86d9edbf01cc2a7c2eb860edf71250b57c540575bee91a8ee4",
     "data/raw/boe_zmrt_cat_wave1.xml": "edc33222a1e7882df2eb5508ba4b4aa7dfe7d33a34bb7ebb864ec9351737c3ec",
     "data/raw/boe_zmrt_cat_wave2.xml": "f732dbc8a905a48e7cca9c6e390572400fcfaf5de0202e2fd7ce0ee0aa9827bf",
     "data/raw/cadastre_cordoba_buildings.zip": "7124770efc5ad2220203fbc012eb73c99585380264ae63e3d7ee2a99d0d8ca53",
@@ -152,20 +152,20 @@
     "data/raw/censo2011_tenencia.csv": "86bfae63ecf59eeb06566192918b6792a6c5aeaf72d508f09452bd600851e90d",
     "data/raw/censo2011_vintage.csv": "f132ff229dffeea194a5bbe659f64afbd61f635ca8c7ee2926ddf605a0ac94b3",
     "data/raw/censo2021_hogares_59543.csv": "27f21e93ea0475fd966a373f131cc6cce1c06cd96eae6c1a9ab5fae3a2ffea5e",
-    "data/raw/censo2021_hogares_59543.html": "a04c070cc1d1c1b4b7a513b6eee5b17e7ba3107586d3ed7c531aac7383af8200",
+    "data/raw/censo2021_hogares_59543.html": "0d9a78d408d47d46796b94201a964ca3ca66520f783d16d9ebda4eedd4eb3f82",
     "data/raw/censo2021_intensidad.csv": "9dfcc0ea546da82bd021c0cf6ff7b34f49270873885053e5f76839a135dd5558",
     "data/raw/censo2021_secciones.csv": "f1749637f2b14da34b80f845accd5d13468905e7bddc166aaf333855524391d8",
     "data/raw/censo2021_tenencia_59529.csv": "f40f4db10a89fc7d4303457c0fd0693603ba3d4abae2dc3d89e78214b1af6668",
-    "data/raw/censo2021_tenencia_59529.html": "b25d051da6e0d165e2657a005987c5164c00afc8b702f8aecba37faea8469973",
+    "data/raw/censo2021_tenencia_59529.html": "df473c06312919c1d15afe920de3f013ef72c52e6f65c6183b5a6afc2f4a446a",
     "data/raw/censo2021_viviendas.csv": "d54e5a3d686fd8e8c7d8c225be22dac98358d1363ff0267e610e98b978ff1f23",
-    "data/raw/censo_anual_68521.csv": "cdd0b707a40ce4af62d0f967fb02d88f2e70098c2ac4dbd846e3bcb7abcf0b52",
+    "data/raw/censo_anual_68521.csv": "4a2de88064832c2eb4898c974fb059325d624a327919322d7e448f52c8a56efa",
     "data/raw/censo_viviendas_2001_2011.csv": "8a4f18414c1d2953003c26d1b22455269f21fc34a6ce9883f710b82b94330dab",
     "data/raw/cgpj_crisis_provincias.xlsx": "065ba5674539dad999dda6e15e93ba0b41884162115c7cfe20e23672c2f8c5a7",
     "data/raw/diba_opendata.zip": "01bb0bd88e67b9add2f015b2294a7e4c0cd632deb7ecba605c82df1c41db3b9a",
     "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
-    "data/raw/ecp_hog_ccaa.json": "2f88bc44494149e360fc430bd7eead380aed115919ef1d2b5043e904fa7b1fea",
-    "data/raw/ecp_hog_prov.json": "e2bd6c8ee60ff7264312c3299fe6a685b7131f356808f05d553a9fb3d2352adb",
-    "data/raw/ecp_pob_ccaa.json": "2117dfcfb189dfc287a5825d0d68706d0c3f28d58de3c1e3e5799d4b682efde1",
+    "data/raw/ecp_hog_ccaa.json": "c6ca301ab999440eecb6efa13b7d22849a9d4103f8491c298c87141998a2ef42",
+    "data/raw/ecp_hog_prov.json": "5b79aaa8da02f9cad4dcaa0d7ef6c69c7441ba9cd631de18a4bd6146be10932c",
+    "data/raw/ecp_pob_ccaa.json": "6abeabe660390182fabd735dad6123d468b0c9f5a72d776832baebd5b7ab47c1",
     "data/raw/ecv_access_79621.csv": "f08c82e12aef274ebb2438001c6efc64233710aae6283b9cb87c23a5c70ead9d",
     "data/raw/ecv_access_79622.csv": "e8bf285061320324697ca21cece8fd2ac4f50e47da859c613a1b660823237deb",
     "data/raw/ecv_access_79623.csv": "e59d0296358302153322fe2f768a9589f5efd1715d880791900ace4824d59728",
@@ -191,31 +191,31 @@
     "data/raw/ecv_access_79643.csv": "42cb8188c344dede3f2ac289b8c6218f41ec335d851917e0c6b421c9dec6a36a",
     "data/raw/ecv_access_79644.csv": "b339697fad32470ca2dd0005322337644106954770bdbe1e5b26ac5b94b8d607",
     "data/raw/ecv_access_79645.csv": "bc7996391966e8ad06cd7c8f4d566e4c82a82149a9e4bf410e7e3329136bfc68",
-    "data/raw/eurostat_ilc_lvho05a_ES.json": "510ceaf54fd485f971e6dad213f3fc63cef52482016cfabc2e8b748a1af03d37",
-    "data/raw/eurostat_ilc_lvho05c_ES.json": "69ce667aba3e9401a537af68d0868abbc758d185cb1878041ac411c27213c0d7",
+    "data/raw/eurostat_ilc_lvho05a_ES.json": "724d02c14b96e9a89a20bba715097699e51d19af9013cd70f9389750b346d3eb",
+    "data/raw/eurostat_ilc_lvho05c_ES.json": "843b6a3ad252650651c260a9815705cb3075d4c3ea315b3eea04016ef41ecbfb",
     "data/raw/eurostat_ilc_lvho05d_ES.json": "2e3534ae20ba4bfcc8a741a9e66b3cb05d02c53777af62fca1c6b83adf4453c1",
-    "data/raw/eurostat_ilc_lvho05q_ES.json": "07d04f999c9f62b2655ab4856d3eb02adae38c7fce432d8e628213b2c347a34c",
-    "data/raw/eurostat_ilc_lvho07a_ES.json": "71f75b584aa34e2240e23279f62e880190532862da737312f77df2f3ec05ce24",
-    "data/raw/eurostat_ilc_lvho07b_ES.json": "44859329108240a6f2198680626a805c2662722ea6bfa2657fab23a078d4316b",
-    "data/raw/eurostat_ilc_lvho07c_ES.json": "fbae897c4cf88ea47b0d0100ba37e53a7678bbea6575362e4ba72052c9f1f581",
-    "data/raw/eurostat_ilc_lvho08a_ES.json": "7e5f1f39e57592175e51189b11b34c80d2078b23f77972cfa4822f1cbba389ef",
-    "data/raw/eurostat_ilc_lvho08b_ES.json": "adf3c015f872ffa3d73139a077e4180039663bff131e9f7b38e686f2c98f77d0",
-    "data/raw/eurostat_ilc_lvho50a_ES.json": "90ac3ea75124b36cfbe6d5ab9ff86d6a517a5498550593badf184490eccf9fbd",
-    "data/raw/eurostat_ilc_lvho50c_ES.json": "d8dd667987a67ade1a12261a92d87335d14426235491f1c5726e70d51b19414e",
+    "data/raw/eurostat_ilc_lvho05q_ES.json": "e17adbe8c1ce8b0da846918f095733d99ff93827cb2d1884fe7a36db164f921c",
+    "data/raw/eurostat_ilc_lvho07a_ES.json": "5e239e51078c8b126e0e991d31649e005df5dcc0101525af804ec28fc1abfca2",
+    "data/raw/eurostat_ilc_lvho07b_ES.json": "aff55c56a8849be5407a12d336447b69a8d5c8e60a0a20b1a0b329e6bd5e3637",
+    "data/raw/eurostat_ilc_lvho07c_ES.json": "ad95a3369fbceef22ca5b2552c47051b146f3f045691422adc0d3439d7405ce7",
+    "data/raw/eurostat_ilc_lvho08a_ES.json": "61cf29681c33c597e8a8f601d167a87e110722f53137259311843b25fb012a6c",
+    "data/raw/eurostat_ilc_lvho08b_ES.json": "a0f098426c70cdbbf5e5c3b147b4336ba18d5555f710c4a0d29a5642927cf738",
+    "data/raw/eurostat_ilc_lvho50a_ES.json": "7234ece756cc48af2f3f6337090349c752fefa6f934b43293aa70bdbb0a5ba35",
+    "data/raw/eurostat_ilc_lvho50c_ES.json": "bc17a54ea5a823ebae324bead8acc218116fb17da1401840e2744537a3a3d14e",
     "data/raw/eurostat_ilc_lvho50d_ES.json": "7517ffd3caab899a4272851ae0c7d401c88e75f807d64768a89d2b51bead8171",
     "data/raw/geo/lau_2021.json": "9b0479e96ae29ae2458d8859177e4643ba22f6f975691f720fb16704aa2de971",
-    "data/raw/hipotecas_ccaa.json": "7afd223280c3cf27a1343bd2f2b834844d86af9c4b798df327c338e9dadfd057",
-    "data/raw/hipotecas_prov.json": "32a7ef413a69195faf85613ec8bd4c3f19831433facb26398f2ba824c263c62a",
-    "data/raw/hipotecas_rates.json": "ae017d5156dafdd6aae66a2763bd4165fa9f8aed07d0b5098e04666748f79435",
+    "data/raw/hipotecas_ccaa.json": "275078e8d6c4be984386f4fbef11bf9900f629c663d5f163eff2cfa40f69fc04",
+    "data/raw/hipotecas_prov.json": "cad796b7868eb67d3a1ed8f828bceb8fd4422a40f84f941ca288717638ab86ee",
+    "data/raw/hipotecas_rates.json": "1da757f3a22d30eb413c3547e3ed5d89ff0be873085fc99452c430c796d06dc2",
     "data/raw/ine_ecv_2025.zip": "bf4f2751ac247957f6edcf02cfd85a3931785b0932b1291e8972a33ad490f617",
-    "data/raw/ipc_ccaa.json": "3fc94f9c62597754edbbd4c41a30b7431967570484cadaec4947a049b2eb466d",
+    "data/raw/ipc_ccaa.json": "bb9cc2f9c6b884e511aa3bebe622761ab9c03a712cdab1716a1cf493c7397874",
     "data/raw/ipv_ccaa_anual.json": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
     "data/raw/mivau_calificaciones.csv": "7749472a8d28843a563f858d2c31c398bda58c0c491328a1dbf03e3b49cbf822",
     "data/raw/mivau_iniciadas_terminadas.csv": "c33f8bce61cc886f99ea5cf867f5ffd0afc09e709dd21c663b7a5782554817b3",
     "data/raw/padron_ccaa.json": "1792c9120dc3c43812cfb5c419575ecd3a5d14a9cf5d53d56fa8c6283493c99f",
     "data/raw/padron_extranjeros.csv": "600b16b511ddd7a0e07591a718a13456c3d93bb2cab3f1703c1dd41e27b269dd",
-    "data/raw/padron_municipios_all_2854.json": "0a11b8d9649006798ce21b4f1d57f18a84efb2e98f220b553bafd14bde2d21cf",
+    "data/raw/padron_municipios_all_2854.json": "b18308dbe595ea3a9a70eec3f485e090655416cd3ff6ce63bb1aa0e3ea5cda5f",
     "data/raw/padron_municipios_all_2855.json": "7456ed630565edef2e5ec3460f0a3931ed7a2935c69e58513f35e3d006fbd4b3",
     "data/raw/padron_municipios_all_2856.json": "e3784ec148cc91318f9d15415fa653f39e9fa6ca8b5662715a7f3cf0a94f349f",
     "data/raw/padron_municipios_all_2857.json": "22c9b6ecd9465405b38fad9fc21d5cc63b51a5610e158946014b454dad322cb2",
@@ -223,28 +223,28 @@
     "data/raw/padron_municipios_all_2859.json": "6b0e57ddb770ec1aae6998b1af64baa5814a1f9ba708047bcab8100f2c5d1bbf",
     "data/raw/padron_municipios_all_2860.json": "3172c4a52d8acd4a8269d999fc6b4588d3ac879917afd9b4af7b4893dc5b0e84",
     "data/raw/padron_municipios_all_2861.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
-    "data/raw/padron_municipios_all_2862.json": "ca59a6304dc97202094e50f65b01d8d030e33e2132a225ec8544fb8730d087d8",
-    "data/raw/padron_municipios_all_2863.json": "57fc21cddf491b021864e22e84caddc74c637a758065a29cbdf63bdef918545f",
+    "data/raw/padron_municipios_all_2862.json": "82e94b1d029e739f714a823c1a4526c8021f4eaee136566088da56f180207510",
+    "data/raw/padron_municipios_all_2863.json": "4c9e099b13037da883884ceb0a562bb028df542aed76ac4521d355e06dc32052",
     "data/raw/padron_municipios_all_2864.json": "7996a05ebf47b9a3680aa7470b09e5cd757e35fc6b9b3e67a5226c3277fe4ac0",
-    "data/raw/padron_municipios_all_2865.json": "56175df5b73c3b0bea09971736ee1e079a38404cd77dbfbe68008c92cb89591d",
+    "data/raw/padron_municipios_all_2865.json": "fc3a8e2d69564398bc2c218d4cf7fb182df3d7212c8c2ae54334c69d9c281668",
     "data/raw/padron_municipios_all_2866.json": "a21c4f5c5a78aa83ec190bd40ef4258dfedcc6d8742acf28c959797f3facded4",
     "data/raw/padron_municipios_all_2868.json": "acbdbe120e46c4bd6fa65bc1a0963d2a263246ee8f089a99b39b9fa2fe8fafb6",
     "data/raw/padron_municipios_all_2869.json": "a76bc1589a22a1542bec2ef008b65aad1c5681d73910d00c4ff1858d83b8011b",
-    "data/raw/padron_municipios_all_2870.json": "5cdb069af89f3ed1158d72f79b9c4d584cf1fba99a32cbfe8a4b9e0b678c4480",
+    "data/raw/padron_municipios_all_2870.json": "e37f25517ef2b668026a62f63a46cf4365d29b44770a3337da75c9fb659aa257",
     "data/raw/padron_municipios_all_2871.json": "eb0a917b15aa4259e7c341cbb8a8dad37ede3aafbd6ddc00620ec92830a208c6",
     "data/raw/padron_municipios_all_2872.json": "48dff2aee9bc1ac2537a9ddfa344352d67826f8d658d827afd64b3515e6e1bfe",
     "data/raw/padron_municipios_all_2873.json": "c9e331bc3fac3612b9fceae2dc65103025ebea273d592498c56b5025c1cba8cf",
     "data/raw/padron_municipios_all_2874.json": "b45525afc6616591d0c1c638704a51eaeab49a10ade6624a1d0c0de88bc97834",
     "data/raw/padron_municipios_all_2875.json": "8ba5be3b4e7bfd8beef83e0a8d8a391c4cd38c035bd9016423a99e19945b4125",
     "data/raw/padron_municipios_all_2876.json": "8ebc88b9a1b61770dbea68313f86d70c72164028fb15e04d9206efd5c2a05518",
-    "data/raw/padron_municipios_all_2877.json": "0574cc74f1635e17dc0bb26969616486049a7984abf212fac1addae3215e49bf",
+    "data/raw/padron_municipios_all_2877.json": "078f395b755be02d2e8a44cd0d57194f0b63b320dad9bbb4b5d2b549d691db9e",
     "data/raw/padron_municipios_all_2878.json": "714773cce30e9cdd7d2e4806e25341f42d10fae8fba07468a811836489c8ef18",
     "data/raw/padron_municipios_all_2879.json": "571131427dc9dbd67916de905b72efe8fd75ab54581f55cd65a48fa618bde718",
     "data/raw/padron_municipios_all_2880.json": "ff955a69f1cfdb31ed01cb3761b04e859ce61ba5822dfee7ed0d9fa49eb2741f",
     "data/raw/padron_municipios_all_2881.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
     "data/raw/padron_municipios_all_2882.json": "af198628d02cde0c6ce8de4c552c9a26bd1e66c4da54d528f6d44d52082b3f8d",
     "data/raw/padron_municipios_all_2883.json": "45de9e402e88e8eb5c0ab6db3c063ff9faa077d37e33f0eb4ce02ed8b6d0c449",
-    "data/raw/padron_municipios_all_2884.json": "c86670edc48d51754f43e592f254aa09110aabe87b6beb89235b7a52fb871c6e",
+    "data/raw/padron_municipios_all_2884.json": "9da16fa495a4dffca765a650dfbbf181ece5639279cb015ed142dee2c9ba79f6",
     "data/raw/padron_municipios_all_2885.json": "e6d5288d95a6188fee3e8933e5e1aae8dd599c71014d50745b78c448992fbeb7",
     "data/raw/padron_municipios_all_2886.json": "63746a0e62117365f629368d40b719432e72abb454d841d8908399c584aa0e27",
     "data/raw/padron_municipios_all_2888.json": "f491db63e5a684e0ede9d8402831e962e381e157a41e14264189634a82193106",
@@ -257,10 +257,10 @@
     "data/raw/padron_municipios_all_2895.json": "b8a436d864f740c6c3e12253cf4b79f33e30ce0955c8b9e8e0b6fcf3aca1059d",
     "data/raw/padron_municipios_all_2896.json": "4a7fc7d18e1cf24f8e59971883a2de8d75a66efb8cf318c465fd6bbb7f4b5d3b",
     "data/raw/padron_municipios_all_2899.json": "39552b3d1617cab711d53b5d9b232acc11c788456b9efdb4e2fac017196ef2fc",
-    "data/raw/padron_municipios_all_2900.json": "7b7fed7dd1cf772196ae97892b9cdfac72fbd5aefb6a642b9d2d83006e485e2d",
+    "data/raw/padron_municipios_all_2900.json": "ea1720f0e49c080a298cbbc6f5b026f1506fef4c67356e963c6c2b87a9c69049",
     "data/raw/padron_municipios_all_2901.json": "b746370e4e61e2ae5e9f91be47baeff2d47574aa9e559bc134a61d4ea4cd5588",
     "data/raw/padron_municipios_all_2902.json": "c65f311407feaecb500b219aee201c9f0e0721a1db20989e3d2f88d7a0986b2a",
-    "data/raw/padron_municipios_all_2903.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
+    "data/raw/padron_municipios_all_2903.json": "0a4a0f35e23721253501448c388e59d91e9a8999037be53cfbb97777ac757080",
     "data/raw/padron_municipios_all_2904.json": "4a7d0c9f2c8982aed0a8bd34ddfbdeb6156286c22b958d0b7a8176655195f623",
     "data/raw/padron_municipios_all_2905.json": "44d1c38152c08799eed2578646dd4e465aa181423908b1e69a1615ed59cf61e9",
     "data/raw/padron_municipios_all_2906.json": "5c8642f62c2334d5d7d2d66a86e2450d4159cd8ef32da3daa02eff98495d3a2f",
@@ -270,14 +270,14 @@
     "data/raw/padron_municipios_bcn.json": "3625bfbbe73f8b0d0a8e047f554623680b6691b29de518b0953cb1825ac2acbe",
     "data/raw/padron_municipios_mad.json": "e33b22cb0a764f24e833366ac960598747034def8c66dd3b047514def8dd65ab",
     "data/raw/padron_municipios_sev.json": "b8a436d864f740c6c3e12253cf4b79f33e30ce0955c8b9e8e0b6fcf3aca1059d",
-    "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
+    "data/raw/padron_municipios_vlc.json": "0a4a0f35e23721253501448c388e59d91e9a8999037be53cfbb97777ac757080",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
-    "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
+    "data/raw/parque_viviendas.csv": "87056501b0f3cc1b7496e7cc1ee40f2b2ef014e43273d2739add3b4778797ef1",
     "data/raw/parquet/adrh_renta_municipal.parquet": "2703c98ac9a3f57cad71301cc83a5046028e8b956552e8baaf0a7d6d0fb2009d",
     "data/raw/parquet/aeat_viviendas_uso.parquet": "9a1d8317a908144e22b41845713d326d68079254265cdcc35cf333f7b47eb6d4",
     "data/raw/parquet/barrios_bcn_compraventes.parquet": "25a96a88ba7ea3f86f83b0b6cec850a7c55972c9e7cb80c55a23cf73fe3c9bef",
     "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": "dfefa78bd98a3422d405c21f5387529f0968739315f8b1479f5a8a5f89598f8b",
-    "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": "d589dfbe5711244932770d1d3e8fe1dc9dbe5ada3f80f298a138777017bda393",
+    "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": "d58bb2b5fc29fed5d9e61179b34490964aaa3956829d25a971c10d7f7cf82890",
     "data/raw/parquet/barrios_madrid.parquet": "bf90c6f737d93929ed0e597ba17e9d13efb44895fea198750d2aeabbba150d92",
     "data/raw/parquet/barrios_sevilla_compra.parquet": "7f866c6f158ea29afdf727eb105d69549abe20b3bef7caa504bafe05dcc7c573",
     "data/raw/parquet/barrios_sevilla_ipra.parquet": "bf3859636666d661f855fcf2e907394699ca390043c837076aa0b8f049d845f3",
@@ -397,7 +397,7 @@
     "data/raw/parquet/censo2021_intensidad.parquet": "fb0e757b0151c42be8d4bcd760032a5472a538dca381e4698a2d425f9e2ee475",
     "data/raw/parquet/censo2021_secciones.parquet": "1f77fefc21082131d502214d4b4d4815190884ebd0dc811b7cdf25f4ab4ac426",
     "data/raw/parquet/censo2021_viviendas.parquet": "f98ba65853bade60e12387d3f6c13c4a28bc6d805dcf1d11ba98f5fbdc1bc045",
-    "data/raw/parquet/censo_anual_pob_prov.parquet": "8ea764f83d9e78f94783b9acd304866e89aa94f8f0c6c988a9cf3a1ca031ab46",
+    "data/raw/parquet/censo_anual_pob_prov.parquet": "33b07ddffb69b3ee9dcb1af1001717e3701c45ae4da69cd31aa3833c0e51ca9c",
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": "42040a0a9a5593538fe7a21c05c707a8c44c5524efba2176a943b2e08d514c14",
     "data/raw/parquet/desahucios_provincia.parquet": "61e1b51e957727c6c2552af1e8038e05ef1bf35e5c639e9bfc882d28314eac45",
     "data/raw/parquet/diba_h18a.parquet": "951b7b80c4925c83bc230e3ed52285fbf0b7c7314c3a20bafad0d2525337e68c",
@@ -409,34 +409,34 @@
     "data/raw/parquet/diba_m19.parquet": "bc783fc3feb27af74af36120c7258203ccebff35dd2c919c683fc03a50e56ce6",
     "data/raw/parquet/diba_m23.parquet": "63900a34ea1766c388ac1a75f4257ea240eedc6b473824d88a6a4a34101ad41e",
     "data/raw/parquet/ech_hogares.parquet": "7567f05ca1aba9d8e3f62d03fdbb560ab7843a61aed62d57bdcdb8d7053d3317",
-    "data/raw/parquet/ecp_edad_ccaa.parquet": "aefa8e90ba6c535aee40e6ed36e71a838d36ccce347423b38bd56e7085d12146",
-    "data/raw/parquet/ecp_hog_ccaa.parquet": "d0a6d54da1e70d5d595f83dbbaff7d268a8ba732c4bac5640f533e42627d8311",
-    "data/raw/parquet/ecp_hog_prov.parquet": "4edba6a9b5ded67621d0d7f0ed5d07b31234aa61e89979a7e1f551598b2d46c6",
-    "data/raw/parquet/ecp_pob_ccaa.parquet": "f97e785ab58ba23c16f52475871d3d6086bd68aea0dc55ed5da49154b2700495",
+    "data/raw/parquet/ecp_edad_ccaa.parquet": "83fb1e2e8a16cf71656d39134204241eec04d7b964868df8f2b56292adaf1600",
+    "data/raw/parquet/ecp_hog_ccaa.parquet": "38bc5c5c8b587e3d1c714802a5b11078c0dcdd9358c3a5b2e2d8b5e0053505d3",
+    "data/raw/parquet/ecp_hog_prov.parquet": "459a072254a801d8e83de7af74658cab41870d2c6eed1292f9ab34d016219627",
+    "data/raw/parquet/ecp_pob_ccaa.parquet": "922bab55c94579327aa24145b251253ddedb382e3afcbdc42d6fcae022c74988",
     "data/raw/parquet/ecv_access.parquet": "c00d01fb0a779895c2eab8f399508aecbf5967d99d555bc162db2f3b52371a56",
     "data/raw/parquet/ecv_joint_burden.parquet": "f8ed2a42f6ac5aa7dfc3210a5bccf225d6eb263fc8df40e5b5debc53a1783929",
-    "data/raw/parquet/hipotecas_ccaa.parquet": "a298bd29aa42e59ebde0d7d1b3aa8082ec1151ec4f9c56a2b3d5dc49575e3905",
-    "data/raw/parquet/hipotecas_prov.parquet": "446840aafade0a6f1549b0cfa8c85542f3901e6edd3a16b27d174a4727b748ff",
-    "data/raw/parquet/hipotecas_rates.parquet": "6be4f31be89a283af59a4ae8d53d15db880625cb6b583f127d23aefdb194552b",
-    "data/raw/parquet/housing_conditions.parquet": "e8e310ba63f37326b2d9f50acc012985494a77d5c3f335b12e0bda07f6c01d90",
-    "data/raw/parquet/housing_overburden.parquet": "25ed8117be68e65307afbc063451fcdc2567dcaa0deca4590af84dcb51c6d628",
-    "data/raw/parquet/housing_overburden_age_poverty.parquet": "3e3f7fb081a92e2544611b5d8cd536082813ed28220937016364e7c4f3df4dba",
-    "data/raw/parquet/ipc_ccaa.parquet": "13ad008a077ddc5adbca347078d2b44f122da770c2adfdaecf575ac4611bce3b",
+    "data/raw/parquet/hipotecas_ccaa.parquet": "485656a48f849173a78ce2f4be41aa5af89f831bec17f4c9a8fd4838fcbc1e3d",
+    "data/raw/parquet/hipotecas_prov.parquet": "16fbb8efa62202c46c96ebea16daf0a5607e937720dcaa68bb715d743f22cb49",
+    "data/raw/parquet/hipotecas_rates.parquet": "0f666cf91dc0e46aa0aee6a11d07bf90b822b83c76b65fb6137397ea092c876c",
+    "data/raw/parquet/housing_conditions.parquet": "5daf533b4d17027080f8270f2f6b51a03a45670a171d33166b08e36f226d0107",
+    "data/raw/parquet/housing_overburden.parquet": "1bce746012bdedada74a9ab377bf77d6ebcd1a871ae5f28a65342f18afbf194e",
+    "data/raw/parquet/housing_overburden_age_poverty.parquet": "8c1ff717278998b468675d4084d1a6bdf3632817465e1f0e955487a679773cff",
+    "data/raw/parquet/ipc_ccaa.parquet": "5b2e2070ea2b05eebe6c34e3292eb195b636906c885d95e8df8a6e9d788f9651",
     "data/raw/parquet/ipv_ccaa_anual.parquet": "6dc32de53a18850f11773834b7455a1ecda921b88d8916687f5e9324167e9c34",
     "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
     "data/raw/parquet/mivau_terminadas.parquet": "3c8e6e907aa37f49c437bbc7dfc1c0aaaa834d1eecebe7a02d47fde4b8f9910a",
     "data/raw/parquet/padron_ccaa.parquet": "495e970541579aa086c3f0ddf760b600734f4b73d672a1fec2aa8e844e07cf4d",
     "data/raw/parquet/padron_extranjeros.parquet": "bfc845757dadb1ce63250d5bf152c4f8b4920c3325dad2b8003b1a00cebd34ed",
     "data/raw/parquet/padron_extranjeros_origen.parquet": "e3157a1c4fffc5ca5ed4002ecc8e5a6051b13f68e0470f8b2b3590f86b5fc417",
-    "data/raw/parquet/padron_municipios_all.parquet": "e8649a9754aad75473ca36aeaa2a8fb279008987e7774c241d115f3075462db5",
+    "data/raw/parquet/padron_municipios_all.parquet": "3d1bcf00326021182a9ddd1ac2cb98fa849a357213f54de7f1c3d4f82b418438",
     "data/raw/parquet/padron_municipios_bcn.parquet": "080464f90f0867e389efb00b0e69f0bc6e4b47d6bce39699c88d5e28a0528ad6",
     "data/raw/parquet/padron_municipios_mad.parquet": "b3a78641d86a691875c746fd0824bce8b29bc3e0b7627e5acc987178af388a86",
     "data/raw/parquet/padron_municipios_sev.parquet": "8940bdb5b31f35c3116e7ffd59c3f6cd9c48b0f9e799b957a71b263371a28de7",
-    "data/raw/parquet/padron_municipios_vlc.parquet": "66c720885bf349df415f1d0cc79e0829988a0515682cd30a8e4bd8b6da1c2937",
+    "data/raw/parquet/padron_municipios_vlc.parquet": "2ed34de13967ab9300a939d01281bcdd0af63a556b76139959d237c8b51c991d",
     "data/raw/parquet/padron_provincia.parquet": "f51115604f56529bba2587a98d885c27589a03fd4b071c07b2fef8df1f17b9a5",
-    "data/raw/parquet/parque_viviendas.parquet": "f30d3ecb3b0ce0051ae661e0b8375c35dfb7070a4ed6874e766d1befd7d06bca",
+    "data/raw/parquet/parque_viviendas.parquet": "5666e9ed98be8fd91c02f811162a8ebcc69fbbe1cb2edb6b9c2b5f4b39f3e0e3",
     "data/raw/parquet/renta_hogar_ccaa.parquet": "34a75c98df6c25c99d5a6f22ffcac57a5e59ba1b4eb21a3405596610fe5987f4",
-    "data/raw/parquet/rmdvp_inscripciones.parquet": "c58834259e3a5f0f727a55c1c8f6a3ca10639b968c9bff58c8f13d605be21ecb",
+    "data/raw/parquet/rmdvp_inscripciones.parquet": "4247695d89954a5eb2d65e9a043933c5c7e261118155af3ac1aa892d08d7c19e",
     "data/raw/parquet/serpavi_distritos.parquet": "aed37f04b35c27a9bcea888fb74d68f8dda3cbf96b4b94824e27d7f7073194b2",
     "data/raw/parquet/serpavi_municipal.parquet": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
     "data/raw/parquet/serpavi_provincial.parquet": "e6cac3651200385e67a459cd96f7073a7c0d73e858d1210a5035c109c241f141",
@@ -519,20 +519,21 @@
     "data/raw/rmdvp/202606_rmdvp01.xls": "fd1d9e31f443125a4c59c05a5da261a5daff4b4ab269b21802aa615cb5df0e60",
     "data/raw/rmdvp/202607_rmdvp01.xls": "31e29e0e1ea961201d52d92e70bdac192da680b5581184b6e80ff7858519b1de",
     "data/raw/rmdvp/202608_rmdvp01.xls": "06b2950bbb54f789579b46b4a4d2d1eb4e1b3ba2adb3fb4bfebc48540675654a",
+    "data/raw/rmdvp/202609_rmdvp01.xls": "ec1c04230c80a76381a269b29aa837e40c163c7dcc91abfcdbce0e4b9d45d5f1",
     "data/raw/serpavi_bd.xlsx": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
     "data/raw/sevilla_anuario_2025_7_3_9.xls": "7e2c3752a3c6243dac94701ae2fa7a105252678f87fb1a6e81e790476b4fabde",
     "data/raw/sevilla_barrios_25830.geojson": "1cd35a8e128a24185d07603a61b99a2a83a2d8427f73a5180b02b2d3c3ae2bf5",
     "data/raw/sevilla_barrios_4326.geojson": "82695676f577944a2f0f5aec5bd3bb5454eca75f355b334426f0d6efbce8d00c",
     "data/raw/sevilla_income_definition.json": "6be8f9ee153d7f918f3ebf82bd3844a1e3b741812504440db88ba72b6488dc1c",
-    "data/raw/sevilla_income_metadata.json": "fda718936ddc745a024c8a7412bd881562e4fb54da50caffc90a587b00dc6d91",
+    "data/raw/sevilla_income_metadata.json": "a2c060e0abf282eb5f984157139186930ea8d00c6f20f5011ebcfb80337cf806",
     "data/raw/sevilla_income_query.json": "18c36476cf9b7453de5f4dd218e5d8d90ffc195da0046c77b8893bf9fe5140d0",
-    "data/raw/sevilla_sim_caracteristicas.json": "0bcdecb757a3f6e17336b932b496d5221e1d70497da124fd9d7dad7df33af5f8",
-    "data/raw/sevilla_sim_hogares.json": "c8fb8645281db943adbb3eb0306a2d735fb5910d819823cbca935579becd0e6c",
-    "data/raw/sevilla_sim_poblacion.json": "6373531cf4f03cfa1e1c70303ed28e52c8d3cd41d5eb2280e65594c3c743f354",
-    "data/raw/sevilla_sim_rehabilitacion.json": "57a9b68d358b87dd4b3ebb2d2ba2d0e358581b37216ff40c90966edce973471f",
-    "data/raw/sevilla_sim_tipologia.json": "e01af404afe05f4d85ceed8633fef3387c63b1fb5c3cdeb3596e7d348cf66195",
-    "data/raw/sevilla_sim_turismo.json": "01f37554c2636c204cc6a30bb71f403a68da996ff9ab5e987657bd35c5b36467",
-    "data/raw/sevilla_sim_uso.json": "57c90e032c96f8f54829a150ee8f2c941245494e32cd9e06816fc160e37f84d1",
+    "data/raw/sevilla_sim_caracteristicas.json": "9ada2cbabb2619428e27c5651922ec9be489e7a3f86017202e11377dc0674d34",
+    "data/raw/sevilla_sim_hogares.json": "4d68840fcc24132aa40020d450b2f965109289ffbbc2564bf38370c6c47ad7ea",
+    "data/raw/sevilla_sim_poblacion.json": "497f87f4e8f13609f32872a8c73f77a4dbed5fcfdd267ec7c710550fc0d09a89",
+    "data/raw/sevilla_sim_rehabilitacion.json": "6f65690ab3703097abddeeab8039cee9ef2108158c35e9d9ff022d7113329f91",
+    "data/raw/sevilla_sim_tipologia.json": "0193d65f551b09526175d2015d909699b365826f3ec673c9b7623b585ed65e9b",
+    "data/raw/sevilla_sim_turismo.json": "164f20acce2e47d4e66e6dc334aa40b89df8bc01c95b643e321c38f38737830c",
+    "data/raw/sevilla_sim_uso.json": "ed14cbe1d3b25668c1aade0769515a1945a15c618ca56e725be3d6fe09768d74",
     "data/raw/transmisiones.csv": "b6d9cc60eca2c82f40d057b209e1f9707389d01f3e13506ef6663f10e6697ecd",
     "data/raw/turisticas_con_pct.json": "77446313d60a7dcd41bcfa24ea24578b19a8b4cc7761f7a1fc1812c12ac24fa6",
     "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
@@ -553,17 +554,17 @@
       "publisher": "SERPAVI (MIVAU) + ADRH (INE) proxy"
     },
     "data/processed/stock.duckdb": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Physical-stock pilot; all-component interior-point joins; see cadastre_stock.md",
       "publisher": "DGC INSPIRE + Ayuntamiento/EMVISESA SIM"
     },
     "data/processed/stock_capitals.duckdb": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/processed/stock_province.duckdb": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
@@ -574,127 +575,127 @@
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/30824.csv"
     },
     "data/raw/aeat_viviendas_uso_2023.html": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "operation": "IRPFVIV",
       "publisher": "AEAT",
       "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2023/jrubik19cd43289fdbce9fbcbd2391abc7741113e371d8.html"
     },
     "data/raw/aeat_viviendas_uso_2024.html": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "operation": "IRPFVIV",
       "publisher": "AEAT",
       "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpfvivienda/2024/jrubik61a05e3830ecee0fbb552daa3b8d60a57826ffd9.html"
     },
     "data/raw/barrios_madrid.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "session-built CSV export; bank query builder, no static file",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
     },
     "data/raw/barrios_sevilla_compra.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
     },
     "data/raw/barrios_sevilla_ipra.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
     },
     "data/raw/bcn_compra_BCN_trimestral_2018.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2018; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2018/BCN_trimestral_2018.xlsx"
     },
     "data/raw/bcn_compra_BCN_trimestral_2019.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2019; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2019/BCN_trimestral_2019.xlsx"
     },
     "data/raw/bcn_compra_BCN_trimestral_2021.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2021; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2021/BCN_trimestral_2021.xlsx"
     },
     "data/raw/bcn_compra_BCN_trimestral_2022.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2022; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2022/BCN_trimestral_2022.xlsx"
     },
     "data/raw/bcn_compra_BCN_trimestral_2023.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2023; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2023/BCN_trimestral_2023.xlsx"
     },
     "data/raw/bcn_compra_BCN_trimestral_2024.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2024; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2024/BCN_trimestral_2024.xlsx"
     },
     "data/raw/bcn_compra_Trimestrals_Barcelona_2025.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2025; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2025/Trimestrals_Barcelona_2025.xlsx"
     },
     "data/raw/bcn_compra_Trimestrals_Barcelona_2026.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores Barcelona sales 2026; quarter sheets pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2026/Trimestrals_Barcelona_2026.xlsx"
     },
     "data/raw/bcn_lloguers_anual_bcn_contractes.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx"
     },
     "data/raw/bcn_lloguers_anual_bcn_lloguer.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx"
     },
     "data/raw/bcn_lloguers_anual_bcn_lloguer_m2.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx"
     },
     "data/raw/bcn_lloguers_anual_bcn_sup.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx"
     },
     "data/raw/bcn_lloguers_trimestral_bcn_contractes.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx"
     },
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx"
     },
     "data/raw/bcn_lloguers_trimestral_bcn_lloguer_m2.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx"
     },
     "data/raw/bcn_lloguers_trimestral_bcn_sup.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Generalitat Barcelona rents workbook; sheets/years pinned by fetcher",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
@@ -712,697 +713,697 @@
       "url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-20576"
     },
     "data/raw/cadastre_cordoba_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/14/14900-CORDOBA/A.ES.SDGC.BU.14900.zip"
     },
     "data/raw/cadastre_cordoba_feed.xml": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/14/ES.SDGC.bu.atom_14.xml"
     },
     "data/raw/cadastre_granada_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/18/18900-GRANADA/A.ES.SDGC.BU.18900.zip"
     },
     "data/raw/cadastre_granada_distritos_20230101.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "District polygons CC-BY, ED50/UTM30 reprojected via EPSG:1632",
       "publisher": "Ayuntamiento de Granada (opendata.granada.org)",
       "url": "https://opendata.granada.org/dataset/cf4dab5c-6e37-4cb2-996f-d72576e71f14/resource/e3487eb6-2543-4165-8252-3fa00597579a/download/101_distritos_municipales_20230101.zip"
     },
     "data/raw/cadastre_granada_feed.xml": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/18/ES.SDGC.bu.atom_18.xml"
     },
     "data/raw/cadastre_malaga_barrios_25830.geojson": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Official barrio polygons CC BY-SA 4.0; share-alike applies to derivatives",
       "publisher": "Ayuntamiento de Malaga (datosabiertos.malaga.eu)",
       "url": "https://datosabiertos.malaga.eu/recursos/urbanismoEInfraestructura/planimetria/callejero/da_cartografiaBarrio-25830.geojson"
     },
     "data/raw/cadastre_malaga_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/29/29900-MALAGA/A.ES.SDGC.BU.29900.zip"
     },
     "data/raw/cadastre_malaga_feed.xml": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/29/ES.SDGC.bu.atom_29.xml"
     },
     "data/raw/cadastre_prov_41001_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41001-AGUADULCE/A.ES.SDGC.BU.41001.zip"
     },
     "data/raw/cadastre_prov_41002_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41002-ALANIS/A.ES.SDGC.BU.41002.zip"
     },
     "data/raw/cadastre_prov_41003_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41003-ALBAIDA%20DEL%20ALJARAFE/A.ES.SDGC.BU.41003.zip"
     },
     "data/raw/cadastre_prov_41004_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41004-ALCALA%20DE%20GUADAIRA/A.ES.SDGC.BU.41004.zip"
     },
     "data/raw/cadastre_prov_41005_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41005-ALCALA%20DEL%20RIO/A.ES.SDGC.BU.41005.zip"
     },
     "data/raw/cadastre_prov_41006_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41006-ALCOLEA%20DEL%20RIO/A.ES.SDGC.BU.41006.zip"
     },
     "data/raw/cadastre_prov_41007_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41007-LA%20ALGABA/A.ES.SDGC.BU.41007.zip"
     },
     "data/raw/cadastre_prov_41008_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41008-ALGAMITAS/A.ES.SDGC.BU.41008.zip"
     },
     "data/raw/cadastre_prov_41009_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41009-ALMADEN%20DE%20LA%20PLATA/A.ES.SDGC.BU.41009.zip"
     },
     "data/raw/cadastre_prov_41010_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41010-ALMENSILLA/A.ES.SDGC.BU.41010.zip"
     },
     "data/raw/cadastre_prov_41011_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41011-ARAHAL/A.ES.SDGC.BU.41011.zip"
     },
     "data/raw/cadastre_prov_41012_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41012-AZNALCAZAR/A.ES.SDGC.BU.41012.zip"
     },
     "data/raw/cadastre_prov_41013_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41013-AZNALCOLLAR/A.ES.SDGC.BU.41013.zip"
     },
     "data/raw/cadastre_prov_41014_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41014-BADOLATOSA/A.ES.SDGC.BU.41014.zip"
     },
     "data/raw/cadastre_prov_41015_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41015-BENACAZON/A.ES.SDGC.BU.41015.zip"
     },
     "data/raw/cadastre_prov_41016_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41016-BOLLULLOS%20DE%20LA%20MITACION/A.ES.SDGC.BU.41016.zip"
     },
     "data/raw/cadastre_prov_41017_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41017-BORMUJOS/A.ES.SDGC.BU.41017.zip"
     },
     "data/raw/cadastre_prov_41018_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41018-BRENES/A.ES.SDGC.BU.41018.zip"
     },
     "data/raw/cadastre_prov_41019_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41019-BURGUILLOS/A.ES.SDGC.BU.41019.zip"
     },
     "data/raw/cadastre_prov_41020_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41020-LAS%20CABEZAS%20DE%20SAN%20JUAN/A.ES.SDGC.BU.41020.zip"
     },
     "data/raw/cadastre_prov_41021_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41021-CAMAS/A.ES.SDGC.BU.41021.zip"
     },
     "data/raw/cadastre_prov_41022_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41022-LA%20CAMPANA/A.ES.SDGC.BU.41022.zip"
     },
     "data/raw/cadastre_prov_41023_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41023-CANTILLANA/A.ES.SDGC.BU.41023.zip"
     },
     "data/raw/cadastre_prov_41024_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41024-CARMONA/A.ES.SDGC.BU.41024.zip"
     },
     "data/raw/cadastre_prov_41025_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41025-CARRION%20DE%20LOS%20CESPEDES/A.ES.SDGC.BU.41025.zip"
     },
     "data/raw/cadastre_prov_41026_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41026-CASARICHE/A.ES.SDGC.BU.41026.zip"
     },
     "data/raw/cadastre_prov_41027_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41027-CASTILBLANCO%20DE%20LOS%20ARROYOS/A.ES.SDGC.BU.41027.zip"
     },
     "data/raw/cadastre_prov_41028_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41028-CASTILLEJA%20DE%20GUZMAN/A.ES.SDGC.BU.41028.zip"
     },
     "data/raw/cadastre_prov_41029_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41029-CASTILLEJA%20DE%20LA%20CUESTA/A.ES.SDGC.BU.41029.zip"
     },
     "data/raw/cadastre_prov_41030_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41030-CASTILLEJA%20DEL%20CAMPO/A.ES.SDGC.BU.41030.zip"
     },
     "data/raw/cadastre_prov_41031_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41031-EL%20CASTILLO%20DE%20LAS%20GUARDAS/A.ES.SDGC.BU.41031.zip"
     },
     "data/raw/cadastre_prov_41032_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41032-CAZALLA%20DE%20LA%20SIERRA/A.ES.SDGC.BU.41032.zip"
     },
     "data/raw/cadastre_prov_41033_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41033-CONSTANTINA/A.ES.SDGC.BU.41033.zip"
     },
     "data/raw/cadastre_prov_41034_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41034-CORIA%20DEL%20RIO/A.ES.SDGC.BU.41034.zip"
     },
     "data/raw/cadastre_prov_41035_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41035-CORIPE/A.ES.SDGC.BU.41035.zip"
     },
     "data/raw/cadastre_prov_41036_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41036-EL%20CORONIL/A.ES.SDGC.BU.41036.zip"
     },
     "data/raw/cadastre_prov_41037_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41037-LOS%20CORRALES/A.ES.SDGC.BU.41037.zip"
     },
     "data/raw/cadastre_prov_41038_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41038-DOS%20HERMANAS/A.ES.SDGC.BU.41038.zip"
     },
     "data/raw/cadastre_prov_41039_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41039-ECIJA/A.ES.SDGC.BU.41039.zip"
     },
     "data/raw/cadastre_prov_41040_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41040-ESPARTINAS/A.ES.SDGC.BU.41040.zip"
     },
     "data/raw/cadastre_prov_41041_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41041-ESTEPA/A.ES.SDGC.BU.41041.zip"
     },
     "data/raw/cadastre_prov_41042_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41042-FUENTES%20DE%20ANDALUCIA/A.ES.SDGC.BU.41042.zip"
     },
     "data/raw/cadastre_prov_41043_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41043-EL%20GARROBO/A.ES.SDGC.BU.41043.zip"
     },
     "data/raw/cadastre_prov_41044_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41044-GELVES/A.ES.SDGC.BU.41044.zip"
     },
     "data/raw/cadastre_prov_41045_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41045-GERENA/A.ES.SDGC.BU.41045.zip"
     },
     "data/raw/cadastre_prov_41046_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41046-GILENA/A.ES.SDGC.BU.41046.zip"
     },
     "data/raw/cadastre_prov_41047_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41047-GINES/A.ES.SDGC.BU.41047.zip"
     },
     "data/raw/cadastre_prov_41048_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41048-GUADALCANAL/A.ES.SDGC.BU.41048.zip"
     },
     "data/raw/cadastre_prov_41049_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41049-GUILLENA/A.ES.SDGC.BU.41049.zip"
     },
     "data/raw/cadastre_prov_41050_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41050-HERRERA/A.ES.SDGC.BU.41050.zip"
     },
     "data/raw/cadastre_prov_41051_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41051-HUEVAR%20DEL%20ALJARAFE/A.ES.SDGC.BU.41051.zip"
     },
     "data/raw/cadastre_prov_41052_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41052-LANTEJUELA/A.ES.SDGC.BU.41052.zip"
     },
     "data/raw/cadastre_prov_41053_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41053-LEBRIJA/A.ES.SDGC.BU.41053.zip"
     },
     "data/raw/cadastre_prov_41054_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41054-LORA%20DE%20ESTEPA/A.ES.SDGC.BU.41054.zip"
     },
     "data/raw/cadastre_prov_41055_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41055-LORA%20DEL%20RIO/A.ES.SDGC.BU.41055.zip"
     },
     "data/raw/cadastre_prov_41056_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41056-LA%20LUISIANA/A.ES.SDGC.BU.41056.zip"
     },
     "data/raw/cadastre_prov_41057_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41057-EL%20MADRO%C3%91O/A.ES.SDGC.BU.41057.zip"
     },
     "data/raw/cadastre_prov_41058_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41058-MAIRENA%20DEL%20ALCOR/A.ES.SDGC.BU.41058.zip"
     },
     "data/raw/cadastre_prov_41059_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41059-MAIRENA%20DEL%20ALJARAFE/A.ES.SDGC.BU.41059.zip"
     },
     "data/raw/cadastre_prov_41060_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41060-MARCHENA/A.ES.SDGC.BU.41060.zip"
     },
     "data/raw/cadastre_prov_41061_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41061-MARINALEDA/A.ES.SDGC.BU.41061.zip"
     },
     "data/raw/cadastre_prov_41062_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41062-MARTIN%20DE%20LA%20JARA/A.ES.SDGC.BU.41062.zip"
     },
     "data/raw/cadastre_prov_41063_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41063-LOS%20MOLARES/A.ES.SDGC.BU.41063.zip"
     },
     "data/raw/cadastre_prov_41064_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41064-MONTELLANO/A.ES.SDGC.BU.41064.zip"
     },
     "data/raw/cadastre_prov_41065_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41065-MORON%20DE%20LA%20FRONTERA/A.ES.SDGC.BU.41065.zip"
     },
     "data/raw/cadastre_prov_41066_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41066-LAS%20NAVAS%20DE%20LA%20CONCEPCION/A.ES.SDGC.BU.41066.zip"
     },
     "data/raw/cadastre_prov_41067_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41067-OLIVARES/A.ES.SDGC.BU.41067.zip"
     },
     "data/raw/cadastre_prov_41068_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41068-OSUNA/A.ES.SDGC.BU.41068.zip"
     },
     "data/raw/cadastre_prov_41069_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41069-LOS%20PALACIOS%20Y%20VILLAFRANCA/A.ES.SDGC.BU.41069.zip"
     },
     "data/raw/cadastre_prov_41070_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41070-PALOMARES%20DEL%20RIO/A.ES.SDGC.BU.41070.zip"
     },
     "data/raw/cadastre_prov_41071_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41071-PARADAS/A.ES.SDGC.BU.41071.zip"
     },
     "data/raw/cadastre_prov_41072_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41072-PEDRERA/A.ES.SDGC.BU.41072.zip"
     },
     "data/raw/cadastre_prov_41073_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41073-EL%20PEDROSO/A.ES.SDGC.BU.41073.zip"
     },
     "data/raw/cadastre_prov_41074_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41074-PE%C3%91AFLOR/A.ES.SDGC.BU.41074.zip"
     },
     "data/raw/cadastre_prov_41075_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41075-PILAS/A.ES.SDGC.BU.41075.zip"
     },
     "data/raw/cadastre_prov_41076_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41076-PRUNA/A.ES.SDGC.BU.41076.zip"
     },
     "data/raw/cadastre_prov_41077_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41077-LA%20PUEBLA%20DE%20CAZALLA/A.ES.SDGC.BU.41077.zip"
     },
     "data/raw/cadastre_prov_41078_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41078-LA%20PUEBLA%20DE%20LOS%20INFANTES/A.ES.SDGC.BU.41078.zip"
     },
     "data/raw/cadastre_prov_41079_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41079-LA%20PUEBLA%20DEL%20RIO/A.ES.SDGC.BU.41079.zip"
     },
     "data/raw/cadastre_prov_41080_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41080-EL%20REAL%20DE%20LA%20JARA/A.ES.SDGC.BU.41080.zip"
     },
     "data/raw/cadastre_prov_41081_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41081-LA%20RINCONADA/A.ES.SDGC.BU.41081.zip"
     },
     "data/raw/cadastre_prov_41082_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41082-LA%20RODA%20DE%20ANDALUCIA/A.ES.SDGC.BU.41082.zip"
     },
     "data/raw/cadastre_prov_41083_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41083-EL%20RONQUILLO/A.ES.SDGC.BU.41083.zip"
     },
     "data/raw/cadastre_prov_41084_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41084-EL%20RUBIO/A.ES.SDGC.BU.41084.zip"
     },
     "data/raw/cadastre_prov_41085_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41085-SALTERAS/A.ES.SDGC.BU.41085.zip"
     },
     "data/raw/cadastre_prov_41086_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41086-SAN%20JUAN%20DE%20AZNALFARACHE/A.ES.SDGC.BU.41086.zip"
     },
     "data/raw/cadastre_prov_41087_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41087-SANLUCAR%20LA%20MAYOR/A.ES.SDGC.BU.41087.zip"
     },
     "data/raw/cadastre_prov_41088_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41088-SAN%20NICOLAS%20DEL%20PUERTO/A.ES.SDGC.BU.41088.zip"
     },
     "data/raw/cadastre_prov_41089_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41089-SANTIPONCE/A.ES.SDGC.BU.41089.zip"
     },
     "data/raw/cadastre_prov_41090_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41090-EL%20SAUCEJO/A.ES.SDGC.BU.41090.zip"
     },
     "data/raw/cadastre_prov_41092_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41092-TOCINA/A.ES.SDGC.BU.41092.zip"
     },
     "data/raw/cadastre_prov_41093_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41093-TOMARES/A.ES.SDGC.BU.41093.zip"
     },
     "data/raw/cadastre_prov_41094_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41094-UMBRETE/A.ES.SDGC.BU.41094.zip"
     },
     "data/raw/cadastre_prov_41095_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41095-UTRERA/A.ES.SDGC.BU.41095.zip"
     },
     "data/raw/cadastre_prov_41096_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41096-VALENCINA%20DE%20LA%20CONCEPCION/A.ES.SDGC.BU.41096.zip"
     },
     "data/raw/cadastre_prov_41097_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41097-VILLAMANRIQUE%20DE%20LA%20CONDESA/A.ES.SDGC.BU.41097.zip"
     },
     "data/raw/cadastre_prov_41098_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41098-VILLANUEVA%20DEL%20ARISCAL/A.ES.SDGC.BU.41098.zip"
     },
     "data/raw/cadastre_prov_41099_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41099-VILLANUEVA%20DEL%20RIO%20Y%20MINAS/A.ES.SDGC.BU.41099.zip"
     },
     "data/raw/cadastre_prov_41100_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41100-VILLANUEVA%20DE%20SAN%20JUAN/A.ES.SDGC.BU.41100.zip"
     },
     "data/raw/cadastre_prov_41101_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41101-VILLAVERDE%20DEL%20RIO/A.ES.SDGC.BU.41101.zip"
     },
     "data/raw/cadastre_prov_41102_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41102-EL%20VISO%20DEL%20ALCOR/A.ES.SDGC.BU.41102.zip"
     },
     "data/raw/cadastre_prov_41103_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41103-CA%C3%91ADA%20ROSAL/A.ES.SDGC.BU.41103.zip"
     },
     "data/raw/cadastre_prov_41104_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41104-ISLA%20MAYOR/A.ES.SDGC.BU.41104.zip"
     },
     "data/raw/cadastre_prov_41105_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41105-EL%20CUERVO%20DE%20SEVILLA/A.ES.SDGC.BU.41105.zip"
     },
     "data/raw/cadastre_prov_41106_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41106-EL%20PALMAR%20DE%20TROYA/A.ES.SDGC.BU.41106.zip"
     },
     "data/raw/cadastre_prov_41900_buildings.zip": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41900-SEVILLA/A.ES.SDGC.BU.41900.zip"
     },
     "data/raw/cadastre_sevilla_buildings.zip": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Buildings/41/41900-SEVILLA/A.ES.SDGC.BU.41900.zip"
     },
     "data/raw/cadastre_sevilla_feed.xml": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "DGC INSPIRE",
       "url": "https://www.catastro.hacienda.gob.es/INSPIRE/buildings/41/ES.SDGC.bu.atom_41.xml"
@@ -1426,327 +1427,327 @@
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/08_Lloguer-de-temporada/lloguer_temporada_mun.xlsx"
     },
     "data/raw/censo2011_municipios.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/3456",
       "operation": "CENSOPV"
     },
     "data/raw/censo2011_tenencia.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv"
     },
     "data/raw/censo2011_vintage.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
     },
     "data/raw/censo2021_hogares_59543.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Table59543 municipal household counts; reference1Jan2021",
       "publisher": "INE Censo de Población y Viviendas 2021",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59543.csv"
     },
     "data/raw/censo2021_hogares_59543.html": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Table59543 municipal household counts; reference1Jan2021",
       "publisher": "INE Censo de Población y Viviendas 2021",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59543&L=0"
     },
     "data/raw/censo2021_intensidad.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "static jaxi CSV; tab-separated, dot-thousands, BOM; 18 measures",
       "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/censo2021_secciones.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "operation": "CENSO2021SEC",
       "publisher": "INE",
       "url": "https://www.ine.es/censos2021/C2021_Indicadores.csv"
     },
     "data/raw/censo2021_tenencia_59529.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Table59529 conventional primary dwellings by tenure; census1Jan2021",
       "publisher": "INE Censo de Población y Viviendas 2021",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59529.csv"
     },
     "data/raw/censo2021_tenencia_59529.html": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Table59529 conventional primary dwellings by tenure; census1Jan2021",
       "publisher": "INE Censo de Población y Viviendas 2021",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59529&L=0"
     },
     "data/raw/censo2021_viviendas.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "browser-exported CSV via playwright-cli; normalized cp1252->UTF-8",
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
     },
     "data/raw/censo_anual_68521.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "static jaxiT3 CSV export; 208 MB; tab-separated, dot-thousands, BOM",
       "operation": "Censo Anual de Población (68521)",
       "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/censo_viviendas_2001_2011.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
     },
     "data/raw/cgpj_crisis_provincias.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "consolidated provincial crisis series through 2026Q1; sheets pinned by fetcher",
       "publisher": "CGPJ, Estadística Judicial (efecto de la crisis, series provinciales)",
       "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/diba_opendata.zip": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/ech_hogares.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "ECH",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv"
     },
     "data/raw/ecp_hog_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/60131",
       "operation": "ECP"
     },
     "data/raw/ecp_hog_prov.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/60133",
       "operation": "ECP"
     },
     "data/raw/ecp_pob_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/56940",
       "operation": "ECP"
     },
     "data/raw/ecv_access_79621.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79621; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79621.csv"
     },
     "data/raw/ecv_access_79622.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79622; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79622.csv"
     },
     "data/raw/ecv_access_79623.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79623; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79623.csv"
     },
     "data/raw/ecv_access_79624.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79624; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79624.csv"
     },
     "data/raw/ecv_access_79625.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79625; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79625.csv"
     },
     "data/raw/ecv_access_79626.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79626; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79626.csv"
     },
     "data/raw/ecv_access_79627.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79627; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79627.csv"
     },
     "data/raw/ecv_access_79628.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79628; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79628.csv"
     },
     "data/raw/ecv_access_79629.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79629; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79629.csv"
     },
     "data/raw/ecv_access_79630.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79630; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79630.csv"
     },
     "data/raw/ecv_access_79631.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79631; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79631.csv"
     },
     "data/raw/ecv_access_79632.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79632; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79632.csv"
     },
     "data/raw/ecv_access_79633.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79633; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79633.csv"
     },
     "data/raw/ecv_access_79634.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79634; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79634.csv"
     },
     "data/raw/ecv_access_79635.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79635; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79635.csv"
     },
     "data/raw/ecv_access_79636.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79636; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79636.csv"
     },
     "data/raw/ecv_access_79637.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79637; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79637.csv"
     },
     "data/raw/ecv_access_79638.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79638; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79638.csv"
     },
     "data/raw/ecv_access_79639.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79639; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79639.csv"
     },
     "data/raw/ecv_access_79640.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79640; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79640.csv"
     },
     "data/raw/ecv_access_79641.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79641; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79641.csv"
     },
     "data/raw/ecv_access_79642.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79642; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79642.csv"
     },
     "data/raw/ecv_access_79643.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79643; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79643.csv"
     },
     "data/raw/ecv_access_79644.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79644; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79644.csv"
     },
     "data/raw/ecv_access_79645.csv": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "JAXI tpx=79645; national grain plus CCAA cut in 79637 only",
       "publisher": "INE, ECV 2025 housing-access module",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/79645.csv"
     },
     "data/raw/eurostat_ilc_lvho05a_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05a?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho05c_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05c?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho05d_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05d?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho05q_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho05q?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho07a_ES.json": {
-      "accessed": "2026-10-08",
-      "note": "ES, annual, percentage of persons; separate marginal breakdown",
+      "accessed": "2026-11-27",
+      "note": "ES, annual person rates; marginals and direct age-poverty cells",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07a?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho07b_ES.json": {
-      "accessed": "2026-10-08",
-      "note": "ES, annual, percentage of persons; separate marginal breakdown",
+      "accessed": "2026-11-27",
+      "note": "ES, annual person rates; marginals and direct age-poverty cells",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07b?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho07c_ES.json": {
-      "accessed": "2026-10-08",
-      "note": "ES, annual, percentage of persons; separate marginal breakdown",
+      "accessed": "2026-11-27",
+      "note": "ES, annual person rates; marginals and direct age-poverty cells",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07c?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho08a_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho08a?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho08b_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho08b?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho50a_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50a?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho50c_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50c?lang=EN&geo=ES&unit=PC&freq=A"
     },
     "data/raw/eurostat_ilc_lvho50d_ES.json": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "ES, annual person rates/medians; published marginals only",
       "publisher": "Eurostat, EU-SILC",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho50d?lang=EN&geo=ES&unit=PC&freq=A"
@@ -1757,17 +1758,17 @@
       "table": "LAU 2021 RG 01M 4326"
     },
     "data/raw/hipotecas_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76316",
       "operation": "HPT"
     },
     "data/raw/hipotecas_prov.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76317",
       "operation": "HPT"
     },
     "data/raw/hipotecas_rates.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76315",
       "operation": "HPT"
     },
@@ -1778,330 +1779,330 @@
       "url": "https://www.ine.es/ftp/microdatos/ecv/ecv_b2013/datos_2025.zip"
     },
     "data/raw/ipc_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76136",
       "operation": "IPC general"
     },
     "data/raw/ipv_ccaa_anual.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/80271",
       "operation": "IPV"
     },
     "data/raw/migracion_flujos.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/24322",
       "operation": "EM flujos"
     },
     "data/raw/mivau_calificaciones.csv": {
-      "accessed": "2026-11-26",
+      "accessed": "2026-11-27",
       "note": "Monthly approvals by CPRO; only protected final approvals are used",
       "publisher": "MIVAU, vivienda protegida y rehabilitación (VDP007_01)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP007_01.csv"
     },
     "data/raw/mivau_iniciadas_terminadas.csv": {
-      "accessed": "2026-11-26",
+      "accessed": "2026-11-27",
       "note": "Monthly free-market starts/completions by CPRO; blanks kept null",
       "publisher": "MIVAU, viviendas iniciadas y terminadas (VDP005_01)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP005_01.csv"
     },
     "data/raw/padron_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2853",
       "operation": "DPOP"
     },
     "data/raw/padron_extranjeros.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/padron_municipios_all_2854.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2854",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2855.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2855",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2856.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2856",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2857.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2857",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2858.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2858",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2859.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2859",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2860.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2860",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2861.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2862.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2862",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2863.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2863",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2864.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2864",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2865.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2865",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2866.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2866",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2868.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2868",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2869.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2869",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2870.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2870",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2871.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2871",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2872.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2872",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2873.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2873",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2874.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2874",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2875.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2875",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2876.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2876",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2877.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2877",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2878.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2878",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2879.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2879",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2880.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2880",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2881.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2882.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2882",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2883.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2883",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2884.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2884",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2885.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2885",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2886.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2886",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2888.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2888",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2889.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2889",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2890.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2890",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2891.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2891",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2892.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2892",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2893.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2893",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2894.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2894",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2895.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2896.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2896",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2899.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2899",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2900.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2900",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2901.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2901",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2902.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2902",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2903.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2904.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2904",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2905.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2905",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2906.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2906",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2907.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2907",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2908.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2908",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_all_2909.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2909",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_bcn.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_mad.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_sev.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/padron_municipios_vlc.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/padron_provincia.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2852",
       "operation": "DPOP"
     },
     "data/raw/parque_viviendas.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "dataset": "VDP002_01",
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
@@ -2113,7 +2114,7 @@
       "publisher": "INE ADRH, Indicadores de renta media y mediana (jaxiT3 30824)"
     },
     "data/raw/parquet/aeat_viviendas_uso.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "operation": "IRPFVIV",
       "publisher": "AEAT",
       "urls": {
@@ -2122,728 +2123,728 @@
       }
     },
     "data/raw/parquet/barrios_bcn_compraventes.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Registradores quarterly sales; zero prices/areas stored as null (suppressed <3 contracts); city total includes non-geolocated records",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (Colegio de Registradores de la Propiedad)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2018/BCN_trimestral_2018.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2019/BCN_trimestral_2019.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2021/BCN_trimestral_2021.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2022/BCN_trimestral_2022.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2023/BCN_trimestral_2023.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2024/BCN_trimestral_2024.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2025/Trimestrals_Barcelona_2025.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/02_Compravenda_i_preu_de_venda/02_Compravendes_d_habitatges_registrades_i_el_preu_de_venda/2026/Trimestrals_Barcelona_2026.xlsx"
     },
     "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "INCASÒL deposits: city+districts 2000–2025, 73 barris 2013–2025; <6-contract cells null; filed contracts, not asking prices",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
     },
     "data/raw/parquet/barrios_bcn_lloguer_trimestral.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "INCASÒL deposits quarterly: districts 2000–2013, +73 barris 2014–; latest year holds published quarters only; <6-contract cells null",
       "publisher": "Generalitat de Catalunya, Servei d'Estudis i Documentació d'Habitatge / Secretaria d'Habitatge (INCASÒL dipòsits de fiances)",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/anual_bcn_sup.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_contractes.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_lloguer_m2.xlsx; https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/03_Lloguers_Barcelona_per_districtes_i_barris/trimestral_bcn_sup.xlsx"
     },
     "data/raw/parquet/barrios_madrid.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "suppressed (<15 cases) cells stay null",
       "publisher": "Ayto. Madrid Banco de datos (Colegio de Registradores)",
       "url": "https://servpub.madrid.es/CSEBD_WBINTER/seleccionSerie.html?numSerie=0504020100060"
     },
     "data/raw/parquet/barrios_sevilla_compra.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "PRO_COL_UNT/PRO_UNI_UNT = purchase €/m² built by housing type; no period field; reference period/method unspecified; service last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VHS/FeatureServer/171"
     },
     "data/raw/parquet/barrios_sevilla_ipra.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "IPRA 2016-2022; rolling 3-year windows; metadata last edited 2023-02-12",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM (AVRA fianzas), ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/X/FeatureServer/179"
     },
     "data/raw/parquet/cadastre_cordoba_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_granada_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_malaga_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Capital BU pilot; Malaga barrio join, rest municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41001_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41002_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41003_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41004_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41005_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41006_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41007_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41008_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41009_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41010_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41011_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41012_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41013_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41014_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41015_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41016_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41017_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41018_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41019_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41020_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41021_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41022_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41023_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41024_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41025_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41026_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41027_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41028_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41029_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41030_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41031_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41032_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41033_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41034_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41035_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41036_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41037_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41038_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41039_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41040_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41041_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41042_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41043_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41044_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41045_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41046_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41047_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41048_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41049_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41050_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41051_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41052_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41053_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41054_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41055_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41056_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41057_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41058_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41059_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41060_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41061_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41062_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41063_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41064_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41065_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41066_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41067_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41068_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41069_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41070_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41071_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41072_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41073_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41074_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41075_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41076_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41077_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41078_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41079_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41080_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41081_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41082_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41083_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41084_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41085_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41086_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41087_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41088_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41089_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41090_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41092_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41093_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41094_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41095_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41096_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41097_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41098_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41099_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41100_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41101_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41102_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41103_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41104_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41105_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41106_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_prov_41900_buildings.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Sevilla-province BU pilot, municipal grain",
       "publisher": "DGC INSPIRE"
     },
     "data/raw/parquet/cadastre_sevilla_buildings.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Physical-stock pilot; all-component interior-point joins; see cadastre_stock.md",
       "publisher": "DGC INSPIRE + Ayuntamiento/EMVISESA SIM"
     },
     "data/raw/parquet/censo2011_municipios.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/3456",
       "operation": "CENSOPV"
     },
     "data/raw/parquet/censo2011_tenencia.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "missing cells dropped",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/hogares/p01/02015.csv"
     },
     "data/raw/parquet/censo2011_vintage.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "'..' suppressed kept missing",
       "operation": "CENSOPV 2011",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p01/01011a.csv"
     },
     "data/raw/parquet/censo2021_intensidad.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "municipio grain; named + Resto aggregates; 18 measures",
       "operation": "Censo 2021 viviendas por intensidad de uso (59531)",
       "url": "https://www.ine.es/jaxi/files/tpx/csv_bd/59531.csv"
     },
     "data/raw/parquet/censo2021_secciones.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "operation": "CENSO2021SEC",
       "publisher": "INE",
       "url": "https://www.ine.es/censos2021/C2021_Indicadores.csv"
     },
     "data/raw/parquet/censo2021_viviendas.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "all tipo x banda cells; anchor uses Total x Total",
       "operation": "Censo 2021 tpx=59521",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=59521&L=0"
     },
     "data/raw/parquet/censo_anual_pob_prov.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Total × Todas las edades × Total margin only; 2021-2025",
       "operation": "Censo Anual de Población (68521)",
       "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bd/68521.csv"
     },
     "data/raw/parquet/censo_viviendas_2001_2011.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "CENSOPV",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e244/viviendas/p07/nal02.csv"
     },
     "data/raw/parquet/desahucios_provincia.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "quarterly launches (2013Q1–) + foreclosure filings (2007Q1–); annual totals and Evolución blocks skipped; service-common figures excluded",
       "publisher": "CGPJ, Estadística Judicial (efecto de la crisis, series provinciales)",
       "url": "https://www.poderjudicial.es/stfls/ESTADISTICA/FICHEROS/Crisis/Series%20-%20Efecto%20de%20la%20crisis%20en%20los%20organos%20judiciales%20por%20provincias%201T-2026_revisado.xlsx"
     },
     "data/raw/parquet/diba_h18a.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_h18a (tourist)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_h9a.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_h9a (vacant_reg)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m11d.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m11d (rent_burden)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m11e.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m11e (mortgage_burden)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m12.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m12 (starts)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m13.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m13 (completions)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m19.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m19 (sale_eur_m2)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/diba_m23.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "tb_m23 (rent_month)",
       "publisher": "Diputació de Barcelona",
       "url": "https://media.diba.cat/diba/indicadors-habitatge/data/opendata/opendata.zip"
     },
     "data/raw/parquet/ech_hogares.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Total x Total margin only; thousands -> units",
       "operation": "ECH",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv"
     },
     "data/raw/parquet/ecp_edad_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/56940",
       "note": "1-Jan age bands parsed from pinned ecp_pob_ccaa.json",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_hog_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/60131",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_hog_prov.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/60133",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/ecp_pob_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/56940",
       "note": "1-Jan (FK_Periodo 19) rows only",
       "operation": "ECP"
     },
     "data/raw/parquet/ecv_access.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned ecv_access_79621..79645.csv by fetch_ecv_access.py",
       "publisher": "INE, ECV 2025 housing-access module"
     },
@@ -2853,204 +2854,204 @@
       "publisher": "Own descriptive estimates from INE ECV 2025"
     },
     "data/raw/parquet/hipotecas_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76316",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/hipotecas_prov.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76317",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/hipotecas_rates.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76315",
       "note": "Viviendas only; annual sums/means + n_months",
       "operation": "HPT"
     },
     "data/raw/parquet/housing_conditions.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned eurostat_ilc_lvho{05a,05c,05d,05q,50a,50c,50d,08a,08b}_ES.json by fetch_housing_conditions.py",
       "publisher": "Eurostat, EU-SILC"
     },
     "data/raw/parquet/housing_overburden.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned eurostat_ilc_lvho07[a,b,c]_ES.json by fetch_housing_overburden.py",
       "publisher": "Eurostat, EU-SILC"
     },
     "data/raw/parquet/housing_overburden_age_poverty.parquet": {
-      "accessed": "2026-10-09",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned eurostat_ilc_lvho07[a,b,c]_ES.json by fetch_housing_overburden.py",
       "publisher": "Eurostat, EU-SILC"
     },
     "data/raw/parquet/ipc_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/76136",
       "note": "general index levels only; base 2021",
       "operation": "IPC general"
     },
     "data/raw/parquet/ipv_ccaa_anual.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/80271",
       "note": "parsed index levels only",
       "operation": "IPV"
     },
     "data/raw/parquet/migracion_flujos.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/24322",
       "note": "Ambos sexos, Total edad; annual (FK_Periodo 28) only",
       "operation": "EM flujos"
     },
     "data/raw/parquet/mivau_terminadas.parquet": {
-      "accessed": "2026-11-26",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned mivau_iniciadas_terminadas.csv + mivau_calificaciones.csv by fetch_mivau_terminadas.py",
       "publisher": "MIVAU, VDP005_01 (free) + VDP007_01 (protected approvals)"
     },
     "data/raw/parquet/padron_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2853",
       "note": "sexo=Total only",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_extranjeros.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "TOTAL EXTRANJEROS x Ambos sexos only; full detail in raw CSV",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/parquet/padron_extranjeros_origen.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "all 137 nacionalidades x sexo (rollups duplicate leaves)",
       "operation": "Padrón e245",
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/e245/p08/l0/03005.csv"
     },
     "data/raw/parquet/padron_municipios_all.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "derived": "52 DPOP municipal tables"
     },
     "data/raw/parquet/padron_municipios_bcn.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2861",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_mad.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2881",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_sev.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2895",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_municipios_vlc.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2903",
       "operation": "DPOP"
     },
     "data/raw/parquet/padron_provincia.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/2852",
       "note": "sexo=Total only",
       "operation": "DPOP"
     },
     "data/raw/parquet/parque_viviendas.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "dataset": "VDP002_01",
       "note": "parquet mirror of the pinned CSV",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
     "data/raw/parquet/renta_hogar_ccaa.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/9949",
       "note": "renta_anyo = encuesta_anyo - 1",
       "operation": "ECV"
     },
     "data/raw/parquet/rmdvp_inscripciones.parquet": {
-      "months": "202012..202608",
+      "months": "202012..202609",
       "operation": "RMDVP",
       "publisher": "Junta de Andalucía"
     },
     "data/raw/parquet/serpavi_distritos.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "long melt: distrito x anyo x medida; populated cells only; district names unpublished (codes only); secciones skipped",
       "operation": "SERPAVI alquiler por distrito censal (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/parquet/serpavi_municipal.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "long melt: municipio x anyo x medida; populated cells only",
       "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/parquet/serpavi_provincial.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "long melt: provincia x anyo x medida; populated cells only",
       "operation": "SERPAVI alquiler provincial (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/parquet/sevilla_oferta_zona_2024.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
       "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
       "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
     },
     "data/raw/parquet/sevilla_sim_pob_hog.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30"
     },
     "data/raw/parquet/sevilla_sim_turismo.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4"
     },
     "data/raw/parquet/sevilla_sim_vivienda.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "derived from pinned SIM raw query JSON; nulls retained; reference limitations documented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layers",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101; https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133"
     },
     "data/raw/parquet/transmisiones.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "Transmisiones",
       "publisher": "INE (registradores)",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bd/6155.csv"
     },
     "data/raw/parquet/turisticas_con_pct.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/46141",
       "note": "December snapshot per year",
       "operation": "VTE"
     },
     "data/raw/parquet/turisticas_counts.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/39364",
       "note": "December snapshot per year",
       "operation": "VTE"
     },
     "data/raw/parquet/valor_municipal_madrid.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "published values only; '-' dropped, counted in print",
       "publisher": "datos.comunidad.madrid (MIVAU mirror)",
       "url": "https://datos.comunidad.madrid/dataset/8cb70b8c-c1e2-43f7-826a-1a22c573a743/resource/ef4a2c7a-4273-4116-9ff2-d5f77020ca04/download/valor-tasado-de-la-vivienda-libre-por-municipios-de-mas-de-25.00-habitantes.-total-base-2005.-mu.csv"
     },
     "data/raw/parquet/valor_tasado.parquet": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "dataset": "VDP006_01",
       "note": "raw quarterly rows; empty Valor = unpublished",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
     },
     "data/raw/renta_hogar_ccaa.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/9949",
       "operation": "ECV"
     },
@@ -3399,121 +3400,126 @@
       "publisher": "Junta de Andalucía",
       "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/09/202608_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
     },
+    "data/raw/rmdvp/202609_rmdvp01.xls": {
+      "operation": "RMDVP",
+      "publisher": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/202609_rmdvp01_solicitudes_estado_de_inscripciones_origen.xls"
+    },
     "data/raw/serpavi_bd.xlsx": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "71 MB Excel; Municipios sheet 8,894 rows x 280 cols",
       "operation": "SERPAVI alquiler municipal (MIVAU, fianzas)",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/sevilla_anuario_2025_7_3_9.xls": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "2024 monthly second-hand housing offer prices, EUR/m²; Fotocasa 11 districts + Idealista 17 zones kept distinct; not transaction prices",
       "publisher": "Ayuntamiento de Sevilla, Anuario 2025 table 7.3.9 (FEMAS mirror)",
       "url": "https://www.femas.es/servicios/servicio-de-estadistica/datos-estadisticos/anuarios/anuario-estadistico-de-la-ciudad-de-sevilla-2025/tablas/capitulo-7/7.3/7-3-9.xls"
     },
     "data/raw/sevilla_barrios_25830.geojson": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "Ayuntamiento/EMVISESA SIM",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evoluci%C3%B3n_reciente_de_poblaci%C3%B3n_residente/FeatureServer/26/query?where=1%3D1&outFields=IDG%2CID_DIS%2CDIS%2CID_BAR%2CBAR&returnGeometry=true&outSR=25830&f=geojson"
     },
     "data/raw/sevilla_barrios_4326.geojson": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Sevilla physical-stock pilot; no protected ownership data",
       "publisher": "Ayuntamiento/EMVISESA SIM",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evoluci%C3%B3n_reciente_de_poblaci%C3%B3n_residente/FeatureServer/26/query?where=1%3D1&outFields=IDG%2CID_DIS%2CDIS%2CID_BAR%2CBAR&returnGeometry=true&outSR=4326&f=geojson"
     },
     "data/raw/sevilla_income_definition.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Publisher-reported barrio net-family income; aggregation weights undocumented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM",
       "url": "https://www.arcgis.com/sharing/rest/content/items/fe78eabad62b4e55a6531cb3e2249f1f/data?f=pjson"
     },
     "data/raw/sevilla_income_metadata.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Publisher-reported barrio net-family income; aggregation weights undocumented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Cualificaci%C3%B3n_de_hogares_residentes_por_Renta_Neta_declarada/FeatureServer/31?f=pjson"
     },
     "data/raw/sevilla_income_query.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Publisher-reported barrio net-family income; aggregation weights undocumented",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Cualificaci%C3%B3n_de_hogares_residentes_por_Renta_Neta_declarada/FeatureServer/31/query?where=1%3D1&outFields=%2A&returnGeometry=false&f=pjson"
     },
     "data/raw/sevilla_sim_caracteristicas.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS barrio layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
     },
     "data/raw/sevilla_sim_hogares.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_hogares_residentes/FeatureServer/30/query"
     },
     "data/raw/sevilla_sim_poblacion.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-05-05; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Evolución_reciente_de_población_residente/FeatureServer/26/query"
     },
     "data/raw/sevilla_sim_rehabilitacion.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-02-10; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/rrr/FeatureServer/101/query"
     },
     "data/raw/sevilla_sim_tipologia.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/ñññ/FeatureServer/2/query"
     },
     "data/raw/sevilla_sim_turismo.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-02-11; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/TTT/FeatureServer/4/query"
     },
     "data/raw/sevilla_sim_uso.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "108 barrios; service data last edited 2023-02-13; fields pinned by fetcher",
       "publisher": "EMVISESA/Ayuntamiento de Sevilla SIM, ArcGIS feature layer",
       "url": "https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/VIVVAC/FeatureServer/133/query"
     },
     "data/raw/transmisiones.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "operation": "Transmisiones",
       "publisher": "INE (registradores)",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bd/6155.csv"
     },
     "data/raw/turisticas_con_pct.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/46141",
       "operation": "VTE"
     },
     "data/raw/turisticas_counts.json": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/39364",
       "operation": "VTE"
     },
     "data/raw/valor_municipal_madrid.csv": {
-      "accessed": "2026-10-08",
-      "note": "cp1252 original; stored as UTF-8",
+      "accessed": "2026-11-27",
+      "note": "UTF-8 original; stored as UTF-8 without BOM",
       "publisher": "datos.comunidad.madrid (MIVAU mirror)",
       "url": "https://datos.comunidad.madrid/dataset/8cb70b8c-c1e2-43f7-826a-1a22c573a743/resource/ef4a2c7a-4273-4116-9ff2-d5f77020ca04/download/valor-tasado-de-la-vivienda-libre-por-municipios-de-mas-de-25.00-habitantes.-total-base-2005.-mu.csv"
     },
     "data/raw/valor_tasado.csv": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "dataset": "VDP006_01",
       "note": "(parsed copy in data/raw/parquet/)",
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
     },
     "evidence/static/geo/sevilla_barrios.geojson": {
-      "accessed": "2026-10-08",
+      "accessed": "2026-11-27",
       "note": "Physical-stock pilot; all-component interior-point joins; see cadastre_stock.md",
       "publisher": "DGC INSPIRE + Ayuntamiento/EMVISESA SIM"
     }
