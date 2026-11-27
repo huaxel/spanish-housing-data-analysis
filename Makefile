@@ -272,7 +272,17 @@ wasm-verify:
 	  fi; \
 	done
 
+# Wrangler prefers CLOUDFLARE_API_TOKEN over the OAuth login. An account
+# token without `workers_scripts` fails only after the whole asset upload
+# ("No access to the specified service"), so check the scope wrangler will
+# actually use before touching build-cf. Added 2026-11-27 after that
+# failure mode cost a full re-upload.
 evidence-deploy: wasm-verify
+	@cd evidence && npx wrangler whoami 2>/dev/null | grep -q "workers_scripts" \
+	  || { echo "Refusing: the credentials wrangler will use lack workers_scripts."; \
+	       echo "CLOUDFLARE_API_TOKEN overrides the OAuth login; either unset it"; \
+	       echo "(env -u CLOUDFLARE_API_TOKEN make evidence-deploy) or grant the token"; \
+	       echo "the Workers Scripts:Edit permission."; exit 1; }
 	rm -rf evidence/build-cf && cp -r evidence/build evidence/build-cf
 	rm -f evidence/build-cf/_app/immutable/assets/*.wasm
 	cd evidence && npx wrangler deploy

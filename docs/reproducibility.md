@@ -142,7 +142,15 @@ push or deployment occurred for this panel implementation.
 
 `make evidence-deploy` publishes `evidence/build/` to the
 `vivienda-explorer` worker (`evidence/wrangler.toml` + `worker.js`).
-Two subtleties, both load-bearing:
+Three subtleties, all load-bearing:
+
+- Credentials: wrangler prefers `CLOUDFLARE_API_TOKEN` over the OAuth
+  login stored by `wrangler login`. The account token in this setup can
+  read the account but has no `workers_scripts` scope, and that fails
+  only *after* the asset upload ("No access to the specified service").
+  `evidence-deploy` therefore checks the scope wrangler will use and
+  refuses early; deploy with `env -u CLOUDFLARE_API_TOKEN` when the
+  exported token is the narrow one.
 
 - DuckDB WASM blobs exceed the 25 MiB asset limit, so `worker.js`
   proxies `*.wasm` from pinned jsDelivr npm bytes (verified
