@@ -127,6 +127,11 @@ and proof field read-only. No input-manifest re-pin, CSV parse, mart write,
 existing-sidecar write, rent join or proxy recalculation is performed here.
 The normal source parser and its exact-parquet check remain authoritative.
 
+Since the release accessed 2026-11-27 the series covers 2015–2024, while the
+rent-income proxy still ends in 2023, so the profile's income and proxy rows can
+show different years. That release also withdrew the 2023 values of four
+municipalities (see [sources](sources.md)); they stay null.
+
 ```bash
 make profile-income
 uv run python scripts/export_profile_income.py --check

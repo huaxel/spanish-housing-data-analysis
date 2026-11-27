@@ -74,6 +74,9 @@ build:
 	uv run python scripts/build_marts.py
 	uv run python scripts/build_rent_income.py
 	uv run python scripts/export_profile_income.py
+	# build_rent_income rewrites housing_access.duckdb, whose bytes the ECV
+	# joint proof pins, so the proof is rebuilt afterwards.
+	uv run python scripts/build_ecv_joint.py --offline
 
 verify:
 	uv run python scripts/verify_data.py

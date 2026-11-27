@@ -125,3 +125,11 @@ def test_cadastre_province_runs_after_the_database_it_reads():
     assert steps.index("scripts/build_sevilla_2021.py") < steps.index(
         "scripts/fetch_cadastre_province.py"
     )
+
+
+def test_build_rebuilds_the_ecv_proof_after_rewriting_the_access_database():
+    recipe = (ROOT / "Makefile").read_text().split("\nbuild:\n", 1)[1].split("\n\n", 1)[0]
+    commands = [line.strip() for line in recipe.splitlines() if "uv run python" in line]
+    assert commands.index("uv run python scripts/build_rent_income.py") < commands.index(
+        "uv run python scripts/build_ecv_joint.py --offline"
+    )

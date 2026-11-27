@@ -4,7 +4,8 @@ Descriptive, explicitly-gated proxy (semantics accepted 2026-10-09, see
 docs/housing_access.md): median monthly contract rent of new/rolling
 tax-deposit signings (SERPAVI ALQTBID12_M_VC, colectiva) divided by mean
 NET annual household income over ALL households (ADRH neta_hogar / 12),
-per municipio and year over the 2015-2023 overlap.
+per municipio and year, 2015-2023. The window is fixed: both inputs now reach
+2024, but adding that year to the proxy needs its own review.
 
 This is a signing-market proxy, never an overburden rate: the numerator
 is not the sitting-tenant stock and the denominator is not renter income.

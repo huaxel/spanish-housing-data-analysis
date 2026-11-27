@@ -103,3 +103,26 @@ def test_no_observed_values_fails():
                 line(ind="Renta neta media por persona", valor='""'),
             )
         )
+
+
+def full_grid(years):
+    return [
+        {"codigo": f"{p:02d}001", "cpro": f"{p:02d}", "indicador": indicator, "anyo": y}
+        for p in range(1, 53)
+        for indicator in fa.INDICADORES.values()
+        for y in years
+    ]
+
+
+def test_coverage_requires_every_year_through_2024():
+    fa.validate_coverage(full_grid(range(2015, 2025)))
+    # Same number of years, so only the year-set check can reject it.
+    with pytest.raises(ValueError, match="series window"):
+        fa.validate_coverage(full_grid(range(2016, 2026)))
+    for years in (
+        range(2015, 2024),  # the previous release
+        [y for y in range(2015, 2025) if y != 2019],  # interior gap, same ends
+        range(2015, 2026),  # a newer release needs a reviewed change
+    ):
+        with pytest.raises(ValueError, match="grid|series window"):
+            fa.validate_coverage(full_grid(years))

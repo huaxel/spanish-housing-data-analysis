@@ -23,7 +23,7 @@ from spanish_housing.data_paths import PROCESSED, RAW, ROOT  # noqa: E402
 
 INPUT = RAW / "parquet/adrh_renta_municipal.parquet"
 DATABASE = PROCESSED / "profile_income.duckdb"
-YEARS = set(range(2015, 2024))
+YEARS = set(range(2015, 2025))
 CPROS = {f"{p:02d}" for p in range(1, 53)}
 SCHEMA = pa.schema(
     [

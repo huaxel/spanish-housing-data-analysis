@@ -82,8 +82,8 @@ That would be a distinct rent-to-income proxy, not observed burden. On proxy
 feasibility: the rent side already exists in the marts (SERPAVI municipal
 medians, 2011–2024; see the SERPAVI probe), while the income side (ADRH
 municipal net income per household and per person) is now pulled as a
-standalone series (`fetch_adrh.py`, 2015–2023). The year overlap is
-2015–2023. A ratio of
+standalone series (`fetch_adrh.py`, 2015–2024). When the proxy was reviewed the
+year overlap was 2015–2023. A ratio of
 median contract rent to mean household income would be mechanically feasible
 but carries hard incompatibilities: SERPAVI medians describe new and rolling
 tax-deposit contracts, not the sitting-tenant stock, and are suppressed in
@@ -97,7 +97,12 @@ checked by `make verify`) and the site page `/renta-ingresos/`. It is never
 labeled an overburden rate, never presented as renter income, and never
 joined into the marts. No local burden integration is otherwise justified without an
 independently validated compatible source and household denominator; do not
-infer local rates from national or regional marginals. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
+infer local rates from national or regional marginals.
+
+**2024 not in the proxy (2026-11-27).** The ADRH release now reaches 2024, as
+the SERPAVI rent series already did. The proxy stays at 2015–2023 until adding
+2024 has had its own review. The same release withdrew La Riba's 2023 income,
+so that municipality-year now has a rent but a null ratio. Sources: [INE ECV FAQ](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608&menu=faq),
 [ADRH](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177088&idp=1254735976608&menu=resultados),
 [Urban Indicators](https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&cid=1254736176957&idp=1254735976608&menu=ultiDatos).
 

@@ -1,11 +1,11 @@
 {
   "sha256": {
-    "data/processed/ecv_joint_burden.duckdb": "0c3a57548c2f1f8aea4ae006377c9e3d33ab3de9339e4f673227e279b798462c",
-    "data/processed/housing_access.duckdb": "3bce046901b0ed4486f91251a736b5cd8d9a5fe349100cea448ea6c2083a3596",
+    "data/processed/ecv_joint_burden.duckdb": "ef58d7fe5175ca7ff29c1f08b73d639dec90139628f8677e7f092edbf496b878",
+    "data/processed/housing_access.duckdb": "9866010e1b1dd3c11d35f6fe134c87dda0a22570289e5ffa7116129b0215ad82",
     "data/processed/stock.duckdb": "5de1d29d78c95d4051edaaa83f53c37b877acbf36695ef4a5917f5710479e712",
     "data/processed/stock_capitals.duckdb": "359da3e660c12b804f4bc65e9d292d5c2e8f72ff6e92cfd10012942a160d3840",
     "data/processed/stock_province.duckdb": "242b8afede651dd5ea42e95841bd97cdbe8a6b476380ce5ad87bcec0e341d6f4",
-    "data/raw/adrh_renta_municipal.csv": "a8998c45abc39df71d6537856add9c2ce822cfe078f78ca9a8448773118ee3cd",
+    "data/raw/adrh_renta_municipal.csv": "7ac913e28963b4afb618dee9f64b6434ccd2a33821b86dd0b26e0b3ef58dfa86",
     "data/raw/aeat_viviendas_uso_2023.html": "b245c718e67114ab676d5d66221a594848d0e4b4d376a94210a23f06d9081539",
     "data/raw/aeat_viviendas_uso_2024.html": "af70a287833542a6c816cab07aa7ad07dabb44d6fe590d854ffe2cff91fd0a94",
     "data/raw/barrios_madrid.csv": "02ea46ca3c33d129ffc234038ea0b7de3c8fcadb5bd0d3de6025d67653005946",
@@ -268,7 +268,7 @@
     "data/raw/padron_municipios_vlc.json": "3547461e32ec2cb2e47438a96343f8f5f680ca7d8b74848d0ae0a0615a64ad82",
     "data/raw/padron_provincia.json": "4747ef997a2b24ae0a96ee1e9fddde0679612cff6de30402c6240ebd3c13e3e3",
     "data/raw/parque_viviendas.csv": "2eda9bafa3f56a5406da5032ab9a10d1de12df9105ff6845e5de9110ff92f7eb",
-    "data/raw/parquet/adrh_renta_municipal.parquet": "f056b1b902673fc4d7a52e7d802749840e0c3e2ef21ae879819687eb4bbe853c",
+    "data/raw/parquet/adrh_renta_municipal.parquet": "2703c98ac9a3f57cad71301cc83a5046028e8b956552e8baaf0a7d6d0fb2009d",
     "data/raw/parquet/aeat_viviendas_uso.parquet": "9a1d8317a908144e22b41845713d326d68079254265cdcc35cf333f7b47eb6d4",
     "data/raw/parquet/barrios_bcn_compraventes.parquet": "25a96a88ba7ea3f86f83b0b6cec850a7c55972c9e7cb80c55a23cf73fe3c9bef",
     "data/raw/parquet/barrios_bcn_lloguer_anual.parquet": "dfefa78bd98a3422d405c21f5387529f0968739315f8b1479f5a8a5f89598f8b",
@@ -535,15 +535,15 @@
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
     "evidence/static/geo/sevilla_barrios.geojson": "bef1b37033d41b4c9a7aa35fe98a4245a73623dc789e8ac538ee5a6f7906c396"
   },
-  "snapshot_date": "2026-11-26",
+  "snapshot_date": "2026-11-27",
   "sources": {
     "data/processed/ecv_joint_burden.duckdb": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "note": "Own poverty-age-tenure; project suppression; no design intervals",
       "publisher": "Own descriptive estimates from INE ECV 2025"
     },
     "data/processed/housing_access.duckdb": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "note": "Derived from marts.duckdb serpavi_municipal and pinned adrh_renta_municipal.parquet by build_rent_income.py (table rent_income); other tables in this sidecar unchanged",
       "publisher": "SERPAVI (MIVAU) + ADRH (INE) proxy"
     },
@@ -563,7 +563,7 @@
       "publisher": "DGC INSPIRE"
     },
     "data/raw/adrh_renta_municipal.csv": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "note": "Municipality rows only; '.' suppression kept null",
       "publisher": "INE ADRH, Indicadores de renta media y mediana (jaxiT3 30824)",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/30824.csv"
@@ -2073,7 +2073,7 @@
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
     },
     "data/raw/parquet/adrh_renta_municipal.parquet": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "note": "Derived from pinned adrh_renta_municipal.csv by fetch_adrh.py",
       "publisher": "INE ADRH, Indicadores de renta media y mediana (jaxiT3 30824)"
     },
@@ -2813,7 +2813,7 @@
       "publisher": "INE, ECV 2025 housing-access module"
     },
     "data/raw/parquet/ecv_joint_burden.parquet": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "note": "Own poverty-age-tenure; project suppression; no design intervals",
       "publisher": "Own descriptive estimates from INE ECV 2025"
     },

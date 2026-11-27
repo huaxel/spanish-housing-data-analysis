@@ -11,7 +11,9 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
   (+ Parquet mirrors). Re-running re-pins bytes in `data/input_manifest.json`.
 - `make build` — refuses to run on unpinned/changed inputs; writes
   `data/processed/marts.duckdb`, `mart_*.parquet`, `dim_territorio.parquet`,
-  `coverage.json`.
+  `coverage.json`. It then rebuilds the rent-income proxy and profile income,
+  and finally the ECV joint estimate (offline, from the pinned archive): the
+  proxy rewrite changes `housing_access.duckdb`, whose bytes that proof pins.
 - `make analysis` — re-runs the deterministic estimators whose outputs
   `make audit` requires (git-ignored `artifacts/` JSONs plus the committed
   `explorations/iv_results.json` / `panel_saiz_results.json` copies the

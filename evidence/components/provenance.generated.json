@@ -1,11 +1,11 @@
 {
-  "manifest_sha256": "f2066a1e529b4dcced7e3cca9605cb8eff4bed4d39823a77cfef3a8e4a190e72",
-  "snapshot_date": "2026-11-26",
+  "manifest_sha256": "04eac0bf50b89a4771fa1e0de6968ce00294d5e6468c560d5d0864aa01db91e9",
+  "snapshot_date": "2026-11-27",
   "sources": {
     "data/raw/adrh_renta_municipal.csv": {
-      "accessed": "2026-10-10",
+      "accessed": "2026-11-27",
       "publisher": "INE ADRH, Indicadores de renta media y mediana (jaxiT3 30824)",
-      "sha256": "a8998c45abc39df71d6537856add9c2ce822cfe078f78ca9a8448773118ee3cd",
+      "sha256": "7ac913e28963b4afb618dee9f64b6434ccd2a33821b86dd0b26e0b3ef58dfa86",
       "url": "https://www.ine.es/jaxiT3/files/t/csv_bdsc/30824.csv"
     },
     "data/raw/aeat_viviendas_uso_2024.html": {

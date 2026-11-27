@@ -3,7 +3,9 @@
 import sys
 from pathlib import Path
 
+import duckdb
 import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -69,3 +71,32 @@ def test_out_of_bounds_ratio_rejected():
         br.expected_years(table(full_window(over)))
     with pytest.raises(ValueError, match="out of bounds"):
         br.expected_years(table(full_window(zero)))
+
+
+def test_proxy_stays_at_2023_when_both_inputs_reach_2024(tmp_path, monkeypatch):
+    income = tmp_path / "adrh.parquet"
+    pq.write_table(
+        pa.Table.from_pylist(
+            [
+                {"codigo": "28079", "indicador": "neta_hogar", "anyo": y, "renta_eur": 36000}
+                for y in (2023, 2024)
+            ]
+        ),
+        income,
+    )
+    marts = tmp_path / "marts.duckdb"
+    with duckdb.connect(str(marts)) as con:
+        con.execute(
+            "create table serpavi_municipal (codigo varchar, municipio varchar, "
+            "cpro varchar, anyo bigint, medida varchar, valor double)"
+        )
+        for year in (2023, 2024):
+            for measure, value in (("ALQTBID12_M_VC", 600.0), ("BI_ALVHEPCO_TVC", 80.0)):
+                con.execute(
+                    "insert into serpavi_municipal values ('28079','Madrid','28',?,?,?)",
+                    [year, measure, value],
+                )
+    monkeypatch.setattr(br, "MARTS", marts)
+    monkeypatch.setattr(br, "QUERY", br.QUERY.replace(str(br.ADRH_PARQUET), str(income)))
+    rows = br.compute_rows().to_pylist()
+    assert [(r["anyo"], r["ratio_pct"]) for r in rows] == [(2023, 20.0)]

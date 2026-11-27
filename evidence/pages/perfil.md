@@ -168,7 +168,9 @@ la renta de municipios de menos de 100 habitantes por una media comarcal o
 provincial, sin bandera por fila; **la ficha no introduce nuevas sustituciones**
 ni identifica qué filas llevan esa regla. El proxy sigue usando exclusivamente
 el cruce SERPAVI/ADRH ya verificado, sin ampliarlo ni recalcularlo con esta serie.
-Sus ingresos y alquiler son del mismo año. Una renta disponible aquí no rellena
+Sus ingresos y alquiler son del mismo año. El cruce llega a 2023, aunque la
+serie de ingresos ya incluye 2024: ese año no se ha incorporado ni revisado
+en el cruce. Una renta disponible aquí no rellena
 un proxy ausente ni permite combinar el alquiler reciente con ingresos antiguos.
 
 ## La historia del alquiler, con sus huecos
@@ -236,7 +238,7 @@ order by c.anyo
   definition="Renta neta media anual por hogar de ADRH, independiente de que exista alquiler publicado."
   coverage="Todos los hogares del ámbito de ADRH, no solo inquilinos. Se conservan supresiones; pueden existir sustituciones territoriales del publicador sin bandera por fila. Euros nominales, no renta real." />
 
-<DataTable data={historia_ingresos_perfil} rows=9>
+<DataTable data={historia_ingresos_perfil} rows=10>
   <Column id=anyo title="Año de ingresos" fmt="0" />
   <Column id=renta_neta_hogar title="Renta neta media (€/hogar/año)" fmt="num0" />
 </DataTable>

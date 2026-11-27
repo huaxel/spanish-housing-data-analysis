@@ -32,7 +32,7 @@ def test_full_projection_keeps_all_null_municipalities_zero_and_original_names()
     rows = source()
     rows.append({**rows[0], "indicador": "bruta_hogar", "renta_eur": 999999})
     projected = ei.project(rows)
-    assert len(projected) == 52 * 9
+    assert len(projected) == 52 * 10
     assert projected[0] == {
         "codigo": "01001",
         "municipio": "L'Hospitalet",
@@ -53,7 +53,7 @@ def test_full_projection_keeps_all_null_municipalities_zero_and_original_names()
         ("codigo", "00123"),
         ("cpro", "02"),
         ("anyo", True),
-        ("anyo", 2024),
+        ("anyo", 2025),
         ("anyo", 2023.0),
         ("municipio", ""),
         ("municipio", None),
@@ -92,7 +92,7 @@ def pinned_fixture(tmp_path, monkeypatch):
 def test_pinned_source_projection_and_proof(tmp_path, monkeypatch):
     pinned_fixture(tmp_path, monkeypatch)
     table, metadata = ei.source_rows()
-    assert table.num_rows == 52 * 9
+    assert table.num_rows == 52 * 10
     assert metadata["input_sha"] == "pin"
     assert metadata["export_script_sha"] == ei.ols.sha_file(ei.__file__)
 
@@ -153,7 +153,7 @@ def test_missing_whole_selected_municipality_fails_despite_other_indicators():
     rows = source()
     original = [r for r in rows if r["codigo"] == "01001"]
     # A second municipality retains province 01 coverage after the first loses
-    # all nine selected records, while its other indicator remains in source.
+    # all selected records, while its other indicator remains in source.
     rows.extend({**r, "codigo": "01002"} for r in original)
     rows = [r for r in rows if r["codigo"] != "01001"]
     rows.extend({**r, "indicador": "bruta_hogar"} for r in original)

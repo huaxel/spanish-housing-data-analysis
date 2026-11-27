@@ -4,7 +4,7 @@ Atlas de Distribución de Renta de los Hogares, "Indicadores de renta
 media y mediana": the single national jaxiT3 distribution covers
 municipios, distritos and secciones censales together; only rows whose
 Distritos and Secciones cells are both empty are municipality grain
-(~8.1k municipios x 6 indicators x 2015-2023). The smaller per-province
+(~8.1k municipios x 6 indicators x 2015-2024). The smaller per-province
 tables carry the same rows split geographically and are not used.
 
 Six indicators per municipality-year: renta neta/bruta media por persona
@@ -17,6 +17,10 @@ population thresholds) are stored null, never zero-filled; from 2020
 values for municipios under 100 residents can be comarca/province
 small-municipio averages per INE methodology — a publication rule the
 plain CSV does not flag per row.
+
+A later release can also withdraw earlier values: the 2024 one (seen
+2026-11-27) suppressed 24 previously published 2023 municipal cells in four
+municipalities. They stay null; nothing is carried over from the old file.
 
 Standalone descriptive series only. No mart join, and no rent-to-income
 ratio without an explicit proxy-semantics decision (see
@@ -63,7 +67,7 @@ INDICADORES = {
     "Media de la renta por unidad de consumo": "uc_media",
     "Mediana de la renta por unidad de consumo": "uc_mediana",
 }
-YEARS = set(range(2015, 2024))
+YEARS = set(range(2015, 2025))
 CPROS = {f"{n:02d}" for n in range(1, 53)}
 VALUE = re.compile(r"^\d{1,3}(\.\d{3})*$")
 CODE = re.compile(r"^(\d{5}) (.+)$")
@@ -154,7 +158,7 @@ def validate_coverage(rows: list[dict]) -> None:
         per_cell[k] = per_cell.get(k, 0) + 1
     if set(per_cell.values()) != {len(INDICADORES)}:
         raise ValueError("adrh: indicator grid incomplete for some municipio-year")
-    if min(r["anyo"] for r in rows) != 2015 or max(r["anyo"] for r in rows) != 2023:
+    if {r["anyo"] for r in rows} != YEARS:
         raise ValueError("adrh: series window moved")
 
 

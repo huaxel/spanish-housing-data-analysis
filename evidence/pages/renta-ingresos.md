@@ -41,7 +41,8 @@ de la renta neta media de sus hogares; en 2015 era
 y el <Value data={mediana_extremos} column=share_20_2023 fmt="num1"/>% de
 municipios supera ya el 20%. La cobertura es
 <Value data={mediana_extremos} column=municipios_2023 fmt="num0"/> municipios
-(los que SERPAVI publica; los pequeños están suprimidos).
+(con alquiler publicado en SERPAVI y renta publicada en ADRH; faltan muchos
+de los pequeños).
 
 ## La mediana no se mueve; las grandes ciudades sí
 
@@ -218,7 +219,7 @@ comarcal/provincial de ADRH en lugar de renta propia (regla de difusión
 - Sin suministros ni otros costes de vivienda; renta neta antes de
   alquiler imputado.
 - **Cobertura sesgada a municipios con suficientes contratos**
-  (1.877–2.415 de 8.139 por año): los pequeños y rurales faltan, y desde
+  (1.876–2.414 de 8.139 por año): los pequeños y rurales faltan, y desde
   2020 ADRH puede sustituir la renta de municipios de menos de 100
   habitantes por la media comarcal/provincial (regla de difusión,
   no marcada por fila).
@@ -227,7 +228,8 @@ comarcal/provincial de ADRH en lugar de renta propia (regla de difusión
 
 Fuente: SERPAVI (MIVAU) y ADRH (INE), construido por
 `scripts/build_rent_income.py` sobre la tabla `access.rent_income`;
-semántica aceptada y documentada en `docs/housing_access.md`.
+semántica aceptada y documentada en `docs/housing_access.md`. El indicador se
+mantiene en 2015–2023: la renta ADRH de 2024 aún no se ha incorporado al cruce.
 
 ---
 *Proxy de mercado de firma, 2015–2023 · SERPAVI + ADRH · [fuentes y métodos](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/methods.md).*
