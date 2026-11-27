@@ -30,8 +30,10 @@ output="$(playwright-cli -s="$SESSION" run-code "async (page) => {
     const value=Number(cell.trim().replace(',', '.'));
     if (!Number.isFinite(value) || Math.abs(value-wanted)>0.051) throw Error('Displayed rate differs');
   };
-  const read = async heading => {
-    const table=page.locator('table').filter({hasText:heading}).last();
+  // Overcrowding and under-occupancy tables reuse these first headings, so a
+  // second column title picks the intended table.
+  const read = async (heading, column=heading) => {
+    const table=page.locator('table').filter({hasText:heading}).filter({hasText:column}).last();
     await table.locator('td').first().waitFor({timeout:45000});
     return table.locator('tr').evaluateAll(rows => rows.map(row =>
       [...row.querySelectorAll('td')].map(c=>c.innerText.trim())).filter(r=>r.length));
@@ -46,7 +48,7 @@ output="$(playwright-cli -s="$SESSION" run-code "async (page) => {
   }
   for (const [group,heading] of [['age','Edad (etiqueta Eurostat)'],['income','Quintil (etiqueta Eurostat)'],
       ['tenure','Tenencia (etiqueta Eurostat)']]) {
-    const rows=await read(heading), wanted=expected.marginals[group];
+    const rows=await read(heading,'Personas en hogares sobrecargados (%)'), wanted=expected.marginals[group];
     if (rows.length!==wanted.length) throw Error('Marginal cell count differs');
     for (const row of rows) {
       const r=wanted.find(r=>r[0]===row[0]);
