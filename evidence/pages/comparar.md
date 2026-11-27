@@ -176,6 +176,9 @@ base **2025 = 100**. Una línea más alta no significa que comprar allí sea má
   xFmt="0" xAxisTitle="Año" yFmt="num1" handleMissing="gap" markers=true
   title="Viviendas por 1.000 habitantes"/>
 
+Hogares: Censo 2011, ECH en 2014–2020 y ECP desde 2021. El tramo 2020–2021
+cambia de fuente y de definición: no leas ese salto como un cambio solo real.
+
 ```sql hogares_disponibles
 select * from ${comparacion}
 where exists (select 1 from ${comparacion} where viv_por_hogar is not null)
@@ -183,8 +186,8 @@ where exists (select 1 from ${comparacion} where viv_por_hogar is not null)
 
 <LineChart data={hogares_disponibles} x=anyo y=viv_por_hogar series=ccaa
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
-  emptySet="pass" emptyMessage="Sin datos de viviendas por hogar en el periodo seleccionado (disponibles desde 2021)."
-  title="Viviendas por hogar (desde 2021)"/>
+  emptySet="pass" emptyMessage="Sin datos de viviendas por hogar en el periodo seleccionado (disponibles en 2011 y desde 2014)."
+  title="Viviendas por hogar (Censo 2011, ECH y ECP)"/>
 
 ## Valor tasado y esfuerzo de renta
 

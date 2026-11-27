@@ -66,7 +66,11 @@ order by anyo, provincia
   y=viv_por_1000_hab
   yFmt="num1" />
 
-<p class="text-sm font-bold mt-4 mb-1">Viviendas por hogar ({inputs.ccaa.value}, desde 2021)</p>
+Hogares: Censo 2011, ECH en 2014–2020 y ECP desde 2021. Sin dato en 2012 y
+2013. El tramo 2020–2021 cambia de fuente y de definición: no leas ese salto
+como un cambio solo real.
+
+<p class="text-sm font-bold mt-4 mb-1">Viviendas por hogar ({inputs.ccaa.value}; Censo 2011, ECH y ECP)</p>
 
 <LineChart
   data={ficha}
@@ -74,6 +78,7 @@ order by anyo, provincia
   xFmt="0"
   xAxisTitle="Año"
   y=viv_por_hogar
+  markers=true
   yFmt="num2" />
 
 ## Valor tasado y esfuerzo de renta
