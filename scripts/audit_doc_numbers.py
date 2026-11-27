@@ -127,7 +127,6 @@ ALLOW = {
     "docs/explorations/proh_households.md": [
         (70.0, "INE operation id for PROH (identifier, not a result)"),
         (54562.0, "INE table id for PROH (identifier, not a result)"),
-        (2040.0, "projection horizon label (year, not a result)"),
         (4.0, "'under 4%' growth-rate threshold in the prose (rounding boundary)"),
     ],
     "docs/explorations/ipva_rent_index.md": [
@@ -192,7 +191,6 @@ ALLOW = {
         (1.04, "quoted inside dated correction notes as superseded pre-repair vintage"),
     ],
     "README.md": [
-        (2040.0, "projection horizon label (year, not a result)"),
         (90.0, "affordability reference dwelling size (assumption)"),
         (2555.0, "SERPAVI municipio coverage (also a claim; kept as count)"),
         (52.0, "52-provincia coverage count"),
@@ -1347,8 +1345,12 @@ def main() -> int:
         if rel in SPANISH_THOUSANDS:
             text = join_spanish_thousands(text)
         for val, slack, ctx in doc_numbers(text):
-            if val == int(val) and 1990 <= val <= 2030:
-                continue  # calendar years are not results
+            if val == int(val) and 1990 <= val <= 2100:
+                # Calendar years are not results. The window reaches 2100 so
+                # projection horizons (INE PROH runs to 2040, 2026-11-27) do
+                # not need allowlist entries; no claim pins a whole number in
+                # that range, which is asserted in tests/test_doc_numbers_years.py.
+                continue
             if any(abs(val - e) <= t + slack for e, t in claims):
                 continue
             if any(abs(val - v) <= 1e-9 for v, _ in allowed):
