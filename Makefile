@@ -66,6 +66,8 @@ fetch:
 	uv run python scripts/fetch_catalonia_rent_control.py
 	# INE statutory rent-update reference index (IRAV, operation 481).
 	uv run python scripts/fetch_irav.py
+	# INE rent price index at municipal grain (IPVA, table 59060).
+	uv run python scripts/fetch_ipva.py
 
 # Frontend geography (vendored evidence/static asset, not an analysis input):
 # Eurostat GISCO LAU polygons simplified to municipal CODIGOINE join keys.
@@ -105,6 +107,8 @@ verify:
 	uv run python scripts/build_ecv_microsim.py --check
 	uv run python scripts/fetch_irav.py --check
 	uv run python scripts/build_irav_index.py --check
+	uv run python scripts/fetch_ipva.py --check
+	uv run python explorations/ipva_rent_index.py --check
 	uv run python scripts/build_claim_ledger.py --check
 
 audit: audit-docs
@@ -183,6 +187,7 @@ analysis:
 	uv run python explorations/catalonia_rent_control.py
 	uv run python scripts/build_ecv_microsim.py
 	uv run python scripts/build_irav_index.py
+	uv run python explorations/ipva_rent_index.py
 	uv run python scripts/build_claim_ledger.py
 
 stock-rent:

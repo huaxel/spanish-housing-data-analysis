@@ -154,6 +154,19 @@ ni de que «no haya efecto». Si el conjunto aceptado toca un extremo de la
 rejilla, el aviso indica que puede extenderse más allá; si ningún candidato
 fue aceptado, no hay puntos probados que declarar (nulo, no cero).
 
+## Dos series oficiales de alquiler que no coinciden en magnitud
+
+La incertidumbre no es solo muestral. SERPAVI (mediana de contratos depositados,
+MIVAU) sostiene todas las cifras municipales de alquiler del repositorio. INE
+publica además el **IPVA**, un índice de precios de alquiler independiente para
+752 municipios de más de 10.000 habitantes. Solo son comparables sus **cambios**:
+entre 2013 y 2023 la mediana municipal sube **+15,8%** según el IPVA y **+32,1%**
+según SERPAVI, con un acuerdo de orden moderado (Spearman **0,670**) pero una
+brecha mediana de **−16,2 pp** que se amplía donde SERPAVI más sube (−9,6 pp en el
+cuartil más débil, −24,6 pp en el más fuerte). Leer un cambio municipal de SERPAVI
+como magnitud precisa —o encadenar varios— hereda esa divergencia; el detalle está
+en [la comprobación cruzada](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/ipva_rent_index.md).
+
 ## Qué sigue sin resolverse
 
 - Las licencias responden a demanda y regulación; la asociación ajustada

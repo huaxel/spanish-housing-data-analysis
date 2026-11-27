@@ -40,6 +40,26 @@ test, sampling-power calculation or confidence interval for cross-sectional
 correlations is added. The individual normal ranges do not supply joint
 coverage across all specifications or account for measurement/model bias.
 
+## Do two official rent series even agree?
+
+Measurement bias is not only sampling variance. SERPAVI is a median of filed
+rental contracts (MIVAU) and carries every municipal rent claim in this repo;
+INE's IPVA is an independent municipal rent price index for the 752 municipios
+above 10,000 inhabitants. Both are official; they are not the same object, so
+only changes are comparable.
+
+| Window | n | IPVA median change | SERPAVI median change | Pearson | Spearman | Gap (IPVA − SERPAVI) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2013→2023 | 678 | +15.8% | +32.1% | +0.618 | +0.670 | −16.2 pp (p10 −27.3, p90 −7.6) |
+| 2019→2023 | 683 | +8.0% | +16.1% | +0.679 | +0.690 | −8.0 pp (p10 −13.9, p90 −4.2) |
+
+They rank municipios similarly and disagree on magnitude by roughly a factor of
+two, and the gap widens where SERPAVI itself rises most (−9.6 pp in the weakest
+quartile against −24.6 pp in the strongest). That is the signature of composition
+or quality drift rather than a fixed instrument offset. Reading any SERPAVI
+municipal percentage change as a precise magnitude, or chaining several of them,
+inherits that divergence; see [the cross-check](explorations/ipva_rent_index.md).
+
 ## Exploratory magnitude control
 
 The page allows the reader to choose a symmetric magnitude band and reports

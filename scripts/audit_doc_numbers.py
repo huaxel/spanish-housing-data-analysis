@@ -43,6 +43,7 @@ COVERED_DOCS = [
     "evidence/pages/afirmaciones.md",
     "evidence/pages/microsimulacion.md",
     "docs/explorations/catalonia_rent_control.md",
+    "docs/explorations/ipva_rent_index.md",
     # Estimator docs (recomputed every analysis run — highest drift risk).
     "docs/explorations/panel_adjusted.md",
     "docs/explorations/panel_tourist.md",
@@ -122,6 +123,11 @@ ALLOW = {
         (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
         (52.7, "complement of the pinned 47.3% Q1-Q2 relief share (-5% cap scenario)"),
     ],
+    "docs/explorations/ipva_rent_index.md": [
+        (432.0, "INE operation id for the IPVA (identifier, not a result)"),
+        (59060.0, "INE table id for the IPVA (identifier, not a result)"),
+        (10000.0, "INE population threshold defining the table's municipio universe"),
+    ],
     "docs/explorations/catalonia_rent_control.md": [
         (140.0, "BOE Wave 1 declared municipality count; fetch --check matches 140/140"),
         (677.0, "never-treated Catalan municipalities (coverage count)"),
@@ -129,6 +135,7 @@ ALLOW = {
         (999.0, "wild cluster bootstrap replicate parameter (WILD_REPS)"),
     ],
     "docs/uncertainty.md": [
+        (10000.0, "INE IPVA population threshold defining its municipio universe"),
         (1.96, "normal critical value in existing panel_tourist interval construction"),
         (95.0, "nominal confidence level of normal approximation, not an empirical finding"),
         (2.0, "prespecified candidate grid endpoint (symmetric +/− 2.0 pp), not a result"),
@@ -1197,6 +1204,7 @@ def audit_total() -> int:
         "MICROSIM_CLAIMS": audit_claims.MICROSIM_CLAIMS,
         "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
         "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
+        "IPVA_CLAIMS": audit_claims.IPVA_CLAIMS,
     }
     total = 0
     seen_lists: set[str] = set()

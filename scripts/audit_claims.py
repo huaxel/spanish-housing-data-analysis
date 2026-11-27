@@ -153,6 +153,12 @@ MODEL_FRESHNESS = [
         "artifacts/irav.json",
         "scripts/build_irav_index.py",
     ),
+    # IPVA vs SERPAVI municipal cross-check, added 2026-11-27.
+    (
+        "ipva_rent_index",
+        "artifacts/ipva_rent_index.json",
+        "explorations/ipva_rent_index.py",
+    ),
 ]
 
 
@@ -2629,6 +2635,105 @@ IRAV_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("politica", "IRAV 2026 mean annual variation", "annual_means.2.mean_pct", 2.42, 0.005),
 ]
 
+# IPVA (INE rent price index, municipal) vs SERPAVI (MIVAU filed-contract
+# medians): the only independent check of SERPAVI's municipal trajectory above
+# Barcelona province. They agree on rank and disagree on magnitude, so both
+# facts are pinned.
+IPVA_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("ipva_rent_index", "IPVA municipios published", "coverage.ipva_municipios", 752, 0),
+    ("ipva_rent_index", "muni_key matches to SERPAVI", "coverage.matched", 686, 0),
+    ("ipva_rent_index", "IPVA municipios unmatched", "coverage.unmatched", 66, 0),
+    ("ipva_rent_index", "2013-2023 pairs", "windows.0.n", 678, 0),
+    ("ipva_rent_index", "2013-2023 IPVA median change", "windows.0.ipva_median_pct", 15.77, 0.005),
+    (
+        "ipva_rent_index",
+        "2013-2023 SERPAVI median change",
+        "windows.0.serpavi_median_pct",
+        32.09,
+        0.005,
+    ),
+    ("ipva_rent_index", "2013-2023 Pearson", "windows.0.pearson", 0.618, 0.0005),
+    ("ipva_rent_index", "2013-2023 Spearman", "windows.0.spearman", 0.67, 0.0005),
+    ("ipva_rent_index", "2013-2023 median gap pp", "windows.0.gap_pp.median", -16.23, 0.005),
+    (
+        "ipva_rent_index",
+        "2013-2023 gap p10 pp",
+        "windows.0.gap_pp.p10",
+        -27.26,
+        0.005,
+    ),
+    ("ipva_rent_index", "2019-2023 pairs", "windows.1.n", 683, 0),
+    ("ipva_rent_index", "2019-2023 IPVA median change", "windows.1.ipva_median_pct", 7.95, 0.005),
+    (
+        "ipva_rent_index",
+        "2019-2023 SERPAVI median change",
+        "windows.1.serpavi_median_pct",
+        16.07,
+        0.005,
+    ),
+    ("ipva_rent_index", "2019-2023 Spearman", "windows.1.spearman", 0.69, 0.0005),
+    ("ipva_rent_index", "2019-2023 median gap pp", "windows.1.gap_pp.median", -7.97, 0.005),
+    (
+        "ipva_rent_index",
+        "2013-2023 weakest-quartile gap pp",
+        "windows.0.quartiles_by_serpavi_change.0.median_gap_pp",
+        -9.55,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2013-2023 strongest-quartile gap pp",
+        "windows.0.quartiles_by_serpavi_change.3.median_gap_pp",
+        -24.57,
+        0.005,
+    ),
+    ("ipva_rent_index", "2019-2023 Pearson", "windows.1.pearson", 0.679, 0.0005),
+    ("ipva_rent_index", "2019-2023 gap p10 pp", "windows.1.gap_pp.p10", -13.92, 0.005),
+    ("ipva_rent_index", "2019-2023 gap p90 pp", "windows.1.gap_pp.p90", -4.2, 0.005),
+    (
+        "ipva_rent_index",
+        "quartile 1 SERPAVI change",
+        "windows.0.quartiles_by_serpavi_change.0.median_serpavi_pct",
+        21.04,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "quartile 2 SERPAVI change",
+        "windows.0.quartiles_by_serpavi_change.1.median_serpavi_pct",
+        28.16,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "quartile 2 gap pp",
+        "windows.0.quartiles_by_serpavi_change.1.median_gap_pp",
+        -14.03,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "quartile 3 SERPAVI change",
+        "windows.0.quartiles_by_serpavi_change.2.median_serpavi_pct",
+        34.94,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "quartile 3 gap pp",
+        "windows.0.quartiles_by_serpavi_change.2.median_gap_pp",
+        -17.55,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "quartile 4 SERPAVI change",
+        "windows.0.quartiles_by_serpavi_change.3.median_serpavi_pct",
+        45.93,
+        0.005,
+    ),
+]
+
 
 def _json_path(data: dict, path: str):
     for part in path.split("."):
@@ -2725,6 +2830,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(IRAV_CLAIMS)
+    ipva = _model_output("artifacts/ipva_rent_index.json")
+    for doc, desc, path, expected, tol in IPVA_CLAIMS:
+        got = _json_path(ipva, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(IPVA_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)
