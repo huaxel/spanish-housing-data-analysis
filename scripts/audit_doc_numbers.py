@@ -41,6 +41,7 @@ COVERED_DOCS = [
     # (added 2026-11-27). All three quote artifact numbers directly.
     "evidence/pages/politica.md",
     "evidence/pages/afirmaciones.md",
+    "evidence/pages/renta.md",
     "evidence/pages/microsimulacion.md",
     "docs/explorations/catalonia_rent_control.md",
     "docs/explorations/ipva_rent_index.md",
@@ -120,6 +121,9 @@ ALLOW = {
         (72975.0, "INE table id for the IRAV (identifier, not a result)"),
         (947.0, "Catalan municipalities with INCASOL rows (coverage count)"),
         (999.0, "wild cluster bootstrap replicate parameter (WILD_REPS)"),
+    ],
+    "evidence/pages/renta.md": [
+        (15.0, "DataTable rows attribute (UI setting, not a result)"),
     ],
     "evidence/pages/microsimulacion.md": [
         (250.0, "policy parameter: monthly subsidy amount in €, not an estimate"),
