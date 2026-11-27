@@ -247,35 +247,84 @@ order by anyo, barrio
   xFmt="0" xAxisTitle="Año" yFmt="num2" handleMissing="gap" markers=true
   title="Alquiler contractual (€/m²/mes): barrios (desde 2013)"/>
 
+<script>
+  // Quarterly axes mark first quarters with the year; tooltips keep the quarter.
+  // Overlapping labels are hidden.
+  // LineChart does not pass showAllXAxisLabels on, so these use Chart + Line.
+  const ejeTrimestral = {
+    grid: { right: 28 },
+    xAxis: {
+      axisLabel: {
+        fontFamily: 'Inter, sans-serif',
+        interval: (_indice, etiqueta) => etiqueta.startsWith('T1 '),
+        formatter: (etiqueta) => etiqueta.slice(3)
+      }
+    }
+  };
+</script>
+
 ```sql serie_trim_bcn
-select anyo * 10 + trimestre as periodo, nom as barrio, lloguer_m2
-from housing.barrios_bcn_lloguer_trimestral
-where ambit = 'barri'
-  and nom in ${inputs.barris_bcn.value}
-order by periodo, barrio
+-- One row per barrio and quarter, so unpublished quarters stay visible as gaps.
+-- q counts quarters; the range ends at the last quarter with a published value.
+with datos as (
+  select nom as barrio,
+         cast(anyo as integer) * 4 + cast(trimestre as integer) - 1 as q,
+         lloguer_m2
+  from housing.barrios_bcn_lloguer_trimestral
+  where ambit = 'barri'
+    and nom in ${inputs.barris_bcn.value}
+), limites as (
+  select min(q) as desde, max(q) as hasta from datos where lloguer_m2 is not null
+), rejilla as (
+  select barrio, q
+  from (select distinct barrio from datos)
+  cross join (select unnest(range(desde, hasta + 1)) as q from limites)
+)
+select 'T' || (q % 4 + 1) || ' ' || (q // 4) as trimestre, barrio, lloguer_m2
+from rejilla left join datos using (barrio, q)
+order by q, barrio
 ```
 
-<LineChart data={serie_trim_bcn} x=periodo y=lloguer_m2 series=barrio
-  xFmt="0" xAxisTitle="Año-trimestre (20241 = T1 2024)" yFmt="num2"
-  handleMissing="gap" markers=true
-  title="Alquiler contractual trimestral (€/m²/mes): barrios"/>
+<Chart data={serie_trim_bcn} x=trimestre y=lloguer_m2 series=barrio
+  sort=false showAllXAxisLabels="false" xAxisTitle="Trimestre (cada año marca su T1)"
+  yFmt="num2" title="Alquiler trimestral (€/m²/mes): barrios"
+  echartsOptions={ejeTrimestral} seriesOptions={{ showAllSymbol: true }}>
+  <Line handleMissing="gap" markers=true />
+</Chart>
 
 ```sql serie_compra_bcn
-select anyo * 10 + trimestre as periodo, nom as barrio, eur_m2_total, trx_total
-from housing.barrios_bcn_compraventes
-where ambit = 'barri'
-  and nom in ${inputs.barris_bcn.value}
-order by periodo, barrio
+-- One row per barrio and quarter, so unpublished quarters stay visible as gaps.
+-- q counts quarters; the range ends at the last quarter with a published value.
+with datos as (
+  select nom as barrio,
+         cast(anyo as integer) * 4 + cast(trimestre as integer) - 1 as q,
+         eur_m2_total, trx_total
+  from housing.barrios_bcn_compraventes
+  where ambit = 'barri'
+    and nom in ${inputs.barris_bcn.value}
+), limites as (
+  select min(q) as desde, max(q) as hasta from datos where eur_m2_total is not null
+), rejilla as (
+  select barrio, q
+  from (select distinct barrio from datos)
+  cross join (select unnest(range(desde, hasta + 1)) as q from limites)
+)
+select 'T' || (q % 4 + 1) || ' ' || (q // 4) as trimestre, barrio, eur_m2_total, trx_total
+from rejilla left join datos using (barrio, q)
+order by q, barrio
 ```
 
-<LineChart data={serie_compra_bcn} x=periodo y=eur_m2_total series=barrio
-  xFmt="0" xAxisTitle="Año-trimestre (20241 = T1 2024)" yFmt="num0"
-  handleMissing="gap" markers=true
-  title="Precio registrado (€/m² construido): barrios (2018–2019, 2021–; precios con <3 contratos ausentes)"/>
+<Chart data={serie_compra_bcn} x=trimestre y=eur_m2_total series=barrio
+  sort=false showAllXAxisLabels="false" xAxisTitle="Trimestre (cada año marca su T1)"
+  yFmt="num0" title="Precio registrado (€/m² constr.): barrios"
+  echartsOptions={ejeTrimestral} seriesOptions={{ showAllSymbol: true }}>
+  <Line handleMissing="gap" markers=true />
+</Chart>
 
 Precios de escrituras inscritas (Registradores), no oferta. Sin 2020
-(hueco de publicación) y serie iniciada en 2018; el total ciudad incluye
-registros sin geolocalizar.
+(hueco de publicación) y serie iniciada en 2018. En otros trimestres también
+falta el precio de algunos barrios, sobre todo con pocas compraventas; un
+hueco no es cero. El total ciudad incluye registros sin geolocalizar.
 
 ```sql rendimiento_bcn
 select s.nom as barrio,
