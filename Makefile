@@ -89,6 +89,10 @@ build:
 	# build_rent_income rewrites housing_access.duckdb, whose bytes the ECV
 	# joint proof pins, so the proof is rebuilt afterwards.
 	uv run python scripts/build_ecv_joint.py --offline
+	# A fetch re-pins raw bytes and the duckdb builds are not byte-stable, so
+	# the chart provenance manifest has to be regenerated here; otherwise a
+	# full `make gates` ends red in test_chart_provenance (measured 2026-11-28).
+	uv run python scripts/export_chart_provenance.py
 
 verify:
 	uv run python scripts/verify_data.py
@@ -124,6 +128,7 @@ verify:
 	uv run python explorations/vut_rent_overlap.py --check
 	uv run python scripts/fetch_catalonia_occupancy.py --check
 	uv run python scripts/build_claim_ledger.py --check
+	uv run python scripts/export_chart_provenance.py --check
 
 audit: audit-docs
 	uv run python scripts/audit_claims.py

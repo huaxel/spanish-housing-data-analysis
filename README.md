@@ -62,10 +62,10 @@ uv sync --group dev
 make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 ```
 
-`make gates` is not cheap: `analysis` re-runs every pure-Python bootstrap
-estimator (a few minutes in parallel lanes, longer serially) and `fetch`
-hits 26 INE endpoints — expect 30–60 min end to end, with fetch and build
-dominating. CI runs the offline subset only (`make lint` + `make test`); run
+`make gates` is not cheap: `fetch` hits 26 INE endpoints and re-pins every
+raw byte, and `build` rebuilds the marts — together about 20 minutes on a
+warm checkout, with `analysis` a few minutes more. Every published number is
+re-checked on the way (claims, freshness, doc numbers, tests). CI runs the offline subset only (`make lint` + `make test`); run
 the full gate locally before release.
 
 Then, for the Evidence dev dashboard (Node/npm required):
