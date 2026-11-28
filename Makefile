@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis analysis-serial inference deficit profile-income chart-provenance stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-provenance evidence-smoke-municipal-comparison evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis analysis-serial inference deficit profile-income rental-registers chart-provenance stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-provenance evidence-smoke-municipal-comparison evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -129,6 +129,7 @@ verify:
 	uv run python explorations/vut_stock.py --check
 	uv run python explorations/vut_rent_overlap.py --check
 	uv run python scripts/fetch_catalonia_occupancy.py --check
+	uv run python scripts/export_rental_registers.py --check
 	uv run python scripts/build_claim_ledger.py --check
 	uv run python scripts/export_chart_provenance.py --check
 
@@ -177,6 +178,9 @@ chart-provenance:
 profile-income:
 	uv run python scripts/export_profile_income.py
 
+rental-registers:
+	uv run python scripts/export_rental_registers.py
+
 deficit:
 	uv run python scripts/export_deficit.py
 
@@ -201,6 +205,7 @@ evidence-dev:
 	@if [ -z "$(ALLOW)" ] && { ss -ltn 2>/dev/null | grep -q '127.0.0.1:3000 ' || systemctl --user is-active -q housing-evidence.service; }; then echo "Local dev server running? Stop it first: systemctl --user stop housing-evidence (or make evidence-dev ALLOW=1)."; exit 1; fi
 	uv run python scripts/export_deficit.py
 	uv run python scripts/export_profile_income.py
+	uv run python scripts/export_rental_registers.py
 	uv run python scripts/export_chart_provenance.py
 	cd evidence && npm run dev
 
@@ -217,6 +222,7 @@ evidence-build:
 	uv run python scripts/analyze_stock_rent.py
 	uv run python scripts/export_deficit.py
 	uv run python scripts/export_profile_income.py
+	uv run python scripts/export_rental_registers.py
 	uv run python scripts/export_chart_provenance.py
 	uv run python explorations/catalonia_rent_control.py
 	uv run python scripts/build_ecv_microsim.py

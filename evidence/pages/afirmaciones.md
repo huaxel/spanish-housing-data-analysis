@@ -77,4 +77,4 @@ order by b.claim_id, b.definition
 Todas las cifras de esta página se regeneran de forma determinista con
 `uv run python scripts/build_claim_ledger.py` y se verifican contra los marts
 con `scripts/build_claim_ledger.py --check`. Ver también:
-[Déficit](/deficit/) · [Vacancia 2021](/vacancia/) · [Zonas tensionadas en Cataluña](/politica/) · [Microsimulación ECV](/microsimulacion/).
+[Déficit](/deficit/) · [Vacancia 2021](/vacancia/) · [El registro del alquiler](/alquiler/) · [Zonas tensionadas en Cataluña](/politica/) · [Microsimulación ECV](/microsimulacion/).

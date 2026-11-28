@@ -1,0 +1,4 @@
+name: rental_registers
+type: duckdb
+options:
+  filename: '../../../data/processed/rental_registers.duckdb'

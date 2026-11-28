@@ -19,6 +19,7 @@
     reportaje: 'docs/methods.md',
     perfil: 'docs/municipal_profile.md',
     deficit: 'docs/deficit_explainer.md',
+    alquiler: 'docs/occupancy_catalonia_deposit_balances.md',
     'comparar-municipios': 'docs/municipal_profile.md#matched-municipality-comparison'
   };
   $: method = Object.entries(methods).find(([route]) => chart.startsWith(route + '-'))?.[1];

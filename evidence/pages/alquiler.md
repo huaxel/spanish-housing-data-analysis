@@ -106,12 +106,62 @@ ventana. Ese saldo es actividad registral: no es el aumento anual de viviendas
 alquiladas. Comparado con el cambio del stock declarado, coincide una sola vez
 (2024, **94** de diferencia) y en 2020 cambia de signo.
 
+```sql bcn_saldo_vs_stock
+select cast(anyo as varchar) as anyo,
+       'Saldo neto de fianzas (INCASÒL)' as serie,
+       saldo_fianzas as contratos
+from rental_registers.bcn_depositos_vs_stock
+union all
+select cast(anyo as varchar) as anyo,
+       'Cambio anual del stock declarado (SERPAVI)' as serie,
+       cambio_stock_declarado as contratos
+from rental_registers.bcn_depositos_vs_stock
+where cambio_stock_declarado is not null
+order by anyo, serie
+```
+
+<BarChart echartsOptions={ajusteGrafico()}
+  data={bcn_saldo_vs_stock}
+  x=anyo
+  y=contratos
+  series=serie
+  type=grouped
+  yFmt="num0"
+  title="Barcelona: saldo neto de fianzas (INCASÒL) frente al cambio anual del stock declarado (SERPAVI)"
+/>
+
+<EvidencePanel data={bcn_saldo_vs_stock} chart="alquiler-bcn-saldo-vs-stock"
+  columns={["anyo", "serie", "contratos"]}
+  files={["data/raw/cat_incasol_saldos_municipis.xlsx", "data/raw/parquet/serpavi_municipal.parquet"]}
+  definition="Comparación anual en Barcelona ciudad entre el saldo neto de fianzas de alquiler habitual (altas menos bajas, INCASÒL) y la variación anual de contratos declarados en el IRPF (SERPAVI)."
+  coverage="Barcelona municipio, 2019–2025 en INCASÒL y 2019–2024 en SERPAVI (2025 aún no publicado en SERPAVI; no se imputa)." />
+
 Las tres lecturas compatibles —alquileres más largos, menos contratos nuevos o
 menos altas registradas— no se pueden separar con estos datos. Lo que sí se
 descarta: el registro turístico no absorbe esa caída. Las viviendas turísticas
 registradas en Cataluña se mueven en una banda estacional entre **45.709** y
 **63.199** y en mayo de 2026 eran **51.305**, por debajo de su máximo de 2020 y
 de su propio valor de mayo de 2025 (**56.851**).
+
+```sql cat_vut_banda
+select periodo, viviendas_turisticas
+from rental_registers.cat_vut_banda
+order by periodo
+```
+
+<LineChart echartsOptions={ajusteGrafico()}
+  data={cat_vut_banda}
+  x=periodo
+  y=viviendas_turisticas
+  yFmt="num0"
+  title="Viviendas turísticas estimadas en Cataluña (INE VTE, 2020–2026)"
+/>
+
+<EvidencePanel data={cat_vut_banda} chart="alquiler-cat-vut-banda"
+  columns={["periodo", "viviendas_turisticas"]}
+  files={["data/raw/parquet/vut_municipal.parquet"]}
+  definition="Estimación experimental del INE de viviendas turísticas anunciadas en plataformas digitales en Cataluña por corte."
+  coverage="INE VTE, 13 cortes entre agosto de 2020 y mayo de 2026 en Cataluña. Es una estimación de plataformas, no un registro de licencias ni una reclasificación desde el alquiler de temporada." />
 
 ## Qué no se puede concluir
 

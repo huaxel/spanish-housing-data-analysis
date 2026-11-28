@@ -134,6 +134,12 @@
       "sha256": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
+    "data/raw/parquet/vut_municipal.parquet": {
+      "accessed": "2026-11-28",
+      "publisher": "INE · VTE municipal",
+      "sha256": "b8fa618be6e60afe7c87a329a15c0d377ab47cf0216b7b348fbeb6b245513d68",
+      "url": null
+    },
     "data/raw/serpavi_bd.xlsx": {
       "accessed": "2026-11-28",
       "publisher": "INE · SERPAVI alquiler municipal (MIVAU, fianzas)",

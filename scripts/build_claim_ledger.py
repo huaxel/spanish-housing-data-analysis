@@ -277,7 +277,7 @@ def build_ledger() -> dict:
                 f"creciendo {negative_stock_change:,}), y ninguna fuente pública cuenta "
                 "oferta efectiva."
             ),
-            "deep_dive_path": "/incertidumbre/",
+            "deep_dive_path": "/alquiler/",
         },
         {
             "claim_id": "C4_harder_than_2007",
