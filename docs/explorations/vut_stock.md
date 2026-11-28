@@ -1,8 +1,8 @@
 # How many tourist dwellings are there, officially?
 
 The public debate about *pisos turísticos* argues about a number the repo never
-had a direct measure of. The tourist claim in this project is built on
-**intensity panels** — travellers and nights per resident — which measure *flow*.
+had a direct measure of. Travellers and nights per resident measure tourism *flows*. The separate
+Barcelona municipal panel instead uses DIBA’s tourist-dwelling stock per resident.
 INE estimates the stock separately in its [experimental tourist-dwelling
 statistics](https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm)
 (VTE, API operation 410, tables 39363/39366).
@@ -25,18 +25,18 @@ an estimate of underlying growth independent of platform coverage.
 
 INE's own share variable (tourist dwellings over census dwellings, per
 municipio) uses the census denominator. The distribution below covers only
-rows with a positive published share and an unambiguous label:
+rows with a positive published share and a published municipality code:
 
 | Municipal share of tourist dwellings | Value |
 | --- | ---: |
 | Median municipio | **0.61%** |
-| 90th percentile | **3.40%** |
+| 90th percentile | **3.38%** |
 | Maximum | **33.33%** |
-| Municipios above 5% | **5.34%** |
+| Municipios above 5% | **5.30%** |
 
 The national share masks wide local differences. The ten largest municipal
-estimates hold **14.99%** of the assigned total, led by Marbella with an
-estimated 6,987 dwellings.
+estimates hold **18.47%** of the assigned total, led by Madrid with an
+estimated 10,836 dwellings.
 
 ## What it cannot do
 
@@ -46,15 +46,17 @@ estimated 6,987 dwellings.
   listing; other characteristics can qualify it. Dwellings outside the observed
   platforms can be missed. Listings are not occupancy or evidence that a home
   left the long-term rental market.
-- **Municipal assignment is incomplete.** The payload has no municipality code.
-  **122 stock rows** have labels used by more than one territory, such as a
-  province and its capital. The analysis marks them `ambiguo` rather than
-  guessing. The rows assigned to the project's municipalities account for
-  **84.52%** of the national estimate; that is join coverage, not platform
-  coverage of the real market.
-- **It does not identify rent effects.** The project's separate intensity panel
-  uses tourist flows. Its inconclusive within-municipality results cannot be
-  confirmed or overturned by this stock estimate.
+- **All May observations match the municipal map by code.** INE's downloadable
+  JAXI CSVs include the official five-digit code even though the JSON series
+  show only a name. The parser checks unique code–period–measure keys and
+  reconciles the municipal stock sum to the national figure in every snapshot.
+  All **8,131** May municipality codes match the project’s map, accounting for
+  **100%** of the published estimate. This is geographic coverage, not the
+  fraction of the real market captured by the platforms or a rent-data join.
+- **It does not identify rent effects.** The [Barcelona panel](panel_tourist.md) uses
+  changes in DIBA tourist dwellings per resident. A [national code-matched
+  comparison](vut_rent_overlap.md) links INE stock and SERPAVI rents descriptively;
+  neither design identifies a causal effect.
 
 ## Reproduce
 
@@ -63,6 +65,7 @@ uv run python scripts/fetch_vut_municipal.py --offline
 uv run python explorations/vut_stock.py
 ```
 
-Pinned inputs: `data/raw/vut_municipal_39363.json`, `data/raw/vut_municipal_39366.json`.
+Pinned inputs: `data/raw/vut_municipal_{39363,39366}.csv` from the official JAXI
+downloads.
 Output artifact: `artifacts/vut_stock.json`; `--check` verifies it against the
-pinned parquet and `marts.duckdb`.
+pinned parquet and `evidence/static/geo/municipios.geojson`.

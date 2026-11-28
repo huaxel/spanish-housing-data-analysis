@@ -9,9 +9,8 @@ platform-based estimate of *stock* rather than *flow*:
 - concentration: how much of the municipal stock sits in the top municipios;
 - official shares: INE's own "% of tourist dwellings over census dwellings",
   whose median and upper tail say how local the phenomenon is;
-- coverage: how much estimated stock can be assigned to the repo's municipal
-  dimension. The payload lacks municipality codes, so ambiguous names are
-  left unassigned.
+- coverage: how much estimated stock matches the project map by the official
+  municipality code included in the JAXI CSV (never by name).
 
 These are filtered, deduplicated platform listings, not a licence count or
 a guaranteed lower bound. This analysis does not estimate rent effects.
@@ -28,17 +27,15 @@ import statistics
 import sys
 from pathlib import Path
 
-import duckdb
 import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from spanish_housing import ols  # noqa: E402
-from spanish_housing.data_paths import PROCESSED, RAW, ROOT  # noqa: E402
-from spanish_housing.ine_api import norm_name as N  # noqa: E402
+from spanish_housing.data_paths import RAW, ROOT  # noqa: E402
 
 VUT_PARQUET = RAW / "parquet" / "vut_municipal.parquet"
-MARTS = PROCESSED / "marts.duckdb"
+MUNICIPAL_MAP = ROOT / "evidence/static/geo/municipios.geojson"
 ARTIFACT = ROOT / "artifacts/vut_stock.json"
 
 
@@ -50,51 +47,33 @@ def latest_snapshot(rows: list[dict]) -> tuple[int, int]:
     return max((r["anyo"], r["periodo"]) for r in rows)
 
 
+def map_codes(path: Path) -> set[str]:
+    features = json.loads(path.read_text())["features"]
+    codes = {feature["properties"]["CODIGOINE"] for feature in features}
+    if not codes or len(codes) != len(features):
+        raise ValueError("Municipal map has no features or repeated municipality codes")
+    return codes
+
+
 def build() -> dict:
     rows = load()
     year, period = latest_snapshot(rows)
     snap = [r for r in rows if (r["anyo"], r["periodo"]) == (year, period)]
 
     def national(medida: str) -> float:
-        return next(
-            r["valor"]
-            for r in snap
-            if r["territorio"] == "Total Nacional" and r["medida"] == medida
-        )
+        return next(r["valor"] for r in snap if r["nivel"] == "nacional" and r["medida"] == medida)
 
-    con = duckdb.connect(str(MARTS), read_only=True)
-    try:
-        muni_names = {
-            N(r[0]) for r in con.execute("select distinct municipio from muni_all").fetchall()
-        }
-    finally:
-        con.close()
-
-    stock = {
-        r["territorio"]: r["valor"]
-        for r in snap
-        if r["medida"] == "viviendas_turisticas"
-        and r["nivel"] == "municipio"
-        and r["territorio"] != "Total Nacional"
-    }
-    assignable = {k: v for k, v in stock.items() if N(k) in muni_names}
-    # Ambiguous labels mix province aggregates with their capitals, so their
-    # summed stock is not a quantity: only the row count is reported.
-    ambiguous_rows = sum(
-        1 for r in snap if r["medida"] == "viviendas_turisticas" and r["nivel"] == "ambiguo"
-    )
-
-    ranked = sorted(assignable.items(), key=lambda kv: -kv[1])
-    assigned_total = sum(assignable.values())
-    top10 = sum(v for _k, v in ranked[:10])
-
+    codes = map_codes(MUNICIPAL_MAP)
+    stock = [r for r in snap if r["medida"] == "viviendas_turisticas" and r["nivel"] == "municipio"]
+    assignable = [r for r in stock if r["codigo_ine"] in codes]
+    unmatched_codes = sorted({r["codigo_ine"] for r in stock} - codes)
+    ranked = sorted(assignable, key=lambda r: (-r["valor"], r["territorio"]))
+    assigned_total = sum(r["valor"] for r in assignable)
+    top10 = sum(r["valor"] for r in ranked[:10])
     shares = sorted(
         r["valor"]
         for r in snap
-        if r["medida"] == "pct_censadas"
-        and r["nivel"] == "municipio"
-        and r["territorio"] != "Total Nacional"
-        and r["valor"] > 0
+        if r["medida"] == "pct_censadas" and r["nivel"] == "municipio" and r["valor"] > 0
     )
 
     # Path: national stock at each published snapshot, oldest → newest.
@@ -112,6 +91,7 @@ def build() -> dict:
         "source": {
             "operation_id": 410,
             "tables": [39363, 39366],
+            "join_key": "INE municipality code (five characters)",
             "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39363",
             "publisher": "INE · Viviendas turísticas en España (VTE)",
             "methodology_url": "https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm",
@@ -134,10 +114,11 @@ def build() -> dict:
             "change_pct": round(100.0 * (national("viviendas_turisticas") / first[2] - 1.0), 2),
         },
         "concentration": {
-            "top10_municipios": [k for k, _v in ranked[:10]],
+            "top10_municipios": [r["territorio"] for r in ranked[:10]],
+            "top10_stock": int(top10),
             "top10_share_of_assigned_pct": round(100.0 * top10 / assigned_total, 2),
-            "top_municipio": ranked[0][0],
-            "top_municipio_vut": ranked[0][1],
+            "top_municipio": ranked[0]["territorio"],
+            "top_municipio_vut": ranked[0]["valor"],
         },
         "shares": {
             "n_municipios": len(shares),
@@ -149,15 +130,17 @@ def build() -> dict:
         "coverage": {
             "rows_in_snapshot": len(snap),
             "municipio_rows": len(stock),
-            "joined_to_muni_all": len(assignable),
-            "ambiguous_rows": ambiguous_rows,
+            "matched_map_rows": len(assignable),
+            "unmatched_map_codes": unmatched_codes,
+            "unassigned_rows": len(stock) - len(assignable),
+            "unassigned_stock": national("viviendas_turisticas") - assigned_total,
             "assigned_stock": assigned_total,
             "assigned_share_of_national_pct": round(
                 100.0 * assigned_total / national("viviendas_turisticas"), 2
             ),
         },
         "_meta": ols.model_meta(
-            __file__, [str(VUT_PARQUET.relative_to(ROOT)), str(MARTS.relative_to(ROOT))]
+            __file__, [str(VUT_PARQUET.relative_to(ROOT)), str(MUNICIPAL_MAP.relative_to(ROOT))]
         ),
     }
 
@@ -193,7 +176,7 @@ def main() -> None:
     )
     print(
         f"  coverage: assigned {cov['assigned_share_of_national_pct']}% of national stock "
-        f"({cov['ambiguous_rows']} ambiguous rows left unassigned)"
+        f"({cov['unassigned_rows']} rows left unassigned)"
     )
 
 

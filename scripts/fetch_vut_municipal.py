@@ -1,35 +1,22 @@
-"""Fetch INE's experimental municipal tourist-dwelling estimates (VTE, operation 410).
+"""Pin INE's semiannual municipal VTE estimates from the coded JAXI downloads.
 
-Two tables, both municipio-grain, each publishing the *snapshot history* of
-the experiment (reference months changed from Feb/Aug to May/Nov
-in the second half of 2024):
+Tables 39363 (dwellings and beds) and 39366 (share of census dwellings)
+contain official five-digit municipality codes and explicit geographic levels
+in CSV. Preserve the published snapshot history and require every municipal
+stock sum to reconcile with its national total.
 
-- 39363 `Viviendas turísticas, plazas, plazas por vivienda turística`: the
-  experimental estimate of tourist dwellings and beds per municipio;
-- 39366 `Porcentaje de viviendas turísticas sobre el total de viviendas
-  censadas`: the same stock as a share of census dwellings, i.e. INE's own
-  denominator rather than one we invent.
-
-Why the municipal cut matters here: the repo's tourist claim is built on
-*tourist intensity* panels (travellers and nights), which measure flow, never
-stock. This table measures the stock — the thing the public debate is actually
-about ("cuántos pisos turísticos hay") — with official provenance.
-
-INE scrapes three platforms twice a year, applies eligibility rules and
-deduplicates across platforms. Listings without a valid licence may be
-included based on other observed characteristics. This is neither a list
-of licences nor a census of all tourist dwellings.
-
-Writes data/raw/vut_municipal_39363.json, data/raw/vut_municipal_39366.json
-(byte evidence) + data/raw/parquet/vut_municipal.parquet.
---offline rebuilds from the pinned JSONs; --check verifies pins and derivation.
+--offline rebuilds from pinned CSVs; --check verifies pins and derivation.
 """
 
 from __future__ import annotations
 
 import argparse
-import json
+import csv
+import io
+import re
 import sys
+import urllib.request
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -38,16 +25,15 @@ import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from spanish_housing import ine_api, manifest  # noqa: E402
+from spanish_housing import manifest  # noqa: E402
 from spanish_housing.data_paths import RAW, ROOT  # noqa: E402
 
-TABLES = {
-    39363: RAW / "vut_municipal_39363.json",
-    39366: RAW / "vut_municipal_39366.json",
-}
+TABLES = {table_id: RAW / f"vut_municipal_{table_id}.csv" for table_id in (39363, 39366)}
+CSV_URL = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/{table_id}.csv"
 PARQUET = RAW / "parquet" / "vut_municipal.parquet"
 SCHEMA = pa.schema(
     [
+        ("codigo_ine", pa.string()),
         ("territorio", pa.string()),
         ("nivel", pa.string()),
         ("medida", pa.string()),
@@ -56,147 +42,164 @@ SCHEMA = pa.schema(
         ("valor", pa.float64()),
     ]
 )
+GEO = ["Total Nacional", "Comunidades y Ciudades Autónomas", "Provincias", "Municipios"]
 MEASURES = {
     "Viviendas turísticas": "viviendas_turisticas",
     "Plazas": "plazas",
     "Plazas por vivienda turística": "plazas_por_vivienda",
-    "Porcentaje de viviendas turísticas sobre el total de viviendas censadas": "pct_censadas",
 }
+COUNTS = {"viviendas_turisticas", "plazas"}
+SPANISH_NUMBER = re.compile(r"(?:[0-9]+|[0-9]{1,3}(?:\.[0-9]{3})+)(?:,[0-9]+)?")
 
 
-def parse(payload: list[dict], table_id: int) -> list[dict]:
-    """Flatten '<territorio>. <medida>. Dato base.' series into long rows.
-
-    Each series carries the full snapshot history (irregular reference months),
-    so rows are keyed by (territorio, medida, anyo, periodo)."""
-    if not isinstance(payload, list) or not payload:
-        raise ValueError(f"VUT {table_id}: unexpected payload {type(payload).__name__}")
-    cells: list[dict] = []
-    for series in payload:
-        parts = [p.strip() for p in series["Nombre"].split(".") if p.strip()]
-        measures = [p for p in parts if p in MEASURES]
-        if len(measures) != 1:
-            raise ValueError(f"VUT {table_id}: no unique measure in {series['Nombre']!r}")
-        medida = MEASURES[measures[0]]
-        territorio = parts[0] if parts[0] not in MEASURES else parts[-2]
-        for obs in series["Data"]:
-            if obs.get("Valor") is None:
-                continue  # unpublished cell: dropped, never zero-filled
-            key = (territorio, medida, int(obs["Anyo"]), int(obs["FK_Periodo"]))
-            cells.append(
-                {
-                    **dict(zip(("territorio", "medida", "anyo", "periodo"), key, strict=True)),
-                    "valor": float(obs["Valor"]),
-                }
+def parse(data: bytes, table_id: int) -> list[dict]:
+    """Separate levels by populated geographic fields, never by names or values."""
+    has_counts = table_id == 39363
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline=""), delimiter=";")
+    expected = [*GEO, *(["Viviendas y plazas"] if has_counts else []), "Periodo", "Total"]
+    if reader.fieldnames != expected:
+        raise ValueError(f"VUT {table_id}: unexpected CSV columns: {reader.fieldnames}")
+    rows = []
+    seen = set()
+    national: dict[tuple[int, int, str], float] = {}
+    stock: Counter[tuple[int, int, str]] = Counter()
+    for row in reader:
+        if None in row or any(value is None for value in row.values()):
+            raise ValueError(f"VUT {table_id}: malformed CSV row at line {reader.line_num}")
+        value_text = row["Total"].strip()
+        if value_text in ("", ".."):
+            continue  # unpublished, not zero
+        y, sep, m = row["Periodo"].partition("M")
+        if not sep or not re.fullmatch(r"[0-9]{4}", y) or m not in ("02", "05", "08", "11"):
+            raise ValueError(f"VUT {table_id}: unrecognized period {row['Periodo']!r}")
+        year, period = int(y), int(m)
+        measure = MEASURES[row["Viviendas y plazas"]] if has_counts else "pct_censadas"
+        if not SPANISH_NUMBER.fullmatch(value_text) or (measure in COUNTS and "," in value_text):
+            raise ValueError(f"VUT {table_id}: invalid {measure} value {value_text!r}")
+        value = float(value_text.replace(".", "").replace(",", "."))
+        country, region, province, municipality = (row[k].strip() for k in GEO)
+        if country != "Total Nacional":
+            raise ValueError(f"VUT {table_id}: unexpected national label {country!r}")
+        code = None
+        label = municipality or province or region or country
+        if municipality:
+            code, _, label = municipality.partition(" ")
+            if (
+                not re.fullmatch(r"[0-9]{5}", code)
+                or not label
+                or not province.startswith(code[:2] + " ")
+            ):
+                raise ValueError(
+                    f"VUT {table_id}: invalid municipality/province pair "
+                    f"{municipality!r} / {province!r}"
+                )
+            level = "municipio"
+        else:
+            level = "agregado" if province or region else "nacional"
+        geography = code if code is not None else (region, province)
+        key = (geography, year, period, measure)
+        if key in seen:
+            raise ValueError(f"VUT {table_id}: duplicate geography/period/measure {key}")
+        seen.add(key)
+        snapshot = (year, period, measure)
+        if level == "nacional":
+            national[snapshot] = value
+        if level == "municipio" and measure == "viviendas_turisticas":
+            stock[snapshot] += value
+        rows.append(
+            dict(
+                codigo_ine=code,
+                territorio=label,
+                nivel=level,
+                medida=measure,
+                anyo=year,
+                periodo=period,
+                valor=value,
             )
-    if not cells:
-        raise ValueError(f"VUT {table_id}: zero rows — format changed?")
-    rows = sorted(cells, key=lambda r: (r["territorio"], r["medida"], r["anyo"], r["periodo"]))
-    if not any(r["territorio"] == "Total Nacional" for r in rows):
-        raise ValueError(f"VUT {table_id}: national total missing")
-    return _label_levels(rows)
-
-
-def _label_levels(rows: list[dict]) -> list[dict]:
-    """Mark labels the table publishes more than once.
-
-    INE ships no municipality code in the data payload, and Spanish municipio
-    names are not unique: 2,227 labels in this table belong to two or three
-    territories (a province and its capital, or the same name in two provinces),
-    and their rows differ. Guessing which copy is which from the values would be
-    invention, so they are labelled `ambiguo` and left for the exploration to
-    report. Everything else keeps `municipio`; province-level rows with unique
-    names survive that label and are dropped by the name join downstream, which
-    is where the coverage accounting happens.
-    """
-    grouped: dict[tuple[str, str, int, int], int] = {}
-    for r in rows:
-        key = (r["territorio"], r["medida"], r["anyo"], r["periodo"])
-        grouped[key] = grouped.get(key, 0) + 1
-    out = []
-    for r in rows:
-        key = (r["territorio"], r["medida"], r["anyo"], r["periodo"])
-        level = "ambiguo" if grouped[key] > 1 else "municipio"
-        out.append({**r, "nivel": level})
-    ambiguous = sum(1 for r in out if r["nivel"] == "ambiguo")
-    if ambiguous > 0.4 * len(out):
-        raise ValueError(f"VUT: {ambiguous}/{len(out)} rows ambiguous — layout changed?")
-    out.sort(key=lambda r: (r["territorio"], r["nivel"], r["medida"], r["anyo"], r["periodo"]))
-    return out
-
-
-def _latest_national(rows: list[dict], medida: str) -> float:
-    """National figure of the most recent snapshot (not the first row)."""
-    candidates = [r for r in rows if r["territorio"] == "Total Nacional" and r["medida"] == medida]
-    latest = max(candidates, key=lambda r: (r["anyo"], r["periodo"]))
-    return latest["valor"]
-
-
-def pinned_rows() -> list[dict]:
-    rows: list[dict] = []
-    for table_id, path in TABLES.items():
-        if not path.is_file():
-            raise SystemExit(f"VUT: {path.relative_to(ROOT)} missing — run without --offline")
-        rows.extend(parse(json.loads(path.read_text(encoding="utf-8")), table_id))
+        )
+    if not national or not any(row["nivel"] == "municipio" for row in rows):
+        raise ValueError(f"VUT {table_id}: missing national or municipal observations")
+    if has_counts and (
+        not stock
+        or dict(stock) != {k: v for k, v in national.items() if k[2] == "viviendas_turisticas"}
+    ):
+        raise ValueError(f"VUT {table_id}: municipal dwelling counts do not sum to national counts")
     return rows
 
 
-def write_parquet(rows: list[dict]) -> None:
-    PARQUET.parent.mkdir(parents=True, exist_ok=True)
-    pq.write_table(pa.Table.from_pylist(rows, schema=SCHEMA), PARQUET)
+def derive(sources: dict[int, bytes]) -> list[dict]:
+    rows = [row for table_id in TABLES for row in parse(sources[table_id], table_id)]
+    stock, shares = set(), set()
+    for row in rows:
+        if row["nivel"] not in ("nacional", "municipio"):
+            continue
+        key = (row["codigo_ine"], row["anyo"], row["periodo"])
+        if row["medida"] == "viviendas_turisticas":
+            stock.add(key)
+        elif row["medida"] == "pct_censadas":
+            shares.add(key)
+    if shares - stock:
+        raise ValueError("VUT: published share without a corresponding stock observation")
+    if {key for key in stock if key[0] is None} != {key for key in shares if key[0] is None}:
+        raise ValueError("VUT: count and share tables have different national snapshots")
+    return rows
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--offline", action="store_true")
-    parser.add_argument("--check", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--offline", action="store_true")
+    mode.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
     if args.check:
-        rows = pinned_rows()
+        pins = manifest.load()["sha256"]
+        paths = [*TABLES.values(), PARQUET]
+        keys = [str(p.relative_to(ROOT)) for p in paths]
+        missing, mismatched = manifest.check({k: pins.get(k, "") for k in keys})
+        if missing or mismatched:
+            raise SystemExit(f"VUT: input pins missing or changed: {missing + mismatched}")
+
+    if args.offline or args.check:
+        sources = {table_id: path.read_bytes() for table_id, path in TABLES.items()}
+    else:
+        sources = {}
+        for table_id in TABLES:
+            with urllib.request.urlopen(CSV_URL.format(table_id=table_id), timeout=90) as response:
+                sources[table_id] = response.read()
+    rows = derive(sources)  # validate the full release before replacing any pin
+    if args.check:
         if pq.read_table(PARQUET).to_pylist() != rows:
             raise SystemExit("VUT: parquet stale vs parser + pinned inputs")
-        nat = _latest_national(rows, "viviendas_turisticas")
-        print(f"vut: {len(rows)} cells; pins verified (national {nat:,.0f} in the latest snapshot)")
+        print(f"vut: {len(rows)} cells; pins and municipal sums verified")
         return
-
-    if not args.offline:
-        for table_id, path in TABLES.items():
-            payload = ine_api.get_table(table_id)
-            if isinstance(payload, dict):
-                raise SystemExit(f"VUT {table_id}: {payload}")
-            parse(payload, table_id)  # validate before replacing the pinned copy
+    for table_id, path in TABLES.items():
+        if not args.offline:
             tmp = path.with_suffix(".tmp")
-            tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            tmp.write_bytes(sources[table_id])
             tmp.replace(path)
-            manifest.record(
-                str(path.relative_to(ROOT)),
-                {
-                    "api": f"wstempus/DATOS_TABLA/{table_id}",
-                    "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
-                    "url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table_id}",
-                    "accessed": date.today().isoformat(),
-                    "note": (
-                        "Semiannual estimates from deduplicated platform listings; "
-                        "not a register of licensed dwellings"
-                    ),
-                },
-            )
-    rows = pinned_rows()
-    write_parquet(rows)
+        manifest.record(
+            str(path.relative_to(ROOT)),
+            {
+                "publisher": "INE · Viviendas turísticas en España (VTE)",
+                "url": CSV_URL.format(table_id=table_id),
+                "accessed": date.today().isoformat(),
+                "note": "JAXI CSV with official municipality codes and explicit geographic levels",
+            },
+        )
+    PARQUET.parent.mkdir(parents=True, exist_ok=True)
+    tmp = PARQUET.with_suffix(".tmp")
+    pq.write_table(pa.Table.from_pylist(rows, schema=SCHEMA), tmp)
+    tmp.replace(PARQUET)
     manifest.record(
         str(PARQUET.relative_to(ROOT)),
         {
             "publisher": "INE · VTE municipal",
             "accessed": date.today().isoformat(),
-            "note": "Derived from the pinned vut_municipal_3936*.json by fetch_vut_municipal.py",
+            "note": "Derived from pinned municipality-coded JAXI CSVs",
         },
     )
-    nat = _latest_national(rows, "viviendas_turisticas")
-    places = _latest_national(rows, "plazas")
-    print(
-        f"vut: {len(rows)} cells | national {nat:,.0f} viviendas turísticas, {places:,.0f} plazas"
-    )
+    print(f"vut: {len(rows)} cells | municipality-coded observations reconciled")
 
 
 if __name__ == "__main__":
