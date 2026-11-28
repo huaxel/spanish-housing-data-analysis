@@ -1,6 +1,6 @@
 {
-  "manifest_sha256": "ac39a1f25e4c1c56ce6f00c17c8349925f865bb52d5c860705d89c4396d43734",
-  "snapshot_date": "2026-11-27",
+  "manifest_sha256": "7df97316fdd0b2193942d141f1f15c49889b336f5f6fb766b1570b02d6fe9b1b",
+  "snapshot_date": "2026-11-28",
   "sources": {
     "data/raw/adrh_renta_municipal.csv": {
       "accessed": "2026-11-27",

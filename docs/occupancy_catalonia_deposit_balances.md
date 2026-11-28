@@ -73,15 +73,23 @@ do not read either measure as homes available to new tenants.
 
 ## Reproduce
 
-Download `Saldos-contractes_lloguer.xlsx` and `Saldo_contractes_Htge_i_Temp.xlsx`
-from the Generalitat page above. The downloaded versions had SHA-256
+`make fetch` pins both workbooks — `data/raw/cat_incasol_saldos_municipis.xlsx`
+and `data/raw/cat_incasol_saldos_habitual_temporada.xlsx` — with their source
+URLs and SHA-256 in `data/input_manifest.json`, so the snippet below runs from
+the repository root. The pinned bytes carry SHA-256
 `041990d9b3a046d20fdf2304f1d52df96b65e787f9e83ee052c7aa1e61821d37` and
-`3181062fcd5bd7f3a257e287bac4d53b1e647ecb1cd61f1a71b39072756e2ef6`, respectively.
-From the download directory with `openpyxl` available:
+`3181062fcd5bd7f3a257e287bac4d53b1e647ecb1cd61f1a71b39072756e2ef6`, respectively;
+if the Generalitat republishes a workbook, `make verify` fails and these
+figures have to be re-derived rather than silently changing.
+
+With `openpyxl` available:
 
 ```python
+from pathlib import Path
+
 from openpyxl import load_workbook
 
+RAW = Path("data/raw")
 QUARTERS = ("1T", "2T", "3T", "4T")
 
 
@@ -115,11 +123,11 @@ def span(cells, area, periods):
 
 
 city = extract(
-    "Saldos-contractes_lloguer.xlsx",
+    RAW / "cat_incasol_saldos_municipis.xlsx",
     {"Barcelona": (2, "Barcelona"), "Catalonia": (18, "Catalunya")},
 )
 region = extract(
-    "Saldo_contractes_Htge_i_Temp.xlsx",
+    RAW / "cat_incasol_saldos_habitual_temporada.xlsx",
     {
         "Habitual": (2, "Lloguer habitual"),
         "Seasonal": (6, "Lloguer de temporada"),

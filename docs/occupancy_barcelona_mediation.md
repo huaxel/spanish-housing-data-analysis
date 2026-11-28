@@ -100,16 +100,27 @@ from 2023, so the earlier comparison remains habitual-only.
 
 ## Reproduce from the official workbooks
 
-Download `mediacio_mun.xlsx`, `MediacioVigents_mun.xlsx`, `Mediacio_CAT.xlsx`,
-and `MediacioVigents_CAT.xlsx` under the two sections on the Generalitat page.
-Use the municipality code for Barcelona, not a name query across geographies.
-For the scale comparison, save the Idescat semicolon downloads as `2017.ssv`,
-`2024.ssv` and `2025.ssv` using the [2017](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=201700&f=ssv),
-[2024](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202400&f=ssv), and
-[2025](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202500&f=ssv) links.
-For the seasonal check, also copy the pinned `data/raw/cat_incasol_temporada_mun.xlsx`
-and download the territorial `lloguer_temporada.xlsx` from the seasonal page.
-From a directory containing these downloads, with `openpyxl` available:
+`make fetch` downloads and pins all of these, so the snippet below runs from
+the repository root without any manual step:
+
+- `data/raw/cat_incasol_mediacio_municipis.xlsx` and
+  `data/raw/cat_incasol_mediacio_vigents_municipis.xlsx` — the municipal
+  workbooks under the two sections on the Generalitat page (`mediacio_mun.xlsx`,
+  `MediacioVigents_mun.xlsx`);
+- `data/raw/cat_incasol_mediacio_catalunya.xlsx` and
+  `data/raw/cat_incasol_mediacio_vigents_catalunya.xlsx` — the published
+  aggregates the municipal sums are checked against (`Mediacio_CAT.xlsx`,
+  `MediacioVigents_CAT.xlsx`);
+- `data/raw/cat_incasol_temporada_mun.xlsx` and
+  `data/raw/cat_incasol_temporada_catalunya.xlsx` — the seasonal series from the
+  [seasonal page](https://habitatge.gencat.cat/ca/dades/indicadors_estadistiques/estadistiques_de_construccio_i_mercat_immobiliari/mercat_de_lloguer/lloguer-de-temporada/);
+- `data/raw/idescat_lloguers_registre_{2017,2024,2025}.ssv` — the Idescat
+  semicolon exports behind the [2017](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=201700&f=ssv),
+  [2024](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202400&f=ssv) and
+  [2025](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202500&f=ssv) links.
+
+Use the municipality code for Barcelona (`08019`), not a name query across
+geographies. With `openpyxl` available:
 
 ```python
 import csv
@@ -126,13 +137,24 @@ def values(file, sheet):
         workbook.close()
 
 
+RAW = Path("data/raw")
 codes = None
 for municipal, ms, aggregate, ags in [
-    ("mediacio_mun", "Mediacio_mun", "Mediacio_CAT", "Mediacio_CAT"),
-    ("MediacioVigents_mun", "Vigents_MUN", "MediacioVigents_CAT", "Vigents_CAT"),
+    (
+        "cat_incasol_mediacio_municipis",
+        "Mediacio_mun",
+        "cat_incasol_mediacio_catalunya",
+        "Mediacio_CAT",
+    ),
+    (
+        "cat_incasol_mediacio_vigents_municipis",
+        "Vigents_MUN",
+        "cat_incasol_mediacio_vigents_catalunya",
+        "Vigents_CAT",
+    ),
 ]:
-    m = values(municipal + ".xlsx", ms)
-    a = values(aggregate + ".xlsx", ags)
+    m = values(RAW / f"{municipal}.xlsx", ms)
+    a = values(RAW / f"{aggregate}.xlsx", ags)
     (header,) = [r for r in m if r[:2] == ("Codi", "Municipi")]
     (region_header,) = [r for r in a if r[:4] == (None, 2025, 2024, 2023)]
     (start,) = [i for i, r in enumerate(a) if r[0] == "Demarcacions territorials"]
@@ -157,20 +179,20 @@ for municipal, ms, aggregate, ags in [
         for year, city_flow, region_flow in history:
             if year not in (2017, 2024, 2025):
                 continue
-            path = Path(f"{year}.ssv")
+            path = RAW / f"idescat_lloguers_registre_{year}.ssv"
             with path.open(encoding="utf-8-sig", newline="") as stream:
                 rows = list(csv.reader(stream, delimiter=";"))
             assert [f"Catalunya. {year}"] in rows
             seasonal = {}
             if year in (2024, 2025):
-                quarters = values("cat_incasol_temporada_mun.xlsx", str(year))
+                quarters = values(RAW / "cat_incasol_temporada_mun.xlsx", str(year))
                 assert quarters[4][3:8] == ("Total", "I", "II", "III", "IV")
                 season_rows = [r for r in quarters if r[0] in codes]
                 assert len(season_rows) == len(codes) and {r[0] for r in season_rows} == codes
                 assert all(r[3] == sum(r[4:8]) for r in season_rows)
                 city_season = next(r[3] for r in season_rows if r[0] == "08019")
                 region_season = sum(r[3] for r in season_rows)
-                territorial = values("lloguer_temporada.xlsx", "Full1")
+                territorial = values(RAW / "cat_incasol_temporada_catalunya.xlsx", "Full1")
                 k = territorial[3].index(year)
                 (region_row,) = [r for r in territorial if r[0] == "Catalunya"]
                 assert region_season == sum(region_row[k : k + 4])
