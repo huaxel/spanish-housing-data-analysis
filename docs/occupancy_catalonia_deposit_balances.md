@@ -127,6 +127,15 @@ same quarters, from **+8,499** to **+7,795**, and habitual new deposits were
 flat (**81,886** to **81,459**), so this is not a visible move of the same
 filings into the habitual category.
 
+One tempting explanation fails a cross-check. Catalonia's registered tourist
+dwellings moved in a seasonal band between **45,709** (February 2023) and
+**63,199** (August 2020), and stood at **51,305** in May 2026 — below both its
+2020 peak and its own May 2025 value of **56,851**. There is no rise in the
+tourist register that would offset the seasonal deposit fall. That is a
+co-movement comparison only: tourist dwellings and seasonal tenancies are
+different legal categories, no home is linked across the two registers, and the
+tourist series is a platform-based estimate rather than a licence count.
+
 The register cannot say why seasonal filings fell. Fewer seasonal tenancies,
 a change in filing practice, or a reclassification the register does not mark
 would all look the same here. Like the annual figures, these are net registry

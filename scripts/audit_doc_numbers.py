@@ -1295,6 +1295,7 @@ def audit_total() -> int:
         "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
         "OCCUPANCY_CLAIMS": audit_claims.OCCUPANCY_CLAIMS,
         "CONTRAST_CLAIMS": audit_claims.CONTRAST_CLAIMS,
+        "VUT_SEASONAL_CLAIMS": audit_claims.VUT_SEASONAL_CLAIMS,
         "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
         "IPVA_CLAIMS": audit_claims.IPVA_CLAIMS,
         "PROH_CLAIMS": audit_claims.PROH_CLAIMS,

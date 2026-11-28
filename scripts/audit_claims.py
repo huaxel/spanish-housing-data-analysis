@@ -187,6 +187,11 @@ MODEL_FRESHNESS = [
         "artifacts/serpavi_deposit_contrast.json",
         "explorations/serpavi_deposit_contrast.py",
     ),
+    (
+        "vut_seasonal_deposits",
+        "artifacts/vut_seasonal_deposits.json",
+        "explorations/vut_seasonal_deposits.py",
+    ),
 ]
 
 
@@ -5132,6 +5137,20 @@ CONTRAST_CLAIMS: list[tuple[str, str, str, float, float]] = [
 ]
 
 
+VUT_SEASONAL_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("occupancy", "tourist dwellings peak", "verdicts.peak_value", 63199, 0),
+    ("occupancy", "tourist dwellings trough", "verdicts.trough_value", 45709, 0),
+    ("occupancy", "tourist dwellings latest", "verdicts.latest_value", 51305, 0),
+    (
+        "occupancy",
+        "tourist dwellings same month prior",
+        "verdicts.same_month_prior_value",
+        56851,
+        0,
+    ),
+]
+
+
 def _json_path(data: dict, path: str):
     for part in path.split("."):
         data = data[int(part)] if isinstance(data, list) and part.isdigit() else data[part]
@@ -5262,6 +5281,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(CONTRAST_CLAIMS)
+    tourist_seasonal = _model_output("artifacts/vut_seasonal_deposits.json")
+    for doc, desc, path, expected, tol in VUT_SEASONAL_CLAIMS:
+        got = _json_path(tourist_seasonal, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(VUT_SEASONAL_CLAIMS)
     vut = _model_output("artifacts/vut_stock.json")
     for doc, desc, path, expected, tol in VUT_CLAIMS:
         got = _json_path(vut, path)
