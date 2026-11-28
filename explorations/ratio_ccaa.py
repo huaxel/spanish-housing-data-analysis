@@ -46,6 +46,7 @@ raw = con.execute(
            p.anyo pa, p.s ps, p.p pp,
            c.anyo ca, c.s cs, c.p cp
     FROM p FULL OUTER JOIN c ON p.ccaa=c.ccaa
+    ORDER BY 1
     """
 ).fetchall()
 
@@ -82,6 +83,7 @@ price_rows = con.execute(
       MAX(CASE WHEN ipc.anyo=2025 THEN ipc.ipc END) c25
     FROM ipv LEFT JOIN ipc ON ipv.ccaa=ipc.territorio
     GROUP BY ipv.ccaa
+    ORDER BY 1
     """
 ).fetchall()
 
@@ -158,6 +160,7 @@ vac_rows = con.execute(
     )
     SELECT ccaa, ROUND(100.0*vac/tot,2) FROM t
     WHERE tot IS NOT NULL AND vac IS NOT NULL
+    ORDER BY 1
     """
 ).fetchall()
 vacancy = {c: v for c, v in vac_rows if c}

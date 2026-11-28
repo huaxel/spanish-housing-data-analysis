@@ -119,7 +119,7 @@ def main() -> None:
         FROM censo2021_viviendas
         WHERE banda = 'De 2001 a 2010' AND tipo <> 'Total'
         GROUP BY cpro, provincia
-        ORDER BY pct_no_principal DESC
+        ORDER BY pct_no_principal DESC, cpro
     """).fetchall()
 
     boom_by_province = {
@@ -147,7 +147,7 @@ def main() -> None:
         FROM censo2021_viviendas
         WHERE banda = 'Total' AND tipo <> 'Total'
         GROUP BY cpro, provincia
-        ORDER BY pct_no_principal DESC
+        ORDER BY pct_no_principal DESC, cpro
     """).fetchall()
 
     total_by_province = {
