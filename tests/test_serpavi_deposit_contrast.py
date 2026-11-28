@@ -72,3 +72,29 @@ def test_no_turnover_or_share_is_derived_from_the_two_series(data):
     for forbidden in ("turnover rate of", "compliance rate of", "market share of"):
         assert forbidden not in text
     assert "not a turnover, compliance or" in text
+
+
+def test_reconciliation_subtracts_the_two_series(data):
+    for year, cell in data["reconciliation"].items():
+        assert cell["balance_minus_change"] == (
+            cell["deposit_balance"] - cell["declared_stock_change"]
+        ), year
+
+
+def test_the_reconciliation_is_reported_as_a_failure_to_reconcile(data):
+    reconciliation = data["reconciliation"]
+    verdicts = data["verdicts"]
+    assert verdicts["reconciliation_sign_conflicts"] == [2020]
+    closest = verdicts["reconciliation_closest_year"]
+    assert verdicts["reconciliation_closest_gap"] == abs(
+        reconciliation[str(closest)]["balance_minus_change"]
+    )
+    gaps = {year: abs(cell["balance_minus_change"]) for year, cell in reconciliation.items()}
+    assert max(gaps, key=gaps.get) == str(verdicts["reconciliation_widest_year"])
+    assert min(gaps, key=gaps.get) == str(closest)
+
+
+def test_the_note_states_the_gap_rather_than_equating_the_two_series():
+    text = (ROOT / "docs/occupancy_catalonia_deposit_balances.md").read_text()
+    assert "net balance is not the annual change in rented stock" in text
+    assert "registry activity" in text

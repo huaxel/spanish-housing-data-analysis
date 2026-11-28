@@ -68,6 +68,30 @@ shrinking. It does not say why fewer new deposits were filed: longer
 tenancies, fewer new contracts, and fewer registrations are all consistent
 with these two series.
 
+## The register's net balance is not the annual change in rented stock
+
+With both series in hand, the obvious temptation is to treat the register's
+net balance as the year's increase in rented homes. Comparing it with the
+year-on-year change in declared contracts shows why that does not work.
+
+| Barcelona city | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Deposit net balance (INCASÒL) | +3,586 | −4,820 | +9,661 | +9,073 | +6,510 | +2,724 |
+| Change in declared contracts (SERPAVI) | +2,742 | +2,414 | +3,419 | +2,689 | +4,766 | +2,630 |
+| Balance minus stock change | +844 | −7,234 | +6,242 | +6,384 | +1,744 | +94 |
+
+The two agree closely once — **2024**, **94** apart — and disagree
+everywhere else. In **2020** the register lost contracts while the declared
+stock still grew, and in 2021–22 the balance was over **6,000** higher than
+the stock change. In every overlap year the balance is larger in magnitude
+than the stock change.
+
+The measures differ in universe and in timing, not just in level: deposits
+attach to contracts as they are filed and cancelled, while SERPAVI counts
+contracts declared in a tax year. Nothing here reconciles them, so the
+register's balance should be read as registry activity, and used as an
+estimate of rented-stock change only with that gap stated.
+
 ## First half of 2026: more new deposits in Barcelona, but a smaller balance
 
 | Barcelona city, habitual rentals | January–June 2025 | January–June 2026 |

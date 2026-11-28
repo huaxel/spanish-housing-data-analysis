@@ -91,6 +91,45 @@ def build() -> dict:
     collective = [stock[str(year)]["collective"] for year in range(2011, 2025)]
     assert collective == sorted(collective)
 
+    # A tempting use of these two series is to read the register's net balance
+    # as the annual change in rented stock. Recomputing that comparison shows
+    # why it is not one: in 2020 the sign differs, and in 2021-22 the balance is
+    # several thousand higher than the stock change.
+    reconciliation = {}
+    for year in overlap_years:
+        previous = str(int(year) - 1)
+        if previous not in stock:
+            continue
+        change = stock[year]["total"] - stock[previous]["total"]
+        balance = city_deposits[year]["balance"]
+        reconciliation[year] = {
+            "deposit_balance": balance,
+            "declared_stock_change": change,
+            "balance_minus_change": balance - change,
+        }
+    assert sorted(reconciliation) == ["2019", "2020", "2021", "2022", "2023", "2024"], sorted(
+        reconciliation
+    )
+    conflicts = [
+        year
+        for year, cell in sorted(reconciliation.items())
+        if cell["deposit_balance"] * cell["declared_stock_change"] < 0
+    ]
+    assert conflicts == ["2020"], conflicts
+    closest = min(
+        reconciliation, key=lambda year: abs(reconciliation[year]["balance_minus_change"])
+    )
+    widest = max(reconciliation, key=lambda year: abs(reconciliation[year]["balance_minus_change"]))
+    assert closest == "2024" and widest == "2020", (closest, widest)
+    larger = sum(
+        1
+        for cell in reconciliation.values()
+        if abs(cell["deposit_balance"]) > abs(cell["declared_stock_change"])
+    )
+    # In every overlap year the register's balance exceeds the stock change in
+    # magnitude, so it cannot be used as a scaled estimate of it either.
+    assert larger == len(reconciliation), larger
+
     entries = {year: city_deposits[year]["entries"] for year in overlap_years}
     balances = {year: city_deposits[year]["balance"] for year in overlap_years}
     peak_year = max(entries, key=lambda year: entries[year])
@@ -113,6 +152,7 @@ def build() -> dict:
             "incasol_balance": balances,
         },
         "overlap_years": overlap_years,
+        "reconciliation": reconciliation,
         "verdicts": {
             "serpavi_stock_rose_every_year_2011_2024": True,
             "serpavi_overlap_year": int(overlap),
@@ -126,6 +166,10 @@ def build() -> dict:
             "deposit_entries_peak_year": int(peak_year),
             "deposit_entries_peak": entries[peak_year],
             "deposit_entries_fell_every_year_after_peak": True,
+            "reconciliation_closest_year": int(closest),
+            "reconciliation_closest_gap": reconciliation[closest]["balance_minus_change"],
+            "reconciliation_widest_year": int(widest),
+            "reconciliation_sign_conflicts": [int(year) for year in conflicts],
         },
         "_meta": ols.model_meta(
             __file__,
