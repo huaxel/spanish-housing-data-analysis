@@ -205,6 +205,27 @@ estadísticas usan fuentes tributarias: ni su acuerdo prueba que sean dos
 mediciones independientes ni la brecha identifica su causa. Véanse los
 [otros periodos y el cruce por código municipal](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/ipva_rent_index.md).
 
+## ¿El saldo del registro de fianzas mide el aumento de vivienda alquilada?
+
+Otra comprobación entre medidas, esta vez del lado del registro. Los saldos de
+fianzas de INCASÒL cuentan altas y bajas; SERPAVI cuenta contratos declarados
+en el IRPF. Si el primero estimara el cambio anual del segundo, ambas series
+se moverían juntas. No lo hacen.
+
+| Barcelona, alquiler habitual | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Saldo neto de fianzas (INCASÒL) | +3.586 | −4.820 | +9.661 | +9.073 | +6.510 | +2.724 |
+| Cambio de contratos declarados (SERPAVI) | +2.742 | +2.414 | +3.419 | +2.689 | +4.766 | +2.630 |
+
+Coinciden una sola vez (**2024**, a **94** de distancia) y discrepan en el
+resto; en 2020 el registro perdió contratos mientras el stock declarado
+crecía. El saldo supera en magnitud al cambio del stock en todos los años
+solapados, así que tampoco sirve como estimación escalada. Miden cosas
+distintas —altas y bajas registradas frente a contratos vigentes en un año
+fiscal— y no se publica ninguna reconciliación: léase el saldo como actividad
+registral, no como aumento de vivienda alquilada. Véanse los
+[saldos por año](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/occupancy_catalonia_deposit_balances.md).
+
 ## Qué sigue sin resolverse
 
 - Las licencias responden a demanda y regulación; la asociación ajustada

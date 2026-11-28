@@ -32,6 +32,7 @@ COVERED_DOCS = [
     "docs/ecv_joint_scope.md",
     "docs/purchase_scenarios.md",
     "docs/uncertainty.md",
+    "evidence/pages/incertidumbre.md",
     "docs/cadastre_stock.md",
     "README.md",
     # Public-facing interactive journalism page.
@@ -296,6 +297,15 @@ ALLOW = {
         (69.0, "RMDVP table-01 months pulled 2020-12..2026-08, verified file count"),
         (543.0, "RMDVP latest-month listed municipalities, verified file count"),
         (785.0, "Andalusian municipalities (official count), coverage denominator"),
+    ],
+    "evidence/pages/incertidumbre.md": [
+        (1.96, "normal critical value in the interval construction the page describes"),
+        (95.0, "nominal confidence level of that normal approximation, not a finding"),
+        (2.0, "prespecified candidate grid endpoint (symmetric +/− 2.0 pp), not a result"),
+        (0.1, "prespecified candidate grid step, not a result"),
+        (41.0, "prespecified candidate count (41 points), not a result"),
+        (1999.0, "bootstrap repetitions shared with the published zero-null routine"),
+        (0.05, "nominal alpha level of the candidate acceptance mask"),
     ],
     "docs/explorations/panel_quarterly.md": [
         (999.0, "bootstrap reps parameter"),
@@ -1316,6 +1326,7 @@ def audit_total() -> int:
 # 607.25 and can only be allowlisted, which unpins it from the audited claim.
 SPANISH_THOUSANDS = {
     "evidence/pages/deficit.md",
+    "evidence/pages/incertidumbre.md",
     "docs/deficit_2025_methods.md",
     "evidence/pages/politica.md",
     "evidence/pages/microsimulacion.md",

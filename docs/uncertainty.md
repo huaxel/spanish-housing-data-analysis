@@ -58,6 +58,25 @@ The ordering of rent growth is similar, but growth in the SERPAVI median is
 roughly twice as large. That does not establish which measure is closer to a
 constant-quality rent change in any particular town. See [methods and coverage](explorations/ipva_rent_index.md).
 
+## Does the deposit register's balance measure rented-stock growth?
+
+A second cross-measure check, on the register side. INCASÒL's rental-deposit
+balances count registrations and cancellations; SERPAVI counts contracts
+declared in the income-tax files. If the first were a usable estimate of the
+second's annual change, the two would move together. They do not.
+
+| Barcelona city, habitual rentals | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Deposit net balance | +3,586 | −4,820 | +9,661 | +9,073 | +6,510 | +2,724 |
+| Change in declared contracts | +2,742 | +2,414 | +3,419 | +2,689 | +4,766 | +2,630 |
+
+They agree once (**2024**, **94** apart) and disagree elsewhere; in 2020 the
+register lost contracts while the declared stock grew. The balance is larger
+in magnitude than the stock change in every overlap year, so it is not a
+scaled estimate either. The two measure different things — filings against
+contracts in force in a tax year — and no reconciliation is published. Read
+the balance as registry activity. See [deposit balances](occupancy_catalonia_deposit_balances.md).
+
 ## Exploratory magnitude control
 
 The page allows the reader to choose a symmetric magnitude band and reports

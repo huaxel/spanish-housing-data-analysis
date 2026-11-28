@@ -82,8 +82,8 @@ year-on-year change in declared contracts shows why that does not work.
 
 The two agree closely once — **2024**, **94** apart — and disagree
 everywhere else. In **2020** the register lost contracts while the declared
-stock still grew, and in 2021–22 the balance was over **6,000** higher than
-the stock change. In every overlap year the balance is larger in magnitude
+stock still grew, and in 2021–22 it ran **6,242** and **6,384** above the stock
+change. In every overlap year the balance is larger in magnitude
 than the stock change.
 
 The measures differ in universe and in timing, not just in level: deposits
