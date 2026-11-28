@@ -17,6 +17,7 @@ fetch:
 	uv run python scripts/fetch_padron.py
 	uv run python scripts/fetch_censo_viviendas.py
 	uv run python scripts/fetch_ecp.py
+	uv run python scripts/fetch_ecp_family_population.py
 	uv run python scripts/fetch_censo_anual.py
 	uv run python scripts/fetch_valor_tasado.py
 	uv run python scripts/fetch_renta.py
@@ -115,8 +116,10 @@ verify:
 	uv run python explorations/ipva_rent_index.py --check
 	uv run python scripts/fetch_proh.py --check
 	uv run python explorations/proh_households.py --check
+	uv run python explorations/ecp_households.py --check
 	uv run python scripts/fetch_vut_municipal.py --check
 	uv run python explorations/vut_stock.py --check
+	uv run python explorations/vut_rent_overlap.py --check
 	uv run python scripts/build_claim_ledger.py --check
 
 audit: audit-docs
@@ -197,7 +200,9 @@ analysis:
 	uv run python scripts/build_irav_index.py
 	uv run python explorations/ipva_rent_index.py
 	uv run python explorations/proh_households.py
+	uv run python explorations/ecp_households.py
 	uv run python explorations/vut_stock.py
+	uv run python explorations/vut_rent_overlap.py
 	uv run python scripts/build_claim_ledger.py
 
 stock-rent:

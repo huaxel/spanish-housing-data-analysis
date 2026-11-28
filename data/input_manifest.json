@@ -163,6 +163,7 @@
     "data/raw/cgpj_crisis_provincias.xlsx": "065ba5674539dad999dda6e15e93ba0b41884162115c7cfe20e23672c2f8c5a7",
     "data/raw/diba_opendata.zip": "01bb0bd88e67b9add2f015b2294a7e4c0cd632deb7ecba605c82df1c41db3b9a",
     "data/raw/ech_hogares.csv": "e33d778fa4f9fdb2df73314826ee2b38406aaf28222785928fee6be8e17f96a1",
+    "data/raw/ecp_family_population.json": "0b617f618308c05a7e2afafb7e08cc80bf8e3207358332f15c1c2461f829fafb",
     "data/raw/ecp_hog_ccaa.json": "c6ca301ab999440eecb6efa13b7d22849a9d4103f8491c298c87141998a2ef42",
     "data/raw/ecp_hog_prov.json": "5b79aaa8da02f9cad4dcaa0d7ef6c69c7441ba9cd631de18a4bd6146be10932c",
     "data/raw/ecp_pob_ccaa.json": "6abeabe660390182fabd735dad6123d468b0c9f5a72d776832baebd5b7ab47c1",
@@ -210,7 +211,7 @@
     "data/raw/ine_ecv_2025.zip": "bf4f2751ac247957f6edcf02cfd85a3931785b0932b1291e8972a33ad490f617",
     "data/raw/ipc_ccaa.json": "bb9cc2f9c6b884e511aa3bebe622761ab9c03a712cdab1716a1cf493c7397874",
     "data/raw/ipv_ccaa_anual.json": "15a998bbc61c40654d48acad4fbfa19a9d6cab01f31cb4a854c79b7e33aecb3d",
-    "data/raw/ipva_municipal_59060.json": "0156a137825c255e0468df471b26c57c979e1c213bd1f1e4005d42a8de8e3b3b",
+    "data/raw/ipva_municipal_59060.csv": "c390c9cf082b9a489f230de0dbb7ca567847aae97f0e3f9b955415c9a52b7822",
     "data/raw/irav_72975.json": "465a485395ce9e0df58cb0994f09d0d2ead11adc42cdf64092c3133b48229725",
     "data/raw/migracion_flujos.json": "1e8a8c79138b4f04103dd123798d6a346d5cd44990b448c7a3598529bc703f5f",
     "data/raw/mivau_calificaciones.csv": "7749472a8d28843a563f858d2c31c398bda58c0c491328a1dbf03e3b49cbf822",
@@ -425,7 +426,7 @@
     "data/raw/parquet/housing_overburden_age_poverty.parquet": "8c1ff717278998b468675d4084d1a6bdf3632817465e1f0e955487a679773cff",
     "data/raw/parquet/ipc_ccaa.parquet": "5b2e2070ea2b05eebe6c34e3292eb195b636906c885d95e8df8a6e9d788f9651",
     "data/raw/parquet/ipv_ccaa_anual.parquet": "6dc32de53a18850f11773834b7455a1ecda921b88d8916687f5e9324167e9c34",
-    "data/raw/parquet/ipva_municipal.parquet": "019f2db13f1d2137a0b8abd6f52d094e1c42c9c2cf562d8263500218b8f96ee5",
+    "data/raw/parquet/ipva_municipal.parquet": "7f8991b39de289300f28e59793f82f4292dcf2fdf21a4bce1fb7c35849d4dd65",
     "data/raw/parquet/irav.parquet": "10aac58cc0db88e2203d170ed515d9e4249bc00041bf547ef325f6c1d78e80d9",
     "data/raw/parquet/migracion_flujos.parquet": "6ceeaf13d1c8882716ed0d52547d4a5e43e3df691e9132e88b96223ffcdc734a",
     "data/raw/parquet/mivau_terminadas.parquet": "3c8e6e907aa37f49c437bbc7dfc1c0aaaa834d1eecebe7a02d47fde4b8f9910a",
@@ -454,7 +455,7 @@
     "data/raw/parquet/turisticas_counts.parquet": "0655cdbea2931e57c96d2907aa40b58f3f381628b6e2fe6ca0ca52188e3dbce2",
     "data/raw/parquet/valor_municipal_madrid.parquet": "88cd24482515cf58280b34976eb1c50aa00e0bb4b9bd7bcc91883100b65d36c0",
     "data/raw/parquet/valor_tasado.parquet": "6d3e1a9047b01194e27ed0fbb8c92ebabdfcfe4b4eedbcac74a1200d5c4276a4",
-    "data/raw/parquet/vut_municipal.parquet": "24d96a7836558b51a8138084e6b5f5c1d9449dab893ba503c5311579ef8b57f2",
+    "data/raw/parquet/vut_municipal.parquet": "b8fa618be6e60afe7c87a329a15c0d377ab47cf0216b7b348fbeb6b245513d68",
     "data/raw/proh_54562.json": "90305c603f21b1a86c1007c0d2c9c73ee028e20c51b2fa914b9587a6866fb2f3",
     "data/raw/renta_hogar_ccaa.json": "4af3fc176c9a58ace647a50939b09b208dba2db81586d833a6e66305caba7a55",
     "data/raw/rmdvp/202012_rmdvp01.xls": "aee6ba03a0ad7b1369e757941b69a0224d984bde97a80df018b8dae1d3db4133",
@@ -546,7 +547,9 @@
     "data/raw/turisticas_counts.json": "c3aa607dea95dc1c8a9fa55aa04dae58c18a02b3dab7b4b64a830836094a04c6",
     "data/raw/valor_municipal_madrid.csv": "5b61a14a42e42210adb471784dac86648844c004367f1bca234379ecf5a13714",
     "data/raw/valor_tasado.csv": "21af4264fd80d617857885032a9a3164c19935dfb18afacf3d9b08647ba68a0b",
+    "data/raw/vut_municipal_39363.csv": "6e25d323d74308416c5cc80bcfc9e096e60a792d7ac95eeb19c2003f047ef476",
     "data/raw/vut_municipal_39363.json": "52fc75b853f219830dc950ece00d35b52383b72e3708d230f65b8e9ce0008717",
+    "data/raw/vut_municipal_39366.csv": "141e193a4196a29d933fd8cd77c8d34b9ba8ca18b71ddb3b2cc213a8060fc3e6",
     "data/raw/vut_municipal_39366.json": "3525a09bcb4b55f8f2eb59dc47c89b8b44cc41930a4136020bd51bd40e7bd299",
     "evidence/static/geo/sevilla_barrios.geojson": "bef1b37033d41b4c9a7aa35fe98a4245a73623dc789e8ac538ee5a6f7906c396"
   },
@@ -1524,6 +1527,13 @@
       "publisher": "INE",
       "url": "https://www.ine.es/jaxi/files/_px/csv_bd/t20/p274/serie/def/p03/l0/03003.csv"
     },
+    "data/raw/ecp_family_population.json": {
+      "accessed": "2026-11-27",
+      "api": "https://servicios.ine.es/wstempus/js/es/DATOS_TABLA/60130",
+      "note": "Full publisher response. Analysis uses all-person totals for Spain, the 50 provinces and 2 autonomous cities.",
+      "publisher": "INE · Estadística Continua de Población (ECP)",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=60130"
+    },
     "data/raw/ecp_hog_ccaa.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/60131",
@@ -1797,12 +1807,11 @@
       "api": "wstempus/DATOS_TABLA/80271",
       "operation": "IPV"
     },
-    "data/raw/ipva_municipal_59060.json": {
+    "data/raw/ipva_municipal_59060.csv": {
       "accessed": "2026-11-27",
-      "api": "wstempus/DATOS_TABLA/59060?date=20120101:20231231",
-      "note": "Municipios >10,000 habitantes only; name-keyed (no codes); annual index and annual variation 2012-2023",
-      "publisher": "INE · Índice de Precios de Vivienda en Alquiler (IPVA), municipal",
-      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59060"
+      "note": "Coded municipal, national and province-remainder series",
+      "publisher": "INE · IPVA",
+      "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/59060.csv"
     },
     "data/raw/irav_72975.json": {
       "accessed": "2026-11-27",
@@ -2923,8 +2932,8 @@
     },
     "data/raw/parquet/ipva_municipal.parquet": {
       "accessed": "2026-11-27",
-      "note": "Derived from pinned ipva_municipal_59060.json by fetch_ipva.py",
-      "publisher": "INE · IPVA municipal"
+      "note": "Derived from pinned JAXI ipva_municipal_59060.csv",
+      "publisher": "INE · IPVA"
     },
     "data/raw/parquet/irav.parquet": {
       "accessed": "2026-11-27",
@@ -3090,7 +3099,7 @@
     },
     "data/raw/parquet/vut_municipal.parquet": {
       "accessed": "2026-11-27",
-      "note": "Derived from the pinned vut_municipal_3936*.json by fetch_vut_municipal.py",
+      "note": "Derived from pinned municipality-coded JAXI CSVs",
       "publisher": "INE · VTE municipal"
     },
     "data/raw/proh_54562.json": {
@@ -3568,12 +3577,24 @@
       "publisher": "MIVAU",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP006_01.csv"
     },
+    "data/raw/vut_municipal_39363.csv": {
+      "accessed": "2026-11-27",
+      "note": "JAXI CSV with official municipality codes and explicit geographic levels",
+      "publisher": "INE · Viviendas turísticas en España (VTE)",
+      "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/39363.csv"
+    },
     "data/raw/vut_municipal_39363.json": {
       "accessed": "2026-11-27",
       "api": "wstempus/DATOS_TABLA/39363",
       "note": "Semiannual estimates from deduplicated platform listings; not a register of licensed dwellings",
       "publisher": "INE · Viviendas turísticas en España (VTE), municipal",
       "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39363"
+    },
+    "data/raw/vut_municipal_39366.csv": {
+      "accessed": "2026-11-27",
+      "note": "JAXI CSV with official municipality codes and explicit geographic levels",
+      "publisher": "INE · Viviendas turísticas en España (VTE)",
+      "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/39366.csv"
     },
     "data/raw/vut_municipal_39366.json": {
       "accessed": "2026-11-27",

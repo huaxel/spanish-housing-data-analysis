@@ -165,11 +165,17 @@ MODEL_FRESHNESS = [
         "artifacts/proh_households.json",
         "explorations/proh_households.py",
     ),
+    ("ecp_households", "artifacts/ecp_households.json", "explorations/ecp_households.py"),
     # Official tourist-dwelling stock (INE VTE municipal), added 2026-11-27.
     (
         "vut_stock",
         "artifacts/vut_stock.json",
         "explorations/vut_stock.py",
+    ),
+    (
+        "vut_rent_overlap",
+        "artifacts/vut_rent_overlap.json",
+        "explorations/vut_rent_overlap.py",
     ),
 ]
 
@@ -269,6 +275,28 @@ def _real_change_sql(municipio: str) -> str:
         f"SELECT ({v25} - {v07} * {i25} / {i07}) / ({v07} * {i25} / {i07}) * 100 "
         f"FROM valor_municipal_madrid m WHERE m.municipio='{municipio}'"
     )
+
+
+# SERPAVI published band, pivoted once: median/P25/P75 for vivienda colectiva in
+# EUR/m2 and EUR/month, vivienda unifamiliar in EUR/m2, plus the surface median.
+# Each measure is sparse, so MAX-over-CASE keeps the municipio-year grain.
+_SERPAVI_BAND = (
+    "(SELECT codigo, anyo,"
+    " MAX(CASE WHEN medida='ALQM2_LV_M_VC' THEN valor END) m2_vc,"
+    " MAX(CASE WHEN medida='ALQM2_LV_25_VC' THEN valor END) lo_vc,"
+    " MAX(CASE WHEN medida='ALQM2_LV_75_VC' THEN valor END) hi_vc,"
+    " MAX(CASE WHEN medida='ALQM2_LV_M_VU' THEN valor END) m2_vu,"
+    " MAX(CASE WHEN medida='ALQM2_LV_25_VU' THEN valor END) lo_vu,"
+    " MAX(CASE WHEN medida='ALQM2_LV_75_VU' THEN valor END) hi_vu,"
+    " MAX(CASE WHEN medida='ALQTBID12_M_VC' THEN valor END) mo_vc,"
+    " MAX(CASE WHEN medida='ALQTBID12_25_VC' THEN valor END) mo_lo_vc,"
+    " MAX(CASE WHEN medida='ALQTBID12_75_VC' THEN valor END) mo_hi_vc,"
+    " MAX(CASE WHEN medida='SLVM2_M_VC' THEN valor END) sf_vc"
+    " FROM serpavi_municipal GROUP BY 1,2) b"
+)
+_VC_BAND_2024 = (
+    f"FROM {_SERPAVI_BAND} WHERE anyo=2024 AND m2_vc>0 AND lo_vc IS NOT NULL AND hi_vc IS NOT NULL"
+)
 
 
 CLAIMS: list[tuple[str, str, str, float, float]] = [
@@ -1133,6 +1161,20 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         0,
     ),
     (
+        "occupancy_barcelona_mediation",
+        "Barcelona INCASÒL city contracts 2017",
+        "SELECT contractes FROM barrios_bcn_lloguer_anual WHERE codi='BCN' AND anyo=2017",
+        49953,
+        0,
+    ),
+    (
+        "occupancy_barcelona_mediation",
+        "Barcelona INCASÒL city contracts 2025",
+        "SELECT contractes FROM barrios_bcn_lloguer_anual WHERE codi='BCN' AND anyo=2025",
+        30789,
+        0,
+    ),
+    (
         "municipios",
         "Barcelona INCASÒL city rent per m2 2024",
         "SELECT ROUND(lloguer_m2, 2) FROM barrios_bcn_lloguer_anual WHERE codi='BCN' AND anyo=2024",
@@ -1396,6 +1438,150 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         "ON c.cpro = m.cpro AND c.periodo = m.anyo WHERE c.periodo = 2011",
         0.51,
         0.03,
+    ),
+    (
+        "occupancy_province_pilot",
+        "03 2024 change in total stock",
+        "SELECT b.viviendas_total - a.viviendas_total "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '03' AND a.anyo = 2023 AND b.anyo = 2024",
+        6000,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "03 2024 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '03' AND a.anyo = 2023 AND b.anyo = 2024",
+        -7343,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "03 2025 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '03' AND a.anyo = 2024 AND b.anyo = 2025",
+        30433,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "03 2024 change in IRPF at owners disposal",
+        "SELECT b.n_disposicion - a.n_disposicion "
+        "FROM aeat_viviendas_uso a JOIN aeat_viviendas_uso b USING (cpro) "
+        "WHERE cpro = '03' AND a.anyo = 2023 AND b.anyo = 2024",
+        1374,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "08 2024 change in total stock",
+        "SELECT b.viviendas_total - a.viviendas_total "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '08' AND a.anyo = 2023 AND b.anyo = 2024",
+        10448,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "08 2024 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '08' AND a.anyo = 2023 AND b.anyo = 2024",
+        -9209,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "08 2025 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '08' AND a.anyo = 2024 AND b.anyo = 2025",
+        14985,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "08 2024 change in IRPF at owners disposal",
+        "SELECT b.n_disposicion - a.n_disposicion "
+        "FROM aeat_viviendas_uso a JOIN aeat_viviendas_uso b USING (cpro) "
+        "WHERE cpro = '08' AND a.anyo = 2023 AND b.anyo = 2024",
+        994,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "28 2024 change in total stock",
+        "SELECT b.viviendas_total - a.viviendas_total "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '28' AND a.anyo = 2023 AND b.anyo = 2024",
+        20608,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "28 2024 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '28' AND a.anyo = 2023 AND b.anyo = 2024",
+        29457,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "28 2025 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '28' AND a.anyo = 2024 AND b.anyo = 2025",
+        41660,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "28 2024 change in IRPF at owners disposal",
+        "SELECT b.n_disposicion - a.n_disposicion "
+        "FROM aeat_viviendas_uso a JOIN aeat_viviendas_uso b USING (cpro) "
+        "WHERE cpro = '28' AND a.anyo = 2023 AND b.anyo = 2024",
+        2224,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "46 2024 change in total stock",
+        "SELECT b.viviendas_total - a.viviendas_total "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '46' AND a.anyo = 2023 AND b.anyo = 2024",
+        4300,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "46 2024 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '46' AND a.anyo = 2023 AND b.anyo = 2024",
+        40529,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "46 2025 change in primary stock",
+        "SELECT b.viviendas_principales - a.viviendas_principales "
+        "FROM mart_provincia_anual a JOIN mart_provincia_anual b USING (cpro) "
+        "WHERE cpro = '46' AND a.anyo = 2024 AND b.anyo = 2025",
+        10185,
+        0,
+    ),
+    (
+        "occupancy_province_pilot",
+        "46 2024 change in IRPF at owners disposal",
+        "SELECT b.n_disposicion - a.n_disposicion "
+        "FROM aeat_viviendas_uso a JOIN aeat_viviendas_uso b USING (cpro) "
+        "WHERE cpro = '46' AND a.anyo = 2023 AND b.anyo = 2024",
+        -1983,
+        0,
     ),
     (
         "anchor",
@@ -2257,6 +2443,72 @@ CLAIMS: list[tuple[str, str, str, float, float]] = [
         453.54,
         0.05,
     ),
+    # Published rent reference band (docs/explorations/serpavi_reference_band.md).
+    # The band is the within-municipio contract spread, not an uncertainty
+    # interval; these pin its width, its coverage and its internal arithmetic.
+    (
+        "serpavi_reference_band",
+        "municipios with a 2024 published colectiva median",
+        "SELECT COUNT(*) FROM muni_all WHERE anyo=2024 AND rent_eur_m2 IS NOT NULL",
+        2512,
+        0,
+    ),
+    (
+        "serpavi_reference_band",
+        "share of municipios with a 2024 median",
+        "SELECT ROUND(1.0*COUNT(*)/(SELECT COUNT(*) FROM muni_all WHERE anyo=2024),3)"
+        " FROM muni_all WHERE anyo=2024 AND rent_eur_m2 IS NOT NULL",
+        0.309,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "share of national population covered by a 2024 median",
+        "SELECT ROUND(SUM(poblacion)/(SELECT SUM(poblacion) FROM muni_all"
+        " WHERE anyo=2024),3) FROM muni_all"
+        " WHERE anyo=2024 AND rent_eur_m2 IS NOT NULL",
+        0.913,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "median relative inner band, colectiva EUR/m2, 2024",
+        f"SELECT ROUND(MEDIAN((hi_vc-lo_vc)/m2_vc),3) {_VC_BAND_2024}",
+        0.453,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "share of municipios with relative inner band above 0.30, 2024",
+        "SELECT ROUND(AVG(CASE WHEN (hi_vc-lo_vc)/m2_vc>0.30 THEN 1 ELSE 0 END),3)"
+        f" {_VC_BAND_2024}",
+        0.924,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "median relative inner band, colectiva EUR/month, 2024",
+        f"SELECT ROUND(MEDIAN((mo_hi_vc-mo_lo_vc)/mo_vc),3) FROM {_SERPAVI_BAND}"
+        " WHERE anyo=2024 AND mo_vc>0 AND mo_lo_vc IS NOT NULL AND mo_hi_vc IS NOT NULL",
+        0.334,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "median relative inner band, unifamiliar EUR/m2, 2024",
+        f"SELECT ROUND(MEDIAN((hi_vu-lo_vu)/m2_vu),3) FROM {_SERPAVI_BAND}"
+        " WHERE anyo=2024 AND m2_vu>0 AND lo_vu IS NOT NULL AND hi_vu IS NOT NULL",
+        0.672,
+        0.001,
+    ),
+    (
+        "serpavi_reference_band",
+        "median EUR/month over EUR/m2 x surface median, 2024",
+        f"SELECT ROUND(MEDIAN(mo_vc/(m2_vc*sf_vc)),3) FROM {_SERPAVI_BAND}"
+        " WHERE anyo=2024 AND m2_vc>0 AND sf_vc>0 AND mo_vc IS NOT NULL",
+        0.956,
+        0.001,
+    ),
 ]
 
 
@@ -2669,102 +2921,236 @@ IRAV_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("politica", "IRAV 2026 mean annual variation", "annual_means.2.mean_pct", 2.42, 0.005),
 ]
 
-# IPVA (INE rent price index, municipal) vs SERPAVI (MIVAU filed-contract
-# medians): the only independent check of SERPAVI's municipal trajectory above
-# Barcelona province. They agree on rank and disagree on magnitude, so both
-# facts are pinned.
+# IPVA vs SERPAVI: changes on code-matched municipalities, not independent sources.
 IPVA_CLAIMS: list[tuple[str, str, str, float, float]] = [
-    ("ipva_rent_index", "IPVA municipios published", "coverage.ipva_municipios", 752, 0),
-    ("ipva_rent_index", "muni_key matches to SERPAVI", "coverage.matched", 686, 0),
-    ("ipva_rent_index", "IPVA municipios unmatched", "coverage.unmatched", 66, 0),
-    ("ipva_rent_index", "2013-2023 pairs", "windows.0.n", 678, 0),
-    ("ipva_rent_index", "2013-2023 IPVA median change", "windows.0.ipva_median_pct", 15.77, 0.005),
+    ("ipva_rent_index", "IPVA municipios published", "coverage.ipva_municipios", 718, 0),
+    ("ipva_rent_index", "codes in SERPAVI (any year)", "coverage.matched", 718, 0),
+    ("ipva_rent_index", "IPVA municipios unmatched", "coverage.unmatched", 0, 0),
+    ("ipva_rent_index", "2013-2023 pairs", "windows.0.n", 697, 0),
+    ("ipva_rent_index", "2013-2023 IPVA median change", "windows.0.ipva_median_pct", 15.82, 0.005),
     (
         "ipva_rent_index",
         "2013-2023 SERPAVI median change",
         "windows.0.serpavi_median_pct",
-        32.09,
+        32.51,
         0.005,
     ),
-    ("ipva_rent_index", "2013-2023 Pearson", "windows.0.pearson", 0.618, 0.0005),
-    ("ipva_rent_index", "2013-2023 Spearman", "windows.0.spearman", 0.67, 0.0005),
-    ("ipva_rent_index", "2013-2023 median gap pp", "windows.0.gap_pp.median", -16.23, 0.005),
-    (
-        "ipva_rent_index",
-        "2013-2023 gap p10 pp",
-        "windows.0.gap_pp.p10",
-        -27.26,
-        0.005,
-    ),
-    ("ipva_rent_index", "2019-2023 pairs", "windows.1.n", 683, 0),
-    ("ipva_rent_index", "2019-2023 IPVA median change", "windows.1.ipva_median_pct", 7.95, 0.005),
+    ("ipva_rent_index", "2013-2023 Pearson", "windows.0.pearson", 0.634, 0.0005),
+    ("ipva_rent_index", "2013-2023 Spearman", "windows.0.spearman", 0.679, 0.0005),
+    ("ipva_rent_index", "2013-2023 median gap pp", "windows.0.gap_pp.median", -16.54, 0.005),
+    ("ipva_rent_index", "2013-2023 gap p10 pp", "windows.0.gap_pp.p10", -27.59, 0.005),
+    ("ipva_rent_index", "2019-2023 pairs", "windows.1.n", 702, 0),
+    ("ipva_rent_index", "2019-2023 IPVA median change", "windows.1.ipva_median_pct", 8.03, 0.005),
     (
         "ipva_rent_index",
         "2019-2023 SERPAVI median change",
         "windows.1.serpavi_median_pct",
-        16.07,
+        16.15,
         0.005,
     ),
-    ("ipva_rent_index", "2019-2023 Spearman", "windows.1.spearman", 0.69, 0.0005),
-    ("ipva_rent_index", "2019-2023 median gap pp", "windows.1.gap_pp.median", -7.97, 0.005),
+    ("ipva_rent_index", "2019-2023 Spearman", "windows.1.spearman", 0.703, 0.0005),
+    ("ipva_rent_index", "2019-2023 median gap pp", "windows.1.gap_pp.median", -8.02, 0.005),
     (
         "ipva_rent_index",
         "2013-2023 weakest-quartile gap pp",
         "windows.0.quartiles_by_serpavi_change.0.median_gap_pp",
-        -9.55,
+        -9.5,
         0.005,
     ),
     (
         "ipva_rent_index",
         "2013-2023 strongest-quartile gap pp",
         "windows.0.quartiles_by_serpavi_change.3.median_gap_pp",
-        -24.57,
+        -24.98,
         0.005,
     ),
-    ("ipva_rent_index", "2019-2023 Pearson", "windows.1.pearson", 0.679, 0.0005),
-    ("ipva_rent_index", "2019-2023 gap p10 pp", "windows.1.gap_pp.p10", -13.92, 0.005),
-    ("ipva_rent_index", "2019-2023 gap p90 pp", "windows.1.gap_pp.p90", -4.2, 0.005),
+    ("ipva_rent_index", "2019-2023 Pearson", "windows.1.pearson", 0.69, 0.0005),
+    ("ipva_rent_index", "2019-2023 gap p10 pp", "windows.1.gap_pp.p10", -13.82, 0.005),
+    ("ipva_rent_index", "2019-2023 gap p90 pp", "windows.1.gap_pp.p90", -4.36, 0.005),
     (
         "ipva_rent_index",
         "quartile 1 SERPAVI change",
         "windows.0.quartiles_by_serpavi_change.0.median_serpavi_pct",
-        21.04,
+        21.11,
         0.005,
     ),
     (
         "ipva_rent_index",
         "quartile 2 SERPAVI change",
         "windows.0.quartiles_by_serpavi_change.1.median_serpavi_pct",
-        28.16,
+        28.4,
         0.005,
     ),
     (
         "ipva_rent_index",
         "quartile 2 gap pp",
         "windows.0.quartiles_by_serpavi_change.1.median_gap_pp",
-        -14.03,
+        -14.13,
         0.005,
     ),
     (
         "ipva_rent_index",
         "quartile 3 SERPAVI change",
         "windows.0.quartiles_by_serpavi_change.2.median_serpavi_pct",
-        34.94,
+        35.22,
         0.005,
     ),
     (
         "ipva_rent_index",
         "quartile 3 gap pp",
         "windows.0.quartiles_by_serpavi_change.2.median_gap_pp",
-        -17.55,
+        -17.7,
         0.005,
     ),
     (
         "ipva_rent_index",
         "quartile 4 SERPAVI change",
         "windows.0.quartiles_by_serpavi_change.3.median_serpavi_pct",
-        45.93,
+        46.43,
         0.005,
+    ),
+    ("ipva_rent_index", "2013-2023 from", "windows.0.from", 2013, 0),
+    ("ipva_rent_index", "2013-2023 to", "windows.0.to", 2023, 0),
+    ("ipva_rent_index", "2013-2023 gap_pp.p90", "windows.0.gap_pp.p90", -7.73, 0.005),
+    ("ipva_rent_index", "2019-2023 from", "windows.1.from", 2019, 0),
+    ("ipva_rent_index", "2019-2023 to", "windows.1.to", 2023, 0),
+    ("ipva_rent_index", "2019-2024 from", "windows.2.from", 2019, 0),
+    ("ipva_rent_index", "2019-2024 to", "windows.2.to", 2024, 0),
+    ("ipva_rent_index", "2019-2024 n", "windows.2.n", 701, 0),
+    ("ipva_rent_index", "2019-2024 ipva_median_pct", "windows.2.ipva_median_pct", 11.62, 0.005),
+    (
+        "ipva_rent_index",
+        "2019-2024 serpavi_median_pct",
+        "windows.2.serpavi_median_pct",
+        22.09,
+        0.005,
+    ),
+    ("ipva_rent_index", "2019-2024 pearson", "windows.2.pearson", 0.753, 0.0005),
+    ("ipva_rent_index", "2019-2024 spearman", "windows.2.spearman", 0.758, 0.0005),
+    ("ipva_rent_index", "2019-2024 gap_pp.p10", "windows.2.gap_pp.p10", -18.3, 0.005),
+    ("ipva_rent_index", "2019-2024 gap_pp.median", "windows.2.gap_pp.median", -10.64, 0.005),
+    ("ipva_rent_index", "2019-2024 gap_pp.p90", "windows.2.gap_pp.p90", -6.26, 0.005),
+    # Same eligible towns in the within- and between-province contrasts.
+    (
+        "ipva_rent_index",
+        "2013-23 province-pair mean pct",
+        "windows.0.pair_ordering.equal_province_pair_agreement_pct",
+        74.68,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-23 province-pair mean pct",
+        "windows.1.pair_ordering.equal_province_pair_agreement_pct",
+        78.81,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 province-pair mean pct",
+        "windows.2.pair_ordering.equal_province_pair_agreement_pct",
+        81.40,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 comparable pairs across provinces",
+        "windows.2.pair_ordering.between.comparable",
+        230379,
+        0,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 tied pairs across provinces",
+        "windows.2.pair_ordering.between.tied",
+        0,
+        0,
+    ),
+    ("ipva_rent_index", "2019-24 tied local pairs", "windows.2.pair_ordering.within.tied", 0, 0),
+    (
+        "ipva_rent_index",
+        "2013-23 within pct",
+        "windows.0.pair_ordering.within.agreement_pct",
+        66.50,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2013-23 between pct",
+        "windows.0.pair_ordering.between.agreement_pct",
+        75.66,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2013-23 province mean pct",
+        "windows.0.pair_ordering.equal_province_agreement_pct",
+        66.32,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-23 within pct",
+        "windows.1.pair_ordering.within.agreement_pct",
+        73.53,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-23 between pct",
+        "windows.1.pair_ordering.between.agreement_pct",
+        76.84,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-23 province mean pct",
+        "windows.1.pair_ordering.equal_province_agreement_pct",
+        71.82,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 within pct",
+        "windows.2.pair_ordering.within.agreement_pct",
+        74.60,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 between pct",
+        "windows.2.pair_ordering.between.agreement_pct",
+        79.35,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 province mean pct",
+        "windows.2.pair_ordering.equal_province_agreement_pct",
+        74.87,
+        0.005,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 local pairs agreed",
+        "windows.2.pair_ordering.within.agreed",
+        8046,
+        0,
+    ),
+    (
+        "ipva_rent_index",
+        "2019-24 comparable local pairs",
+        "windows.2.pair_ordering.within.comparable",
+        10786,
+        0,
+    ),
+    ("ipva_rent_index", "2019-24 pair sample", "windows.2.pair_ordering.municipalities", 695, 0),
+    (
+        "ipva_rent_index",
+        "2019-24 comparable provinces",
+        "windows.2.pair_ordering.provinces_with_comparable_pairs",
+        42,
+        0,
     ),
 ]
 
@@ -2832,26 +3218,1009 @@ VUT_CLAIMS: list[tuple[str, str, str, float, float]] = [
     ("vut_stock", "share of census dwellings pct", "national.pct_censadas", 1.28, 0.005),
     ("vut_stock", "first snapshot stock", "path.first_value", 321496, 0),
     ("vut_stock", "change since first snapshot pct", "path.change_pct", 6.07, 0.005),
-    ("vut_stock", "top municipio stock", "concentration.top_municipio_vut", 6987, 0),
+    ("vut_stock", "top municipio stock", "concentration.top_municipio_vut", 10836, 0),
     (
         "vut_stock",
         "top-10 share of assigned stock pct",
         "concentration.top10_share_of_assigned_pct",
-        14.99,
+        18.47,
         0.005,
     ),
     ("vut_stock", "median municipal share pct", "shares.median_pct", 0.61, 0.005),
-    ("vut_stock", "p90 municipal share pct", "shares.p90_pct", 3.4, 0.005),
+    ("vut_stock", "p90 municipal share pct", "shares.p90_pct", 3.38, 0.005),
     ("vut_stock", "max municipal share pct", "shares.max_pct", 33.33, 0.005),
-    ("vut_stock", "municipios above 5 pct", "shares.share_above_5pct", 5.34, 0.005),
-    ("vut_stock", "municipios with a published share", "shares.n_municipios", 5278, 0),
-    ("vut_stock", "stock rows with ambiguous labels", "coverage.ambiguous_rows", 122, 0),
+    ("vut_stock", "municipios above 5 pct", "shares.share_above_5pct", 5.30, 0.005),
+    ("vut_stock", "municipios with a published share", "shares.n_municipios", 5319, 0),
+    ("vut_stock", "municipality stock rows", "coverage.municipio_rows", 8131, 0),
+    ("vut_stock", "municipal codes matched to map", "coverage.matched_map_rows", 8131, 0),
+    ("vut_stock", "unmapped municipality rows", "coverage.unassigned_rows", 0, 0),
+    ("vut_stock", "unassigned stock", "coverage.unassigned_stock", 0, 0),
+    ("vut_stock", "assigned stock", "coverage.assigned_stock", 341001, 0),
     (
         "vut_stock",
         "assigned share of national stock pct",
         "coverage.assigned_share_of_national_pct",
-        84.52,
+        100,
         0.005,
+    ),
+]
+
+
+VUT_RENT_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("vut_rent_overlap", "2024 level sample", "levels_2024.n", 2555, 0),
+    ("vut_rent_overlap", "2022 change sample", "changes_2022_2024.n", 2340, 0),
+    ("vut_rent_overlap", "2020 change sample", "changes_2020_2024.n", 2122, 0),
+    ("vut_rent_overlap", "2024 level rank correlation", "levels_2024.spearman", 0.206, 0.0005),
+    (
+        "vut_rent_overlap",
+        "2022 change rank correlation",
+        "changes_2022_2024.spearman",
+        0.050,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 change rank correlation",
+        "changes_2020_2024.spearman",
+        0.007,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "levels on the 2022 change sample",
+        "changes_2022_2024.end_levels_spearman_on_same_sample",
+        0.224,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "levels on the 2020 change sample",
+        "changes_2020_2024.end_levels_spearman_on_same_sample",
+        0.241,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "municipalities covered in 2024 pct",
+        "levels_2024.end_matched_municipalities_pct",
+        31.42,
+        0.005,
+    ),
+    (
+        "vut_rent_overlap",
+        "stock in 2024 level sample pct",
+        "levels_2024.end_matched_stock_pct",
+        95.29,
+        0.005,
+    ),
+    (
+        "vut_rent_overlap",
+        "stock in 2022 change sample pct",
+        "changes_2022_2024.end_matched_stock_pct",
+        94.19,
+        0.005,
+    ),
+    (
+        "vut_rent_overlap",
+        "stock in 2020 change sample pct",
+        "changes_2020_2024.end_matched_stock_pct",
+        92.97,
+        0.005,
+    ),
+    # Hold the towns fixed when changing the rent measure.
+    (
+        "vut_rent_overlap",
+        "2022–24 towns on common IPVA sample",
+        "changes_2022_2024.common_ipva_sample.n",
+        703,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022–24 IPVA towns observed at both endpoints",
+        "changes_2022_2024.common_ipva_sample.ipva_both_endpoints",
+        703,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022–24 August 2024 tourist stock pct on common sample",
+        "changes_2022_2024.common_ipva_sample.end_matched_stock_pct",
+        76.98,
+        0.005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022–24 tourist share vs SERPAVI growth, common sample",
+        "changes_2022_2024.common_ipva_sample.tourism_serpavi_spearman",
+        0.12,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022–24 tourist share vs IPVA growth, common sample",
+        "changes_2022_2024.common_ipva_sample.tourism_ipva_spearman",
+        0.104,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022–24 SERPAVI vs IPVA growth, common sample",
+        "changes_2022_2024.common_ipva_sample.serpavi_ipva_spearman",
+        0.694,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 towns on common IPVA sample",
+        "changes_2020_2024.common_ipva_sample.n",
+        701,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 IPVA towns observed at both endpoints",
+        "changes_2020_2024.common_ipva_sample.ipva_both_endpoints",
+        701,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 August 2024 tourist stock pct on common sample",
+        "changes_2020_2024.common_ipva_sample.end_matched_stock_pct",
+        76.96,
+        0.005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 tourist share vs SERPAVI growth, common sample",
+        "changes_2020_2024.common_ipva_sample.tourism_serpavi_spearman",
+        0.068,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 tourist share vs IPVA growth, common sample",
+        "changes_2020_2024.common_ipva_sample.tourism_ipva_spearman",
+        0.032,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–24 SERPAVI vs IPVA growth, common sample",
+        "changes_2020_2024.common_ipva_sample.serpavi_ipva_spearman",
+        0.747,
+        0.0005,
+    ),
+    # Fixed housing denominator and the separately documented regional count revision.
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: all, n",
+        "changes_2022_2024.fixed_2021_base.all.n",
+        703,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: all, reported_serpavi",
+        "changes_2022_2024.fixed_2021_base.all.reported_serpavi",
+        0.12,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: all, fixed_serpavi",
+        "changes_2022_2024.fixed_2021_base.all.fixed_serpavi",
+        0.167,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: all, reported_ipva",
+        "changes_2022_2024.fixed_2021_base.all.reported_ipva",
+        0.104,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: all, fixed_ipva",
+        "changes_2022_2024.fixed_2021_base.all.fixed_ipva",
+        0.133,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: all, n",
+        "changes_2020_2024.fixed_2021_base.all.n",
+        701,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: all, reported_serpavi",
+        "changes_2020_2024.fixed_2021_base.all.reported_serpavi",
+        0.068,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: all, fixed_serpavi",
+        "changes_2020_2024.fixed_2021_base.all.fixed_serpavi",
+        0.113,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: all, reported_ipva",
+        "changes_2020_2024.fixed_2021_base.all.reported_ipva",
+        0.032,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: all, fixed_ipva",
+        "changes_2020_2024.fixed_2021_base.all.fixed_ipva",
+        0.069,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: outside_andalucia, n",
+        "changes_2022_2024.fixed_2021_base.outside_andalucia.n",
+        551,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: outside_andalucia, reported_serpavi",
+        "changes_2022_2024.fixed_2021_base.outside_andalucia.reported_serpavi",
+        0.088,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: outside_andalucia, fixed_serpavi",
+        "changes_2022_2024.fixed_2021_base.outside_andalucia.fixed_serpavi",
+        0.145,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: outside_andalucia, reported_ipva",
+        "changes_2022_2024.fixed_2021_base.outside_andalucia.reported_ipva",
+        0.041,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2022 fixed base: outside_andalucia, fixed_ipva",
+        "changes_2022_2024.fixed_2021_base.outside_andalucia.fixed_ipva",
+        0.076,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: outside_andalucia, n",
+        "changes_2020_2024.fixed_2021_base.outside_andalucia.n",
+        549,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: outside_andalucia, reported_serpavi",
+        "changes_2020_2024.fixed_2021_base.outside_andalucia.reported_serpavi",
+        0.045,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: outside_andalucia, fixed_serpavi",
+        "changes_2020_2024.fixed_2021_base.outside_andalucia.fixed_serpavi",
+        0.091,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: outside_andalucia, reported_ipva",
+        "changes_2020_2024.fixed_2021_base.outside_andalucia.reported_ipva",
+        0.017,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020 fixed base: outside_andalucia, fixed_ipva",
+        "changes_2020_2024.fixed_2021_base.outside_andalucia.fixed_ipva",
+        0.055,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "fixed August 2024 shares within rounding, 2022 sample",
+        "changes_2022_2024.fixed_2021_base.all.end_shares_within_rounding",
+        694,
+        0,
+    ),
+    # Net change over the two earlier windows, without the middle count.
+    (
+        "vut_rent_overlap",
+        "net timing serpavi rank correlation",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.spearman.serpavi",
+        -0.023268,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing ipva rank correlation",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.spearman.ipva",
+        -0.00422,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing decreased n",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.decreased.n",
+        320,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing decreased median_change_per_100",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.decreased.median_change_per_100",
+        -0.05272,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing decreased median serpavi rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.decreased.median_rent_growth_pct.serpavi",
+        5.211647,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing decreased median ipva rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.decreased.median_rent_growth_pct.ipva",
+        3.274595,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing unchanged n",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.unchanged.n",
+        44,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing unchanged median_change_per_100",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.unchanged.median_change_per_100",
+        0.0,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing unchanged median serpavi rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.unchanged.median_rent_growth_pct.serpavi",
+        5.10002,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing unchanged median ipva rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.unchanged.median_rent_growth_pct.ipva",
+        3.168573,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing increased n",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.increased.n",
+        339,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing increased median_change_per_100",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.increased.median_change_per_100",
+        0.072838,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing increased median serpavi rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.increased.median_rent_growth_pct.serpavi",
+        5.427659,
+        0,
+    ),
+    (
+        "vut_rent_overlap",
+        "net timing increased median ipva rent growth",
+        "earlier_tourism_later_rents.net_two_year.2020_2022__2023_2024.by_direction.increased.median_rent_growth_pct.ipva",
+        3.371754,
+        0,
+    ),
+    # One fixed cohort for all strictly ordered one-year stock/rent comparisons.
+    (
+        "vut_rent_overlap",
+        "fully observed later rent series",
+        "earlier_tourism_later_rents.rent_complete",
+        703,
+        0,
+    ),
+    ("vut_rent_overlap", "balanced timing sample", "earlier_tourism_later_rents.n", 703, 0),
+    (
+        "vut_rent_overlap",
+        "2020–2021 tourist change vs 2022–2023 serpavi growth",
+        "earlier_tourism_later_rents.comparisons.2020_2021__2022_2023.serpavi",
+        -0.045,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–2021 tourist change vs 2022–2023 ipva growth",
+        "earlier_tourism_later_rents.comparisons.2020_2021__2022_2023.ipva",
+        -0.072,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–2021 tourist change vs 2023–2024 serpavi growth",
+        "earlier_tourism_later_rents.comparisons.2020_2021__2023_2024.serpavi",
+        -0.104,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2020–2021 tourist change vs 2023–2024 ipva growth",
+        "earlier_tourism_later_rents.comparisons.2020_2021__2023_2024.ipva",
+        -0.098,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2021–2022 tourist change vs 2023–2024 serpavi growth",
+        "earlier_tourism_later_rents.comparisons.2021_2022__2023_2024.serpavi",
+        0.075,
+        0.0005,
+    ),
+    (
+        "vut_rent_overlap",
+        "2021–2022 tourist change vs 2023–2024 ipva growth",
+        "earlier_tourism_later_rents.comparisons.2021_2022__2023_2024.ipva",
+        0.072,
+        0.0005,
+    ),
+]
+
+
+# October ECP remains separate from the December stock comparison.
+ECP_HOUSEHOLD_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    ("deficit", "October 2026 household total", "latest.total", 19953529, 0),
+    ("deficit", "October household change versus 2025", "latest.yoy.total_change", 244014, 0),
+    (
+        "deficit",
+        "October change for one- and two-person households",
+        "latest.yoy.small_change",
+        220295,
+        0,
+    ),
+    (
+        "deficit",
+        "share of net growth for one- and two-person households",
+        "latest.yoy.small_share_of_net_change_pct",
+        90.28,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2026 top four share of net household growth",
+        "regional_october.2026-10-01.top4_share_pct",
+        64.74,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2026 small-household share outside the top four",
+        "regional_october.2026-10-01.rest_small_share_pct",
+        98.34,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2026 territory count",
+        "regional_october.2026-10-01.territories",
+        19,
+        0,
+    ),
+    (
+        "deficit",
+        "October 2026 territories with small-household majority of net growth",
+        "regional_october.2026-10-01.small_majority",
+        19,
+        0,
+    ),
+    (
+        "deficit",
+        "minimum October territories with small-household majority of net growth",
+        "regional_october_min_majority",
+        18,
+        0,
+    ),
+    (
+        "deficit",
+        "October 2021 small-household share",
+        "small_share_first_to_last_october.start_share_pct",
+        55.96,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2026 small-household share",
+        "small_share_first_to_last_october.end_share_pct",
+        57.77,
+        0.005,
+    ),
+    (
+        "deficit",
+        "territories with rising small-household share from 2021 to 2026",
+        "small_share_first_to_last_october.territories_with_rising_share",
+        19,
+        0,
+    ),
+    (
+        "deficit",
+        "within-territory contribution to small-household share shift",
+        "small_share_first_to_last_october.within_territories_pp",
+        1.84,
+        0.005,
+    ),
+    (
+        "deficit",
+        "reweighting contribution to small-household share shift",
+        "small_share_first_to_last_october.regional_reweighting_pp",
+        -0.03,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2021 persons per household",
+        "population_accounting.first_to_last_october.start_people_per_household",
+        2.51,
+        0.005,
+    ),
+    (
+        "deficit",
+        "October 2026 persons per household",
+        "population_accounting.first_to_last_october.end_people_per_household",
+        2.48,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2021–2026 household growth share from lower average size",
+        "population_accounting.first_to_last_october.household_size_component_pct",
+        19.16,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2025–2026 household growth share from lower average size",
+        "population_accounting.october_yoy.2026-10-01.household_size_component_pct",
+        30.28,
+        0.005,
+    ),
+    (
+        "deficit",
+        "province and autonomous-city coverage",
+        "local_family_accounting.first_to_last_october.territories",
+        52,
+        0,
+    ),
+    (
+        "deficit",
+        "lower average household size in 2021–2026",
+        "local_family_accounting.first_to_last_october.territories_with_smaller_households",
+        46,
+        0,
+    ),
+    (
+        "deficit",
+        "local household gains with resident loss in 2021–2026",
+        "local_family_accounting.first_to_last_october.households_rose_population_fell_count",
+        5,
+        0,
+    ),
+    (
+        "deficit",
+        "local household gains with resident loss in 2025–2026",
+        "local_family_accounting.october_yoy.2026-10-01.households_rose_population_fell_count",
+        2,
+        0,
+    ),
+    (
+        "deficit",
+        "Zamora household count change in 2021–2026",
+        "local_family_accounting.first_to_last_october.by_territory.Zamora.net_household_change",
+        1457,
+        0,
+    ),
+    (
+        "deficit",
+        "Zamora family-dwelling resident change in 2021–2026",
+        "local_family_accounting.first_to_last_october.by_territory.Zamora.family_population_change",
+        -2437,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 matched stock territories",
+        "aligned_stock_comparison.2021-2025.territories",
+        51,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 positive observed gaps",
+        "aligned_stock_comparison.2021-2025.observed_gap_positive",
+        49,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 positive fixed-size gaps",
+        "aligned_stock_comparison.2021-2025.fixed_size_gap_positive",
+        27,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 territories with fewer family-dwelling residents",
+        "aligned_stock_comparison.2021-2025.fewer_residents",
+        6,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 positive household-and-stock gap despite fewer residents",
+        "aligned_stock_comparison.2021-2025.fewer_residents_but_household_growth_exceeds_stock",
+        5,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2024 positive observed gaps",
+        "aligned_stock_comparison.2021-2024.observed_gap_positive",
+        50,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2024 positive fixed-size gaps",
+        "aligned_stock_comparison.2021-2024.fixed_size_gap_positive",
+        24,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 observed national stock gap",
+        "aligned_stock_comparison.2021-2025.spain.observed_gap",
+        746612,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 national stock gap at fixed local household sizes",
+        "aligned_stock_comparison.2021-2025.spain.fixed_local_size_gap",
+        359113,
+        0.5,
+    ),
+    (
+        "deficit",
+        "2021–2025 national stock gap at fixed pooled household size",
+        "aligned_stock_comparison.2021-2025.spain.fixed_national_size_gap",
+        368210,
+        0.5,
+    ),
+    (
+        "deficit",
+        "2021-2024 observed top four share of positive gaps",
+        "aligned_stock_comparison.2021-2024.positive_gap_concentration.observed.share_pct",
+        43.18,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2021-2024 fixed_local_size top four share of positive gaps",
+        "aligned_stock_comparison.2021-2024.positive_gap_concentration.fixed_local_size.share_pct",
+        60.28,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2021-2025 observed top four share of positive gaps",
+        "aligned_stock_comparison.2021-2025.positive_gap_concentration.observed.share_pct",
+        42.1,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2021-2025 fixed_local_size top four share of positive gaps",
+        "aligned_stock_comparison.2021-2025.positive_gap_concentration.fixed_local_size.share_pct",
+        57.78,
+        0.005,
+    ),
+    (
+        "deficit",
+        "2021–2025 observed top four positive gaps",
+        "aligned_stock_comparison.2021-2025.positive_gap_concentration.observed.group_positive_gap",
+        314532,
+        0,
+    ),
+    (
+        "deficit",
+        "2021–2025 fixed_local_size top four positive gaps",
+        "aligned_stock_comparison.2021-2025.positive_gap_concentration.fixed_local_size.group_positive_gap",
+        249788,
+        0.5,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 household change",
+        "aligned_stock_comparison.2025.spain.household_change",
+        240932,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 stock change",
+        "aligned_stock_comparison.2025.spain.stock_change",
+        94791,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 observed gap",
+        "aligned_stock_comparison.2025.spain.observed_gap",
+        146141,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 fixed local size gap",
+        "aligned_stock_comparison.2025.spain.fixed_local_size_gap",
+        86631,
+        0.5,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 territory coverage",
+        "aligned_stock_comparison.2025.territories",
+        51,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 observed positive gaps",
+        "aligned_stock_comparison.2025.observed_gap_positive",
+        50,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2025 fixed local size positive gaps",
+        "aligned_stock_comparison.2025.fixed_size_gap_positive",
+        43,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2021 observed gap",
+        "aligned_stock_comparison.2021.spain.observed_gap",
+        186648,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2021 fixed local size gap",
+        "aligned_stock_comparison.2021.spain.fixed_local_size_gap",
+        -66226,
+        0.5,
+    ),
+    (
+        "deficit",
+        "Calendar 2022 observed gap",
+        "aligned_stock_comparison.2022.spain.observed_gap",
+        188926,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2022 fixed local size gap",
+        "aligned_stock_comparison.2022.spain.fixed_local_size_gap",
+        139332,
+        0.5,
+    ),
+    (
+        "deficit",
+        "Calendar 2023 observed gap",
+        "aligned_stock_comparison.2023.spain.observed_gap",
+        120905,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2023 fixed local size gap",
+        "aligned_stock_comparison.2023.spain.fixed_local_size_gap",
+        116068,
+        0.5,
+    ),
+    (
+        "deficit",
+        "Calendar 2024 observed gap",
+        "aligned_stock_comparison.2024.spain.observed_gap",
+        103992,
+        0,
+    ),
+    (
+        "deficit",
+        "Calendar 2024 fixed local size gap",
+        "aligned_stock_comparison.2024.spain.fixed_local_size_gap",
+        94359,
+        0.5,
+    ),
+    (
+        "deficit",
+        "2024–2025 annual observed gap increase",
+        "annual_gap_change.2024-2025.observed_gap_change",
+        42149,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 slower stock growth contribution",
+        "annual_gap_change.2024-2025.stock_contribution",
+        7531,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 population growth contribution at starting household sizes",
+        "annual_gap_change.2024-2025.population_at_starting_size_contribution",
+        -15260,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 household-size residual contribution",
+        "annual_gap_change.2024-2025.household_size_residual_contribution",
+        49878,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 territories with wider gaps",
+        "annual_gap_change.2024-2025.territories_with_wider_gap",
+        40,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 Madrid observed gap increase",
+        "annual_gap_change.2024-2025.by_territory.Madrid",
+        12234,
+        0,
+    ),
+    (
+        "deficit",
+        "2024 completions",
+        "completion_crosscheck_2024_2025.by_year.2024.completions",
+        100980,
+        0,
+    ),
+    (
+        "deficit",
+        "2025 completions",
+        "completion_crosscheck_2024_2025.by_year.2025.completions",
+        93650,
+        0,
+    ),
+    (
+        "deficit",
+        "2024 households minus completions",
+        "completion_crosscheck_2024_2025.by_year.2024.households_minus_completions",
+        105334,
+        0,
+    ),
+    (
+        "deficit",
+        "2025 households minus completions",
+        "completion_crosscheck_2024_2025.by_year.2025.households_minus_completions",
+        147282,
+        0,
+    ),
+    (
+        "deficit",
+        "2024–2025 increase in household-completion gap",
+        "completion_crosscheck_2024_2025.completion_gap_change",
+        41948,
+        0,
+    ),
+    (
+        "deficit",
+        "2024 missing completion cells",
+        "completion_crosscheck_2024_2025.by_year.2024.completion_cells_missing",
+        0,
+        0,
+    ),
+    (
+        "deficit",
+        "2025 missing completion cells",
+        "completion_crosscheck_2024_2025.by_year.2025.completion_cells_missing",
+        0,
+        0,
+    ),
+    (
+        "deficit",
+        "areas with paired gaps",
+        "completion_crosscheck_2024_2025.local.areas_with_paired_completion_gaps",
+        51,
+        0,
+    ),
+    (
+        "deficit",
+        "areas with matching change direction",
+        "completion_crosscheck_2024_2025.local.areas_with_matching_direction",
+        51,
+        0,
+    ),
+    (
+        "deficit",
+        "areas where both gaps widened",
+        "completion_crosscheck_2024_2025.local.areas_with_both_gaps_widening",
+        40,
+        0,
+    ),
+    (
+        "deficit",
+        "areas with different gap signs in 2025",
+        "completion_crosscheck_2024_2025.local.areas_with_different_end_signs",
+        1,
+        0,
+    ),
+    (
+        "deficit",
+        "2025 Soria stock gap",
+        "completion_crosscheck_2024_2025.local.by_territory.Soria.stock_gap_end",
+        14,
+        0,
+    ),
+    (
+        "deficit",
+        "2025 Soria completion gap",
+        "completion_crosscheck_2024_2025.local.by_territory.Soria.completion_gap_end",
+        -15,
+        0,
+    ),
+    (
+        "deficit",
+        "areas with matching supply directions",
+        "completion_crosscheck_2024_2025.local.areas_with_matching_supply_direction",
+        50,
+        0,
+    ),
+    (
+        "deficit",
+        "Toledo change in net stock growth",
+        "completion_crosscheck_2024_2025.local.by_territory.Toledo.net_stock_growth_change",
+        19,
+        0,
+    ),
+    (
+        "deficit",
+        "Toledo change in completions",
+        "completion_crosscheck_2024_2025.local.by_territory.Toledo.completion_flow_change",
+        -41,
+        0,
     ),
 ]
 
@@ -2965,6 +4334,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(PROH_CLAIMS)
+    ecp = _model_output("artifacts/ecp_households.json")
+    for doc, desc, path, expected, tol in ECP_HOUSEHOLD_CLAIMS:
+        got = _json_path(ecp, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(ECP_HOUSEHOLD_CLAIMS)
     vut = _model_output("artifacts/vut_stock.json")
     for doc, desc, path, expected, tol in VUT_CLAIMS:
         got = _json_path(vut, path)
@@ -2972,6 +4348,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(VUT_CLAIMS)
+    vut_rent = _model_output("artifacts/vut_rent_overlap.json")
+    for doc, desc, path, expected, tol in VUT_RENT_CLAIMS:
+        got = _json_path(vut_rent, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(VUT_RENT_CLAIMS)
     muniterr = json.loads((expl / "saiz_municipal_bcn.json").read_text())
     muni_tot_land = round(sum(x["land_km2"] for x in muniterr), 1)
     muni_tot_lau = round(sum(x["lau_km2"] for x in muniterr), 1)
