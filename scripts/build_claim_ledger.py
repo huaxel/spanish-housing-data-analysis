@@ -31,6 +31,7 @@ DEFICIT_DB = PROCESSED / "deficit.duckdb"
 CAT_ARTIFACT = ROOT / "artifacts/catalonia_rent_control.json"
 TOURIST_PANEL = ROOT / "artifacts/panel_tourist.json"
 TOURIST_RENTS = ROOT / "artifacts/tourist_rents.json"
+DEPOSIT_CONTRAST = ROOT / "artifacts/serpavi_deposit_contrast.json"
 
 ARTIFACT_OUT = ROOT / "artifacts/claim_ledger.json"
 DUCKDB_OUT = PROCESSED / "claim_ledger.duckdb"
@@ -46,7 +47,7 @@ def query_one(con: duckdb.DuckDBPyConnection, sql: str) -> dict:
 
 
 def build_ledger() -> dict:
-    for p in (MARTS_DB, DEFICIT_DB, CAT_ARTIFACT):
+    for p in (MARTS_DB, DEFICIT_DB, CAT_ARTIFACT, DEPOSIT_CONTRAST):
         if not p.is_file():
             raise SystemExit(f"Missing required input for claim ledger: {p}")
 
@@ -169,6 +170,22 @@ def build_ledger() -> dict:
     a_tmp = cat_did[("A_w1_vs_w2", "temporada_share")]
     b_tmp = cat_did[("B_w1_vs_never", "temporada_share")]
 
+    # 7. Barcelona contract stock vs deposit flow (INCASÒL/SERPAVI contrast)
+    contrast = json.loads(DEPOSIT_CONTRAST.read_text())
+    contracts = contrast["barcelona_city"]["serpavi_contracts"]
+    entries = contrast["barcelona_city"]["incasol_entries"]
+    balances = contrast["barcelona_city"]["incasol_balance"]
+    stock_first = contracts[min(contracts)]["total"]
+    stock_last = contracts[max(contracts)]["total"]
+    stock_growth = round(100.0 * (stock_last / stock_first - 1), 1)
+    entries_peak_year = max(entries, key=lambda year: entries[year])
+    entries_last_year = max(entries)
+    negative_year = next(year for year, value in sorted(balances.items()) if value < 0)
+    negative_balance = balances[negative_year]
+    negative_stock_change = (
+        contracts[negative_year]["total"] - contracts[str(int(negative_year) - 1)]["total"]
+    )
+
     con.close()
 
     real_chg_07_25 = round(
@@ -237,6 +254,28 @@ def build_ledger() -> dict:
             "what_breaks_claim": (
                 "El nulo intra-municipal no prueba efecto cero (hay licencias y "
                 "subregistro), pero impide atribuir la subida generalizada al VUT."
+            ),
+            "deep_dive_path": "/incertidumbre/",
+        },
+        {
+            "claim_id": "C8_rentals_disappearing",
+            "topic": "Alquiler",
+            "public_claim": "«Cada vez hay menos viviendas en alquiler»",
+            "verdict": "Sin medir: el registro no es la oferta",
+            "verdict_code": "unidentified",
+            "pinned_finding": (
+                f"En Barcelona los contratos declarados en el IRPF suben de "
+                f"{stock_first:,} ({min(contracts)}) a {stock_last:,} ({max(contracts)}), "
+                f"+{stock_growth}%, mientras las altas de fianza bajan de "
+                f"{entries[entries_peak_year]:,} ({entries_peak_year}) a "
+                f"{entries[entries_last_year]:,} ({entries_last_year})."
+            ),
+            "what_breaks_claim": (
+                "Las fianzas cuentan altas y bajas registradas, no viviendas disponibles; "
+                "comparadas con el stock declarado no reconcilian año a año "
+                f"(en {negative_year} el saldo fue {negative_balance:,} con el stock "
+                f"creciendo {negative_stock_change:,}), y ninguna fuente pública cuenta "
+                "oferta efectiva."
             ),
             "deep_dive_path": "/incertidumbre/",
         },
@@ -435,6 +474,80 @@ def build_ledger() -> dict:
                 f"+{b_tmp['effect_display']:.2f} pp (Ola 1 vs no tensionados)."
             ),
         },
+        {
+            "claim_id": "C8_rentals_disappearing",
+            "definition": (
+                f"Contratos de alquiler declarados en el IRPF (SERPAVI), Barcelona {max(contracts)}"
+            ),
+            "value_num": float(stock_last),
+            "unit": "contratos",
+            "why_it_differs": (
+                "Stock de contratos vigentes en el año fiscal: no es oferta disponible "
+                f"ni un flujo; {min(contracts)} fue {stock_first:,}."
+            ),
+        },
+        {
+            "claim_id": "C8_rentals_disappearing",
+            "definition": (f"Altas de fianza registradas (INCASÒL), Barcelona {entries_last_year}"),
+            "value_num": float(entries[entries_last_year]),
+            "unit": "altas",
+            "why_it_differs": (
+                "Flujo anual de altas registradas; el máximo de la ventana fue "
+                f"{entries[entries_peak_year]:,} en {entries_peak_year}."
+            ),
+        },
+        {
+            "claim_id": "C5_flat_stock_ratio",
+            "definition": "Viviendas por 1.000 habitantes · Madrid (2025)",
+            "value_num": float(mad_25),
+            "unit": "por 1.000",
+            "why_it_differs": (
+                f"La media nacional apenas se mueve, pero Madrid pasó de {mad_07:.0f} "
+                f"(2007) a {mad_25:.0f} (2025)."
+            ),
+        },
+        {
+            "claim_id": "C5_flat_stock_ratio",
+            "definition": "Viviendas por 1.000 habitantes · Galicia (2025)",
+            "value_num": float(gal_25),
+            "unit": "por 1.000",
+            "why_it_differs": (
+                f"Galicia va en la dirección contraria: {gal_07:.0f} (2007) a {gal_25:.0f} (2025)."
+            ),
+        },
+        {
+            "claim_id": "C7_bust_oversupply_only",
+            "definition": "Caída del IPV · 2007–2013",
+            "value_num": float(ipv_drop_07_13),
+            "unit": "%",
+            "why_it_differs": (
+                "El precio cayó mientras el parque por habitante subía "
+                f"({float(spine[2007]['viv_por_1000_hab']):.0f}→"
+                f"{float(spine[2013]['viv_por_1000_hab']):.0f}), así que el excedente "
+                "no basta como explicación única."
+            ),
+        },
+        {
+            "claim_id": "C7_bust_oversupply_only",
+            "definition": "Caída de hipotecas · 2007–2013",
+            "value_num": float(hip_drop_07_13),
+            "unit": "%",
+            "why_it_differs": (
+                f"El crédito se cerró al mismo tiempo "
+                f"({float(spine[2007]['hip_viv_num']):,.0f}→"
+                f"{float(spine[2013]['hip_viv_num']):,.0f} hipotecas)."
+            ),
+        },
+        {
+            "claim_id": "C8_rentals_disappearing",
+            "definition": f"Saldo neto de fianzas (INCASÒL), Barcelona {negative_year}",
+            "value_num": float(negative_balance),
+            "unit": "saldo",
+            "why_it_differs": (
+                "Altas menos bajas del registro; ese mismo año el stock declarado creció "
+                f"{negative_stock_change:,}, así que no mide su cambio."
+            ),
+        },
     ]
 
     return {
@@ -451,9 +564,19 @@ def build_ledger() -> dict:
                     CAT_ARTIFACT,
                     TOURIST_PANEL,
                     TOURIST_RENTS,
+                    DEPOSIT_CONTRAST,
                 )
             ],
         ),
+        # A public claim whose evidence is a null, not a number: there is no
+        # second quantity to reconcile, so it is exempt from the bridge rule
+        # (asserted in tests/test_claim_ledger.py).
+        "bridge_exempt": {
+            "C3_tourist_flats": (
+                "La evidencia es un panel intra-municipal nulo, sin una segunda cifra "
+                "reconciliable; los puentes numéricos cubren C1, C2 y C4–C8."
+            )
+        },
         "claims": claims,
         "bridges": bridges,
     }

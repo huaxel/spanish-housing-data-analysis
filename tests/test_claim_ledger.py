@@ -17,15 +17,23 @@ def test_claim_ledger_artifact_integrity():
     data = json.loads(path.read_text())
     claims = data["claims"]
     bridges = data["bridges"]
-    assert len(claims) == 7
+    assert len(claims) == 8
     assert len(bridges) >= 10
     claim_ids = {c["claim_id"] for c in claims}
-    assert len(claim_ids) == 7
+    assert len(claim_ids) == 8
     for c in claims:
         assert c["public_claim"]
         assert c["verdict"]
         assert c["pinned_finding"]
         assert c["deep_dive_path"].startswith("/")
+    exempt = data.get("bridge_exempt", {})
+    assert set(exempt) <= claim_ids
+    for claim_id, reason in exempt.items():
+        assert reason and len(reason) > 20, f"exemption needs a reason: {claim_id}"
+    bridged = {b["claim_id"] for b in bridges}
+    assert bridged | set(exempt) == claim_ids, (
+        f"claims with neither bridge nor exemption: {claim_ids - bridged - set(exempt)}"
+    )
     for b in bridges:
         assert b["claim_id"] in claim_ids
         assert isinstance(b["value_num"], (int, float))

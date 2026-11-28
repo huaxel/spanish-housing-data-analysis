@@ -150,6 +150,11 @@ DEPENDENCIES: list[tuple[str, str, list[str]]] = [
         "explorations/occupancy_catalonia.py",
         ["explorations/serpavi_deposit_contrast.py"],
     ),
+    (
+        "artifacts/serpavi_deposit_contrast.json",
+        "explorations/serpavi_deposit_contrast.py",
+        ["scripts/build_claim_ledger.py"],
+    ),
 ]
 
 STAGES = [INSTRUMENT, INDEPENDENT, DEPENDENT, DERIVED, LEDGER]
