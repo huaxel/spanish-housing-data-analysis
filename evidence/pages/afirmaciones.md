@@ -5,7 +5,7 @@ title: Registro de afirmaciones públicas
 # Registro de afirmaciones sobre vivienda en España
 
 El debate público sobre vivienda gira en torno a media docena de cifras que se
-repiten sin su definición. Este registro contrasta las siete afirmaciones más
+repiten sin su definición. Este registro contrasta las ocho afirmaciones más
 habituales directamente contra las series oficiales fijadas en el repositorio y
 muestra **qué definición cambia la respuesta**.
 
@@ -36,8 +36,8 @@ order by claim_id
 
 <EvidencePanel data={ledger_claims} chart="afirmaciones-veredictos"
   columns={["Tema", "Afirmación habitual", "Veredicto", "Dato fijado en el repositorio", "Dónde falla o se matiza"]}
-  files={["data/raw/parque_viviendas.csv", "data/raw/ipv_ccaa_anual.json", "data/raw/censo2021_intensidad.csv", "data/raw/cat_incasol_municipis_trimestral_lloguer.xlsx", "data/raw/cat_incasol_municipis_trimestral_contractes.xlsx"]}
-  definition="Contrastación directa de siete afirmaciones del debate público contra marts DuckDB y artefactos fijados por SHA-256."
+  files={["data/raw/parque_viviendas.csv", "data/raw/ipv_ccaa_anual.json", "data/raw/censo2021_intensidad.csv", "data/raw/cat_incasol_municipis_trimestral_lloguer.xlsx", "data/raw/cat_incasol_municipis_trimestral_contractes.xlsx", "data/raw/parquet/serpavi_municipal.parquet", "data/raw/cat_incasol_saldos_municipis.xlsx"]}
+  definition="Contrastación directa de ocho afirmaciones del debate público contra marts DuckDB y artefactos fijados por SHA-256."
   coverage="Datos oficiales INE, MIVAU e INCASÒL (2001–2026T2 según serie). Ninguna cifra se extrapola fuera de su ámbito territorial o temporal." />
 
 ## 2. Puentes metodológicos: por qué cambian las cifras según la definición

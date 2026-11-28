@@ -38,6 +38,12 @@
       "sha256": "12a56ab1e7c74397aeaf478641fc947c66e76cdf403ac0f79fb27ec57941aa1c",
       "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/02_Lloguers_per_ambits_geografics/Lloguer_mitja/municipis_trimestral_lloguer.xlsx"
     },
+    "data/raw/cat_incasol_saldos_municipis.xlsx": {
+      "accessed": "2026-11-28",
+      "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge",
+      "sha256": "041990d9b3a046d20fdf2304f1d52df96b65e787f9e83ee052c7aa1e61821d37",
+      "url": "https://habitatge.gencat.cat/web/.content/home/dades/estadistiques/01_Estadistiques_de_construccio_i_mercat_immobiliari/03_Mercat_de_lloguer/07_Saldos/Saldos-contractes_lloguer.xlsx"
+    },
     "data/raw/cat_incasol_temporada_mun.xlsx": {
       "accessed": "2026-11-28",
       "publisher": "Generalitat de Catalunya, Secretaria d'Habitatge (INCASÒL fiances)",
@@ -121,6 +127,12 @@
       "publisher": "MIVAU",
       "sha256": "87056501b0f3cc1b7496e7cc1ee40f2b2ef014e43273d2739add3b4778797ef1",
       "url": "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP002_01.csv"
+    },
+    "data/raw/parquet/serpavi_municipal.parquet": {
+      "accessed": "2026-11-28",
+      "publisher": "INE · SERPAVI alquiler municipal (MIVAU, fianzas)",
+      "sha256": "a30eeb605976e8de6df4a7cfd13566e30762c7595a2bd233823753482cfe17e7",
+      "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
     },
     "data/raw/serpavi_bd.xlsx": {
       "accessed": "2026-11-28",
