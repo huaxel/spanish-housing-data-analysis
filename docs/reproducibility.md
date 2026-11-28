@@ -20,9 +20,14 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
   audit freshness-checks). `bartik_predict` runs first: `iv_migration` +
   `panel_saiz` read its instrument. Required on a clean checkout (where
   `artifacts/` is absent) and after every `make build` (see below).
-  Runtime: ~30 min (pure-Python wild bootstraps dominate; `panel_quarterly`
-  alone ~11 min, `panel_adjusted` ~5 min) — the Makefile prints per-script
-  progress. Three steps run last and take seconds: the Catalonia
+  Runtime: ~3 min in the default parallel lanes, ~6 min serially
+  (`wild_ar_bust` ~2.5 min and `iv_migration` ~2 min dominate; the
+  `panel_quarterly ~11 min` figure this file carried until 2026-11-28 was
+  stale). Both modes write byte-identical artifacts: the staging in
+  `scripts/run_analysis.py` only decides what may run concurrently, and the
+  artifact edges it encodes are asserted in `tests/test_run_analysis.py`.
+  Each estimator prints its own progress; `make analysis-serial` reruns them
+  one at a time. Three steps run last and take seconds: the Catalonia
   rent-control event study (`explorations/catalonia_rent_control.py`), the
   ECV 2025 distributional microsimulation
   (`scripts/build_ecv_microsim.py`), and the public claim ledger

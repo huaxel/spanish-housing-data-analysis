@@ -62,10 +62,10 @@ uv sync --group dev
 make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 ```
 
-`make gates` is slow by design: `analysis` re-runs every pure-Python
-bootstrap estimator (~30 min alone; `panel_quarterly` is the worst at
-~11 min) and `fetch` hits 26 INE endpoints — expect 30–60 min end to
-end. CI runs the offline subset only (`make lint` + `make test`); run
+`make gates` is not cheap: `analysis` re-runs every pure-Python bootstrap
+estimator (a few minutes in parallel lanes, longer serially) and `fetch`
+hits 26 INE endpoints — expect 30–60 min end to end, with fetch and build
+dominating. CI runs the offline subset only (`make lint` + `make test`); run
 the full gate locally before release.
 
 Then, for the Evidence dev dashboard (Node/npm required):

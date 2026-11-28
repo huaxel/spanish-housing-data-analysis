@@ -1,4 +1,4 @@
-.PHONY: sync test lint fetch geo build analysis inference deficit profile-income chart-provenance stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-provenance evidence-smoke-municipal-comparison evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
+.PHONY: sync test lint fetch geo build analysis analysis-serial inference deficit profile-income chart-provenance stock-rent verify audit audit-docs backup restore dashboard evidence-install evidence-dev evidence-build evidence-smoke evidence-smoke-browser evidence-smoke-profile evidence-smoke-deficit evidence-smoke-provenance evidence-smoke-municipal-comparison evidence-smoke-purchase evidence-smoke-uncertainty evidence-smoke-stock wasm-verify clean
 
 sync:
 	uv sync --group dev
@@ -136,78 +136,18 @@ audit-docs:
 
 # Deterministic estimators whose outputs audit requires (git-ignored
 # artifacts/ JSONs + committed explorations/*.json freshness copies).
-# bartik_predict first: iv_migration + panel_saiz read its instrument.
-# ~30 min total (hypothesis_01 + municipios_nacional are seconds):
-# pure-Python wild bootstraps dominate (panel_quarterly
-# alone ~11 min, panel_adjusted ~5 min). Progress prints per script.
+# scripts/run_analysis.py runs them in stages: the instrument first, then
+# every marts-reading estimator concurrently, then the artifact consumers,
+# then the ledger (which hashes the producers). Parallelism is a wall-clock
+# change only — the estimators write byte-identical output. Measured
+# 2026-11-28: ~3 min with the default 8 lanes, ~6 min serially (wild_ar_bust
+# ~2.5 min and iv_migration ~2 min dominate). ANALYSIS_JOBS=N overrides lanes.
 analysis:
-	@echo "[analysis 1/18] bartik_predict (instrument)"
-	uv run python explorations/bartik_predict.py
-	@echo "[analysis 2/18] iv_migration"
-	uv run python explorations/iv_migration.py
-	@echo "[analysis 3/18] panel_saiz"
-	uv run python explorations/panel_saiz.py
-	@echo "[analysis 4/18] panel_provincial"
-	uv run python explorations/panel_provincial.py
-	@echo "[analysis 5/18] panel_adjusted (~5 min)"
-	uv run python explorations/panel_adjusted.py
-	@echo "[analysis 6/18] panel_tourist"
-	uv run python explorations/panel_tourist.py
-	@echo "[analysis 7/18] panel_quarterly (~11 min)"
-	uv run python explorations/panel_quarterly.py
-	@echo "[analysis 8/18] ratio_ccaa"
-	uv run python explorations/ratio_ccaa.py
-	@echo "[analysis 9/18] serpavi_analysis"
-	uv run python explorations/serpavi_analysis.py
-	@echo "[analysis 10/18] tourist_rents"
-	uv run python explorations/tourist_rents.py
-	@echo "[analysis 11/18] panel_saiz_municipal"
-	uv run python explorations/panel_saiz_municipal.py
-	@echo "[analysis 12/18] panel_saiz_madrid"
-	uv run python explorations/panel_saiz_madrid.py
-	@echo "[analysis 13/18] panel_saiz_madrid_vacancy"
-	uv run python explorations/panel_saiz_madrid_vacancy.py
-	@echo "[analysis 14/18] wild_ar_bust"
-	uv run python explorations/wild_ar_bust.py
-	@echo "[analysis 15/18] test_absorption_hypothesis"
-	uv run python explorations/test_absorption_hypothesis.py
-	@echo "[analysis 16/18] municipios_nacional (descriptive)"
-	uv run python explorations/municipios_nacional.py
-	@echo "[analysis 17/18] barrios_bcn_yield (descriptive)"
-	uv run python explorations/barrios_bcn_yield.py
-	@echo "[analysis 18/18] desahucios_renta (descriptive)"
-	uv run python explorations/desahucios_renta.py
-	uv run python scripts/analyze_stock_rent.py
-	uv run python explorations/cadastre_eras.py
-	uv run python explorations/cadastre_age_rent.py
-	uv run python explorations/cadastre_era_rehab.py
-	uv run python explorations/cadastre_era_quality.py
-	uv run python explorations/cadastre_era_surface.py
-	uv run python explorations/cadastre_vacancy_alignment.py
-	uv run python explorations/cadastre_household_alignment.py
-	uv run python explorations/cadastre_capitals.py
-	uv run python explorations/cadastre_province.py
-	uv run python explorations/cadastre_malaga_barrios.py
-	uv run python explorations/cadastre_granada_distritos.py
-	uv run python explorations/censo_vintage.py
-	uv run python explorations/deficit_vivienda.py
-	uv run python scripts/export_deficit.py
-	uv run python scripts/invert_tourist.py
-	uv run python scripts/export_inference.py
-	# Policy evaluation, distributional microsimulation, and the claim ledger.
-	# The ledger must run last: it hashes both marts plus the catalonia,
-	# panel_tourist, and tourist_rents artifacts, so it has to see every
-	# producer above. Seconds, not minutes (the parquet is already built).
-	uv run python explorations/catalonia_rent_control.py
-	uv run python scripts/build_ecv_microsim.py
-	uv run python scripts/build_irav_index.py
-	uv run python explorations/ipva_rent_index.py
-	uv run python explorations/proh_households.py
-	uv run python explorations/ecp_households.py
-	uv run python explorations/occupancy_catalonia.py
-	uv run python explorations/vut_stock.py
-	uv run python explorations/vut_rent_overlap.py
-	uv run python scripts/build_claim_ledger.py
+	uv run python scripts/run_analysis.py
+
+# Serial fallback for bisecting an order-sensitive estimator (~30 min).
+analysis-serial:
+	uv run python scripts/run_analysis.py --serial
 
 stock-rent:
 	uv run python scripts/analyze_stock_rent.py
