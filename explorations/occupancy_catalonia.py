@@ -315,6 +315,64 @@ def build() -> dict:
 
     before = annual["2024"]["barcelona_habitual"]
     after = annual["2025"]["barcelona_habitual"]
+
+    # The full history the two workbooks support: the municipal sheet runs from
+    # 2019, the habitual/seasonal sheet from 2023, and 2026 is partial in both.
+    # Only complete calendar years are compared, so the falling 2025 balance can
+    # be read against the years before it (2020's negative balance included).
+    city_years = [
+        year
+        for year in range(2019, 2026)
+        if all(
+            quarter in city_balances["barcelona_city"].get(str(year), {}) for quarter in QUARTERS
+        )
+    ]
+    split_years = [
+        year
+        for year in range(2023, 2026)
+        if all(quarter in region_balances["habitual"].get(str(year), {}) for quarter in QUARTERS)
+    ]
+    assert city_years == list(range(2019, 2026)) and split_years == [2023, 2024, 2025]
+    assert not all(
+        quarter in city_balances["barcelona_city"].get("2026", {}) for quarter in QUARTERS
+    )
+    history = {
+        "complete_years": {"barcelona_habitual": city_years, "catalonia_split": split_years},
+        "excluded_partial_year": 2026,
+        "barcelona_habitual": {
+            str(year): triple(add(city_balances, "barcelona_city", [(year, q) for q in QUARTERS]))
+            for year in city_years
+        },
+        "catalonia_habitual": {
+            str(year): triple(add(region_balances, "habitual", [(year, q) for q in QUARTERS]))
+            for year in split_years
+        },
+        "catalonia_seasonal": {
+            str(year): triple(add(region_balances, "seasonal", [(year, q) for q in QUARTERS]))
+            for year in split_years
+        },
+    }
+    city_balances_by_year = [history["barcelona_habitual"][str(y)]["balance"] for y in city_years]
+    city_entries_by_year = [history["barcelona_habitual"][str(y)]["entries"] for y in city_years]
+    region_habitual_by_year = [
+        history["catalonia_habitual"][str(y)]["balance"] for y in split_years
+    ]
+    negatives_annual = [
+        y for y in city_years if history["barcelona_habitual"][str(y)]["balance"] < 0
+    ]
+    assert negatives_annual == [2020], negatives_annual
+    positives = [(b, y) for b, y in zip(city_balances_by_year, city_years, strict=True) if b > 0]
+    lowest_positive = min(positives)[1]
+    assert lowest_positive == 2025
+    assert city_entries_by_year[-5:] == sorted(city_entries_by_year[-5:], reverse=True)
+    assert region_habitual_by_year == sorted(region_habitual_by_year, reverse=True)
+    history["verdicts"] = {
+        "lowest_positive_balance_year": lowest_positive,
+        "negative_balance_years": negatives_annual,
+        "city_entries_fell_every_year_2021_2025": True,
+        "catalonia_habitual_balance_fell_every_year_2023_2025": True,
+        "city_entries_peak_year": city_years[city_entries_by_year.index(max(city_entries_by_year))],
+    }
     return {
         "source_workbooks": {
             "mediation_flow_municipal": MEDIATION_FLOW_MUN.name,
@@ -344,6 +402,7 @@ def build() -> dict:
                 f"{year} {quarter}": triple(region_balances["seasonal"][str(year)][quarter])
                 for year, quarter in last_three
             },
+            "history": history,
             "city_habitual_change": {
                 "balance_change": after["balance"] - before["balance"],
                 "entries_change": after["entries"] - before["entries"],

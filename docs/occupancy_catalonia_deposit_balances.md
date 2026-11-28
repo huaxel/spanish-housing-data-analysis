@@ -22,6 +22,27 @@ workbook does not give a Barcelona-city cancellation count. The separately
 published city seasonal figures count new deposits, so they cannot fill
 that missing balance.
 
+## +534 is the smallest positive balance in the window
+
+The municipal workbook starts in 2019, so the 2025 fall can be read against
+the years before it.
+
+| Barcelona city, habitual rentals | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| New deposits | 51,294 | 40,416 | 57,158 | 47,927 | 38,683 | 32,903 | 30,789 |
+| Cancellations | 47,708 | 45,236 | 47,497 | 38,854 | 32,173 | 30,179 | 30,255 |
+| Net balance | +3,586 | −4,820 | +9,661 | +9,073 | +6,510 | +2,724 | +534 |
+
+Every year in the window is positive except 2020, when cancellations
+outnumbered new deposits. New deposits peaked in 2021 at **57,158** and have
+fallen every year since; cancellations fell too, so the balance narrowed
+because entries fell faster than exits. The regional habitual balance
+narrowed in the same direction over its shorter window, from **+26,845** in
+2023 to **+8,895** in 2025.
+
+A positive balance is still a positive flow: the register records fewer new
+deposits than in 2021, not fewer active contracts than in 2024.
+
 ## First half of 2026: more new deposits in Barcelona, but a smaller balance
 
 | Barcelona city, habitual rentals | January–June 2025 | January–June 2026 |

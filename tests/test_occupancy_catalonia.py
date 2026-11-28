@@ -183,3 +183,41 @@ def test_2025_is_the_smallest_total_in_the_window_for_both_measures(data):
         assert totals[-1] == min(totals)
     assert data["window_verdicts"]["lowest_flow_year"] == 2025
     assert data["window_verdicts"]["lowest_active_year"] == 2025
+
+
+def test_the_history_holds_every_complete_year_and_excludes_the_partial_one(data):
+    history = data["balances"]["history"]
+    assert history["excluded_partial_year"] == 2026
+    assert history["complete_years"]["barcelona_habitual"] == list(range(2019, 2026))
+    assert history["complete_years"]["catalonia_split"] == [2023, 2024, 2025]
+
+
+def test_each_history_year_adds_up_to_its_four_quarters(data):
+    city = data["balances"]["history"]["barcelona_habitual"]
+    for year, cells in city.items():
+        assert cells["entries"] - cells["cancellations"] == cells["balance"], year
+    for part in ("catalonia_habitual", "catalonia_seasonal"):
+        for year, cells in data["balances"]["history"][part].items():
+            assert cells["entries"] - cells["cancellations"] == cells["balance"], (part, year)
+
+
+def test_one_negative_year_and_2025_the_smallest_positive_balance(data):
+    history = data["balances"]["history"]
+    balances = {year: cells["balance"] for year, cells in history["barcelona_habitual"].items()}
+    assert [year for year, value in balances.items() if value < 0] == ["2020"]
+    assert history["verdicts"]["negative_balance_years"] == [2020]
+    positive = {year: value for year, value in balances.items() if value > 0}
+    assert min(positive, key=positive.get) == "2025"
+    assert history["verdicts"]["lowest_positive_balance_year"] == 2025
+
+
+def test_city_new_deposits_fell_from_their_2021_peak(data):
+    history = data["balances"]["history"]
+    entries = {
+        year: cells["entries"]
+        for year, cells in history["barcelona_habitual"].items()
+        if year >= "2021"
+    }
+    values = list(entries.values())
+    assert values == sorted(values, reverse=True)
+    assert history["verdicts"]["city_entries_peak_year"] == 2021
