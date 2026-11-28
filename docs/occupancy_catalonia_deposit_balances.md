@@ -1,0 +1,172 @@
+# Barcelona’s rental-deposit balance after cancellations
+
+The Generalitat’s [rental-deposit balances](https://habitatge.gencat.cat/ca/dades/indicadors_estadistiques/estadistiques_de_construccio_i_mercat_immobiliari/mercat_de_lloguer/saldos/)
+count new deposits (*altes*) and cancellations (*baixes*) recorded with
+INCASÒL. Their difference is a **net registry flow**, not the number of
+active leases at year-end. Full-year comparisons sum all four quarters.
+
+| Barcelona city, habitual rentals | 2024 | 2025 |
+| --- | ---: | ---: |
+| New deposits | 32,903 | 30,789 |
+| Cancellations | 30,179 | 30,255 |
+| Net balance | +2,724 | +534 |
+
+The net balance stayed positive but fell by **2,190**. The change came
+mostly from **2,114 fewer new deposits**, with **76 more cancellations**
+accounting for the rest. A fall in new deposits does not on its own imply
+that the register lost contracts overall.
+
+For Catalonia as a whole, the **seasonal** balance went from **+4,186**
+in 2024 to **+243** in 2025. That is a regional result: the seasonal balance
+workbook does not give a Barcelona-city cancellation count. The separately
+published city seasonal figures count new deposits, so they cannot fill
+that missing balance.
+
+## First half of 2026: more new deposits in Barcelona, but a smaller balance
+
+| Barcelona city, habitual rentals | January–June 2025 | January–June 2026 |
+| --- | ---: | ---: |
+| New deposits | 15,026 | 16,001 |
+| Cancellations | 14,255 | 15,420 |
+| Net balance | +771 | +581 |
+
+New registrations rose, but cancellations rose by more, so the city’s net
+habitual balance fell again. Across Catalonia, the habitual balance rose
+from **+5,429 to +5,913**, while the seasonal balance turned negative,
+from **+1,135 to −1,065**. As a result, the sum of the two regional balances
+fell from **+6,564 to +4,848**. These are like-for-like half-year counts,
+not full-year forecasts, and they do not show homes moving from one contract
+type to another. The regional seasonal result cannot be assigned to Barcelona.
+
+## The seasonal balance has been negative for three quarters
+
+The regional seasonal balance was negative in the three most recent quarters
+in the workbook: **−1,233** in the fourth quarter of 2025, **−102** in the
+first quarter of 2026, and **−963** in the second. Every earlier quarter in
+the 2023–2026 window the workbook covers was positive.
+
+| Catalonia, seasonal rentals | 2024 Q4 – 2025 Q2 | 2025 Q4 – 2026 Q2 |
+| --- | ---: | ---: |
+| New deposits | 10,872 | 5,677 |
+| Cancellations | 7,734 | 7,975 |
+| Net balance | +3,138 | −2,298 |
+
+The change is on the entry side: new seasonal deposits nearly halved while
+cancellations rose slightly. The habitual balance fell far less over the
+same quarters, from **+8,499** to **+7,795**, and habitual new deposits were
+flat (**81,886** to **81,459**), so this is not a visible move of the same
+filings into the habitual category.
+
+The register cannot say why seasonal filings fell. Fewer seasonal tenancies,
+a change in filing practice, or a reclassification the register does not mark
+would all look the same here. Like the annual figures, these are net registry
+flows, not counts of seasonal homes or of homes available to rent.
+
+## What this adds to the mediation comparison
+
+The [mediation workbooks](occupancy_barcelona_mediation.md) show **55 more**
+active city contracts at year-end. That is a change in an observed program
+portfolio, not the same measure as the INCASÒL net flow. We do not know the
+overlap or the correspondence of deposit events to tenancy start and end
+dates. Do not divide the program’s change by the net deposit balance, and
+do not read either measure as homes available to new tenants.
+
+## Reproduce
+
+Download `Saldos-contractes_lloguer.xlsx` and `Saldo_contractes_Htge_i_Temp.xlsx`
+from the Generalitat page above. The downloaded versions had SHA-256
+`041990d9b3a046d20fdf2304f1d52df96b65e787f9e83ee052c7aa1e61821d37` and
+`3181062fcd5bd7f3a257e287bac4d53b1e647ecb1cd61f1a71b39072756e2ef6`, respectively.
+From the download directory with `openpyxl` available:
+
+```python
+from openpyxl import load_workbook
+
+QUARTERS = ("1T", "2T", "3T", "4T")
+
+
+def extract(name, columns):
+    """Every quarter as {(area, year, quarter): (altes, baixes, saldo)}."""
+    book = load_workbook(name, read_only=True, data_only=True)
+    try:
+        rows = list(book["dades"].values)
+    finally:
+        book.close()
+    cells = {}
+    for area, (column, title) in columns.items():
+        assert rows[2][column] == title
+        assert rows[4][column : column + 3] == ("Altes", "Baixes", "Saldo")
+        year = None
+        for row in rows[5:]:
+            if type(row[0]) is int:
+                year = row[0]
+            if year is None or row[1] not in QUARTERS:
+                continue
+            key = (area, year, row[1])
+            assert key not in cells
+            entries, cancellations, balance = row[column : column + 3]
+            assert entries - cancellations == balance
+            cells[key] = (entries, cancellations, balance)
+    return cells
+
+
+def span(cells, area, periods):
+    return tuple(map(sum, zip(*(cells[area, *p] for p in periods), strict=True)))
+
+
+city = extract(
+    "Saldos-contractes_lloguer.xlsx",
+    {"Barcelona": (2, "Barcelona"), "Catalonia": (18, "Catalunya")},
+)
+region = extract(
+    "Saldo_contractes_Htge_i_Temp.xlsx",
+    {
+        "Habitual": (2, "Lloguer habitual"),
+        "Seasonal": (6, "Lloguer de temporada"),
+        "Total": (10, "Total contractes"),
+    },
+)
+
+PERIODS = {
+    "2024": [(2024, q) for q in QUARTERS],
+    "2025": [(2025, q) for q in QUARTERS],
+    "2025 H1": [(2025, "1T"), (2025, "2T")],
+    "2026 H1": [(2026, "1T"), (2026, "2T")],
+    "last 3 quarters": [(2025, "4T"), (2026, "1T"), (2026, "2T")],
+    "same 3 a year earlier": [(2024, "4T"), (2025, "1T"), (2025, "2T")],
+}
+
+# The two workbooks disagree only in coverage: the city file's Catalonia
+# column is the regional file's habitual series wherever both exist.
+for year in (2023, 2024, 2025):
+    full = [(year, q) for q in QUARTERS]
+    assert span(city, "Catalonia", full) == span(region, "Habitual", full)
+
+for label, periods in PERIODS.items():
+    habitual, seasonal, total = (
+        span(region, a, periods) for a in ("Habitual", "Seasonal", "Total")
+    )
+    assert tuple(a + b for a, b in zip(habitual, seasonal, strict=True)) == total
+    print(
+        f"{label:23}",
+        "Barcelona habitual:",
+        span(city, "Barcelona", periods),
+        "| Catalonia habitual, seasonal, total:",
+        habitual,
+        seasonal,
+        total,
+    )
+    if label in ("2026 H1", "last 3 quarters"):
+        assert span(city, "Catalonia", periods) == habitual
+
+# The negative quarters are the last three, and only those.
+negatives = [k for k, v in region.items() if k[0] == "Seasonal" and v[2] < 0]
+assert sorted(negatives) == [
+    ("Seasonal", 2025, "4T"),
+    ("Seasonal", 2026, "1T"),
+    ("Seasonal", 2026, "2T"),
+], sorted(negatives)
+```
+
+Barcelona’s full-year entry counts also match the pinned annual INCASÒL series. This
+is a source comparison; no new workbook was added to the mart.

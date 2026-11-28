@@ -12,15 +12,19 @@ properties-per-household ratios
 ([household alignment](explorations/cadastre_household_alignment.md)),
 SERPAVI contract rents and tourist-dwelling counts (in the marts).
 
+A [four-province pilot](occupancy_province_pilot.md) compares recent MIVAU
+primary-residence estimates with AEAT tax-use counts without treating either
+as market availability.
+
 ## Conclusion
 
 No public source counts effectively available homes (willingness plus legal
 access plus market listing). The closest recurring occupancy-composition
 sources are tax-administrative (AEAT use split) and the census itself at
-section grain; the closest genuine availability count is unsold new stock
-(narrow: new segment only). Demand-side waiting lists exist (Andalucía) but
-are PDF-only. Portal listings are commercial-only. Everything else is a
-large-holder or fiscal instrument, not a statistical series.
+section grain. The official unsold-new-stock estimate describes sale
+inventory but may include homes already rented; it is not a count of homes
+on offer. Protected-housing waiting lists are a demand-side measure, and
+portal listings with broad coverage are commercial.
 
 ## Shortlist
 
@@ -28,12 +32,12 @@ large-holder or fiscal instrument, not a statistical series.
 | --- | --- | --- | --- | --- |
 | 1 | AEAT viviendas declaradas en IRPF, use split | Strongest recurring occupancy composition | CCAA + provincia (+ municipal rentals); annual tax year, 2024 latest | Integration design |
 | 2 | Censo 2021 inframunicipal dwellings/persons/households | Section-grain occupancy from one aligned source; 2021 vintage aging | Sección censal, 2021-01-01 | Verify-and-pull design |
-| 3 | MIVAU stock de vivienda nueva sin vender | Genuine availability, new segment only | CCAA + provincia, annual to 2025-12-31 | Park (PDF-only, no tabular endpoint; assessed 2026-10-09) |
+| 3 | MIVAU stock de vivienda nueva sin vender | Estimated unsold stock; not live availability | CCAA + provincia, annual | Madrid has a public table; no matched four-province series verified |
 | 4 | RMDVP municipal demandante counts (Andalucía) | Demand-side waiting-list proxy; monthly .xls twins | Municipal, 2020-12.. monthly | Pulled 2026-10-09 (table 01 → `rmdvp_inscripciones`) |
 | 5 | Catalan / Valencian vacant-dwelling registers | Large-holder vacancy signals, compliance scope | Regional, 2024–2026 | Context only |
 | 6 | IBI vacancy surcharges | Fiscal instruments, not data | Municipal ordinances, heterogeneous | No integration |
 | 7 | Idealista/data listings | Commercial-only; wrappers are ToS risk | Down to sección, weekly | Park (commercial API confirmed 2026-10-09) |
-| 8 | Eustat EUV non-principal dwellings (Euskadi) | Only recurring small-holder vacancy cut (owner type × offer status) | Territorio histórico / size bands, biennial | Watch (series PDF-locked; HTML tables lack owner split) |
+| 8 | Basque Government EUV (Euskadi) | Sample survey separates seasonal, on-offer and off-market homes | Euskadi and historical territories; verified 2023 workbook | [Verified regional benchmark](occupancy_euskadi_euv.md); no national extrapolation |
 
 ## 1. AEAT use split: habitual, rented, at owners' disposal
 
@@ -80,33 +84,33 @@ cadastral properties and persons are not households, so the ratios are
 occupancy composition, never availability; microdata is a 10% sample with
 suppressed small-municipality geography.
 
-## 3. Unsold new stock: narrow but genuine availability
+## 3. Unsold new stock: a sales-inventory estimate, not available homes
 
-[MIVAU's stock de vivienda nueva](https://www.mivau.gob.es/el-ministerio/observatorios-y-estadisticas/estadisticas/stock-vivienda-nueva)
-estimates unsold new dwellings annually at CCAA plus provincia grain; the
-[2025 report](https://www.mivau.gob.es/recursos_mfom/comodin/recursos/stock_2025.pdf)
-puts 452,670 unsold new dwellings at 31 December 2025 (455,280 a year
-earlier). This is the only official series that counts dwellings for sale
-and unsold — genuine availability, not a proxy. Limits: new segment only
-(about one sixtieth of the dwelling stock); provincial grain, no municipal
-detail; an estimation methodology (completions minus sales), not a listing
-count; unsold does not mean affordable, habitable on arrival, or located
-where demand is.
+The [INE inventory for the MIVAU study](https://ine.es/dyngs/IOE/operacion.htm?id=1259931143118)
+classifies it as an annual, provincial estimate derived from other statistics.
+The [MIVAU annual bulletin](https://servicios.mpr.es/VisorPublicaciones/visordocumentosicopo.aspx?IDPUBLICACION=000217926&NIPO=179240103&SUBNIPO=0001)
+(page 34, table 2.14) gives **455,280** for Spain in 2024. It explicitly
+cautions that much of the estimated stock may be older dwellings and that
+many may be used for rental. That rules out treating the estimate as a count
+of recent completions offered for sale now, or of vacant or rentable homes.
+It also does not establish what share was actually occupied or advertised.
 
-Series-pull assessment (2026-10-09): parked. The statistics page links
-only report PDFs (recent vintages plus a revised-series note) with no
-Excel, CSV or ODS endpoint; direct report downloads are bot-walled, so
-there is no reproducible fetch path, and the repo stack has no PDF-table
-tooling. A provincial annual series would mean hand-transcribing PDF
-tables year by year — grey-zone extraction under the same rule that
-parked the Valor de Referencia probe. Watch for a machine-readable
-series or request one before any integration. Recheck 2026-10-09: the 2025
-edition keeps the same PDF-only format and the statistics page still lists
-no tabular endpoint; the only CSV surfaced is a Madrid-only regional series,
-which does not fill the national gap — park stands. Data quirk for that day:
-several provinces and autonomous communities read zero in the latest
-table under a methodology note, so zeros must be treated as
-not-measured-or-suppressed, not as true zeros, before any use.
+**Madrid is reproducible separately.** The Comunidad de Madrid's [official
+series](https://gestiona.comunidad.madrid/desvan/desvan/AccionDatosUnaSerie.icm?codSerie=952842)
+republishes MIVAU figures in an HTML table. For the region (not the city),
+the estimate rose from **62,545** in 2024 to **66,627** in 2025, a change of
+**4,082**. The table provides a recent endpoint, but republishes the same
+estimate and does not independently verify actual listings or vacancy.
+
+**Four-province comparison remains unverified.** Direct requests for the
+Ministry's [2025](https://www.mivau.gob.es/recursos_mfom/comodin/recursos/stock_2025.pdf)
+and [2024](https://www.mivau.gob.es/recursos_mfom/comodin/recursos/stock_2024.pdf)
+reports returned `HTTP 403` in this check. The accessible annual bulletin has
+an older provincial snapshot with selected shares, not a matching table for
+both years. We did not substitute press-reported figures or reconstruct
+counts from rounded shares. No series was added to the mart. Do not read
+zeros in a future provincial extract as absence of stock without checking
+the publisher's notes.
 
 ## 4. Protected-housing waiting lists: demand side, now pulled
 
@@ -261,12 +265,13 @@ dependency and no grey-zone extraction in this pipeline.
 ## What remains unfillable
 
 - Effective availability has no public count: willingness, legal access
-  and market listing are jointly unobserved. Unsold-new covers the new
-  segment; asking-listings are commercial; registers cover large holders.
-- Second homes and true vacancy are entangled in every recurring source
-  (AEAT "at disposal", MIVAU/census non-principal, consumption bands).
-  Only the one-off 2020 consumption snapshot ever separated them, by
-  assumption-laden bands.
+  and market listing are jointly unobserved. Unsold-new is a derived estimate
+  that may include rented homes; public vacancy registers cover selected holders.
+- The recurring national proxies do not separate second homes from vacancy
+  (AEAT "at disposal" and MIVAU non-primary). The one-off census electricity
+  snapshot gives distinct low-use categories, but those are not direct
+  observations of second-home status. The Euskadi survey is a regional
+  exception, not a national series.
 - Small-holder vacancy has no recurring national measurement at all; the
   registers exclude small holders by design and the census snapshot does
   not repeat. The one regional exception is the Basque EUV survey
@@ -285,23 +290,15 @@ dependency and no grey-zone extraction in this pipeline.
 
 ## Second hunt round (2026-10-09): small-holder vacancy + asking-stock
 
-Small-holder vacancy: the only genuine recurring measurement found is
-Eustat's Encuesta sobre el Uso de la Vivienda (EUV, Euskadi-only,
-biennial survey): it classifies non-principal dwellings by owner type
-(including private individuals) and market situation (on offer for sale
-or rent vs off-market "gestionable" stock). Verdict: watch, not pull.
-The machine-readable surface is two single-year cross-section tables
-with predictable CSV twins and no owner split; the gap-filling cuts
-(owner-type series, gestionable series) live in the PDF reports only.
-The Eustat databank node carries no dataset tables for this operation
-as of now. Even pulled, Euskadi-only survey data would be a context
-sidecar, never a mart join. Revisit when a new edition extends the
-downloadable tables. Recheck 2026-10-09: latest edition remains 2023
-(reference period 2023, published May 2024); no 2025 edition out yet and
-no next-update date announced — watch stays. ECV was confirmed structurally blind (it samples
-principal dwellings only). The Basque deshabitada canon register is
-procedural (municipality-initiated, no public municipal series found) —
-context only, alongside the IBI surcharges.
+The Basque Government's Encuesta sobre el Uso de la Vivienda (EUV) is a
+regional sample survey. The [2023 workbook check](occupancy_euskadi_euv.md)
+verified downloadable XLSX tables for on-offer and off-market uninhabited
+homes, with a separate sampling-errors workbook. That supersedes the earlier
+verdict that these cuts were PDF-only. Historical use categories are also
+downloadable; the workbook does not give a historical offer-status series
+or a cross-tab of ownership by offer status. This remains regional context,
+not a fill for the national mart. The Basque deshabitada canon register is a
+separate municipal administrative procedure, not the EUV survey.
 
 Asking-stock: park confirmed. Idealista listing microdata sits behind
 commercial request-access APIs; Fotocasa publishes survey-based
