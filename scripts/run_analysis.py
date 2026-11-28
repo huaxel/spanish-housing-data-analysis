@@ -88,6 +88,7 @@ DEPENDENT = [
     "explorations/panel_saiz_madrid_vacancy.py",
     "scripts/export_deficit.py",
     "scripts/invert_tourist.py",
+    "explorations/serpavi_deposit_contrast.py",
 ]
 
 # Stage 3: export_inference reads the inversion that invert_tourist writes, so
@@ -143,6 +144,11 @@ DEPENDENCIES: list[tuple[str, str, list[str]]] = [
         "artifacts/deficit_vivienda.json",
         "explorations/deficit_vivienda.py",
         ["scripts/export_deficit.py"],
+    ),
+    (
+        "artifacts/occupancy_catalonia.json",
+        "explorations/occupancy_catalonia.py",
+        ["explorations/serpavi_deposit_contrast.py"],
     ),
 ]
 

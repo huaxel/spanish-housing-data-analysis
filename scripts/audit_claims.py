@@ -182,6 +182,11 @@ MODEL_FRESHNESS = [
         "artifacts/occupancy_catalonia.json",
         "explorations/occupancy_catalonia.py",
     ),
+    (
+        "serpavi_deposit_contrast",
+        "artifacts/serpavi_deposit_contrast.json",
+        "explorations/serpavi_deposit_contrast.py",
+    ),
 ]
 
 
@@ -4920,6 +4925,66 @@ ECP_HOUSEHOLD_CLAIMS: list[tuple[str, str, str, float, float]] = [
 ]
 
 
+CONTRAST_CLAIMS: list[tuple[str, str, str, float, float]] = [
+    (
+        "contrast",
+        "Barcelona declared rental contracts 2011",
+        "barcelona_city.serpavi_contracts.2011.total",
+        82608,
+        0,
+    ),
+    (
+        "contrast",
+        "Barcelona declared rental contracts 2019",
+        "barcelona_city.serpavi_contracts.2019.total",
+        127241,
+        0,
+    ),
+    (
+        "contrast",
+        "Barcelona declared rental contracts 2021",
+        "barcelona_city.serpavi_contracts.2021.total",
+        133074,
+        0,
+    ),
+    (
+        "contrast",
+        "Barcelona declared rental contracts 2024",
+        "barcelona_city.serpavi_contracts.2024.total",
+        143159,
+        0,
+    ),
+    (
+        "contrast",
+        "Barcelona collective-housing contracts 2024",
+        "barcelona_city.serpavi_contracts.2024.collective",
+        140872,
+        0,
+    ),
+    (
+        "contrast",
+        "Barcelona single-family contracts 2024",
+        "barcelona_city.serpavi_contracts.2024.single_family",
+        2287,
+        0,
+    ),
+    (
+        "contrast",
+        "declared contract growth 2011-2024 pct",
+        "verdicts.contracts_growth_pct_2011_2024",
+        73.3,
+        0.05,
+    ),
+    (
+        "contrast",
+        "deposit entries in the overlap year",
+        "barcelona_city.incasol_entries.2024",
+        32903,
+        0,
+    ),
+]
+
+
 def _json_path(data: dict, path: str):
     for part in path.split("."):
         data = data[int(part)] if isinstance(data, list) and part.isdigit() else data[part]
@@ -5043,6 +5108,13 @@ def main() -> int:
         print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
         failures += not ok
     total += len(OCCUPANCY_CLAIMS)
+    contrast = _model_output("artifacts/serpavi_deposit_contrast.json")
+    for doc, desc, path, expected, tol in CONTRAST_CLAIMS:
+        got = _json_path(contrast, path)
+        ok = got is not None and abs(got - expected) <= tol
+        print(f"[{'OK' if ok else 'FAIL'}] {doc}: {desc} = {got} (doc: {expected})")
+        failures += not ok
+    total += len(CONTRAST_CLAIMS)
     vut = _model_output("artifacts/vut_stock.json")
     for doc, desc, path, expected, tol in VUT_CLAIMS:
         got = _json_path(vut, path)

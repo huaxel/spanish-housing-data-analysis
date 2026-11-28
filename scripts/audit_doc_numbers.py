@@ -1284,6 +1284,7 @@ def audit_total() -> int:
         "MICROSIM_CLAIMS": audit_claims.MICROSIM_CLAIMS,
         "LEDGER_CLAIMS": audit_claims.LEDGER_CLAIMS,
         "OCCUPANCY_CLAIMS": audit_claims.OCCUPANCY_CLAIMS,
+        "CONTRAST_CLAIMS": audit_claims.CONTRAST_CLAIMS,
         "IRAV_CLAIMS": audit_claims.IRAV_CLAIMS,
         "IPVA_CLAIMS": audit_claims.IPVA_CLAIMS,
         "PROH_CLAIMS": audit_claims.PROH_CLAIMS,

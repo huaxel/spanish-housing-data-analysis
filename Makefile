@@ -123,6 +123,7 @@ verify:
 	uv run python explorations/proh_households.py --check
 	uv run python explorations/ecp_households.py --check
 	uv run python explorations/occupancy_catalonia.py --check
+	uv run python explorations/serpavi_deposit_contrast.py --check
 	uv run python scripts/fetch_vut_municipal.py --check
 	uv run python explorations/vut_stock.py --check
 	uv run python explorations/vut_rent_overlap.py --check

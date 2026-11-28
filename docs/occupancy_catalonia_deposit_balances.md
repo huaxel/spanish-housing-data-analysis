@@ -43,6 +43,31 @@ narrowed in the same direction over its shorter window, from **+26,845** in
 A positive balance is still a positive flow: the register records fewer new
 deposits than in 2021, not fewer active contracts than in 2024.
 
+## The declared rental stock kept growing while the deposit flow fell
+
+A falling deposit flow is not a shrinking rented stock, and an independent
+source says so. SERPAVI counts rental contracts declared in the income-tax
+files; for Barcelona city that count rose every year from **82,608** in 2011
+to **143,159** in 2024, **73.3%** higher, of which **140,872** were in
+collective housing and **2,287** in single-family homes.
+
+| Barcelona city | 2019 | 2021 | 2024 |
+| --- | ---: | ---: | ---: |
+| Declared rental contracts (SERPAVI, stock) | 127,241 | 133,074 | 143,159 |
+| New habitual deposit filings (INCASÒL, flow) | 51,294 | 57,158 | 32,903 |
+
+Through the last year both series cover, the declared contract stock was
+still rising while new filings fell. The measures are not interchangeable:
+SERPAVI counts contracts in force at some point in the tax year, INCASÒL
+counts registrations and cancellations of deposits, and nothing links a
+filing to a contract, so their ratio is not a turnover, compliance or
+market-share rate.
+
+What the contrast rules out is the reading that Barcelona's rented stock was
+shrinking. It does not say why fewer new deposits were filed: longer
+tenancies, fewer new contracts, and fewer registrations are all consistent
+with these two series.
+
 ## First half of 2026: more new deposits in Barcelona, but a smaller balance
 
 | Barcelona city, habitual rentals | January–June 2025 | January–June 2026 |
