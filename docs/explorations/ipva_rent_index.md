@@ -1,82 +1,91 @@
-# Does an independent official series corroborate SERPAVI's municipal rents?
+# How closely do IPVA and SERPAVI agree on municipal rent growth?
 
-SERPAVI (MIVAU's exploitation of rental *fianzas*) is the repo's only
-municipal rent **level** series, and every municipal rent claim rests on it.
-The only cross-check so far is the DIBA comparison for Barcelona province.
-INE publishes a second municipal rent series from a different instrument:
-the **IPVA** (`Índice de Precios de Vivienda en Alquiler`, operation 432,
-table 59060) — a quality-controlled price index for the 752 municipios above
-10,000 inhabitants, annual, 2012–2023.
+Among **701 municipalities** observed in both 2019 and 2024, the median increase
+was **11.62%** in INE’s rent price index (IPVA) and **22.09%** in MIVAU’s
+SERPAVI rent per square metre. Municipalities with larger increases by one
+measure generally also had larger increases by the other (Spearman **0.758**).
+That agreement in ordering does not establish agreement on the size of a rise.
 
-The two answer different questions, so only **changes** are comparable: an
-index has no level in euros, and SERPAVI's median of filed contracts is not a
-quality-controlled index. The test is whether the municipal *trajectories*
-agree.
-
-## Method
-
-- Both sides are name-keyed (the IPVA publishes no municipality codes), joined
-  through `muni_names.muni_key` with a bilingual fallback that retries each half
-  of `Alicante/Alacant`-style names. Of the 752 IPVA municipios, **686** match a
-  SERPAVI row and **66** do not (mostly Valencian and Balearic bilingual names
-  and small Costa Brava municipalities); nothing is dropped silently.
-- Two windows are reported, 2013→2023 and 2019→2023, so a result does not hinge
-  on one base year.
-- Agreement is measured twice: **rank** (Spearman — do they order municipios the
-  same way?) and **level** (the per-municipality gap in percentage points).
-
-## What the two series say
-
-| Window | n | IPVA median change | SERPAVI median change | Pearson | Spearman | Gap (IPVA − SERPAVI) |
+| Window | Paired municipalities | Median IPVA change | Median SERPAVI change | Pearson | Spearman | Median paired gap (IPVA − SERPAVI) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 2013→2023 | 678 | +15.8% | +32.1% | +0.618 | +0.670 | −16.2 pp (p10 −27.3, p90 −7.6) |
-| 2019→2023 | 683 | +8.0% | +16.1% | +0.679 | +0.690 | −8.0 pp (p10 −13.9, p90 −4.2) |
+| 2013→2023 | 697 | +15.82% | +32.51% | +0.634 | +0.679 | −16.54 pp |
+| 2019→2023 | 702 | +8.03% | +16.15% | +0.690 | +0.703 | −8.02 pp |
+| 2019→2024 | 701 | +11.62% | +22.09% | +0.753 | +0.758 | −10.64 pp |
 
-They agree on **direction and ordering** (ρ ≈ 0.67–0.69, r ≈ 0.62–0.68) and
-disagree on **magnitude**: SERPAVI's municipal median rent rises roughly twice
-as much as INE's index over the same window. The gap is not a base-year
-artefact — it survives when both windows are cut.
+The gap is calculated **within each municipality before taking the median**;
+it need not equal the difference of the two displayed medians. Each municipality
+counts once; these are not national rent growth rates.
 
-## Why the gap is not a constant offset
+## Do the measures pick the same faster-rising town within a province?
 
-Sorting municipios by SERPAVI's own change splits the gap cleanly (2013→2023):
+Yes, more often than not. In 2019→2024, IPVA and SERPAVI picked the same town
+in **8,046 of 10,786** within-province pairs (**74.60%**). That compares with
+**79.35%** of **230,379** pairs drawn from different provinces, using exactly
+the same **695 municipalities**. Neither measure tied on any pair in this
+window. The two measures agree on local ordering more often than not, even
+without comparing municipalities across provincial boundaries.
 
-| Quartile | SERPAVI change | Gap (IPVA − SERPAVI) |
-| --- | ---: | ---: |
-| 1 (weakest) | +21.0% | −9.6 pp |
-| 2 | +28.2% | −14.0 pp |
-| 3 | +34.9% | −17.6 pp |
-| 4 (strongest) | +45.9% | −24.6 pp |
+| Window | Same province | Different provinces | Equal weight per province (within) | Equal weight per province pair (between) |
+| --- | ---: | ---: | ---: | ---: |
+| 2013→2023 | 66.50% | 75.66% | 66.32% | 74.68% |
+| 2019→2023 | 73.53% | 76.84% | 71.82% | 78.81% |
+| 2019→2024 | 74.60% | 79.35% | 74.87% | 81.40% |
 
-Where SERPAVI rises most, the disagreement is largest. A constant instrument
-offset would leave the gap flat across quartiles; this pattern is what
-composition or quality drift looks like — the mix of dwellings and contracts
-behind a median of filed deposits can change faster than a quality-controlled
-index — but the decomposition is not identified here (no dwelling-level mix in
-either series).
+For each window, group the matched towns by the province prefix of the INE
+code. Exclude a town from **both** comparisons if no other town in its
+province is matched. In 2019→2024 this leaves 695 of the 701 matched towns.
+Compare the percentage changes for every unordered pair; omit a pair from the
+rate if either measure ties. The same- and different-province rates give each
+comparable pair one vote, so provinces with more observed towns contribute more
+pairs. The last two columns average rates across provinces and unordered pairs
+of provinces, respectively. In 2019→2024, **42 provinces** contribute local
+comparisons. Even a narrow difference in growth counts as an ordering; these
+are descriptive rates, not measures of economic significance or accuracy. Many
+pairs share a town and are not independent trials.
 
-## What this changes, and what it does not
+## What is being compared?
 
-- **Supported:** SERPAVI's municipal *ordering* is corroborated by an
-  independent official instrument. Claims that compare municipios ("this market
-  is tighter than that one") are not overturned.
-- **Weakened:** any claim that treats SERPAVI's municipal percentage changes as
-  precise magnitudes, and any chained calculation that multiplies them over
-  several years. The repo's own caveat that SERPAVI is a proxy already said this
-  qualitatively; this is the quantitative version, and the divergence grows with
-  the size of the move.
-- **Not claimed:** that either series is wrong. The IPVA ends in 2023, covers
-  only municipios above 10,000 inhabitants and carries INE's own weighting
-  choices; SERPAVI is a median of filed contracts with nationwide coverage. Both
-  are published official statistics measuring different objects.
+- [INE’s IPVA](https://www.ine.es/dyngs/Prensa/IPVA2024.htm) is a chained
+  price index for rented primary residences in common fiscal territory (it
+  excludes País Vasco and Navarra). The municipal table covers municipalities
+  above 10,000 inhabitants; smaller places are grouped. We use the overall
+  municipal index, not an index restricted to apartments.
+- The SERPAVI measure is the annual median rent in €/m²/month for collective
+  housing (`ALQM2_LV_M_VC`). [AEAT describes its tax and cadastral inputs](https://sede.agenciatributaria.gob.es/Sede/estadisticas/estadisticas-impuesto/estadistica-viviendas-declaradas-irpf/metodologia/preguntas-frecuentes.html).
+  IPVA also uses AEAT records: these are **different statistics with overlapping
+  source data**, not independent observations of the market. An index level
+  cannot be compared directly with a euro rent.
+- [INE table 59060](https://www.ine.es/jaxiT3/Tabla.htm?t=59060) supplies
+  five-digit municipality codes in its JAXI CSV. All **718** codes with a
+  published index somewhere in 2011–2024 occur in the SERPAVI measure in at
+  least one year. The table above requires both series at *both endpoints*;
+  missing data are not filled. The national and provincial remainder rows
+  never enter the join. Equal percentage changes receive average ranks.
+
+## Why might the amounts diverge?
+
+Over 2013→2023 the median paired gap ranges from **−9.50 pp** in the quartile
+with the smallest SERPAVI increases to **−24.98 pp** in the quartile with the
+largest. Because the gap subtracts the same SERPAVI change used for sorting,
+this pattern alone cannot diagnose composition bias. Coverage, changes in the
+mix of rented dwellings, and the index construction can all matter. Neither
+series tells us which factor explains how much.
+
+**Correction (2026-11-27):** The previous comparison joined place names. Some
+names mapped to the same rental series, and a provincial remainder could map
+to a city. Its coverage denominator also counted aggregate labels as municipalities.
+The table above replaces that comparison, retains both historical windows and
+adds the 2024 endpoint. The rank calculation now averages ties; on the old
+samples that fix alone did not change either reported correlation at three decimals.
 
 ## Reproduce
 
-```bash
-uv run python scripts/fetch_ipva.py --offline
+```sh
+uv run python scripts/fetch_ipva.py          # first download; --offline uses the pinned CSV
 uv run python explorations/ipva_rent_index.py
+uv run python scripts/fetch_ipva.py --check
+uv run python explorations/ipva_rent_index.py --check
 ```
 
-Pinned input: `data/raw/ipva_municipal_59060.json` (table 59060, 2012–2023).
-Output artifact: `artifacts/ipva_rent_index.json`; `--check` verifies it against
-the pinned parquet and the marts.
+Inputs: `data/raw/ipva_municipal_59060.csv` and the `serpavi_municipal` table
+in `data/processed/marts.duckdb`. Output: `artifacts/ipva_rent_index.json`.

@@ -42,23 +42,21 @@ coverage across all specifications or account for measurement/model bias.
 
 ## Do two official rent series even agree?
 
-Measurement bias is not only sampling variance. SERPAVI is a median of filed
-rental contracts (MIVAU) and carries every municipal rent claim in this repo;
-INE's IPVA is an independent municipal rent price index for the 752 municipios
-above 10,000 inhabitants. Both are official; they are not the same object, so
-only changes are comparable.
+The two official series compare different quantities. SERPAVI reports the
+median rent per square metre of collective housing; IPVA is a rent price index
+covering both collective and single-family housing. Both use tax data, so this
+is a check across measures, not independent source validation. Match official
+municipality codes with published observations at both ends of each window:
 
-| Window | n | IPVA median change | SERPAVI median change | Pearson | Spearman | Gap (IPVA − SERPAVI) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 2013→2023 | 678 | +15.8% | +32.1% | +0.618 | +0.670 | −16.2 pp (p10 −27.3, p90 −7.6) |
-| 2019→2023 | 683 | +8.0% | +16.1% | +0.679 | +0.690 | −8.0 pp (p10 −13.9, p90 −4.2) |
+| Window | Municipalities | IPVA median change | SERPAVI median change | Spearman | Median paired gap (IPVA − SERPAVI) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 2013→2023 | 697 | +15.82% | +32.51% | +0.679 | −16.54 pp |
+| 2019→2023 | 702 | +8.03% | +16.15% | +0.703 | −8.02 pp |
+| 2019→2024 | 701 | +11.62% | +22.09% | +0.758 | −10.64 pp |
 
-They rank municipios similarly and disagree on magnitude by roughly a factor of
-two, and the gap widens where SERPAVI itself rises most (−9.6 pp in the weakest
-quartile against −24.6 pp in the strongest). That is the signature of composition
-or quality drift rather than a fixed instrument offset. Reading any SERPAVI
-municipal percentage change as a precise magnitude, or chaining several of them,
-inherits that divergence; see [the cross-check](explorations/ipva_rent_index.md).
+The ordering of rent growth is similar, but growth in the SERPAVI median is
+roughly twice as large. That does not establish which measure is closer to a
+constant-quality rent change in any particular town. See [methods and coverage](explorations/ipva_rent_index.md).
 
 ## Exploratory magnitude control
 

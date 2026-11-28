@@ -1,33 +1,18 @@
-"""Fetch INE's rental price index at municipal grain (IPVA, operation 432, table 59060).
+"""Pin INE IPVA table 59060: annual municipal rent price indices and variations.
 
-`Índice de Precios de Vivienda en Alquiler`, municipal cut: annual index levels
-and annual variation for the 764 municipios above the 10,000-inhabitant
-threshold INE uses for this table, 2012–2023. The table is name-keyed — it
-publishes no municipality code — so joins go through
-`spanish_housing.muni_names.muni_key` and the exploration reports the coverage
-it achieves (it is not a silent inner join).
-
-Why it matters: SERPAVI (MIVAU tax-deposit exploitation) is the repo's only
-municipal rent *level* series. The IPVA is a second official municipal rent
-series produced from a different instrument (price index, not median of filed
-contracts), so it can test whether SERPAVI's municipal trajectory is
-independently corroborated rather than assumed.
-
-Semantics: an index of asking/paid rent prices, quality-controlled by INE and
-weighted by its own dwelling mix; NOT a median of signed contracts, and not
-comparable to SERPAVI's level in absolute terms. Only changes are comparable,
-and only up to 2023 (the last year published here).
-
-Writes data/raw/ipva_municipal_59060.json (byte evidence) +
-data/raw/parquet/ipva_municipal.parquet. --offline rebuilds from the pinned
-JSON; --check verifies pins and exact derivation without writing.
+JAXI supplies official municipality codes, unlike the series names in WSTEMPUS.
+Keep national and provincial remainder observations separately from municipalities.
+--offline derives parquet from the pinned bytes; --check verifies both pins and rows.
 """
 
 from __future__ import annotations
 
 import argparse
-import json
+import csv
+import io
+import re
 import sys
+import urllib.request
 from datetime import date
 from pathlib import Path
 
@@ -35,127 +20,133 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
-from spanish_housing import ine_api, manifest  # noqa: E402
+from spanish_housing import manifest  # noqa: E402
 from spanish_housing.data_paths import RAW, ROOT  # noqa: E402
 
-TABLE_ID = 59060
-RAW_JSON = RAW / "ipva_municipal_59060.json"
-PARQUET = RAW / "parquet" / "ipva_municipal.parquet"
+URL = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/59060.csv"
+RAW_CSV = RAW / "ipva_municipal_59060.csv"
+PARQUET = RAW / "parquet/ipva_municipal.parquet"
 SCHEMA = pa.schema(
     [
-        ("municipio", pa.string()),
+        ("codigo_ine", pa.string()),
+        ("territorio", pa.string()),
+        ("nivel", pa.string()),
         ("medida", pa.string()),
         ("anyo", pa.int16()),
         ("valor", pa.float64()),
     ]
 )
 MEASURES = {"Índice": "indice", "Variación anual": "variacion"}
-ANNUAL_PERIODO = 28  # FK_Periodo for annual observations in this table
-NATIONAL = "Total Nacional"
 
 
-def parse(payload: list[dict]) -> list[dict]:
-    """Flatten '<municipio>. <medida>. Total.' series into long rows."""
-    if not isinstance(payload, list) or not payload:
-        raise ValueError(f"IPVA {TABLE_ID}: unexpected payload {type(payload).__name__}")
-    rows: list[dict] = []
-    for series in payload:
-        parts = [p.strip() for p in series["Nombre"].split(".") if p.strip()]
-        # Two label shapes coexist: "<municipio>. <medida>. Total." for the
-        # municipal cut and "Total Nacional. Total. <medida>." for the national
-        # aggregate. Locate the measure by name instead of by position.
-        found = [p for p in parts[1:] if p in MEASURES]
-        if len(found) != 1:
-            raise ValueError(f"IPVA: unexpected series name {series['Nombre']!r}")
-        municipio, medida = parts[0], MEASURES[found[0]]
-        for obs in series["Data"]:
-            if obs["FK_Periodo"] != ANNUAL_PERIODO:
-                raise ValueError(f"IPVA: non-annual period in {series['Nombre']!r}")
-            if obs.get("Valor") is None:
-                continue  # unpublished cell: dropped, never zero-filled
-            rows.append(
-                {
-                    "municipio": municipio,
-                    "medida": medida,
-                    "anyo": int(obs["Anyo"]),
-                    "valor": float(obs["Valor"]),
-                }
+def parse(data: bytes) -> list[dict]:
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline=""), delimiter=";")
+    if reader.fieldnames != ["Municipio", "Tipo de dato", "Periodo", "Total"]:
+        raise ValueError(f"IPVA: unexpected columns {reader.fieldnames}")
+    rows, seen = [], set()
+    for row in reader:
+        if None in row or None in row.values():
+            raise ValueError(f"IPVA: malformed row {reader.line_num}")
+        label = row["Municipio"].strip()
+        code = None
+        if label == "Total Nacional":
+            level = "nacional"
+        elif label.startswith("Resto "):
+            level = "resto_provincia"
+        elif match := re.fullmatch(r"([0-9]{5}) (\S.*)", label):
+            level = "municipio"
+            code, label = match.groups()
+        else:
+            raise ValueError(f"IPVA: unknown geography {label!r}")
+        measure = MEASURES.get(row["Tipo de dato"])
+        if measure is None or not re.fullmatch(r"[0-9]{4}", row["Periodo"]):
+            raise ValueError(f"IPVA: unexpected measure or annual period at row {reader.line_num}")
+        year = int(row["Periodo"])
+        key = (level, code or label, year, measure)
+        if key in seen:
+            raise ValueError(f"IPVA: duplicate observation {key}")
+        seen.add(key)
+        raw = row["Total"].strip()
+        if raw in ("", ".."):
+            continue  # unpublished, never a zero index or zero change
+        if not re.fullmatch(r"-?[0-9]+(?:,[0-9]+)?", raw):
+            raise ValueError(f"IPVA: invalid value {raw!r}")
+        value = float(raw.replace(",", "."))
+        if measure == "indice" and value <= 0:
+            raise ValueError(f"IPVA: nonpositive index {key}")
+        rows.append(
+            dict(
+                codigo_ine=code,
+                territorio=label,
+                nivel=level,
+                medida=measure,
+                anyo=year,
+                valor=value,
             )
-    rows.sort(key=lambda r: (r["municipio"], r["medida"], r["anyo"]))
-    keys = {(r["municipio"], r["medida"], r["anyo"]) for r in rows}
-    if len(keys) != len(rows):
-        raise ValueError("IPVA: duplicate municipio/medida/year rows")
-    years = sorted({r["anyo"] for r in rows})
-    if years[0] != 2012 or years[-1] != 2023:
-        raise ValueError(f"IPVA: expected years 2012-2023, got {years[0]}-{years[-1]}")
-    if len({r["municipio"] for r in rows}) < 500:
-        raise ValueError("IPVA: fewer than 500 municipios — table layout changed?")
+        )
     return rows
-
-
-def pinned_rows() -> list[dict]:
-    if not RAW_JSON.is_file():
-        raise SystemExit(f"IPVA: {RAW_JSON.relative_to(ROOT)} missing — run without --offline")
-    return parse(json.loads(RAW_JSON.read_text(encoding="utf-8")))
-
-
-def write_parquet(rows: list[dict]) -> None:
-    PARQUET.parent.mkdir(parents=True, exist_ok=True)
-    pq.write_table(pa.Table.from_pylist(rows, schema=SCHEMA), PARQUET)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--offline", action="store_true")
-    parser.add_argument("--check", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--offline", action="store_true")
+    mode.add_argument("--check", action="store_true")
     args = parser.parse_args()
-
+    raw_key, parquet_key = (str(p.relative_to(ROOT)) for p in (RAW_CSV, PARQUET))
+    pins = manifest.load()["sha256"]
+    if args.check or args.offline:
+        checked = [raw_key, parquet_key] if args.check else [raw_key]
+        missing, changed = manifest.check({k: pins.get(k, "") for k in checked})
+        if missing or changed:
+            raise SystemExit(f"IPVA: missing or changed pins: {missing + changed}")
+        data = RAW_CSV.read_bytes()
+    else:
+        with urllib.request.urlopen(URL, timeout=90) as response:
+            data = response.read()
+    rows = parse(data)
+    # Reject a truncated response before replacing either input. A new release
+    # may add years but must retain the complete published reference history.
+    indices = [r for r in rows if r["medida"] == "indice"]
+    national = {r["anyo"] for r in indices if r["nivel"] == "nacional"}
+    municipal = {r["anyo"] for r in indices if r["nivel"] == "municipio"}
+    if national != municipal or not set(range(2011, 2025)) <= national:
+        raise SystemExit("IPVA: missing national or municipal annual index history")
+    for y in national:
+        if sum(r["nivel"] == "municipio" and r["anyo"] == y for r in indices) < 500:
+            raise SystemExit(f"IPVA: too few municipal index observations in {y}")
+    table = pa.Table.from_pylist(rows, schema=SCHEMA)
     if args.check:
-        rows = pinned_rows()
-        if pq.read_table(PARQUET).to_pylist() != rows:
-            raise SystemExit("IPVA: parquet stale vs parser + pinned input")
-        munis = len({r["municipio"] for r in rows})
-        print(f"ipva: {len(rows)} municipio-measure-years, {munis} municipios; pins verified")
+        if not table.equals(pq.read_table(PARQUET)):
+            raise SystemExit("IPVA: parquet stale vs parser + pinned CSV")
+        print(f"ipva: {len(rows)} cells; input pins and coded rows verified")
         return
-
+    PARQUET.parent.mkdir(parents=True, exist_ok=True)
+    tmp = PARQUET.with_suffix(".tmp")
+    pq.write_table(table, tmp)
     if not args.offline:
-        payload = ine_api.get_table(TABLE_ID, date="20120101:20231231")
-        if isinstance(payload, dict):
-            raise SystemExit(f"IPVA {TABLE_ID}: {payload}")
-        rows = parse(payload)  # validate before replacing the pinned copy
-        tmp = RAW_JSON.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-        tmp.replace(RAW_JSON)
+        raw_tmp = RAW_CSV.with_suffix(".tmp")
+        raw_tmp.write_bytes(data)
+        raw_tmp.replace(RAW_CSV)
         manifest.record(
-            str(RAW_JSON.relative_to(ROOT)),
+            raw_key,
             {
-                "api": f"wstempus/DATOS_TABLA/{TABLE_ID}?date=20120101:20231231",
-                "publisher": "INE · Índice de Precios de Vivienda en Alquiler (IPVA), municipal",
-                "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59060",
+                "publisher": "INE · IPVA",
+                "url": URL,
                 "accessed": date.today().isoformat(),
-                "note": (
-                    "Municipios >10,000 habitantes only; name-keyed (no codes); "
-                    "annual index and annual variation 2012-2023"
-                ),
+                "note": "Coded municipal, national and province-remainder series",
             },
         )
-    rows = pinned_rows()
-    write_parquet(rows)
+    tmp.replace(PARQUET)
     manifest.record(
-        str(PARQUET.relative_to(ROOT)),
+        parquet_key,
         {
-            "publisher": "INE · IPVA municipal",
+            "publisher": "INE · IPVA",
             "accessed": date.today().isoformat(),
-            "note": "Derived from pinned ipva_municipal_59060.json by fetch_ipva.py",
+            "note": "Derived from pinned JAXI ipva_municipal_59060.csv",
         },
     )
-    munis = len({r["municipio"] for r in rows})
-    nacional = [r for r in rows if r["municipio"] == NATIONAL and r["medida"] == "indice"]
-    print(
-        f"ipva: {len(rows)} rows, {munis} municipios "
-        f"(national index 2023 = {nacional[-1]['valor'] if nacional else 'n/a'})"
-    )
+    print(f"ipva: {len(rows)} coded and aggregate cells; latest index year {max(national)}")
 
 
 if __name__ == "__main__":

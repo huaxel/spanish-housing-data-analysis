@@ -156,35 +156,54 @@ fue aceptado, no hay puntos probados que declarar (nulo, no cero).
 
 ## Cuántas viviendas turísticas estima el INE
 
-El panel de intensidad turística mide **flujo** (viajeros y pernoctaciones por
-residente). La [estadística experimental del INE](https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm)
+El panel de Barcelona emplea viviendas turísticas de la DIBA por habitante.
+Por separado, la [estadística experimental del INE](https://www.ine.es/experimental/viv_turistica/experimental_viv_turistica.htm)
 estima **stock**: en mayo de 2026, **341.001 viviendas turísticas** (**1,28%** de
 las viviendas censadas) y 1.714.702 plazas. Entre los municipios con un
-porcentaje positivo publicado y una etiqueta no ambigua, la mediana es
-**0,61%**, el percentil 90 llega a **3,40%** y el máximo a **33,33%**; el
-**5,34%** supera el 5%. Los diez mayores stocks concentran el **14,99%** del
-total asignable (Marbella, 6.987).
+porcentaje positivo publicado y código municipal, la mediana es
+**0,61%**, el percentil 90 llega a **3,38%** y el máximo a **33,33%**; el
+**5,30%** supera el 5%. Los diez mayores stocks concentran el **18,47%** del
+total asignable (Madrid, 10.836).
 
 El INE filtra anuncios de plataformas y elimina duplicados. Puede incluir
 alojamientos sin licencia y omitir otros que no se anuncian en las plataformas
-observadas: no es un registro de licencias ni un mínimo garantizado. Estas tablas
-no publican códigos municipales: **122** filas con etiquetas ambiguas quedan
-sin asignar. La parte asignada equivale al **84,52%** de la estimación nacional.
+observadas: no es un registro de licencias ni un mínimo garantizado. Los
+**8.131 códigos municipales** del fichero del INE coinciden con los del mapa
+del proyecto y cubren el **100%** de la estimación publicada de mayo. Es
+cobertura geográfica del dato, no cobertura del mercado ni de las rentas.
 Estas cifras no identifican un efecto sobre el alquiler residencial.
 Detalle en la [nota metodológica](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/vut_stock.md).
+En el [cruce nacional por código municipal](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/vut_rent_overlap.md),
+la relación con el alquiler de SERPAVI es más clara en niveles que en cambios.
+Entre 2022 y 2024, en los **703 municipios** donde se observan ambas medidas de
+alquiler, la correlación de rangos entre el cambio del porcentaje de viviendas
+turísticas y el crecimiento del alquiler es **0,120** con SERPAVI y **0,104**
+con el índice de precios del INE (IPVA). Ese periodo cruza un cambio de censo.
+Si se divide el aumento o descenso del número de viviendas turísticas por un
+mismo parque municipal (el del censo de 2021), las correlaciones suben a
+**0,167** y **0,133**, respectivamente, en los mismos municipios. La relación
+sigue siendo débil también al excluir Andalucía, donde el INE revisó el
+recuento de agosto de 2024. Al separar los periodos tampoco aparece una
+relación de signo estable: para el mismo crecimiento del alquiler de 2023 a
+2024, la correlación es ligeramente negativa con el cambio turístico de 2020
+a 2021 y ligeramente positiva con el de 2021 a 2022, tanto con SERPAVI como
+con IPVA. Si se mide el cambio neto de agosto de 2020 a agosto de 2022 en
+esos mismos municipios, sin usar el recuento intermedio, la correlación con
+el crecimiento del alquiler de 2023 a 2024 se acerca a cero en ambas series.
+Ninguno de estos contrastes estima el efecto de las viviendas
+turísticas sobre los precios.
 
 ## Dos series oficiales de alquiler que no coinciden en magnitud
 
-La incertidumbre no es solo muestral. SERPAVI (mediana de contratos depositados,
-MIVAU) sostiene todas las cifras municipales de alquiler del repositorio. INE
-publica además el **IPVA**, un índice de precios de alquiler independiente para
-752 municipios de más de 10.000 habitantes. Solo son comparables sus **cambios**:
-entre 2013 y 2023 la mediana municipal sube **+15,8%** según el IPVA y **+32,1%**
-según SERPAVI, con un acuerdo de orden moderado (Spearman **0,670**) pero una
-brecha mediana de **−16,2 pp** que se amplía donde SERPAVI más sube (−9,6 pp en el
-cuartil más débil, −24,6 pp en el más fuerte). Leer un cambio municipal de SERPAVI
-como magnitud precisa —o encadenar varios— hereda esa divergencia; el detalle está
-en [la comprobación cruzada](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/ipva_rent_index.md).
+En los **701 municipios** con datos en 2019 y 2024, la mediana de las subidas
+es **+11,62%** según el índice de precios de alquiler del INE (IPVA) y
+**+22,09%** según la renta mediana por metro cuadrado de vivienda colectiva
+(SERPAVI). El orden de las subidas es parecido (Spearman **0,758**), pero la
+brecha mediana dentro de cada municipio es de **−10,64 puntos porcentuales**
+(IPVA menos SERPAVI). El IPVA incluye también viviendas unifamiliares. Ambas
+estadísticas usan fuentes tributarias: ni su acuerdo prueba que sean dos
+mediciones independientes ni la brecha identifica su causa. Véanse los
+[otros periodos y el cruce por código municipal](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/explorations/ipva_rent_index.md).
 
 ## Qué sigue sin resolverse
 
