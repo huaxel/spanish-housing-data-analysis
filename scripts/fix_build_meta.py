@@ -20,6 +20,10 @@ DESCRIPTIONS = {
         "Precios, stock de vivienda y población en España 2007–2025: "
         "IPV, valor tasado, viviendas por 1.000 habitantes, esfuerzo de renta y crédito."
     ),
+    "alquiler/index.html": (
+        "Registro del alquiler en España: contratos declarados en el IRPF (SERPAVI "
+        "2011–2024) frente a altas y bajas de fianzas (INCASÒL), con sus límites."
+    ),
     "ccaa/index.html": (
         "Detalle por comunidades autónomas: precios, stock por habitante, "
         "esfuerzo de renta y crédito hipotecario 2007–2025."

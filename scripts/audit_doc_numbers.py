@@ -32,6 +32,7 @@ COVERED_DOCS = [
     "docs/ecv_joint_scope.md",
     "docs/purchase_scenarios.md",
     "docs/uncertainty.md",
+    "evidence/pages/alquiler.md",
     "evidence/pages/incertidumbre.md",
     "docs/cadastre_stock.md",
     "README.md",
@@ -297,6 +298,9 @@ ALLOW = {
         (69.0, "RMDVP table-01 months pulled 2020-12..2026-08, verified file count"),
         (543.0, "RMDVP latest-month listed municipalities, verified file count"),
         (785.0, "Andalusian municipalities (official count), coverage denominator"),
+    ],
+    "evidence/pages/alquiler.md": [
+        (20000.0, "selection threshold for the growth chart (analysis rule, not a result)"),
     ],
     "evidence/pages/incertidumbre.md": [
         (1.96, "normal critical value in the interval construction the page describes"),
@@ -1326,6 +1330,7 @@ def audit_total() -> int:
 # Pages that write thousands as 607.250. Without normalising, the number reads as
 # 607.25 and can only be allowlisted, which unpins it from the audited claim.
 SPANISH_THOUSANDS = {
+    "evidence/pages/alquiler.md",
     "evidence/pages/deficit.md",
     "evidence/pages/incertidumbre.md",
     "docs/deficit_2025_methods.md",

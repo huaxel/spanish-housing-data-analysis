@@ -25,7 +25,8 @@ causas ni miden viviendas disponibles para cada hogar.
 [2. Comunidades autónomas](/ccaa/) y [comparación](/comparar/) →
 [3. Municipios](/municipios/) → [4. Acceso: stock no es disponibilidad](/acceso/).
 
-**Explora una pregunta concreta:** [alquiler municipal](/renta/) ·
+**Explora una pregunta concreta:** [el registro del alquiler](/alquiler/) ·
+[alquiler municipal](/renta/) ·
 [alquiler frente a ingresos](/renta-ingresos/) ·
 [vivienda vacía, Censo 2021](/vacancia/) ·
 [escenario hipotético de compra](/compra/) ·
