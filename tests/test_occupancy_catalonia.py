@@ -15,10 +15,58 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "explorations"))
 import occupancy_catalonia as occ  # noqa: E402
 
+INPUTS = [
+    occ.MEDIATION_FLOW_MUN,
+    occ.MEDIATION_FLOW_CAT,
+    occ.MEDIATION_ACTIVE_MUN,
+    occ.MEDIATION_ACTIVE_CAT,
+    occ.SEASONAL_MUN,
+    occ.SEASONAL_CAT,
+    occ.SALDOS_MUN,
+    occ.SALDOS_HT,
+    *occ.IDESCAT.values(),
+]
+
 
 @pytest.fixture(scope="module")
 def data():
+    """Built artifact.
+
+    CI runs `make test` without the git-ignored publisher files, so the
+    workbook-level checks skip there; `make verify` (local, after fetch) runs the
+    same build via the artifact --check. The pure-helper tests below always run.
+    """
+    missing = [str(path.relative_to(ROOT)) for path in INPUTS if not path.exists()]
+    if missing:
+        pytest.skip(f"pinned raw inputs absent: {missing[0]} (run make fetch)")
     return occ.build()
+
+
+def test_switch_decomposition_splits_continuers_from_switchers():
+    header = ["Codi", "Municipi", 2024, 2025]
+    towns = [
+        ("08001", "A", 10, 4),  # positive both years
+        ("08002", "B", 0, 7),  # switcher: enters
+        ("08003", "C", 5, 0),  # switcher: exits
+        ("08004", "D", 3, 3),  # positive both, no change
+        ("08005", "E", 0, 0),  # never positive
+    ]
+    out = occ.switch_decomposition(towns, header, (2024, 2025))
+    assert out == {
+        "positive_first": 3,
+        "positive_last": 3,
+        "change_both_positive": -6,
+        "change_switchers": 2,
+        "net_change": -4,
+    }
+    assert out["change_both_positive"] + out["change_switchers"] == out["net_change"]
+
+
+def test_add_and_triple_sum_the_selected_quarters_only():
+    cells = {"a": {"2024": {"1T": (10, 5, 5), "2T": (1, 2, -1), "3T": (0, 0, 0), "4T": (3, 1, 2)}}}
+    assert occ.add(cells, "a", [(2024, "1T"), (2024, "2T")]) == (11, 7, 4)
+    assert occ.add(cells, "a", [(2024, "4T")]) == (3, 1, 2)
+    assert occ.triple((11, 7, 4)) == {"entries": 11, "cancellations": 7, "balance": 4}
 
 
 def test_every_input_is_pinned_in_the_manifest(data):
