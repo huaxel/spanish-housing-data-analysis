@@ -58,6 +58,24 @@ tolerance (worst 2011 disagreement 2.11%); the 2021 ECH→ECP seam makes
 the 2020→2021 step non-comparable. Read the measured 2011→2025 movement
 (1.40→1.44→1.39) as the comparable arc, not the proxy-anchored endpoints.
 
+## Rental registers: activity, not availability
+
+The tightening story above is stock and households. The rental side has its
+own registers, and they are the easiest numbers here to misread. In Barcelona
+the contracts declared in the income-tax files rose every year from **82,608**
+(2011) to **143,159** (2024), **73.3%** higher, while INCASÒL's new habitual
+deposit filings fell from **57,158** (2021) to **30,789** (2025) and the net
+balance narrowed to **+534** in 2025 — the smallest positive year in the
+window.
+
+The two series do not reconcile year by year (**2024** within **94**, **2020**
+by sign), so the register's balance is registry activity, not the annual change
+in rented homes, and neither series counts homes on offer. Fewer filings are
+consistent with longer tenancies, fewer new contracts, or fewer registrations;
+these data cannot separate those. Details:
+[deposit balances](occupancy_catalonia_deposit_balances.md),
+[what is not available](occupancy_availability.md).
+
 ## Causal extension: withdrawn after independent read (design A is a negative result)
 
 Removed 2026-10-07 on the milestone-5 independent read (verdict: REMOVE;
