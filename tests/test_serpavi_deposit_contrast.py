@@ -98,3 +98,28 @@ def test_the_note_states_the_gap_rather_than_equating_the_two_series():
     text = (ROOT / "docs/occupancy_catalonia_deposit_balances.md").read_text()
     assert "net balance is not the annual change in rented stock" in text
     assert "registry activity" in text
+
+
+def test_the_municipal_spread_agrees_with_its_own_selection_rule(data):
+    spread = data["municipal_spread"]
+    selection = spread["selection"]
+    assert selection["min_contracts_last_year"] == 1000
+    assert selection["years"] == [2015, 2024]
+    assert spread["n_municipios"] == spread["rising"], "every selected municipality rose"
+    assert 0 < spread["monotone"] <= spread["n_municipios"]
+    assert spread["min_growth_pct"] > 0
+    assert spread["median_growth_pct"] >= spread["min_growth_pct"]
+    assert len(spread["largest"]) == 10
+    stocks = [row["last"] for row in spread["largest"]]
+    assert stocks == sorted(stocks, reverse=True), "largest list must be ordered by 2024 stock"
+
+
+def test_the_largest_growth_figures_match_their_endpoints(data):
+    for row in data["municipal_spread"]["largest"]:
+        assert row["growth_pct"] == round(100.0 * (row["last"] / row["first"] - 1), 1)
+
+
+def test_the_note_keeps_the_two_cautions_about_the_spread():
+    prose = " ".join((ROOT / "docs/occupancy_catalonia_deposit_balances.md").read_text().split())
+    assert "better declaration compliance raises the count" in prose
+    assert "single-family-dominated stocks" in prose

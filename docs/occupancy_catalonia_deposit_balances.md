@@ -68,6 +68,24 @@ shrinking. It does not say why fewer new deposits were filed: longer
 tenancies, fewer new contracts, and fewer registrations are all consistent
 with these two series.
 
+The rise is not a Barcelona story. Among the **308** municipalities with a
+complete collective-housing series (**2015–2024**) and at least **1,000**
+declared contracts in 2024, **all 308** ended higher than they started and
+**295** rose in every single year; the median increase was **59.4%**, the
+smallest **17.9%**. The largest declared markets and their growth:
+
+| Municipality | 2015 | 2024 | Change |
+| --- | ---: | ---: | ---: |
+| Madrid | 191,435 | 300,447 | +56.9% |
+| Barcelona | 104,971 | 140,872 | +34.2% |
+| València | 39,267 | 65,742 | +67.4% |
+
+Two cautions survive that spread. These are contracts *declared* in the
+income-tax files, so better declaration compliance raises the count without
+more rented homes; and the municipalities below the threshold are excluded,
+where suppression and single-family-dominated stocks make the series
+uninformative.
+
 ## The register's net balance is not the annual change in rented stock
 
 With both series in hand, the obvious temptation is to treat the register's

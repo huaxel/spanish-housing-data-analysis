@@ -21,6 +21,12 @@ declared contract stock was still rising while new filings fell, so the
 falling deposit flow is not by itself evidence that Barcelona's rented stock
 shrank.
 
+The same increase is not a Barcelona story: across the 308 municipalities
+with a complete collective-housing series (2015-2024) and at least 1,000
+declared contracts in 2024, every one rose and 295 rose in every single year.
+Compliance can raise the count without more rented homes, so this is a
+tax-declared series, not a vacancy-adjusted rental stock.
+
 Only Barcelona city is published as a level: SERPAVI suppresses cells for
 small municipalities, so a regional sum would move with coverage as well as
 with stock.
@@ -73,6 +79,71 @@ def contracts(table: duckdb.DuckDBPyConnection) -> dict[str, dict[str, int]]:
     return out
 
 
+def municipal_spread(table: duckdb.DuckDBPyConnection) -> dict:
+    """How general the declared-contract rise is across municipalities.
+
+    Restricted to municipalities with a complete collective-housing series and
+    at least 1,000 contracts in the last year: below that, suppression and
+    single-family-dominated stocks dominate the series.
+    """
+    rows = table.execute(
+        f"""
+        WITH series AS (
+            SELECT codigo, anyo, valor::BIGINT AS value
+            FROM serpavi_municipal
+            WHERE medida = '{COLLECTIVE}' AND anyo BETWEEN 2015 AND 2024
+              AND valor = CAST(valor AS BIGINT)
+        ), complete AS (
+            SELECT codigo FROM series GROUP BY 1 HAVING count(*) = 10
+        ), agg AS (
+            SELECT s.codigo, min(s.value) AS low, max(s.value) AS high,
+                   any_value(CASE WHEN s.anyo = 2015 THEN s.value END) AS first_value,
+                   any_value(CASE WHEN s.anyo = 2024 THEN s.value END) AS last_value
+            FROM series s JOIN complete USING (codigo)
+            GROUP BY 1
+        )
+        SELECT a.codigo, a.first_value, a.last_value, a.low, a.high, m.municipio
+        FROM agg a
+        JOIN (SELECT DISTINCT codigo, municipio FROM serpavi_municipal) m USING (codigo)
+        WHERE a.last_value >= 1000
+        ORDER BY a.last_value DESC
+        """
+    ).fetchall()
+    assert rows, "no municipalities with a complete series"
+    min_contracts = 1000
+    rising = [row for row in rows if row[2] > row[1]]
+    monotone = [row for row in rows if row[2] == row[4] and row[1] == row[3]]
+    growth = sorted(100.0 * (row[2] - row[1]) / row[1] for row in rows)
+    median_growth = round(
+        0.5 * (growth[len(growth) // 2 - 1] + growth[len(growth) // 2])
+        if len(growth) % 2 == 0
+        else growth[len(growth) // 2],
+        1,
+    )
+    return {
+        "selection": {
+            "measure": COLLECTIVE,
+            "years": [2015, 2024],
+            "complete_series_required": True,
+            "min_contracts_last_year": min_contracts,
+        },
+        "n_municipios": len(rows),
+        "rising": len(rising),
+        "monotone": len(monotone),
+        "median_growth_pct": median_growth,
+        "min_growth_pct": round(growth[0], 1),
+        "largest": [
+            {
+                "municipio": row[5],
+                "first": row[1],
+                "last": row[2],
+                "growth_pct": round(100.0 * (row[2] - row[1]) / row[1], 1),
+            }
+            for row in rows[:10]
+        ],
+    }
+
+
 def build() -> dict:
     deposits = json.loads(DEPOSITS.read_text())
     history = deposits["balances"]["history"]
@@ -84,6 +155,14 @@ def build() -> dict:
         stock = contracts(table)
     finally:
         table.close()
+
+    table = duckdb.connect(str(MARTS), read_only=True)
+    try:
+        spread = municipal_spread(table)
+    finally:
+        table.close()
+    assert spread["n_municipios"] == spread["rising"], spread["n_municipios"]
+    assert spread["monotone"] >= spread["n_municipios"] - 20, spread["monotone"]
 
     totals = [stock[str(year)]["total"] for year in range(2011, 2025)]
     assert totals == sorted(totals), "SERPAVI contract stock must be non-decreasing"
@@ -153,6 +232,7 @@ def build() -> dict:
         },
         "overlap_years": overlap_years,
         "reconciliation": reconciliation,
+        "municipal_spread": spread,
         "verdicts": {
             "serpavi_stock_rose_every_year_2011_2024": True,
             "serpavi_overlap_year": int(overlap),
