@@ -2,15 +2,22 @@
 
 The `/deficit/` page compares household growth, finished dwellings and net
 modelled stock growth over the existing exploration's two calendar-year
-windows. The page itself adds no causal estimator, forecast, tourist
-adjustment or source fetch beyond the exploration's inputs, and keeps its
-published-number comparisons; see [the original note](explorations/deficit_vivienda.md).
+windows. The interactive tables remain tied to the original exploration;
+see [the original note](explorations/deficit_vivienda.md). The additional annual
+and household-composition checks are documented separately in the
+[2025 methods note](deficit_2025_methods.md). Neither analysis estimates causal
+effects or forecasts housing need.
 
 The completion inputs were corrected on 2026-11-26 (see [the original
 note](explorations/deficit_vivienda.md#correction-2026-11-26-protected-completions)).
 With them the two national residuals are close. That is not independent
-confirmation: the park estimate itself incorporates construction activity and
-may draw on the same administrative records (not checked here).
+confirmation. The [MIVAU stock README](https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/Info/Readme_VDP002_01.pdf)
+explicitly includes completions as an inflow and names the free-market and
+protected housing statistics as sources. It also includes additions from
+rehabilitation and removes dwellings that leave the stock. The README does not
+provide a cell-by-cell reconciliation of the published monthly completion
+figures to the provincial stock estimates. The [source comparison](deficit_2025_methods.md#qué-información-comparten-las-dos-medidas-de-oferta)
+distinguishes documented overlap from unknown implementation details.
 
 ## Timing contract
 

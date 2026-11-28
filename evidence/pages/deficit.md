@@ -13,6 +13,19 @@ ni cuánto bajarían los precios.
 [Reportaje](/reportaje/) · [Tu municipio](/perfil/) · [Stock y acceso](/acceso/) ·
 [Panorama nacional](/)
 
+## Qué cambió en 2025
+
+- **Se amplió la brecha.** El aumento de hogares superó al del parque en
+  **146.141**, frente a **103.992** en 2024.
+- **El cambio de tamaño de los hogares fue el mayor componente del repunte.**
+  En el desglose contable, aportó **+49.878** a una subida de **42.149**
+  del saldo. No es una estimación causal.
+- **El repunte también se ve al restar las terminadas.** Con esa medida, la
+  brecha aumentó en **41.948**. El parque incorpora las terminadas, según el
+  Ministerio, así que no son comprobaciones independientes.
+
+[Desglose, fuentes y comprobaciones](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/deficit_2025_methods.md).
+
 **Corrección (26 de noviembre de 2026).** Antes se usaban unas cifras de
 vivienda protegida terminada muy inferiores a las del boletín del propio
 Ministerio (2024: 1.134 frente a 14.371). Con las calificaciones definitivas,
@@ -89,17 +102,21 @@ extremos del año natural 2025: por eso la ventana 2021–2025 usa ese dato de
 enero junto al parque de diciembre de 2025. Es un aumento neto observado,
 no una proyección ni un recuento de hogares que buscan vivienda.
 
+Los datos trimestrales de octubre describen cambios en el tamaño y la
+composición de los hogares, pero no se combinan con el parque de diciembre.
+[Ver la comprobación demográfica](https://github.com/huaxel/spanish-housing-data-analysis/blob/main/docs/deficit_2025_methods.md#octubre-composición-de-los-hogares-no-un-nuevo-saldo-de-parque).
+
 Fuentes: hogares ECP (INE), a principios de año; parque modelado (MIVAU), a
 fin de año; terminadas mensuales MIVAU, sumadas por año natural: vivienda
 libre más calificaciones definitivas de vivienda protegida, el criterio del
 [boletín anual 2024 del Ministerio](https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/vivienda-agenda-urbana/Documents/2025/040725-ObservatoriodeviviendaysueloBoletnanual24.pdf)
 (tabla 1.2). Los totales nacionales coinciden con esa tabla de 2008 a 2024;
-2025 no está contrastado con ella. El parque estimado también recoge la obra
-terminada y puede usar los mismos registros (no comprobado): que dos saldos se
-parezcan no es una confirmación independiente. Los cambios de parque incluyen el balance modelado de altas
-y bajas, no solo obra nueva. Las revisiones y anclajes censales tampoco son
-movimientos orgánicos observados. Los últimos datos de hogares y terminadas
-pueden ser provisionales y revisarse.
+2025 no está contrastado con ella. El [método del MIVAU](https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/Info/Readme_VDP002_01.pdf)
+confirma que el parque incorpora las terminadas y las viviendas creadas por
+rehabilitación, y descuenta las bajas. Usa las estadísticas de vivienda libre
+y protegida, entre otras fuentes. El documento no detalla cómo se trasladan
+las celdas mensuales al parque provincial. La coincidencia entre las restas no es una
+confirmación independiente. Las cifras pueden revisarse.
 
 ## Tres cantidades distintas
 
