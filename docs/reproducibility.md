@@ -9,6 +9,11 @@ make gates   # lint -> fetch -> build -> analysis -> verify -> audit -> test
 
 - `make fetch` — downloads all pinned sources into `data/raw`
   (+ Parquet mirrors). Re-running re-pins bytes in `data/input_manifest.json`.
+  This is where the time goes: measured 2026-11-28, a full `make gates` took
+  20 min 41 s end to end, of which `fetch` was roughly sixteen minutes
+  (hundreds of requests to INE and the regional open-data portals); the
+  `build` that follows took 13 s, `analysis` 3.6 min, `verify`+`audit`+`test`
+  about a minute. Plan the wait around `fetch`, not around the estimators.
 - `make build` — refuses to run on unpinned/changed inputs; writes
   `data/processed/marts.duckdb`, `mart_*.parquet`, `dim_territorio.parquet`,
   `coverage.json`. It then rebuilds the rent-income proxy and profile income,
