@@ -162,3 +162,24 @@ def test_idescat_denominators_are_the_register_habitual_entries(data):
         register = annual[year]["barcelona_habitual"]["entries"]
         idescat = data["seasonal_deposits"]["denominators"][year]["barcelona_city"]
         assert idescat == register, (year, idescat, register)
+
+
+def test_city_share_of_active_contracts_rises_every_year(data):
+    """The note's "rose every year" reading applies to the active portfolio."""
+    shares = [data["mediation_active"]["city_share_pct"][str(year)] for year in data["years"]]
+    assert all(later > earlier for earlier, later in zip(shares, shares[1:], strict=False))
+    assert data["window_verdicts"]["city_share_rose_every_year"] is True
+
+
+def test_flow_share_is_not_monotonic_so_the_reading_stays_with_active_contracts(data):
+    shares = [data["mediation_flow"]["city_share_pct"][str(year)] for year in data["years"]]
+    assert not all(later > earlier for earlier, later in zip(shares, shares[1:], strict=False))
+    assert data["window_verdicts"]["flow_share_is_monotonic"] is False
+
+
+def test_2025_is_the_smallest_total_in_the_window_for_both_measures(data):
+    for series in ("mediation_flow", "mediation_active"):
+        totals = [data[series]["catalonia"][str(year)] for year in data["years"]]
+        assert totals[-1] == min(totals)
+    assert data["window_verdicts"]["lowest_flow_year"] == 2025
+    assert data["window_verdicts"]["lowest_active_year"] == 2025

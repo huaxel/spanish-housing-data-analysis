@@ -212,6 +212,20 @@ def build() -> dict:
     )
     assert codes == active_codes
 
+    # The note's two window verdicts, asserted here rather than left to prose:
+    # the city's share of active contracts rose every year, and 2025 is the
+    # smallest total in the common window for both measures. The flow share is
+    # deliberately *not* asserted to rise: it dips in 2018-2020 and 2024.
+    active_shares = [active["city_share_pct"][str(year)] for year in YEARS]
+    active_pairs = list(zip(active_shares, active_shares[1:], strict=False))
+    assert all(later > earlier for earlier, later in active_pairs)
+    for series in (flow, active):
+        totals = [series["catalonia"][str(year)] for year in YEARS]
+        assert totals[-1] == min(totals)
+    flow_shares = [flow["city_share_pct"][str(year)] for year in YEARS]
+    flow_pairs = list(zip(flow_shares, flow_shares[1:], strict=False))
+    assert not all(later > earlier for earlier, later in flow_pairs)
+
     seasonal = seasonal_by_year(codes, (2024, 2025))
     denominators = deposit_denominators()
     seasonal["denominators"] = denominators
@@ -335,6 +349,12 @@ def build() -> dict:
                 "entries_change": after["entries"] - before["entries"],
                 "cancellations_change": after["cancellations"] - before["cancellations"],
             },
+        },
+        "window_verdicts": {
+            "city_share_rose_every_year": True,
+            "lowest_flow_year": int(min(YEARS, key=lambda year: flow["catalonia"][str(year)])),
+            "lowest_active_year": int(min(YEARS, key=lambda year: active["catalonia"][str(year)])),
+            "flow_share_is_monotonic": False,
         },
         "seasonal_negative_quarters": negatives,
         "_meta": ols.model_meta(
