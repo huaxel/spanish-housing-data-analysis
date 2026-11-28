@@ -285,12 +285,12 @@ at boot, so the tailnet address keeps working unattended.
 Remove just this proxy with `tailscale serve --tcp=3000 off` (do not reset
 all Serve configuration).
 
-Verify everything with `make evidence-smoke`: dev liveness on all four
-pages locally and via Tailscale, content markers in the static build,
+Verify everything with `make evidence-smoke`: dev liveness on every route it
+lists, locally and via Tailscale, content markers in the static build,
 the Tailscale proxy, and the extracted source manifest.
 `make evidence-smoke-browser` goes further in a real (headless) browser via
-the global `playwright-cli`: it waits for chart hydration on all four pages
-and asserts canvas counts, key content, and zero page errors.
+the global `playwright-cli`: it waits for chart hydration on the pages it
+covers and asserts canvas counts, key content, and zero page errors.
 
 The dev server runs as the user service `housing-evidence.service`
 (`~/.config/systemd/user/`), enabled for boot via linger. It binds only to
