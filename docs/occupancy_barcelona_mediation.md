@@ -119,6 +119,11 @@ the repository root without any manual step:
   [2024](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202400&f=ssv) and
   [2025](https://www.idescat.cat/indicadors/?id=aec&n=15708&t=202500&f=ssv) links.
 
+`explorations/occupancy_catalonia.py` recomputes the figures in this note from the
+same pinned files into `artifacts/occupancy_catalonia.json`, and `make audit`
+compares them against the claims quoted here, so a reissued workbook fails the
+gate instead of leaving the text on a superseded vintage.
+
 Use the municipality code for Barcelona (`08019`), not a name query across
 geographies. With `openpyxl` available:
 

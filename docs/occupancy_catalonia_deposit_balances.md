@@ -82,6 +82,10 @@ the repository root. The pinned bytes carry SHA-256
 if the Generalitat republishes a workbook, `make verify` fails and these
 figures have to be re-derived rather than silently changing.
 
+`explorations/occupancy_catalonia.py` recomputes every figure here from the same
+pinned workbooks into `artifacts/occupancy_catalonia.json`, and `make audit`
+compares them against the claims quoted in this note.
+
 With `openpyxl` available:
 
 ```python

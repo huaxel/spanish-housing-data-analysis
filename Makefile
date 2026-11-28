@@ -118,6 +118,7 @@ verify:
 	uv run python scripts/fetch_proh.py --check
 	uv run python explorations/proh_households.py --check
 	uv run python explorations/ecp_households.py --check
+	uv run python explorations/occupancy_catalonia.py --check
 	uv run python scripts/fetch_vut_municipal.py --check
 	uv run python explorations/vut_stock.py --check
 	uv run python explorations/vut_rent_overlap.py --check
@@ -203,6 +204,7 @@ analysis:
 	uv run python explorations/ipva_rent_index.py
 	uv run python explorations/proh_households.py
 	uv run python explorations/ecp_households.py
+	uv run python explorations/occupancy_catalonia.py
 	uv run python explorations/vut_stock.py
 	uv run python explorations/vut_rent_overlap.py
 	uv run python scripts/build_claim_ledger.py
