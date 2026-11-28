@@ -1,7 +1,7 @@
 {
   "sha256": {
-    "data/processed/ecv_joint_burden.duckdb": "09fadc124699b47a5706c4a13eed8a73795e10794c04cda10d0c748f38a72966",
-    "data/processed/housing_access.duckdb": "8905685b7b2b981810abdc55dcfc579da11b2332f9321a561a188ce3ad04a135",
+    "data/processed/ecv_joint_burden.duckdb": "48b205bedc385b72c14fe5407b2cfc9d8cbdada5a5ab8e80de5e97d2de11c12b",
+    "data/processed/housing_access.duckdb": "92c02ec34cb587782b7991d466e9f99db40d633b408bd6e779f949377c005184",
     "data/processed/stock.duckdb": "900c3f4e9c217edce3e524cd488e7fe3359cf73abfe110cc2f2a7e6dcdb33829",
     "data/processed/stock_capitals.duckdb": "3c655982d893c206771871440e303867bb6da386c8fd3bcfb6dd4255ae6bc929",
     "data/processed/stock_province.duckdb": "91871217f968dc490228bbe13dcfb657df80c46565e13e7e71fce2253b26ea3b",
